@@ -27,9 +27,20 @@ CREATE TABLE IF NOT EXISTS trades(
   result TEXT,
   pnl_usd REAL,
   settled_ts TEXT,
-  order_id TEXT
+  order_id TEXT,
+  exit_type TEXT,
+  target_price REAL,
+  stop_price REAL,
+  review_after_ts TEXT,
+  exit_price REAL
 )
 """
+
+# columns added after the original schema shipped -> additive migration
+_MIGRATIONS = {
+    "order_id": "TEXT", "exit_type": "TEXT", "target_price": "REAL",
+    "stop_price": "REAL", "review_after_ts": "TEXT", "exit_price": "REAL",
+}
 
 
 def _conn() -> sqlite3.Connection:
@@ -38,8 +49,9 @@ def _conn() -> sqlite3.Connection:
     c.row_factory = sqlite3.Row
     c.execute(SCHEMA)
     cols = {r[1] for r in c.execute("PRAGMA table_info(trades)")}
-    if "order_id" not in cols:                      # migrate pre-live databases
-        c.execute("ALTER TABLE trades ADD COLUMN order_id TEXT")
+    for name, typ in _MIGRATIONS.items():
+        if name not in cols:
+            c.execute(f"ALTER TABLE trades ADD COLUMN {name} {typ}")
     return c
 
 
@@ -90,6 +102,31 @@ def settle_trade(trade_id: int, result: str, pnl_usd: float) -> None:
                   (result, pnl_usd, dt.datetime.now().isoformat(timespec="seconds"), trade_id))
 
 
+def close_position(trade_id: int, exit_price: float, pnl_usd: float, reason: str) -> None:
+    """Early exit (swing) before settlement. status='closed' so it is excluded from
+    Brier calibration (no resolved outcome) but its P&L still counts in the account."""
+    now = dt.datetime.now().isoformat(timespec="seconds")
+    with _conn() as c:
+        c.execute("UPDATE trades SET status='closed', exit_price=?, pnl_usd=?, settled_ts=?, "
+                  "result=?, rationale = rationale || ' | EXIT: ' || ? WHERE id=?",
+                  (exit_price, pnl_usd, now, reason, reason, trade_id))
+
+
+def set_exit_plan(trade_id: int, exit_type: str, target_price: float,
+                  stop_price: float, review_after_ts: str) -> None:
+    with _conn() as c:
+        c.execute("UPDATE trades SET exit_type=?, target_price=?, stop_price=?, "
+                  "review_after_ts=? WHERE id=?",
+                  (exit_type, target_price, stop_price, review_after_ts, trade_id))
+
+
+def positions_due_for_review(now_iso: str) -> list[dict]:
+    with _conn() as c:
+        return [dict(r) for r in c.execute(
+            "SELECT * FROM trades WHERE status='open' AND review_after_ts IS NOT NULL "
+            "AND review_after_ts <= ? ORDER BY review_after_ts", (now_iso,))]
+
+
 def stats() -> dict:
     today = dt.date.today().isoformat()
     with _conn() as c:
@@ -107,6 +144,13 @@ def stats() -> dict:
             (today,)).fetchone()[0]
     return {"risk_used_today": risk_today, "open_exposure": open_exp,
             "open_positions": n_open, "realized_pnl_today": pnl_today}
+
+
+def swing_summary() -> dict:
+    with _conn() as c:
+        r = c.execute("SELECT COUNT(*) n, COALESCE(SUM(pnl_usd),0) pnl "
+                      "FROM trades WHERE status='closed'").fetchone()
+    return {"n_closed": r["n"], "swing_pnl": round(r["pnl"], 2)}
 
 
 def calibration() -> dict:

@@ -12,6 +12,14 @@ models, interaction mode, verification, and live settings all come from it.
 ## Steps
 
 1. **Settle first**: `python -m src.pipeline settle`
+1b. **Manage open positions** (swing / VALUES.md #10): `python -m src.pipeline manage`.
+    This mechanically takes profit / stops out at stored targets. For any position it
+    prints as `REVIEW-DUE`, run the ensemble research flow (step 4) on that ticker with
+    the ORIGINAL entry thesis in hand, then act on the fresh consensus:
+    - thesis still holds with room → keep (optionally raise target via set_exit_plan);
+    - fair value converged to mark → exit now (treat as a manual take-profit);
+    - fair value flipped against us → exit now (thesis broken).
+    Record any target change; note review outcomes in the summary.
 2. **Scan**: `python -m src.pipeline scan`, read `data/candidates.json`.
 3. **Pick markets** (up to `research.markets_per_cycle`):
    - Interactive session AND `interaction.ask_before_research: true` → AskUserQuestion

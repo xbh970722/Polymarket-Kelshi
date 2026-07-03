@@ -106,6 +106,18 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
 - 第二轮后家族最终值直接作为 q_claude / q_codex 进引擎。
 - 成本意识: 每轮 4-6 次 LLM 调用。估计聚类紧密且无优势的市场不辩第二轮。
 
+## 退出管理与波段 (VALUES.md #10)
+
+系统是双向的: 有入场 (decide) 也有退出 (manage)。
+
+- **入场即定退出计划**: decide 记单时 `_assign_exit_plan` 按共识与入场价算止盈目标、
+  止损 backstop、5 天重判时点, 写进账本。
+- **机械退出** (`manage`): 现价 bid ≥ 止盈目标 → 卖出落袋; ≤ 止损 → 认输。
+  paper 按 bid 模拟成交; live 走 `place_exit` (reduce_only, 只减不反手)。
+- **集成重判**: 持仓 >5 天标 REVIEW-DUE → 四模型带着**原始入场论据**重研究该市场,
+  裁决 保留/改目标/退出。这是纪律: 不因价格短期波动割肉, 但基本面变了要认。
+- **live 卖出路径尚未实盘验证** (2026-07-03 只验证了买入); 首次真钱波段退出前需复核 place_exit。
+
 ## 铁律
 
 1. **盲估先于看价**。看过市场价再估的数字作废。

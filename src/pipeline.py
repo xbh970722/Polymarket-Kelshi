@@ -19,7 +19,7 @@ from pathlib import Path
 import yaml
 
 from . import engine, ledger
-from .kalshi_client import KalshiPublic
+from .kalshi_client import KalshiPublic, taker_fee_usd
 from .scanner import scan
 
 REPORTS = Path("reports")
@@ -93,7 +93,7 @@ def cmd_decide(args) -> None:
             continue
         market_prob = round((yb + ya) / 2, 4) if yb else round(ya, 4)
         status = "pending" if is_live else "open"
-        ledger.insert_trade(
+        trade_id = ledger.insert_trade(
             mode=cfg["mode"], ticker=ticker, title=item.get("title", ""),
             side=d.side, price=d.price, contracts=d.contracts,
             cost_usd=d.cost_usd, fee_usd=d.fee_usd,
@@ -101,6 +101,7 @@ def cmd_decide(args) -> None:
             q_consensus=d.q_consensus, market_prob=market_prob,
             edge_net=d.edge_net, rationale=item.get("rationale", ""),
             status=status)
+        _assign_exit_plan(trade_id, d.side, d.price, d.q_consensus, cfg)
         placed += 1
         tag = "LIVE-PENDING" if is_live else "PAPER"
         print(f"{tag} {ticker}: {d.side.upper()} x{d.contracts} @ {d.price * 100:.1f}c "
@@ -110,6 +111,63 @@ def cmd_decide(args) -> None:
         print(f"NOTE: {placed} live order(s) are PENDING confirmation. "
               f"Review with 'pending', then 'execute-live --confirmed'.")
     print(f"done: {placed} orders ({'live-pending' if is_live else 'paper'}), {skipped} skipped")
+
+
+def _assign_exit_plan(trade_id: int, side: str, entry_price: float,
+                      q_consensus: float, cfg: dict) -> engine.ExitPlan:
+    q_side = q_consensus if side == "yes" else 1 - q_consensus
+    plan = engine.plan_exit(q_side, entry_price, cfg)
+    ts_row = [t for t in ledger.open_trades() + ledger.pending_trades() if t["id"] == trade_id]
+    base = ts_row[0]["ts"] if ts_row else dt.datetime.now().isoformat(timespec="seconds")
+    review_ts = (dt.datetime.fromisoformat(base)
+                 + dt.timedelta(days=plan.review_after_days)).isoformat(timespec="seconds")
+    ledger.set_exit_plan(trade_id, plan.exit_type, plan.target_price, plan.stop_price, review_ts)
+    return plan
+
+
+def cmd_manage(_args) -> None:
+    """Mechanical swing management: take-profit / stop-loss exits + flag review-due holds."""
+    cfg = load_config()
+    if not cfg.get("swing", {}).get("enabled", False):
+        print("swing management disabled in config")
+        return
+    is_live = live_active(cfg)
+    api = KalshiPublic()
+    now_iso = dt.datetime.now().isoformat(timespec="seconds")
+    exited = flagged = held = 0
+    for t in ledger.open_trades():
+        if t.get("exit_type") is None:                 # backfill plan for legacy positions
+            _assign_exit_plan(t["id"], t["side"], t["price"], t["q_consensus"] or 0, cfg)
+            t = next((x for x in ledger.open_trades() if x["id"] == t["id"]), t)
+        try:
+            m = api.market_norm(t["ticker"])
+        except Exception as e:
+            print(f"WARN  {t['ticker']}: {e}")
+            continue
+        exit_bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
+        action, px = engine.check_exit(t.get("target_price") or 0, t.get("stop_price") or 0, exit_bid)
+        if action and px > 0:
+            fee = taker_fee_usd(px, t["contracts"])
+            pnl = round(t["contracts"] * px - fee - t["cost_usd"], 2)
+            if is_live:
+                from .live import KalshiLive
+                try:
+                    KalshiLive().place_exit(t["ticker"], t["side"], t["contracts"], px)
+                except Exception as e:
+                    print(f"LIVE EXIT FAILED {t['ticker']}: {e}")
+                    continue
+            ledger.close_position(t["id"], px, pnl, f"{action}@{px * 100:.0f}c")
+            exited += 1
+            print(f"EXIT  {t['ticker']}: {action} sell x{t['contracts']} @ {px * 100:.0f}c "
+                  f"pnl=${pnl:+.2f}")
+        elif t.get("review_after_ts") and t["review_after_ts"] <= now_iso:
+            flagged += 1
+            tgt = (t.get("target_price") or 0) * 100
+            print(f"REVIEW-DUE {t['ticker']}: held since {t['ts'][:10]} entry {t['price'] * 100:.0f}c "
+                  f"mark {exit_bid * 100:.0f}c target {tgt:.0f}c -> ensemble re-judge hold/modify/exit")
+        else:
+            held += 1
+    print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
 
 
 def cmd_settle(_args) -> None:
@@ -144,8 +202,8 @@ def cmd_report(_args) -> None:
     if not opens:
         lines.append("_none_")
     else:
-        lines += ["| ticker | side | qty | entry | mark | unreal P&L | model q | net edge |",
-                  "|---|---|---|---|---|---|---|---|"]
+        lines += ["| ticker | side | qty | entry | mark | target | plan | unreal P&L | model q |",
+                  "|---|---|---|---|---|---|---|---|---|"]
         unreal_total = 0.0
         for t in opens:
             try:
@@ -161,10 +219,18 @@ def cmd_report(_args) -> None:
                 unreal = t["contracts"] * mark - t["cost_usd"]
                 mark_s = f"{mark:.2f}"
             unreal_total += unreal
+            tgt = t.get("target_price") or 0
+            tgt_s = f"{tgt * 100:.0f}c" if tgt else "—"
+            plan = t.get("exit_type") or "?"
             lines.append(f"| {t['ticker']} | {t['side']} | {t['contracts']} | "
-                         f"{t['price'] * 100:.1f}c | {mark_s} | {unreal:+.2f} | "
-                         f"{t['q_consensus']:.2f} | {t['edge_net']:+.3f} |")
+                         f"{t['price'] * 100:.1f}c | {mark_s} | {tgt_s} | {plan} | {unreal:+.2f} | "
+                         f"{t['q_consensus']:.2f} |")
         lines += ["", f"unrealized total: **{unreal_total:+.2f} USD**"]
+    sw = ledger.swing_summary()
+    if sw["n_closed"]:
+        lines += ["", "## Swing exits (closed before settlement)", "",
+                  f"- {sw['n_closed']} closed | realized swing P&L: **${sw['swing_pnl']:+.2f}** "
+                  f"(excluded from Brier — no resolved outcome)"]
     r = cfg["risk"]
     lines += ["", "## Risk usage", "",
               f"- today risk used: ${st['risk_used_today']:.2f} / ${r['max_daily_risk_usd']}",
@@ -292,6 +358,7 @@ def main() -> None:
     p.add_argument("--research", required=True)
     p.set_defaults(fn=cmd_decide)
     sub.add_parser("settle").set_defaults(fn=cmd_settle)
+    sub.add_parser("manage").set_defaults(fn=cmd_manage)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)

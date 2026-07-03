@@ -91,3 +91,24 @@ class KalshiLive:
                 "time_in_force": tif, "self_trade_prevention_type": "taker_at_cross",
                 "client_order_id": str(uuid.uuid4())}
         return self._req("POST", f"{API}/portfolio/events/orders", body)
+
+    def place_exit(self, ticker: str, held_side: str, count: int, price_prob: float,
+                   tif: str = "immediate_or_cancel") -> dict:
+        """Close/reduce a position by selling the held side into its bid.
+
+        held_side 'yes' -> sell YES = book side 'ask' at the YES price.
+        held_side 'no'  -> flatten short-YES = book side 'bid' at (1 - no price).
+        price_prob is the exit price in the HELD side's terms (its current bid).
+        reduce_only guarantees this can only shrink a position, never open the opposite.
+        NOTE: sell path not yet validated against a live key (buy path was, 2026-07-03).
+        """
+        assert held_side in ("yes", "no")
+        book_side = "ask" if held_side == "yes" else "bid"
+        yes_price = price_prob if held_side == "yes" else 1.0 - price_prob
+        yes_price = round(yes_price, 4)
+        assert 0.0001 <= yes_price <= 0.9999, f"exit price out of range: {yes_price}"
+        body = {"ticker": ticker, "side": book_side,
+                "count": f"{int(count):d}.00", "price": f"{yes_price:.4f}",
+                "time_in_force": tif, "self_trade_prevention_type": "taker_at_cross",
+                "reduce_only": True, "client_order_id": str(uuid.uuid4())}
+        return self._req("POST", f"{API}/portfolio/events/orders", body)

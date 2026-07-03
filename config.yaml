@@ -71,6 +71,16 @@ sizing:
   bankroll_usd: 500
   kelly_fraction: 0.333            # VALUES.md #1: 娱乐预算, 1/3 Kelly
 
+# ---------- 波段 / 退出管理 (VALUES.md #10) ----------
+# 系统不再只买入持有到结算; 短期定价错误可波段: 机械止盈, 集成团队定期重判持有/修改/退出。
+swing:
+  enabled: true
+  take_profit_capture: 0.6   # 止盈价 = 入场 + 0.6×(共识价 − 入场价), 捕获 60% 收敛空间即落袋
+  min_target_move: 0.03      # 止盈目标离入场 <3 分则不值得波段 → 纯持有到结算
+  stop_loss_frac: 0.5        # 机械止损 backstop: 现价(可卖出的bid)跌到入场价 50% 即认输
+  review_after_days: 5       # 持仓 >5 天 → 交集成团队重判 (保留/改目标/退出)
+  manage_intraday: true      # 允许日内 manage 扫描 (不止每日循环, 可高频查止盈)
+
 risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
   max_per_trade_usd: 25
   max_daily_risk_usd: 100
