@@ -76,3 +76,28 @@
 [07-03 10:50:28]   weather: weather: 16 priced buckets | spent $1.13/1.00
 [07-03 10:50:28]   weather: budget: weather daily budget reached
 [07-03 10:50:28]   weather: done: 0 weather orders
+[07-03 10:56:21]   settle: done: 0 settled, 11 still open
+[07-03 10:56:27]   shortcycle: shortcycle: 0 candidate strikes | balance $6.93 | today spent $0.62/2.00
+[07-03 10:56:27]   shortcycle: done: 0 shortcycle orders
+[07-03 10:56:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 10:56:30]   weather: weather: 16 priced buckets | spent $1.13/1.00
+[07-03 10:56:30]   weather: budget: weather daily budget reached
+[07-03 10:56:30]   weather: done: 0 weather orders
+[07-03 11:05:21]   settle: SETTLED KXBTCD-26JUL0313-T61699.99: result=yes LOSS pnl=$-0.14
+[07-03 11:05:21]   settle: SETTLED KXBTCD-26JUL0313-T61599.99: result=yes LOSS pnl=$-0.13
+[07-03 11:05:21]   settle: SETTLED KXBTCD-26JUL0313-T61799.99: result=yes LOSS pnl=$-0.18
+[07-03 11:05:21]   settle: SETTLED KXBTCD-26JUL0313-T62099.99: result=no LOSS pnl=$-0.17
+[07-03 11:05:21]   settle: done: 4 settled, 7 still open
+[07-03 11:05:25]   shortcycle: shortcycle: 9 candidate strikes | balance $6.93 | today spent $0.00/2.00
+[07-03 11:05:25]   shortcycle: LIVE  KXETHD-26JUL0314-T1739.99: YES x2 @ 13.0c cost=$0.28 q_model=0.21 vs mkt=0.10 tau=54.6m order=e5bae2dd-7706-423f-991c-705af3971379
+[07-03 11:05:25]   shortcycle: LIVE  KXBTCD-26JUL0314-T62299.99: YES x1 @ 16.0c cost=$0.17 q_model=0.23 vs mkt=0.12 tau=54.6m order=3ebba5c4-f423-4087-b781-c3b482473f9f
+[07-03 11:05:25]   shortcycle: LIVE  KXBTCD-26JUL0314-T62399.99: YES x3 @ 5.0c cost=$0.16 q_model=0.13 vs mkt=0.04 tau=54.6m order=04d97009-388a-40ec-b4c5-78d49128bec8
+[07-03 11:05:25]   shortcycle: LIVE  KXBTCD-26JUL0314-T61899.99: NO x1 @ 11.0c cost=$0.12 q_model=0.80 vs mkt=0.88 tau=54.6m order=b2ba9e0b-8494-4295-8628-7d1925ab4d7a
+[07-03 11:05:25]   shortcycle: LIVE  KXBTCD-26JUL0314-T61799.99: NO x3 @ 4.0c cost=$0.13 q_model=0.89 vs mkt=0.96 tau=54.6m order=22e7472a-1941-46de-bc39-8f2f11c220c3
+[07-03 11:05:25]   shortcycle: done: 5 shortcycle orders
+[07-03 11:05:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:05:29]   weather: weather: 19 priced buckets | spent $1.13/1.00
+[07-03 11:05:29]   weather: budget: weather daily budget reached
+[07-03 11:05:29]   weather: done: 0 weather orders
+[07-03 11:05:30]   journal: journal written: realized today $-0.84, 5 settled, 17 fills
+[07-03 11:05:31]   report: wrote reports\report_2026-07-03.md
