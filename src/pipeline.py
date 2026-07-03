@@ -213,6 +213,87 @@ def cmd_manage(_args) -> None:
     print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
 
 
+def cmd_shortcycle(_args) -> None:
+    """Hourly quant lane: model hourly crypto strikes, trade real micro-edges (no LLM)."""
+    cfg = load_config()
+    sc = cfg.get("shortcycle", {})
+    if not sc.get("enabled"):
+        print("shortcycle disabled")
+        return
+    if not live_active(cfg):
+        print("shortcycle requires live mode (it exists to generate real settled samples)")
+        return
+    from .live import KalshiLive, LiveAuthError
+    from .shortcycle import candidates
+    try:
+        client = KalshiLive()
+        balance = float(client.balance().get("balance_dollars") or 0)
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    # dedicated sub-budget: today's live cost on shortcycle series tickers
+    today = dt.date.today().isoformat()
+    prefixes = tuple(sc["series"])
+    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
+                if t["mode"] == "live" and t["ticker"].startswith(prefixes)
+                and t["ts"].startswith(today))
+    cands = candidates(cfg)
+    print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
+          f"today spent ${spent:.2f}/{sc['daily_budget_usd']:.2f}")
+    placed = 0
+    for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
+        if spent >= sc["daily_budget_usd"]:
+            print("budget: shortcycle daily budget reached")
+            break
+        if ledger.has_open_position(c["ticker"], "live"):
+            continue
+        cfg_sc = {**cfg,
+                  "edge": {**cfg["edge"], "min_edge_after_fees": sc["min_edge_after_fees"],
+                           "consensus_max_divergence": 1.0},
+                  "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])},
+                  "risk": {**cfg["risk"], "max_per_trade_usd": sc["max_per_trade_usd"]}}
+        d = engine.decide(c["q_model"], c["q_model"], c["yes_ask"], c["no_ask"], cfg_sc)
+        if d.action != "trade":
+            continue
+        d.contracts = min(d.contracts, sc.get("max_contracts", 3))
+        d.fee_usd = taker_fee_usd(d.price, d.contracts)
+        d.cost_usd = round(d.contracts * d.price + d.fee_usd, 2)
+        veto = engine.check_risk(ledger.stats("live"), d.cost_usd, cfg_sc)
+        if veto:
+            print(f"VETO  {c['ticker']}: {veto}")
+            continue
+        try:
+            resp = client.place_limit(c["ticker"], d.side, d.contracts, d.price)
+        except Exception as e:
+            print(f"FAILED {c['ticker']}: {e}")
+            continue
+        filled = float(resp.get("fill_count") or 0)
+        order_id = str(resp.get("order_id") or "?")
+        if filled < 1:
+            print(f"NOFILL {c['ticker']}: IOC returned no fill")
+            continue
+        n = int(filled)
+        fee = taker_fee_usd(d.price, n)
+        cost = round(n * d.price + fee, 2)
+        tid = ledger.insert_trade(
+            mode="live", ticker=c["ticker"], title=f"shortcycle {c['series']} strike {c['strike']}",
+            side=d.side, price=d.price, contracts=n, cost_usd=cost, fee_usd=fee,
+            q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
+            market_prob=c["mid"], edge_net=d.edge_net,
+            rationale=f"shortcycle terminal model: spot {c['spot']:.0f}, sigma_min "
+                      f"{c['sigma_min']:.5f}, tau {c['tau_min']}m", status="open")
+        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+        with_order = order_id
+        ledger.mark_placed(tid, with_order)
+        spent += cost
+        placed += 1
+        print(f"LIVE  {c['ticker']}: {d.side.upper()} x{n} @ {d.price * 100:.0f}c "
+              f"cost=${cost:.2f} q_model={c['q_model']:.2f} vs mkt={c['mid']:.2f} "
+              f"edge={d.edge_net:+.3f} tau={c['tau_min']}m order={order_id}")
+    print(f"done: {placed} shortcycle orders")
+
+
 def cmd_settle(_args) -> None:
     api = KalshiPublic()
     settled = 0
@@ -402,6 +483,7 @@ def main() -> None:
     p.set_defaults(fn=cmd_decide)
     sub.add_parser("settle").set_defaults(fn=cmd_settle)
     sub.add_parser("manage").set_defaults(fn=cmd_manage)
+    sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)

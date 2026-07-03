@@ -110,6 +110,18 @@ live:
   #   KALSHI_PRIVATE_KEY_PATH=<RSA 私钥 .pem 路径>
   # 获取: kalshi.com -> Account -> API Keys -> Create; 验证: python -m src.pipeline live-check
 
+# ---------- 短波量化通道 (小时级, 无LLM, VALUES.md #11) ----------
+shortcycle:
+  enabled: true
+  series: [KXBTCD]               # 先只做 BTC 小时 (ETH 价差太宽, 观察后再加)
+  min_minutes_to_close: 15       # 离结算太近模型无意义, 太远该小时报价未成型
+  max_minutes_to_close: 75
+  vol_lookback_min: 180          # 分钟波动率回看窗口
+  min_edge_after_fees: 0.04      # 短波专用门槛: 1c 价差 + ~1c 手续费之上还要 4 点
+  max_per_trade_usd: 0.50        # 微单: 每笔 ≤$0.50
+  max_contracts: 3
+  daily_budget_usd: 2.00         # 短波日预算 (占 live 日风险 $4 的一半)
+
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30
   max_brier: 0.22
