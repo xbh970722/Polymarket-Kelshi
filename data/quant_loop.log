@@ -101,3 +101,46 @@
 [07-03 11:05:29]   weather: done: 0 weather orders
 [07-03 11:05:30]   journal: journal written: realized today $-0.84, 5 settled, 17 fills
 [07-03 11:05:31]   report: wrote reports\report_2026-07-03.md
+[07-03 11:05:33] committed + pushed
+[07-03 11:11:21]   settle: done: 0 settled, 12 still open
+[07-03 11:11:26]   shortcycle: shortcycle: 9 candidate strikes | balance $6.08 | today spent $0.86/2.00
+[07-03 11:11:26]   shortcycle: PASS  KXBTCD-26JUL0314-T61999.99: IOC no fill even crossed
+[07-03 11:11:26]   shortcycle: done: 0 shortcycle orders
+[07-03 11:11:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:11:30]   weather: weather: 21 priced buckets | spent $1.13/1.00
+[07-03 11:11:30]   weather: budget: weather daily budget reached
+[07-03 11:11:30]   weather: done: 0 weather orders
+[07-03 11:20:21]   settle: done: 0 settled, 12 still open
+[07-03 11:20:24]   shortcycle: shortcycle: 8 candidate strikes | balance $6.08 | today spent $0.86/2.00
+[07-03 11:20:24]   shortcycle: done: 0 shortcycle orders
+[07-03 11:20:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:20:28]   weather: weather: 21 priced buckets | spent $1.13/1.00
+[07-03 11:20:28]   weather: budget: weather daily budget reached
+[07-03 11:20:28]   weather: done: 0 weather orders
+[07-03 11:20:29]   manage: done: 0 exited, 0 flagged for review, 12 holding
+[07-03 11:26:21]   settle: done: 0 settled, 12 still open
+[07-03 11:26:26]   shortcycle: shortcycle: 7 candidate strikes | balance $6.08 | today spent $0.86/2.00
+[07-03 11:26:26]   shortcycle: done: 0 shortcycle orders
+[07-03 11:26:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:26:29]   weather: weather: 20 priced buckets | spent $1.13/1.00
+[07-03 11:26:29]   weather: budget: weather daily budget reached
+[07-03 11:26:29]   weather: done: 0 weather orders
+[07-03 11:35:21]   settle: done: 0 settled, 12 still open
+[07-03 11:35:25]   shortcycle: shortcycle: 6 candidate strikes | balance $6.08 | today spent $0.86/2.00
+[07-03 11:35:25]   shortcycle: PASS  KXBTCD-26JUL0314-T62199.99: edge below bar at crossed price 0.420
+[07-03 11:35:25]   shortcycle: done: 0 shortcycle orders
+[07-03 11:35:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:35:28]   weather: weather: 21 priced buckets | spent $1.13/1.00
+[07-03 11:35:28]   weather: budget: weather daily budget reached
+[07-03 11:35:28]   weather: done: 0 weather orders
+[07-03 11:41:21]   settle: done: 0 settled, 12 still open
+[07-03 11:41:27]   shortcycle: shortcycle: 7 candidate strikes | balance $6.08 | today spent $0.86/2.00
+[07-03 11:41:27]   shortcycle: LIVE  KXBTCD-26JUL0314-T62099.99: NO x2 @ 14.0c cost=$0.30 q_model=0.70 vs mkt=0.85 tau=18.6m order=fb1b6f6d-1230-42c3-8fba-9a188ada0948
+[07-03 11:41:27]   shortcycle: LIVE  KXETH15M-26JUL031345-45: NO x2 @ 2.8c cost=$0.06 q_model=0.89 vs mkt=0.96 tau=3.6m order=c0228725-3479-4518-81a8-03225c2b1e3a
+[07-03 11:41:27]   shortcycle: done: 2 shortcycle orders
+[07-03 11:41:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 11:41:30]   weather: weather: 21 priced buckets | spent $1.13/1.00
+[07-03 11:41:30]   weather: budget: weather daily budget reached
+[07-03 11:41:30]   weather: done: 0 weather orders
+[07-03 11:41:31]   journal: journal written: realized today $-0.84, 5 settled, 19 fills
+[07-03 11:41:33]   report: wrote reports\report_2026-07-03.md
