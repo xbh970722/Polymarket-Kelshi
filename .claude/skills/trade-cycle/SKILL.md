@@ -28,6 +28,25 @@ Follow `research/PROTOCOL.md` exactly — it is the source of truth for the rese
    — the engine and risk limits make the call, not you.
 7. **Report**: `python -m src.pipeline report`, then send the report file to the user
    with a 3-line summary: new orders / settlements / calibration status.
+8. **Archive**: commit and push the audit trail:
+   `git add -A` then commit `cycle <date>: <n> orders, <m> settled, <k> flagged` and
+   `git push`. The GitHub repo (xbh970722/Polymarket-Kelshi, private) is the wetware's
+   remote console — reports must land there even when nothing traded.
+
+## Escalation to the human (wetware protocol)
+
+The user's role is judgment, not monitoring. Interrupt them (PushNotification if
+available, otherwise lead the summary with it) ONLY when:
+
+- new paper orders were placed (count + tickers + one-line why),
+- a market was skipped for model divergence > 0.10 — this is a judgment request:
+  put both estimates and the crux of disagreement in the report under
+  "needs human judgment",
+- any risk cap or the daily-loss circuit breaker triggered,
+- the live-gate status changed (any direction),
+- the cycle failed and could not complete.
+
+A routine no-trade cycle is NOT notification-worthy — the pushed report is the record.
 
 ## Guardrails
 
