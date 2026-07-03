@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-03",
+  "mode": "ensemble-4+1 (2x Opus 4.8 + 2x Codex gpt-5.5 xhigh blind, Fable 5 arbiter)",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Fed decision July 2026 | Maintain (hike of 0bps)",
+      "q_claude": 0.87,
+      "q_codex": 0.88,
+      "rationale": "R1 blind: Opus 0.84/0.90, Codex 0.82/0.81 (raw FedWatch anchor 0.812). R2 crux: futures term-premium bias + Kalshi-as-evidence + Jul-3 soft jobs data. Both families converged 0.87/0.88: raw FedWatch understates hold, but Kalshi 0.905 and FedWatch are correlated observations, not independent; ~12% hike tail from hawkish June dots survives. Consensus 0.875 sits between the two markets -> no edge after fees on either side.",
+      "sources": [
+        "CME FedWatch via growbeansprout.com 2026-07-03: 81.2% maintain",
+        "June 17 FOMC statement/dots (12-0 hold, median +25bp by YE2026, 9/19 see hike)",
+        "MarketWatch (Codex live check): July hike odds fell after jobs data",
+        "Exa search 2026-07-03: rate-hike risk recedes headlines"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "title": "Trump attends 2026 FIFA World Cup Final",
+      "q_claude": 0.905,
+      "q_codex": 0.87,
+      "rationale": "R1 blind: Opus 0.93/0.88, Codex 0.86/0.88. Explicit Infantino joint-presentation announcement + same-stadium Club WC precedent vs 16-day tail (health at 80, security, optics reversal). Consensus 0.8875 vs ask 0.87: +0.8pt net, below threshold. No round 2 - estimates clustered, no crux.",
+      "sources": [
+        "BBC Sport 2026-06-23: Infantino confirms Trump to attend and present trophy",
+        "Fox News 2026-06-23: joint trophy presentation plan",
+        "Exa search 2026-07-03"
+      ]
+    },
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000",
+      "title": "How high will BTC get in July? | Above $65,000 (BRTI trimmed-mean touch)",
+      "q_claude": 0.59,
+      "q_codex": 0.635,
+      "rationale": "R1 blind: Opus 0.58/0.60, Codex 0.62/0.65. All four independently derived reflection-principle ~0.65 (barrier +4.9% = 0.45 monthly sigma) then trimmed for smoothed-index drag and mixed flow signals. Consensus 0.6125 vs ask 0.63: no edge. Arbiter MC model (20k paths, mu 0/+-20%) gave 0.574-0.66, fully consistent.",
+      "sources": [
+        "Coinbase BTC-USD: spot 61963, vol30 37.7% ann, July high 62148",
+        "Arbiter Monte Carlo (scratchpad btc_model_max.py)",
+        "CoinDesk/Cointelegraph RSS 2026-07-03: whale accumulation, ETF inflows resumed, options skeptical"
+      ]
+    }
+  ]
+}

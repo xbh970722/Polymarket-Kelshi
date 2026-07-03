@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-03T12:38:25.453554+00:00",
+  "generated": "2026-07-03T13:23:05.845681+00:00",
   "categories_seen": {
     "World": 9,
     "Elections": 2219,
@@ -10,14 +10,14 @@
     "Financials": 253,
     "Companies": 70,
     "Social": 10,
-    "Entertainment": 486,
+    "Entertainment": 487,
     "Economics": 298,
     "Health": 6,
     "Transportation": 1,
     "Commodities": 14,
     "Crypto": 33,
     "?": 3,
-    "Mentions": 62
+    "Mentions": 61
   },
   "candidates": [
     {
@@ -31,10 +31,10 @@
       "no_ask": 0.1,
       "mid_prob": 0.905,
       "spread_cents": 1.0,
-      "volume_24h": 598691.36,
-      "open_interest": 2277491.15,
+      "volume_24h": 470741.0,
+      "open_interest": 2277912.52,
       "close_time": "2026-07-29T17:59:00Z",
-      "days_to_close": 26.22,
+      "days_to_close": 26.19,
       "score": 1.95
     },
     {
@@ -43,15 +43,15 @@
       "category": "Economics",
       "title": "Fed decision in Jul 2026?",
       "subtitle": "Hike 25bps",
-      "yes_bid": 0.08,
-      "yes_ask": 0.09,
-      "no_ask": 0.92,
-      "mid_prob": 0.085,
+      "yes_bid": 0.07,
+      "yes_ask": 0.08,
+      "no_ask": 0.93,
+      "mid_prob": 0.075,
       "spread_cents": 1.0,
-      "volume_24h": 184901.0,
-      "open_interest": 1529839.46,
+      "volume_24h": 88373.91,
+      "open_interest": 1529803.5,
       "close_time": "2026-07-29T17:59:00Z",
-      "days_to_close": 26.22,
+      "days_to_close": 26.19,
       "score": 1.95
     },
     {
@@ -65,10 +65,10 @@
       "no_ask": 0.92,
       "mid_prob": 0.085,
       "spread_cents": 1.0,
-      "volume_24h": 24699.74,
+      "volume_24h": 23695.75,
       "open_interest": 82908.42,
       "close_time": "2026-07-29T17:55:00Z",
-      "days_to_close": 26.22,
+      "days_to_close": 26.19,
       "score": 1.95
     },
     {
@@ -82,10 +82,10 @@
       "no_ask": 0.88,
       "mid_prob": 0.125,
       "spread_cents": 1.0,
-      "volume_24h": 22772.59,
+      "volume_24h": 21707.87,
       "open_interest": 68009.59,
       "close_time": "2026-07-25T14:00:00Z",
-      "days_to_close": 22.06,
+      "days_to_close": 22.03,
       "score": 1.95
     },
     {
@@ -99,10 +99,10 @@
       "no_ask": 0.14,
       "mid_prob": 0.865,
       "spread_cents": 1.0,
-      "volume_24h": 46897.57,
-      "open_interest": 305193.79,
+      "volume_24h": 45037.95,
+      "open_interest": 305271.76,
       "close_time": "2026-07-20T14:00:00Z",
-      "days_to_close": 17.06,
+      "days_to_close": 17.03,
       "score": 1.95
     },
     {
@@ -116,10 +116,10 @@
       "no_ask": 0.51,
       "mid_prob": 0.495,
       "spread_cents": 1.0,
-      "volume_24h": 28238.98,
+      "volume_24h": 28188.98,
       "open_interest": 32135.6,
       "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.64,
+      "days_to_close": 28.61,
       "score": 1.5927
     },
     {
@@ -133,11 +133,11 @@
       "no_ask": 0.38,
       "mid_prob": 0.625,
       "spread_cents": 1.0,
-      "volume_24h": 22911.15,
-      "open_interest": 28095.61,
+      "volume_24h": 22043.39,
+      "open_interest": 28559.42,
       "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.64,
-      "score": 1.5119
+      "days_to_close": 28.61,
+      "score": 1.5212
     },
     {
       "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
@@ -150,10 +150,10 @@
       "no_ask": 0.64,
       "mid_prob": 0.365,
       "spread_cents": 1.0,
-      "volume_24h": 20965.66,
+      "volume_24h": 20839.66,
       "open_interest": 26080.44,
       "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.64,
+      "days_to_close": 28.61,
       "score": 1.4716
     },
     {
@@ -170,7 +170,7 @@
       "volume_24h": 3929.53,
       "open_interest": 169225.41,
       "close_time": "2026-08-01T03:59:00Z",
-      "days_to_close": 28.64,
+      "days_to_close": 28.61,
       "score": 1.1765
     },
     {
@@ -184,11 +184,11 @@
       "no_ask": 0.93,
       "mid_prob": 0.075,
       "spread_cents": 1.0,
-      "volume_24h": 13507.21,
+      "volume_24h": 13565.92,
       "open_interest": 19251.78,
       "close_time": "2026-07-25T14:00:00Z",
-      "days_to_close": 22.06,
-      "score": 1.0104
+      "days_to_close": 22.03,
+      "score": 1.0133
     },
     {
       "ticker": "KXLLM1-26JUL31-A",
@@ -201,28 +201,28 @@
       "no_ask": 0.11,
       "mid_prob": 0.895,
       "spread_cents": 1.0,
-      "volume_24h": 4676.03,
-      "open_interest": 36825.41,
+      "volume_24h": 4651.57,
+      "open_interest": 36832.41,
       "close_time": "2026-07-31T14:00:00Z",
-      "days_to_close": 28.06,
-      "score": 0.9203
+      "days_to_close": 28.03,
+      "score": 0.9192
     },
     {
-      "ticker": "KXALITOANNOUNCERETIRE-26JUN-AUG01",
-      "event_ticker": "KXALITOANNOUNCERETIRE-26JUN",
-      "category": "Politics",
-      "title": "Will Samuel Alito announce his retirement?",
-      "subtitle": "Before Aug 1, 2026",
-      "yes_bid": 0.1,
-      "yes_ask": 0.11,
-      "no_ask": 0.9,
-      "mid_prob": 0.105,
-      "spread_cents": 1.0,
-      "volume_24h": 6809.45,
-      "open_interest": 25472.81,
-      "close_time": "2026-08-01T03:59:00Z",
-      "days_to_close": 28.64,
-      "score": 0.7999
+      "ticker": "KXGPT-OPEN-26JUL07",
+      "event_ticker": "KXGPT-OPENB",
+      "category": "Science and Technology",
+      "title": "When will OpenAI release GPT-5.6?",
+      "subtitle": "Before Jul 7, 2026",
+      "yes_bid": 0.06,
+      "yes_ask": 0.08,
+      "no_ask": 0.94,
+      "mid_prob": 0.07,
+      "spread_cents": 2.0,
+      "volume_24h": 12289.51,
+      "open_interest": 14588.96,
+      "close_time": "2026-07-07T03:59:00Z",
+      "days_to_close": 3.61,
+      "score": 0.8063
     }
   ]
 }

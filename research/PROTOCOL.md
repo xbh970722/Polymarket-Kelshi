@@ -71,6 +71,22 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
 ```
 然后 `python -m src.pipeline decide --research <该文件>` —— 引擎决定,不是我决定。
 
+## 集成模式 (2026-07-03 起为标准配置)
+
+用户定调: **2×Opus 4.8 + 2×Codex (xhigh) 盲估, Fable 5 仲裁**。
+
+- 四个盲估者 = 2 个模型家族 × 2 种方法论人格 (INSIDE VIEW 机制建模 / OUTSIDE VIEW 基率锚定)。
+  同一份情报摘要, 全程不给任何预测市场价格。Opus 用 Agent tool (model: opus, 禁用工具),
+  Codex 用 `codex exec` 后台并行。每个估计者一次评完本轮全部市场。
+- 聚合规则 (预注册, 不看结果调整): `q_claude` = Opus 家族均值, `q_codex` = Codex 家族均值。
+- 仲裁者 (Fable 5) 职责: 预注册各市场合理区间; 检查家族内分歧 (>0.10 标记人工复核);
+  识别哪个市场存在"决定交易与否的 crux"; 只对这类市场发起第二轮聚焦对辩
+  (每家族一个代表, 揭示市场价作为证据); 汇总落盘。
+  **仲裁者永远不用自己的数字替换估计者的输出** —— 它可以杀掉一笔交易 (风险裁决),
+  不能创造一笔交易。
+- 第二轮后家族最终值直接作为 q_claude / q_codex 进引擎。
+- 成本意识: 每轮 4-6 次 LLM 调用。估计聚类紧密且无优势的市场不辩第二轮。
+
 ## 铁律
 
 1. **盲估先于看价**。看过市场价再估的数字作废。
