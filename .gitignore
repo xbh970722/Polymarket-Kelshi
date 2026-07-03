@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.venv/
+# 账本 data/ledger.db 和 reports/ 特意纳入版本控制: 它们是审计轨迹

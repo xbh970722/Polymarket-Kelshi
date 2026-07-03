@@ -1,0 +1,80 @@
+# 研究协议 (Research Protocol)
+
+每轮交易循环中,Claude Code(下称"我")按此协议对候选市场做研究。
+**这份文件是纪律,不是建议。任何一步偷懒都会污染校准数据。**
+
+## 分工
+
+| 角色 | 职责 |
+|---|---|
+| 情报 | agent-reach / web-access 抓一手信息源 |
+| 估计者 A | 我 (Claude) 独立估 P(YES) |
+| 估计者 B | Codex (gpt-5.5, xhigh) 独立估 P(YES) |
+| 裁决 | `src/engine.py` 用共识概率算净优势, 硬风控放行才成交 |
+| 元决策 | 用户: 定领域、定风控、审报告、决定是否开真钱闸门 |
+
+## 每个市场的研究步骤
+
+### 0. 读规则 (必须第一步)
+```
+python -m src.pipeline rules TICKER
+```
+把 `rules_primary` 逐字读完。预测市场的坑一半在结算条款:
+数据来源是哪家、截止时间是何时区、修订值算不算、平局怎么判。
+**对"事件会不会发生"估得再准,搞错结算条款照样亏钱。**
+
+### 1. 情报收集 (agent-reach / web-access)
+按领域找一手来源,记录每条信息的时间戳:
+- 经济数据: BLS/BEA 官方日历、FRED、CME FedWatch、近期联储官员讲话、机构 nowcast (Cleveland Fed / Atlanta GDPNow)
+- 政治/地缘: 官方公告、主流通讯社 (AP/Reuters)、聚合民调、当事方原话
+- 加密/科技/文娱: 现货价格与波动率、官方公告、行业媒体
+
+规则: 优先一手来源;二手转述必须溯源;记下"市场还不知道什么"。
+
+### 2. 盲估 (防锚定, 顺序不可颠倒)
+- **先不看市场价**,我基于情报独立写下 P(YES) 和三条核心理由。
+- 同时让 Codex 盲估(prompt 里不给市场价、不给我的估计):
+
+```
+codex exec --skip-git-repo-check -s read-only "You are an independent superforecaster. Do not search for prediction-market prices; estimate from evidence only.
+
+MARKET RULES (verbatim): <rules_primary>
+CLOSE TIME: <close_time>
+INTEL DIGEST (each item timestamped): <intel>
+
+Task: estimate P(YES). Think adversarially about base rates, current evidence, and time remaining. Output STRICT JSON only:
+{\"p_yes\": 0.XX, \"ci_low\": 0.XX, \"ci_high\": 0.XX, \"key_drivers\": [\"...\"], \"what_would_change_mind\": [\"...\"]}"
+```
+
+### 3. 对辩 (第二轮)
+把「我的估计+理由」和「市场当前价」发给 Codex,要求它:
+攻击我的最弱论据 -> 说明它更新/不更新的理由 -> 给最终 p_yes。
+我读它的攻击,同样更新我的最终估计。
+**更新要有新论据,不许因为"它比我低"就无脑向中间靠。**
+
+### 4. 落盘
+写入 `reports/research_<YYYY-MM-DD>.json`:
+```json
+{
+  "date": "2026-07-03",
+  "items": [
+    {
+      "ticker": "KX...",
+      "title": "...",
+      "q_claude": 0.62,
+      "q_codex": 0.58,
+      "rationale": "三句话: 核心论据 / 主要风险 / 双方分歧点",
+      "sources": ["url1", "url2"]
+    }
+  ]
+}
+```
+然后 `python -m src.pipeline decide --research <该文件>` —— 引擎决定,不是我决定。
+
+## 铁律
+
+1. **盲估先于看价**。看过市场价再估的数字作废。
+2. 双模型分歧 > 0.10 -> 引擎自动跳过,写进报告标记人工复核。这不是失败,这是系统在工作。
+3. 我不修改 config.yaml 的 risk / live_gate 数值。调整限额是用户的决定。
+4. 结算条款没读懂的市场,跳过,不硬估。
+5. 每轮循环必须跑 settle + report,即使没有新交易——校准数据是整个系统的目的。

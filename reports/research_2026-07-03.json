@@ -1,0 +1,17 @@
+{
+  "date": "2026-07-03",
+  "items": [
+    {
+      "ticker": "KXBTCMINMON-BTC-26JUL31-5750000",
+      "title": "How low will BTC get in July? | Below $57,500 (CF BRTI trimmed-mean touch)",
+      "q_claude": 0.50,
+      "q_codex": 0.49,
+      "rationale": "Barrier 7% below spot = 0.69 monthly sigma; Claude MC (20k paths) and Codex closed-form first-passage both ~0.49-0.52 before rules discount. Round-2 debate converged on touch-style settlement with a small rules-ambiguity discount (Claude 5%, Codex 3% weight on cumulative reading). Market mid 0.495 is fair value. Watch: CPI ~Jul 14, FOMC Jul 28-29 vol catalysts; July low so far 58,243.",
+      "sources": [
+        "Coinbase BTC-USD public API: spot 61860, vol30 37.7% ann, July hourly lows",
+        "Kalshi rules KXBTCMINMON-BTC-26JUL31-5750000 (trimmed-mean BRTI, template-error noted)",
+        "CoinDesk + Cointelegraph RSS 2026-07-03 (whale accumulation vs skeptical options; rate-hike risk receding)"
+      ]
+    }
+  ]
+}

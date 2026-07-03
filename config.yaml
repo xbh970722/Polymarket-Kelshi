@@ -1,0 +1,55 @@
+# ============================================================
+# Kalshi 双模型研究 + 纸面交易流水线 全局配置
+# mode 只有两个值: paper | live
+# live 在 live_gate 三条件全部通过之前会被 pipeline 硬拒绝
+# ============================================================
+mode: paper
+platform: kalshi
+
+# 扫描哪些 Kalshi 事件类别 (对应用户选定的三大领域)
+domains:
+  - Economics
+  - Politics
+  - Elections
+  - World
+  - Crypto
+  - Financials
+  - Companies
+  - Science and Technology
+  - Entertainment
+
+scanner:
+  max_pages: 25            # /events 分页上限 (每页200个事件)
+  min_volume_24h: 500      # 24h 最低成交量 (合约数)
+  min_open_interest: 1000  # 最低未平仓量
+  max_spread_cents: 6      # 买卖价差上限 (美分)
+  min_price_cents: 4       # 排除接近确定性的市场 (<4c 或 >96c 扣费后无利润空间)
+  max_price_cents: 96
+  min_days_to_close: 0
+  max_days_to_close: 45
+  shortlist_size: 12
+
+research:
+  codex_model: gpt-5.5           # 用户 ~/.codex/config.toml 默认即 gpt-5.5 + xhigh
+  codex_reasoning_effort: xhigh
+  markets_per_cycle: 3           # 每轮深度研究的市场数上限
+
+edge:
+  min_edge_after_fees: 0.05      # 扣手续费后最低净优势 (概率点), 低于此不交易
+  consensus_max_divergence: 0.10 # 双模型分歧超过此值 -> 不交易, 标记人工复核
+
+sizing:
+  bankroll_usd: 500
+  kelly_fraction: 0.25           # 1/4 Kelly
+
+risk:                            # ===== 硬限额, 全自动模式的安全边界 =====
+  max_per_trade_usd: 25          # 单笔成本上限 (含手续费)
+  max_daily_risk_usd: 100        # 单日新增风险上限
+  max_total_exposure_usd: 300    # 未平仓总敞口上限
+  max_open_positions: 10
+  daily_loss_halt_usd: 150       # 单日已实现亏损达到此值 -> 熔断停机
+
+live_gate:                       # ===== 切换真钱交易的准入条件 (三条全过才讨论开闸) =====
+  min_settled_trades: 30         # 至少30笔已结算纸面交易
+  max_brier: 0.22                # 模型 Brier 分数上限
+  require_positive_pnl: true     # 纸面盈亏必须为正
