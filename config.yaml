@@ -85,7 +85,7 @@ risk:                      # ===== 硬限额: paper 和 live 都强制执行 ===
   max_per_trade_usd: 25
   max_daily_risk_usd: 100
   max_total_exposure_usd: 300
-  max_open_positions: 10
+  max_open_positions: 16           # 2026-07-03 用户指令: 仓位上限 +10 (原10)
   daily_loss_halt_usd: 200         # VALUES.md #1: 学费心态, 熔断放宽
 
 # ---------- 真钱交易 (练手模式, VALUES.md #5a) ----------
@@ -103,7 +103,7 @@ live:
   live_min_edge_after_fees: 0.035  # 练手期与纸面同门槛, 攒真实成交经验; 正式期回 0.05
   max_daily_risk_usd: 4          # 日新增风险 ≤$4
   max_total_exposure_usd: 8      # 总敞口 ≤$8 (留手续费余量)
-  max_open_positions: 6
+  max_open_positions: 16         # 2026-07-03 用户指令: +10 (原6); 美元上限不变
   daily_loss_halt_usd: 5         # 日亏 $5 熔断 (账户一半)
   # API key 配置 (环境变量, 不进 git):
   #   KALSHI_API_KEY_ID=<key id>
