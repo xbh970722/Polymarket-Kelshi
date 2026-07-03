@@ -71,12 +71,23 @@ class KalshiLive:
         return self._req("GET", f"{API}/portfolio/positions")
 
     # ---- money-moving ----
-    def place_limit(self, ticker: str, side: str, count: int, price_prob: float) -> dict:
-        """Buy `count` contracts of yes/no at a limit price (probability 0-1)."""
+    def place_limit(self, ticker: str, side: str, count: int, price_prob: float,
+                    tif: str = "immediate_or_cancel") -> dict:
+        """Buy `count` contracts of yes/no at a limit price (probability 0-1).
+
+        Kalshi V2 single-book model: `side` is the YES leg. bid = buy YES;
+        ask = sell YES, which is economically buying NO at (1 - price). So a
+        NO buy at no_price becomes a YES-leg 'ask' at (1 - no_price).
+        Prices and counts are fixed-point dollar strings.
+        tif: immediate_or_cancel (marketable) | good_till_canceled | fill_or_kill.
+        """
         assert side in ("yes", "no")
-        cents = int(round(price_prob * 100))
-        assert 1 <= cents <= 99, f"limit price out of range: {cents}c"
-        body = {"ticker": ticker, "action": "buy", "side": side, "count": int(count),
-                "type": "limit", "client_order_id": str(uuid.uuid4())}
-        body["yes_price" if side == "yes" else "no_price"] = cents
-        return self._req("POST", f"{API}/portfolio/orders", body)
+        book_side = "bid" if side == "yes" else "ask"
+        yes_price = price_prob if side == "yes" else 1.0 - price_prob
+        yes_price = round(yes_price, 4)
+        assert 0.0001 <= yes_price <= 0.9999, f"price out of range: {yes_price}"
+        body = {"ticker": ticker, "side": book_side,
+                "count": f"{int(count):d}.00", "price": f"{yes_price:.4f}",
+                "time_in_force": tif, "self_trade_prevention_type": "taker_at_cross",
+                "client_order_id": str(uuid.uuid4())}
+        return self._req("POST", f"{API}/portfolio/events/orders", body)
