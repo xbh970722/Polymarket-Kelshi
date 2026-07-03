@@ -29,12 +29,9 @@ def load_config() -> dict:
     return yaml.safe_load(Path("config.yaml").read_text(encoding="utf-8"))
 
 
-def require_paper(cfg: dict) -> None:
-    if cfg["mode"] != "paper":
-        print("REFUSED: live mode is not armed in this build.")
-        print("Order placement code stays disabled until the live gate passes")
-        print("(see 'Live gate' section of pipeline report) AND it is reviewed together.")
-        sys.exit(2)
+def live_active(cfg: dict) -> bool:
+    """Live orders flow only when BOTH switches are on; keys are checked at placement."""
+    return cfg["mode"] == "live" and bool(cfg.get("live", {}).get("enabled"))
 
 
 def cmd_scan(_args) -> None:
@@ -61,7 +58,11 @@ def cmd_rules(args) -> None:
 
 def cmd_decide(args) -> None:
     cfg = load_config()
-    require_paper(cfg)
+    is_live = live_active(cfg)
+    if is_live:
+        # live mode tightens the per-trade cap to min(risk, live)
+        cfg["risk"]["max_per_trade_usd"] = min(cfg["risk"]["max_per_trade_usd"],
+                                               cfg["live"]["max_per_trade_usd"])
     research = json.loads(Path(args.research).read_text(encoding="utf-8"))
     api = KalshiPublic()
     placed = skipped = 0
@@ -88,18 +89,24 @@ def cmd_decide(args) -> None:
             skipped += 1
             continue
         market_prob = round((yb + ya) / 2, 4) if yb else round(ya, 4)
+        status = "pending" if is_live else "open"
         ledger.insert_trade(
             mode=cfg["mode"], ticker=ticker, title=item.get("title", ""),
             side=d.side, price=d.price, contracts=d.contracts,
             cost_usd=d.cost_usd, fee_usd=d.fee_usd,
             q_claude=item["q_claude"], q_codex=item["q_codex"],
             q_consensus=d.q_consensus, market_prob=market_prob,
-            edge_net=d.edge_net, rationale=item.get("rationale", ""))
+            edge_net=d.edge_net, rationale=item.get("rationale", ""),
+            status=status)
         placed += 1
-        print(f"PAPER {ticker}: {d.side.upper()} x{d.contracts} @ {d.price * 100:.1f}c "
+        tag = "LIVE-PENDING" if is_live else "PAPER"
+        print(f"{tag} {ticker}: {d.side.upper()} x{d.contracts} @ {d.price * 100:.1f}c "
               f"cost=${d.cost_usd:.2f} (fee ${d.fee_usd:.2f}) edge={d.edge_net:+.3f} "
               f"q={d.q_consensus:.2f} vs mkt={market_prob:.2f}")
-    print(f"done: {placed} paper orders, {skipped} skipped")
+    if is_live and placed:
+        print(f"NOTE: {placed} live order(s) are PENDING confirmation. "
+              f"Review with 'pending', then 'execute-live --confirmed'.")
+    print(f"done: {placed} orders ({'live-pending' if is_live else 'paper'}), {skipped} skipped")
 
 
 def cmd_settle(_args) -> None:
@@ -191,7 +198,82 @@ def cmd_report(_args) -> None:
 
 
 def cmd_status(_args) -> None:
-    print(json.dumps({**ledger.stats(), **ledger.calibration()}, indent=2))
+    out = {**ledger.stats(), **ledger.calibration(),
+           "pending_live_orders": len(ledger.pending_trades())}
+    print(json.dumps(out, indent=2))
+
+
+def cmd_pending(_args) -> None:
+    rows = ledger.pending_trades()
+    if not rows:
+        print("no pending live orders")
+        return
+    for t in rows:
+        print(f"  #{t['id']} {t['ticker']} {t['side'].upper()} x{t['contracts']} "
+              f"@ {t['price'] * 100:.1f}c cost=${t['cost_usd']:.2f} "
+              f"edge={t['edge_net']:+.3f} q={t['q_consensus']:.2f}")
+    print(f"{len(rows)} pending. Execute: python -m src.pipeline execute-live --confirmed")
+
+
+def cmd_execute_live(args) -> None:
+    if not args.confirmed:
+        print("REFUSED: execute-live requires --confirmed "
+              "(human approval or live.require_confirm=false auto-policy).")
+        sys.exit(2)
+    cfg = load_config()
+    if not live_active(cfg):
+        print("REFUSED: mode is not live or live.enabled is false in config.yaml.")
+        sys.exit(2)
+    from .live import KalshiLive, LiveAuthError
+    try:
+        client = KalshiLive()
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        sys.exit(2)
+    rows = ledger.pending_trades()
+    if args.id:
+        rows = [t for t in rows if t["id"] == args.id]
+    ok = failed = 0
+    for t in rows:
+        try:
+            resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"])
+            order_id = (resp.get("order") or {}).get("order_id") or resp.get("order_id") or "?"
+            ledger.mark_placed(t["id"], str(order_id))
+            ok += 1
+            print(f"PLACED #{t['id']} {t['ticker']} {t['side'].upper()} x{t['contracts']} "
+                  f"@ {t['price'] * 100:.1f}c order_id={order_id}")
+        except Exception as e:
+            failed += 1
+            print(f"FAILED #{t['id']} {t['ticker']}: {e}")
+    print(f"done: {ok} placed, {failed} failed, "
+          f"{len(ledger.pending_trades())} still pending")
+
+
+def cmd_cancel_pending(args) -> None:
+    rows = ledger.pending_trades()
+    if args.id:
+        rows = [t for t in rows if t["id"] == args.id]
+    for t in rows:
+        ledger.void_trade(t["id"], args.reason or "cancelled by user")
+        print(f"VOIDED #{t['id']} {t['ticker']}")
+    print(f"done: {len(rows)} voided")
+
+
+def cmd_live_check(_args) -> None:
+    """Validate live credentials + connectivity without placing anything."""
+    from .live import KalshiLive, LiveAuthError
+    cfg = load_config()
+    print(f"config: mode={cfg['mode']} live.enabled={cfg.get('live', {}).get('enabled')} "
+          f"require_confirm={cfg.get('live', {}).get('require_confirm')}")
+    try:
+        client = KalshiLive()
+    except LiveAuthError as e:
+        print(f"NOT READY: {e}")
+        sys.exit(1)
+    bal = client.balance()
+    pos = client.positions()
+    n_pos = len(pos.get("market_positions") or pos.get("positions") or [])
+    print(f"READY: balance={bal} | open API positions={n_pos}")
 
 
 def main() -> None:
@@ -209,6 +291,16 @@ def main() -> None:
     sub.add_parser("settle").set_defaults(fn=cmd_settle)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
+    sub.add_parser("pending").set_defaults(fn=cmd_pending)
+    p = sub.add_parser("execute-live")
+    p.add_argument("--confirmed", action="store_true")
+    p.add_argument("--id", type=int, default=None)
+    p.set_defaults(fn=cmd_execute_live)
+    p = sub.add_parser("cancel-pending")
+    p.add_argument("--id", type=int, default=None)
+    p.add_argument("--reason", default="")
+    p.set_defaults(fn=cmd_cancel_pending)
+    sub.add_parser("live-check").set_defaults(fn=cmd_live_check)
     args = ap.parse_args()
     args.fn(args)
 

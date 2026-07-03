@@ -52,6 +52,16 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
 我读它的攻击,同样更新我的最终估计。
 **更新要有新论据,不许因为"它比我低"就无脑向中间靠。**
 
+### 3.5 验证层 (下单前强制, 2026-07-03 起)
+
+任何将产生**交易指令**的市场(跳过的不需要),在 decide 之前必须过验证:
+- **社媒**: agent-reach 搜 Twitter / Reddit 近 24h 该事件关键词 —— 找模型没见过的突发信息
+  (官员临时讲话、伤病/行程变更、链上异动、爆料)。
+- **数据库**: 经济类查 FRED / BLS / 官方日历确认数据发布时点与最新值;
+  加密类查交易所现货与资金费率; 政治类查官方公告原文。
+- 发现重大新信息 → 带着新证据回炉第二轮, 重新出家族终值再 decide。
+- 验证动作与结论写进 research JSON 的 sources / rationale。
+
 ### 4. 落盘
 写入 `reports/research_<YYYY-MM-DD>.json`:
 ```json
@@ -76,8 +86,12 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
 用户定调: **2×Opus 4.8 + 2×Codex (xhigh) 盲估, Fable 5 仲裁**。
 
 - 四个盲估者 = 2 个模型家族 × 2 种方法论人格 (INSIDE VIEW 机制建模 / OUTSIDE VIEW 基率锚定)。
-  同一份情报摘要, 全程不给任何预测市场价格。Opus 用 Agent tool (model: opus, 禁用工具),
-  Codex 用 `codex exec` 后台并行。每个估计者一次评完本轮全部市场。
+  同一份情报摘要, 全程不给任何预测市场价格。每个估计者一次评完本轮全部市场。
+- **模型全部来自 config.yaml `ensemble:` 段** — Claude 家族用 Agent tool
+  (model 参数 = `claude_family.model`, 禁用工具), Codex 家族用
+  `codex exec -m <codex_family.model> -c model_reasoning_effort=<effort>` 后台并行。
+  换代升级 (Opus 5.0 / Codex 5.6 / Fable 下一代) 只改配置, 协议与代码不动。
+  仲裁者按 `arbiter_preference` 顺序: 有 Fable 额度用 Fable 5, 用尽切 Opus 4.8。
 - 聚合规则 (预注册, 不看结果调整): `q_claude` = Opus 家族均值, `q_codex` = Codex 家族均值。
 - 仲裁者 (Fable 5) 职责: 预注册各市场合理区间; 检查家族内分歧 (>0.10 标记人工复核);
   识别哪个市场存在"决定交易与否的 crux"; 只对这类市场发起第二轮聚焦对辩

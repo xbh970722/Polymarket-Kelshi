@@ -26,7 +26,8 @@ CREATE TABLE IF NOT EXISTS trades(
   status TEXT NOT NULL DEFAULT 'open',
   result TEXT,
   pnl_usd REAL,
-  settled_ts TEXT
+  settled_ts TEXT,
+  order_id TEXT
 )
 """
 
@@ -36,6 +37,9 @@ def _conn() -> sqlite3.Connection:
     c = sqlite3.connect(DB)
     c.row_factory = sqlite3.Row
     c.execute(SCHEMA)
+    cols = {r[1] for r in c.execute("PRAGMA table_info(trades)")}
+    if "order_id" not in cols:                      # migrate pre-live databases
+        c.execute("ALTER TABLE trades ADD COLUMN order_id TEXT")
     return c
 
 
@@ -52,6 +56,25 @@ def open_trades() -> list[dict]:
     with _conn() as c:
         return [dict(r) for r in c.execute(
             "SELECT * FROM trades WHERE status='open' ORDER BY ts")]
+
+
+def pending_trades() -> list[dict]:
+    """Live orders decided by the engine but not yet confirmed/placed."""
+    with _conn() as c:
+        return [dict(r) for r in c.execute(
+            "SELECT * FROM trades WHERE status='pending' ORDER BY ts")]
+
+
+def mark_placed(trade_id: int, order_id: str) -> None:
+    with _conn() as c:
+        c.execute("UPDATE trades SET status='open', order_id=? WHERE id=?",
+                  (order_id, trade_id))
+
+
+def void_trade(trade_id: int, reason: str) -> None:
+    with _conn() as c:
+        c.execute("UPDATE trades SET status='voided', rationale=rationale || ' | VOID: ' || ? "
+                  "WHERE id=?", (reason, trade_id))
 
 
 def has_open_position(ticker: str) -> bool:
@@ -71,12 +94,14 @@ def stats() -> dict:
     today = dt.date.today().isoformat()
     with _conn() as c:
         risk_today = c.execute(
-            "SELECT COALESCE(SUM(cost_usd),0) FROM trades WHERE ts LIKE ? || '%'",
+            "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
+            "WHERE ts LIKE ? || '%' AND status != 'voided'",
             (today,)).fetchone()[0]
         open_exp = c.execute(
-            "SELECT COALESCE(SUM(cost_usd),0) FROM trades WHERE status='open'").fetchone()[0]
+            "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
+            "WHERE status IN ('open','pending')").fetchone()[0]
         n_open = c.execute(
-            "SELECT COUNT(*) FROM trades WHERE status='open'").fetchone()[0]
+            "SELECT COUNT(*) FROM trades WHERE status IN ('open','pending')").fetchone()[0]
         pnl_today = c.execute(
             "SELECT COALESCE(SUM(pnl_usd),0) FROM trades WHERE settled_ts LIKE ? || '%'",
             (today,)).fetchone()[0]

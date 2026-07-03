@@ -1,12 +1,38 @@
 # ============================================================
-# Kalshi 双模型研究 + 纸面交易流水线 全局配置
-# mode 只有两个值: paper | live
-# live 在 live_gate 三条件全部通过之前会被 pipeline 硬拒绝
+# Kalshi 集成研究 + 交易流水线 全局配置
+# mode: paper | live   (live 还需 live.enabled: true + API key)
 # ============================================================
 mode: paper
 platform: kalshi
 
-# 扫描哪些 Kalshi 事件类别 (对应用户选定的三大领域)
+# ---------- 模型编制 (换代升级只改这里, 代码零改动) ----------
+ensemble:
+  # 主AI/仲裁者: 会话层选择 — 有 Fable 额度时用 Fable 5, 用尽时切 Opus 4.8
+  # (交互会话: /model 切换; 定时任务: 桌面端默认模型)
+  arbiter_preference: [fable-5, opus-4.8]
+  claude_family:
+    count: 2
+    model: opus            # Agent tool 的 model 参数: opus|sonnet|haiku|fable (未来: opus5 等)
+    personas: [inside_view, outside_view]
+  codex_family:
+    count: 2
+    model: gpt-5.5         # codex exec -m 参数 (未来: gpt-5.6 / codex-5.6 等)
+    reasoning_effort: xhigh
+  round2_representatives: 1   # 第二轮每家族代表数
+
+# ---------- 交互协议 (确认用户意志的节点) ----------
+interaction:
+  when_interactive: ask    # ask: 关键节点用选择题问用户; auto: 不打断
+  ask_before_research: true  # 扫描后让用户挑选研究哪些候选 (交互会话时)
+  ask_on_trade: true         # 出现交易信号时询问用户 (paper 也问; 定时任务除外)
+
+# ---------- 决策前验证层 ----------
+verification:
+  enabled: true
+  social: [twitter, reddit]     # agent-reach 通道: 下单前搜索近24h突发信息
+  data: [fred, coinbase, official_calendars]  # 经济=FRED/官方日历, 加密=交易所数据
+  rule: "任何 trade 信号在下单前必须过验证层; 发现模型未见的重大信息 -> 回炉重估"
+
 domains:
   - Economics
   - Politics
@@ -19,37 +45,46 @@ domains:
   - Entertainment
 
 scanner:
-  max_pages: 25            # /events 分页上限 (每页200个事件)
-  min_volume_24h: 500      # 24h 最低成交量 (合约数)
-  min_open_interest: 1000  # 最低未平仓量
-  max_spread_cents: 6      # 买卖价差上限 (美分)
-  min_price_cents: 4       # 排除接近确定性的市场 (<4c 或 >96c 扣费后无利润空间)
+  max_pages: 25
+  min_volume_24h: 500
+  min_open_interest: 1000
+  max_spread_cents: 6
+  min_price_cents: 4
   max_price_cents: 96
   min_days_to_close: 0
   max_days_to_close: 45
   shortlist_size: 12
 
 research:
-  codex_model: gpt-5.5           # 用户 ~/.codex/config.toml 默认即 gpt-5.5 + xhigh
-  codex_reasoning_effort: xhigh
-  markets_per_cycle: 3           # 每轮深度研究的市场数上限
+  markets_per_cycle: 3
 
 edge:
-  min_edge_after_fees: 0.05      # 扣手续费后最低净优势 (概率点), 低于此不交易
-  consensus_max_divergence: 0.10 # 双模型分歧超过此值 -> 不交易, 标记人工复核
+  min_edge_after_fees: 0.05
+  consensus_max_divergence: 0.10
 
 sizing:
   bankroll_usd: 500
-  kelly_fraction: 0.25           # 1/4 Kelly
+  kelly_fraction: 0.25
 
-risk:                            # ===== 硬限额, 全自动模式的安全边界 =====
-  max_per_trade_usd: 25          # 单笔成本上限 (含手续费)
-  max_daily_risk_usd: 100        # 单日新增风险上限
-  max_total_exposure_usd: 300    # 未平仓总敞口上限
+risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
+  max_per_trade_usd: 25
+  max_daily_risk_usd: 100
+  max_total_exposure_usd: 300
   max_open_positions: 10
-  daily_loss_halt_usd: 150       # 单日已实现亏损达到此值 -> 熔断停机
+  daily_loss_halt_usd: 150
 
-live_gate:                       # ===== 切换真钱交易的准入条件 (三条全过才讨论开闸) =====
-  min_settled_trades: 30         # 至少30笔已结算纸面交易
-  max_brier: 0.22                # 模型 Brier 分数上限
-  require_positive_pnl: true     # 纸面盈亏必须为正
+# ---------- 真钱交易 ----------
+live:
+  enabled: false           # 改 true 才可能下真单 (还需 mode: live + 环境变量 API key)
+  require_confirm: true    # true: 每单需人确认 (交互=选择题, 定时任务=推送通知等待);
+                           # false: 全自动直接下单 (硬限额仍生效) — 用户明示后才可改
+  max_per_trade_usd: 25    # live 专用单笔上限 (与 risk 取小)
+  # API key 配置 (环境变量, 不进 git):
+  #   KALSHI_API_KEY_ID=<key id>
+  #   KALSHI_PRIVATE_KEY_PATH=<RSA 私钥 .pem 路径>
+  # 获取: kalshi.com -> Account -> API Keys -> Create; 验证: python -m src.pipeline live-check
+
+live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
+  min_settled_trades: 30
+  max_brier: 0.22
+  require_positive_pnl: true
