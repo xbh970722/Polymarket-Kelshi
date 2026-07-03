@@ -1,0 +1,53 @@
+{
+  "date": "2026-07-03",
+  "mode": "ensemble-4+1 evening cycle (user-picked 5 markets; verification layer active)",
+  "items": [
+    {
+      "ticker": "KXRANKLIST1SONG-26JUL25-IKN",
+      "title": "I Knew It, I Knew You (Taylor Swift) #1 on Hot 100 in July",
+      "q_claude": 0.16,
+      "q_codex": 0.16,
+      "rationale": "R1 blind (0.14/0.25 vs 0.52/0.40, family div 0.265) was built on a WRONG inference (Stupid Song displacement). Verification: Taylor held #1 two weeks, lost Jul 4 chart to Ella Langley's country surge; 3 eligible charts remain; Ariana's album lands after window. Both families' R2 converged 0.16: reclaim live but market's Luminate mid-week data edge respected. Ask 0.14 -> net +0.01, skip.",
+      "sources": [
+        "billboard.com/charts/hot-100/2026-07-04 (verified #1 = Choosin' Texas, IKN ~#2 LW1)",
+        "Billboard News YouTube 2026-06-29 (chart countdown framing)",
+        "billboard.com Gary Trust pieces: IKN debut (Jun 20), Ariana debut (Jun 13), Rodrigo album week (Jun 27)"
+      ]
+    },
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-7250000",
+      "title": "How high will BTC get in July? | Above $72,500",
+      "q_claude": 0.13,
+      "q_codex": 0.18,
+      "rationale": "All four blind estimators (0.15/0.11/0.18/0.18) above market ask 0.11; arbiter MC 0.128 (mu0). Consensus 0.155 -> net edge +0.035, below 5pt threshold. Directional note for the record: models see the 0.10-0.11 ask as slightly cheap.",
+      "sources": ["Coinbase spot 62046, vol30 37.8%", "Arbiter MC btc_model_725.py"]
+    },
+    {
+      "ticker": "KXKASHOUT-26APR-AUG01",
+      "title": "Kash Patel out as FBI Director before Aug 1",
+      "q_claude": 0.035,
+      "q_codex": 0.035,
+      "rationale": "Perfect four-way agreement at 0.03-0.04 vs market mid 0.075: STOCK Act disclosure lapse is lawyered (DAG no-conflict letter), no acute trigger, low 29-day base rate. NO side edge +0.028 after fees - insufficient. Skip.",
+      "sources": ["NOTUS via CoinDesk 2026-07-02 (MSTR disclosure violation)"]
+    },
+    {
+      "ticker": "KXALITOANNOUNCERETIRE-26JUN-AUG01",
+      "title": "Alito announces departure before Aug 1",
+      "q_claude": 0.13,
+      "q_codex": 0.205,
+      "rationale": "Consensus 0.1675 vs ask 0.11 -> net +0.0475, misses threshold by 0.25pt. NEAR-MISS worth watching: all four estimators price the retracted Totenberg report as real smoke above market. Rules verified: announcement counts regardless of effective date. Re-examine if any new signal.",
+      "sources": ["AP News 2026-06-30 (NPR retraction)", "rules_secondary verified: announcement-based resolution"]
+    },
+    {
+      "ticker": "KXLLM1-26JUL31-A",
+      "title": "Best AI in Jul 2026 = Claude (LMArena top rank Jul 31)",
+      "q_claude": 0.92,
+      "q_codex": 0.92,
+      "rationale": "R1 consensus 0.63 (apparent +24.7pt NO edge) was GIGO from a stale third-party snapshot. Verification: actual lmarena.ai shows Anthropic double-lock (#1 Fable 5 High, #2 Opus 4.8 Thinking, GPT 5.5 xHigh #3); GPT-5.6 Sol announced Jun 26 but government-gated limited preview, not accruing Arena votes. Both families R2 -> 0.92. Ask 0.90 -> net +0.01, skip. Conflict-of-interest handled: Claude family corrected DOWNWARD from naive 0.95.",
+      "sources": [
+        "lmarena.ai/leaderboard fetched 2026-07-03 (verified standings)",
+        "openai.com/index/previewing-gpt-5-6-sol (Jun 26, limited preview at government request)"
+      ]
+    }
+  ]
+}

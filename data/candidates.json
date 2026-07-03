@@ -1,5 +1,5 @@
 {
-  "generated": "2026-07-03T13:23:05.845681+00:00",
+  "generated": "2026-07-03T13:49:10.189448+00:00",
   "categories_seen": {
     "World": 9,
     "Elections": 2219,
@@ -31,10 +31,10 @@
       "no_ask": 0.1,
       "mid_prob": 0.905,
       "spread_cents": 1.0,
-      "volume_24h": 470741.0,
-      "open_interest": 2277912.52,
+      "volume_24h": 441124.31,
+      "open_interest": 2277884.59,
       "close_time": "2026-07-29T17:59:00Z",
-      "days_to_close": 26.19,
+      "days_to_close": 26.17,
       "score": 1.95
     },
     {
@@ -48,10 +48,10 @@
       "no_ask": 0.93,
       "mid_prob": 0.075,
       "spread_cents": 1.0,
-      "volume_24h": 88373.91,
+      "volume_24h": 88148.4,
       "open_interest": 1529803.5,
       "close_time": "2026-07-29T17:59:00Z",
-      "days_to_close": 26.19,
+      "days_to_close": 26.17,
       "score": 1.95
     },
     {
@@ -68,7 +68,7 @@
       "volume_24h": 23695.75,
       "open_interest": 82908.42,
       "close_time": "2026-07-29T17:55:00Z",
-      "days_to_close": 26.19,
+      "days_to_close": 26.17,
       "score": 1.95
     },
     {
@@ -77,15 +77,15 @@
       "category": "Entertainment",
       "title": "Which songs will be #1 on the Billboard Hot 100 in July?",
       "subtitle": "I Knew It, I Knew You",
-      "yes_bid": 0.12,
-      "yes_ask": 0.13,
-      "no_ask": 0.88,
-      "mid_prob": 0.125,
+      "yes_bid": 0.13,
+      "yes_ask": 0.14,
+      "no_ask": 0.87,
+      "mid_prob": 0.135,
       "spread_cents": 1.0,
-      "volume_24h": 21707.87,
-      "open_interest": 68009.59,
+      "volume_24h": 21724.55,
+      "open_interest": 68030.66,
       "close_time": "2026-07-25T14:00:00Z",
-      "days_to_close": 22.03,
+      "days_to_close": 22.01,
       "score": 1.95
     },
     {
@@ -99,10 +99,10 @@
       "no_ask": 0.14,
       "mid_prob": 0.865,
       "spread_cents": 1.0,
-      "volume_24h": 45037.95,
-      "open_interest": 305271.76,
+      "volume_24h": 45656.54,
+      "open_interest": 305389.12,
       "close_time": "2026-07-20T14:00:00Z",
-      "days_to_close": 17.03,
+      "days_to_close": 17.01,
       "score": 1.95
     },
     {
@@ -116,11 +116,28 @@
       "no_ask": 0.51,
       "mid_prob": 0.495,
       "spread_cents": 1.0,
-      "volume_24h": 28188.98,
+      "volume_24h": 26202.69,
       "open_interest": 32135.6,
       "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.61,
+      "days_to_close": 28.59,
       "score": 1.5927
+    },
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-7250000",
+      "event_ticker": "KXBTCMAXMON-BTC-26JUL31",
+      "category": "Crypto",
+      "title": "How high will BTC get in July?",
+      "subtitle": "Above $72,500.00",
+      "yes_bid": 0.1,
+      "yes_ask": 0.11,
+      "no_ask": 0.9,
+      "mid_prob": 0.105,
+      "spread_cents": 1.0,
+      "volume_24h": 27262.58,
+      "open_interest": 26311.13,
+      "close_time": "2026-08-01T03:59:59Z",
+      "days_to_close": 28.59,
+      "score": 1.4762
     },
     {
       "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000",
@@ -129,32 +146,15 @@
       "title": "How high will BTC get in July?",
       "subtitle": "Above $65,000.00",
       "yes_bid": 0.62,
-      "yes_ask": 0.63,
+      "yes_ask": 0.64,
       "no_ask": 0.38,
-      "mid_prob": 0.625,
-      "spread_cents": 1.0,
-      "volume_24h": 22043.39,
-      "open_interest": 28559.42,
+      "mid_prob": 0.63,
+      "spread_cents": 2.0,
+      "volume_24h": 22041.82,
+      "open_interest": 28711.84,
       "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.61,
-      "score": 1.5212
-    },
-    {
-      "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
-      "event_ticker": "KXBTCMAXMON-BTC-26JUL31",
-      "category": "Crypto",
-      "title": "How high will BTC get in July?",
-      "subtitle": "Above $67,500.00",
-      "yes_bid": 0.36,
-      "yes_ask": 0.37,
-      "no_ask": 0.64,
-      "mid_prob": 0.365,
-      "spread_cents": 1.0,
-      "volume_24h": 20839.66,
-      "open_interest": 26080.44,
-      "close_time": "2026-08-01T03:59:59Z",
-      "days_to_close": 28.61,
-      "score": 1.4716
+      "days_to_close": 28.59,
+      "score": 1.4742
     },
     {
       "ticker": "KXKASHOUT-26APR-AUG01",
@@ -167,11 +167,11 @@
       "no_ask": 0.927,
       "mid_prob": 0.075,
       "spread_cents": 0.4,
-      "volume_24h": 3929.53,
+      "volume_24h": 3890.26,
       "open_interest": 169225.41,
       "close_time": "2026-08-01T03:59:00Z",
-      "days_to_close": 28.61,
-      "score": 1.1765
+      "days_to_close": 28.59,
+      "score": 1.1745
     },
     {
       "ticker": "KXRANKLIST1SONG-26JUL25-BEH",
@@ -187,7 +187,7 @@
       "volume_24h": 13565.92,
       "open_interest": 19251.78,
       "close_time": "2026-07-25T14:00:00Z",
-      "days_to_close": 22.03,
+      "days_to_close": 22.01,
       "score": 1.0133
     },
     {
@@ -204,25 +204,25 @@
       "volume_24h": 4651.57,
       "open_interest": 36832.41,
       "close_time": "2026-07-31T14:00:00Z",
-      "days_to_close": 28.03,
+      "days_to_close": 28.01,
       "score": 0.9192
     },
     {
-      "ticker": "KXGPT-OPEN-26JUL07",
-      "event_ticker": "KXGPT-OPENB",
-      "category": "Science and Technology",
-      "title": "When will OpenAI release GPT-5.6?",
-      "subtitle": "Before Jul 7, 2026",
-      "yes_bid": 0.06,
-      "yes_ask": 0.08,
-      "no_ask": 0.94,
-      "mid_prob": 0.07,
-      "spread_cents": 2.0,
-      "volume_24h": 12289.51,
-      "open_interest": 14588.96,
-      "close_time": "2026-07-07T03:59:00Z",
-      "days_to_close": 3.61,
-      "score": 0.8063
+      "ticker": "KXALITOANNOUNCERETIRE-26JUN-AUG01",
+      "event_ticker": "KXALITOANNOUNCERETIRE-26JUN",
+      "category": "Politics",
+      "title": "Will Samuel Alito announce his retirement?",
+      "subtitle": "Before Aug 1, 2026",
+      "yes_bid": 0.1,
+      "yes_ask": 0.11,
+      "no_ask": 0.9,
+      "mid_prob": 0.105,
+      "spread_cents": 1.0,
+      "volume_24h": 6717.26,
+      "open_interest": 25572.81,
+      "close_time": "2026-08-01T03:59:00Z",
+      "days_to_close": 28.59,
+      "score": 0.7973
     }
   ]
 }
