@@ -113,14 +113,28 @@ live:
 # ---------- 短波量化通道 (小时级, 无LLM, VALUES.md #11) ----------
 shortcycle:
   enabled: true
-  series: [KXBTCD]               # 先只做 BTC 小时 (ETH 价差太宽, 观察后再加)
-  min_minutes_to_close: 15       # 离结算太近模型无意义, 太远该小时报价未成型
+  series: [KXBTCD, KXETHD]       # BTC + ETH 小时市场 (2026-07-03 用户: crypto 也做)
+  min_edge_by_series:
+    KXETHD: 0.05                 # ETH 价差 3c, 门槛相应更高
+  min_minutes_to_close: 15
   max_minutes_to_close: 75
-  vol_lookback_min: 180          # 分钟波动率回看窗口
-  min_edge_after_fees: 0.04      # 短波专用门槛: 1c 价差 + ~1c 手续费之上还要 4 点
-  max_per_trade_usd: 0.50        # 微单: 每笔 ≤$0.50
+  vol_lookback_min: 180
+  min_edge_after_fees: 0.03      # 果断化: 4→3 点 (用户: 策略果断点)
+  slippage: 0.01                 # 果断化: 允许越价 1c 吃单 (越价后仍须过门槛)
+  max_per_trade_usd: 0.50
   max_contracts: 3
-  daily_budget_usd: 2.00         # 短波日预算 (占 live 日风险 $4 的一半)
+  daily_budget_usd: 2.00
+
+# ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
+weather:
+  enabled: true
+  series: [KXHIGHNY, KXHIGHCHI, KXHIGHAUS, KXHIGHMIA, KXHIGHLAX, KXHIGHDEN, KXHIGHPHIL]
+  active_local_hours: [11, 21]   # 当地 11:00-21:00 才交易 (早晨预报噪声大)
+  min_edge_after_fees: 0.05      # 预报基差风险真实存在, 门槛比 crypto 高
+  max_per_trade_usd: 0.50
+  max_contracts: 3
+  max_trades_per_city_per_day: 1
+  daily_budget_usd: 1.00
 
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30

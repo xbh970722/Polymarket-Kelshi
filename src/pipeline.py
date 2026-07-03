@@ -213,6 +213,31 @@ def cmd_manage(_args) -> None:
     print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
 
 
+def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
+                  q_model: float, min_edge: float, slippage: float = 0.01):
+    """Decisive fill: re-quote fresh, cross up to `slippage` above the ask, but only
+    if the edge STILL clears the bar at that worst-case price. Returns
+    (filled_count, avg_price, fee, order_id) or (0, reason, None, None)."""
+    mn = api.market_norm(ticker)
+    ask = mn["yes_ask"] if side == "yes" else mn["no_ask"]
+    if not (0.01 <= ask <= 0.99):
+        return 0, "no fresh quote", None, None
+    limit_px = round(min(ask + slippage, 0.99), 4)
+    q_side = q_model if side == "yes" else 1 - q_model
+    if q_side - limit_px - taker_fee_usd(limit_px, 1) < min_edge:
+        return 0, f"edge below bar at crossed price {limit_px:.3f}", None, None
+    resp = client.place_limit(ticker, side, contracts, limit_px)
+    filled = int(float(resp.get("fill_count") or 0))
+    if filled < 1:
+        return 0, "IOC no fill even crossed", None, None
+    avg_px = float(resp.get("average_fill_price") or limit_px)
+    if side == "no":                     # exchange reports fills in YES-leg terms
+        avg_px = round(1.0 - avg_px, 4)
+    fee_per = float(resp.get("average_fee_paid") or 0) * filled
+    fee = round(fee_per, 2) if fee_per else taker_fee_usd(avg_px, filled)
+    return filled, avg_px, fee, str(resp.get("order_id") or "?")
+
+
 def cmd_shortcycle(_args) -> None:
     """Hourly quant lane: model hourly crypto strikes, trade real micro-edges (no LLM)."""
     cfg = load_config()
@@ -240,6 +265,7 @@ def cmd_shortcycle(_args) -> None:
     cands = candidates(cfg)
     print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
           f"today spent ${spent:.2f}/{sc['daily_budget_usd']:.2f}")
+    api = KalshiPublic()
     placed = 0
     for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
         if spent >= sc["daily_budget_usd"]:
@@ -247,51 +273,126 @@ def cmd_shortcycle(_args) -> None:
             break
         if ledger.has_open_position(c["ticker"], "live"):
             continue
+        min_edge = (sc.get("min_edge_by_series") or {}).get(c["series"],
+                                                            sc["min_edge_after_fees"])
         cfg_sc = {**cfg,
-                  "edge": {**cfg["edge"], "min_edge_after_fees": sc["min_edge_after_fees"],
+                  "edge": {**cfg["edge"], "min_edge_after_fees": min_edge,
                            "consensus_max_divergence": 1.0},
                   "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])},
                   "risk": {**cfg["risk"], "max_per_trade_usd": sc["max_per_trade_usd"]}}
         d = engine.decide(c["q_model"], c["q_model"], c["yes_ask"], c["no_ask"], cfg_sc)
         if d.action != "trade":
             continue
-        d.contracts = min(d.contracts, sc.get("max_contracts", 3))
-        d.fee_usd = taker_fee_usd(d.price, d.contracts)
-        d.cost_usd = round(d.contracts * d.price + d.fee_usd, 2)
-        veto = engine.check_risk(ledger.stats("live"), d.cost_usd, cfg_sc)
+        contracts = min(d.contracts, sc.get("max_contracts", 3))
+        est_cost = round(contracts * (d.price + sc.get("slippage", 0.01)) + 0.02, 2)
+        veto = engine.check_risk(ledger.stats("live"), est_cost, cfg_sc)
         if veto:
             print(f"VETO  {c['ticker']}: {veto}")
             continue
         try:
-            resp = client.place_limit(c["ticker"], d.side, d.contracts, d.price)
+            n, px, fee, order_id = _decisive_ioc(client, api, c["ticker"], d.side, contracts,
+                                                 c["q_model"], min_edge, sc.get("slippage", 0.01))
         except Exception as e:
             print(f"FAILED {c['ticker']}: {e}")
             continue
-        filled = float(resp.get("fill_count") or 0)
-        order_id = str(resp.get("order_id") or "?")
-        if filled < 1:
-            print(f"NOFILL {c['ticker']}: IOC returned no fill")
+        if n < 1:
+            print(f"PASS  {c['ticker']}: {px}")
             continue
-        n = int(filled)
-        fee = taker_fee_usd(d.price, n)
-        cost = round(n * d.price + fee, 2)
+        cost = round(n * px + fee, 2)
         tid = ledger.insert_trade(
             mode="live", ticker=c["ticker"], title=f"shortcycle {c['series']} strike {c['strike']}",
-            side=d.side, price=d.price, contracts=n, cost_usd=cost, fee_usd=fee,
+            side=d.side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
             q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
             market_prob=c["mid"], edge_net=d.edge_net,
             rationale=f"shortcycle terminal model: spot {c['spot']:.0f}, sigma_min "
                       f"{c['sigma_min']:.5f}, tau {c['tau_min']}m", status="open")
         ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
                              (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
-        with_order = order_id
-        ledger.mark_placed(tid, with_order)
+        ledger.mark_placed(tid, order_id)
         spent += cost
         placed += 1
-        print(f"LIVE  {c['ticker']}: {d.side.upper()} x{n} @ {d.price * 100:.0f}c "
+        print(f"LIVE  {c['ticker']}: {d.side.upper()} x{n} @ {px * 100:.1f}c "
               f"cost=${cost:.2f} q_model={c['q_model']:.2f} vs mkt={c['mid']:.2f} "
-              f"edge={d.edge_net:+.3f} tau={c['tau_min']}m order={order_id}")
+              f"tau={c['tau_min']}m order={order_id}")
     print(f"done: {placed} shortcycle orders")
+
+
+def cmd_weather(_args) -> None:
+    """Weather lane: daily high-temp markets priced from NWS obs + hourly forecast."""
+    cfg = load_config()
+    wc = cfg.get("weather", {})
+    if not wc.get("enabled"):
+        print("weather lane disabled")
+        return
+    if not live_active(cfg):
+        print("weather lane requires live mode")
+        return
+    from .live import KalshiLive, LiveAuthError
+    from .weather import candidates
+    try:
+        client = KalshiLive()
+        balance = float(client.balance().get("balance_dollars") or 0)
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    today = dt.date.today().isoformat()
+    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
+                if t["mode"] == "live" and t["ticker"].startswith("KXHIGH")
+                and t["ts"].startswith(today))
+    cands = candidates(cfg)
+    print(f"weather: {len(cands)} priced buckets | spent ${spent:.2f}/{wc['daily_budget_usd']:.2f}")
+    api = KalshiPublic()
+    placed = 0
+    per_city: dict = {}
+    for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
+        if spent >= wc["daily_budget_usd"]:
+            print("budget: weather daily budget reached")
+            break
+        if per_city.get(c["series"], 0) >= wc.get("max_trades_per_city_per_day", 1):
+            continue
+        if ledger.has_open_position(c["ticker"], "live"):
+            continue
+        cfg_w = {**cfg,
+                 "edge": {**cfg["edge"], "min_edge_after_fees": wc["min_edge_after_fees"],
+                          "consensus_max_divergence": 1.0},
+                 "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])},
+                 "risk": {**cfg["risk"], "max_per_trade_usd": wc["max_per_trade_usd"]}}
+        d = engine.decide(c["q_model"], c["q_model"], c["yes_ask"], c["no_ask"], cfg_w)
+        if d.action != "trade":
+            continue
+        contracts = min(d.contracts, wc.get("max_contracts", 3))
+        est_cost = round(contracts * (d.price + 0.01) + 0.02, 2)
+        veto = engine.check_risk(ledger.stats("live"), est_cost, cfg_w)
+        if veto:
+            print(f"VETO  {c['ticker']}: {veto}")
+            continue
+        try:
+            n, px, fee, order_id = _decisive_ioc(client, api, c["ticker"], d.side, contracts,
+                                                 c["q_model"], wc["min_edge_after_fees"])
+        except Exception as e:
+            print(f"FAILED {c['ticker']}: {e}")
+            continue
+        if n < 1:
+            print(f"PASS  {c['ticker']}: {px}")
+            continue
+        cost = round(n * px + fee, 2)
+        tid = ledger.insert_trade(
+            mode="live", ticker=c["ticker"], title=f"weather {c['series']}",
+            side=d.side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
+            q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
+            market_prob=c["mid"], edge_net=d.edge_net,
+            rationale=f"NWS model: mu {c['mu']}F sigma {c['sigma']} obs_max {c['obs_max']} "
+                      f"fc_max {c['fc_max']} local_h {c['local_hour']}", status="open")
+        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+        ledger.mark_placed(tid, order_id)
+        spent += cost
+        per_city[c["series"]] = per_city.get(c["series"], 0) + 1
+        placed += 1
+        print(f"LIVE  {c['ticker']}: {d.side.upper()} x{n} @ {px * 100:.1f}c "
+              f"cost=${cost:.2f} q_model={c['q_model']:.2f} vs mkt={c['mid']:.2f} "
+              f"mu={c['mu']}F sigma={c['sigma']} order={order_id}")
+    print(f"done: {placed} weather orders")
 
 
 def cmd_settle(_args) -> None:
@@ -484,6 +585,7 @@ def main() -> None:
     sub.add_parser("settle").set_defaults(fn=cmd_settle)
     sub.add_parser("manage").set_defaults(fn=cmd_manage)
     sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
+    sub.add_parser("weather").set_defaults(fn=cmd_weather)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)
