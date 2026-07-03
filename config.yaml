@@ -114,8 +114,14 @@ live:
 shortcycle:
   enabled: true
   series: [KXBTCD, KXETHD]       # BTC + ETH 小时市场 (2026-07-03 用户: crypto 也做)
+  series_15m: [KXBTC15M, KXETH15M, KXSOL15M]   # 15分钟涨跌盘 (96次/天, 新市场流动性薄)
+  min_minutes_15m: 3
+  max_minutes_15m: 12
   min_edge_by_series:
     KXETHD: 0.05                 # ETH 价差 3c, 门槛相应更高
+    KXBTC15M: 0.04               # 15m盘: 费用占比高 + 指数基差, 门槛 4 点
+    KXETH15M: 0.05
+    KXSOL15M: 0.05
   min_minutes_to_close: 15
   max_minutes_to_close: 75
   vol_lookback_min: 180

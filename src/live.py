@@ -23,14 +23,26 @@ class LiveAuthError(RuntimeError):
     pass
 
 
+_SECRETS_DIR = r"D:\kalshi-secrets"          # outside the repo; never committed
+
+
 def _load_credentials():
     key_id = os.environ.get("KALSHI_API_KEY_ID")
     key_path = os.environ.get("KALSHI_PRIVATE_KEY_PATH")
+    # file fallback so detached processes (quant loop, schedulers) work without env vars
+    if not key_id:
+        id_file = os.path.join(_SECRETS_DIR, "key_id.txt")
+        if os.path.exists(id_file):
+            key_id = open(id_file).read().strip()
+    if not key_path:
+        pem_default = os.path.join(_SECRETS_DIR, "kalshi_test.pem")
+        if os.path.exists(pem_default):
+            key_path = pem_default
     if not key_id or not key_path:
         raise LiveAuthError(
-            "KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH not set. "
-            "Create an API key at kalshi.com -> Account -> API Keys, save the .pem, "
-            "then set both environment variables (see README '真钱交易配置').")
+            "credentials not found: set KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH "
+            "or place key_id.txt + kalshi_test.pem in D:\\kalshi-secrets\\ "
+            "(see README '真钱交易配置').")
     if not os.path.exists(key_path):
         raise LiveAuthError(f"private key file not found: {key_path}")
     with open(key_path, "rb") as f:

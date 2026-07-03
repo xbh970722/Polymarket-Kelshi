@@ -17,6 +17,8 @@ import requests
 from .kalshi_client import KalshiPublic, normalize_market
 
 SPOT_PRODUCT = {"KXBTCD": "BTC-USD", "KXETHD": "ETH-USD"}
+# 15-minute up/down series: settle = (60s index avg before window end) >= (avg before window start)
+SPOT_15M = {"KXBTC15M": "BTC-USD", "KXETH15M": "ETH-USD", "KXSOL15M": "SOL-USD"}
 
 
 def _phi(x: float) -> float:
@@ -51,6 +53,64 @@ def strike_of(ticker: str) -> float | None:
         return float(tail[1:])
     except ValueError:
         return None
+
+
+def _minute_closes(product: str, start: dt.datetime, end: dt.datetime) -> dict:
+    s = requests.Session()
+    s.headers["User-Agent"] = "shortcycle/0.1"
+    r = s.get(f"https://api.exchange.coinbase.com/products/{product}/candles",
+              params={"granularity": 60, "start": start.isoformat(), "end": end.isoformat()},
+              timeout=20)
+    r.raise_for_status()
+    return {int(c[0]): c[4] for c in r.json()}          # epoch-min -> close
+
+
+def candidates_15m(cfg: dict) -> list[dict]:
+    """15-minute up/down markets: q = P(index avg at window end >= at window start)."""
+    sc = cfg["shortcycle"]
+    api = KalshiPublic()
+    now = dt.datetime.now(dt.timezone.utc)
+    out = []
+    for series in sc.get("series_15m", []):
+        product = SPOT_15M.get(series)
+        if not product:
+            continue
+        try:
+            page = api._get("/markets", series_ticker=series, status="open", limit=20)
+        except Exception as e:
+            print(f"WARN {series}: {e}")
+            continue
+        for mr in page.get("markets", []):
+            m = normalize_market(mr)
+            if m["status"] != "active" or not m["close_time"]:
+                continue
+            close = dt.datetime.fromisoformat(m["close_time"].replace("Z", "+00:00"))
+            tau_min = (close - now).total_seconds() / 60.0
+            if not (sc.get("min_minutes_15m", 3) <= tau_min <= sc.get("max_minutes_15m", 12)):
+                continue
+            if not (m["yes_bid"] > 0 and 0.05 <= m["yes_ask"] <= 0.95):
+                continue
+            ref_dt = close - dt.timedelta(minutes=15)
+            try:
+                spot, sigma_min = minute_vol(product, 120)
+                closes = _minute_closes(product, ref_dt - dt.timedelta(minutes=4),
+                                        ref_dt + dt.timedelta(minutes=1))
+            except Exception as e:
+                print(f"WARN {series}: data fetch failed ({e})")
+                break
+            # reference = close of the minute ending at window start (proxy for 60s index avg)
+            ref_epoch_min = int(ref_dt.timestamp()) - 60
+            ref_px = closes.get(ref_epoch_min) or (closes[max(closes)] if closes else None)
+            if not ref_px:
+                continue
+            denom = sigma_min * math.sqrt(max(tau_min, 0.5))
+            q = _phi(math.log(spot / ref_px) / denom) if denom > 0 else (1.0 if spot >= ref_px else 0.0)
+            out.append({"ticker": m["ticker"], "series": series, "strike": ref_px,
+                        "spot": spot, "sigma_min": sigma_min, "tau_min": round(tau_min, 1),
+                        "yes_bid": m["yes_bid"], "yes_ask": m["yes_ask"],
+                        "no_ask": m["no_ask"], "q_model": round(min(max(q, 0.001), 0.999), 4),
+                        "mid": round((m["yes_bid"] + m["yes_ask"]) / 2, 4)})
+    return out
 
 
 def candidates(cfg: dict) -> list[dict]:

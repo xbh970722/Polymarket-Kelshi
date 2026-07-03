@@ -249,7 +249,7 @@ def cmd_shortcycle(_args) -> None:
         print("shortcycle requires live mode (it exists to generate real settled samples)")
         return
     from .live import KalshiLive, LiveAuthError
-    from .shortcycle import candidates
+    from .shortcycle import candidates, candidates_15m
     try:
         client = KalshiLive()
         balance = float(client.balance().get("balance_dollars") or 0)
@@ -258,11 +258,11 @@ def cmd_shortcycle(_args) -> None:
         return
     # dedicated sub-budget: today's live cost on shortcycle series tickers
     today = dt.date.today().isoformat()
-    prefixes = tuple(sc["series"])
+    prefixes = tuple(sc["series"]) + tuple(sc.get("series_15m", []))
     spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
                 if t["mode"] == "live" and t["ticker"].startswith(prefixes)
                 and t["ts"].startswith(today))
-    cands = candidates(cfg)
+    cands = candidates(cfg) + candidates_15m(cfg)
     print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
           f"today spent ${spent:.2f}/{sc['daily_budget_usd']:.2f}")
     api = KalshiPublic()
@@ -491,6 +491,88 @@ def cmd_report(_args) -> None:
     print(f"wrote {out}")
 
 
+def _lane_of(ticker: str) -> str:
+    if ticker.startswith(("KXBTCD", "KXETHD")) or "15M" in ticker.split("-")[0]:
+        return "shortcycle"
+    if ticker.startswith("KXHIGH"):
+        return "weather"
+    return "ensemble"
+
+
+def cmd_journal(_args) -> None:
+    """Daily P&L journal: per-lane realized/fills today + running calibration + CSV history."""
+    cfg = load_config()
+    today = dt.date.today().isoformat()
+    con = ledger._conn()
+    settled_today = [dict(r) for r in con.execute(
+        "SELECT * FROM trades WHERE settled_ts LIKE ? || '%' AND status IN ('settled','closed')",
+        (today,))]
+    fills_today = [dict(r) for r in con.execute(
+        "SELECT * FROM trades WHERE ts LIKE ? || '%' AND status != 'voided'", (today,))]
+    all_settled = [dict(r) for r in con.execute(
+        "SELECT * FROM trades WHERE status='settled' AND result IN ('yes','no')")]
+
+    lanes = {"shortcycle": [], "weather": [], "ensemble": []}
+    for t in settled_today:
+        lanes[_lane_of(t["ticker"])].append(t)
+    realized = {k: round(sum(t["pnl_usd"] or 0 for t in v), 2) for k, v in lanes.items()}
+    total_realized = round(sum(realized.values()), 2)
+
+    brier = {}
+    for lane in lanes:
+        rows = [t for t in all_settled if _lane_of(t["ticker"]) == lane]
+        if rows:
+            bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
+                     for t in rows) / len(rows)
+            bk = sum((t["market_prob"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
+                     for t in rows) / len(rows)
+            brier[lane] = (len(rows), round(bm, 4), round(bk, 4))
+
+    balance = None
+    if live_active(cfg):
+        try:
+            from .live import KalshiLive
+            balance = float(KalshiLive().balance().get("balance_dollars") or 0)
+        except Exception:
+            pass
+
+    st = ledger.stats("live")
+    lines = [f"# 交易日志 {today}", "",
+             f"- 实时余额: {'$%.2f' % balance if balance is not None else 'n/a'} | "
+             f"live 敞口 ${st['open_exposure']:.2f} | 今日已实现 **${total_realized:+.2f}**",
+             f"- 今日成交 {len(fills_today)} 笔 | 今日结算 {len(settled_today)} 笔", "",
+             "## 分通道", ""]
+    for lane in ("shortcycle", "weather", "ensemble"):
+        b = brier.get(lane)
+        cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
+        lines.append(f"- **{lane}**: 今日已实现 ${realized[lane]:+.2f} | {cal}")
+    lines += ["", "## 今日结算明细", ""]
+    if settled_today:
+        for t in settled_today:
+            tag = t["result"] or (t.get("rationale") or "")[-20:]
+            lines.append(f"- {t['ticker']} {t['side']} x{t['contracts']} @ "
+                         f"{t['price'] * 100:.0f}c -> {t['status']}({tag}) "
+                         f"pnl ${t['pnl_usd'] or 0:+.2f} | 模型 q={t['q_consensus']:.2f} "
+                         f"市场 {t['market_prob']:.2f}")
+    else:
+        lines.append("_无_")
+    REPORTS.mkdir(exist_ok=True)
+    (REPORTS / f"journal_{today}.md").write_text("\n".join(lines), encoding="utf-8")
+
+    csv = REPORTS / "pnl_history.csv"
+    header = "date,realized_today,balance,fills_today,settled_today,live_exposure\n"
+    row = (f"{today},{total_realized},{balance if balance is not None else ''},"
+           f"{len(fills_today)},{len(settled_today)},{st['open_exposure']:.2f}\n")
+    if csv.exists():
+        content = [l for l in csv.read_text(encoding="utf-8").splitlines(True)
+                   if not l.startswith(today)]
+        csv.write_text("".join(content) + row, encoding="utf-8")
+    else:
+        csv.write_text(header + row, encoding="utf-8")
+    print(f"journal written: realized today ${total_realized:+.2f}, "
+          f"{len(settled_today)} settled, {len(fills_today)} fills")
+
+
 def cmd_status(_args) -> None:
     out = {**ledger.stats(), **ledger.calibration(),
            "pending_live_orders": len(ledger.pending_trades())}
@@ -586,6 +668,7 @@ def main() -> None:
     sub.add_parser("manage").set_defaults(fn=cmd_manage)
     sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
     sub.add_parser("weather").set_defaults(fn=cmd_weather)
+    sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)
