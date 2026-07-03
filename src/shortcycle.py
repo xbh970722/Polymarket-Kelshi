@@ -55,21 +55,63 @@ def strike_of(ticker: str) -> float | None:
         return None
 
 
-def _minute_closes(product: str, start: dt.datetime, end: dt.datetime) -> dict:
+def _ewma_minute_vol(product: str) -> tuple[float, float]:
+    """Spot + EWMA per-minute vol (lambda=.94 over ~60m) floored by 0.6x the 180m std,
+    guarding against calm-then-burst underestimation."""
     s = requests.Session()
     s.headers["User-Agent"] = "shortcycle/0.1"
+    end = dt.datetime.now(dt.timezone.utc)
+    start = end - dt.timedelta(minutes=185)
     r = s.get(f"https://api.exchange.coinbase.com/products/{product}/candles",
               params={"granularity": 60, "start": start.isoformat(), "end": end.isoformat()},
               timeout=20)
     r.raise_for_status()
-    return {int(c[0]): c[4] for c in r.json()}          # epoch-min -> close
+    closes = [c[4] for c in sorted(r.json())]
+    if len(closes) < 40:
+        raise RuntimeError(f"not enough candles for {product}")
+    rets = [math.log(b / a) for a, b in zip(closes, closes[1:]) if a > 0]
+    long_std = statistics.stdev(rets)
+    lam, var = 0.94, rets[-60] ** 2 if len(rets) >= 60 else rets[0] ** 2
+    for x in rets[-60:]:
+        var = lam * var + (1 - lam) * x * x
+    sigma = max(math.sqrt(var), 0.6 * long_std)
+    spot = float(s.get(f"https://api.exchange.coinbase.com/products/{product}/ticker",
+                       timeout=15).json()["price"])
+    return spot, sigma
+
+
+def _prev_settlement(api: KalshiPublic, series: str, window_start: dt.datetime) -> float | None:
+    """EXACT reference: the previous 15m window's published settlement value
+    (its 60s index average IS this window's starting reference)."""
+    try:
+        page = api._get("/markets", series_ticker=series, status="settled", limit=4)
+    except Exception:
+        return None
+    target = window_start.strftime("%Y-%m-%dT%H:%M")
+    for m in page.get("markets", []):
+        ct = (m.get("close_time") or "")[:16]
+        ev = m.get("expiration_value")
+        if ct == target and ev:
+            try:
+                return float(ev)
+            except ValueError:
+                return None
+    return None
 
 
 def candidates_15m(cfg: dict) -> list[dict]:
-    """15-minute up/down markets: q = P(index avg at window end >= at window start)."""
+    """15-minute up/down markets — certainty-zone design (SHORTCYCLE_DESIGN.md):
+
+    * reference price = previous window's exact published settlement (no proxy error)
+    * only hunt tau in [2,6] min where direction is nearly locked
+    * only act when q is OUTSIDE the coin-flip band (certainty gate) AND the
+      spot-vs-reference distance exceeds 2 sigma (basis guard) — a few bps of
+      Coinbase-vs-BRTI basis then cannot flip the signal
+    """
     sc = cfg["shortcycle"]
     api = KalshiPublic()
     now = dt.datetime.now(dt.timezone.utc)
+    lo_q, hi_q = sc.get("certainty_band", [0.22, 0.78])
     out = []
     for series in sc.get("series_15m", []):
         product = SPOT_15M.get(series)
@@ -86,26 +128,27 @@ def candidates_15m(cfg: dict) -> list[dict]:
                 continue
             close = dt.datetime.fromisoformat(m["close_time"].replace("Z", "+00:00"))
             tau_min = (close - now).total_seconds() / 60.0
-            if not (sc.get("min_minutes_15m", 3) <= tau_min <= sc.get("max_minutes_15m", 12)):
+            if not (sc.get("min_minutes_15m", 2) <= tau_min <= sc.get("max_minutes_15m", 6)):
                 continue
-            if not (m["yes_bid"] > 0 and 0.05 <= m["yes_ask"] <= 0.95):
+            if not (m["yes_bid"] > 0 and 0.03 <= m["yes_ask"] <= 0.97):
                 continue
-            ref_dt = close - dt.timedelta(minutes=15)
+            ref = _prev_settlement(api, series, close - dt.timedelta(minutes=15))
+            if ref is None:
+                print(f"PASS  {m['ticker']}: previous settlement value unavailable")
+                continue
             try:
-                spot, sigma_min = minute_vol(product, 120)
-                closes = _minute_closes(product, ref_dt - dt.timedelta(minutes=4),
-                                        ref_dt + dt.timedelta(minutes=1))
+                spot, sigma_min = _ewma_minute_vol(product)
             except Exception as e:
-                print(f"WARN {series}: data fetch failed ({e})")
+                print(f"WARN {series}: vol fetch failed ({e})")
                 break
-            # reference = close of the minute ending at window start (proxy for 60s index avg)
-            ref_epoch_min = int(ref_dt.timestamp()) - 60
-            ref_px = closes.get(ref_epoch_min) or (closes[max(closes)] if closes else None)
-            if not ref_px:
+            dist = math.log(spot / ref)
+            if abs(dist) < 2.0 * sigma_min:            # basis guard: signal inside noise
                 continue
-            denom = sigma_min * math.sqrt(max(tau_min, 0.5))
-            q = _phi(math.log(spot / ref_px) / denom) if denom > 0 else (1.0 if spot >= ref_px else 0.0)
-            out.append({"ticker": m["ticker"], "series": series, "strike": ref_px,
+            tau_eff = max(tau_min - 0.75, 0.5)         # 60s-average endpoints shave variance
+            q = _phi(dist / (sigma_min * math.sqrt(tau_eff)))
+            if lo_q < q < hi_q:                        # certainty gate: skip coin-flip zone
+                continue
+            out.append({"ticker": m["ticker"], "series": series, "strike": ref,
                         "spot": spot, "sigma_min": sigma_min, "tau_min": round(tau_min, 1),
                         "yes_bid": m["yes_bid"], "yes_ask": m["yes_ask"],
                         "no_ask": m["no_ask"], "q_model": round(min(max(q, 0.001), 0.999), 4),

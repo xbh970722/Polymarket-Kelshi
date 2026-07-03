@@ -115,8 +115,11 @@ shortcycle:
   enabled: true
   series: [KXBTCD, KXETHD]       # BTC + ETH 小时市场 (2026-07-03 用户: crypto 也做)
   series_15m: [KXBTC15M, KXETH15M, KXSOL15M]   # 15分钟涨跌盘 (96次/天, 新市场流动性薄)
-  min_minutes_15m: 3
-  max_minutes_15m: 12
+  # 确定性区间设计 (research/SHORTCYCLE_DESIGN.md): 参考价 = 上一窗口精确结算值;
+  # 只在方向近乎锁定时出手, 永久禁入掷硬币区
+  min_minutes_15m: 2
+  max_minutes_15m: 6
+  certainty_band: [0.22, 0.78]   # q 落在带内 = 掷硬币区, 直接跳过
   min_edge_by_series:
     KXETHD: 0.05                 # ETH 价差 3c, 门槛相应更高
     KXBTC15M: 0.04               # 15m盘: 费用占比高 + 指数基差, 门槛 4 点

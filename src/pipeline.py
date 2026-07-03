@@ -273,6 +273,12 @@ def cmd_shortcycle(_args) -> None:
             break
         if ledger.has_open_position(c["ticker"], "live"):
             continue
+        if "15M" in c["series"]:
+            # correlation cap: crypto moves together — one 15m position across ALL coins
+            open_15m = [t for t in ledger.open_trades()
+                        if t["mode"] == "live" and "15M" in t["ticker"].split("-")[0]]
+            if open_15m:
+                continue
         min_edge = (sc.get("min_edge_by_series") or {}).get(c["series"],
                                                             sc["min_edge_after_fees"])
         cfg_sc = {**cfg,

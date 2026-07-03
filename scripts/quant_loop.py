@@ -16,7 +16,7 @@ import sys
 ROOT = r"D:\Polymarket-Kelshi"
 LOG = os.path.join(ROOT, "data", "quant_loop.log")
 PIDF = os.path.join(ROOT, "data", "quant_loop.pid")
-MARKS = (5, 20, 35, 50)
+MARKS = (5, 11, 20, 26, 35, 41, 50, 56)   # :11/:26/:41/:56 hit each 15m window at tau~4min
 
 
 def log(msg: str) -> None:

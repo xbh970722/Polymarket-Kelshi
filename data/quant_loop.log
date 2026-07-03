@@ -3,3 +3,4 @@
 [07-03 09:50:22]   shortcycle: AUTH ERROR: KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH not set. Create an API key at kalshi.com -> Account -> API Keys, save the .pem, then set both environment variables (see README '真钱交易配置').
 [07-03 09:50:23]   weather: AUTH ERROR: KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH not set. Create an API key at kalshi.com -> Account -> API Keys, save the .pem, then set both environment variables (see README '真钱交易配置').
 [07-03 09:51:03] === quant_loop started pid=64588 ===
+[07-03 09:58:11] === quant_loop started pid=56340 ===
