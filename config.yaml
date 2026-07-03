@@ -127,7 +127,10 @@ shortcycle:
     KXSOL15M: 0.05
   min_minutes_to_close: 15
   max_minutes_to_close: 75
-  vol_lookback_min: 180
+  # ===== 2026-07-03 复盘改刀 (0/16 惨案, 见 SHORTCYCLE_DESIGN.md 复盘节) =====
+  lag_only: true                 # 只做"模型比市场更确定"的滞后单, 永禁淡化市场把握
+  lag_margin: 0.02
+  vol_lookback_min: 180          # (已弃用: 小时通道改用 EWMA 波动率)
   min_edge_after_fees: 0.03      # 果断化: 4→3 点 (用户: 策略果断点)
   slippage: 0.01                 # 果断化: 允许越价 1c 吃单 (越价后仍须过门槛)
   max_per_trade_usd: 0.50

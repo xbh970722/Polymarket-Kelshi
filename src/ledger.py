@@ -154,6 +154,17 @@ def stats(mode: str | None = None) -> dict:
             "open_positions": n_open, "realized_pnl_today": pnl_today}
 
 
+def spent_today(prefixes: tuple, mode: str = "live") -> float:
+    """Today's TOTAL cost on matching tickers regardless of status (settled included) —
+    budget must not refill when positions resolve."""
+    today = dt.date.today().isoformat()
+    with _conn() as c:
+        rows = c.execute(
+            "SELECT ticker, cost_usd FROM trades WHERE mode=? AND ts LIKE ? || '%' "
+            "AND status != 'voided'", (mode, today)).fetchall()
+    return round(sum(r["cost_usd"] for r in rows if r["ticker"].startswith(prefixes)), 2)
+
+
 def swing_summary() -> dict:
     with _conn() as c:
         r = c.execute("SELECT COUNT(*) n, COALESCE(SUM(pnl_usd),0) pnl "

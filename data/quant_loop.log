@@ -316,3 +316,211 @@
 [07-03 14:05:27]   weather: done: 0 weather orders
 [07-03 14:05:28]   journal: journal written: realized today $-2.86, 17 settled, 23 fills
 [07-03 14:05:29]   report: wrote reports\report_2026-07-03.md
+[07-03 14:05:34] committed + pushed
+[07-03 14:11:21]   settle: done: 0 settled, 6 still open
+[07-03 14:11:25]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:11:25]   shortcycle: done: 0 shortcycle orders
+[07-03 14:11:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:11:29]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:11:29]   weather: budget: weather daily budget reached
+[07-03 14:11:29]   weather: done: 0 weather orders
+[07-03 14:20:21]   settle: done: 0 settled, 6 still open
+[07-03 14:20:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:20:24]   shortcycle: done: 0 shortcycle orders
+[07-03 14:20:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:20:28]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:20:28]   weather: budget: weather daily budget reached
+[07-03 14:20:28]   weather: done: 0 weather orders
+[07-03 14:20:29]   manage: done: 0 exited, 0 flagged for review, 6 holding
+[07-03 14:26:21]   settle: done: 0 settled, 6 still open
+[07-03 14:26:25]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:26:25]   shortcycle: done: 0 shortcycle orders
+[07-03 14:26:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:26:29]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:26:29]   weather: budget: weather daily budget reached
+[07-03 14:26:29]   weather: done: 0 weather orders
+[07-03 14:35:21]   settle: done: 0 settled, 6 still open
+[07-03 14:35:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:35:24]   shortcycle: done: 0 shortcycle orders
+[07-03 14:35:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:35:27]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:35:27]   weather: budget: weather daily budget reached
+[07-03 14:35:27]   weather: done: 0 weather orders
+[07-03 14:41:21]   settle: done: 0 settled, 6 still open
+[07-03 14:41:25]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:41:25]   shortcycle: done: 0 shortcycle orders
+[07-03 14:41:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:41:29]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:41:29]   weather: budget: weather daily budget reached
+[07-03 14:41:29]   weather: done: 0 weather orders
+[07-03 14:50:21]   settle: done: 0 settled, 6 still open
+[07-03 14:50:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:50:24]   shortcycle: done: 0 shortcycle orders
+[07-03 14:50:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:50:28]   weather: weather: 14 priced buckets | spent $1.13/1.00
+[07-03 14:50:28]   weather: budget: weather daily budget reached
+[07-03 14:50:28]   weather: done: 0 weather orders
+[07-03 14:56:21]   settle: done: 0 settled, 6 still open
+[07-03 14:56:27]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 14:56:27]   shortcycle: done: 0 shortcycle orders
+[07-03 14:56:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 14:56:30]   weather: weather: 13 priced buckets | spent $1.13/1.00
+[07-03 14:56:30]   weather: budget: weather daily budget reached
+[07-03 14:56:30]   weather: done: 0 weather orders
+[07-03 15:05:21]   settle: done: 0 settled, 6 still open
+[07-03 15:05:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:05:24]   shortcycle: done: 0 shortcycle orders
+[07-03 15:05:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:05:29]   weather: weather: 13 priced buckets | spent $1.13/1.00
+[07-03 15:05:29]   weather: budget: weather daily budget reached
+[07-03 15:05:29]   weather: done: 0 weather orders
+[07-03 15:11:21]   settle: done: 0 settled, 6 still open
+[07-03 15:11:26]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:11:26]   shortcycle: done: 0 shortcycle orders
+[07-03 15:11:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:11:29]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:11:29]   weather: budget: weather daily budget reached
+[07-03 15:11:29]   weather: done: 0 weather orders
+[07-03 15:20:21]   settle: done: 0 settled, 6 still open
+[07-03 15:20:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:20:24]   shortcycle: done: 0 shortcycle orders
+[07-03 15:20:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:20:28]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:20:28]   weather: budget: weather daily budget reached
+[07-03 15:20:28]   weather: done: 0 weather orders
+[07-03 15:20:29]   manage: done: 0 exited, 0 flagged for review, 6 holding
+[07-03 15:26:21]   settle: done: 0 settled, 6 still open
+[07-03 15:26:25]   shortcycle: shortcycle: 2 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:26:25]   shortcycle: done: 0 shortcycle orders
+[07-03 15:26:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:26:29]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:26:29]   weather: budget: weather daily budget reached
+[07-03 15:26:29]   weather: done: 0 weather orders
+[07-03 15:35:21]   settle: done: 0 settled, 6 still open
+[07-03 15:35:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:35:24]   shortcycle: done: 0 shortcycle orders
+[07-03 15:35:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:35:27]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:35:27]   weather: budget: weather daily budget reached
+[07-03 15:35:27]   weather: done: 0 weather orders
+[07-03 15:41:21]   settle: done: 0 settled, 6 still open
+[07-03 15:41:25]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:41:25]   shortcycle: done: 0 shortcycle orders
+[07-03 15:41:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:41:28]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:41:28]   weather: budget: weather daily budget reached
+[07-03 15:41:28]   weather: done: 0 weather orders
+[07-03 15:50:21]   settle: done: 0 settled, 6 still open
+[07-03 15:50:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:50:24]   shortcycle: done: 0 shortcycle orders
+[07-03 15:50:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:50:28]   weather: weather: 12 priced buckets | spent $1.13/1.00
+[07-03 15:50:28]   weather: budget: weather daily budget reached
+[07-03 15:50:28]   weather: done: 0 weather orders
+[07-03 15:56:21]   settle: done: 0 settled, 6 still open
+[07-03 15:56:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 15:56:24]   shortcycle: done: 0 shortcycle orders
+[07-03 15:56:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 15:56:28]   weather: weather: 10 priced buckets | spent $1.13/1.00
+[07-03 15:56:28]   weather: budget: weather daily budget reached
+[07-03 15:56:28]   weather: done: 0 weather orders
+[07-03 16:05:21]   settle: done: 0 settled, 6 still open
+[07-03 16:05:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:05:24]   shortcycle: done: 0 shortcycle orders
+[07-03 16:05:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:05:27]   weather: weather: 9 priced buckets | spent $1.13/1.00
+[07-03 16:05:27]   weather: budget: weather daily budget reached
+[07-03 16:05:27]   weather: done: 0 weather orders
+[07-03 16:11:21]   settle: done: 0 settled, 6 still open
+[07-03 16:11:25]   shortcycle: shortcycle: 1 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:11:25]   shortcycle: done: 0 shortcycle orders
+[07-03 16:11:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:11:28]   weather: weather: 8 priced buckets | spent $1.13/1.00
+[07-03 16:11:28]   weather: budget: weather daily budget reached
+[07-03 16:11:28]   weather: done: 0 weather orders
+[07-03 16:20:21]   settle: done: 0 settled, 6 still open
+[07-03 16:20:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:20:24]   shortcycle: done: 0 shortcycle orders
+[07-03 16:20:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:20:28]   weather: weather: 8 priced buckets | spent $1.13/1.00
+[07-03 16:20:28]   weather: budget: weather daily budget reached
+[07-03 16:20:28]   weather: done: 0 weather orders
+[07-03 16:20:29]   manage: done: 0 exited, 0 flagged for review, 6 holding
+[07-03 16:26:21]   settle: done: 0 settled, 6 still open
+[07-03 16:26:27]   shortcycle: shortcycle: 1 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:26:27]   shortcycle: done: 0 shortcycle orders
+[07-03 16:26:31]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:26:31]   weather: weather: 8 priced buckets | spent $1.13/1.00
+[07-03 16:26:31]   weather: budget: weather daily budget reached
+[07-03 16:26:31]   weather: done: 0 weather orders
+[07-03 16:35:21]   settle: done: 0 settled, 6 still open
+[07-03 16:35:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:35:24]   shortcycle: done: 0 shortcycle orders
+[07-03 16:35:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:35:27]   weather: weather: 8 priced buckets | spent $1.13/1.00
+[07-03 16:35:27]   weather: budget: weather daily budget reached
+[07-03 16:35:27]   weather: done: 0 weather orders
+[07-03 16:41:21]   settle: done: 0 settled, 6 still open
+[07-03 16:41:25]   shortcycle: shortcycle: 2 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:41:25]   shortcycle: done: 0 shortcycle orders
+[07-03 16:41:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:41:29]   weather: weather: 8 priced buckets | spent $1.13/1.00
+[07-03 16:41:29]   weather: budget: weather daily budget reached
+[07-03 16:41:29]   weather: done: 0 weather orders
+[07-03 16:50:21]   settle: done: 0 settled, 6 still open
+[07-03 16:50:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:50:24]   shortcycle: done: 0 shortcycle orders
+[07-03 16:50:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:50:28]   weather: weather: 7 priced buckets | spent $1.13/1.00
+[07-03 16:50:28]   weather: budget: weather daily budget reached
+[07-03 16:50:28]   weather: done: 0 weather orders
+[07-03 16:56:21]   settle: done: 0 settled, 6 still open
+[07-03 16:56:26]   shortcycle: shortcycle: 1 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 16:56:26]   shortcycle: done: 0 shortcycle orders
+[07-03 16:56:31]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 16:56:31]   weather: weather: 6 priced buckets | spent $1.13/1.00
+[07-03 16:56:31]   weather: budget: weather daily budget reached
+[07-03 16:56:31]   weather: done: 0 weather orders
+[07-03 17:05:21]   settle: done: 0 settled, 6 still open
+[07-03 17:05:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:05:24]   shortcycle: done: 0 shortcycle orders
+[07-03 17:05:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:05:27]   weather: weather: 6 priced buckets | spent $1.13/1.00
+[07-03 17:05:27]   weather: budget: weather daily budget reached
+[07-03 17:05:27]   weather: done: 0 weather orders
+[07-03 17:11:21]   settle: done: 0 settled, 6 still open
+[07-03 17:11:26]   shortcycle: shortcycle: 1 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:11:26]   shortcycle: done: 0 shortcycle orders
+[07-03 17:11:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:11:30]   weather: weather: 6 priced buckets | spent $1.13/1.00
+[07-03 17:11:30]   weather: budget: weather daily budget reached
+[07-03 17:11:30]   weather: done: 0 weather orders
+[07-03 17:20:21]   settle: done: 0 settled, 6 still open
+[07-03 17:20:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:20:24]   shortcycle: done: 0 shortcycle orders
+[07-03 17:20:27]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:20:27]   weather: weather: 6 priced buckets | spent $1.13/1.00
+[07-03 17:20:27]   weather: budget: weather daily budget reached
+[07-03 17:20:27]   weather: done: 0 weather orders
+[07-03 17:20:28]   manage: done: 0 exited, 0 flagged for review, 6 holding
+[07-03 17:26:21]   settle: done: 0 settled, 6 still open
+[07-03 17:26:26]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:26:26]   shortcycle: done: 0 shortcycle orders
+[07-03 17:26:31]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:26:31]   weather: weather: 7 priced buckets | spent $1.13/1.00
+[07-03 17:26:31]   weather: budget: weather daily budget reached
+[07-03 17:26:31]   weather: done: 0 weather orders
+[07-03 17:35:21]   settle: done: 0 settled, 6 still open
+[07-03 17:35:25]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:35:25]   shortcycle: done: 0 shortcycle orders
+[07-03 17:35:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:35:29]   weather: weather: 7 priced buckets | spent $1.13/1.00
+[07-03 17:35:29]   weather: budget: weather daily budget reached
+[07-03 17:35:29]   weather: done: 0 weather orders
+[07-03 17:41:21]   settle: done: 0 settled, 6 still open
+[07-03 17:41:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.04 | today spent $0.00/2.00
+[07-03 17:41:24]   shortcycle: done: 0 shortcycle orders
+[07-03 17:41:28]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-03 17:41:28]   weather: weather: 6 priced buckets | spent $1.13/1.00
+[07-03 17:41:28]   weather: budget: weather daily budget reached
+[07-03 17:41:28]   weather: done: 0 weather orders

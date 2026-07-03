@@ -256,12 +256,9 @@ def cmd_shortcycle(_args) -> None:
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
         return
-    # dedicated sub-budget: today's live cost on shortcycle series tickers
-    today = dt.date.today().isoformat()
+    # dedicated sub-budget: ALL of today's spend incl. settled (leak fixed 2026-07-03)
     prefixes = tuple(sc["series"]) + tuple(sc.get("series_15m", []))
-    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
-                if t["mode"] == "live" and t["ticker"].startswith(prefixes)
-                and t["ts"].startswith(today))
+    spent = ledger.spent_today(prefixes)
     cands = candidates(cfg) + candidates_15m(cfg)
     print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
           f"today spent ${spent:.2f}/{sc['daily_budget_usd']:.2f}")
@@ -273,12 +270,23 @@ def cmd_shortcycle(_args) -> None:
             break
         if ledger.has_open_position(c["ticker"], "live"):
             continue
+        # LAG-ONLY GATE (post-mortem 2026-07-03, 0/16 on certainty-fades): trade only
+        # when the MODEL is more certain than the market — i.e. price moved and quotes
+        # lag. Fading market certainty with a worse vol model is structurally -EV.
+        if sc.get("lag_only", True):
+            if abs(c["q_model"] - 0.5) < abs(c["mid"] - 0.5) + sc.get("lag_margin", 0.02):
+                continue
         if "15M" in c["series"]:
             # correlation cap: crypto moves together — one 15m position across ALL coins
             open_15m = [t for t in ledger.open_trades()
                         if t["mode"] == "live" and "15M" in t["ticker"].split("-")[0]]
             if open_15m:
                 continue
+        # per-window cap: multiple strikes of the same event window = one bet repeated
+        window_key = c["ticker"].rsplit("-", 1)[0]
+        if any(t["ticker"].startswith(window_key) for t in ledger.open_trades()
+               if t["mode"] == "live"):
+            continue
         min_edge = (sc.get("min_edge_by_series") or {}).get(c["series"],
                                                             sc["min_edge_after_fees"])
         cfg_sc = {**cfg,

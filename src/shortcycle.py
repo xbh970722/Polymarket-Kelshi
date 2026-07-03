@@ -167,7 +167,10 @@ def candidates(cfg: dict) -> list[dict]:
         if not product:
             continue
         try:
-            spot, sigma_min = minute_vol(product, sc.get("vol_lookback_min", 180))
+            # EWMA regime-aware vol (post-mortem 2026-07-03: flat 180m std imported the
+            # morning burst into quiet hours, inflating sigma and faking "overpriced
+            # certainty" everywhere -> 15 straight certainty-fade losses)
+            spot, sigma_min = _ewma_minute_vol(product)
         except Exception as e:
             print(f"WARN {series}: vol fetch failed ({e})")
             continue
