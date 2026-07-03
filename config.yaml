@@ -2,7 +2,7 @@
 # Kalshi 集成研究 + 交易流水线 全局配置
 # mode: paper | live   (live 还需 live.enabled: true + API key)
 # ============================================================
-mode: paper
+mode: live        # 2026-07-03 用户指令: $10 测试账户真钱练手 (超小仓位, 极其确定才加码)
 platform: kalshi
 
 # ---------- 模型编制 (换代升级只改这里, 代码零改动) ----------
@@ -88,12 +88,23 @@ risk:                      # ===== 硬限额: paper 和 live 都强制执行 ===
   max_open_positions: 10
   daily_loss_halt_usd: 200         # VALUES.md #1: 学费心态, 熔断放宽
 
-# ---------- 真钱交易 ----------
+# ---------- 真钱交易 (练手模式, VALUES.md #5a) ----------
 live:
-  enabled: false           # 改 true 才可能下真单 (还需 mode: live + 环境变量 API key)
-  require_confirm: true    # 切换由 VALUES.md #5 的 standing order 管辖:
-                           # key就绪 + ≥15笔结算 + 纸面盈利 + ≥14天 → 系统自动切全自动并推送通知
-  max_per_trade_usd: 15    # VALUES.md #5: 真钱起步单笔上限 $15
+  enabled: true            # $10 测试账户, 用户 2026-07-03 明示授权全自动练手
+  require_confirm: false   # 全自动; 保护 = 下方超小硬限额 (最大总敞口 $8)
+  practice: true
+  # 练手期风控: 账户仅 ~$9.7, 所有限额等比压缩; bankroll 由 decide 时实时查询余额
+  max_per_trade_usd: 1.50        # 常规单上限 (十几张低价合约级别)
+  high_conviction_max_usd: 4.00  # "极其确定"单上限
+  high_conviction:               # 极其确定的机器定义 (三条全满足):
+    min_edge: 0.10               #   净优势 ≥10 个概率点
+    max_family_divergence: 0.05  #   两家族终值分歧 ≤5 点
+    require_all_estimators: true #   四个盲估者与市场价同方向 (需 research JSON 提供 q_all)
+  live_min_edge_after_fees: 0.035  # 练手期与纸面同门槛, 攒真实成交经验; 正式期回 0.05
+  max_daily_risk_usd: 4          # 日新增风险 ≤$4
+  max_total_exposure_usd: 8      # 总敞口 ≤$8 (留手续费余量)
+  max_open_positions: 6
+  daily_loss_halt_usd: 5         # 日亏 $5 熔断 (账户一半)
   # API key 配置 (环境变量, 不进 git):
   #   KALSHI_API_KEY_ID=<key id>
   #   KALSHI_PRIVATE_KEY_PATH=<RSA 私钥 .pem 路径>

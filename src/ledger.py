@@ -89,10 +89,14 @@ def void_trade(trade_id: int, reason: str) -> None:
                   "WHERE id=?", (reason, trade_id))
 
 
-def has_open_position(ticker: str) -> bool:
+def has_open_position(ticker: str, mode: str | None = None) -> bool:
+    q = "SELECT 1 FROM trades WHERE status IN ('open','pending') AND ticker=?"
+    args: list = [ticker]
+    if mode:
+        q += " AND mode=?"
+        args.append(mode)
     with _conn() as c:
-        return c.execute("SELECT 1 FROM trades WHERE status='open' AND ticker=?",
-                         (ticker,)).fetchone() is not None
+        return c.execute(q, args).fetchone() is not None
 
 
 def settle_trade(trade_id: int, result: str, pnl_usd: float) -> None:
@@ -127,21 +131,25 @@ def positions_due_for_review(now_iso: str) -> list[dict]:
             "AND review_after_ts <= ? ORDER BY review_after_ts", (now_iso,))]
 
 
-def stats() -> dict:
+def stats(mode: str | None = None) -> dict:
+    """Risk usage. Paper and live keep SEPARATE budgets — pass mode to scope."""
     today = dt.date.today().isoformat()
+    mc = " AND mode=?" if mode else ""
+    ma: list = [mode] if mode else []
     with _conn() as c:
         risk_today = c.execute(
             "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
-            "WHERE ts LIKE ? || '%' AND status != 'voided'",
-            (today,)).fetchone()[0]
+            f"WHERE ts LIKE ? || '%' AND status != 'voided'{mc}",
+            [today] + ma).fetchone()[0]
         open_exp = c.execute(
             "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
-            "WHERE status IN ('open','pending')").fetchone()[0]
+            f"WHERE status IN ('open','pending'){mc}", ma).fetchone()[0]
         n_open = c.execute(
-            "SELECT COUNT(*) FROM trades WHERE status IN ('open','pending')").fetchone()[0]
+            f"SELECT COUNT(*) FROM trades WHERE status IN ('open','pending'){mc}",
+            ma).fetchone()[0]
         pnl_today = c.execute(
-            "SELECT COALESCE(SUM(pnl_usd),0) FROM trades WHERE settled_ts LIKE ? || '%'",
-            (today,)).fetchone()[0]
+            f"SELECT COALESCE(SUM(pnl_usd),0) FROM trades WHERE settled_ts LIKE ? || '%'{mc}",
+            [today] + ma).fetchone()[0]
     return {"risk_used_today": risk_today, "open_exposure": open_exp,
             "open_positions": n_open, "realized_pnl_today": pnl_today}
 

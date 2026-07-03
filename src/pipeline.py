@@ -60,19 +60,34 @@ def cmd_decide(args) -> None:
     cfg = load_config()
     is_live = live_active(cfg)
     if is_live:
-        # live mode tightens the per-trade cap and raises the edge bar (VALUES.md #2/#5)
+        # live mode: bankroll = real account balance; tighten every cap to the
+        # live sub-limits; edge bar from live config (VALUES.md #2/#5/#5a)
+        from .live import KalshiLive, LiveAuthError
+        try:
+            balance = float(KalshiLive().balance().get("balance_dollars") or 0)
+        except LiveAuthError as e:
+            print(f"AUTH ERROR: {e}")
+            sys.exit(2)
+        lv = cfg["live"]
+        cfg["sizing"]["bankroll_usd"] = min(cfg["sizing"]["bankroll_usd"], balance)
+        print(f"live bankroll: ${cfg['sizing']['bankroll_usd']:.2f} (account balance)")
         cfg["risk"]["max_per_trade_usd"] = min(cfg["risk"]["max_per_trade_usd"],
-                                               cfg["live"]["max_per_trade_usd"])
+                                               lv["max_per_trade_usd"])
+        for cap in ("max_daily_risk_usd", "max_total_exposure_usd",
+                    "max_open_positions", "daily_loss_halt_usd"):
+            if lv.get(cap) is not None:
+                cfg["risk"][cap] = min(cfg["risk"][cap], lv[cap])
         cfg["edge"]["min_edge_after_fees"] = max(
             cfg["edge"]["min_edge_after_fees"],
-            cfg["edge"].get("live_min_edge_after_fees", 0.05))
+            lv.get("live_min_edge_after_fees",
+                   cfg["edge"].get("live_min_edge_after_fees", 0.05)))
     research = json.loads(Path(args.research).read_text(encoding="utf-8"))
     api = KalshiPublic()
     placed = skipped = 0
     for item in research["items"]:
         ticker = item["ticker"]
-        if ledger.has_open_position(ticker):
-            print(f"SKIP  {ticker}: already holding an open position")
+        if ledger.has_open_position(ticker, cfg["mode"]):
+            print(f"SKIP  {ticker}: already holding an open {cfg['mode']} position")
             skipped += 1
             continue
         mn = api.market_norm(ticker)
@@ -82,11 +97,17 @@ def cmd_decide(args) -> None:
             skipped += 1
             continue
         d = engine.decide(item["q_claude"], item["q_codex"], ya, na, cfg)
+        if d.action == "trade" and is_live:
+            hc_cap = _conviction_cap(item, d, (ya + yb) / 2 if yb else ya, cfg)
+            if hc_cap:
+                cfg_hc = {**cfg, "risk": {**cfg["risk"], "max_per_trade_usd": hc_cap}}
+                d = engine.decide(item["q_claude"], item["q_codex"], ya, na, cfg_hc)
+                print(f"HIGH-CONVICTION {ticker}: cap raised to ${hc_cap:.2f}")
         if d.action == "skip":
             print(f"SKIP  {ticker}: {d.reason}")
             skipped += 1
             continue
-        veto = engine.check_risk(ledger.stats(), d.cost_usd, cfg)
+        veto = engine.check_risk(ledger.stats(cfg["mode"]), d.cost_usd, cfg)
         if veto:
             print(f"VETO  {ticker}: {veto}")
             skipped += 1
@@ -111,6 +132,25 @@ def cmd_decide(args) -> None:
         print(f"NOTE: {placed} live order(s) are PENDING confirmation. "
               f"Review with 'pending', then 'execute-live --confirmed'.")
     print(f"done: {placed} orders ({'live-pending' if is_live else 'paper'}), {skipped} skipped")
+
+
+def _conviction_cap(item: dict, d, market_mid: float, cfg: dict) -> float | None:
+    """VALUES.md #5a '极其确定' tier: edge >=10pts + family agreement + all four
+    blind estimators on the same side of the market. Returns the raised cap or None."""
+    hc = cfg["live"].get("high_conviction") or {}
+    if d.edge_net < hc.get("min_edge", 0.10):
+        return None
+    if abs(item["q_claude"] - item["q_codex"]) > hc.get("max_family_divergence", 0.05):
+        return None
+    if hc.get("require_all_estimators", True):
+        q_all = item.get("q_all") or []
+        if len(q_all) < 4:
+            return None
+        if d.side == "yes" and not all(q > market_mid for q in q_all):
+            return None
+        if d.side == "no" and not all(q < market_mid for q in q_all):
+            return None
+    return cfg["live"].get("high_conviction_max_usd")
 
 
 def _assign_exit_plan(trade_id: int, side: str, entry_price: float,
@@ -149,7 +189,10 @@ def cmd_manage(_args) -> None:
         if action and px > 0:
             fee = taker_fee_usd(px, t["contracts"])
             pnl = round(t["contracts"] * px - fee - t["cost_usd"], 2)
-            if is_live:
+            if t["mode"] == "live":            # real position -> real sell (reduce_only)
+                if not is_live:
+                    print(f"HOLD  {t['ticker']}: live position but live mode disabled - not selling")
+                    continue
                 from .live import KalshiLive
                 try:
                     KalshiLive().place_exit(t["ticker"], t["side"], t["contracts"], px)
