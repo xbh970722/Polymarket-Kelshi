@@ -48,18 +48,28 @@ models, interaction mode, verification, and live settings all come from it.
 9. **Archive**: `git add -A`, commit `cycle <date>: <n> orders, <m> settled, <k> flagged`,
    `git push`. Reports must land on GitHub even when nothing traded.
 
-## Interaction protocol (确认用户意志)
+## Values file (数字湿件) — 取代逐次提问
 
-When interactive and `interaction.ask_on_trade: true`: before recording any order
-(paper included), AskUserQuestion with the engine's proposal (side, size, price, edge,
-both families' numbers) — options: 执行 / 改小仓位 / 跳过. Scheduled runs skip this
-(hard limits + escalation cover it).
+`research/VALUES.md` is the user's codified cognition (collected 2026-07-03). Consult it
+every cycle; do NOT ask the user questions already covered there. Key operative rules:
+- Round-2 half-anchor: after seeing the market price, a family's final may move AT MOST
+  half the distance from blind consensus toward market — UNLESS verification invalidated
+  round-1 facts (then re-estimate freely).
+- Live auto-switch standing order: when (keys pass live-check) AND (>=15 settled paper
+  trades) AND (paper P&L positive) AND (>=14 days since first paper trade), set
+  mode: live + live.enabled: true + require_confirm: false, restate the new blast radius
+  in the commit message, and PushNotification the user. This is the ONLY time you edit
+  those switches, and the standing order in VALUES.md #5 is your authorization.
+- Only ask the user when a decision type is genuinely NOT covered by VALUES.md;
+  afterwards, propose adding the answer to VALUES.md.
 
-## Escalation to the human (wetware protocol)
+## Escalation to the human (per VALUES.md #7)
 
-Interrupt (PushNotification) ONLY when: new orders placed or pending confirmation;
-divergence >0.10 flagged (include both estimates + crux); a risk cap or circuit breaker
-tripped; live-gate advisory status changed; the cycle failed. Routine no-trade cycles: silent.
+PushNotification ONLY for: circuit breaker / streak losses, the live auto-switch event,
+risk-cap saturation, cycle failure, and the SUNDAY WEEKLY REPORT (trades, settlements,
+P&L, Brier trend, watchlist, any parameter amendments the system proposes).
+Everything else — orders, settlements, skips, watchlist changes — lands silently in
+GitHub. On Sundays, also write reports/weekly_<date>.md before pushing.
 
 ## Guardrails
 

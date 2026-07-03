@@ -60,9 +60,12 @@ def cmd_decide(args) -> None:
     cfg = load_config()
     is_live = live_active(cfg)
     if is_live:
-        # live mode tightens the per-trade cap to min(risk, live)
+        # live mode tightens the per-trade cap and raises the edge bar (VALUES.md #2/#5)
         cfg["risk"]["max_per_trade_usd"] = min(cfg["risk"]["max_per_trade_usd"],
                                                cfg["live"]["max_per_trade_usd"])
+        cfg["edge"]["min_edge_after_fees"] = max(
+            cfg["edge"]["min_edge_after_fees"],
+            cfg["edge"].get("live_min_edge_after_fees", 0.05))
     research = json.loads(Path(args.research).read_text(encoding="utf-8"))
     api = KalshiPublic()
     placed = skipped = 0

@@ -20,11 +20,14 @@ ensemble:
     reasoning_effort: xhigh
   round2_representatives: 1   # 第二轮每家族代表数
 
-# ---------- 交互协议 (确认用户意志的节点) ----------
+# ---------- 交互协议 ----------
+# 2026-07-03 起: 用户认知已固化到 research/VALUES.md, 系统全自动决策,
+# 仲裁者每轮引用 VALUES.md 而非提问。仅 VALUES 未覆盖的全新决策类型才可提问。
 interaction:
-  when_interactive: ask    # ask: 关键节点用选择题问用户; auto: 不打断
-  ask_before_research: true  # 扫描后让用户挑选研究哪些候选 (交互会话时)
-  ask_on_trade: true         # 出现交易信号时询问用户 (paper 也问; 定时任务除外)
+  when_interactive: auto
+  ask_before_research: false
+  ask_on_trade: false
+  values_file: research/VALUES.md
 
 # ---------- 决策前验证层 ----------
 verification:
@@ -59,26 +62,28 @@ research:
   markets_per_cycle: 3
 
 edge:
-  min_edge_after_fees: 0.05
+  min_edge_after_fees: 0.035       # 纸面阶段 3.5 点 (VALUES.md #2: 用交易换校准数据)
+  live_min_edge_after_fees: 0.05   # 真钱阶段回升 5 点
   consensus_max_divergence: 0.10
+  round2_half_anchor: true         # VALUES.md #3: 终值最多向市场价移动一半距离
 
 sizing:
   bankroll_usd: 500
-  kelly_fraction: 0.25
+  kelly_fraction: 0.333            # VALUES.md #1: 娱乐预算, 1/3 Kelly
 
 risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
   max_per_trade_usd: 25
   max_daily_risk_usd: 100
   max_total_exposure_usd: 300
   max_open_positions: 10
-  daily_loss_halt_usd: 150
+  daily_loss_halt_usd: 200         # VALUES.md #1: 学费心态, 熔断放宽
 
 # ---------- 真钱交易 ----------
 live:
   enabled: false           # 改 true 才可能下真单 (还需 mode: live + 环境变量 API key)
-  require_confirm: true    # true: 每单需人确认 (交互=选择题, 定时任务=推送通知等待);
-                           # false: 全自动直接下单 (硬限额仍生效) — 用户明示后才可改
-  max_per_trade_usd: 25    # live 专用单笔上限 (与 risk 取小)
+  require_confirm: true    # 切换由 VALUES.md #5 的 standing order 管辖:
+                           # key就绪 + ≥15笔结算 + 纸面盈利 + ≥14天 → 系统自动切全自动并推送通知
+  max_per_trade_usd: 15    # VALUES.md #5: 真钱起步单笔上限 $15
   # API key 配置 (环境变量, 不进 git):
   #   KALSHI_API_KEY_ID=<key id>
   #   KALSHI_PRIVATE_KEY_PATH=<RSA 私钥 .pem 路径>
