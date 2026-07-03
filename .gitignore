@@ -1,4 +1,10 @@
 __pycache__/
 *.pyc
 .venv/
+# 密钥防线: 任何私钥/凭据文件永不进版本控制 (真正的钥匙存在 D:\kalshi-secrets\, 仓库外)
+*.pem
+*.key
+*secret*
+*credential*
+.env
 # 账本 data/ledger.db 和 reports/ 特意纳入版本控制: 它们是审计轨迹
