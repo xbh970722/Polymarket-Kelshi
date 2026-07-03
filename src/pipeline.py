@@ -259,13 +259,17 @@ def cmd_shortcycle(_args) -> None:
     # dedicated sub-budget: ALL of today's spend incl. settled (leak fixed 2026-07-03)
     prefixes = tuple(sc["series"]) + tuple(sc.get("series_15m", []))
     spent = ledger.spent_today(prefixes)
+    budget = sc["daily_budget_usd"]
+    extra = sc.get("budget_extra") or {}
+    if extra.get("date") == dt.date.today().isoformat():
+        budget += float(extra.get("usd", 0))          # self-expiring one-day top-up
     cands = candidates(cfg) + candidates_15m(cfg)
     print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
-          f"today spent ${spent:.2f}/{sc['daily_budget_usd']:.2f}")
+          f"today spent ${spent:.2f}/{budget:.2f}")
     api = KalshiPublic()
     placed = 0
     for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
-        if spent >= sc["daily_budget_usd"]:
+        if spent >= budget:
             print("budget: shortcycle daily budget reached")
             break
         if ledger.has_open_position(c["ticker"], "live"):

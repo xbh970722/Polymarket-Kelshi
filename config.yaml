@@ -136,6 +136,9 @@ shortcycle:
   max_per_trade_usd: 0.50
   max_contracts: 3
   daily_budget_usd: 2.00
+  budget_extra:                  # 一次性追加预算 (自动过期): 旧策略烧超后, 给新策略的当日弹药
+    date: "2026-07-03"
+    usd: 1.00
 
 # ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
 weather:
