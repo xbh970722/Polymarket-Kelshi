@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-03",
+  "mode": "ensemble-4+1 cycle 3 (2x Opus 4.8 + 2x Codex gpt-5.5 xhigh blind, arbiter = this session; round 2 on BEH only)",
+  "items": [
+    {
+      "ticker": "KXGPT-OPEN-26JUL07",
+      "title": "Will OpenAI release GPT-5.6 before Jul 7, 2026?",
+      "q_claude": 0.11,
+      "q_codex": 0.055,
+      "rationale": "R1 blind: Opus 0.13/0.09, Codex 0.05/0.06 -- all four independently below market. GPT-5.6 announced Jun 26 but gated to ~20 government-vetted partners; GA reported 'coming weeks,' mid-July best case, i.e. after the Jul 7 close; not on lmarena or any paid tier yet. Consensus 0.0825 vs YES ask 0.13 -> no YES edge; fair NO ~0.9175 vs NO ask 0.91 -> only +0.0075 net, far below threshold. No crux, no round 2, skip.",
+      "sources": [
+        "openai.com/index/previewing-gpt-5-6-sol (2026-06-26)",
+        "TechCrunch 2026-06-26: government-requested rollout limits, ~20 trusted partners",
+        "CryptoBriefing ~2026-07-01/02: public launch 'expected by July 2026', still gated",
+        "same-day earlier research (KXLLM1 market): lmarena.ai leaderboard shows GPT-5.6 not accruing public votes as of 2026-07-03"
+      ]
+    },
+    {
+      "ticker": "KXRANKLIST1SONG-26JUL25-BEH",
+      "title": "Will \"Be Her\" (Ella Langley) be #1 on the Billboard Hot 100 in July 2026?",
+      "q_claude": 0.30,
+      "q_codex": 0.24,
+      "rationale": "R1 blind (Opus 0.22/0.20, Codex 0.24/0.24, consensus 0.225) was built on materially incomplete info: 'no identified promotional catalyst' was wrong. Verification layer found: Be Her is Ella Langley's Country Airplay #1 for 4 straight weeks (fastest-ever to #1 in her catalog, tied for longest female solo reign since Taylor Swift 2007), she performed it live at the 2026 ACM Awards, and Hot 100 position is still climbing #5->#3 (radio leads Hot 100 by design, so this is under-converted rising momentum, not a plateau). The only blocker at #1 is her OWN earlier single 'Choosin' Texas' (same artist/album), a same-artist succession pattern. Social-media search (Twitter/Reddit) found no negative catalyst or rival surge. Per VALUES.md #3 factual-basis exception, Claude round-2 representative revised freely to 0.30 (explicitly reasoned above blind AND above market, not toward market). Codex round-2 representative failed twice (first attempt looped on futile web-search tool calls despite explicit read-only/no-network instruction; retry was truncated mid-response) -- per protocol 'codex fails twice -> record unavailable,' q_codex falls back to its valid ROUND-1 blind mean (0.24), NOT re-estimated with the new evidence. Consensus (0.27) vs YES ask 0.08 -> net edge ~+0.185, far above both paper (3.5pt) and live-practice (3.5pt) thresholds. Divergence 0.06, under the 0.10 auto-skip and just above the 0.05 high-conviction bar (so NOT high-conviction sizing even though edge is huge) -- flagged as a genuine known limitation: this trade's true edge is somewhat uncertain because half the ensemble's 'final' number is an un-updated round-1 figure, not a true post-verification consensus.",
+      "sources": [
+        "billboard.com/music/chart-beat/be-her-ella-langley-fastest-country-airplay-no-1-1236260193 (fetched 2026-07-03)",
+        "billboard.com/music/chart-beat/ella-langleys-be-her-longest-country-airplay-number-1-1236280756 (fetched 2026-07-03)",
+        "hollywoodreporter.com/music/music-news/ella-langley-performs-be-her-2026-acm-awards-1236598184 (fetched 2026-07-03)",
+        "Billboard Hot 100 chart dated week of Jul 1-7 2026 (fetched 2026-07-03): Be Her #3 (prev #5, peak #2)",
+        "WebSearch 'Ella Langley twitter reddit reaction 2026' 2026-07-03: no negative catalyst or rival-song surge found"
+      ]
+    },
+    {
+      "ticker": "KXBTCMINMON-BTC-26JUL31-5750000",
+      "title": "How low will BTC get in July? | Below $57,500.00",
+      "q_claude": 0.51,
+      "q_codex": 0.43,
+      "rationale": "R1 blind: Opus 0.42/0.60 (wide intra-family spread: inside view calibrated barrier-touch math conservatively, outside view used reflection-principle full-month 'ever touches' framing more aggressively), Codex 0.43/0.43 (tight). $57,500 barrier is ~7.2% below spot (~$61,800); 30d annualized vol ~37.7% (Coinbase, monthly sigma ~10.8%) implies a plausible but not dominant chance of an intramonth touch. Consensus (0.51+0.43)/2=0.47 lands almost exactly on market mid (0.475, YES ask 0.48) -- essentially zero net edge either direction. Divergence 0.08, under the 0.10 auto-skip threshold. No crux (both families independently average out near the market despite internal Claude-family disagreement), no round 2 needed, skip.",
+      "sources": [
+        "Coinbase spot ~$61,963-62,046, 30d vol ~37.7-37.8% annualized (from same-day earlier research on a different BTC market, fetched 2026-07-03)",
+        "Yahoo Finance / Kraken spot ~$61,678-61,862 (fetched 2026-07-03)",
+        "24/7 Wall St. and CryptoTimes July 2026 outlook pieces (fetched 2026-07-03, flagged as low-quality secondary sources, weighted lightly): support zone $56,200-58,000 called out ahead of Jul 29 FOMC",
+        "KXBTCMINMON rules_secondary contains a known Kalshi MAX-template copy/paste bug (says 'above threshold resolves Yes' on a MIN market); rules_primary ('ever below $57,500 -> Yes') used as authoritative per prior-session finding"
+      ]
+    }
+  ]
+}
