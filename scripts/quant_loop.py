@@ -102,18 +102,11 @@ def check_review_trigger() -> None:
                    "n_losses": n_loss, "usd_loss": round(usd_loss, 2),
                    "since_id": state.get("last_review_id", 0)},
                   open(REVIEW_DUE, "w", encoding="utf-8"))
+        # NOTE: the loop does NOT spawn a headless claude (nested -p proved unreliable).
+        # It only RAISES the flag; the hourly app-scheduled supervisor task detects
+        # data/review_due.json and performs the Fable 5 review — that path actually runs.
         log(f"REVIEW TRIGGERED: {n_loss} crypto losses / ${usd_loss:.2f} since review "
-            f"#{state.get('review_no', 0)} -> summoning Fable 5")
-        prompt = ("Crypto策略亏损复盘已触发 (data/review_due.json)。你是 Fable 5 总复盘官。"
-                  "严格按 research/CRYPTO_REVIEW_PROTOCOL.md 执行全部六步: 拉数据找模式、"
-                  "对照 SHORTCYCLE_DESIGN.md 假设、三选一裁决、实施并编译验证、更新 "
-                  "review_state.json 并删除 review_due.json、commit+push。遵守权限边界: "
-                  "不得提高任何美元上限。")
-        model = cr.get("reviewer_model", "claude-fable-5")
-        subprocess.Popen(
-            ["claude", "-p", prompt, "--model", model, "--permission-mode", "acceptEdits"],
-            cwd=ROOT, stdout=open(os.path.join(ROOT, "data", "review_session.log"), "a"),
-            stderr=subprocess.STDOUT, creationflags=0x08000000)   # detached, no window
+            f"#{state.get('review_no', 0)} -> review_due.json raised for supervisor")
     except Exception as e:
         log(f"review trigger check failed: {e}")
 
