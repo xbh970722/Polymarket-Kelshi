@@ -138,7 +138,15 @@ shortcycle:
   daily_budget_usd: 2.00
   budget_extra:                  # 一次性追加预算 (自动过期): 旧策略烧超后, 给新策略的当日弹药
     date: "2026-07-03"
-    usd: 1.00
+    usd: 2.00                    # 用户: "新策略给2刀"
+
+# ---------- 亏损触发式复盘 (用户: 每亏几笔自动复盘, Fable 5 总领) ----------
+crypto_review:
+  enabled: true
+  loss_count_trigger: 5          # 自上次复盘起 crypto 结算亏损 ≥5 笔 -> 触发
+  loss_usd_trigger: 1.00         # 或累计新增亏损 ≥$1 -> 触发
+  cooldown_hours: 2              # 复盘冷却, 防连环触发
+  reviewer_model: claude-fable-5 # 总领复盘的模型 (用户点名 Fable 5)
 
 # ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
 weather:

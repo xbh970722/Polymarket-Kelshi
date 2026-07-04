@@ -64,6 +64,60 @@ def git(*args: str) -> None:
         log(f"git {args} failed: {e}")
 
 
+REVIEW_STATE = os.path.join(ROOT, "data", "review_state.json")
+REVIEW_DUE = os.path.join(ROOT, "data", "review_due.json")
+
+
+def check_review_trigger() -> None:
+    """Loss-triggered crypto review: summon a Fable 5 session when crypto losses
+    since the last review hit the configured count/USD threshold."""
+    import json
+    import sqlite3
+    try:
+        import yaml
+        cfg = yaml.safe_load(open(os.path.join(ROOT, "config.yaml"), encoding="utf-8"))
+        cr = cfg.get("crypto_review") or {}
+        if not cr.get("enabled"):
+            return
+        state = {"last_review_id": 0, "review_no": 0}
+        if os.path.exists(REVIEW_STATE):
+            state = json.load(open(REVIEW_STATE, encoding="utf-8"))
+        if os.path.exists(REVIEW_DUE):        # pending review; respect cooldown
+            age_h = (dt.datetime.now()
+                     - dt.datetime.fromtimestamp(os.path.getmtime(REVIEW_DUE))).total_seconds() / 3600
+            if age_h < cr.get("cooldown_hours", 2):
+                return
+        con = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
+        con.row_factory = sqlite3.Row
+        rows = con.execute(
+            "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
+            "AND status IN ('settled','closed') AND pnl_usd < 0 AND ("
+            "ticker LIKE 'KXBTC%' OR ticker LIKE 'KXETH%' OR ticker LIKE 'KXSOL%')",
+            (state.get("last_review_id", 0),)).fetchall()
+        n_loss = len(rows)
+        usd_loss = -sum(r["pnl_usd"] for r in rows)
+        if n_loss < cr.get("loss_count_trigger", 5) and usd_loss < cr.get("loss_usd_trigger", 1.0):
+            return
+        json.dump({"triggered_ts": dt.datetime.now().isoformat(timespec="seconds"),
+                   "n_losses": n_loss, "usd_loss": round(usd_loss, 2),
+                   "since_id": state.get("last_review_id", 0)},
+                  open(REVIEW_DUE, "w", encoding="utf-8"))
+        log(f"REVIEW TRIGGERED: {n_loss} crypto losses / ${usd_loss:.2f} since review "
+            f"#{state.get('review_no', 0)} -> summoning Fable 5")
+        prompt = ("Crypto策略亏损复盘已触发 (data/review_due.json)。你是 Fable 5 总复盘官。"
+                  "严格按 research/CRYPTO_REVIEW_PROTOCOL.md 执行全部六步: 拉数据找模式、"
+                  "对照 SHORTCYCLE_DESIGN.md 假设、三选一裁决、实施并编译验证、更新 "
+                  "review_state.json 并删除 review_due.json、commit+push。遵守权限边界: "
+                  "不得提高任何美元上限。")
+        model = cr.get("reviewer_model", "claude-fable-5")
+        subprocess.Popen(
+            ["claude", "-p", prompt, "--model", model, "--permission-mode", "acceptEdits"],
+            cwd=ROOT, stdout=open(os.path.join(ROOT, "data", "review_session.log"), "a"),
+            stderr=subprocess.STDOUT, creationflags=0x08000000)   # detached, no window
+    except Exception as e:
+        log(f"review trigger check failed: {e}")
+
+
 def main() -> None:
     if already_running():
         print("quant_loop already running; exiting")
@@ -82,6 +136,7 @@ def main() -> None:
             import time
             time.sleep(wait)
         out = run_cmd("settle")
+        check_review_trigger()
         out += run_cmd("shortcycle")
         out += run_cmd("weather")
         if nxt.minute == 20:

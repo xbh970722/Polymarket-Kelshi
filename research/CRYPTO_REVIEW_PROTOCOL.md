@@ -1,0 +1,30 @@
+# Crypto 亏损触发式复盘协议 (Fable 5 总领)
+
+触发: quant_loop 在结算后检测到自上次复盘以来 crypto 结算亏损 ≥5 笔 或 累计亏损 ≥$1。
+执行者: **Fable 5**(用户 2026-07-03 点名)— 由 quant_loop 以 `claude -p --model claude-fable-5`
+自动召唤; 每小时监工任务兜底 (检查 data/review_due.json)。
+
+## 复盘会话必须完成的六步
+
+1. **拉数据**: sqlite 查询 data/ledger.db 中 id > review_state.last_review_id 的全部 crypto
+   结算交易 (ticker 前缀 KXBTC/KXETH/KXSOL, 含 15M), 以及 data/quant_loop.log 相关段落。
+2. **找模式, 不数尸体**: 亏损单共享什么结构?哪个门放行的?(滞后门/确定区/基差守卫/
+   窗口上限/预算) 与 SHORTCYCLE_DESIGN.md 中在检验的假设 (H1-H4...) 逐条对照 —
+   哪条被数据支持, 哪条被证伪。区分实力与运气: q=0.8 输一笔是噪声, 同构输五笔是偏差。
+3. **裁决** (三选一, 必须选):
+   - 参数调整: 收紧/放宽某个门 (写明 旧值→新值→数据依据);
+   - 结构调整: 新增/删除某条规则 (在 shortcycle.py / pipeline.py 实施);
+   - 死刑: 触发 SHORTCYCLE_DESIGN.md 的废通道红线 → 在 config 将对应 series 移出,
+     PushNotification 告知用户。
+4. **实施**: 改 config/代码, `python -m py_compile` 验证, 更新 SHORTCYCLE_DESIGN.md
+   复盘编号章节 (Review #N: 数据→诊断→裁决→新假设)。
+5. **记账**: 更新 data/review_state.json: {"last_review_id": <本次覆盖到的最大id>,
+   "ts": <ISO时间>, "review_no": N}; 删除 data/review_due.json。
+6. **归档**: git add -A && git commit -m "crypto review #N: <一句话裁决>" && git push。
+
+## 权限边界 (硬约束)
+
+- 复盘**可以**: 调整策略参数/门槛/规则、收紧预算、停用某 series、废除通道。
+- 复盘**不可以**: 提高任何美元上限 (单笔/日预算/敞口/熔断) —— 那是用户专属权力;
+  不可以动 ensemble/weather/swing 的参数 (只管 crypto 短周期); 不可以改 VALUES.md 数值。
+- 静默完成 (GitHub 即记录); 仅"死刑裁决"或改动失败时 PushNotification。
