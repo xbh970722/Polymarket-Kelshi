@@ -114,7 +114,10 @@ live:
 shortcycle:
   enabled: true
   series: [KXBTCD, KXETHD]       # BTC + ETH 小时市场 (2026-07-03 用户: crypto 也做)
-  series_15m: [KXBTC15M, KXETH15M, KXSOL15M]   # 15分钟涨跌盘 (96次/天, 新市场流动性薄)
+  # 15分钟涨跌盘已停用 (2026-07-03 数据裁决): v24h=0 无对手盘, 50c处费率4%最狠,
+  # 信噪比全通道最差, 实战1笔亏$0.06。代码保留, 改回 [KXBTC15M,KXETH15M,KXSOL15M] 即复活。
+  # 注: H5 校准记录器 (src/mktcal.py) 仍免费采样这些市场, 停交易不丢数据。
+  series_15m: []
   # 确定性区间设计 (research/SHORTCYCLE_DESIGN.md): 参考价 = 上一窗口精确结算值;
   # 只在方向近乎锁定时出手, 永久禁入掷硬币区
   min_minutes_15m: 2
