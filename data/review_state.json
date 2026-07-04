@@ -1,1 +1,6 @@
-{"last_review_id": 46, "review_no": 2, "ts": "2026-07-04T10:24:00", "note": "Review #2 = favorites-lane loss #45 (-$1.7) via short-cycle path; zone floor 0.85->0.86 to close sub-floor leak; calibration confirms bias holds, single loss = noise. H6 opened (verify leak mechanism in favorites exec code)."}
+{
+"last_review_id": 54,
+"review_no": 3,
+"ts": "2026-07-04T12:21:00",
+"note": "Review #3 = favorites-lane loss #52 (-$1.93 @ 96c) via short-cycle path; zone ceiling 0.95->0.94 to close symmetric top leak (mirror of #2 floor fix). H6 RESOLVED: leak = IOC fill upslip ~1c above scan-ask (pipeline.py:414 gates scan ask, :429 IOC fills 1c worse). Band [0.94,0.97) net -$1.49 structural (96c risks 96 to win 4); core [0.88,0.94) 14 trades 0 loss +$2.09. Single loss = noise but fill leaked into net-neg band. H7 opened (code-level post-fill zone recheck if config double-buffer still leaks)."
+}
