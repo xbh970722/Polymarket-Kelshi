@@ -1770,3 +1770,61 @@
 [07-04 10:26:28]   weather: weather: 13 priced buckets | spent $1.09/1.00
 [07-04 10:26:28]   weather: budget: weather daily budget reached
 [07-04 10:26:28]   weather: done: 0 weather orders
+[07-04 10:35:21]   settle: done: 0 settled, 6 still open
+[07-04 10:35:22]   mktsnap: mktsnap: 10 quotes recorded, 3 outcomes resolved
+[07-04 10:35:24]   shortcycle: shortcycle: 7 candidate strikes | balance $4.14 | today spent $32.24/4.00
+[07-04 10:35:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 10:35:24]   shortcycle: done: 0 shortcycle orders
+[07-04 10:35:26]   favorites: favorites: 3 favorites in zone | realized $+1.52 | today spent $3.48/4.00
+[07-04 10:35:26]   favorites: done: 0 favorite orders
+[07-04 10:35:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 10:35:29]   weather: weather: 13 priced buckets | spent $1.09/1.00
+[07-04 10:35:29]   weather: budget: weather daily budget reached
+[07-04 10:35:29]   weather: done: 0 weather orders
+[07-04 10:41:21]   settle: done: 0 settled, 6 still open
+[07-04 10:41:22]   mktsnap: mktsnap: 10 quotes recorded, 0 outcomes resolved
+[07-04 10:41:24]   shortcycle: shortcycle: 5 candidate strikes | balance $4.14 | today spent $32.24/4.00
+[07-04 10:41:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 10:41:24]   shortcycle: done: 0 shortcycle orders
+[07-04 10:41:25]   favorites: favorites: 2 favorites in zone | realized $+1.52 | today spent $3.48/4.00
+[07-04 10:41:25]   favorites: done: 0 favorite orders
+[07-04 10:41:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 10:41:29]   weather: weather: 13 priced buckets | spent $1.09/1.00
+[07-04 10:41:29]   weather: budget: weather daily budget reached
+[07-04 10:41:29]   weather: done: 0 weather orders
+[07-04 10:50:21]   settle: done: 0 settled, 6 still open
+[07-04 10:50:22]   mktsnap: mktsnap: 9 quotes recorded, 3 outcomes resolved
+[07-04 10:50:25]   shortcycle: shortcycle: 0 candidate strikes | balance $4.14 | today spent $32.24/4.00
+[07-04 10:50:25]   shortcycle: done: 0 shortcycle orders
+[07-04 10:50:26]   favorites: favorites: 0 favorites in zone | realized $+1.52 | today spent $3.48/4.00
+[07-04 10:50:26]   favorites: done: 0 favorite orders
+[07-04 10:50:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 10:50:29]   weather: weather: 13 priced buckets | spent $1.09/1.00
+[07-04 10:50:29]   weather: budget: weather daily budget reached
+[07-04 10:50:29]   weather: done: 0 weather orders
+[07-04 10:56:21]   settle: done: 0 settled, 6 still open
+[07-04 10:56:22]   mktsnap: mktsnap: 5 quotes recorded, 0 outcomes resolved
+[07-04 10:56:25]   shortcycle: shortcycle: 0 candidate strikes | balance $4.14 | today spent $32.24/4.00
+[07-04 10:56:25]   shortcycle: done: 0 shortcycle orders
+[07-04 10:56:26]   favorites: favorites: 0 favorites in zone | realized $+1.52 | today spent $3.48/4.00
+[07-04 10:56:26]   favorites: done: 0 favorite orders
+[07-04 10:56:29]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 10:56:29]   weather: weather: 13 priced buckets | spent $1.09/1.00
+[07-04 10:56:29]   weather: budget: weather daily budget reached
+[07-04 10:56:29]   weather: done: 0 weather orders
+[07-04 11:05:21]   settle: SETTLED KXETHD-26JUL0413-T1799.99: result=no WIN pnl=$+0.28
+[07-04 11:05:21]   settle: SETTLED KXBTCD-26JUL0413-T63099.99: result=no WIN pnl=$+0.24
+[07-04 11:05:21]   settle: done: 2 settled, 4 still open
+[07-04 11:05:22]   mktsnap: mktsnap: 3 quotes recorded, 10 outcomes resolved
+[07-04 11:05:25]   shortcycle: shortcycle: 8 candidate strikes | balance $8.14 | today spent $32.24/4.00
+[07-04 11:05:25]   shortcycle: budget: shortcycle daily budget reached
+[07-04 11:05:25]   shortcycle: done: 0 shortcycle orders
+[07-04 11:05:26]   favorites: favorites: 2 favorites in zone | realized $+2.04 | today spent $0.00/4.00
+[07-04 11:05:26]   favorites: LIVE  KXBTCD-26JUL0414-T63099.99: FAV NO x2 @ 96c cost=$1.93 order=36f6227f-72c2-4433-94fb-7c34b9f6acf5
+[07-04 11:05:26]   favorites: done: 1 favorite orders
+[07-04 11:05:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 11:05:30]   weather: weather: 17 priced buckets | spent $1.09/1.00
+[07-04 11:05:30]   weather: budget: weather daily budget reached
+[07-04 11:05:30]   weather: done: 0 weather orders
+[07-04 11:05:31]   journal: journal written: realized today $+4.74, 28 settled, 25 fills
+[07-04 11:05:32]   report: wrote reports\report_2026-07-04.md
