@@ -1,1 +1,1 @@
-{"last_review_id": 23, "review_no": 1, "ts": "2026-07-03T12:00:00", "note": "Review #1 = manual Fable5 post-mortem (0/16 -> lag_only overhaul)"}
+{"last_review_id": 46, "review_no": 2, "ts": "2026-07-04T10:24:00", "note": "Review #2 = favorites-lane loss #45 (-$1.7) via short-cycle path; zone floor 0.85->0.86 to close sub-floor leak; calibration confirms bias holds, single loss = noise. H6 opened (verify leak mechanism in favorites exec code)."}
