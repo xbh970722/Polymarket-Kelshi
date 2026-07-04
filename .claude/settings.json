@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Bash(python*)",
+      "Bash(codex*)",
       "Bash(git add*)",
       "Bash(git commit*)",
       "Bash(git push*)",
@@ -12,7 +13,9 @@
       "Edit",
       "Write",
       "Grep",
-      "Glob"
+      "Glob",
+      "Agent",
+      "PushNotification"
     ]
   }
 }
