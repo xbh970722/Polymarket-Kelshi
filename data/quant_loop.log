@@ -1658,3 +1658,80 @@
 [07-04 09:11:29]   journal: journal written: realized today $+5.81, 24 settled, 22 fills
 [07-04 09:11:30]   report: wrote reports\report_2026-07-04.md
 [07-04 09:11:32] committed + pushed
+[07-04 09:20:21]   settle: done: 0 settled, 6 still open
+[07-04 09:20:22]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-04 09:20:24]   shortcycle: shortcycle: 8 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:20:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 09:20:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:20:26]   favorites: favorites: 3 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:20:26]   favorites: done: 0 favorite orders
+[07-04 09:20:28]   weather: weather: 10 priced buckets | spent $1.09/1.00
+[07-04 09:20:28]   weather: budget: weather daily budget reached
+[07-04 09:20:28]   weather: done: 0 weather orders
+[07-04 09:20:29]   manage: done: 0 exited, 0 flagged for review, 6 holding
+[07-04 09:26:21]   settle: done: 0 settled, 6 still open
+[07-04 09:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-04 09:26:24]   shortcycle: shortcycle: 9 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:26:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 09:26:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:26:25]   favorites: favorites: 4 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:26:25]   favorites: done: 0 favorite orders
+[07-04 09:26:28]   weather: weather: 9 priced buckets | spent $1.09/1.00
+[07-04 09:26:28]   weather: budget: weather daily budget reached
+[07-04 09:26:28]   weather: done: 0 weather orders
+[07-04 09:35:21]   settle: done: 0 settled, 6 still open
+[07-04 09:35:22]   mktsnap: mktsnap: 11 quotes recorded, 3 outcomes resolved
+[07-04 09:35:24]   shortcycle: shortcycle: 6 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:35:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 09:35:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:35:26]   favorites: favorites: 2 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:35:26]   favorites: done: 0 favorite orders
+[07-04 09:35:28]   weather: weather: 9 priced buckets | spent $1.09/1.00
+[07-04 09:35:28]   weather: budget: weather daily budget reached
+[07-04 09:35:28]   weather: done: 0 weather orders
+[07-04 09:41:21]   settle: done: 0 settled, 6 still open
+[07-04 09:41:22]   mktsnap: mktsnap: 11 quotes recorded, 0 outcomes resolved
+[07-04 09:41:24]   shortcycle: shortcycle: 7 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:41:24]   shortcycle: budget: shortcycle daily budget reached
+[07-04 09:41:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:41:26]   favorites: favorites: 2 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:41:26]   favorites: done: 0 favorite orders
+[07-04 09:41:28]   weather: weather: 9 priced buckets | spent $1.09/1.00
+[07-04 09:41:28]   weather: budget: weather daily budget reached
+[07-04 09:41:28]   weather: done: 0 weather orders
+[07-04 09:50:21]   settle: done: 0 settled, 6 still open
+[07-04 09:50:22]   mktsnap: mktsnap: 10 quotes recorded, 3 outcomes resolved
+[07-04 09:50:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:50:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:50:26]   favorites: favorites: 0 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:50:26]   favorites: done: 0 favorite orders
+[07-04 09:50:28]   weather: weather: 10 priced buckets | spent $1.09/1.00
+[07-04 09:50:28]   weather: budget: weather daily budget reached
+[07-04 09:50:28]   weather: done: 0 weather orders
+[07-04 09:56:21]   settle: done: 0 settled, 6 still open
+[07-04 09:56:22]   mktsnap: mktsnap: 7 quotes recorded, 0 outcomes resolved
+[07-04 09:56:24]   shortcycle: shortcycle: 0 candidate strikes | balance $5.61 | today spent $28.76/4.00
+[07-04 09:56:24]   shortcycle: done: 0 shortcycle orders
+[07-04 09:56:25]   favorites: favorites: 0 favorites in zone | realized $+3.11 | today spent $3.59/4.00
+[07-04 09:56:25]   favorites: done: 0 favorite orders
+[07-04 09:56:28]   weather: weather: 9 priced buckets | spent $1.09/1.00
+[07-04 09:56:28]   weather: budget: weather daily budget reached
+[07-04 09:56:28]   weather: done: 0 weather orders
+[07-04 10:05:21]   settle: SETTLED KXETHD-26JUL0412-T1779.99: result=yes LOSS pnl=$-1.70
+[07-04 10:05:21]   settle: SETTLED KXBTCD-26JUL0412-T62499.99: result=yes WIN pnl=$+0.11
+[07-04 10:05:21]   settle: done: 2 settled, 4 still open
+[07-04 10:05:21] REVIEW TRIGGERED: 1 crypto losses / $1.70 since review #1 -> review_due.json raised for supervisor
+[07-04 10:05:23]   mktsnap: mktsnap: 3 quotes recorded, 11 outcomes resolved
+[07-04 10:05:25]   shortcycle: shortcycle: 9 candidate strikes | balance $7.61 | today spent $28.76/4.00
+[07-04 10:05:25]   shortcycle: budget: shortcycle daily budget reached
+[07-04 10:05:25]   shortcycle: done: 0 shortcycle orders
+[07-04 10:05:27]   favorites: favorites: 5 favorites in zone | realized $+1.52 | today spent $0.00/4.00
+[07-04 10:05:27]   favorites: LIVE  KXETHD-26JUL0413-T1799.99: FAV NO x2 @ 85c cost=$1.72 order=42613a78-5b62-486f-a4fa-6963e2342072
+[07-04 10:05:27]   favorites: LIVE  KXBTCD-26JUL0413-T63099.99: FAV NO x2 @ 87c cost=$1.76 order=ea03f3a4-c2b1-4ac6-9361-b0a211b080b4
+[07-04 10:05:27]   favorites: done: 2 favorite orders
+[07-04 10:05:30]   weather: WARN KXHIGHAUS: station keyword 'Camp Mabry' not in rules - skipping city
+[07-04 10:05:30]   weather: weather: 13 priced buckets | spent $1.09/1.00
+[07-04 10:05:30]   weather: budget: weather daily budget reached
+[07-04 10:05:30]   weather: done: 0 weather orders
+[07-04 10:05:31]   journal: journal written: realized today $+4.22, 26 settled, 24 fills
+[07-04 10:05:32]   report: wrote reports\report_2026-07-04.md
