@@ -1,0 +1,45 @@
+{
+  "date": "2026-07-04",
+  "protocol": "ensemble 2xOpus + 2xCodex(gpt-5.5 xhigh) blind, arbiter aggregation, half-anchor round-2, verification layer passed",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Will the Federal Reserve Hike rates by 0bps at their July 2026 meeting? (Fed maintains rate)",
+      "q_claude": 0.80,
+      "q_codex": 0.80,
+      "q_all": [0.80, 0.80, 0.80, 0.80],
+      "rationale": "Core: CME FedWatch (fed-funds futures, the authoritative FOMC source) implies ~81% hold on Jul 29, so Kalshi's 0.90 'maintain' is ~9pts too high (retail status-quo/favorite overpricing) -> NO edge. Main risk: hawkish backdrop (Warsh 'inflation too high', core PCE 3.4%, 6 officials want two hikes) means the ~19% move is HIKE-side and could actually fire, resolving NO for us anyway is fine but a July hold is still the modal outcome; also futures vs Kalshi gap could close before close. Divergence: none - all four estimators landed at 0.80 (family div 0.00), verification confirmed rather than invalidated the blind, so half-anchor toward 0.90 was not taken.",
+      "sources": [
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+        "https://www.cnbc.com/2026/07/01/kevin-warsh-ecb-forum-live-updates.html",
+        "https://www.cnn.com/2026/06/17/business/live-news/federal-reserve-interest-rate-kevin-warsh"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "q_claude": 0.935,
+      "q_codex": 0.90,
+      "q_all": [0.94, 0.93, 0.89, 0.91],
+      "rationale": "Core: White House confirmed to NBC it is 'holding' the Jul 19 final on Trump's schedule and FIFA granted him an unprecedented trophy-presentation role, so attendance is strongly signaled and resolution is generous (any brief appearance / self-posted social counts). Main risk: only real downside is a health/security/geopolitical shock in the ~2 weeks before the final. Divergence: small (family div 0.035) - Codex slightly lower on generic 2-3 week cancellation base rate; blind consensus ~0.92 vs market 0.88, half-anchor leaves finals near 0.90-0.935.",
+      "sources": [
+        "https://www.nbcnewyork.com/world-cup/trump-world-cup-final-fifa-metlife-stadium/6512369/",
+        "https://sports.yahoo.com/articles/fifa-break-protocol-allowing-donald-094000674.html",
+        "https://www.cnbc.com/2026/07/01/trump-fifa-infantino-world-cup-financial-disclosure.html"
+      ]
+    },
+    {
+      "ticker": "KXKASHOUT-26APR-AUG01",
+      "title": "Will Kash Patel leave as FBI Director before Aug 1, 2026?",
+      "q_claude": 0.05,
+      "q_codex": 0.035,
+      "q_all": [0.05, 0.05, 0.04, 0.03],
+      "rationale": "Core: Patel is actively serving (Iowa visit this week, vowed World Cup security), president-backed, no resignation/removal or Trump signal of intent, and the ~27-day window plus 'permanent departure only' wording make YES at 0.09 look rich -> mild NO lean. Main risk: live controversies (late STOCK-Act disclosure of $100k-$250k MSTR buy, alcohol/absence allegations he denies+litigates) leave a small tail for a shock resignation. Divergence: small (family div 0.015); blind consensus ~0.043 vs market 0.09, edge is thin so engine threshold likely governs.",
+      "sources": [
+        "https://cbs2iowa.com/news/local/fbi-director-kash-patel-in-iowa-to-strengthen-state-federal-law-enforcement-partnerships",
+        "https://www.coindesk.com/policy/2026/07/02/fbi-director-kash-patel-caught-sleeping-on-required-disclosure-of-six-figure-mstr-investment",
+        "https://thehill.com/homenews/administration/5920072-fifa-world-cup-2026-fbi-patel/"
+      ]
+    }
+  ]
+}
