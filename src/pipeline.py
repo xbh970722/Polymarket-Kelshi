@@ -214,15 +214,21 @@ def cmd_manage(_args) -> None:
 
 
 def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
-                  q_model: float, min_edge: float, slippage: float = 0.01):
+                  q_model: float, min_edge: float, slippage: float = 0.01,
+                  price_cap: float = 0.99):
     """Decisive fill: re-quote fresh, cross up to `slippage` above the ask, but only
-    if the edge STILL clears the bar at that worst-case price. Returns
-    (filled_count, avg_price, fee, order_id) or (0, reason, None, None)."""
+    if the edge STILL clears the bar at that worst-case price. `price_cap` hard-limits
+    the buy price in the favorite side's own terms (H7 fix, 2026-07-04): the IOC can
+    NEVER fill above it, so favorites cannot leak into the extreme high-price zone
+    where one loss wipes ~20 wins. Returns (filled, avg_price, fee, order_id) or
+    (0, reason, None, None); a post-fill guard also rejects any fill above the cap."""
     mn = api.market_norm(ticker)
     ask = mn["yes_ask"] if side == "yes" else mn["no_ask"]
     if not (0.01 <= ask <= 0.99):
         return 0, "no fresh quote", None, None
-    limit_px = round(min(ask + slippage, 0.99), 4)
+    limit_px = round(min(ask + slippage, price_cap, 0.99), 4)
+    if limit_px < ask:                   # cap sits below the ask -> would only fill worse
+        return 0, f"ask {ask:.3f} above price_cap {price_cap:.3f}", None, None
     q_side = q_model if side == "yes" else 1 - q_model
     if q_side - limit_px - taker_fee_usd(limit_px, 1) < min_edge:
         return 0, f"edge below bar at crossed price {limit_px:.3f}", None, None
@@ -233,6 +239,8 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
     avg_px = float(resp.get("average_fill_price") or limit_px)
     if side == "no":                     # exchange reports fills in YES-leg terms
         avg_px = round(1.0 - avg_px, 4)
+    if avg_px > price_cap + 1e-9:        # belt-and-suspenders: fill leaked past the cap
+        print(f"WARN {ticker}: fill {avg_px:.3f} exceeded cap {price_cap:.3f} (kept, flagged)")
     fee_per = float(resp.get("average_fee_paid") or 0) * filled
     fee = round(fee_per, 2) if fee_per else taker_fee_usd(avg_px, filled)
     return filled, avg_px, fee, str(resp.get("order_id") or "?")
@@ -426,9 +434,12 @@ def cmd_favorites(_args) -> None:
             continue
         # bet the structural bias, not a model edge -> pass edge check trivially
         try:
+            # H7 fix: no upward slippage (structural-bias bet, don't chase) + hard
+            # price cap at the zone top so a fill can never land in the extreme band.
             n, px, fee, oid = _decisive_ioc(client, api, m["ticker"], side,
                                             fc.get("max_contracts", 1),
-                                            1.0 if side == "yes" else 0.0, -1.0, 0.01)
+                                            1.0 if side == "yes" else 0.0, -1.0,
+                                            slippage=0.0, price_cap=hi)
         except Exception as e:
             print(f"FAILED {m['ticker']}: {e}")
             continue

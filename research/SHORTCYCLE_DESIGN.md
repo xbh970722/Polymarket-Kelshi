@@ -179,3 +179,17 @@ since_id=23。冷却前上次复盘 last_review_id=23。
   (px) 复核 zone, 越界即撤/不记 (代码层硬夹)? 若 config 双侧缓冲仍漏, 下次转 H7 代码修。
 
 **继续**: 热门收割整体仍 +$0.22 净 (27 结算), 核心带健康, 通道继续下单。
+
+---
+
+## H7 结案 — 2026-07-04 (用户拍板, 代码层硬修)
+
+Review #2/#3 的 config 双侧缓冲 (抬底/降顶) 只是权宜; 根因是 `_decisive_ioc` 的
+`limit_px = min(ask + slippage, 0.99)` 让 IOC 可上滑吃进极端带。**用户决定直接缝针**:
+- `_decisive_ioc` 加 `price_cap` 参数: `limit_px = min(ask+slippage, price_cap, 0.99)`;
+  若 `limit_px < ask` 直接不下单 (卖价已超帽)。另加成交后越帽告警 (belt-and-suspenders)。
+- favorites 调用改 `slippage=0`(结构性偏差不追价) + `price_cap=zone_hi`。
+- 效果: 96c 亏损那类单 (ask 0.96 > cap 0.94) **从源头被拒**, 极端带彻底进不去,
+  不再依赖 config 缓冲挡 1c 滑点。config zone [0.86,0.94] 保留为第一道筛, 代码帽为硬底线。
+- H7 关闭。**新监测点**: 若今后仍出现越帽成交 (WARN 日志), 说明交易所 IOC 语义有额外
+  滑点, 再收 price_cap 或改挂限价单 (maker) 而非 IOC (taker)。
