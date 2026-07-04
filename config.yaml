@@ -94,15 +94,15 @@ live:
   require_confirm: false   # 全自动; 保护 = 下方超小硬限额 (最大总敞口 $8)
   practice: true
   # 练手期风控: 账户仅 ~$9.7, 所有限额等比压缩; bankroll 由 decide 时实时查询余额
-  max_per_trade_usd: 1.50        # 常规单上限 (十几张低价合约级别)
+  max_per_trade_usd: 2.50        # 2026-07-04 用户: 提速提量 (原1.50)
   high_conviction_max_usd: 4.00  # "极其确定"单上限
   high_conviction:               # 极其确定的机器定义 (三条全满足):
     min_edge: 0.10               #   净优势 ≥10 个概率点
     max_family_divergence: 0.05  #   两家族终值分歧 ≤5 点
     require_all_estimators: true #   四个盲估者与市场价同方向 (需 research JSON 提供 q_all)
   live_min_edge_after_fees: 0.035  # 练手期与纸面同门槛, 攒真实成交经验; 正式期回 0.05
-  max_daily_risk_usd: 4          # 日新增风险 ≤$4
-  max_total_exposure_usd: 8      # 总敞口 ≤$8 (留手续费余量)
+  max_daily_risk_usd: 6          # 2026-07-04 用户提量 (原4); 实余额才是真上限
+  max_total_exposure_usd: 12     # 原8; 余额$3.5时非约束, 充值后才生效
   max_open_positions: 16         # 2026-07-03 用户指令: +10 (原6); 美元上限不变
   daily_loss_halt_usd: 5         # 日亏 $5 熔断 (账户一半)
   # API key 配置 (环境变量, 不进 git):
@@ -134,11 +134,11 @@ shortcycle:
   lag_only: true                 # 只做"模型比市场更确定"的滞后单, 永禁淡化市场把握
   lag_margin: 0.02
   vol_lookback_min: 180          # (已弃用: 小时通道改用 EWMA 波动率)
-  min_edge_after_fees: 0.03      # 果断化: 4→3 点 (用户: 策略果断点)
+  min_edge_after_fees: 0.03      # 果断化: 4→3 点 (用户: 策略果断点) — 安全门, 不动
   slippage: 0.01                 # 果断化: 允许越价 1c 吃单 (越价后仍须过门槛)
-  max_per_trade_usd: 0.50
-  max_contracts: 3
-  daily_budget_usd: 2.00
+  max_per_trade_usd: 1.00        # 2026-07-04 提量 (原0.50)
+  max_contracts: 5               # 原3
+  daily_budget_usd: 4.00         # 2026-07-04 提速 (原2.00)
   budget_extra:                  # 一次性追加预算 (自动过期): 旧策略烧超后, 给新策略的当日弹药
     date: "2026-07-03"
     usd: 2.00                    # 用户: "新策略给2刀"
@@ -159,10 +159,10 @@ favorites:
   series: [KXBTCD, KXETHD]        # 先只做流动性最好的 BTC/ETH 小时
   zone: [0.85, 0.95]             # 热门侧卖价落在此带才买 (>0.95 一次踏空即灾难, 排除)
   tau_window_min: [10, 90]
-  max_contracts: 1               # 每笔仅 1 张 (热门≈0.9美元/张, 这已是最小单位)
-  max_per_trade_usd: 1.00
-  daily_budget_usd: 2.00         # 每天最多约 2 个热门
-  max_open: 3
+  max_contracts: 2               # 2026-07-04 用户: 稍增单笔金额 (原1); 单笔亏损上限≈$1.8
+  max_per_trade_usd: 2.00        # 原1.00
+  daily_budget_usd: 4.00         # 2026-07-04 提速: 每天更多热门 (原2.00)
+  max_open: 5                    # 原3
   max_per_window: 1
   # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
   # 每亏 $3 触发一次复盘 -> Fable5 调策略 -> 继续下单 -> 再亏 $3 再复盘, 循环。
