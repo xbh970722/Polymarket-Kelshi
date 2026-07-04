@@ -1147,3 +1147,34 @@
 [07-04 03:11:27]   favorites: done: 0 favorite orders
 [07-04 03:11:28]   weather: weather: 0 priced buckets | spent $0.00/1.00
 [07-04 03:11:28]   weather: done: 0 weather orders
+[07-04 03:20:21]   settle: done: 0 settled, 7 still open
+[07-04 03:20:22]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-04 03:20:25]   shortcycle: shortcycle: 6 candidate strikes | balance $4.96 | today spent $5.36/4.00
+[07-04 03:20:25]   shortcycle: budget: shortcycle daily budget reached
+[07-04 03:20:25]   shortcycle: done: 0 shortcycle orders
+[07-04 03:20:26]   favorites: favorites: 2 favorites in zone | realized $+0.81 | today spent $0.89/4.00
+[07-04 03:20:26]   favorites: done: 0 favorite orders
+[07-04 03:20:27]   weather: weather: 0 priced buckets | spent $0.00/1.00
+[07-04 03:20:27]   weather: done: 0 weather orders
+[07-04 03:20:29]   manage: done: 0 exited, 0 flagged for review, 7 holding
+[07-04 03:26:21]   settle: done: 0 settled, 7 still open
+[07-04 03:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-04 03:26:25]   shortcycle: shortcycle: 6 candidate strikes | balance $4.96 | today spent $5.36/4.00
+[07-04 03:26:25]   shortcycle: budget: shortcycle daily budget reached
+[07-04 03:26:25]   shortcycle: done: 0 shortcycle orders
+[07-04 03:26:27]   favorites: favorites: 1 favorites in zone | realized $+0.81 | today spent $0.89/4.00
+[07-04 03:26:27]   favorites: done: 0 favorite orders
+[07-04 03:26:28]   weather: weather: 0 priced buckets | spent $0.00/1.00
+[07-04 03:26:28]   weather: done: 0 weather orders
+[07-04 03:35:21]   settle: done: 0 settled, 7 still open
+[07-04 03:35:22]   mktsnap: mktsnap: 10 quotes recorded, 3 outcomes resolved
+[07-04 03:35:25]   shortcycle: shortcycle: 5 candidate strikes | balance $4.96 | today spent $5.36/4.00
+[07-04 03:35:25]   shortcycle: budget: shortcycle daily budget reached
+[07-04 03:35:25]   shortcycle: done: 0 shortcycle orders
+[07-04 03:35:27]   favorites: favorites: 1 favorites in zone | realized $+0.81 | today spent $0.89/4.00
+[07-04 03:35:27]   favorites: LIVE  KXETHD-26JUL0406-T1759.99: FAV NO x2 @ 88c cost=$1.77 order=fcf3fac7-1871-4267-a660-75ba85428932
+[07-04 03:35:27]   favorites: done: 1 favorite orders
+[07-04 03:35:27]   weather: weather: 0 priced buckets | spent $0.00/1.00
+[07-04 03:35:27]   weather: done: 0 weather orders
+[07-04 03:35:28]   journal: journal written: realized today $+0.67, 7 settled, 7 fills
+[07-04 03:35:30]   report: wrote reports\report_2026-07-04.md
