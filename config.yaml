@@ -161,7 +161,10 @@ favorites:
   daily_budget_usd: 2.00         # 每天最多约 2 个热门
   max_open: 3
   max_per_window: 1
-  kill_switch_usd: 1.50          # 累计已实现 ≤ −$1.5 → 自动停用本通道 + 触发复盘
+  # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
+  # 每亏 $3 触发一次复盘 -> Fable5 调策略 -> 继续下单 -> 再亏 $3 再复盘, 循环。
+  drawdown_step_usd: 3.00        # 每段回撤额度
+  hard_stop_steps: 5             # 连续 5 段 ($15) 仍未转正 -> 真正停用, 通知用户
 
 # ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
 weather:

@@ -765,3 +765,14 @@
 [07-03 22:20:28]   weather: done: 0 weather orders
 [07-03 22:20:29]   manage: done: 0 exited, 0 flagged for review, 6 holding
 [07-03 22:21:47] === quant_loop started pid=81688 ===
+[07-03 22:26:21]   settle: done: 0 settled, 7 still open
+[07-03 22:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-03 22:26:28]   shortcycle: shortcycle: 7 candidate strikes | balance $4.11 | today spent $3.83/4.00
+[07-03 22:26:28]   shortcycle: done: 0 shortcycle orders
+[07-03 22:26:30]   favorites: favorites: 3 favorites in zone | realized $+0.00 | today spent $0.93/2.00
+[07-03 22:26:30]   favorites: LIVE  KXETHD-26JUL0401-T1759.99: FAV NO x1 @ 93c cost=$0.93 order=3d17a543-9cf7-48c7-8bed-7a483d60266d
+[07-03 22:26:30]   favorites: done: 1 favorite orders
+[07-03 22:26:32]   weather: weather: 0 priced buckets | spent $1.13/1.00
+[07-03 22:26:32]   weather: done: 0 weather orders
+[07-03 22:26:32]   journal: journal written: realized today $-2.86, 17 settled, 25 fills
+[07-03 22:26:34]   report: wrote reports\report_2026-07-03.md
