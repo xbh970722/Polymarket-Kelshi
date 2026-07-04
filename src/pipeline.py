@@ -354,13 +354,35 @@ def cmd_favorites(_args) -> None:
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
         return
+    # Drawdown-step review cadence (user 2026-07-03): every -$3 of cumulative loss
+    # raises a review (Fable 5 adjusts strategy) but trading CONTINUES; only a hard
+    # stop at N steps truly disables. Steps are tracked so each band fires once.
+    import json
+    import os
     realized = ledger.realized_by_title("favorite")
-    if realized <= -fc.get("kill_switch_usd", 1.5):
-        import json
+    step = fc.get("drawdown_step_usd", 3.0)
+    hard_steps = fc.get("hard_stop_steps", 5)
+    cur_step = int((-realized) // step) if realized < 0 else 0
+    fav_state_path = "data/fav_review_state.json"
+    fav_state = {"steps_reviewed": 0}
+    if os.path.exists(fav_state_path):
+        try:
+            fav_state = json.load(open(fav_state_path, encoding="utf-8"))
+        except Exception:
+            pass
+    if cur_step > fav_state.get("steps_reviewed", 0):
         json.dump({"triggered_ts": dt.datetime.now().isoformat(timespec="seconds"),
-                   "reason": f"favorites kill switch: realized ${realized:.2f}"},
+                   "lane": "favorites", "step": cur_step, "realized": realized,
+                   "reason": f"favorites drawdown step {cur_step} (${realized:.2f}) -> "
+                             f"review & ADJUST strategy, then continue trading"},
                   open("data/review_due.json", "w", encoding="utf-8"))
-        print(f"KILL SWITCH: favorites realized ${realized:.2f} -> lane disabled, review raised")
+        fav_state["steps_reviewed"] = cur_step
+        json.dump(fav_state, open(fav_state_path, "w", encoding="utf-8"))
+        print(f"DRAWDOWN REVIEW: favorites ${realized:.2f} (step {cur_step}) -> "
+              f"review raised, TRADING CONTINUES")
+    if cur_step >= hard_steps:
+        print(f"HARD STOP: favorites ${realized:.2f} ({cur_step} steps >= {hard_steps}) "
+              f"-> lane paused pending user")
         return
     lo, hi = fc.get("zone", [0.85, 0.95])
     twmin, twmax = fc.get("tau_window_min", [10, 90])

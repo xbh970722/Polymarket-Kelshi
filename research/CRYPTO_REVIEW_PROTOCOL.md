@@ -22,6 +22,21 @@
    "ts": <ISO时间>, "review_no": N}; 删除 data/review_due.json。
 6. **归档**: git add -A && git commit -m "crypto review #N: <一句话裁决>" && git push。
 
+## 通道分流 (读 review_due.json 的 "lane" 字段)
+
+- `lane` 缺省或非 favorites → **短周期策略复盘** (原六步, 针对 shortcycle/15m)。
+- `lane == "favorites"` → **热门收割回撤复盘** (2026-07-03 用户设定的节拍器):
+  1. 拉 data/ledger.db 中 title LIKE 'favorite%' 的全部结算交易, 算命中率、
+     平均买入价、亏损集中在哪个价带/币种/方向。
+  2. 对照假设: favorite-longshot bias 是否在 Kalshi crypto 成立?亏损是"热门真不便宜"
+     还是"价带选错/单侧押注/踏空集中"?查 data/market_calibration.db 的热门桶最新偏差。
+  3. **调整并继续** (不是停用): 三选一 —— 收窄价带 (如 [0.85,0.95]→[0.88,0.93])、
+     调方向中性平衡、降单笔/日预算; 在 config.yaml `favorites:` 实施。**继续下单是默认。**
+  4. 记账: data/fav_review_state.json 已由通道写入 steps_reviewed; 你只需在
+     SHORTCYCLE_DESIGN.md 追加 "Favorites Review #N: 数据→诊断→调整"。
+  5. 删 review_due.json, commit+push。
+  - 仅当 hard_stop_steps ($15) 触及时才建议真正停用, 并 PushNotification 用户。
+
 ## 权限边界 (硬约束)
 
 - 复盘**可以**: 调整策略参数/门槛/规则、收紧预算、停用某 series、废除通道。
