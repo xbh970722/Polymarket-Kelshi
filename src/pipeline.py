@@ -591,6 +591,18 @@ def cmd_journal(_args) -> None:
           f"{len(settled_today)} settled, {len(fills_today)} fills")
 
 
+def cmd_mktsnap(_args) -> None:
+    """Zero-cost calibration sampling of soon-to-settle crypto markets (H5)."""
+    from .mktcal import snapshot
+    added, resolved = snapshot()
+    print(f"mktsnap: {added} quotes recorded, {resolved} outcomes resolved")
+
+
+def cmd_mktcal(_args) -> None:
+    from .mktcal import report
+    print(report())
+
+
 def cmd_status(_args) -> None:
     out = {**ledger.stats(), **ledger.calibration(),
            "pending_live_orders": len(ledger.pending_trades())}
@@ -687,6 +699,8 @@ def main() -> None:
     sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
     sub.add_parser("weather").set_defaults(fn=cmd_weather)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
+    sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
+    sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)

@@ -137,6 +137,7 @@ def main() -> None:
             time.sleep(wait)
         out = run_cmd("settle")
         check_review_trigger()
+        run_cmd("mktsnap")          # zero-cost calibration sampling (H5, never trades)
         out += run_cmd("shortcycle")
         out += run_cmd("weather")
         if nxt.minute == 20:
