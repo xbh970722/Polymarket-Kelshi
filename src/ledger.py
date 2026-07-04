@@ -165,6 +165,15 @@ def spent_today(prefixes: tuple, mode: str = "live") -> float:
     return round(sum(r["cost_usd"] for r in rows if r["ticker"].startswith(prefixes)), 2)
 
 
+def realized_by_title(prefix: str) -> float:
+    """Cumulative realized P&L of live trades whose title starts with prefix (lane tag)."""
+    with _conn() as c:
+        r = c.execute("SELECT COALESCE(SUM(pnl_usd),0) FROM trades WHERE mode='live' "
+                      "AND status IN ('settled','closed') AND title LIKE ? || '%'",
+                      (prefix,)).fetchone()
+    return round(r[0], 2)
+
+
 def swing_summary() -> dict:
     with _conn() as c:
         r = c.execute("SELECT COUNT(*) n, COALESCE(SUM(pnl_usd),0) pnl "

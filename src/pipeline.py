@@ -19,7 +19,7 @@ from pathlib import Path
 import yaml
 
 from . import engine, ledger
-from .kalshi_client import KalshiPublic, taker_fee_usd
+from .kalshi_client import KalshiPublic, normalize_market, taker_fee_usd
 from .scanner import scan
 
 REPORTS = Path("reports")
@@ -333,6 +333,102 @@ def cmd_shortcycle(_args) -> None:
               f"cost=${cost:.2f} q_model={c['q_model']:.2f} vs mkt={c['mid']:.2f} "
               f"tau={c['tau_min']}m order={order_id}")
     print(f"done: {placed} shortcycle orders")
+
+
+def cmd_favorites(_args) -> None:
+    """Favorite-harvest lane: buy the favorite side (yes OR no) in the price zone,
+    direction-neutral so a single-direction move can't systematically help/hurt.
+    Bets the documented favorite-longshot bias, not a per-market model edge."""
+    cfg = load_config()
+    fc = cfg.get("favorites", {})
+    if not fc.get("enabled"):
+        print("favorites lane disabled")
+        return
+    if not live_active(cfg):
+        print("favorites requires live mode")
+        return
+    from .live import KalshiLive, LiveAuthError
+    try:
+        client = KalshiLive()
+        balance = float(client.balance().get("balance_dollars") or 0)
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    realized = ledger.realized_by_title("favorite")
+    if realized <= -fc.get("kill_switch_usd", 1.5):
+        import json
+        json.dump({"triggered_ts": dt.datetime.now().isoformat(timespec="seconds"),
+                   "reason": f"favorites kill switch: realized ${realized:.2f}"},
+                  open("data/review_due.json", "w", encoding="utf-8"))
+        print(f"KILL SWITCH: favorites realized ${realized:.2f} -> lane disabled, review raised")
+        return
+    lo, hi = fc.get("zone", [0.85, 0.95])
+    twmin, twmax = fc.get("tau_window_min", [10, 90])
+    today = dt.date.today().isoformat()
+    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
+                if t["mode"] == "live" and (t["title"] or "").startswith("favorite")
+                and t["ts"].startswith(today))
+    n_open = sum(1 for t in ledger.open_trades() if (t["title"] or "").startswith("favorite"))
+    api = KalshiPublic()
+    now = dt.datetime.now(dt.timezone.utc)
+    cands = []
+    for series in fc["series"]:
+        try:
+            page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        except Exception:
+            continue
+        for mr in page.get("markets", []):
+            m = normalize_market(mr)
+            if m["status"] != "active" or not m["close_time"]:
+                continue
+            close = dt.datetime.fromisoformat(m["close_time"].replace("Z", "+00:00"))
+            tau = (close - now).total_seconds() / 60
+            if not (twmin <= tau <= twmax):
+                continue
+            if not (m["yes_bid"] > 0 and 0.01 <= m["yes_ask"] <= 0.99):
+                continue
+            fav_side = "yes" if (m["yes_bid"] + m["yes_ask"]) / 2 >= 0.5 else "no"
+            fav_ask = m["yes_ask"] if fav_side == "yes" else m["no_ask"]
+            if lo <= fav_ask <= hi:
+                cands.append((series, m, fav_side, fav_ask))
+    print(f"favorites: {len(cands)} favorites in zone | realized ${realized:+.2f} | "
+          f"today spent ${spent:.2f}/{fc['daily_budget_usd']:.2f}")
+    placed = 0
+    for series, m, side, ask in sorted(cands, key=lambda x: x[3]):    # cheapest favorite = most room
+        if spent >= fc["daily_budget_usd"] or n_open >= fc.get("max_open", 3):
+            break
+        if ledger.has_open_position(m["ticker"], "live"):
+            continue
+        window = m["ticker"].rsplit("-", 1)[0]
+        if any(t["ticker"].startswith(window) for t in ledger.open_trades() if t["mode"] == "live"):
+            continue
+        # bet the structural bias, not a model edge -> pass edge check trivially
+        try:
+            n, px, fee, oid = _decisive_ioc(client, api, m["ticker"], side,
+                                            fc.get("max_contracts", 1),
+                                            1.0 if side == "yes" else 0.0, -1.0, 0.01)
+        except Exception as e:
+            print(f"FAILED {m['ticker']}: {e}")
+            continue
+        if n < 1:
+            continue
+        cost = round(n * px + fee, 2)
+        tid = ledger.insert_trade(
+            mode="live", ticker=m["ticker"], title=f"favorite {series}",
+            side=side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
+            q_claude=round(px, 4), q_codex=round(px, 4), q_consensus=round(px, 4),
+            market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4), edge_net=0.0,
+            rationale=f"favorite-harvest {side} @ {px*100:.0f}c (direction-neutral bias bet)",
+            status="open")
+        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+        ledger.mark_placed(tid, oid)
+        spent += cost
+        n_open += 1
+        placed += 1
+        print(f"LIVE  {m['ticker']}: FAV {side.upper()} x{n} @ {px*100:.0f}c cost=${cost:.2f} "
+              f"order={oid}")
+    print(f"done: {placed} favorite orders")
 
 
 def cmd_weather(_args) -> None:
@@ -698,6 +794,7 @@ def main() -> None:
     sub.add_parser("manage").set_defaults(fn=cmd_manage)
     sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
     sub.add_parser("weather").set_defaults(fn=cmd_weather)
+    sub.add_parser("favorites").set_defaults(fn=cmd_favorites)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)

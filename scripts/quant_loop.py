@@ -132,6 +132,7 @@ def main() -> None:
         check_review_trigger()
         run_cmd("mktsnap")          # zero-cost calibration sampling (H5, never trades)
         out += run_cmd("shortcycle")
+        out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("weather")
         if nxt.minute == 20:
             out += run_cmd("manage")

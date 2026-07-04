@@ -148,6 +148,21 @@ crypto_review:
   cooldown_hours: 2              # 复盘冷却, 防连环触发
   reviewer_model: claude-fable-5 # 总领复盘的模型 (用户点名 Fable 5)
 
+# ---------- 热门收割通道 (2026-07-03 用户: 现在就用真钱低额开) ----------
+# 收割 favorite-longshot bias: 买"热门那一侧"(不管YES/NO), 方向中性防单边污染。
+# 数据仅43样本尚未证实, 用户明示先小额实战; 亏损触发自动复盘/熔断。
+favorites:
+  enabled: true
+  series: [KXBTCD, KXETHD]        # 先只做流动性最好的 BTC/ETH 小时
+  zone: [0.85, 0.95]             # 热门侧卖价落在此带才买 (>0.95 一次踏空即灾难, 排除)
+  tau_window_min: [10, 90]
+  max_contracts: 1               # 每笔仅 1 张 (热门≈0.9美元/张, 这已是最小单位)
+  max_per_trade_usd: 1.00
+  daily_budget_usd: 2.00         # 每天最多约 2 个热门
+  max_open: 3
+  max_per_window: 1
+  kill_switch_usd: 1.50          # 累计已实现 ≤ −$1.5 → 自动停用本通道 + 触发复盘
+
 # ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
 weather:
   enabled: true

@@ -1,6 +1,8 @@
 __pycache__/
 *.pyc
 .venv/
+NUL
+review_session.log
 # 密钥防线: 任何私钥/凭据文件永不进版本控制 (真正的钥匙存在 D:\kalshi-secrets\, 仓库外)
 *.pem
 *.key
