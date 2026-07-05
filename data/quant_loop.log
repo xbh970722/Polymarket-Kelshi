@@ -3115,3 +3115,21 @@
 [07-05 01:05:31]   weather: done: 0 weather orders
 [07-05 01:05:34]   disloc: DISLOC KXXRPD-26JUL1017-T1.2999: fav 0.94->0.85 ask 0.99 [BOOK-ONLY] tau 8034m
 [07-05 01:05:34]   disloc: disloc: +1 events, 0 settled | disloc shadow: 0 settled (1 pending)
+[07-05 01:11:21]   settle: SETTLED KXBTCD-26JUL0503-T62799.99: result=no WIN pnl=$+0.39
+[07-05 01:11:21]   settle: SETTLED KXSOLD-26JUL0503-T79.9999: result=yes WIN pnl=$+0.19
+[07-05 01:11:21]   settle: SETTLED KXETHD-26JUL0503-T1769.99: result=no WIN pnl=$+0.20
+[07-05 01:11:21]   settle: done: 3 settled, 5 still open
+[07-05 01:11:23]   mktsnap: mktsnap: 3 quotes recorded, 7 outcomes resolved
+[07-05 01:11:27]   shortcycle: shortcycle: 7 candidate strikes | balance $18.92 | today spent $0.00/999999.00
+[07-05 01:11:27]   shortcycle: LIVE  KXXRPD-26JUL0504-T1.1399: NO x1 @ 84.0c cost=$0.85 q_model=0.06 vs mkt=0.17 tau=48.6m order=558f9e9f-dfec-485d-9642-6b8195f2a72b
+[07-05 01:11:27]   shortcycle: PASS  KXBTCD-26JUL0504-T62899.99: edge below bar at crossed price 0.960
+[07-05 01:11:27]   shortcycle: done: 1 shortcycle orders
+[07-05 01:11:29]   favorites: favorites: 3 favorites in zone | realized $+3.57 | today spent $8.11/999999.00
+[07-05 01:11:29]   favorites: LIVE  KXBTCD-26JUL0504-T62799.99: FAV NO x3 @ 81c cost=$2.46 order=467e0f32-b6de-4049-bcbc-6a49f83971f5
+[07-05 01:11:29]   favorites: done: 1 favorite orders
+[07-05 01:11:30]   h10: h10: 0 in-window | h10 shadow: n=2 mean net +9.0c/contract total $+0.18 | KXETH15M: n=1 net $+0.09 | KXSOL15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 01:11:31]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 01:11:31]   weather: done: 0 weather orders
+[07-05 01:11:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (1 pending)
+[07-05 01:11:34]   journal: journal written: realized today $+1.92, 7 settled, 7 fills
+[07-05 01:11:35]   report: wrote reports\report_2026-07-05.md
