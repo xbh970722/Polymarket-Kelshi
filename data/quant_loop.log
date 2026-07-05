@@ -2708,3 +2708,20 @@
 [07-05 16:05:50]   pmwatch: pmwatch: +52 pairs | pmwatch: 1218 rows, 387 kalshi-matched | |divergence| median 5.0c, p90 19.0c (gate n>=300)
 [07-05 16:05:51]   journal: journal written: realized today $-0.17, 64 settled, 65 fills
 [07-05 16:05:52]   report: wrote reports\report_2026-07-05.md
+[07-05 16:06:27] committed + pushed
+[07-05 16:08:21]   h15: done: h15 pass complete
+[07-05 16:08:21]   h10: h10: 0 in-window | h10 shadow(main): n=48 mean -7.0c total $-3.36 | KXETH15M: n=15 net $+0.37 | KXSOL15M: n=16 net $-3.49 | KXBTC15M: n=17 net $-0.24 | gate: accumulating (0 pending) || H13 final6: n=10 win 10/10 net $+0.31 gate: accumulating
+[07-05 16:11:21]   settle: done: 0 settled, 8 still open
+[07-05 16:11:22]   h15: done: h15 pass complete
+[07-05 16:11:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 16:11:27]   shortcycle: shortcycle: 15 candidate strikes | balance $9.12 | today spent $2.26/999999.00
+[07-05 16:11:27]   shortcycle: done: 0 shortcycle orders
+[07-05 16:11:29]   favorites: favorites: 5 favorites in zone | realized $+0.52 | today spent $71.64/999999.00
+[07-05 16:11:29]   favorites: LIVE  KXXRPD-26JUL0519-T1.1399: FAV YES x1 @ 88c cost=$0.89 order=7e8238f6-e809-4563-b60e-383a8f23158c
+[07-05 16:11:29]   favorites: done: 1 favorite orders
+[07-05 16:11:30]   h10: h10: 0 in-window | h10 shadow(main): n=48 mean -7.0c total $-3.36 | KXETH15M: n=15 net $+0.37 | KXSOL15M: n=16 net $-3.49 | KXBTC15M: n=17 net $-0.24 | gate: accumulating (0 pending) || H13 final6: n=10 win 10/10 net $+0.31 gate: accumulating
+[07-05 16:11:31]   weather: weather: daily entry cap reached (3)
+[07-05 16:11:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=17 win 65% EV -11.3c | BOOK-ONLY: n=14 win 64% EV -9.7c | SPOT-MOVE: n=7 win 71% EV +8.3c | gate: accumulating (33 pending)
+[07-05 16:11:44]   pmwatch: pmwatch: +53 pairs | pmwatch: 1230 rows, 391 kalshi-matched | |divergence| median 5.0c, p90 19.5c (gate n>=300)
+[07-05 16:11:45]   journal: journal written: realized today $-0.17, 64 settled, 66 fills
+[07-05 16:11:46]   report: wrote reports\report_2026-07-05.md
