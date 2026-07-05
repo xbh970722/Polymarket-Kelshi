@@ -177,6 +177,7 @@ def cmd_manage(_args) -> None:
     api = KalshiPublic()
     now_iso = dt.datetime.now().isoformat(timespec="seconds")
     exited = flagged = held = 0
+    unreal_map: dict = {}          # R4-FABLE-B: live mark-to-market for the mtm halt
     for t in ledger.open_trades():
         if t.get("exit_type") is None:                 # backfill plan for legacy positions
             _assign_exit_plan(t["id"], t["side"], t["price"], t["q_consensus"] or 0, cfg)
@@ -187,6 +188,8 @@ def cmd_manage(_args) -> None:
             print(f"WARN  {t['ticker']}: {e}")
             continue
         exit_bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
+        if t["mode"] == "live":
+            unreal_map[t["id"]] = t["contracts"] * exit_bid - t["cost_usd"]
         action, px = engine.check_exit(t.get("target_price") or 0, t.get("stop_price") or 0, exit_bid)
         if action and px > 0:
             if t["mode"] == "live":            # real position -> real sell (reduce_only)
@@ -247,7 +250,9 @@ def cmd_manage(_args) -> None:
                                                      f"but split_close failed")
                     except Exception:
                         pass
+                    unreal_map.pop(t["id"], None)
                     continue
+                unreal_map.pop(t["id"], None)    # realized now; don't double-count
                 exited += 1
                 print(f"EXIT  {t['ticker']}: {action} sell x{filled}/{t['contracts']} "
                       f"@ {avg_px * 100:.0f}c")
@@ -265,7 +270,40 @@ def cmd_manage(_args) -> None:
                   f"mark {exit_bid * 100:.0f}c target {tgt:.0f}c -> ensemble re-judge hold/modify/exit")
         else:
             held += 1
+    try:                # hourly mark-to-market snapshot consumed by _mtm_halt
+        (Path("data") / "unrealized.json").write_text(json.dumps(
+            {"ts": dt.datetime.now().isoformat(timespec="seconds"),
+             "unrealized": round(sum(unreal_map.values()), 2),
+             "n": len(unreal_map)}), encoding="utf-8")
+    except Exception:
+        pass
     print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
+
+
+def _mtm_halt(cfg: dict) -> str | None:
+    """R4-FABLE-B HIGH: daily_loss_halt reads REALIZED pnl only — 8 correlated open
+    favorites (~$12) can blow past the $5 halt before anything settles. cmd_manage
+    writes an hourly mark-to-market snapshot; if realized + unrealized breaches the
+    halt, refuse to OPEN. Purely additive: uses the user's existing halt number,
+    touches no cap. Stale/missing snapshot falls back to realized-only (engine)."""
+    try:
+        p = Path("data") / "unrealized.json"
+        if not p.exists():
+            return None
+        snap = json.loads(p.read_text(encoding="utf-8"))
+        age_h = (dt.datetime.now()
+                 - dt.datetime.fromisoformat(snap["ts"])).total_seconds() / 3600
+        if age_h > 2:
+            return None
+        lv = cfg.get("live", {})
+        halt = lv.get("daily_loss_halt_usd") or cfg["risk"]["daily_loss_halt_usd"]
+        eq = ledger.stats("live")["realized_pnl_today"] + snap.get("unrealized", 0)
+        if eq <= -halt:
+            return (f"mark-to-market halt: realized+unrealized ${eq:+.2f} "
+                    f"<= -${halt:.2f} (open positions bleeding — stop opening)")
+    except Exception:
+        return None
+    return None
 
 
 def _live_risk_overlay(cfg: dict) -> dict:
@@ -399,6 +437,10 @@ def cmd_shortcycle(_args) -> None:
     extra = sc.get("budget_extra") or {}
     if extra.get("date") == dt.date.today().isoformat():
         budget += float(extra.get("usd", 0))          # self-expiring one-day top-up
+    mtm = _mtm_halt(cfg)           # R4-FABLE-B: equity halt, not just realized
+    if mtm:
+        print(f"VETO shortcycle lane: {mtm}")
+        return
     cands = candidates(cfg) + candidates_15m(cfg)
     print(f"shortcycle: {len(cands)} candidate strikes | balance ${balance:.2f} | "
           f"today spent ${spent:.2f}/{budget:.2f}")
@@ -586,6 +628,10 @@ def cmd_favorites(_args) -> None:
                 cands.append((series, m, fav_side, fav_ask))
     print(f"favorites: {len(cands)} favorites in zone | realized ${realized:+.2f} | "
           f"today spent ${spent:.2f}/{fc['daily_budget_usd']:.2f}")
+    mtm = _mtm_halt(cfg)           # R4-FABLE-B: 8 correlated favorites can outrun
+    if mtm:                        # the realized-only halt — check equity too
+        print(f"VETO favorites lane: {mtm}")
+        return
     # bug #13 fix (unified via _live_risk_overlay, CODEX-6): favorites obeys the
     # global live brakes; its own per-trade cap merges on top
     cfg_gl = _live_risk_overlay(cfg)
@@ -692,6 +738,10 @@ def cmd_weather(_args) -> None:
         balance = float(client.balance().get("balance_dollars") or 0)
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
+        return
+    mtm = _mtm_halt(cfg)           # R4-FABLE-B: equity halt, not just realized
+    if mtm:
+        print(f"VETO weather lane: {mtm}")
         return
     spent = ledger.spent_today_by_title("weather")   # OPUS-A HIGH fix (leak class)
     cands = candidates(cfg)
@@ -975,7 +1025,10 @@ def cmd_journal(_args) -> None:
              "## 分通道", ""]
     for lane in ("shortcycle", "favorites", "weather", "ensemble"):
         b = brier.get(lane)
-        cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
+        if lane == "favorites":    # R4-FABLE-B MED: q = entry price by construction
+            cal = "Brier: N/A (吃价通道, q≡价格非模型)"   # — a Brier here is meaningless
+        else:
+            cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
         lines.append(f"- **{lane}**: 今日已实现 ${realized[lane]:+.2f} | {cal}")
     lines += ["", "## 今日结算明细", ""]
     if settled_today:
@@ -1000,6 +1053,31 @@ def cmd_journal(_args) -> None:
         csv.write_text("".join(content) + row, encoding="utf-8")
     else:
         csv.write_text(header + row, encoding="utf-8")
+
+    # R4-FABLE-B LOW: dated config-regime snapshot — same-day knob churn (zone
+    # 0.85->0.86->0.84, budget $15->∞ within hours) makes attribution impossible
+    # without a record of WHICH regime each sample traded under.
+    try:
+        fav = cfg.get("favorites", {})
+        reg = REPORTS / "config_regimes.csv"
+        hdr = ("date,fav_zone,fav_budget,sc_budget,wx_budget,live_per_trade,"
+               "live_daily_risk,live_exposure,live_halt,fav_max_open\n")
+        rrow = (f"{today},\"{fav.get('zone')}\",{fav.get('daily_budget_usd')},"
+                f"{cfg.get('shortcycle', {}).get('daily_budget_usd')},"
+                f"{cfg.get('weather', {}).get('daily_budget_usd')},"
+                f"{cfg.get('live', {}).get('max_per_trade_usd')},"
+                f"{cfg.get('live', {}).get('max_daily_risk_usd')},"
+                f"{cfg.get('live', {}).get('max_total_exposure_usd')},"
+                f"{cfg.get('live', {}).get('daily_loss_halt_usd')},"
+                f"{fav.get('max_open')}\n")
+        if reg.exists():
+            keep = [l for l in reg.read_text(encoding="utf-8").splitlines(True)
+                    if not l.startswith(today)]
+            reg.write_text("".join(keep) + rrow, encoding="utf-8")
+        else:
+            reg.write_text(hdr + rrow, encoding="utf-8")
+    except Exception:
+        pass
     try:
         ledger.checkpoint()     # R3-CODEX-2 HIGH: fold WAL into ledger.db before the
     except Exception:           # loop's git add — the pushed backup must be current
@@ -1253,6 +1331,10 @@ def cmd_execute_live(args) -> None:
         rows = [t for t in rows if t["id"] == args.id]
     ok = failed = 0
     cfg_x = _live_risk_overlay(cfg)
+    mtm = _mtm_halt(cfg)           # R4-FABLE-B: equity halt covers this path too
+    if mtm and rows:
+        print(f"VETO execute-live: {mtm} ({len(rows)} pending stay pending)")
+        rows = []
     for t in rows:
         # R3-CODEX-6 HIGH fix: a pending decision may be STALE — resident lanes can
         # spend the cap room between decide and execute. Re-check caps now. The

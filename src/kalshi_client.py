@@ -98,8 +98,9 @@ class KalshiPublic:
     def market_norm(self, ticker: str) -> dict:
         return normalize_market(self.market(ticker))
 
-    def orderbook(self, ticker: str, depth: int = 8) -> dict:
-        return self._get(f"/markets/{ticker}/orderbook", depth=depth)["orderbook"]
+    # (orderbook() deleted 2026-07-04 R4-FABLE-B: parsed a pre-2026 response shape
+    #  (KeyError live), zero callers — re-add against the current API when H9 needs
+    #  book depth.)
 
 
 def taker_fee_usd(price: float, contracts: float) -> float:

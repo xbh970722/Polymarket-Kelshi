@@ -158,6 +158,15 @@ def settle() -> int:
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     done = 0
     with _conn() as c:
+        # R4-FABLE-B HIGH: enrollments whose session died before recording an
+        # estimate (ai_yes NULL, market closed) are permanently unscoreable —
+        # reap them loudly instead of letting the experiment rot silently.
+        reaped = c.execute(
+            "UPDATE calls SET result='abandoned' WHERE result IS NULL "
+            "AND ai_yes IS NULL AND close_time < ?", (now,)).rowcount
+        if reaped:
+            print(f"blind-AI WARN: {reaped} enrollment(s) abandoned (session died "
+                  f"before estimate) — check the scheduled task if this recurs")
         pend = [r["ticker"] for r in c.execute(
             "SELECT ticker FROM calls WHERE result IS NULL AND ai_yes IS NOT NULL "
             "AND close_time < ?", (now,))]

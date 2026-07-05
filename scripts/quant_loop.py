@@ -88,6 +88,26 @@ def acquire_lock() -> bool:
             return False
 
 
+_TREE_MODULES = ["src/pipeline.py", "src/ledger.py", "src/live.py", "src/engine.py",
+                 "src/shortcycle.py", "src/weather.py", "src/kalshi_client.py"]
+
+
+def tree_healthy() -> bool:
+    """R4-FABLE-B MED: the loop hot-loads the working tree every mark — a
+    half-saved edit must skip the mark LOUDLY, not fail every lane quietly."""
+    try:
+        r = subprocess.run([sys.executable, "-m", "py_compile", *_TREE_MODULES],
+                           capture_output=True, text=True, timeout=60, cwd=ROOT)
+        if r.returncode != 0:
+            log(f"CRITICAL: working tree does not compile - SKIPPING mark "
+                f"({(r.stderr or '')[:200]})")
+            return False
+        return True
+    except Exception as e:
+        log(f"tree health check errored ({e}) - proceeding")
+        return True
+
+
 def run_cmd(*args: str) -> str:
     try:
         r = subprocess.run([sys.executable, "-m", "src.pipeline", *args],
@@ -252,8 +272,9 @@ def main() -> None:
             minute=MARKS[0], second=20, microsecond=0)
         wait = (nxt - now).total_seconds()
         if wait > 0:
-            import time
             time.sleep(wait)
+        if not tree_healthy():     # R4-FABLE-B: never trade a broken working tree
+            continue
         out = run_cmd("settle")
         check_review_trigger()
         run_cmd("mktsnap")          # zero-cost calibration sampling (H5, never trades)
