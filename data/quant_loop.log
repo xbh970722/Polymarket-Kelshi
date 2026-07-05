@@ -4468,3 +4468,9 @@
 [07-05 09:05:51]   wxfade: wxfade: +1 logged, 0 settled | wxfade shadow: 0 settled (31 pending)
 [07-05 09:05:53]   journal: journal written: realized today $-2.37, 39 settled, 40 fills
 [07-05 09:05:54]   report: wrote reports\report_2026-07-05.md
+[07-05 09:05:56] committed + pushed
+[07-05 09:08:21]   h15: H15 FILLED KXETH15M-26JUL051115-15: YES x1 @ 84c (maker, queue win)
+[07-05 09:08:22]   h10: h10: 1 in-window | h10 shadow(main): n=27 mean +2.2c total $+0.60 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=11 net $-1.06 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (3 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 09:08:22]   h10: H10 STOP KXSOL15M: 2 consecutive losses -> shadow-only (delete data/h10_stop_KXSOL15M.json to re-arm)
+[07-05 09:08:22]   h10: done: 0 h10 orders
+[07-05 09:08:24]   journal: journal written: realized today $-2.37, 39 settled, 40 fills
