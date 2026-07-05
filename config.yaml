@@ -172,7 +172,7 @@ favorites:
   max_contracts: 2               # 2026-07-04 用户: 稍增单笔金额 (原1); 单笔亏损上限≈$1.8
   max_per_trade_usd: 2.00        # 原1.00
   daily_budget_usd: 4.00         # 2026-07-04 提速: 每天更多热门 (原2.00)
-  max_open: 5                    # 原3
+  max_open: 8                    # 2026-07-04 用户"123": 5→8 (4币时段打满; 全局$5熔断兜底)
   max_per_window: 1
   # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
   # 每亏 $3 触发一次复盘 -> Fable5 调策略 -> 继续下单 -> 再亏 $3 再复盘, 循环。
@@ -187,8 +187,8 @@ weather:
   min_edge_after_fees: 0.05      # 预报基差风险真实存在, 门槛比 crypto 高
   max_per_trade_usd: 0.50
   max_contracts: 3
-  max_trades_per_city_per_day: 1
-  daily_budget_usd: 1.00
+  max_trades_per_city_per_day: 2   # 2026-07-04 用户"123": 上午预报单+午后锁定单
+  daily_budget_usd: 2.00           # 城市×2 后配套翻倍
 
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30
