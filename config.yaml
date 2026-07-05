@@ -106,7 +106,8 @@ live:
                                  # 注意这是"当日累计投放"闸, 不是亏损闸 — 亏损闸保留在下方 $5
   max_total_exposure_usd: 12     # 原8; 余额$3.5时非约束, 充值后才生效
   max_open_positions: 16         # 2026-07-03 用户指令: +10 (原6); 美元上限不变
-  daily_loss_halt_usd: 5         # 日亏 $5 熔断 (账户一半)
+  daily_loss_halt_usd: 8         # 2026-07-04 深夜用户指令: 5→8 (预算解除后放宽刹车;
+                                 # 同一数字同时约束已实现亏损与 已实现+浮亏 的 mtm 熔断)
   # API key 配置 (环境变量, 不进 git):
   #   KALSHI_API_KEY_ID=<key id>
   #   KALSHI_PRIVATE_KEY_PATH=<RSA 私钥 .pem 路径>
