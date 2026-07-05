@@ -55,7 +55,7 @@ results["极确档: 边际不足→拒绝"] = "PASS" if c3 is None else f"FAIL: 
 # ---------- 4) cancel_order (live, zero-cost) ----------
 from src.live import KalshiLive
 from src.kalshi_client import KalshiPublic, normalize_market
-live = KalshiLive(); api = KalshiPublic()
+live = KalshiLive(demo=True); api = KalshiPublic()   # VALUES 5f: demo only
 placed = None
 for series in ("KXBTCD", "KXETHD"):
     page = api._get("/markets", series_ticker=series, status="open", limit=50)

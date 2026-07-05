@@ -16,7 +16,8 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import padding
 
 BASE = "https://api.elections.kalshi.com"
-API = "/trade-api/v2"
+DEMO_BASE = "https://demo-api.kalshi.co"     # paper-money environment (C1 verified
+API = "/trade-api/v2"                        # 2026-07-05); same auth scheme
 
 
 class LiveAuthError(RuntimeError):
@@ -26,22 +27,29 @@ class LiveAuthError(RuntimeError):
 _SECRETS_DIR = r"D:\kalshi-secrets"          # outside the repo; never committed
 
 
-def _load_credentials():
-    key_id = os.environ.get("KALSHI_API_KEY_ID")
-    key_path = os.environ.get("KALSHI_PRIVATE_KEY_PATH")
+def _load_credentials(demo: bool = False):
+    """Load (key_id, private_key). demo=True selects the DEMO environment's
+    credentials — separate account, separate key, fake money. VALUES 5f: all
+    test batteries / probes must run demo; prod keys are for the money paths."""
+    env_id = "KALSHI_DEMO_API_KEY_ID" if demo else "KALSHI_API_KEY_ID"
+    env_path = "KALSHI_DEMO_PRIVATE_KEY_PATH" if demo else "KALSHI_PRIVATE_KEY_PATH"
+    id_name = "demo_key_id.txt" if demo else "key_id.txt"
+    pem_name = "kalshi_demo.pem" if demo else "kalshi_test.pem"
+    key_id = os.environ.get(env_id)
+    key_path = os.environ.get(env_path)
     # file fallback so detached processes (quant loop, schedulers) work without env vars
     if not key_id:
-        id_file = os.path.join(_SECRETS_DIR, "key_id.txt")
+        id_file = os.path.join(_SECRETS_DIR, id_name)
         if os.path.exists(id_file):
             key_id = open(id_file).read().strip()
     if not key_path:
-        pem_default = os.path.join(_SECRETS_DIR, "kalshi_test.pem")
+        pem_default = os.path.join(_SECRETS_DIR, pem_name)
         if os.path.exists(pem_default):
             key_path = pem_default
     if not key_id or not key_path:
         raise LiveAuthError(
-            "credentials not found: set KALSHI_API_KEY_ID / KALSHI_PRIVATE_KEY_PATH "
-            "or place key_id.txt + kalshi_test.pem in D:\\kalshi-secrets\\ "
+            f"credentials not found: set {env_id} / {env_path} "
+            f"or place {id_name} + {pem_name} in D:\\kalshi-secrets\\ "
             "(see README '真钱交易配置').")
     if not os.path.exists(key_path):
         raise LiveAuthError(f"private key file not found: {key_path}")
@@ -51,8 +59,10 @@ def _load_credentials():
 
 
 class KalshiLive:
-    def __init__(self, timeout: int = 20):
-        self.key_id, self.pk = _load_credentials()
+    def __init__(self, timeout: int = 20, demo: bool = False):
+        self.key_id, self.pk = _load_credentials(demo=demo)
+        self.demo = demo
+        self.base = DEMO_BASE if demo else BASE
         self.s = requests.Session()
         self.timeout = timeout
 
@@ -73,7 +83,7 @@ class KalshiLive:
         # signature covers the BARE path only — query params must go via `params`
         # (passing them inside `path` breaks the signature -> 401, found 2026-07-04)
         bare = path.split("?")[0]
-        r = self.s.request(method, BASE + bare, json=body, params=params,
+        r = self.s.request(method, self.base + bare, json=body, params=params,
                            headers=self._headers(method, bare), timeout=self.timeout)
         if r.status_code >= 400:
             raise RuntimeError(f"{method} {bare} -> HTTP {r.status_code}: {r.text[:400]}")

@@ -7,8 +7,9 @@ results = {}
 from src.live import KalshiLive, LiveAuthError
 from src.kalshi_client import KalshiPublic, normalize_market
 
-live = KalshiLive()
-api = KalshiPublic()
+live = KalshiLive(demo=True)   # VALUES 5f: batteries fire at the DEMO account.
+api = KalshiPublic()           # (F2 incident 2026-07-05: a probe on prod bought
+                               # $4.28 of real ETH. Never again.)
 bal0 = float(live.balance()["balance_dollars"])
 
 # ---- F1: order on an already-settled market -> exchange must reject cleanly ----

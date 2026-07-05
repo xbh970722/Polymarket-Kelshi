@@ -122,6 +122,11 @@
   用不可成交价问 (深度外限价), 不用可成交价问 — 后者不是测试, 是市价单。
 - **规则四: 测试脚本 = 实弹武器库。** tests/ 目录永远不进 pytest 收集
   (conftest.py collect_ignore), 只许单文件蓄意运行。
+- **规则五 (07-05 晚, demo key 到位后): 炮组只打靶场。** Kalshi demo 环境
+  (demo-api.kalshi.co, 假钱) 凭据存 D:\kalshi-secrets\{demo_key_id.txt,
+  kalshi_demo.pem}; KalshiLive(demo=True) 即切换。两个既有炮组已改指 demo;
+  今后一切实弹探针/炮组默认打 demo, 打生产必须逐次说明理由且只读。
+  生产/测试隔离从纪律升级为物理结构 — F2 类事故从此不可能。
 
 ## 6. 仓位风格
 
