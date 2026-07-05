@@ -314,6 +314,7 @@ def main() -> None:
         out += run_cmd("shortcycle")
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("h10")        # 15m shadow ledger + capped ETH probe (R6)
+        out += run_cmd("h15")        # 15m maker resting-bid lane (H15, ETH micro)
         out += run_cmd("weather")
         run_cmd("stopshadow")        # 0.70 stop-loss would-fire log (R6 shadow week)
         run_cmd("disloc")            # H12 dislocation shadow (smash-pit harvest)

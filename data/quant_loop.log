@@ -3178,3 +3178,46 @@
 [07-05 01:35:35]   disloc: disloc: +3 events, 0 settled | disloc shadow: 0 settled (5 pending)
 [07-05 01:35:36]   journal: journal written: realized today $+2.03, 8 settled, 8 fills
 [07-05 01:35:37]   report: wrote reports\report_2026-07-05.md
+[07-05 01:35:39] committed + pushed
+[07-05 01:41:21]   settle: done: 0 settled, 7 still open
+[07-05 01:41:22]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-05 01:41:27]   shortcycle: shortcycle: 5 candidate strikes | balance $13.80 | today spent $0.85/999999.00
+[07-05 01:41:27]   shortcycle: done: 0 shortcycle orders
+[07-05 01:41:29]   favorites: favorites: 1 favorites in zone | realized $+3.68 | today spent $13.37/999999.00
+[07-05 01:41:29]   favorites: done: 0 favorite orders
+[07-05 01:41:30]   h10: h10: 0 in-window | h10 shadow: n=2 mean net +9.0c/contract total $+0.18 | KXETH15M: n=1 net $+0.09 | KXSOL15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 3 unsettled)
+[07-05 01:41:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 01:41:30]   weather: done: 0 weather orders
+[07-05 01:41:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (5 pending)
+[07-05 01:50:21]   settle: done: 0 settled, 7 still open
+[07-05 01:50:22]   mktsnap: mktsnap: 9 quotes recorded, 3 outcomes resolved
+[07-05 01:50:26]   shortcycle: shortcycle: 0 candidate strikes | balance $13.80 | today spent $0.85/999999.00
+[07-05 01:50:26]   shortcycle: done: 0 shortcycle orders
+[07-05 01:50:28]   favorites: favorites: 0 favorites in zone | realized $+3.68 | today spent $13.37/999999.00
+[07-05 01:50:28]   favorites: done: 0 favorite orders
+[07-05 01:50:29]   h10: h10: 0 in-window | h10 shadow: n=5 mean net +8.5c/contract total $+0.42 | KXETH15M: n=2 net $+0.14 | KXSOL15M: n=2 net $+0.19 | KXBTC15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 01:50:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 01:50:30]   weather: done: 0 weather orders
+[07-05 01:50:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (5 pending)
+[07-05 01:50:34]   manage: done: 0 exited, 0 flagged for review, 7 holding
+[07-05 01:50:35]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 01:50:35]   reconcile: OK       KXBTCD-26JUL0504-T62799.99: -3
+[07-05 01:50:35]   reconcile: OK       KXETHD-26JUL0504-T1769.99: -3
+[07-05 01:50:35]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 01:50:35]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 01:50:35]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 01:50:35]   reconcile: OK       KXXRPD-26JUL0504-T1.1399: -1
+[07-05 01:50:35]   reconcile: CASH OK: balance $13.80 ~ expected $13.81 (drift $-0.01)
+[07-05 01:50:35]   reconcile: reconcile: 7 tickers, 0 mismatches — ACCOUNTING CLEAN
+[07-05 01:50:36]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: 0 settled (8 pending)
+[07-05 01:56:21]   settle: done: 0 settled, 7 still open
+[07-05 01:56:22]   mktsnap: mktsnap: 7 quotes recorded, 0 outcomes resolved
+[07-05 01:56:26]   shortcycle: shortcycle: 0 candidate strikes | balance $13.80 | today spent $0.85/999999.00
+[07-05 01:56:26]   shortcycle: done: 0 shortcycle orders
+[07-05 01:56:28]   favorites: favorites: 0 favorites in zone | realized $+3.68 | today spent $13.37/999999.00
+[07-05 01:56:28]   favorites: done: 0 favorite orders
+[07-05 01:56:29]   h10: h10: 0 in-window | h10 shadow: n=5 mean net +8.5c/contract total $+0.42 | KXETH15M: n=2 net $+0.14 | KXSOL15M: n=2 net $+0.19 | KXBTC15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 01:56:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 01:56:30]   weather: done: 0 weather orders
+[07-05 01:56:32]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (5 pending)
+[07-05 02:02:41] === quant_loop started pid=47004 ===

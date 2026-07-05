@@ -215,6 +215,23 @@ h10:
     series: [KXBTC15M]           # -> 收盘锁定收割影子。历史: 697窗口 0.94+ 带
     tau_window_min: [0.5, 6]     # 报价.991 实胜1.000; :11/:26/:41/:56 四个闲置
     zone: [0.94, 0.985]          # mark 正好落在 tau~4min。判据见 SHORTCYCLE_DESIGN
+
+# ---------- H15: 15m 挂单收割 (maker, 用户拍板 2026-07-05 "现在就建") ----------
+# 回测 (1600窗口/10天): 挂0.84 → 102成交/天, 胜率91.3%, +7.3c/张 (maker零费),
+# 最坏日全正。从"追逐转瞬即逝的ask"改为"守在bid上等恐慌盘撞进来"——H12 研究里
+# +17.1c 利润的真正主人就是这个位置; 天然免疫猎杀 (砸盘者砸进来的单 87.5% 是错的)。
+# 实盘微额的唯一使命: 测队列位置真相 (print打到价位 != 轮到我们成交)。
+h15:
+  enabled: true
+  series: [KXETH15M]             # ETH 优先 (回测 98.7% 胜率); SOL 待 ETH 数据后复议
+  bid: 0.84
+  place_tau_min: [4, 16]         # tau 在此区间且热门价高于挂单价时挂出
+  cancel_tau_min: 2              # 收盘前 2 分钟强制撤单 (回测同款纪律)
+  min_fav_mid: 0.86              # 热门中值须高于此才挂 (否则等于吃单越价)
+  max_contracts: 1
+  max_per_trade_usd: 1.00
+  drawdown_step_usd: 3.00        # 独立回撤记账 (title h15maker); 首步 -$3 硬停
+  hard_stop_steps: 1
   drawdown_step_usd: 3.00        # C5: 独立回撤记账 (title h10fav15m, 绝不与
   hard_stop_steps: 1             #     favorites 共用刹车); 首步 -$3 即硬停待复盘
 

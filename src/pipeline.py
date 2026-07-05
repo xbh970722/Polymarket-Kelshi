@@ -1134,6 +1134,218 @@ def cmd_disloc(_args) -> None:
     print(f"disloc: +{n} events, {settled} settled | {disloc.report()}")
 
 
+def cmd_h15(_args) -> None:
+    """H15 maker-mode 15m harvest (user 2026-07-05): REST a bid on the favorite
+    side and let panic flow fill us — the standing-bid seat that owns the H12
+    +17.1c class. Micro live: ETH only, 1 contract, maker fee zero. The live
+    mission is measuring QUEUE reality (a print at our level != our fill)."""
+    cfg = load_config()
+    h = cfg.get("h15", {})
+    if not h.get("enabled"):
+        print("h15 disabled")
+        return
+    if not live_active(cfg):
+        print("h15 requires live mode")
+        return
+    from .live import KalshiLive, LiveAuthError
+    try:
+        client = KalshiLive()
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    api = KalshiPublic()
+    now = dt.datetime.now(dt.timezone.utc)
+    # ---- 1. manage existing resting order(s): fill? pull? keep? ----
+    resting = [t for t in ledger.pending_trades()
+               if (t.get("title") or "").startswith("h15maker")]
+    for t in resting:
+        coid = (t.get("order_id") or "").strip()
+        exch_oid, o_status, fill_ct = "", "", 0.0
+        try:
+            for o in client.orders(ticker=t["ticker"]):
+                if coid and coid in (str(o.get("client_order_id") or ""),
+                                     str(o.get("order_id") or "")):
+                    exch_oid = str(o.get("order_id") or "")
+                    o_status = str(o.get("status") or "")
+                    fill_ct = float(o.get("fill_count_fp")
+                                    or o.get("fill_count") or 0)
+                    break
+        except Exception as e:
+            print(f"WARN h15 order lookup failed ({e}) — keep resting")
+            continue
+        tau = 0.0
+        try:
+            m = api.market_norm(t["ticker"])
+            if m["close_time"]:
+                close = dt.datetime.fromisoformat(
+                    m["close_time"].replace("Z", "+00:00"))
+                tau = (close - now).total_seconds() / 60
+        except Exception:
+            pass
+        if fill_ct >= 1:                       # -------- FILLED (maker) --------
+            n = int(round(fill_ct))
+            avg = t["price"]
+            try:                               # actual avg from fills by exch oid
+                fl = client.fills(ticker=t["ticker"], limit=100).get("fills") or []
+                mine = [f for f in fl
+                        if str(f.get("order_id") or "") == exch_oid]
+                cnt = sum(float(f.get("count_fp") or f.get("count") or 0)
+                          for f in mine)
+                if cnt:
+                    tot = 0.0
+                    for f in mine:
+                        ci = float(f.get("count_fp") or f.get("count") or 0)
+                        raw = (f.get("no_price_dollars") if t["side"] == "no"
+                               else f.get("yes_price_dollars"))
+                        if raw is not None:
+                            pi = float(raw)
+                        else:
+                            yp = float(f.get("yes_price") or 0)
+                            yp = yp / 100.0 if yp >= 1 else yp
+                            pi = 1 - yp if t["side"] == "no" else yp
+                        tot += ci * pi
+                    avg = round(tot / cnt, 4)
+            except Exception:
+                pass
+            try:
+                ledger.record_fill(t["id"], n, avg, round(n * avg, 2), 0.0,
+                                   exch_oid or coid)   # maker fee = 0
+                ledger.set_exit_plan(t["id"], "hold", 0.0, 0.0,
+                                     (dt.datetime.now() + dt.timedelta(days=1)
+                                      ).isoformat(timespec="seconds"))
+                print(f"H15 FILLED {t['ticker']}: {t['side'].upper()} x{n} "
+                      f"@ {avg * 100:.0f}c (maker, queue win)")
+            except Exception as e:
+                print(f"CRITICAL h15 {t['ticker']}: FILLED but ledger failed "
+                      f"({e}) — freezing #{t['id']}")
+                try:
+                    ledger.mark_unknown(t["id"], "h15 filled, record failed")
+                except Exception:
+                    pass
+            continue
+        if tau <= h.get("cancel_tau_min", 2) or o_status in (
+                "canceled", "cancelled", "expired"):
+            if exch_oid and o_status not in ("canceled", "cancelled", "expired"):
+                try:
+                    client.cancel_order(exch_oid)
+                except Exception as e:
+                    print(f"WARN h15 cancel failed ({e}) — TTL/resolver will own it")
+            ledger.void_trade(t["id"], f"h15 resting pulled (tau {tau:.1f}m, no fill)")
+            print(f"H15 PULLED {t['ticker']}: no fill, window closing "
+                  f"(queue data point)")
+            continue
+        print(f"H15 RESTING {t['ticker']}: bid {t['price'] * 100:.0f}c "
+              f"tau {tau:.1f}m")
+    if resting:
+        return                                  # one resting order at a time
+    # ---- 2. place a new resting bid ----
+    realized = ledger.realized_by_title("h15maker")
+    hard = h.get("drawdown_step_usd", 3.0) * h.get("hard_stop_steps", 1)
+    if realized <= -hard:
+        due = Path("data") / "review_due_h15maker.json"
+        if not due.exists():
+            try:
+                due.write_text(json.dumps(
+                    {"lane": "h15maker", "realized": round(realized, 2),
+                     "ts": dt.datetime.now().isoformat(timespec="seconds")}),
+                    encoding="utf-8")
+            except Exception:
+                pass
+        print(f"h15 HARD STOP: realized ${realized:+.2f} — paused pending review")
+        return
+    mtm = _mtm_halt(cfg)
+    if mtm:
+        print(f"VETO h15: {mtm}")
+        return
+    if any("15M" in t["ticker"].split("-")[0]
+           for t in ledger.active_trades("live")):
+        return                                  # one 15m position across ALL lanes
+    cfg_m = _live_risk_overlay(cfg)
+    cfg_m["risk"]["max_per_trade_usd"] = min(cfg_m["risk"]["max_per_trade_usd"],
+                                             h.get("max_per_trade_usd", 1.0))
+    bid = h.get("bid", 0.84)
+    tlo, thi = h.get("place_tau_min", [4, 16])
+    placed = False
+    for series in h.get("series") or []:
+        if placed:
+            break
+        try:
+            markets = api.open_markets(series)
+        except Exception as e:
+            print(f"WARN h15 {series}: fetch failed ({e})")
+            continue
+        for mr in markets:
+            m = normalize_market(mr)
+            if m["status"] != "active" or not m["close_time"]:
+                continue
+            close = dt.datetime.fromisoformat(
+                m["close_time"].replace("Z", "+00:00"))
+            tau = (close - now).total_seconds() / 60
+            if not (tlo < tau <= thi):
+                continue
+            if not (m["yes_bid"] > 0 and 0.01 <= m["yes_ask"] <= 0.99):
+                continue
+            mid = (m["yes_bid"] + m["yes_ask"]) / 2
+            side = "yes" if mid >= 0.5 else "no"
+            fav_mid = mid if side == "yes" else 1 - mid
+            if fav_mid < h.get("min_fav_mid", 0.86):
+                continue                        # must rest BELOW the market
+            if ledger.has_open_position(m["ticker"], "live"):
+                continue
+            est = round(bid + 0.01, 2)
+            veto = engine.check_risk(ledger.stats("live"), est, cfg_m)
+            if veto:
+                print(f"VETO  {m['ticker']}: {veto}")
+                break
+            coid = str(uuid.uuid4())
+            try:
+                tid = ledger.insert_trade(
+                    mode="live", ticker=m["ticker"],
+                    title=f"h15maker {series}", side=side, price=bid,
+                    contracts=1, cost_usd=est, fee_usd=0.0,
+                    q_claude=bid, q_codex=bid, q_consensus=bid,
+                    market_prob=round(fav_mid, 4), edge_net=0.0,
+                    rationale=f"h15 resting bid (maker), fav_mid {fav_mid:.2f} "
+                              f"tau {tau:.0f}m", status="pending", order_id=coid)
+            except Exception as e:
+                print(f"FAILED {m['ticker']}: intent write failed ({e})")
+                continue
+            try:
+                resp = client.place_limit(m["ticker"], side, 1, bid,
+                                          tif="good_till_canceled",
+                                          client_order_id=coid)
+            except RuntimeError as e:
+                st = _http_status(e)
+                if st is not None and 400 <= st < 500:
+                    ledger.void_trade(tid, f"GTC rejected: {str(e)[:80]}")
+                    print(f"REJECTED {m['ticker']}: {str(e)[:110]}")
+                else:
+                    ledger.mark_unknown(tid, f"GTC submit ambiguous: {str(e)[:90]}")
+                    print(f"CRITICAL {m['ticker']}: GTC outcome UNKNOWN — frozen")
+                placed = True                   # do not spray retries this mark
+                break
+            except Exception as e:
+                ledger.mark_unknown(tid, f"GTC submit ambiguous: "
+                                         f"{type(e).__name__} {str(e)[:70]}")
+                print(f"CRITICAL {m['ticker']}: GTC outcome UNKNOWN — frozen")
+                placed = True
+                break
+            fill_raw = float(resp.get("fill_count")
+                             or resp.get("fill_count_fp") or 0)
+            if fill_raw >= 1:                   # crossed immediately (rare)
+                n = int(round(fill_raw))
+                ledger.record_fill(tid, n, bid, round(n * bid, 2), 0.0,
+                                   str(resp.get("order_id") or coid))
+                print(f"H15 INSTANT FILL {m['ticker']}: x{n} @ {bid * 100:.0f}c")
+            else:
+                print(f"H15 RESTING placed {m['ticker']}: {side.upper()} bid "
+                      f"{bid * 100:.0f}c fav_mid {fav_mid:.2f} tau {tau:.0f}m "
+                      f"order={resp.get('order_id')}")
+            placed = True
+            break
+    print("done: h15 pass complete")
+
+
 def cmd_wxfade(_args) -> None:
     """W2 weather longshot-fade SHADOW (9-seat panel; $0.50 cap keeps it
     unbuyable live per user — this measures whether the print edge survives
@@ -1262,7 +1474,7 @@ def _lane_of(ticker: str, title: str = "") -> str:
     # title-first (OPUS-A note): favorites/shortcycle share tickers, only the
     # lane tag in the title distinguishes them
     t = title or ""
-    if t.startswith("h10fav15m"):
+    if t.startswith(("h10fav15m", "h15maker")):
         return "h10"
     if t.startswith("favorite"):
         return "favorites"
@@ -1796,6 +2008,7 @@ def main() -> None:
     sub.add_parser("weather").set_defaults(fn=cmd_weather)
     sub.add_parser("favorites").set_defaults(fn=cmd_favorites)
     sub.add_parser("h10").set_defaults(fn=cmd_h10)
+    sub.add_parser("h15").set_defaults(fn=cmd_h15)
     sub.add_parser("stopshadow").set_defaults(fn=cmd_stopshadow)
     sub.add_parser("wxfade").set_defaults(fn=cmd_wxfade)
     sub.add_parser("disloc").set_defaults(fn=cmd_disloc)
