@@ -3626,3 +3626,35 @@
 [07-05 04:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (0 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
 [07-05 04:02:21]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (0 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
 [07-05 04:05:21] === quant_loop started pid=31404 ===
+[07-05 04:08:21]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (0 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 04:11:21]   settle: SETTLED KXETHD-26JUL0506-T1769.99: result=no WIN pnl=$+0.39
+[07-05 04:11:21]   settle: SETTLED KXBTCD-26JUL0506-T62699.99: result=no LOSS pnl=$-2.69
+[07-05 04:11:21]   settle: SETTLED KXETH15M-26JUL050600-00: result=yes WIN pnl=$+0.14
+[07-05 04:11:21]   settle: done: 3 settled, 7 still open
+[07-05 04:11:22]   h15: done: h15 pass complete
+[07-05 04:11:24]   mktsnap: mktsnap: 3 quotes recorded, 14 outcomes resolved
+[07-05 04:11:28]   shortcycle: shortcycle: 9 candidate strikes | balance $10.64 | today spent $0.85/999999.00
+[07-05 04:11:28]   shortcycle: done: 0 shortcycle orders
+[07-05 04:11:30]   favorites: favorites: 3 favorites in zone | realized $+0.06 | today spent $25.63/999999.00
+[07-05 04:11:30]   favorites: LIVE  KXBTCD-26JUL0507-T62499.99: FAV YES x1 @ 89c cost=$0.90 order=b46a4385-89a9-44f4-a678-fce7a4886013
+[07-05 04:11:30]   favorites: done: 1 favorite orders
+[07-05 04:11:31]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (1 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 04:11:32]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 04:11:32]   weather: done: 0 weather orders
+[07-05 04:11:35]   disloc: disloc: +0 events, 5 settled | disloc shadow: AMBIGUOUS: n=5 win 20% EV -56.0c | BOOK-ONLY: n=2 win 0% EV -80.5c | SPOT-MOVE: n=4 win 50% EV -7.2c | gate: accumulating (7 pending)
+[07-05 04:11:44]   pmwatch: pmwatch: +44 pairs | pmwatch: 216 rows, 68 kalshi-matched | |divergence| median 4.0c, p90 17.3c (gate n>=300)
+[07-05 04:11:45]   manage: done: 0 exited, 0 flagged for review, 8 holding
+[07-05 04:11:46]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 04:11:46]   reconcile: OK       KXBTCD-26JUL0507-T62499.99: +1
+[07-05 04:11:46]   reconcile: MISMATCH KXETHD-26JUL0507-T1749.99: exchange=+5 ledger=+0  <- exchange has untracked position
+[07-05 04:11:46]   reconcile: OK       KXHIGHDEN-26JUL05-B93.5: -1
+[07-05 04:11:46]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 04:11:46]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 04:11:46]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 04:11:46]   reconcile: OK       KXHIGHPHIL-26JUL05-B91.5: -0
+[07-05 04:11:46]   reconcile: OK       KXXRPD-26JUL0506-T1.1399: -1
+[07-05 04:11:46]   reconcile: CASH MISMATCH: balance $9.74 vs expected $14.02 (drift $-4.27) — booking corruption or external deposit/withdrawal
+[07-05 04:11:46]   reconcile: reconcile: 9 tickers, 2 mismatches — INVESTIGATE
+[07-05 04:11:47]   wxfade: wxfade: +2 logged, 0 settled | wxfade shadow: 0 settled (12 pending)
+[07-05 04:11:48]   journal: journal written: realized today $-1.18, 18 settled, 19 fills
+[07-05 04:11:49]   report: wrote reports\report_2026-07-05.md
