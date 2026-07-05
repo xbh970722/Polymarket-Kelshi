@@ -1087,6 +1087,17 @@ def cmd_stopshadow(_args) -> None:
         print(f"stopshadow: {n} would-stop event(s) logged")
 
 
+def cmd_disloc(_args) -> None:
+    """H12 dislocation shadow: log book-only favorite smashes with the REAL
+    standing ask at detection (the pit a stop-hunter digs is the harvester's
+    meal — gate rules in SHORTCYCLE_DESIGN.md H12)."""
+    cfg = load_config()
+    from . import disloc
+    settled = disloc.settle()
+    n = disloc.scan(cfg)
+    print(f"disloc: +{n} events, {settled} settled | {disloc.report()}")
+
+
 def cmd_wxfade(_args) -> None:
     """W2 weather longshot-fade SHADOW (9-seat panel; $0.50 cap keeps it
     unbuyable live per user — this measures whether the print edge survives
@@ -1751,6 +1762,7 @@ def main() -> None:
     sub.add_parser("h10").set_defaults(fn=cmd_h10)
     sub.add_parser("stopshadow").set_defaults(fn=cmd_stopshadow)
     sub.add_parser("wxfade").set_defaults(fn=cmd_wxfade)
+    sub.add_parser("disloc").set_defaults(fn=cmd_disloc)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)
