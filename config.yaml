@@ -83,7 +83,8 @@ swing:
 
 risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
   max_per_trade_usd: 25
-  max_daily_risk_usd: 100
+  max_daily_risk_usd: 999999   # 2026-07-04 深夜用户指令: 预算不设上限 (原100;
+                               # 日投放闸全部解除, 风险由单笔/敞口/日亏熔断/余额兜底)
   max_total_exposure_usd: 300
   max_open_positions: 16           # 2026-07-03 用户指令: 仓位上限 +10 (原10)
   daily_loss_halt_usd: 200         # VALUES.md #1: 学费心态, 熔断放宽
@@ -101,7 +102,8 @@ live:
     max_family_divergence: 0.05  #   两家族终值分歧 ≤5 点
     require_all_estimators: true #   四个盲估者与市场价同方向 (需 research JSON 提供 q_all)
   live_min_edge_after_fees: 0.035  # 练手期与纸面同门槛, 攒真实成交经验; 正式期回 0.05
-  max_daily_risk_usd: 6          # 2026-07-04 用户提量 (原4); 实余额才是真上限
+  max_daily_risk_usd: 999999     # 2026-07-04 深夜用户指令: 预算不设上限 (原6);
+                                 # 注意这是"当日累计投放"闸, 不是亏损闸 — 亏损闸保留在下方 $5
   max_total_exposure_usd: 12     # 原8; 余额$3.5时非约束, 充值后才生效
   max_open_positions: 16         # 2026-07-03 用户指令: +10 (原6); 美元上限不变
   daily_loss_halt_usd: 5         # 日亏 $5 熔断 (账户一半)
@@ -140,7 +142,7 @@ shortcycle:
   slippage: 0.01                 # 果断化: 允许越价 1c 吃单 (越价后仍须过门槛)
   max_per_trade_usd: 1.00        # 2026-07-04 提量 (原0.50)
   max_contracts: 5               # 原3
-  daily_budget_usd: 4.00         # 2026-07-04 提速 (原2.00)
+  daily_budget_usd: 999999       # 2026-07-04 深夜用户指令: 预算不设上限 (原4.00)
   budget_extra:                  # 一次性追加预算 (自动过期): 旧策略烧超后, 给新策略的当日弹药
     date: "2026-07-03"
     usd: 2.00                    # 用户: "新策略给2刀"
@@ -177,9 +179,9 @@ favorites:
     KXBTCD: 3
     KXETHD: 3
   max_per_trade_usd: 3.00        # 3张×~94c 上限配套 (原2.00)
-  daily_budget_usd: 15.00        # 2026-07-05 评审团修正: 预算改为诚实的"每日总投放"口径
-                                 # (旧$4靠结算回填漏洞实现~$50/天流转; 现按真实口径设$15,
-                                 # 约今日实际节奏, 由$5日亏熔断+$12敞口兜风险)
+  daily_budget_usd: 999999       # 2026-07-04 深夜用户指令: 预算不设上限 (原$15 诚实口径,
+                                 # 只挡了半天)。风险兜底改为: 单笔$3 + 敞口$12 + 日亏$5熔断
+                                 # + $3回撤步复盘 + 余额本身; 复盘不得擅自恢复预算上限
   max_open: 8                    # 2026-07-04 用户"123": 5→8 (4币时段打满; 全局$5熔断兜底)
   # (R3-FABLE: max_per_window 旋钮已删 — 每窗口一仓由代码硬编码, 改这里没有效果)
   # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
@@ -196,7 +198,8 @@ weather:
   max_per_trade_usd: 0.50
   max_contracts: 3
   max_trades_per_city_per_day: 2   # 2026-07-04 用户"123": 上午预报单+午后锁定单
-  daily_budget_usd: 3.00           # 2026-07-05 评审团修正: 改诚实口径 (原$2按漏洞口径)
+  daily_budget_usd: 999999         # 2026-07-04 深夜用户指令: 预算不设上限 (原$3;
+                                   # 天气实际节流阀 = 2单/城/天 × 7城 × 单笔$0.50)
 
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30
