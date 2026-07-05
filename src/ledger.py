@@ -182,11 +182,18 @@ def swing_summary() -> dict:
 
 
 def calibration() -> dict:
-    """Brier scores answer: was the model actually better calibrated than the market?"""
+    """Brier scores answer: was the model actually better calibrated than the market?
+
+    Favorites-lane trades are EXCLUDED: they record q_consensus = fill price by
+    construction (structural-bias bet, no model estimate), so including them would
+    dilute the model-vs-market comparison toward zero and corrupt the Sept-1 goal
+    metric. Only trades with a genuine independent model probability count here.
+    """
     with _conn() as c:
         rows = c.execute(
             "SELECT q_consensus, market_prob, side, result, pnl_usd FROM trades "
-            "WHERE status='settled' AND result IN ('yes','no')").fetchall()
+            "WHERE status='settled' AND result IN ('yes','no') "
+            "AND (title IS NULL OR title NOT LIKE 'favorite%')").fetchall()
     n = len(rows)
     if n == 0:
         return {"n_settled": 0}

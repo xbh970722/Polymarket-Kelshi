@@ -18,7 +18,7 @@ from .kalshi_client import KalshiPublic, normalize_market
 CITIES = {
     "KXHIGHNY":   ("KNYC", 40.783, -73.967, "America/New_York",    "Central Park"),
     "KXHIGHCHI":  ("KMDW", 41.786, -87.752, "America/Chicago",     "Midway"),
-    "KXHIGHAUS":  ("KATT", 30.321, -97.760, "America/Chicago",     "Camp Mabry"),
+    "KXHIGHAUS":  ("KAUS", 30.183, -97.680, "America/Chicago",     "Bergstrom"),
     "KXHIGHMIA":  ("KMIA", 25.788, -80.317, "America/New_York",    "Miami"),
     "KXHIGHLAX":  ("KLAX", 33.938, -118.389, "America/Los_Angeles", "Los Angeles"),
     "KXHIGHDEN":  ("KDEN", 39.847, -104.656, "America/Denver",     "Denver"),
