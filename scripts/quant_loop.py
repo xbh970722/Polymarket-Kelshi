@@ -18,6 +18,10 @@ ROOT = r"D:\Polymarket-Kelshi"
 LOG = os.path.join(ROOT, "data", "quant_loop.log")
 PIDF = os.path.join(ROOT, "data", "quant_loop.pid")
 MARKS = (5, 11, 20, 26, 35, 41, 50, 56)   # :11/:26/:41/:56 hit each 15m window at tau~4min
+LIGHT_MARKS = (2, 8, 17, 23, 32, 38, 47, 53)   # user 2026-07-05: 15m-only passes
+# (h15+h10 only, ~5 API calls) — each 15m window now gets THREE entry-window
+# scans (tau ~12.7/9.7/6.7) instead of one, tripling the catch rate on
+# transient zone asks; h15 fill-detection latency drops from ~7.5 to ~3 min.
 LAST_HOURLY = None                         # elapsed-time tracker for manage/reconcile/janitor
 
 
@@ -309,14 +313,35 @@ def main() -> None:
     log(f"=== quant_loop started pid={os.getpid()} ===")
     while True:
         now = dt.datetime.now()
-        future = [now.replace(minute=m, second=20, microsecond=0)
-                  for m in MARKS if now.replace(minute=m, second=20, microsecond=0) > now]
-        nxt = future[0] if future else (now + dt.timedelta(hours=1)).replace(
-            minute=MARKS[0], second=20, microsecond=0)
+        slots = ([(m, "full") for m in MARKS]
+                 + [(m, "light") for m in LIGHT_MARKS])
+        future = []
+        for m, kind in slots:
+            t = now.replace(minute=m, second=20, microsecond=0)
+            if t > now:
+                future.append((t, kind))
+        if future:
+            nxt, kind = min(future)
+        else:
+            nxt = (now + dt.timedelta(hours=1)).replace(
+                minute=LIGHT_MARKS[0], second=20, microsecond=0)
+            kind = "light"
         wait = (nxt - now).total_seconds()
         if wait > 0:
             time.sleep(wait)
         if not tree_healthy():     # R4-FABLE-B: never trade a broken working tree
+            continue
+        if kind == "light":        # 15m-only pass: h15 lifecycle + h10 scan
+            out = run_cmd("h15", timeout=120)
+            out += run_cmd("h10", timeout=120)
+            if any(k in out for k in ("LIVE ", "H15 ", "UNKNOWN", "CRITICAL",
+                                      "HARD STOP")):
+                run_cmd("journal")
+                git("add", "-A")
+                git("commit", "-m",
+                    f"light mark {nxt:%m-%d %H:%M}: 15m fills")
+                git("push")
+                log("light mark committed + pushed")
             continue
         out = run_cmd("settle")
         # R7-C4/C5: h15 FIRST after settle — its cancel/fill management is the
