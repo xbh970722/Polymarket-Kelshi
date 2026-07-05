@@ -219,7 +219,9 @@ weather:
   min_edge_after_fees: 0.05      # 预报基差风险真实存在, 门槛比 crypto 高
   max_per_trade_usd: 0.50
   max_contracts: 3
-  max_trades_per_city_per_day: 2   # 2026-07-04 用户"123": 上午预报单+午后锁定单
+  max_trades_per_city_per_day: 1   # R6 三席会师 (C1/C3/C5): 同城多桶共享同一个
+                                   # 结算值, 2单/城是假分散; 天气日界=一次天气注
+  max_entries_per_day: 3           # R6-C1: 天区(synoptic)聚簇, 全天气族日新仓帽
   daily_budget_usd: 999999         # 2026-07-04 深夜用户指令: 预算不设上限 (原$3;
                                    # 天气实际节流阀 = 2单/城/天 × 7城 × 单笔$0.50)
 

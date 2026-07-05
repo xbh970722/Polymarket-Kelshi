@@ -744,8 +744,63 @@ def cmd_weather(_args) -> None:
         print(f"VETO weather lane: {mtm}")
         return
     spent = ledger.spent_today_by_title("weather")   # OPUS-A HIGH fix (leak class)
+    # R6-C1 synoptic day cap: weather-family NEW entries per day
+    today_w = dt.date.today().isoformat()
+    con_w0 = ledger._conn()
+    n_today = con_w0.execute(
+        "SELECT COUNT(*) FROM trades WHERE title LIKE 'weather%' AND mode='live' "
+        "AND ts LIKE ? || '%' AND status != 'voided'", (today_w,)).fetchone()[0]
+    if n_today >= wc.get("max_entries_per_day", 3):
+        print(f"weather: daily entry cap reached ({n_today})")
+        return
     cands = candidates(cfg)
     print(f"weather: {len(cands)} priced buckets | spent ${spent:.2f}/{wc['daily_budget_usd']:.2f}")
+    # R6-FABLE governance: bucket-level calibration log — every priced bucket at
+    # every scan (~40 free samples/day) feeds Brier monitors + the Sep-01 re-cert
+    try:
+        import sqlite3 as _sq
+        con_cal = _sq.connect("data/weather_cal.db", timeout=15)
+        con_cal.execute("CREATE TABLE IF NOT EXISTS buckets("
+                        "ticker TEXT, ts TEXT, q_model REAL, mid REAL, "
+                        "local_hour INTEGER, PRIMARY KEY (ticker, ts))")
+        now_cal = dt.datetime.now().isoformat(timespec="seconds")
+        for c in cands:
+            con_cal.execute("INSERT OR IGNORE INTO buckets VALUES(?,?,?,?,?)",
+                            (c["ticker"], now_cal, c["q_model"], c["mid"],
+                             c["local_hour"]))
+        con_cal.commit()
+        con_cal.close()
+    except Exception:
+        pass
+    # R6 state-stop SHADOW: model-flip events on open weather positions (no
+    # price stops — weather losses gap; the correct stop fires when NWS updates)
+    try:
+        import sqlite3 as _sq
+        fresh_q = {c["ticker"]: c["q_model"] for c in cands}
+        con_fs = _sq.connect("data/stop_shadow.db", timeout=15)
+        con_fs.execute("CREATE TABLE IF NOT EXISTS wxflip("
+                       "trade_id INTEGER PRIMARY KEY, ticker TEXT, ts TEXT, "
+                       "entry_q REAL, fresh_q REAL, entry_price REAL)")
+        for t in ledger.open_trades():
+            if t["mode"] != "live" or not (t.get("title") or "").startswith("weather"):
+                continue
+            fq = fresh_q.get(t["ticker"])
+            if fq is None:
+                continue
+            q_held = fq if t["side"] == "yes" else 1 - fq
+            entry_q = t["q_consensus"] if t["side"] == "yes" else 1 - (t["q_consensus"] or 0.5)
+            if q_held <= entry_q * 0.5 and not con_fs.execute(
+                    "SELECT 1 FROM wxflip WHERE trade_id=?", (t["id"],)).fetchone():
+                con_fs.execute("INSERT OR IGNORE INTO wxflip VALUES(?,?,?,?,?,?)",
+                               (t["id"], t["ticker"],
+                                dt.datetime.now().isoformat(timespec="seconds"),
+                                round(entry_q, 4), round(q_held, 4), t["price"]))
+                print(f"WXFLIP #{t['id']} {t['ticker']}: model q_held {q_held:.2f} "
+                      f"<= half of entry {entry_q:.2f} (would state-stop here)")
+        con_fs.commit()
+        con_fs.close()
+    except Exception:
+        pass
     api = KalshiPublic()
     placed = 0
     # FABLE-C MED fix: per-city daily count from the LEDGER, not an in-process dict
@@ -1004,6 +1059,17 @@ def cmd_stopshadow(_args) -> None:
     con_s.close()
     if n:
         print(f"stopshadow: {n} would-stop event(s) logged")
+
+
+def cmd_wxfade(_args) -> None:
+    """W2 weather longshot-fade SHADOW (9-seat panel; $0.50 cap keeps it
+    unbuyable live per user — this measures whether the print edge survives
+    real standing no_asks; gate rules in research/WEATHER_LANES.md)."""
+    cfg = load_config()
+    from . import wxfade
+    settled = wxfade.settle()
+    logged = wxfade.scan(cfg)
+    print(f"wxfade: +{logged} logged, {settled} settled | {wxfade.report()}")
 
 
 def cmd_settle(_args) -> None:
@@ -1658,6 +1724,7 @@ def main() -> None:
     sub.add_parser("favorites").set_defaults(fn=cmd_favorites)
     sub.add_parser("h10").set_defaults(fn=cmd_h10)
     sub.add_parser("stopshadow").set_defaults(fn=cmd_stopshadow)
+    sub.add_parser("wxfade").set_defaults(fn=cmd_wxfade)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)

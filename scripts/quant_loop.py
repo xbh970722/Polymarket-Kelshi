@@ -202,6 +202,39 @@ def check_review_trigger() -> None:
             (state.get("last_review_id", 0),)).fetchall()
         n_loss = len(rows)
         usd_loss = -sum(r["pnl_usd"] for r in rows)
+        # R6-FABLE governance: weather loss trigger (cum <= -$2 since last weather
+        # review OR 4 consecutive losing settlements) — weather previously had NO
+        # tripwire and could bleed slowly forever. Checked before the crypto
+        # early-return below so one lane's cooldown never blinds the other.
+        try:
+            wstate_p = os.path.join(ROOT, "data", "weather_review_state.json")
+            wdue_p = os.path.join(ROOT, "data", "review_due_weather.json")
+            wstate = {"last_review_id": 0}
+            if os.path.exists(wstate_p):
+                wstate = json.load(open(wstate_p, encoding="utf-8"))
+            if not os.path.exists(wdue_p):
+                wrows = con.execute(
+                    "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
+                    "AND status IN ('settled','closed') AND title LIKE 'weather%' "
+                    "ORDER BY id",
+                    (wstate.get("last_review_id", 0),)).fetchall()
+                cum = sum(r["pnl_usd"] or 0 for r in wrows)
+                streak = 0
+                for r in reversed(wrows):
+                    if (r["pnl_usd"] or 0) < 0:
+                        streak += 1
+                    else:
+                        break
+                if cum <= -2.0 or streak >= 4:
+                    json.dump({"triggered_ts": dt.datetime.now().isoformat(timespec="seconds"),
+                               "lane": "weather", "cum_pnl": round(cum, 2),
+                               "consec_losses": streak,
+                               "since_id": wstate.get("last_review_id", 0)},
+                              open(wdue_p, "w", encoding="utf-8"))
+                    log(f"WEATHER REVIEW TRIGGERED: cum ${cum:.2f}, "
+                        f"streak {streak} -> review_due_weather.json")
+        except Exception as e:
+            log(f"weather trigger check failed: {e}")
         if n_loss < cr.get("loss_count_trigger", 5) and usd_loss < cr.get("loss_usd_trigger", 1.0):
             return
         # OPUS-B fix: lane-specific file so a favorites drawdown trigger and this
@@ -293,6 +326,7 @@ def main() -> None:
             out += run_cmd("manage")
             out += run_cmd("reconcile")   # books-vs-exchange audit; MISMATCH lines
                                           # land in the log/journal for the reflection
+            run_cmd("wxfade")             # W2 fade shadow (hourly is plenty: tau 8-48h)
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
                                          "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",

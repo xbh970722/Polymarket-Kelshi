@@ -28,6 +28,12 @@ CITIES = {
 _S = requests.Session()
 _S.headers["User-Agent"] = "kalshi-research-pipeline/0.1 (contact: paper)"
 
+# R6-O1 (meteorology seat): one national sigma was the model's biggest defect —
+# independent per-city settled-high sd spans 5.7x (LAX 2.2F vs DEN 12.6F).
+# Marine-capped cities shrink; high-plains convection/downslope widens.
+SIGMA_MULT = {"KXHIGHLAX": 0.4, "KXHIGHMIA": 0.5, "KXHIGHAUS": 0.7,
+              "KXHIGHDEN": 1.4}
+
 
 def _phi(x: float) -> float:
     return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
@@ -151,8 +157,13 @@ def candidates(cfg: dict) -> list[dict]:
         if obs is None and local_now.hour >= 13:
             print(f"WARN {series}: observation leg missing after midday - skipping")
             continue
-        mu = max(x for x in (obs, fc) if x is not None)
-        sigma = _sigma_for_local_hour(local_now.hour)
+        # R6-O1: after the afternoon peak the forecast leg only adds a warm
+        # max-of-correlated-estimators bias — obs floor is ground truth by then
+        if local_now.hour >= 17 and obs is not None:
+            mu = obs
+        else:
+            mu = max(x for x in (obs, fc) if x is not None)
+        sigma = _sigma_for_local_hour(local_now.hour) * SIGMA_MULT.get(series, 1.0)
         for m in todays:
             tail = m["ticker"].rsplit("-", 1)[-1]
             mt = re.match(r"^[BT](\d+(?:\.\d+)?)$", tail)
@@ -163,8 +174,11 @@ def candidates(cfg: dict) -> list[dict]:
             q = _bucket_prob(mu, sigma, m.get("yes_sub_title") or "", float(mt.group(1)))
             if q is None:
                 continue
+            # R6-O1 fat-tail floor: busts are one-sided and fat (90th-pct intraday
+            # migration 0.37 vs median 0.07); a pure Gaussian saying 0.1% for a
+            # far bucket inflates phantom edges exactly on losing days
             out.append({"ticker": m["ticker"], "series": series,
-                        "q_model": round(min(max(q, 0.001), 0.999), 4),
+                        "q_model": round(min(max(q, 0.025), 0.975), 4),
                         "yes_bid": m["yes_bid"], "yes_ask": m["yes_ask"],
                         "no_ask": m["no_ask"],
                         "mid": round((m["yes_bid"] + m["yes_ask"]) / 2, 4),
