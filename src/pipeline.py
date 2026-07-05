@@ -1428,14 +1428,141 @@ def cmd_h15(_args) -> None:
 
 
 def cmd_wxfade(_args) -> None:
-    """W2 weather longshot-fade SHADOW (9-seat panel; $0.50 cap keeps it
-    unbuyable live per user — this measures whether the print edge survives
-    real standing no_asks; gate rules in research/WEATHER_LANES.md)."""
+    """W2 weather longshot-fade: SHADOW (the adjudicating instrument) + LIVE
+    micro (user 2026-07-05 morning: early-open at minimum size, $0.90/trade —
+    VALUES #14 precedent; the shadow gate still archives the lane if the edge
+    fails to survive real books)."""
     cfg = load_config()
     from . import wxfade
     settled = wxfade.settle()
     logged = wxfade.scan(cfg)
     print(f"wxfade: +{logged} logged, {settled} settled | {wxfade.report()}")
+    w2 = cfg.get("wxfade_live") or {}
+    if not (w2.get("enabled") and live_active(cfg)):
+        return
+    from .live import KalshiLive, LiveAuthError
+    mtm = _mtm_halt(cfg)
+    if mtm:
+        print(f"VETO wxfade live: {mtm}")
+        return
+    today = dt.date.today().isoformat()
+    con_w = ledger._conn()
+    n_today = con_w.execute(
+        "SELECT COUNT(*) FROM trades WHERE title LIKE 'weather-fade%' "
+        "AND mode='live' AND ts LIKE ? || '%' AND status != 'voided'",
+        (today,)).fetchone()[0]
+    if n_today >= w2.get("max_entries_per_day", 2):
+        return
+    n_family = con_w.execute(
+        "SELECT COUNT(*) FROM trades WHERE title LIKE 'weather%' AND mode='live' "
+        "AND ts LIKE ? || '%' AND status != 'voided'", (today,)).fetchone()[0]
+    if n_family >= cfg.get("weather", {}).get("max_entries_per_day", 3):
+        return                              # family synoptic cap shared with W1
+    try:
+        client = KalshiLive()
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    api = KalshiPublic()
+    now = dt.datetime.now(dt.timezone.utc)
+    ylo, yhi = w2.get("yes_band", [0.15, 0.40])
+    tlo, thi = w2.get("tau_hours", [8, 48])
+    cands = []
+    for series in cfg.get("weather", {}).get("series") or []:
+        # city cap shared with W1 (one weather bet per city per day, any lane)
+        city_used = con_w.execute(
+            "SELECT COUNT(*) FROM trades WHERE title LIKE 'weather%' "
+            "AND title LIKE '%' || ? AND mode='live' AND ts LIKE ? || '%' "
+            "AND status != 'voided'", (series, today)).fetchone()[0]
+        if city_used >= 1:
+            continue
+        try:
+            markets = api.open_markets(series)
+        except Exception:
+            continue
+        for mr in markets:
+            m = normalize_market(mr)
+            if m["status"] != "active" or not m["close_time"]:
+                continue
+            close = dt.datetime.fromisoformat(
+                m["close_time"].replace("Z", "+00:00"))
+            tau_h = (close - now).total_seconds() / 3600.0
+            if not (tlo < tau_h <= thi):
+                continue
+            if not (m["yes_bid"] > 0 and 0.01 <= m["yes_ask"] <= 0.99):
+                continue
+            mid = (m["yes_bid"] + m["yes_ask"]) / 2
+            if not (ylo <= mid <= yhi):
+                continue
+            no_ask = m["no_ask"]
+            if not (0.55 <= no_ask <= 0.88):
+                continue
+            cands.append({"ticker": m["ticker"], "series": series,
+                          "no_ask": no_ask, "tau_h": tau_h,
+                          "mid_yes": round(mid, 4)})
+    if not cands:
+        return
+    cands.sort(key=lambda c: c["no_ask"])   # cheapest NO = biggest edge (backtest)
+    c0 = cands[0]
+    if ledger.has_open_position(c0["ticker"], "live"):
+        return
+    cfg_f = _live_risk_overlay(cfg)
+    cfg_f["risk"]["max_per_trade_usd"] = min(cfg_f["risk"]["max_per_trade_usd"],
+                                             w2.get("max_per_trade_usd", 0.90))
+    est = round(c0["no_ask"] + 0.02, 2)
+    veto = engine.check_risk(ledger.stats("live"), est, cfg_f)
+    if veto:
+        print(f"VETO  {c0['ticker']}: {veto}")
+        return
+    coid = str(uuid.uuid4())
+    try:
+        tid = ledger.insert_trade(
+            mode="live", ticker=c0["ticker"],
+            title=f"weather-fade {c0['series']}", side="no",
+            price=c0["no_ask"], contracts=1, cost_usd=est, fee_usd=0.0,
+            q_claude=round(c0["no_ask"], 4), q_codex=round(c0["no_ask"], 4),
+            q_consensus=round(c0["no_ask"], 4),
+            market_prob=round(1 - c0["mid_yes"], 4), edge_net=0.0,
+            rationale=f"W2 fade: yes quoted {c0['mid_yes']:.2f} in [.15,.40], "
+                      f"tau {c0['tau_h']:.0f}h (66d backtest 99.5% band)",
+            status="pending", order_id=coid)
+    except Exception as e:
+        print(f"FAILED {c0['ticker']}: intent write failed ({e})")
+        return
+    try:
+        n, px, fee, oid = _decisive_ioc(
+            client, api, c0["ticker"], "no", 1, 0.0, -1.0,
+            slippage=0.0, price_cap=0.88,
+            max_cost_usd=w2.get("max_per_trade_usd", 0.90),
+            client_order_id=coid,
+            price_floor=w2.get("price_floor", 0.55))
+    except OrderAmbiguous as e:
+        ledger.mark_unknown(tid, f"submit ambiguous: {e}")
+        print(f"CRITICAL {c0['ticker']}: outcome UNKNOWN ({e}) — frozen")
+        return
+    except Exception as e:
+        ledger.void_trade(tid, f"pre-submit failure: {e}")
+        print(f"FAILED {c0['ticker']}: {e}")
+        return
+    if n < 1:
+        ledger.void_trade(tid, f"no fill: {px}")
+        print(f"PASS  {c0['ticker']}: {px}")
+        return
+    cost = round(n * px + fee, 2)
+    try:
+        ledger.record_fill(tid, n, px, cost, fee, oid)
+        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                             (dt.datetime.now() + dt.timedelta(days=2)
+                              ).isoformat(timespec="seconds"))
+    except Exception as e:
+        print(f"CRITICAL {c0['ticker']}: FILLED x{n} but ledger failed ({e})")
+        try:
+            ledger.mark_unknown(tid, f"filled x{n}@{px} record failed")
+        except Exception:
+            pass
+        return
+    print(f"LIVE  {c0['ticker']}: W2 FADE NO x{n} @ {px * 100:.0f}c "
+          f"cost=${cost:.2f} (yes was {c0['mid_yes']:.2f}) order={oid}")
 
 
 def cmd_settle(_args) -> None:
@@ -1822,12 +1949,38 @@ def cmd_reconcile(_args) -> None:
                         print(f"RESOLVED #{u['id']} {u['ticker']}: fills prove x{n} "
                               f"@ {avg * 100:.0f}c -> open")
                         resolved = True
-                    elif str(o.get("status") or "") in ("canceled", "cancelled",
-                                                        "expired", "rejected"):
+                    elif abs(cnt) < 0.005 and str(o.get("status") or "") in (
+                            "canceled", "cancelled", "expired", "rejected"):
+                        # W2 first-fill lesson: weather books trade FRACTIONAL
+                        # contracts — void only when fills are provably ~zero
                         ledger.void_trade(u["id"], f"exchange order "
                                                    f"{o.get('status')} with zero fills")
                         print(f"RESOLVED #{u['id']} {u['ticker']}: order "
                               f"{o.get('status')}, no fills -> voided")
+                        resolved = True
+                    elif cnt > 0.005:
+                        # fractional fill (0 < cnt < 1): book the TRUE fractional
+                        # position — sqlite stores it, settle math is float-safe
+                        tot = 0.0
+                        for f in mine:
+                            ci = float(f.get("count_fp") or f.get("count") or 0)
+                            if u["side"] == "no":
+                                raw = f.get("no_price_dollars")
+                                pi = (float(raw) if raw is not None
+                                      else 1.0 - float(f.get("yes_price") or 0))
+                            else:
+                                raw = f.get("yes_price_dollars")
+                                pi = (float(raw) if raw is not None
+                                      else float(f.get("yes_price") or 0))
+                            tot += ci * pi
+                        avgf = round(tot / cnt, 4) if cnt else u["price"]
+                        feef = (0.0 if (u.get("title") or "").startswith(
+                            ("h15maker", "weather-fade")) else 0.01)
+                        ledger.record_fill(u["id"], cnt, avgf,
+                                           round(cnt * avgf + feef, 2), feef,
+                                           exch_oid)
+                        print(f"RESOLVED #{u['id']} {u['ticker']}: FRACTIONAL "
+                              f"fill x{cnt} @ {avgf * 100:.0f}c -> open")
                         resolved = True
                     # order exists in another state with no visible fills: keep
                     # frozen — never guess against a live order
