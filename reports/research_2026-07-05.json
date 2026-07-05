@@ -1,43 +1,43 @@
 {
   "date": "2026-07-05",
-  "cycle": "ensemble_scheduled",
-  "protocol": "2x Opus 4.8 + 2x Codex gpt-5.5 xhigh blind, arbiter (session) aggregation; round-2 reconciliation on GPT-5.6 crux; verification layer passed",
+  "cycle": "ensemble_scheduled_pm",
+  "protocol": "2x Opus 4.8 + 2x Codex gpt-5.5 xhigh blind, arbiter (session) aggregation; verification layer passed on trade candidate",
   "items": [
     {
-      "ticker": "KXFEDDECISION-26JUL-H0",
-      "title": "Fed maintains rate (0bps) at July 29 2026 meeting",
-      "q_claude": 0.895,
-      "q_codex": 0.895,
-      "q_all": [0.90, 0.89, 0.90, 0.89],
-      "rationale": "Core: CME FedWatch ~90% no-change into the Jul 29 meeting, reinforced by soft +57k Jul-1 payrolls that cut hike odds to ~10%; four straight holds at 3.50-3.75%. Risk: residual is a small hawkish-Warsh hike (~10%), cut odds near zero. Divergence: none (families identical at 0.895). Sits on market 0.90 -> no edge, expected skip.",
-      "sources": [
-        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
-        "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm"
-      ]
-    },
-    {
       "ticker": "KXTRUMPATTEND",
-      "title": "Trump attends 2026 FIFA World Cup Final (Jul 19)",
-      "q_claude": 0.93,
-      "q_codex": 0.895,
-      "q_all": [0.96, 0.90, 0.88, 0.91],
-      "rationale": "Core: WH 'holding' Jul 19 on his schedule; he is set to personally present the trophy (FIFA breaking protocol), attended the 2025 Club WC Final at the same venue, and resolution is extremely lenient (any source incl. own social media, partial counts). Risk: ~2-week tail of health/security/geopolitical shock or last-minute schedule change. Divergence: 0.035 (Opus higher on lenient-resolution weighting). Only ~1-3pt above market 0.90 -> edge below 0.035 threshold, expected skip.",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "q_claude": 0.945,
+      "q_codex": 0.935,
+      "q_all": [0.95, 0.94, 0.96, 0.91],
+      "rationale": "Core: FIFA president Infantino publicly confirmed (~Jul 1) Trump will CO-PRESENT the trophy at the Final (Jul 19, MetLife NJ); NBC reports the White House is 'holding' the date on his schedule; resolution is very generous (brief appearance or his own social post counts). Risk: 14-day tail = acute health/security/geopolitical emergency (~4-6%). Divergence negligible (families 0.945 vs 0.935); verification-layer news search confirmed the trophy role and found no adverse signal (the 'Trump snubs USMNT' item refers to a group-stage US game, not the Final). Consensus ~0.94 vs market yes_ask 0.88; half-anchor floor 0.91 not binding.",
       "sources": [
+        "https://abc7ny.com/post/president-trump-present-world-cup-trophy-final-metlife-stadium-new-jersey-fifa-boss-gianni-infantino-confirms/19364252/",
         "https://www.nbcnewyork.com/world-cup/trump-world-cup-final-fifa-metlife-stadium/6512369/",
+        "https://www.espn.com/soccer/story/_/id/49154827/donald-trump-present-world-cup-trophy-final-fifa-boss-gianni-infantino-confirms",
         "https://www.cnbc.com/2026/07/01/trump-fifa-infantino-world-cup-financial-disclosure.html"
       ]
     },
     {
-      "ticker": "KXGPT-OPENB-26JUL10",
-      "title": "OpenAI releases GPT-5.6+ to the public before Jul 10 2026",
-      "q_claude": 0.14,
-      "q_codex": 0.13,
-      "q_all": [0.10, 0.10, 0.27, 0.23],
-      "rationale": "Core: resolution requires a PUBLIC release OUTSIDE closed beta; GPT-5.6 shipped Jun 26 only to ~20 gov-approved partners behind a US-government cyber-safety gate (explicitly not public), with GA guided to 'coming weeks'/mid-July and analyst earliest-GA ~Jul 10-17 -- so a public release inside the ~4.5-day window is unlikely. Risk: fast gate clearance or a high-cost 'public' tier before the cutoff (residual ~13-14%). Divergence: round-1 families split 0.10 vs 0.25 (crux); round-2 with market price revealed + verification converged to 0.14/0.13 (div 0.01). Market 0.735 reads as favorite/hype bias + misreading of the closed-beta clause. Consensus ~0.135 -> NO fair value ~0.865 vs NO ask 0.28 = large NO edge; qualifies high-conviction (edge>=0.10, family-div<=0.05, all four blind estimators below market_mid 0.73).",
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
+      "title": "Will BTC trimmed mean be above $67,500.00 by 11:59 PM ET on Jul 31, 2026?",
+      "q_claude": 0.32,
+      "q_codex": 0.57,
+      "q_all": [0.32, 0.32, 0.56, 0.58],
+      "rationale": "One-touch barrier +7.3% above $62,904 spot (log 0.0706) over ~26 days. Core disagreement (family divergence 0.25 >> 0.10): Opus family shaded the reflection-principle raw touch (~0.6-0.67 at 3% daily vol) down hard for negative post-crash drift (June -20.5%, 43% green days) and index-trimming of brief wicks -> 0.32; Codex family held near the raw touch math -> 0.57. Families straddle the market (0.32 below, 0.57 above) so they disagree on the SIGN of the edge, not just size. FLAGGED for human review; engine auto-skips on >0.10 divergence. System working as designed, not a failure.",
       "sources": [
-        "https://venturebeat.com/technology/openai-unveils-gpt-5-6-sol-terra-and-luna-models-but-only-accessible-to-limited-preview-partners-for-now-per-us-gov",
-        "https://www.axios.com/2026/06/26/openai-gpt-sol-terra-luna-trump",
-        "https://cryptobriefing.com/openai-releases-gpt-56-models-to-20-partners-public-launch-expected-by-july-2026/"
+        "https://api.coinbase.com/v2/prices/BTC-USD/spot"
+      ]
+    },
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey (Nolan) Rotten Tomatoes score Above 90?",
+      "q_claude": 0.47,
+      "q_codex": 0.37,
+      "q_all": [0.52, 0.42, 0.36, 0.38],
+      "rationale": "Strict >90 threshold on Nolan's 13th film (wide release Jul 17, RT determined Mon Jul 20). Core: ~4 of 12 prior Nolan films cleared strictly >90; recent prestige (Oppenheimer 93, Dunkirk 92) clusters just above, but ambitious epics dipped (Interstellar 73, Tenet 69). Risk: NO review data yet (embargoed to ~Jul 16-17) = no information edge over the market. Families 0.47 vs 0.37 (divergence ~0.10), consensus ~0.42 vs market ~0.40 -> ~2pt edge, below threshold. No trade; no informational advantage.",
+      "sources": [
+        "https://www.rottentomatoes.com/m/the_odyssey_2026",
+        "https://editorial.rottentomatoes.com/article/everything-we-know-about-the-odyssey/"
       ]
     }
   ]
