@@ -266,6 +266,11 @@ weather:
   max_trades_per_city_per_day: 1   # R6 三席会师 (C1/C3/C5): 同城多桶共享同一个
                                    # 结算值, 2单/城是假分散; 天气日界=一次天气注
   max_entries_per_day: 3           # R6-C1: 天区(synoptic)聚簇, 全天气族日新仓帽
+  daily_budget_usd: 999999         # 2026-07-04 深夜用户指令: 预算不设上限 (原$3;
+                                   # 天气实际节流阀 = 1单/城/天 × 7城 × 单笔$0.50)
+                                   # 07-05 04:1x: 此行曾被 W2 粘贴事故挪进 wxfade_live
+                                   # 块 -> cmd_weather KeyError 崩了一小时 (幸在交易
+                                   # 时窗外, 零损失)。归位 + 交易时窗外也要盯崩溃。
 
 # ---------- W2 彩票折价实弹 (用户 2026-07-05 晨: "更好的也OK, 贴着最低的来") ----------
 # 提前开闸 (VALUES #14 先例: 统计证实前按用户意愿小额下注); wxfade 影子继续平行跑,
@@ -279,8 +284,6 @@ wxfade_live:
   max_contracts: 1
   max_entries_per_day: 2         # 比家族帽(3)更紧: 新通道先用半油门
   price_floor: 0.55              # 新价复核下限: NO ask 崩到带外 = 形态失效不追
-  daily_budget_usd: 999999         # 2026-07-04 深夜用户指令: 预算不设上限 (原$3;
-                                   # 天气实际节流阀 = 2单/城/天 × 7城 × 单笔$0.50)
 
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30

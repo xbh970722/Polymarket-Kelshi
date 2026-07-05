@@ -1397,6 +1397,7 @@ def cmd_h15(_args) -> None:
         return
     if any("15M" in t["ticker"].split("-")[0]
            for t in ledger.active_trades("live")):
+        print("h15 idle: 15m slot held by another lane (one-position mutex)")
         return                                  # one 15m position across ALL lanes
     cfg_m = _live_risk_overlay(cfg)
     cfg_m["risk"]["max_per_trade_usd"] = min(cfg_m["risk"]["max_per_trade_usd"],
