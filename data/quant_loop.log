@@ -2162,3 +2162,17 @@
 [07-05 11:38:22]   h10: h10: 1 in-window | h10 shadow(main): n=36 mean -4.1c total $-1.49 | KXETH15M: n=10 net $+0.94 | KXSOL15M: n=14 net $-2.68 | KXBTC15M: n=12 net $+0.25 | gate: accumulating (1 pending) || H13 final6: n=7 win 7/7 net $+0.21 gate: accumulating
 [07-05 11:38:22]   h10: done: 0 h10 orders
 [07-05 11:38:23]   journal: journal written: realized today $-2.51, 48 settled, 50 fills
+[07-05 11:38:25] light mark committed + pushed
+[07-05 11:41:21]   settle: done: 0 settled, 8 still open
+[07-05 11:41:22]   h15: H15 UNKNOWN KXETH15M-26JUL051345-45: cancel unverified — frozen as exposure until reconcile resolves
+[07-05 11:41:24]   mktsnap: mktsnap: 9 quotes recorded, 0 outcomes resolved
+[07-05 11:41:29]   shortcycle: shortcycle: 4 candidate strikes | balance $7.91 | today spent $0.85/999999.00
+[07-05 11:41:29]   shortcycle: done: 0 shortcycle orders
+[07-05 11:41:31]   favorites: favorites: 1 favorites in zone | realized $-1.31 | today spent $57.09/999999.00
+[07-05 11:41:31]   favorites: done: 0 favorite orders
+[07-05 11:41:32]   h10: h10: 0 in-window | h10 shadow(main): n=36 mean -4.1c total $-1.49 | KXETH15M: n=10 net $+0.94 | KXSOL15M: n=14 net $-2.68 | KXBTC15M: n=12 net $+0.25 | gate: accumulating (1 pending) || H13 final6: n=7 win 7/7 net $+0.21 gate: accumulating
+[07-05 11:41:33]   weather: weather: daily entry cap reached (3)
+[07-05 11:41:36]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=11 win 55% EV -19.6c | BOOK-ONLY: n=10 win 60% EV -11.5c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (27 pending)
+[07-05 11:41:47]   pmwatch: pmwatch: +56 pairs | pmwatch: 906 rows, 289 kalshi-matched | |divergence| median 5.0c, p90 19.0c (gate n>=300)
+[07-05 11:41:47]   journal: journal written: realized today $-2.51, 48 settled, 50 fills
+[07-05 11:41:49]   report: wrote reports\report_2026-07-05.md
