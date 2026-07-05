@@ -12,6 +12,7 @@ import datetime as dt
 import os
 import subprocess
 import sys
+import time
 
 ROOT = r"D:\Polymarket-Kelshi"
 LOG = os.path.join(ROOT, "data", "quant_loop.log")
@@ -22,8 +23,11 @@ LAST_HOURLY = None                         # elapsed-time tracker for manage/rec
 
 def log(msg: str) -> None:
     line = f"[{dt.datetime.now():%m-%d %H:%M:%S}] {msg}\n"
-    with open(LOG, "a", encoding="utf-8") as f:
-        f.write(line)
+    try:                                    # R3-CODEX-8 MED: disk-full on the log
+        with open(LOG, "a", encoding="utf-8") as f:   # must not kill the loop
+            f.write(line)
+    except OSError:
+        return
     try:                                    # crude rotation
         if os.path.getsize(LOG) > 400_000:
             with open(LOG, encoding="utf-8") as f:
@@ -143,11 +147,28 @@ def check_review_trigger() -> None:
             try:
                 state = json.load(open(REVIEW_STATE, encoding="utf-8"))
             except (json.JSONDecodeError, OSError):
-                return          # OPUS-B fix: torn read mid-rewrite -> skip this tick,
-                                # never default last_review_id=0 (would re-fire everything)
+                # OPUS-B fix: torn read mid-rewrite -> skip this tick, never default
+                # last_review_id=0. R3-CODEX-2 MED refinement: PERSISTENT corruption
+                # (>30min old) would disable loss reviews forever — self-heal by
+                # rebuilding at the current max id (no re-fire, reviews resume).
+                try:
+                    if (time.time() - os.path.getmtime(REVIEW_STATE)) / 60 > 30:
+                        os.replace(REVIEW_STATE, REVIEW_STATE + ".corrupt")
+                        con_h = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
+                        max_id = con_h.execute(
+                            "SELECT COALESCE(MAX(id),0) FROM trades").fetchone()[0]
+                        con_h.close()
+                        state = {"last_review_id": max_id, "review_no": 0}
+                        json.dump(state, open(REVIEW_STATE, "w", encoding="utf-8"))
+                        log(f"CRITICAL: review_state.json corrupt >30min -> rebuilt "
+                            f"at id {max_id} (old file kept as .corrupt)")
+                    else:
+                        return
+                except Exception:
+                    return
         if os.path.exists(REVIEW_DUE):        # pending review; respect cooldown
-            age_h = (dt.datetime.now()
-                     - dt.datetime.fromtimestamp(os.path.getmtime(REVIEW_DUE))).total_seconds() / 3600
+            # R3-CODEX-4 MED: epoch math, immune to DST wall-clock jumps
+            age_h = (time.time() - os.path.getmtime(REVIEW_DUE)) / 3600
             if age_h < cr.get("cooldown_hours", 2):
                 return
         con = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
@@ -192,7 +213,9 @@ def janitor_stale_sessions() -> None:
              "Get-Process claude -ErrorAction SilentlyContinue | "
              "Where-Object { $h = ((Get-Date) - $_.StartTime).TotalHours; "
              "$h -gt 3 -and $h -lt 16 -and "
-             "$_.StartTime.Minute -in 5,6,7,8,9,10,12,13,14,20,21,22,35,36,37,38,39,40 } | "
+             # R3-FABLE MED: cover the real jittered launch windows — daily-cycle
+             # 0-8, blind-AI 12-16, supervisor 20-22, reflection 30-40
+             "$_.StartTime.Minute -in (0..16 + 20..22 + 30..40) } | "
              "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
             capture_output=True, text=True, timeout=60)
         killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
@@ -238,17 +261,19 @@ def main() -> None:
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("weather")
         # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —
-        # a mark overrun past :20 no longer skips exits/reconcile for the whole hour
+        # a mark overrun past :20 no longer skips exits/reconcile for the whole hour.
+        # R3-CODEX-4 HIGH: monotonic clock, immune to DST wall-clock jumps.
         global LAST_HOURLY
-        now_ts = dt.datetime.now()
-        if LAST_HOURLY is None or (now_ts - LAST_HOURLY).total_seconds() >= 3540:
-            LAST_HOURLY = now_ts
+        mono = time.monotonic()
+        if LAST_HOURLY is None or (mono - LAST_HOURLY) >= 3540:
+            LAST_HOURLY = mono
             out += run_cmd("manage")
             out += run_cmd("reconcile")   # books-vs-exchange audit; MISMATCH lines
                                           # land in the log/journal for the reflection
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
-                                         "MISMATCH", "UNKNOWN"))
+                                         "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",
+                                         "CRITICAL"))
         if changed:
             run_cmd("journal")
             run_cmd("report")

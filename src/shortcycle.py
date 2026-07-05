@@ -36,7 +36,14 @@ def minute_vol(product: str, lookback_min: int = 180) -> tuple[float, float]:
               params={"granularity": 60, "start": start.isoformat(), "end": end.isoformat()},
               timeout=20)
     r.raise_for_status()
-    closes = [c[4] for c in sorted(r.json())]
+    candles = sorted(r.json())
+    # R3-CODEX-8 MED: stale-but-plentiful candles fake a calm market -> fake
+    # certainty. Require the newest candle to be recent, not just enough rows.
+    if not candles or end.timestamp() - candles[-1][0] > 300:
+        raise RuntimeError(f"stale candles for {product}: newest is "
+                           f"{(end.timestamp() - candles[-1][0]) / 60:.0f}m old"
+                           if candles else f"no candles for {product}")
+    closes = [c[4] for c in candles]
     if len(closes) < 30:
         raise RuntimeError(f"not enough 1-min candles for {product}: {len(closes)}")
     rets = [math.log(b / a) for a, b in zip(closes, closes[1:]) if a > 0]
@@ -67,7 +74,12 @@ def _ewma_minute_vol(product: str) -> tuple[float, float]:
               params={"granularity": 60, "start": start.isoformat(), "end": end.isoformat()},
               timeout=20)
     r.raise_for_status()
-    closes = [c[4] for c in sorted(r.json())]
+    candles = sorted(r.json())
+    if not candles or end.timestamp() - candles[-1][0] > 300:   # R3-CODEX-8 MED
+        raise RuntimeError(f"stale candles for {product}: newest is "
+                           f"{(end.timestamp() - candles[-1][0]) / 60:.0f}m old"
+                           if candles else f"no candles for {product}")
+    closes = [c[4] for c in candles]
     if len(closes) < 40:
         raise RuntimeError(f"not enough candles for {product}")
     rets = [math.log(b / a) for a, b in zip(closes, closes[1:]) if a > 0]
@@ -175,12 +187,12 @@ def candidates(cfg: dict) -> list[dict]:
         except Exception as e:
             print(f"WARN {series}: vol fetch failed ({e})")
             continue
-        try:
-            page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        try:                                   # R3-CODEX-3 MED: paginated fetch
+            markets_raw = api.open_markets(series)
         except Exception as e:                 # CODEX-4 LOW: one series' API hiccup
             print(f"WARN {series}: market fetch failed ({e})")   # must not kill the
             continue                                             # other three coins
-        for mr in page.get("markets", []):
+        for mr in markets_raw:
             m = normalize_market(mr)
             k = strike_of(m["ticker"])
             if k is None or m["status"] != "active" or not m["close_time"]:

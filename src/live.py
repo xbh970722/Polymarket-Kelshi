@@ -95,11 +95,27 @@ class KalshiLive:
         return self._req("DELETE", f"{API}/portfolio/events/orders/{order_id}")
 
     def positions(self) -> dict:
-        return self._req("GET", f"{API}/portfolio/positions")
+        """All non-zero market positions. R3-CODEX-3 HIGH fix: paginate to the end —
+        a single default page could hide orphan positions from reconcile once the
+        account has traded enough distinct markets."""
+        out: dict = {"market_positions": [], "event_positions": []}
+        cursor = None
+        for _ in range(20):
+            params: dict = {"limit": 200, "count_filter": "position"}
+            if cursor:
+                params["cursor"] = cursor
+            page = self._req("GET", f"{API}/portfolio/positions", params=params)
+            out["market_positions"] += page.get("market_positions") or []
+            out["event_positions"] += page.get("event_positions") or []
+            cursor = page.get("cursor")
+            if not cursor:
+                break
+        return out
 
     # ---- money-moving ----
     def place_limit(self, ticker: str, side: str, count: int, price_prob: float,
-                    tif: str = "immediate_or_cancel") -> dict:
+                    tif: str = "immediate_or_cancel",
+                    client_order_id: str | None = None) -> dict:
         """Buy `count` contracts of yes/no at a limit price (probability 0-1).
 
         Kalshi V2 single-book model: `side` is the YES leg. bid = buy YES;
@@ -116,7 +132,9 @@ class KalshiLive:
         body = {"ticker": ticker, "side": book_side,
                 "count": f"{int(count):d}.00", "price": f"{yes_price:.4f}",
                 "time_in_force": tif, "self_trade_prevention_type": "taker_at_cross",
-                "client_order_id": str(uuid.uuid4())}
+                # R3 fix: caller-supplied id lets a pre-submit ledger row own the
+                # order identity, so ambiguous submits are recoverable via fills
+                "client_order_id": client_order_id or str(uuid.uuid4())}
         return self._req("POST", f"{API}/portfolio/events/orders", body)
 
     def place_exit(self, ticker: str, held_side: str, count: int, price_prob: float,

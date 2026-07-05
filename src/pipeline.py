@@ -14,6 +14,7 @@ import argparse
 import datetime as dt
 import json
 import sys
+import uuid
 from pathlib import Path
 
 import yaml
@@ -194,9 +195,21 @@ def cmd_manage(_args) -> None:
                 from .live import KalshiLive
                 try:
                     client_x = KalshiLive()
-                    resp = client_x.place_exit(t["ticker"], t["side"], t["contracts"], px)
                 except Exception as e:
-                    print(f"LIVE EXIT FAILED {t['ticker']}: {e}")
+                    print(f"LIVE EXIT FAILED {t['ticker']}: auth ({e})")
+                    continue
+                try:
+                    resp = client_x.place_exit(t["ticker"], t["side"], t["contracts"], px)
+                except RuntimeError as e:
+                    if "HTTP 4" in str(e):     # clean reject: position untouched
+                        print(f"LIVE EXIT FAILED {t['ticker']}: {e}")
+                    else:                      # R3-CODEX-2: 5xx after possible execution
+                        print(f"CRITICAL {t['ticker']}: exit outcome AMBIGUOUS ({str(e)[:90]}) "
+                              f"— position may be partly closed; reconcile will compare books")
+                    continue
+                except Exception as e:
+                    print(f"CRITICAL {t['ticker']}: exit outcome AMBIGUOUS "
+                          f"({type(e).__name__}: {str(e)[:80]}) — reconcile will compare books")
                     continue
                 # CODEX-A fix: close only what actually filled, at the real price
                 filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
@@ -221,7 +234,18 @@ def cmd_manage(_args) -> None:
                     avg_px = px
                 fee_paid = float(resp.get("average_fee_paid") or 0) * filled
                 fee = round(fee_paid, 2) if fee_paid else taker_fee_usd(avg_px, filled)
-                ledger.split_close(t["id"], filled, avg_px, fee, f"{action}@{avg_px * 100:.0f}c")
+                try:
+                    ledger.split_close(t["id"], filled, avg_px, fee,
+                                       f"{action}@{avg_px * 100:.0f}c")
+                except Exception as e:   # R3-CODEX-2: exit FILLED but books didn't move
+                    print(f"CRITICAL {t['ticker']}: EXIT FILLED x{filled} but split_close "
+                          f"failed ({e}) — freezing #{t['id']} as unknown")
+                    try:
+                        ledger.mark_unknown(t["id"], f"exit filled x{filled}@{avg_px} "
+                                                     f"but split_close failed")
+                    except Exception:
+                        pass
+                    continue
                 exited += 1
                 print(f"EXIT  {t['ticker']}: {action} sell x{filled}/{t['contracts']} "
                       f"@ {avg_px * 100:.0f}c")
@@ -255,9 +279,17 @@ def _live_risk_overlay(cfg: dict) -> dict:
     return {**cfg, "risk": merged}
 
 
+class OrderAmbiguous(RuntimeError):
+    """R3 5-reviewer consensus: raised when an order POST was ATTEMPTED but the
+    outcome is unprovable (timeout, connection drop, 5xx, unparseable fill count).
+    Callers must freeze the pre-submit intent row as 'unknown' — never retry,
+    never void — until the reconcile fills-resolver proves what happened."""
+
+
 def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
                   q_model: float, min_edge: float, slippage: float = 0.01,
-                  price_cap: float = 0.99):
+                  price_cap: float = 0.99, max_cost_usd: float | None = None,
+                  client_order_id: str | None = None):
     """Decisive fill: re-quote fresh, cross up to `slippage` above the ask, but only
     if the edge STILL clears the bar at that worst-case price. `price_cap` hard-limits
     the buy price in the favorite side's own terms (H7 fix, 2026-07-04): the IOC can
@@ -274,10 +306,30 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
     q_side = q_model if side == "yes" else 1 - q_model
     if q_side - limit_px - taker_fee_usd(limit_px, 1) < min_edge:
         return 0, f"edge below bar at crossed price {limit_px:.3f}", None, None
-    resp = client.place_limit(ticker, side, contracts, limit_px)
+    # R3-C1/C6/C8 HIGH fix: the pre-scan cap check used a STALE price; recheck the
+    # dollar cap at the fresh crossed limit — shrink to fit, or refuse to POST.
+    if max_cost_usd is not None:
+        while contracts > 1 and (contracts * limit_px
+                                 + taker_fee_usd(limit_px, contracts)) > max_cost_usd + 1e-9:
+            contracts -= 1
+        if contracts * limit_px + taker_fee_usd(limit_px, contracts) > max_cost_usd + 1e-9:
+            return 0, (f"fresh px {limit_px:.2f} busts cap ${max_cost_usd:.2f} "
+                       f"even at 1 contract"), None, None
+    try:
+        resp = client.place_limit(ticker, side, contracts, limit_px,
+                                  client_order_id=client_order_id)
+    except RuntimeError as e:
+        if "HTTP 4" in str(e):           # clean exchange reject: provably no order
+            return 0, f"rejected: {str(e)[:80]}", None, None
+        raise OrderAmbiguous(str(e)[:120])          # 5xx: may have executed
+    except Exception as e:               # timeout/connection: POST may have landed
+        raise OrderAmbiguous(f"{type(e).__name__}: {str(e)[:90]}")
     # V2 responses use fill_count OR fill_count_fp depending on path (sell-path test
     # 2026-07-04 caught this: sells reported via _fp and were misread as no-fill)
-    filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
+    fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
+    filled = int(fill_raw)
+    if abs(fill_raw - filled) > 1e-9:    # R3-C3 HIGH: NEVER truncate a fractional
+        raise OrderAmbiguous(f"fractional fill_count {fill_raw}")   # fill silently
     if filled < 1:
         oid = resp.get("order_id")
         if oid:                       # belt-and-suspenders: never leave a resting stray
@@ -346,14 +398,14 @@ def cmd_shortcycle(_args) -> None:
                 continue
         if "15M" in c["series"]:
             # correlation cap: crypto moves together — one 15m position across ALL coins
-            open_15m = [t for t in ledger.open_trades()
-                        if t["mode"] == "live" and "15M" in t["ticker"].split("-")[0]]
+            # (R3-FABLE HIGH: active_trades includes 'unknown' ambiguous fills)
+            open_15m = [t for t in ledger.active_trades("live")
+                        if "15M" in t["ticker"].split("-")[0]]
             if open_15m:
                 continue
         # per-window cap: multiple strikes of the same event window = one bet repeated
         window_key = c["ticker"].rsplit("-", 1)[0]
-        if any(t["ticker"].startswith(window_key) for t in ledger.open_trades()
-               if t["mode"] == "live"):
+        if any(t["ticker"].startswith(window_key) for t in ledger.active_trades("live")):
             continue
         min_edge = (sc.get("min_edge_by_series") or {}).get(c["series"],
                                                             sc["min_edge_after_fees"])
@@ -375,26 +427,57 @@ def cmd_shortcycle(_args) -> None:
         if veto:
             print(f"VETO  {c['ticker']}: {veto}")
             continue
+        # R3 5-reviewer consensus (CRITICAL): durable INTENT ROW before the POST.
+        # A fill whose response is lost must never be invisible to the books.
+        coid = f"sc-{uuid.uuid4()}"
         try:
-            n, px, fee, order_id = _decisive_ioc(client, api, c["ticker"], d.side, contracts,
-                                                 c["q_model"], min_edge, sc.get("slippage", 0.01))
+            tid = ledger.insert_trade(
+                mode="live", ticker=c["ticker"],
+                title=f"shortcycle {c['series']} strike {c['strike']}",
+                side=d.side, price=d.price, contracts=contracts, cost_usd=est_cost,
+                fee_usd=0.0,
+                q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
+                market_prob=c["mid"], edge_net=d.edge_net,
+                rationale=f"shortcycle terminal model: spot {c['spot']:.0f}, sigma_min "
+                          f"{c['sigma_min']:.5f}, tau {c['tau_min']}m",
+                status="pending", order_id=coid)
         except Exception as e:
+            print(f"FAILED {c['ticker']}: intent write failed ({e}) — no order sent")
+            continue
+        try:
+            n, px, fee, order_id = _decisive_ioc(
+                client, api, c["ticker"], d.side, contracts, c["q_model"], min_edge,
+                sc.get("slippage", 0.01),
+                max_cost_usd=min(cfg_sc["risk"]["max_per_trade_usd"],
+                                 round(budget - spent, 2)),
+                client_order_id=coid)
+        except OrderAmbiguous as e:
+            ledger.mark_unknown(tid, f"submit ambiguous: {e}")
+            print(f"CRITICAL {c['ticker']}: order outcome UNKNOWN ({e}) — "
+                  f"row #{tid} frozen; reconcile resolves via fills")
+            continue
+        except Exception as e:
+            ledger.void_trade(tid, f"pre-submit failure: {e}")
             print(f"FAILED {c['ticker']}: {e}")
             continue
         if n < 1:
+            ledger.void_trade(tid, f"no fill: {px}")
             print(f"PASS  {c['ticker']}: {px}")
             continue
         cost = round(n * px + fee, 2)
-        tid = ledger.insert_trade(
-            mode="live", ticker=c["ticker"], title=f"shortcycle {c['series']} strike {c['strike']}",
-            side=d.side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
-            q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
-            market_prob=c["mid"], edge_net=d.edge_net,
-            rationale=f"shortcycle terminal model: spot {c['spot']:.0f}, sigma_min "
-                      f"{c['sigma_min']:.5f}, tau {c['tau_min']}m", status="open")
-        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
-                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
-        ledger.mark_placed(tid, order_id)
+        try:
+            ledger.record_fill(tid, n, px, cost, fee, order_id)
+            ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                                 (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+        except Exception as e:
+            print(f"CRITICAL {c['ticker']}: FILLED x{n} but ledger write failed ({e}) "
+                  f"— freezing #{tid} as unknown")
+            try:
+                ledger.mark_unknown(tid, f"filled x{n}@{px} but record_fill failed")
+            except Exception:
+                pass
+            spent += cost
+            continue
         spent += cost
         placed += 1
         print(f"LIVE  {c['ticker']}: {d.side.upper()} x{n} @ {px * 100:.1f}c "
@@ -462,11 +545,11 @@ def cmd_favorites(_args) -> None:
     now = dt.datetime.now(dt.timezone.utc)
     cands = []
     for series in fc["series"]:
-        try:
-            page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        try:                                    # R3-CODEX-3 MED: paginate — one page
+            markets_raw = api.open_markets(series)   # can truncate busy crypto series
         except Exception:
             continue
-        for mr in page.get("markets", []):
+        for mr in markets_raw:
             m = normalize_market(mr)
             if m["status"] != "active" or not m["close_time"]:
                 continue
@@ -504,40 +587,64 @@ def cmd_favorites(_args) -> None:
         if ledger.has_open_position(m["ticker"], "live"):
             continue
         window = m["ticker"].rsplit("-", 1)[0]
-        if any(t["ticker"].startswith(window) for t in ledger.open_trades() if t["mode"] == "live"):
+        if any(t["ticker"].startswith(window)          # R3-FABLE HIGH: incl. unknown
+               for t in ledger.active_trades("live")):
             continue
         # bet the structural bias, not a model edge -> pass edge check trivially
-        try:
-            # H7 fix: no upward slippage (structural-bias bet, don't chase) + hard
-            # price cap at the zone top so a fill can never land in the extreme band.
-            n_ct = (fc.get("max_contracts_by_series") or {}).get(
-                series, fc.get("max_contracts", 1))
-            n, px, fee, oid = _decisive_ioc(client, api, m["ticker"], side, n_ct,
-                                            1.0 if side == "yes" else 0.0, -1.0,
-                                            slippage=0.0, price_cap=hi)
-        except Exception as e:
-            print(f"FAILED {m['ticker']}: {e}")
-            continue
-        if n < 1:
-            continue
-        cost = round(n * px + fee, 2)
+        n_ct = (fc.get("max_contracts_by_series") or {}).get(
+            series, fc.get("max_contracts", 1))
+        # R3 consensus (CRITICAL): durable intent row BEFORE the POST
+        coid = f"fav-{uuid.uuid4()}"
         try:
             tid = ledger.insert_trade(
                 mode="live", ticker=m["ticker"], title=f"favorite {series}",
-                side=side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
-                q_claude=round(px, 4), q_codex=round(px, 4), q_consensus=round(px, 4),
+                side=side, price=ask, contracts=n_ct, cost_usd=round(est_cost_f, 2),
+                fee_usd=0.0,
+                q_claude=round(ask, 4), q_codex=round(ask, 4), q_consensus=round(ask, 4),
                 # OPUS-A LOW fix: store market_prob in the SAME frame as q/side
                 market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4) if side == "yes"
                             else round(1 - (m["yes_bid"] + m["yes_ask"]) / 2, 4),
                 edge_net=0.0,
-                rationale=f"favorite-harvest {side} @ {px*100:.0f}c (direction-neutral bias bet)",
-                status="open")
+                rationale=f"favorite-harvest {side} (direction-neutral bias bet)",
+                status="pending", order_id=coid)
+        except Exception as e:
+            print(f"FAILED {m['ticker']}: intent write failed ({e}) — no order sent")
+            continue
+        try:
+            # H7 fix: no upward slippage (structural-bias bet, don't chase) + hard
+            # price cap at the zone top so a fill can never land in the extreme band.
+            n, px, fee, oid = _decisive_ioc(
+                client, api, m["ticker"], side, n_ct,
+                1.0 if side == "yes" else 0.0, -1.0,
+                slippage=0.0, price_cap=hi,
+                max_cost_usd=min(cfg_gl["risk"]["max_per_trade_usd"],
+                                 round(fc["daily_budget_usd"] - spent, 2)),
+                client_order_id=coid)
+        except OrderAmbiguous as e:
+            ledger.mark_unknown(tid, f"submit ambiguous: {e}")
+            print(f"CRITICAL {m['ticker']}: order outcome UNKNOWN ({e}) — "
+                  f"row #{tid} frozen; reconcile resolves via fills")
+            continue
+        except Exception as e:
+            ledger.void_trade(tid, f"pre-submit failure: {e}")
+            print(f"FAILED {m['ticker']}: {e}")
+            continue
+        if n < 1:
+            ledger.void_trade(tid, f"no fill: {px}")
+            continue
+        cost = round(n * px + fee, 2)
+        try:
+            ledger.record_fill(tid, n, px, cost, fee, oid)
             ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
                                  (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
-            ledger.mark_placed(tid, oid)
         except Exception as e:                    # CODEX-1 HIGH: fill exists on exchange!
             print(f"CRITICAL {m['ticker']}: FILLED x{n} @ {px*100:.0f}c (order {oid}) but "
-                  f"ledger write failed ({e}) — hourly reconcile will flag the orphan")
+                  f"ledger write failed ({e}) — freezing #{tid} as unknown")
+            try:
+                ledger.mark_unknown(tid, f"filled x{n}@{px} but record_fill failed")
+            except Exception:
+                pass
+            spent += cost
             continue
         spent += cost
         n_open += 1
@@ -611,26 +718,55 @@ def cmd_weather(_args) -> None:
         if veto:
             print(f"VETO  {c['ticker']}: {veto}")
             continue
+        # R3 consensus (CRITICAL): durable intent row BEFORE the POST
+        coid = f"wx-{uuid.uuid4()}"
         try:
-            n, px, fee, order_id = _decisive_ioc(client, api, c["ticker"], d.side, contracts,
-                                                 c["q_model"], wc["min_edge_after_fees"])
+            tid = ledger.insert_trade(
+                mode="live", ticker=c["ticker"], title=f"weather {c['series']}",
+                side=d.side, price=d.price, contracts=contracts, cost_usd=est_cost,
+                fee_usd=0.0,
+                q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
+                market_prob=c["mid"], edge_net=d.edge_net,
+                rationale=f"NWS model: mu {c['mu']}F sigma {c['sigma']} obs_max {c['obs_max']} "
+                          f"fc_max {c['fc_max']} local_h {c['local_hour']}",
+                status="pending", order_id=coid)
         except Exception as e:
+            print(f"FAILED {c['ticker']}: intent write failed ({e}) — no order sent")
+            continue
+        try:
+            n, px, fee, order_id = _decisive_ioc(
+                client, api, c["ticker"], d.side, contracts, c["q_model"],
+                wc["min_edge_after_fees"],
+                max_cost_usd=min(cfg_w["risk"]["max_per_trade_usd"],
+                                 round(wc["daily_budget_usd"] - spent, 2)),
+                client_order_id=coid)
+        except OrderAmbiguous as e:
+            ledger.mark_unknown(tid, f"submit ambiguous: {e}")
+            print(f"CRITICAL {c['ticker']}: order outcome UNKNOWN ({e}) — "
+                  f"row #{tid} frozen; reconcile resolves via fills")
+            continue
+        except Exception as e:
+            ledger.void_trade(tid, f"pre-submit failure: {e}")
             print(f"FAILED {c['ticker']}: {e}")
             continue
         if n < 1:
+            ledger.void_trade(tid, f"no fill: {px}")
             print(f"PASS  {c['ticker']}: {px}")
             continue
         cost = round(n * px + fee, 2)
-        tid = ledger.insert_trade(
-            mode="live", ticker=c["ticker"], title=f"weather {c['series']}",
-            side=d.side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
-            q_claude=c["q_model"], q_codex=c["q_model"], q_consensus=c["q_model"],
-            market_prob=c["mid"], edge_net=d.edge_net,
-            rationale=f"NWS model: mu {c['mu']}F sigma {c['sigma']} obs_max {c['obs_max']} "
-                      f"fc_max {c['fc_max']} local_h {c['local_hour']}", status="open")
-        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
-                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
-        ledger.mark_placed(tid, order_id)
+        try:
+            ledger.record_fill(tid, n, px, cost, fee, order_id)
+            ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                                 (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+        except Exception as e:
+            print(f"CRITICAL {c['ticker']}: FILLED x{n} but ledger write failed ({e}) "
+                  f"— freezing #{tid} as unknown")
+            try:
+                ledger.mark_unknown(tid, f"filled x{n}@{px} but record_fill failed")
+            except Exception:
+                pass
+            spent += cost
+            continue
         spent += cost
         per_city[c["series"]] = per_city.get(c["series"], 0) + 1
         placed += 1
@@ -644,7 +780,10 @@ def cmd_settle(_args) -> None:
     api = KalshiPublic()
     stale = ledger.void_stale_pending(60)      # OPUS-A MED: pending TTL
     if stale:
-        print(f"voided {stale} stale pending order(s) (>60min unexecuted)")
+        # R3-CODEX-2 MED: say UNKNOWN (what actually happened) so the loop's
+        # changed-keyword scan journals/commits this ledger mutation
+        print(f"UNKNOWN: {stale} stale pending order(s) frozen (>60min, "
+              f"ambiguous until reconcile)")
     settled = 0
     for t in ledger.open_trades():
         try:
@@ -652,13 +791,24 @@ def cmd_settle(_args) -> None:
         except Exception as e:
             print(f"WARN  {t['ticker']}: fetch failed ({e})")
             continue
-        if m.get("status") in ("settled", "finalized") and m.get("result") in ("yes", "no"):
-            win = m["result"] == t["side"]
+        if m.get("status") not in ("settled", "finalized"):
+            continue
+        res = m.get("result")
+        if res in ("yes", "no"):
+            win = res == t["side"]
             pnl = round(t["contracts"] - t["cost_usd"], 2) if win else round(-t["cost_usd"], 2)
-            ledger.settle_trade(t["id"], m["result"], pnl)
+            ledger.settle_trade(t["id"], res, pnl)
             settled += 1
-            print(f"SETTLED {t['ticker']}: result={m['result']} "
+            print(f"SETTLED {t['ticker']}: result={res} "
                   f"{'WIN' if win else 'LOSS'} pnl=${pnl:+.2f}")
+        elif res in ("void", "voided", "scratch", "cancelled", "canceled"):
+            # R3-CODEX-7 MED: a scratched market refunds cost — without this the
+            # row sat in 'open' forever. Booked as close@pnl=0 (refund = cost back)
+            # so the cash-reconciliation identity still balances (R3-FABLE HIGH).
+            ledger.close_position(t["id"], 0.0, 0.0, f"market {res}: cost refunded")
+            settled += 1
+            print(f"VOIDED {t['ticker']}: market {res} — cost refunded, pnl $0")
+        # empty/other result while finalized: settlement still publishing — wait
     print(f"done: {settled} settled, {len(ledger.open_trades())} still open")
 
 
@@ -775,7 +925,12 @@ def cmd_journal(_args) -> None:
 
     brier = {}
     for lane in lanes:
-        rows = [t for t in all_settled if _lane_of(t["ticker"], t.get("title") or "") == lane]
+        # R3-C1/C5 fix: favorites store q in HELD-side frame (q=price by design) —
+        # scoring them as P(YES) marks winning NO favorites as huge misses. Same
+        # exclusion ledger.calibration applies.
+        rows = [t for t in all_settled
+                if _lane_of(t["ticker"], t.get("title") or "") == lane
+                and not (t.get("title") or "").startswith("favorite")]
         if rows:
             bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
                      for t in rows) / len(rows)
@@ -824,6 +979,10 @@ def cmd_journal(_args) -> None:
         csv.write_text("".join(content) + row, encoding="utf-8")
     else:
         csv.write_text(header + row, encoding="utf-8")
+    try:
+        ledger.checkpoint()     # R3-CODEX-2 HIGH: fold WAL into ledger.db before the
+    except Exception:           # loop's git add — the pushed backup must be current
+        pass
     print(f"journal written: realized today ${total_realized:+.2f}, "
           f"{len(settled_today)} settled, {len(fills_today)} fills")
 
@@ -888,23 +1047,68 @@ def cmd_reconcile(_args) -> None:
         return
     from .live import KalshiLive, LiveAuthError
     try:
-        pos = KalshiLive().positions()
+        client = KalshiLive()
+        pos = client.positions()
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
         return
     exch = {}
     for p in pos.get("market_positions") or []:
-        net = float(p.get("position_fp") or 0)
+        # R3-CODEX-7 HIGH: accept BOTH field shapes — position_fp (fp string) and
+        # position (int) — a shape change must never blank the safety net
+        raw = p.get("position_fp")
+        if raw is None:
+            raw = p.get("position")
+        net = float(raw or 0)
         if abs(net) > 1e-9:
             exch[p["ticker"]] = net                 # +N = long yes, -N = long no
-    led = {}
+    # ---- unknown resolver (R3-CODEX-7: 'unknown' must not be an absorbing state) --
     con_r = ledger._conn()
     unknowns = [dict(r) for r in con_r.execute(
-        "SELECT id, ticker, side, contracts FROM trades WHERE status='unknown'")]
+        "SELECT id, ts, ticker, side, contracts, price, order_id FROM trades "
+        "WHERE status='unknown'")]
     for u in unknowns:
-        print(f"UNKNOWN #{u['id']} {u['ticker']} {u['side']} x{u['contracts']} "
-              f"-> resolve via fills API (ambiguous exchange state)")
-    for t in ledger.open_trades():
+        oid = (u.get("order_id") or "").strip()
+        resolved = False
+        if oid and oid != "?":
+            try:
+                fl = client.fills(ticker=u["ticker"], limit=100).get("fills") or []
+                mine = [f for f in fl
+                        if oid in (str(f.get("order_id") or ""),
+                                   str(f.get("client_order_id") or ""))]
+                cnt = sum(float(f.get("count") or f.get("count_fp") or 0) for f in mine)
+                n = int(round(cnt))
+                if n >= 1:
+                    tot = 0.0
+                    for f in mine:
+                        ci = float(f.get("count") or f.get("count_fp") or 0)
+                        pi = float(f.get("yes_price") or f.get("price") or 0)
+                        if pi > 1:                    # cents payload variant
+                            pi /= 100.0
+                        if u["side"] == "no":         # fills report YES-leg terms
+                            pi = 1.0 - pi
+                        tot += ci * pi
+                    avg = round(tot / cnt, 4) if cnt else u["price"]
+                    fee = taker_fee_usd(avg, n)
+                    ledger.record_fill(u["id"], n, avg, round(n * avg + fee, 2), fee, oid)
+                    print(f"RESOLVED #{u['id']} {u['ticker']}: fills prove x{n} "
+                          f"@ {avg * 100:.0f}c -> open")
+                    resolved = True
+                else:
+                    age_h = (dt.datetime.now()
+                             - dt.datetime.fromisoformat(u["ts"])).total_seconds() / 3600
+                    if age_h >= 2:                    # IOC cannot rest: no fills after
+                        ledger.void_trade(u["id"],   # 2h proves it never executed
+                                          "no fills for order after 2h (IOC cannot rest)")
+                        print(f"RESOLVED #{u['id']} {u['ticker']}: no fills -> voided")
+                        resolved = True
+            except Exception as e:
+                print(f"WARN resolver #{u['id']}: {e}")
+        if not resolved:
+            print(f"UNKNOWN #{u['id']} {u['ticker']} {u['side']} x{u['contracts']} "
+                  f"-> unresolved (ambiguous exchange state)")
+    led = {}
+    for t in ledger.open_trades():                    # AFTER resolver: fresh statuses
         if t["mode"] != "live":
             continue
         net = t["contracts"] if t["side"] == "yes" else -t["contracts"]
@@ -918,6 +1122,40 @@ def cmd_reconcile(_args) -> None:
                   f"  <- {'exchange has untracked position' if abs(e) > abs(l) else 'ledger claims more than exchange holds'}")
         else:
             print(f"OK       {tk}: {e:+.0f}")
+    # ---- cash reconciliation (R3-FABLE HIGH): contracts-only compare is blind to
+    # booking-PRICE corruption. Identity: balance_now - balance_prev must equal
+    # (returned cash: cost+pnl of rows settled/closed since) - (consumed cash:
+    # cost of rows entered since). Alert on > $1 drift (deposits also trip once).
+    problems_cash = 0
+    try:
+        bal_now = float(client.balance().get("balance_dollars") or 0)
+        snap_path = Path("data") / "cash_check.json"
+        now_iso = dt.datetime.now().isoformat(timespec="seconds")
+        if snap_path.exists():
+            prev = json.loads(snap_path.read_text(encoding="utf-8"))
+            returned = con_r.execute(
+                "SELECT COALESCE(SUM(cost_usd + COALESCE(pnl_usd,0)),0) FROM trades "
+                "WHERE mode='live' AND status IN ('settled','closed') AND settled_ts > ?",
+                (prev["ts"],)).fetchone()[0]
+            consumed = con_r.execute(
+                "SELECT COALESCE(SUM(cost_usd),0) FROM trades WHERE mode='live' "
+                "AND ts > ? AND status IN ('open','closed','settled','unknown')",
+                (prev["ts"],)).fetchone()[0]
+            expected = prev["balance"] + returned - consumed
+            drift = bal_now - expected
+            if abs(drift) > 1.0:
+                problems_cash = 1
+                print(f"CASH MISMATCH: balance ${bal_now:.2f} vs expected "
+                      f"${expected:.2f} (drift ${drift:+.2f}) — booking corruption "
+                      f"or external deposit/withdrawal")
+            else:
+                print(f"CASH OK: balance ${bal_now:.2f} ~ expected ${expected:.2f} "
+                      f"(drift ${drift:+.2f})")
+        snap_path.write_text(json.dumps({"ts": now_iso, "balance": bal_now}),
+                             encoding="utf-8")
+    except Exception as e:
+        print(f"WARN cash check failed: {e}")
+    problems += problems_cash
     print(f"reconcile: {len(set(exch) | set(led))} tickers, {problems} mismatches"
           + (" — ACCOUNTING CLEAN" if problems == 0 else " — INVESTIGATE"))
 
@@ -959,13 +1197,44 @@ def cmd_execute_live(args) -> None:
     if args.id:
         rows = [t for t in rows if t["id"] == args.id]
     ok = failed = 0
+    cfg_x = _live_risk_overlay(cfg)
     for t in rows:
+        # R3-CODEX-6 HIGH fix: a pending decision may be STALE — resident lanes can
+        # spend the cap room between decide and execute. Re-check caps now (this
+        # row's cost is already inside stats, so additional cost is 0).
+        veto = engine.check_risk(ledger.stats("live"), 0.0, cfg_x)
+        if veto:
+            failed += 1
+            print(f"VETO #{t['id']} {t['ticker']}: {veto} (stays pending)")
+            continue
         try:
             resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"])
+        except RuntimeError as e:
+            failed += 1
+            if "HTTP 4" in str(e):        # clean exchange reject: provably no order
+                print(f"REJECTED #{t['id']} {t['ticker']}: {str(e)[:90]} (stays pending)")
+            else:                          # R3 consensus CRITICAL: 5xx may have filled
+                ledger.mark_unknown(t["id"], f"submit ambiguous: {str(e)[:100]}")
+                print(f"UNKNOWN #{t['id']} {t['ticker']}: submit ambiguous ({str(e)[:70]}) "
+                      f"— frozen; reconcile resolves via fills")
+            continue
+        except Exception as e:             # timeout/connection: POST may have landed
+            failed += 1
+            ledger.mark_unknown(t["id"], f"submit ambiguous: {type(e).__name__} {str(e)[:80]}")
+            print(f"UNKNOWN #{t['id']} {t['ticker']}: {type(e).__name__} — frozen; "
+                  f"reconcile resolves via fills")
+            continue
+        try:
             order_id = (resp.get("order") or {}).get("order_id") or resp.get("order_id") or "?"
             # OPUS-A CRITICAL fix: an IOC can return 200 with zero fills — never book
             # a phantom. Parse fills; 0 -> cancel stray + stay pending.
-            filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
+            fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
+            filled = int(fill_raw)
+            if abs(fill_raw - filled) > 1e-9:      # R3-CODEX-3: fractional fill
+                ledger.mark_unknown(t["id"], f"fractional fill_count {fill_raw}")
+                failed += 1
+                print(f"UNKNOWN #{t['id']} {t['ticker']}: fractional fill {fill_raw} — frozen")
+                continue
             if filled < 1:
                 if order_id != "?":
                     try:
@@ -999,12 +1268,23 @@ def cmd_execute_live(args) -> None:
                     pass
                 failed += 1
                 continue
+            # R3-CODEX-1 MED fix: exit plan must track the ACTUAL entry, not the
+            # pre-submit quote (a 13c fill with 10c-based stops exits at wrong levels)
+            try:
+                _assign_exit_plan(t["id"], t["side"], avg_px, t["q_consensus"] or 0, cfg)
+            except Exception:
+                pass                       # plan refresh is best-effort; fill is booked
             ok += 1
             print(f"PLACED #{t['id']} {t['ticker']} {t['side'].upper()} x{filled} "
                   f"@ {avg_px * 100:.1f}c order_id={order_id}")
-        except Exception as e:
-            failed += 1
-            print(f"FAILED #{t['id']} {t['ticker']}: {e}")
+        except Exception as e:             # response in hand but handling broke:
+            failed += 1                    # state unproven -> freeze, never retry
+            print(f"CRITICAL #{t['id']} {t['ticker']}: response handling failed ({e}) "
+                  f"-> marking unknown")
+            try:
+                ledger.mark_unknown(t["id"], f"response handling failed: {str(e)[:80]}")
+            except Exception:
+                pass
     print(f"done: {ok} placed, {failed} failed, "
           f"{len(ledger.pending_trades())} still pending")
 

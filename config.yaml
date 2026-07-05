@@ -181,7 +181,7 @@ favorites:
                                  # (旧$4靠结算回填漏洞实现~$50/天流转; 现按真实口径设$15,
                                  # 约今日实际节奏, 由$5日亏熔断+$12敞口兜风险)
   max_open: 8                    # 2026-07-04 用户"123": 5→8 (4币时段打满; 全局$5熔断兜底)
-  max_per_window: 1
+  # (R3-FABLE: max_per_window 旋钮已删 — 每窗口一仓由代码硬编码, 改这里没有效果)
   # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
   # 每亏 $3 触发一次复盘 -> Fable5 调策略 -> 继续下单 -> 再亏 $3 再复盘, 循环。
   drawdown_step_usd: 3.00        # 每段回撤额度
@@ -201,4 +201,4 @@ weather:
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30
   max_brier: 0.22
-  require_positive_pnl: true
+  # (R3-FABLE: require_positive_pnl 旋钮已删 — 无代码读取, 留着会误导)

@@ -74,6 +74,24 @@ class KalshiPublic:
             if not cursor:
                 break
 
+    def open_markets(self, series_ticker: str, status: str = "open",
+                     max_pages: int = 3) -> list[dict]:
+        """All markets of a series across pages. R3-CODEX-3 MED fix: a single
+        limit=100 page can truncate busy series (e.g. daily crypto with strikes
+        across many hourly events) and silently hide tradable windows."""
+        out: list[dict] = []
+        cursor = None
+        for _ in range(max_pages):
+            params = {"series_ticker": series_ticker, "status": status, "limit": 100}
+            if cursor:
+                params["cursor"] = cursor
+            page = self._get("/markets", **params)
+            out += page.get("markets", [])
+            cursor = page.get("cursor")
+            if not cursor:
+                break
+        return out
+
     def market(self, ticker: str) -> dict:
         return self._get(f"/markets/{ticker}")["market"]
 

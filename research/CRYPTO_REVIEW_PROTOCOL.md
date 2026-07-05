@@ -23,10 +23,11 @@ favorites 回撤写 review_due_favorites.json, 双信箱防互相覆盖); **每 
 4. **实施**: 改 config/代码, `python -m py_compile` 验证, 更新 SHORTCYCLE_DESIGN.md
    复盘编号章节 (Review #N: 数据→诊断→裁决→新假设)。
 5. **记账**: 更新 data/review_state.json: {"last_review_id": <本次覆盖到的最大id>,
-   "ts": <ISO时间>, "review_no": N}; 删除 data/review_due.json。
+   "ts": <ISO时间>, "review_no": N}; 删除 **data/review_due_shortcycle.json**
+   (R3-FABLE 修正: 旧名 review_due.json 已拆分, 删错名字会让监工每 3h 重复复盘)。
 6. **归档**: git add -A && git commit -m "crypto review #N: <一句话裁决>" && git push。
 
-## 通道分流 (读 review_due.json 的 "lane" 字段)
+## 通道分流 (读 review_due_*.json 的 "lane" 字段)
 
 - `lane` 缺省或非 favorites → **短周期策略复盘** (原六步, 针对 shortcycle/15m)。
 - `lane == "favorites"` → **热门收割回撤复盘** (2026-07-03 用户设定的节拍器):

@@ -115,7 +115,11 @@ def candidates(cfg: dict) -> list[dict]:
         local_now = now.astimezone(ZoneInfo(tz)).replace(tzinfo=None)
         if not (wc["active_local_hours"][0] <= local_now.hour <= wc["active_local_hours"][1]):
             continue
-        page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        try:                     # R3-CODEX-3 MED: one city's 503 must not abort
+            page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        except Exception as e:   # the whole lane during Kalshi maintenance
+            print(f"WARN {series}: market fetch failed ({e}) - skipping city")
+            continue
         markets = [normalize_market(m) for m in page.get("markets", [])]
         markets = [m for m in markets if m["status"] == "active" and m["close_time"]]
         todays = [m for m in markets
@@ -137,6 +141,15 @@ def candidates(cfg: dict) -> list[dict]:
         fc = forecast_remaining_max_f(lat, lon, now, day_end_utc)
         if obs is None and fc is None:
             print(f"WARN {series}: no NWS data")
+            continue
+        # R3-CODEX-8 HIGH: single-leg NWS data prices confidently from half the
+        # picture. Before late day the forecast IS the information (obs alone
+        # lowballs the high); after midday the obs floor is required too.
+        if fc is None and local_now.hour < 17:
+            print(f"WARN {series}: forecast leg missing before late day - skipping")
+            continue
+        if obs is None and local_now.hour >= 13:
+            print(f"WARN {series}: observation leg missing after midday - skipping")
             continue
         mu = max(x for x in (obs, fc) if x is not None)
         sigma = _sigma_for_local_hour(local_now.hour)

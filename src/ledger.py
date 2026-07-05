@@ -89,12 +89,17 @@ def mark_placed(trade_id: int, order_id: str) -> None:
                   (order_id, trade_id))
 
 
-def resize_trade(trade_id: int, contracts: int, price: float,
-                 cost_usd: float, fee_usd: float) -> None:
-    """Rewrite a row to the ACTUAL fill (partial-fill correction, OPUS-A fix)."""
+def active_trades(mode: str | None = None) -> list[dict]:
+    """Rows that may hold real exposure: open, pending (intent), OR unknown
+    (ambiguous fill). R3-FABLE HIGH: window/correlation dedup must see all
+    three — dedup that ignores an ambiguous fill can double real exposure."""
+    q = "SELECT * FROM trades WHERE status IN ('open','pending','unknown')"
+    args: list = []
+    if mode:
+        q += " AND mode=?"
+        args.append(mode)
     with _conn() as c:
-        c.execute("UPDATE trades SET contracts=?, price=?, cost_usd=?, fee_usd=? WHERE id=?",
-                  (contracts, price, cost_usd, fee_usd, trade_id))
+        return [dict(r) for r in c.execute(q + " ORDER BY ts", args)]
 
 
 def record_fill(trade_id: int, contracts: int, price: float, cost_usd: float,
@@ -153,12 +158,16 @@ def split_close(trade_id: int, filled: int, exit_price: float,
 
 def void_stale_pending(max_age_min: int = 60) -> int:
     """Pending live orders that never executed keep consuming exposure/slots
-    forever (OPUS-A MED). CODEX-2 HIGH revision: age alone cannot prove the
-    exchange never filled — stale rows become 'unknown' (still counted as
-    exposure, listed by reconcile for human/supervisor resolution), NOT voided."""
+    forever (OPUS-A MED). R3-FABLE MED refinement: a stale pending WITHOUT an
+    order_id provably never reached the exchange (no POST was attempted with
+    its identity) -> clean void. Only rows that own an order identity become
+    'unknown' (possibly filled; resolver/reconcile owns them)."""
     cutoff = (dt.datetime.now() - dt.timedelta(minutes=max_age_min)
               ).isoformat(timespec="seconds")
     with _conn() as c:
+        c.execute("UPDATE trades SET status='voided', "
+                  "rationale = rationale || ' | VOID: stale pending, never submitted' "
+                  "WHERE status='pending' AND ts < ? AND order_id IS NULL", (cutoff,))
         cur = c.execute("UPDATE trades SET status='unknown', "
                         "rationale = rationale || ' | UNKNOWN: stale pending TTL' "
                         "WHERE status='pending' AND ts < ?", (cutoff,))
@@ -172,13 +181,22 @@ def void_trade(trade_id: int, reason: str) -> None:
 
 
 def has_open_position(ticker: str, mode: str | None = None) -> bool:
-    q = "SELECT 1 FROM trades WHERE status IN ('open','pending') AND ticker=?"
+    # R3 5-reviewer consensus: 'unknown' MUST block re-entry — the order may have
+    # filled, so trading the same ticker again can silently double real exposure
+    q = "SELECT 1 FROM trades WHERE status IN ('open','pending','unknown') AND ticker=?"
     args: list = [ticker]
     if mode:
         q += " AND mode=?"
         args.append(mode)
     with _conn() as c:
         return c.execute(q, args).fetchone() is not None
+
+
+def checkpoint() -> None:
+    """R3-CODEX-2 HIGH fix: git ignores the -wal sidecar, so the pushed ledger.db
+    could omit fills still sitting in WAL. Truncate-checkpoint before commits."""
+    with _conn() as c:
+        c.execute("PRAGMA wal_checkpoint(TRUNCATE)")
 
 
 def settle_trade(trade_id: int, result: str, pnl_usd: float) -> None:
