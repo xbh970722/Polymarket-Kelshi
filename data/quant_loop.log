@@ -4506,3 +4506,20 @@
 [07-05 09:20:44]   journal: journal written: realized today $-2.21, 40 settled, 41 fills
 [07-05 09:20:46]   report: wrote reports\report_2026-07-05.md
 [07-05 09:20:47] committed + pushed
+[07-05 09:23:20]   h15: done: h15 pass complete
+[07-05 09:23:21]   h10: h10: 0 in-window | h10 shadow(main): n=30 mean -0.1c total $-0.04 | KXETH15M: n=8 net $+0.80 | KXSOL15M: n=12 net $-1.94 | KXBTC15M: n=10 net $+1.10 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 09:26:21]   settle: done: 0 settled, 8 still open
+[07-05 09:26:22]   h15: done: h15 pass complete
+[07-05 09:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 09:26:27]   shortcycle: shortcycle: 10 candidate strikes | balance $8.81 | today spent $0.85/999999.00
+[07-05 09:26:27]   shortcycle: done: 0 shortcycle orders
+[07-05 09:26:29]   favorites: favorites: 3 favorites in zone | realized $-0.85 | today spent $47.78/999999.00
+[07-05 09:26:29]   favorites: LIVE  KXXRPD-26JUL0512-T1.1399: FAV NO x1 @ 92c cost=$0.93 order=19b47e15-a2fc-4f50-a06e-99680d6cabae
+[07-05 09:26:29]   favorites: done: 1 favorite orders
+[07-05 09:26:30]   h10: h10: 0 in-window | h10 shadow(main): n=30 mean -0.1c total $-0.04 | KXETH15M: n=8 net $+0.80 | KXSOL15M: n=12 net $-1.94 | KXBTC15M: n=10 net $+1.10 | gate: accumulating (1 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 09:26:31]   weather: weather: daily entry cap reached (3)
+[07-05 09:26:34]   disloc: DISLOC KXETHD-26JUL0512-T1769.99: fav 0.79->0.70 ask 0.72 [BOOK-ONLY] tau 33m
+[07-05 09:26:34]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=9 win 44% EV -29.2c | BOOK-ONLY: n=7 win 71% EV -4.3c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (21 pending)
+[07-05 09:26:44]   pmwatch: pmwatch: +48 pairs | pmwatch: 692 rows, 219 kalshi-matched | |divergence| median 4.0c, p90 16.5c (gate n>=300)
+[07-05 09:26:44]   journal: journal written: realized today $-2.21, 40 settled, 42 fills
+[07-05 09:26:46]   report: wrote reports\report_2026-07-05.md
