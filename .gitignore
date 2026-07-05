@@ -14,3 +14,5 @@ review_session.log
 data/ledger.db-shm
 data/ledger.db-wal
 data/quant_loop.pid.lock
+
+data/backfill_*.db

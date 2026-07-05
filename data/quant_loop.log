@@ -3006,3 +3006,29 @@
 [07-05 00:20:29]   weather: weather: 0 priced buckets | spent $0.00/999999.00
 [07-05 00:20:29]   weather: done: 0 weather orders
 [07-05 00:21:25] === quant_loop started pid=79960 ===
+[07-05 00:26:21]   settle: done: 0 settled, 8 still open
+[07-05 00:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 00:26:27]   shortcycle: shortcycle: 6 candidate strikes | balance $9.71 | today spent $0.00/999999.00
+[07-05 00:26:27]   shortcycle: done: 0 shortcycle orders
+[07-05 00:26:29]   favorites: favorites: 2 favorites in zone | realized $+2.53 | today spent $7.22/999999.00
+[07-05 00:26:29]   favorites: LIVE  KXXRPD-26JUL0503-T1.1399: FAV NO x1 @ 88c cost=$0.89 order=65497993-e87c-457d-ac91-a0610b3133b8
+[07-05 00:26:29]   favorites: VETO  KXBTCD-26JUL0503-T62599.99: total exposure cap reached
+[07-05 00:26:29]   favorites: done: 1 favorite orders
+[07-05 00:26:30]   h10: h10: 0 in-window | h10 shadow: 0 settled (0 pending)
+[07-05 00:26:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 00:26:30]   weather: done: 0 weather orders
+[07-05 00:26:33]   manage: done: 0 exited, 0 flagged for review, 9 holding
+[07-05 00:26:33]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 00:26:33]   reconcile: OK       KXBTCD-26JUL0503-T62799.99: -3
+[07-05 00:26:33]   reconcile: OK       KXETHD-26JUL0503-T1769.99: -3
+[07-05 00:26:33]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 00:26:33]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 00:26:33]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 00:26:33]   reconcile: OK       KXSOLD-26JUL0503-T79.9999: +2
+[07-05 00:26:33]   reconcile: OK       KXXRPD-26JUL0502-T1.1399: -2
+[07-05 00:26:33]   reconcile: OK       KXXRPD-26JUL0503-T1.1399: -1
+[07-05 00:26:33]   reconcile: CASH OK: balance $8.82 ~ expected $8.82 (drift $+0.00)
+[07-05 00:26:33]   reconcile: reconcile: 9 tickers, 0 mismatches — ACCOUNTING CLEAN
+[07-05 00:26:34] janitor: killed stale task sessions ['72780', '86276']
+[07-05 00:26:35]   journal: journal written: realized today $+0.79, 2 settled, 4 fills
+[07-05 00:26:36]   report: wrote reports\report_2026-07-05.md
