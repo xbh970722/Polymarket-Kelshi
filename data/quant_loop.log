@@ -2846,3 +2846,20 @@
 [07-04 22:35:27]   favorites: done: 0 favorite orders
 [07-04 22:35:29]   weather: weather: 0 priced buckets | spent $1.09/3.00
 [07-04 22:35:29]   weather: done: 0 weather orders
+[07-04 22:41:20]   settle: done: 0 settled, 4 still open
+[07-04 22:41:22]   mktsnap: mktsnap: 6 quotes recorded, 0 outcomes resolved
+[07-04 22:41:26]   shortcycle: shortcycle: 6 candidate strikes | balance $17.88 | today spent $0.00/999999.00
+[07-04 22:41:26]   shortcycle: done: 0 shortcycle orders
+[07-04 22:41:28]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $52.54/999999.00
+[07-04 22:41:28]   favorites: done: 0 favorite orders
+[07-04 22:41:30]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 22:41:30]   weather: done: 0 weather orders
+[07-04 22:50:20]   settle: done: 0 settled, 4 still open
+[07-04 22:50:22]   mktsnap: mktsnap: 6 quotes recorded, 3 outcomes resolved
+[07-04 22:50:26]   shortcycle: shortcycle: 0 candidate strikes | balance $17.88 | today spent $0.00/999999.00
+[07-04 22:50:26]   shortcycle: done: 0 shortcycle orders
+[07-04 22:50:28]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $52.54/999999.00
+[07-04 22:50:28]   favorites: done: 0 favorite orders
+[07-04 22:50:30]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 22:50:30]   weather: done: 0 weather orders
+[07-04 22:53:24] === quant_loop started pid=71968 ===

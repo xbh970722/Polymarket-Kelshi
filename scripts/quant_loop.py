@@ -204,7 +204,7 @@ def check_review_trigger() -> None:
 def janitor_stale_sessions() -> None:
     """Scheduled-task claude sessions don't exit and leak ~370MB each (found
     2026-07-04: pagefile exhaustion, fork failures). Kill 'claude' processes
-    aged 3-20h whose start minute matches task-launch minutes. The <20h upper
+    aged 3-16h whose start minute matches task-launch minutes. The <16h upper
     bound protects long-lived interactive sessions (review 2026-07-04: a
     days-old chat session could otherwise collide on start-minute)."""
     try:
@@ -273,7 +273,7 @@ def main() -> None:
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
                                          "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",
-                                         "CRITICAL"))
+                                         "CRITICAL", "FAILED", "REJECTED"))
         if changed:
             run_cmd("journal")
             run_cmd("report")

@@ -148,4 +148,17 @@ print("PASS 5efgh: ambiguity taxonomy (4xx reject / 5xx / timeout / fractional)"
 ledger.checkpoint()
 print("PASS 6: wal checkpoint")
 
+# ---- 7. _http_status: parse live._req's prefix, ignore lookalikes in the body ----
+from src.pipeline import _http_status
+assert _http_status(RuntimeError("POST /x -> HTTP 400: insufficient")) == 400
+assert _http_status(RuntimeError("POST /x -> HTTP 502: <html>HTTP 400</html>")) == 502
+assert _http_status(TimeoutError("timed out")) is None
+try:
+    _decisive_ioc(FakeClient(exc=RuntimeError("POST /x -> HTTP 502: body HTTP 400 page")),
+                  FakeApi(0.50), "T", "yes", 1, 0.99, 0.0)
+    raise AssertionError("5xx with 4xx-lookalike body must be OrderAmbiguous")
+except OrderAmbiguous:
+    pass
+print("PASS 7: http status prefix parse (body lookalikes stay ambiguous)")
+
 print("ALL R3 REGRESSION TESTS PASSED")

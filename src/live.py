@@ -85,6 +85,25 @@ class KalshiLive:
             p["ticker"] = ticker
         return self._req("GET", f"{API}/portfolio/fills", params=p)
 
+    def orders(self, ticker: str | None = None, limit: int = 100) -> list[dict]:
+        """Recent orders (R4-FABLE-A CRITICAL fix): the ONLY authoritative way to
+        map our client_order_id to the exchange order_id — fills don't carry the
+        client id, so ambiguous submits must resolve through here."""
+        out: list[dict] = []
+        cursor = None
+        for _ in range(3):
+            p: dict = {"limit": limit}
+            if ticker:
+                p["ticker"] = ticker
+            if cursor:
+                p["cursor"] = cursor
+            page = self._req("GET", f"{API}/portfolio/orders", params=p)
+            out += page.get("orders") or []
+            cursor = page.get("cursor")
+            if not cursor:
+                break
+        return out
+
     # ---- read-only ----
     def balance(self) -> dict:
         return self._req("GET", f"{API}/portfolio/balance")

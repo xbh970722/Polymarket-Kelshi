@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS trades(
 _MIGRATIONS = {
     "order_id": "TEXT", "exit_type": "TEXT", "target_price": "REAL",
     "stop_price": "REAL", "review_after_ts": "TEXT", "exit_price": "REAL",
-}
+    "booked_ts": "TEXT",   # R4: when cash actually moved (fill/freeze time) —
+}                          # the cash identity keys on this, not on decide-time ts
 
 
 def _conn() -> sqlite3.Connection:
@@ -105,20 +106,31 @@ def active_trades(mode: str | None = None) -> list[dict]:
 def record_fill(trade_id: int, contracts: int, price: float, cost_usd: float,
                 fee_usd: float, order_id: str) -> None:
     """CODEX-2 HIGH fix: actual fill + status='open' + order_id in ONE transaction,
-    so no crash window can leave a filled trade looking pending (and later voided)."""
+    so no crash window can leave a filled trade looking pending (and later voided).
+    booked_ts = when the cash actually moved (R4 cash-identity keying)."""
+    now = dt.datetime.now().isoformat(timespec="seconds")
     with _conn() as c:
         c.execute("UPDATE trades SET contracts=?, price=?, cost_usd=?, fee_usd=?, "
-                  "order_id=?, status='open' WHERE id=?",
-                  (contracts, price, cost_usd, fee_usd, order_id, trade_id))
+                  "order_id=?, status='open', booked_ts=? WHERE id=?",
+                  (contracts, price, cost_usd, fee_usd, order_id, now, trade_id))
 
 
 def mark_unknown(trade_id: int, reason: str) -> None:
     """Exchange state ambiguous (post-submit exception): freeze the row as 'unknown'
     — counted as exposure, excluded from auto-retry, surfaced by reconcile."""
+    now = dt.datetime.now().isoformat(timespec="seconds")
     with _conn() as c:
-        c.execute("UPDATE trades SET status='unknown', "
+        c.execute("UPDATE trades SET status='unknown', booked_ts=?, "
                   "rationale = rationale || ' | UNKNOWN: ' || ? WHERE id=?",
-                  (reason, trade_id))
+                  (now, reason, trade_id))
+
+
+def set_client_oid(trade_id: int, client_oid: str | None) -> None:
+    """R4-FABLE-A HIGH fix: give a pending row its order identity BEFORE the POST
+    (execute-live lane), or clear it back to NULL after a provable clean reject so
+    the stale-pending TTL voids instead of freezing."""
+    with _conn() as c:
+        c.execute("UPDATE trades SET order_id=? WHERE id=?", (client_oid, trade_id))
 
 
 def split_close(trade_id: int, filled: int, exit_price: float,

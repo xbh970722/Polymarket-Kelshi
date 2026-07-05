@@ -75,7 +75,7 @@ class KalshiPublic:
                 break
 
     def open_markets(self, series_ticker: str, status: str = "open",
-                     max_pages: int = 3) -> list[dict]:
+                     max_pages: int = 5) -> list[dict]:
         """All markets of a series across pages. R3-CODEX-3 MED fix: a single
         limit=100 page can truncate busy series (e.g. daily crypto with strikes
         across many hourly events) and silently hide tradable windows."""

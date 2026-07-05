@@ -13,6 +13,7 @@ following research/PROTOCOL.md. This CLI only does the deterministic parts.
 import argparse
 import datetime as dt
 import json
+import re
 import sys
 import uuid
 from pathlib import Path
@@ -201,7 +202,8 @@ def cmd_manage(_args) -> None:
                 try:
                     resp = client_x.place_exit(t["ticker"], t["side"], t["contracts"], px)
                 except RuntimeError as e:
-                    if "HTTP 4" in str(e):     # clean reject: position untouched
+                    st = _http_status(e)       # R4: parse status, don't substring-match
+                    if st is not None and 400 <= st < 500:   # clean reject: untouched
                         print(f"LIVE EXIT FAILED {t['ticker']}: {e}")
                     else:                      # R3-CODEX-2: 5xx after possible execution
                         print(f"CRITICAL {t['ticker']}: exit outcome AMBIGUOUS ({str(e)[:90]}) "
@@ -286,6 +288,15 @@ class OrderAmbiguous(RuntimeError):
     never void — until the reconcile fills-resolver proves what happened."""
 
 
+def _http_status(err: Exception) -> int | None:
+    """R4-FABLE-A MED fix: parse the status code from live._req's fixed error
+    prefix ('METHOD path -> HTTP NNN: body'). A raw substring test over the whole
+    text could match 'HTTP 4xx' INSIDE a 5xx response body and misclassify an
+    ambiguous failure as a provable reject."""
+    m = re.search(r"-> HTTP (\d{3}):", str(err))
+    return int(m.group(1)) if m else None
+
+
 def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
                   q_model: float, min_edge: float, slippage: float = 0.01,
                   price_cap: float = 0.99, max_cost_usd: float | None = None,
@@ -319,39 +330,48 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
         resp = client.place_limit(ticker, side, contracts, limit_px,
                                   client_order_id=client_order_id)
     except RuntimeError as e:
-        if "HTTP 4" in str(e):           # clean exchange reject: provably no order
+        st = _http_status(e)
+        if st is not None and 400 <= st < 500:   # provable exchange reject: no order
             return 0, f"rejected: {str(e)[:80]}", None, None
-        raise OrderAmbiguous(str(e)[:120])          # 5xx: may have executed
+        raise OrderAmbiguous(str(e)[:120])          # 5xx/unparsed: may have executed
     except Exception as e:               # timeout/connection: POST may have landed
         raise OrderAmbiguous(f"{type(e).__name__}: {str(e)[:90]}")
-    # V2 responses use fill_count OR fill_count_fp depending on path (sell-path test
-    # 2026-07-04 caught this: sells reported via _fp and were misread as no-fill)
-    fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
-    filled = int(fill_raw)
-    if abs(fill_raw - filled) > 1e-9:    # R3-C3 HIGH: NEVER truncate a fractional
-        raise OrderAmbiguous(f"fractional fill_count {fill_raw}")   # fill silently
-    if filled < 1:
-        oid = resp.get("order_id")
-        if oid:                       # belt-and-suspenders: never leave a resting stray
-            try:
-                client.cancel_order(str(oid))
-            except Exception:
-                pass
-        return 0, "IOC no fill even crossed", None, None
-    # CODEX-1 CRITICAL fix: the YES-leg->held-side conversion applies ONLY to the
-    # exchange-reported average; the limit_px fallback is ALREADY in held-side frame.
-    raw_avg = resp.get("average_fill_price")
-    if raw_avg is not None and str(raw_avg) != "":
-        avg_px = float(raw_avg)
-        if side == "no":                 # exchange reports fills in YES-leg terms
-            avg_px = round(1.0 - avg_px, 4)
-    else:
-        avg_px = limit_px                # held-side frame already; no conversion
-    if avg_px > price_cap + 1e-9:        # belt-and-suspenders: fill leaked past the cap
-        print(f"WARN {ticker}: fill {avg_px:.3f} exceeded cap {price_cap:.3f} (kept, flagged)")
-    fee_per = float(resp.get("average_fee_paid") or 0) * filled
-    fee = round(fee_per, 2) if fee_per else taker_fee_usd(avg_px, filled)
-    return filled, avg_px, fee, str(resp.get("order_id") or "?")
+    # R4-FABLE-A HIGH fix: a response IS in hand — any parse failure from payload
+    # drift must FREEZE (ambiguous), never bubble out as a pre-submit-style void.
+    try:
+        # V2 responses use fill_count OR fill_count_fp depending on path (sell-path
+        # test 2026-07-04: sells reported via _fp and were misread as no-fill)
+        fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
+        filled = int(fill_raw)
+        if abs(fill_raw - filled) > 1e-9:   # R3-C3 HIGH: NEVER truncate a fractional
+            raise OrderAmbiguous(f"fractional fill_count {fill_raw}")  # fill silently
+        if filled < 1:
+            oid = resp.get("order_id")
+            if oid:                   # belt-and-suspenders: never leave a resting stray
+                try:
+                    client.cancel_order(str(oid))
+                except Exception:
+                    pass
+            return 0, "IOC no fill even crossed", None, None
+        # CODEX-1 CRITICAL fix: the YES-leg->held-side conversion applies ONLY to the
+        # exchange-reported average; the limit_px fallback is ALREADY held-side frame.
+        raw_avg = resp.get("average_fill_price")
+        if raw_avg is not None and str(raw_avg) != "":
+            avg_px = float(raw_avg)
+            if side == "no":             # exchange reports fills in YES-leg terms
+                avg_px = round(1.0 - avg_px, 4)
+        else:
+            avg_px = limit_px            # held-side frame already; no conversion
+        if avg_px > price_cap + 1e-9:    # belt-and-suspenders: fill leaked past cap
+            print(f"WARN {ticker}: fill {avg_px:.3f} exceeded cap {price_cap:.3f} "
+                  f"(kept, flagged)")
+        fee_per = float(resp.get("average_fee_paid") or 0) * filled
+        fee = round(fee_per, 2) if fee_per else taker_fee_usd(avg_px, filled)
+        return filled, avg_px, fee, str(resp.get("order_id") or "?")
+    except OrderAmbiguous:
+        raise
+    except Exception as e:
+        raise OrderAmbiguous(f"response parse failed: {type(e).__name__} {str(e)[:80]}")
 
 
 def cmd_shortcycle(_args) -> None:
@@ -429,7 +449,8 @@ def cmd_shortcycle(_args) -> None:
             continue
         # R3 5-reviewer consensus (CRITICAL): durable INTENT ROW before the POST.
         # A fill whose response is lost must never be invisible to the books.
-        coid = f"sc-{uuid.uuid4()}"
+        # R4-FABLE-A: pure UUID — a prefixed id risks a format-400 on EVERY order.
+        coid = str(uuid.uuid4())
         try:
             tid = ledger.insert_trade(
                 mode="live", ticker=c["ticker"],
@@ -592,9 +613,9 @@ def cmd_favorites(_args) -> None:
             continue
         # bet the structural bias, not a model edge -> pass edge check trivially
         n_ct = (fc.get("max_contracts_by_series") or {}).get(
-            series, fc.get("max_contracts", 1))
+            series, fc.get("max_contracts", 2))   # R4: same default as est_ct
         # R3 consensus (CRITICAL): durable intent row BEFORE the POST
-        coid = f"fav-{uuid.uuid4()}"
+        coid = str(uuid.uuid4())     # R4: pure UUID (no prefix; format-safe)
         try:
             tid = ledger.insert_trade(
                 mode="live", ticker=m["ticker"], title=f"favorite {series}",
@@ -681,9 +702,9 @@ def cmd_weather(_args) -> None:
     # that reset every 7-minute loop invocation (cap was per-run, not per-day)
     today = dt.date.today().isoformat()
     per_city: dict = {}
-    for t in ledger.open_trades() + ledger.pending_trades():
-        ttl = t.get("title") or ""
-        if ttl.startswith("weather") and t["ts"].startswith(today):
+    for t in ledger.active_trades("live"):    # R4-FABLE-A LOW: incl. unknown rows —
+        ttl = t.get("title") or ""            # an ambiguous fill still occupies the
+        if ttl.startswith("weather") and t["ts"].startswith(today):   # city slot
             s = ttl.split(" ")[-1]
             per_city[s] = per_city.get(s, 0) + 1
     con_w = ledger._conn()
@@ -719,7 +740,7 @@ def cmd_weather(_args) -> None:
             print(f"VETO  {c['ticker']}: {veto}")
             continue
         # R3 consensus (CRITICAL): durable intent row BEFORE the POST
-        coid = f"wx-{uuid.uuid4()}"
+        coid = str(uuid.uuid4())     # R4: pure UUID (no prefix; format-safe)
         try:
             tid = ledger.insert_trade(
                 mode="live", ticker=c["ticker"], title=f"weather {c['series']}",
@@ -1072,36 +1093,67 @@ def cmd_reconcile(_args) -> None:
         resolved = False
         if oid and oid != "?":
             try:
-                fl = client.fills(ticker=u["ticker"], limit=100).get("fills") or []
-                mine = [f for f in fl
-                        if oid in (str(f.get("order_id") or ""),
-                                   str(f.get("client_order_id") or ""))]
-                cnt = sum(float(f.get("count") or f.get("count_fp") or 0) for f in mine)
-                n = int(round(cnt))
-                if n >= 1:
-                    tot = 0.0
-                    for f in mine:
-                        ci = float(f.get("count") or f.get("count_fp") or 0)
-                        pi = float(f.get("yes_price") or f.get("price") or 0)
-                        if pi > 1:                    # cents payload variant
-                            pi /= 100.0
-                        if u["side"] == "no":         # fills report YES-leg terms
-                            pi = 1.0 - pi
-                        tot += ci * pi
-                    avg = round(tot / cnt, 4) if cnt else u["price"]
-                    fee = taker_fee_usd(avg, n)
-                    ledger.record_fill(u["id"], n, avg, round(n * avg + fee, 2), fee, oid)
-                    print(f"RESOLVED #{u['id']} {u['ticker']}: fills prove x{n} "
-                          f"@ {avg * 100:.0f}c -> open")
-                    resolved = True
-                else:
+                # R4-FABLE-A CRITICAL fix: fills do NOT carry client_order_id — map
+                # our client id to the EXCHANGE order via /portfolio/orders first;
+                # only an authoritative empty lookup may 2h-void a frozen row.
+                ords = client.orders(ticker=u["ticker"])
+                mine_ord = [o for o in ords
+                            if oid in (str(o.get("client_order_id") or ""),
+                                       str(o.get("order_id") or ""))]
+                if not mine_ord:
                     age_h = (dt.datetime.now()
                              - dt.datetime.fromisoformat(u["ts"])).total_seconds() / 3600
-                    if age_h >= 2:                    # IOC cannot rest: no fills after
-                        ledger.void_trade(u["id"],   # 2h proves it never executed
-                                          "no fills for order after 2h (IOC cannot rest)")
-                        print(f"RESOLVED #{u['id']} {u['ticker']}: no fills -> voided")
+                    if age_h >= 2:        # by-id lookup succeeded, empty, aged:
+                        ledger.void_trade(u["id"], "no exchange order matches the "
+                                                   "client id after 2h — never accepted")
+                        print(f"RESOLVED #{u['id']} {u['ticker']}: no order -> voided")
                         resolved = True
+                else:
+                    o = mine_ord[0]
+                    exch_oid = str(o.get("order_id") or "")
+                    fl = client.fills(ticker=u["ticker"], limit=100).get("fills") or []
+                    mine = [f for f in fl if str(f.get("order_id") or "") == exch_oid]
+                    cnt = sum(float(f.get("count_fp") or f.get("count") or 0)
+                              for f in mine)
+                    n = int(round(cnt))
+                    if n >= 1:
+                        tot = 0.0
+                        for f in mine:
+                            ci = float(f.get("count_fp") or f.get("count") or 0)
+                            # R4-FABLE-A HIGH fix: 2026 payload = *_dollars fields;
+                            # read the HELD side directly (no conversion error), and
+                            # the cents fallback treats >=1 as cents (1c boundary)
+                            if u["side"] == "no":
+                                raw = f.get("no_price_dollars")
+                                if raw is not None:
+                                    pi = float(raw)
+                                else:
+                                    yp = float(f.get("yes_price") or 0)
+                                    pi = 1.0 - (yp / 100.0 if yp >= 1 else yp)
+                            else:
+                                raw = f.get("yes_price_dollars")
+                                if raw is not None:
+                                    pi = float(raw)
+                                else:
+                                    yp = float(f.get("yes_price") or 0)
+                                    pi = yp / 100.0 if yp >= 1 else yp
+                            tot += ci * pi
+                        avg = round(tot / cnt, 4) if cnt else u["price"]
+                        fee = taker_fee_usd(avg, n)
+                        ledger.record_fill(u["id"], n, avg, round(n * avg + fee, 2),
+                                           fee, exch_oid)
+                        print(f"RESOLVED #{u['id']} {u['ticker']}: fills prove x{n} "
+                              f"@ {avg * 100:.0f}c -> open")
+                        resolved = True
+                    elif str(o.get("status") or "") in ("canceled", "cancelled",
+                                                        "expired", "rejected"):
+                        ledger.void_trade(u["id"], f"exchange order "
+                                                   f"{o.get('status')} with zero fills")
+                        print(f"RESOLVED #{u['id']} {u['ticker']}: order "
+                              f"{o.get('status')}, no fills -> voided")
+                        resolved = True
+                    # order exists in another state with no visible fills: keep
+                    # frozen — never guess against a live order
             except Exception as e:
                 print(f"WARN resolver #{u['id']}: {e}")
         if not resolved:
@@ -1138,8 +1190,11 @@ def cmd_reconcile(_args) -> None:
                 "WHERE mode='live' AND status IN ('settled','closed') AND settled_ts > ?",
                 (prev["ts"],)).fetchone()[0]
             consumed = con_r.execute(
+                # R4-FABLE-A MED fix: key on when cash MOVED (booked_ts), not on
+                # decide-time ts — a pending confirmed hours later was never counted
                 "SELECT COALESCE(SUM(cost_usd),0) FROM trades WHERE mode='live' "
-                "AND ts > ? AND status IN ('open','closed','settled','unknown')",
+                "AND COALESCE(booked_ts, ts) > ? "
+                "AND status IN ('open','closed','settled','unknown')",
                 (prev["ts"],)).fetchone()[0]
             expected = prev["balance"] + returned - consumed
             drift = bal_now - expected
@@ -1200,29 +1255,49 @@ def cmd_execute_live(args) -> None:
     cfg_x = _live_risk_overlay(cfg)
     for t in rows:
         # R3-CODEX-6 HIGH fix: a pending decision may be STALE — resident lanes can
-        # spend the cap room between decide and execute. Re-check caps now (this
-        # row's cost is already inside stats, so additional cost is 0).
-        veto = engine.check_risk(ledger.stats("live"), 0.0, cfg_x)
+        # spend the cap room between decide and execute. Re-check caps now. The
+        # row's dollars are already inside stats (additional cost 0) and its slot
+        # is its own, so exclude it from the position count (R4-FABLE-A MED: at
+        # the cap boundary the row otherwise vetoes ITSELF forever).
+        st_x = ledger.stats("live")
+        st_x["open_positions"] = max(0, st_x["open_positions"] - 1)
+        veto = engine.check_risk(st_x, 0.0, cfg_x)
         if veto:
             failed += 1
             print(f"VETO #{t['id']} {t['ticker']}: {veto} (stays pending)")
             continue
+        # R4-FABLE-A HIGH fix: mint the order identity BEFORE the POST — without
+        # it an ambiguous submit freezes a row the resolver can never look up.
+        coid = (t.get("order_id") or "").strip() or str(uuid.uuid4())
         try:
-            resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"])
+            ledger.set_client_oid(t["id"], coid)
+        except Exception as e:
+            failed += 1
+            print(f"FAILED #{t['id']} {t['ticker']}: identity write failed ({e}) "
+                  f"— no order sent")
+            continue
+        try:
+            resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"],
+                                      client_order_id=coid)
         except RuntimeError as e:
             failed += 1
-            if "HTTP 4" in str(e):        # clean exchange reject: provably no order
+            st = _http_status(e)
+            if st is not None and 400 <= st < 500:   # provable reject: no order
+                try:                       # clear identity so the TTL VOIDS (not
+                    ledger.set_client_oid(t["id"], None)   # freezes) this row later
+                except Exception:
+                    pass
                 print(f"REJECTED #{t['id']} {t['ticker']}: {str(e)[:90]} (stays pending)")
             else:                          # R3 consensus CRITICAL: 5xx may have filled
                 ledger.mark_unknown(t["id"], f"submit ambiguous: {str(e)[:100]}")
                 print(f"UNKNOWN #{t['id']} {t['ticker']}: submit ambiguous ({str(e)[:70]}) "
-                      f"— frozen; reconcile resolves via fills")
+                      f"— frozen; reconcile resolves via orders/fills")
             continue
         except Exception as e:             # timeout/connection: POST may have landed
             failed += 1
             ledger.mark_unknown(t["id"], f"submit ambiguous: {type(e).__name__} {str(e)[:80]}")
             print(f"UNKNOWN #{t['id']} {t['ticker']}: {type(e).__name__} — frozen; "
-                  f"reconcile resolves via fills")
+                  f"reconcile resolves via orders/fills")
             continue
         try:
             order_id = (resp.get("order") or {}).get("order_id") or resp.get("order_id") or "?"
@@ -1241,6 +1316,10 @@ def cmd_execute_live(args) -> None:
                         client.cancel_order(str(order_id))
                     except Exception:
                         pass
+                try:                       # provably flat: clear identity so the
+                    ledger.set_client_oid(t["id"], None)   # TTL voids, not freezes
+                except Exception:
+                    pass
                 failed += 1
                 print(f"NOFILL #{t['id']} {t['ticker']}: stays pending (book moved)")
                 continue
