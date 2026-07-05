@@ -272,9 +272,9 @@ def cmd_shortcycle(_args) -> None:
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
         return
-    # dedicated sub-budget: ALL of today's spend incl. settled (leak fixed 2026-07-03)
-    prefixes = tuple(sc["series"]) + tuple(sc.get("series_15m", []))
-    spent = ledger.spent_today(prefixes)
+    # dedicated sub-budget by LANE TITLE — ticker prefixes collide with the favorites
+    # lane on the same series (bug #12: favorites' spend locked this lane out all day)
+    spent = ledger.spent_today_by_title("shortcycle")
     budget = sc["daily_budget_usd"]
     extra = sc.get("budget_extra") or {}
     if extra.get("date") == dt.date.today().isoformat():

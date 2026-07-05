@@ -165,6 +165,17 @@ def spent_today(prefixes: tuple, mode: str = "live") -> float:
     return round(sum(r["cost_usd"] for r in rows if r["ticker"].startswith(prefixes)), 2)
 
 
+def spent_today_by_title(title_prefix: str, mode: str = "live") -> float:
+    """Today's spend for ONE lane, keyed by title prefix — ticker prefixes collide
+    across lanes (favorites and shortcycle both trade KXBTCD/KXETHD; bug #12)."""
+    today = dt.date.today().isoformat()
+    with _conn() as c:
+        r = c.execute("SELECT COALESCE(SUM(cost_usd),0) FROM trades WHERE mode=? "
+                      "AND ts LIKE ? || '%' AND status != 'voided' AND title LIKE ? || '%'",
+                      (mode, today, title_prefix)).fetchone()
+    return round(r[0], 2)
+
+
 def realized_by_title(prefix: str) -> float:
     """Cumulative realized P&L of live trades whose title starts with prefix (lane tag)."""
     with _conn() as c:
