@@ -3494,3 +3494,5 @@
 [07-05 03:26:44]   pmwatch: pmwatch: +47 pairs | pmwatch: 156 rows, 49 kalshi-matched | |divergence| median 5.5c, p90 19.4c (gate n>=300)
 [07-05 03:26:45]   journal: journal written: realized today $+0.80, 14 settled, 17 fills
 [07-05 03:26:46]   report: wrote reports\report_2026-07-05.md
+[07-05 03:26:48] committed + pushed
+[07-05 03:28:30] === quant_loop started pid=56560 ===

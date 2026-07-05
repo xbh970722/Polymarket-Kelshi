@@ -18,7 +18,10 @@ ROOT = r"D:\Polymarket-Kelshi"
 LOG = os.path.join(ROOT, "data", "quant_loop.log")
 PIDF = os.path.join(ROOT, "data", "quant_loop.pid")
 MARKS = (5, 11, 20, 26, 35, 41, 50, 56)   # :11/:26/:41/:56 hit each 15m window at tau~4min
-LIGHT_MARKS = (2, 8, 17, 23, 32, 38, 47, 53)   # user 2026-07-05: 15m-only passes
+LIGHT_MARKS = (0, 2, 8, 15, 17, 23, 30, 32, 38, 45, 47, 53)   # 15m-only passes
+# (user 2026-07-05 ×2): timing study — 15m edge is MONOTONE in tau (+5.5pt at
+# tau 2-4 -> +11.6pt at 12-14), so :00/:15/:30/:45 add the earliest look
+# (tau~14.7, fattest bin) on top of ~12.7/9.7/6.7. Four scans per window.
 # (h15+h10 only, ~5 API calls) — each 15m window now gets THREE entry-window
 # scans (tau ~12.7/9.7/6.7) instead of one, tripling the catch rate on
 # transient zone asks; h15 fill-detection latency drops from ~7.5 to ~3 min.

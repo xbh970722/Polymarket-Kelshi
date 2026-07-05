@@ -176,7 +176,9 @@ favorites:
   # 高于 0.95 顶 (~1c 泄漏): 门槛 (pipeline.py:414) 校验扫描 ask, 但 IOC(:429) 实际
   # 成交可上滑 1c。band 数据: 0.94-0.97 共 6 单净 -$1.49 (96c NO 冒 96 博 4, 一翻即毁),
   # 而 0.88-0.94 核心 14 单 0 亏 +$2.09。降顶 1c 让有效顶回到意图 ~0.95。见 H6。
-  tau_window_min: [10, 90]
+  tau_window_min: [5, 90]        # 2026-07-05 时点解剖: tau(5,10] 偏差 +8.4pt 为
+                                 # 全场最肥箱 (n=74), 原下限 10 恰好禁着它;
+                                 # :50 全量刻 tau~9.7 现成覆盖
   max_contracts: 2               # 基准 2 张; BTC/ETH 深书可 3 张 (油门②, 见 per_series)
   max_contracts_by_series:       # 2026-07-04 用户开油门②
     KXBTCD: 3
