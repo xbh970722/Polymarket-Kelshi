@@ -68,12 +68,22 @@ class KalshiLive:
                 "KALSHI-ACCESS-TIMESTAMP": ts,
                 "KALSHI-ACCESS-SIGNATURE": base64.b64encode(signature).decode()}
 
-    def _req(self, method: str, path: str, body: dict | None = None):
-        r = self.s.request(method, BASE + path, json=body,
-                           headers=self._headers(method, path), timeout=self.timeout)
+    def _req(self, method: str, path: str, body: dict | None = None,
+             params: dict | None = None):
+        # signature covers the BARE path only — query params must go via `params`
+        # (passing them inside `path` breaks the signature -> 401, found 2026-07-04)
+        bare = path.split("?")[0]
+        r = self.s.request(method, BASE + bare, json=body, params=params,
+                           headers=self._headers(method, bare), timeout=self.timeout)
         if r.status_code >= 400:
-            raise RuntimeError(f"{method} {path} -> HTTP {r.status_code}: {r.text[:400]}")
+            raise RuntimeError(f"{method} {bare} -> HTTP {r.status_code}: {r.text[:400]}")
         return r.json() if r.text else {}
+
+    def fills(self, ticker: str | None = None, limit: int = 50) -> dict:
+        p = {"limit": limit}
+        if ticker:
+            p["ticker"] = ticker
+        return self._req("GET", f"{API}/portfolio/fills", params=p)
 
     # ---- read-only ----
     def balance(self) -> dict:

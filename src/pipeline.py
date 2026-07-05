@@ -778,6 +778,44 @@ def cmd_mktcal(_args) -> None:
     print(report())
 
 
+def cmd_reconcile(_args) -> None:
+    """Ledger-vs-exchange position reconciliation — the accounting truth test.
+    Compares net exchange positions against ledger open trades; any mismatch means
+    a booking bug (phantom close, unrecorded fill, wrong side) and prints loudly."""
+    cfg = load_config()
+    if not live_active(cfg):
+        print("reconcile requires live mode")
+        return
+    from .live import KalshiLive, LiveAuthError
+    try:
+        pos = KalshiLive().positions()
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    exch = {}
+    for p in pos.get("market_positions") or []:
+        net = float(p.get("position_fp") or 0)
+        if abs(net) > 1e-9:
+            exch[p["ticker"]] = net                 # +N = long yes, -N = long no
+    led = {}
+    for t in ledger.open_trades():
+        if t["mode"] != "live":
+            continue
+        net = t["contracts"] if t["side"] == "yes" else -t["contracts"]
+        led[t["ticker"]] = led.get(t["ticker"], 0) + net
+    problems = 0
+    for tk in sorted(set(exch) | set(led)):
+        e, l = exch.get(tk, 0), led.get(tk, 0)
+        if abs(e - l) > 1e-9:
+            problems += 1
+            print(f"MISMATCH {tk}: exchange={e:+.0f} ledger={l:+.0f}"
+                  f"  <- {'exchange has untracked position' if abs(e) > abs(l) else 'ledger claims more than exchange holds'}")
+        else:
+            print(f"OK       {tk}: {e:+.0f}")
+    print(f"reconcile: {len(set(exch) | set(led))} tickers, {problems} mismatches"
+          + (" — ACCOUNTING CLEAN" if problems == 0 else " — INVESTIGATE"))
+
+
 def cmd_status(_args) -> None:
     out = {**ledger.stats(), **ledger.calibration(),
            "pending_live_orders": len(ledger.pending_trades())}
@@ -898,6 +936,7 @@ def main() -> None:
     p.add_argument("--reason", default="")
     p.set_defaults(fn=cmd_cancel_pending)
     sub.add_parser("live-check").set_defaults(fn=cmd_live_check)
+    sub.add_parser("reconcile").set_defaults(fn=cmd_reconcile)
     args = ap.parse_args()
     args.fn(args)
 

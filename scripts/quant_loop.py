@@ -136,6 +136,8 @@ def main() -> None:
         out += run_cmd("weather")
         if nxt.minute == 20:
             out += run_cmd("manage")
+            out += run_cmd("reconcile")   # hourly books-vs-exchange audit; MISMATCH lines
+                                          # land in the log/journal for the reflection to flag
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT "))
         if changed:
             run_cmd("journal")
