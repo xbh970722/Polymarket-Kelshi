@@ -102,4 +102,21 @@ def report() -> str:
         imp, real = mids / n, wins / n
         lines.append(f"{b/10:.1f}-{(b+1)/10:.1f} | {n:4d} | {imp:.3f} | {real:.3f} | "
                      f"{real - imp:+.3f}")
+    # CODEX-B fix: favorite-SIDE normalization (yes OR no) — the direction-neutral
+    # harvest strategy needs fav_prob = max(mid, 1-mid) vs whether the favorite won,
+    # otherwise NO-favorite samples hide in the low YES buckets.
+    fav: dict = {}
+    for r in rows:
+        fp = max(r["yes_mid"], 1 - r["yes_mid"])
+        fwin = (r["result"] == "yes") == (r["yes_mid"] >= 0.5)
+        b = min(int(fp * 20), 19)                     # 5c buckets in the favorite zone
+        n, w, s = fav.get(b, (0, 0, 0.0))
+        fav[b] = (n + 1, w + (1 if fwin else 0), s + fp)
+    lines.append("favorite-side calibration (fav price vs fav win):")
+    for b in sorted(fav):
+        n, w, s = fav[b]
+        if s / n < 0.75:
+            continue                                   # only the harvest-relevant zone
+        lines.append(f"{b/20:.2f}-{(b+1)/20:.2f} | {n:4d} | {s/n:.3f} | {w/n:.3f} | "
+                     f"{w/n - s/n:+.3f}")
     return "\n".join(lines)

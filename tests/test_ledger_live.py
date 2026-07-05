@@ -1,5 +1,6 @@
 """Synthetic test of the live order state machine on a throwaway DB."""
 import sys
+import tempfile
 from pathlib import Path
 sys.path.insert(0, r"D:\Polymarket-Kelshi")
 import src.ledger as ledger

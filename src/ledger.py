@@ -45,8 +45,14 @@ _MIGRATIONS = {
 
 def _conn() -> sqlite3.Connection:
     DB.parent.mkdir(exist_ok=True)
-    c = sqlite3.connect(DB)
+    c = sqlite3.connect(DB, timeout=15)
     c.row_factory = sqlite3.Row
+    # concurrency hardening (panel review 2026-07-04, OPUS-B CRITICAL): the loop's
+    # subprocesses, supervisor sessions and interactive scripts all hit this file —
+    # WAL lets readers and one writer coexist; busy_timeout waits instead of raising
+    # 'database is locked' mid-settle.
+    c.execute("PRAGMA journal_mode=WAL")
+    c.execute("PRAGMA busy_timeout=15000")
     c.execute(SCHEMA)
     cols = {r[1] for r in c.execute("PRAGMA table_info(trades)")}
     for name, typ in _MIGRATIONS.items():
@@ -81,6 +87,58 @@ def mark_placed(trade_id: int, order_id: str) -> None:
     with _conn() as c:
         c.execute("UPDATE trades SET status='open', order_id=? WHERE id=?",
                   (order_id, trade_id))
+
+
+def resize_trade(trade_id: int, contracts: int, price: float,
+                 cost_usd: float, fee_usd: float) -> None:
+    """Rewrite a row to the ACTUAL fill (partial-fill correction, OPUS-A fix)."""
+    with _conn() as c:
+        c.execute("UPDATE trades SET contracts=?, price=?, cost_usd=?, fee_usd=? WHERE id=?",
+                  (contracts, price, cost_usd, fee_usd, trade_id))
+
+
+def split_close(trade_id: int, filled: int, exit_price: float,
+                fee_actual: float, reason: str) -> None:
+    """Partial exit fill (CODEX-A fix): close only the filled contracts at the real
+    price; shrink the original row to the residual so books match the exchange."""
+    now = dt.datetime.now().isoformat(timespec="seconds")
+    with _conn() as c:
+        t = c.execute("SELECT * FROM trades WHERE id=?", (trade_id,)).fetchone()
+        if not t or filled <= 0 or filled > t["contracts"]:
+            return
+        frac = filled / t["contracts"]
+        cost_f = round(t["cost_usd"] * frac, 2)
+        pnl = round(filled * exit_price - fee_actual - cost_f, 2)
+        if filled == t["contracts"]:
+            c.execute("UPDATE trades SET status='closed', exit_price=?, pnl_usd=?, "
+                      "settled_ts=?, result=?, rationale=rationale || ' | EXIT: ' || ? "
+                      "WHERE id=?", (exit_price, pnl, now, reason, reason, trade_id))
+            return
+        rem = t["contracts"] - filled
+        c.execute("UPDATE trades SET contracts=?, cost_usd=?, fee_usd=? WHERE id=?",
+                  (rem, round(t["cost_usd"] - cost_f, 2),
+                   round((t["fee_usd"] or 0) * rem / t["contracts"], 2), trade_id))
+        c.execute("INSERT INTO trades(ts,mode,ticker,title,side,price,contracts,cost_usd,"
+                  "fee_usd,q_claude,q_codex,q_consensus,market_prob,edge_net,rationale,"
+                  "status,result,pnl_usd,settled_ts,exit_price) "
+                  "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                  (t["ts"], t["mode"], t["ticker"], t["title"], t["side"], t["price"],
+                   filled, cost_f, round((t["fee_usd"] or 0) * frac, 2),
+                   t["q_claude"], t["q_codex"], t["q_consensus"], t["market_prob"],
+                   t["edge_net"], (t["rationale"] or "") + f" | partial EXIT: {reason}",
+                   "closed", reason, pnl, now, exit_price))
+
+
+def void_stale_pending(max_age_min: int = 60) -> int:
+    """Pending live orders that never executed keep consuming exposure/slots
+    forever (OPUS-A MED). Auto-void anything pending older than max_age_min."""
+    cutoff = (dt.datetime.now() - dt.timedelta(minutes=max_age_min)
+              ).isoformat(timespec="seconds")
+    with _conn() as c:
+        cur = c.execute("UPDATE trades SET status='voided', "
+                        "rationale = rationale || ' | VOID: stale pending TTL' "
+                        "WHERE status='pending' AND ts < ?", (cutoff,))
+        return cur.rowcount
 
 
 def void_trade(trade_id: int, reason: str) -> None:

@@ -1,5 +1,6 @@
 """Synthetic test of swing exit: plan -> take-profit -> close -> P&L -> Brier exclusion."""
 import sys
+import tempfile
 from pathlib import Path
 sys.path.insert(0, r"D:\Polymarket-Kelshi")
 import src.ledger as ledger

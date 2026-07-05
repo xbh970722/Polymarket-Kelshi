@@ -65,7 +65,9 @@ def forecast_remaining_max_f(lat: float, lon: float, now_utc: dt.datetime,
     temps = []
     for p in hourly["properties"]["periods"]:
         t0 = dt.datetime.fromisoformat(p["startTime"])
-        if now_utc <= t0.astimezone(dt.timezone.utc) <= local_day_end_utc:
+        # strict < (CODEX-B fix): the period STARTING at next local midnight belongs
+        # to tomorrow and must not price today's high
+        if now_utc <= t0.astimezone(dt.timezone.utc) < local_day_end_utc:
             temps.append(float(p["temperature"]))          # already F
     return max(temps) if temps else None
 
@@ -107,9 +109,9 @@ def candidates(cfg: dict) -> list[dict]:
         if series not in wc["series"]:
             continue
         # local-time gate: only trade when the model has information (post-morning)
-        offset = {"America/New_York": -4, "America/Chicago": -5,
-                  "America/Denver": -6, "America/Los_Angeles": -7}[tz]
-        local_now = now + dt.timedelta(hours=offset)
+        # CODEX-B fix: real IANA zones, not hardcoded DST offsets (winter was off by 1h)
+        from zoneinfo import ZoneInfo
+        local_now = now.astimezone(ZoneInfo(tz)).replace(tzinfo=None)
         if not (wc["active_local_hours"][0] <= local_now.hour <= wc["active_local_hours"][1]):
             continue
         page = api._get("/markets", series_ticker=series, status="open", limit=100)
@@ -124,7 +126,8 @@ def candidates(cfg: dict) -> list[dict]:
             print(f"WARN {series}: station keyword '{keyword}' not in rules - skipping city")
             continue
         midnight_local = local_now.replace(hour=0, minute=0, second=0, microsecond=0)
-        midnight_utc = midnight_local - dt.timedelta(hours=offset)
+        midnight_utc = (midnight_local.replace(tzinfo=ZoneInfo(tz))
+                        .astimezone(dt.timezone.utc).replace(tzinfo=dt.timezone.utc))
         day_end_utc = midnight_utc + dt.timedelta(hours=24)
         obs = observed_max_f(stn, midnight_utc)
         fc = forecast_remaining_max_f(lat, lon, now, day_end_utc)

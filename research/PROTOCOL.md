@@ -78,6 +78,7 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
       "title": "...",
       "q_claude": 0.62,
       "q_codex": 0.58,
+      "q_all": [0.61, 0.63, 0.57, 0.59],
       "rationale": "三句话: 核心论据 / 主要风险 / 双方分歧点",
       "sources": ["url1", "url2"]
     }
@@ -85,6 +86,8 @@ Task: estimate P(YES). Think adversarially about base rates, current evidence, a
 }
 ```
 然后 `python -m src.pipeline decide --research <该文件>` —— 引擎决定,不是我决定。
+**q_all 必填** (四个盲估者的原始数字, 顺序: opus内/opus外/codex内/codex外) ——
+缺失时"极其确定 $4 档"永远静默不触发 (FABLE-C 发现的死条款)。
 
 ## 集成模式 (2026-07-03 起为标准配置)
 

@@ -85,7 +85,13 @@ def pick_context(cfg=None) -> dict | None:
     now = dt.datetime.now(dt.timezone.utc)
     with _conn() as c:
         logged = {r["ticker"] for r in c.execute("SELECT ticker FROM calls")}
-    for series in SERIES:
+        counts = {s: 0 for s in SERIES}
+        for (t,) in c.execute("SELECT ticker FROM calls WHERE ai_yes IS NOT NULL"):
+            for s in SERIES:
+                if t.startswith(s):
+                    counts[s] += 1
+    # least-sampled series first (CODEX-B fix: BTC was starving ETH of samples)
+    for series in sorted(SERIES, key=lambda s: counts.get(s, 0)):
         try:
             page = api._get("/markets", series_ticker=series, status="open", limit=100)
         except Exception:

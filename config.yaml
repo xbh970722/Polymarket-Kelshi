@@ -79,7 +79,7 @@ swing:
   min_target_move: 0.03      # 止盈目标离入场 <3 分则不值得波段 → 纯持有到结算
   stop_loss_frac: 0.5        # 机械止损 backstop: 现价(可卖出的bid)跌到入场价 50% 即认输
   review_after_days: 5       # 持仓 >5 天 → 交集成团队重判 (保留/改目标/退出)
-  manage_intraday: true      # 允许日内 manage 扫描 (不止每日循环, 可高频查止盈)
+  # (评审团清理: manage_intraday 为死旋钮已删 — 日内扫描频率由 quant_loop MARKS 决定)
 
 risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
   max_per_trade_usd: 25
@@ -151,7 +151,7 @@ crypto_review:
   loss_count_trigger: 5          # 自上次复盘起 crypto 结算亏损 ≥5 笔 -> 触发
   loss_usd_trigger: 1.00         # 或累计新增亏损 ≥$1 -> 触发
   cooldown_hours: 2              # 复盘冷却, 防连环触发
-  reviewer_model: claude-fable-5 # 总领复盘的模型 (用户点名 Fable 5)
+  # (评审团清理: reviewer_model 为死旋钮已删 — 复盘由监工任务执行, 模型=桌面端默认)
 
 # ---------- 热门收割通道 (2026-07-03 用户: 现在就用真钱低额开) ----------
 # 收割 favorite-longshot bias: 买"热门那一侧"(不管YES/NO), 方向中性防单边污染。
@@ -177,7 +177,9 @@ favorites:
     KXBTCD: 3
     KXETHD: 3
   max_per_trade_usd: 3.00        # 3张×~94c 上限配套 (原2.00)
-  daily_budget_usd: 4.00         # 2026-07-04 提速: 每天更多热门 (原2.00)
+  daily_budget_usd: 15.00        # 2026-07-05 评审团修正: 预算改为诚实的"每日总投放"口径
+                                 # (旧$4靠结算回填漏洞实现~$50/天流转; 现按真实口径设$15,
+                                 # 约今日实际节奏, 由$5日亏熔断+$12敞口兜风险)
   max_open: 8                    # 2026-07-04 用户"123": 5→8 (4币时段打满; 全局$5熔断兜底)
   max_per_window: 1
   # 2026-07-03 用户: 熔断线 $3, 且熔断=复盘调整后继续 (不是终点)。
@@ -194,7 +196,7 @@ weather:
   max_per_trade_usd: 0.50
   max_contracts: 3
   max_trades_per_city_per_day: 2   # 2026-07-04 用户"123": 上午预报单+午后锁定单
-  daily_budget_usd: 2.00           # 城市×2 后配套翻倍
+  daily_budget_usd: 3.00           # 2026-07-05 评审团修正: 改诚实口径 (原$2按漏洞口径)
 
 live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达标时开 live 请三思)
   min_settled_trades: 30

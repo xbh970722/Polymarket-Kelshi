@@ -21,6 +21,10 @@ class Decision:
 
 
 def decide(q_claude: float, q_codex: float, yes_ask: float, no_ask: float, cfg: dict) -> Decision:
+    # CODEX-B HIGH fix: a one-sided book (e.g. no_ask=0) previously reached Kelly
+    # sizing and crashed on division by zero — reject invalid quotes up front.
+    if not (0.0 < yes_ask < 1.0 and 0.0 < no_ask < 1.0):
+        return Decision("skip", f"invalid quote (yes_ask={yes_ask}, no_ask={no_ask})")
     div = abs(q_claude - q_codex)
     if div > cfg["edge"]["consensus_max_divergence"]:
         return Decision("skip", f"model divergence {div:.2f} exceeds limit -> flag for human review")
@@ -45,10 +49,14 @@ def decide(q_claude: float, q_codex: float, yes_ask: float, no_ask: float, cfg: 
 
     fee = taker_fee_usd(price, contracts)
     cost = round(contracts * price + fee, 2)
-    while cost > cfg["risk"]["max_per_trade_usd"] and contracts > 1:
+    # CODEX-B LOW fix: honor the Kelly stake on an ALL-IN basis (fees included),
+    # not just the hard per-trade cap — floor stays at 1 contract when edge cleared.
+    while contracts > 1 and (cost > cfg["risk"]["max_per_trade_usd"] or cost > stake + price):
         contracts -= 1
         fee = taker_fee_usd(price, contracts)
         cost = round(contracts * price + fee, 2)
+    if cost > cfg["risk"]["max_per_trade_usd"]:
+        return Decision("skip", "single contract exceeds per-trade cap", q_consensus=round(q, 4))
 
     return Decision("trade", "edge cleared", side, price, contracts,
                     cost, fee, round(edge, 4), round(q, 4))

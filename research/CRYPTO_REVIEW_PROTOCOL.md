@@ -1,13 +1,17 @@
 # Crypto 亏损触发式复盘协议 (Fable 5 总领)
 
-触发: quant_loop 在结算后检测到自上次复盘以来 crypto 结算亏损 ≥5 笔 或 累计亏损 ≥$1。
-执行者: **Fable 5**(用户 2026-07-03 点名)— 由 quant_loop 以 `claude -p --model claude-fable-5`
-自动召唤; 每小时监工任务兜底 (检查 data/review_due.json)。
+触发: quant_loop 在结算后检测到自上次复盘以来 crypto 结算亏损 ≥5 笔 或 累计亏损 ≥$1
+(四币全算: KXBTC/KXETH/KXSOL/**KXXRP** — FABLE-C 修正, XRP 曾是盲区)。
+执行机制 (2026-07-05 如实修正): quant_loop 只**举旗** (写 data/review_due_shortcycle.json;
+favorites 回撤写 review_due_favorites.json, 双信箱防互相覆盖); **每 3 小时的监工任务**
+发现旗子后执行复盘 (headless 直召被证不可靠已弃用)。最坏延迟 ~3 小时, 期间交易继续,
+由全局 $5 日亏熔断兜底。
 
 ## 复盘会话必须完成的六步
 
 1. **拉数据**: sqlite 查询 data/ledger.db 中 id > review_state.last_review_id 的全部 crypto
-   结算交易 (ticker 前缀 KXBTC/KXETH/KXSOL, 含 15M), 以及 data/quant_loop.log 相关段落。
+   结算交易 (前缀取自 config 的 shortcycle.series + favorites.series 并集, 当前 =
+   KXBTC/KXETH/KXSOL/KXXRP, 含 15M), 以及 data/quant_loop.log 相关段落。
 2. **找模式, 不数尸体**: 亏损单共享什么结构?哪个门放行的?(滞后门/确定区/基差守卫/
    窗口上限/预算) 与 SHORTCYCLE_DESIGN.md 中在检验的假设 (H1-H4...) 逐条对照 —
    哪条被数据支持, 哪条被证伪。区分实力与运气: q=0.8 输一笔是噪声, 同构输五笔是偏差。

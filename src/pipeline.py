@@ -187,18 +187,41 @@ def cmd_manage(_args) -> None:
         exit_bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
         action, px = engine.check_exit(t.get("target_price") or 0, t.get("stop_price") or 0, exit_bid)
         if action and px > 0:
-            fee = taker_fee_usd(px, t["contracts"])
-            pnl = round(t["contracts"] * px - fee - t["cost_usd"], 2)
             if t["mode"] == "live":            # real position -> real sell (reduce_only)
                 if not is_live:
                     print(f"HOLD  {t['ticker']}: live position but live mode disabled - not selling")
                     continue
                 from .live import KalshiLive
                 try:
-                    KalshiLive().place_exit(t["ticker"], t["side"], t["contracts"], px)
+                    client_x = KalshiLive()
+                    resp = client_x.place_exit(t["ticker"], t["side"], t["contracts"], px)
                 except Exception as e:
                     print(f"LIVE EXIT FAILED {t['ticker']}: {e}")
                     continue
+                # CODEX-A fix: close only what actually filled, at the real price
+                filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
+                if filled < 1:
+                    oid = resp.get("order_id")
+                    if oid:
+                        try:
+                            client_x.cancel_order(str(oid))
+                        except Exception:
+                            pass
+                    print(f"EXIT NOFILL {t['ticker']}: book gone, keep holding")
+                    held += 1
+                    continue
+                avg_px = float(resp.get("average_fill_price") or px)
+                if t["side"] == "no":
+                    avg_px = round(1.0 - avg_px, 4)
+                fee_paid = float(resp.get("average_fee_paid") or 0) * filled
+                fee = round(fee_paid, 2) if fee_paid else taker_fee_usd(avg_px, filled)
+                ledger.split_close(t["id"], filled, avg_px, fee, f"{action}@{avg_px * 100:.0f}c")
+                exited += 1
+                print(f"EXIT  {t['ticker']}: {action} sell x{filled}/{t['contracts']} "
+                      f"@ {avg_px * 100:.0f}c")
+                continue
+            fee = taker_fee_usd(px, t["contracts"])
+            pnl = round(t["contracts"] * px - fee - t["cost_usd"], 2)
             ledger.close_position(t["id"], px, pnl, f"{action}@{px * 100:.0f}c")
             exited += 1
             print(f"EXIT  {t['ticker']}: {action} sell x{t['contracts']} @ {px * 100:.0f}c "
@@ -391,7 +414,7 @@ def cmd_favorites(_args) -> None:
                    "lane": "favorites", "step": cur_step, "realized": realized,
                    "reason": f"favorites drawdown step {cur_step} (${realized:.2f}) -> "
                              f"review & ADJUST strategy, then continue trading"},
-                  open("data/review_due.json", "w", encoding="utf-8"))
+                  open("data/review_due_favorites.json", "w", encoding="utf-8"))
         fav_state["steps_reviewed"] = cur_step
         json.dump(fav_state, open(fav_state_path, "w", encoding="utf-8"))
         print(f"DRAWDOWN REVIEW: favorites ${realized:.2f} (step {cur_step}) -> "
@@ -402,10 +425,9 @@ def cmd_favorites(_args) -> None:
         return
     lo, hi = fc.get("zone", [0.85, 0.95])
     twmin, twmax = fc.get("tau_window_min", [10, 90])
-    today = dt.date.today().isoformat()
-    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
-                if t["mode"] == "live" and (t["title"] or "").startswith("favorite")
-                and t["ts"].startswith(today))
+    # OPUS-A HIGH fix: true daily spend incl. settled (same leak class as shortcycle);
+    # daily_budget_usd is now an honest per-day cap, sized in config for throughput
+    spent = ledger.spent_today_by_title("favorite")
     n_open = sum(1 for t in ledger.open_trades() if (t["title"] or "").startswith("favorite"))
     api = KalshiPublic()
     now = dt.datetime.now(dt.timezone.utc)
@@ -479,7 +501,10 @@ def cmd_favorites(_args) -> None:
             mode="live", ticker=m["ticker"], title=f"favorite {series}",
             side=side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
             q_claude=round(px, 4), q_codex=round(px, 4), q_consensus=round(px, 4),
-            market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4), edge_net=0.0,
+            # OPUS-A LOW fix: store market_prob in the SAME frame as q/side
+            market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4) if side == "yes"
+                        else round(1 - (m["yes_bid"] + m["yes_ask"]) / 2, 4),
+            edge_net=0.0,
             rationale=f"favorite-harvest {side} @ {px*100:.0f}c (direction-neutral bias bet)",
             status="open")
         ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
@@ -511,15 +536,26 @@ def cmd_weather(_args) -> None:
     except LiveAuthError as e:
         print(f"AUTH ERROR: {e}")
         return
-    today = dt.date.today().isoformat()
-    spent = sum(t["cost_usd"] for t in ledger.open_trades() + ledger.pending_trades()
-                if t["mode"] == "live" and t["ticker"].startswith("KXHIGH")
-                and t["ts"].startswith(today))
+    spent = ledger.spent_today_by_title("weather")   # OPUS-A HIGH fix (leak class)
     cands = candidates(cfg)
     print(f"weather: {len(cands)} priced buckets | spent ${spent:.2f}/{wc['daily_budget_usd']:.2f}")
     api = KalshiPublic()
     placed = 0
+    # FABLE-C MED fix: per-city daily count from the LEDGER, not an in-process dict
+    # that reset every 7-minute loop invocation (cap was per-run, not per-day)
+    today = dt.date.today().isoformat()
     per_city: dict = {}
+    for t in ledger.open_trades() + ledger.pending_trades():
+        ttl = t.get("title") or ""
+        if ttl.startswith("weather") and t["ts"].startswith(today):
+            s = ttl.split(" ")[-1]
+            per_city[s] = per_city.get(s, 0) + 1
+    con_w = ledger._conn()
+    for r in con_w.execute("SELECT title FROM trades WHERE ts LIKE ? || '%' AND "
+                           "status IN ('settled','closed') AND title LIKE 'weather%'",
+                           (today,)):
+        s = (r["title"] or "").split(" ")[-1]
+        per_city[s] = per_city.get(s, 0) + 1
     for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
         if spent >= wc["daily_budget_usd"]:
             print("budget: weather daily budget reached")
@@ -573,6 +609,9 @@ def cmd_weather(_args) -> None:
 
 def cmd_settle(_args) -> None:
     api = KalshiPublic()
+    stale = ledger.void_stale_pending(60)      # OPUS-A MED: pending TTL
+    if stale:
+        print(f"voided {stale} stale pending order(s) (>60min unexecuted)")
     settled = 0
     for t in ledger.open_trades():
         try:
@@ -667,11 +706,18 @@ def cmd_report(_args) -> None:
     print(f"wrote {out}")
 
 
-def _lane_of(ticker: str) -> str:
-    if ticker.startswith(("KXBTCD", "KXETHD")) or "15M" in ticker.split("-")[0]:
+def _lane_of(ticker: str, title: str = "") -> str:
+    # title-first (OPUS-A note): favorites/shortcycle share tickers, only the
+    # lane tag in the title distinguishes them
+    t = title or ""
+    if t.startswith("favorite"):
+        return "favorites"
+    if t.startswith("shortcycle"):
         return "shortcycle"
-    if ticker.startswith("KXHIGH"):
+    if t.startswith("weather") or ticker.startswith("KXHIGH"):
         return "weather"
+    if ticker.startswith(("KXBTCD", "KXETHD", "KXSOLD", "KXXRPD")) or "15M" in ticker.split("-")[0]:
+        return "shortcycle"
     return "ensemble"
 
 
@@ -688,15 +734,15 @@ def cmd_journal(_args) -> None:
     all_settled = [dict(r) for r in con.execute(
         "SELECT * FROM trades WHERE status='settled' AND result IN ('yes','no')")]
 
-    lanes = {"shortcycle": [], "weather": [], "ensemble": []}
+    lanes = {"shortcycle": [], "favorites": [], "weather": [], "ensemble": []}
     for t in settled_today:
-        lanes[_lane_of(t["ticker"])].append(t)
+        lanes[_lane_of(t["ticker"], t.get("title") or "")].append(t)
     realized = {k: round(sum(t["pnl_usd"] or 0 for t in v), 2) for k, v in lanes.items()}
     total_realized = round(sum(realized.values()), 2)
 
     brier = {}
     for lane in lanes:
-        rows = [t for t in all_settled if _lane_of(t["ticker"]) == lane]
+        rows = [t for t in all_settled if _lane_of(t["ticker"], t.get("title") or "") == lane]
         if rows:
             bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
                      for t in rows) / len(rows)
@@ -718,7 +764,7 @@ def cmd_journal(_args) -> None:
              f"live 敞口 ${st['open_exposure']:.2f} | 今日已实现 **${total_realized:+.2f}**",
              f"- 今日成交 {len(fills_today)} 笔 | 今日结算 {len(settled_today)} 笔", "",
              "## 分通道", ""]
-    for lane in ("shortcycle", "weather", "ensemble"):
+    for lane in ("shortcycle", "favorites", "weather", "ensemble"):
         b = brier.get(lane)
         cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
         lines.append(f"- **{lane}**: 今日已实现 ${realized[lane]:+.2f} | {cal}")
@@ -878,9 +924,29 @@ def cmd_execute_live(args) -> None:
         try:
             resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"])
             order_id = (resp.get("order") or {}).get("order_id") or resp.get("order_id") or "?"
+            # OPUS-A CRITICAL fix: an IOC can return 200 with zero fills — never book
+            # a phantom. Parse fills; 0 -> cancel stray + stay pending; partial ->
+            # rewrite the row to the actual fill before marking placed.
+            filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
+            if filled < 1:
+                if order_id != "?":
+                    try:
+                        client.cancel_order(str(order_id))
+                    except Exception:
+                        pass
+                failed += 1
+                print(f"NOFILL #{t['id']} {t['ticker']}: stays pending (book moved)")
+                continue
+            if filled < t["contracts"]:
+                avg_px = float(resp.get("average_fill_price") or t["price"])
+                if t["side"] == "no":
+                    avg_px = round(1.0 - avg_px, 4)
+                fee = taker_fee_usd(avg_px, filled)
+                ledger.resize_trade(t["id"], filled, avg_px,
+                                    round(filled * avg_px + fee, 2), fee)
             ledger.mark_placed(t["id"], str(order_id))
             ok += 1
-            print(f"PLACED #{t['id']} {t['ticker']} {t['side'].upper()} x{t['contracts']} "
+            print(f"PLACED #{t['id']} {t['ticker']} {t['side'].upper()} x{filled} "
                   f"@ {t['price'] * 100:.1f}c order_id={order_id}")
         except Exception as e:
             failed += 1

@@ -45,6 +45,29 @@ def already_running() -> bool:
         return False
 
 
+def acquire_lock() -> bool:
+    """Atomic single-instance lock (OPUS-B fix): O_CREAT|O_EXCL beats the old
+    check-then-write race where two loops starting in the same second both won."""
+    lockf = PIDF + ".lock"
+    try:
+        fd = os.open(lockf, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        os.write(fd, str(os.getpid()).encode())
+        os.close(fd)
+        return True
+    except FileExistsError:
+        # stale lock? valid only if the pid inside is dead
+        try:
+            old = int(open(lockf).read().strip())
+            out = subprocess.run(["tasklist", "/FI", f"PID eq {old}"],
+                                 capture_output=True, text=True, timeout=15).stdout
+            if str(old) in out and "python" in out.lower():
+                return False
+            os.remove(lockf)
+            return acquire_lock()
+        except Exception:
+            return False
+
+
 def run_cmd(*args: str) -> str:
     try:
         r = subprocess.run([sys.executable, "-m", "src.pipeline", *args],
@@ -58,14 +81,25 @@ def run_cmd(*args: str) -> str:
 
 
 def git(*args: str) -> None:
+    """OPUS-B fix: pushes used to fail silently on non-fast-forward (concurrent
+    Claude-session commits) and the remote diverged. Now: detect, rebase, retry."""
     try:
-        subprocess.run(["git", *args], capture_output=True, text=True, timeout=120, cwd=ROOT)
+        r = subprocess.run(["git", *args], capture_output=True, text=True,
+                           timeout=120, cwd=ROOT)
+        if args[0] == "push" and r.returncode != 0:
+            log(f"git push rejected: {(r.stderr or '')[:150]} -> pull --rebase + retry")
+            subprocess.run(["git", "pull", "--rebase", "--autostash"],
+                           capture_output=True, text=True, timeout=120, cwd=ROOT)
+            r2 = subprocess.run(["git", "push"], capture_output=True, text=True,
+                                timeout=120, cwd=ROOT)
+            log("git push retry " + ("ok" if r2.returncode == 0
+                                     else f"FAILED: {(r2.stderr or '')[:150]}"))
     except Exception as e:
         log(f"git {args} failed: {e}")
 
 
 REVIEW_STATE = os.path.join(ROOT, "data", "review_state.json")
-REVIEW_DUE = os.path.join(ROOT, "data", "review_due.json")
+REVIEW_DUE = os.path.join(ROOT, "data", "review_due_shortcycle.json")
 
 
 def check_review_trigger() -> None:
@@ -81,7 +115,11 @@ def check_review_trigger() -> None:
             return
         state = {"last_review_id": 0, "review_no": 0}
         if os.path.exists(REVIEW_STATE):
-            state = json.load(open(REVIEW_STATE, encoding="utf-8"))
+            try:
+                state = json.load(open(REVIEW_STATE, encoding="utf-8"))
+            except (json.JSONDecodeError, OSError):
+                return          # OPUS-B fix: torn read mid-rewrite -> skip this tick,
+                                # never default last_review_id=0 (would re-fire everything)
         if os.path.exists(REVIEW_DUE):        # pending review; respect cooldown
             age_h = (dt.datetime.now()
                      - dt.datetime.fromtimestamp(os.path.getmtime(REVIEW_DUE))).total_seconds() / 3600
@@ -92,16 +130,21 @@ def check_review_trigger() -> None:
         rows = con.execute(
             "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
             "AND status IN ('settled','closed') AND pnl_usd < 0 AND ("
-            "ticker LIKE 'KXBTC%' OR ticker LIKE 'KXETH%' OR ticker LIKE 'KXSOL%')",
+            "ticker LIKE 'KXBTC%' OR ticker LIKE 'KXETH%' OR ticker LIKE 'KXSOL%' "
+            "OR ticker LIKE 'KXXRP%')",   # FABLE-C HIGH: XRP was invisible to the brake
             (state.get("last_review_id", 0),)).fetchall()
         n_loss = len(rows)
         usd_loss = -sum(r["pnl_usd"] for r in rows)
         if n_loss < cr.get("loss_count_trigger", 5) and usd_loss < cr.get("loss_usd_trigger", 1.0):
             return
+        # OPUS-B fix: lane-specific file so a favorites drawdown trigger and this
+        # crypto trigger can never clobber each other in a shared review_due.json
         json.dump({"triggered_ts": dt.datetime.now().isoformat(timespec="seconds"),
+                   "lane": "shortcycle",
                    "n_losses": n_loss, "usd_loss": round(usd_loss, 2),
                    "since_id": state.get("last_review_id", 0)},
-                  open(REVIEW_DUE, "w", encoding="utf-8"))
+                  open(os.path.join(ROOT, "data", "review_due_shortcycle.json"),
+                       "w", encoding="utf-8"))
         # NOTE: the loop does NOT spawn a headless claude (nested -p proved unreliable).
         # It only RAISES the flag; the hourly app-scheduled supervisor task detects
         # data/review_due.json and performs the Fable 5 review — that path actually runs.
@@ -122,8 +165,8 @@ def janitor_stale_sessions() -> None:
             ["powershell", "-NoProfile", "-Command",
              "Get-Process claude -ErrorAction SilentlyContinue | "
              "Where-Object { $h = ((Get-Date) - $_.StartTime).TotalHours; "
-             "$h -gt 3 -and $h -lt 20 -and "
-             "$_.StartTime.Minute -in 20,21,22,40,44,45,46,56 } | "
+             "$h -gt 3 -and $h -lt 16 -and "
+             "$_.StartTime.Minute -in 9,10,12,13,14,20,21,22 } | "
              "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
             capture_output=True, text=True, timeout=60)
         killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
@@ -134,11 +177,13 @@ def janitor_stale_sessions() -> None:
 
 
 def main() -> None:
-    if already_running():
+    os.makedirs(os.path.join(ROOT, "data"), exist_ok=True)
+    if already_running() or not acquire_lock():
         print("quant_loop already running; exiting")
         return
-    os.makedirs(os.path.join(ROOT, "data"), exist_ok=True)
     open(PIDF, "w").write(str(os.getpid()))
+    import atexit
+    atexit.register(lambda: os.path.exists(PIDF + ".lock") and os.remove(PIDF + ".lock"))
     log(f"=== quant_loop started pid={os.getpid()} ===")
     while True:
         now = dt.datetime.now()
