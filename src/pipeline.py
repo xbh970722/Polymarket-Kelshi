@@ -1030,6 +1030,11 @@ def cmd_stopshadow(_args) -> None:
     con_s.execute("CREATE TABLE IF NOT EXISTS stops("
                   "trade_id INTEGER PRIMARY KEY, ticker TEXT, ts TEXT, "
                   "held_bid REAL, entry_price REAL, contracts INTEGER)")
+    for col in ("spot REAL", "strike REAL"):   # R6 user: stop-hunt classifier —
+        try:                                   # log the UNMANIPULABLE signal too
+            con_s.execute(f"ALTER TABLE stops ADD COLUMN {col}")
+        except _sq.OperationalError:
+            pass
     api = KalshiPublic()
     n = 0
     for t in ledger.open_trades():
@@ -1048,13 +1053,34 @@ def cmd_stopshadow(_args) -> None:
             continue
         bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
         if 0 < bid <= 0.70:
-            con_s.execute("INSERT OR IGNORE INTO stops VALUES(?,?,?,?,?,?)",
+            # a Kalshi book-smash cannot move Coinbase spot: spot-vs-strike at
+            # the trigger moment separates real deaths from stop-hunt dislocations
+            spot = strike = None
+            try:
+                from .shortcycle import strike_of
+                strike = strike_of(t["ticker"])
+                prod = {"KXBTC": "BTC-USD", "KXETH": "ETH-USD",
+                        "KXSOL": "SOL-USD", "KXXRP": "XRP-USD"}.get(
+                    t["ticker"][:5])
+                if prod:
+                    import requests as _rq
+                    spot = float(_rq.get(
+                        f"https://api.exchange.coinbase.com/products/{prod}/ticker",
+                        timeout=10).json()["price"])
+            except Exception:
+                pass
+            con_s.execute("INSERT OR IGNORE INTO stops VALUES(?,?,?,?,?,?,?,?)",
                           (t["id"], t["ticker"],
                            dt.datetime.now().isoformat(timespec="seconds"),
-                           round(bid, 4), t["price"], t["contracts"]))
+                           round(bid, 4), t["price"], t["contracts"],
+                           spot, strike))
             n += 1
+            tag = ""
+            if spot is not None and strike is not None:
+                dist = (spot - strike) / strike * 100
+                tag = f" | spot {spot:.0f} vs strike {strike:.0f} ({dist:+.2f}%)"
             print(f"STOPSHADOW #{t['id']} {t['ticker']}: held-side bid "
-                  f"{bid:.2f} <= 0.70 (would exit here)")
+                  f"{bid:.2f} <= 0.70 (would exit here){tag}")
     con_s.commit()
     con_s.close()
     if n:
