@@ -12,7 +12,8 @@ from pathlib import Path
 from .kalshi_client import KalshiPublic, normalize_market
 
 DB = Path("data") / "market_calibration.db"
-SERIES = ["KXBTCD", "KXETHD", "KXBTC15M", "KXETH15M", "KXSOL15M"]
+SERIES = ["KXBTCD", "KXETHD", "KXSOLD", "KXXRPD",     # 4-coin hourly (zone data for all)
+          "KXBTC15M", "KXETH15M", "KXSOL15M"]
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS snaps(

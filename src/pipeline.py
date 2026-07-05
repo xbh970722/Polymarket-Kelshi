@@ -449,8 +449,9 @@ def cmd_favorites(_args) -> None:
     for series, m, side, ask in sorted(cands, key=lambda x: x[3]):    # cheapest favorite = most room
         if spent >= fc["daily_budget_usd"] or n_open >= fc.get("max_open", 3):
             break
-        veto = engine.check_risk(ledger.stats("live"),
-                                 fc.get("max_contracts", 2) * ask + 0.03, cfg_gl)
+        est_ct = (fc.get("max_contracts_by_series") or {}).get(
+            series, fc.get("max_contracts", 2))
+        veto = engine.check_risk(ledger.stats("live"), est_ct * ask + 0.03, cfg_gl)
         if veto:
             print(f"VETO  {m['ticker']}: {veto}")
             break

@@ -114,25 +114,23 @@ def check_review_trigger() -> None:
 def janitor_stale_sessions() -> None:
     """Scheduled-task claude sessions don't exit and leak ~370MB each (found
     2026-07-04: pagefile exhaustion, fork failures). Kill 'claude' processes
-    older than 3h whose start minute matches task-launch minutes — interactive
-    sessions rarely start exactly then, task sessions always do."""
+    aged 3-20h whose start minute matches task-launch minutes. The <20h upper
+    bound protects long-lived interactive sessions (review 2026-07-04: a
+    days-old chat session could otherwise collide on start-minute)."""
     try:
-        import psutil  # optional; skip silently if unavailable
-    except ImportError:
-        try:
-            out = subprocess.run(
-                ["powershell", "-NoProfile", "-Command",
-                 "Get-Process claude -ErrorAction SilentlyContinue | "
-                 "Where-Object { ((Get-Date) - $_.StartTime).TotalHours -gt 3 -and "
-                 "$_.StartTime.Minute -in 20,21,22,40,44,45,46,56 } | "
-                 "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
-                capture_output=True, text=True, timeout=60)
-            killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
-            if killed:
-                log(f"janitor: killed stale task sessions {killed}")
-        except Exception as e:
-            log(f"janitor failed: {e}")
-        return
+        out = subprocess.run(
+            ["powershell", "-NoProfile", "-Command",
+             "Get-Process claude -ErrorAction SilentlyContinue | "
+             "Where-Object { $h = ((Get-Date) - $_.StartTime).TotalHours; "
+             "$h -gt 3 -and $h -lt 20 -and "
+             "$_.StartTime.Minute -in 20,21,22,40,44,45,46,56 } | "
+             "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
+            capture_output=True, text=True, timeout=60)
+        killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
+        if killed:
+            log(f"janitor: killed stale task sessions {killed}")
+    except Exception as e:
+        log(f"janitor failed: {e}")
 
 
 def main() -> None:
