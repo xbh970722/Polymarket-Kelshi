@@ -2912,3 +2912,32 @@
 [07-05 17:20:44]   pmwatch: pmwatch: +44 pairs | pmwatch: 1338 rows, 424 kalshi-matched | |divergence| median 5.0c, p90 19.4c (gate n>=300)
 [07-05 17:20:45]   journal: journal written: realized today $+0.31, 67 settled, 70 fills
 [07-05 17:20:46]   report: wrote reports\report_2026-07-05.md
+[07-05 17:20:48] committed + pushed
+[07-05 17:23:20]   h15: done: h15 pass complete
+[07-05 17:23:22]   h10: h10: 2 in-window | h10 shadow(main): n=54 mean -5.1c total $-2.75 | KXETH15M: n=18 net $+0.63 | KXSOL15M: n=17 net $-3.40 | KXBTC15M: n=19 net $+0.02 | gate: accumulating (2 pending) || H13 final6: n=11 win 11/11 net $+0.33 gate: accumulating
+[07-05 17:23:22]   h10: PASS  KXETH15M-26JUL051930-30: IOC no fill even crossed (fill-reality data point)
+[07-05 17:23:22]   h10: done: 0 h10 orders
+[07-05 17:23:24]   stopshadow: STOPSHADOW #168 KXXRPD-26JUL0520-T1.1599: held-side bid 0.46 <= 0.7 (crossing logged) | spot 1 vs strike 1 (-0.12%)
+[07-05 17:23:24]   stopshadow: STOPGUARD NOFILL #168 KXXRPD-26JUL0520-T1.1599: bid vanished, still holding
+[07-05 17:23:24]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-05 17:26:21]   settle: done: 0 settled, 10 still open
+[07-05 17:26:22]   h15: done: h15 pass complete
+[07-05 17:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 17:26:27]   shortcycle: shortcycle: 16 candidate strikes | balance $8.19 | today spent $2.26/999999.00
+[07-05 17:26:27]   shortcycle: done: 0 shortcycle orders
+[07-05 17:26:30]   favorites: favorites: 3 favorites in zone | realized $+0.89 | today spent $76.68/999999.00
+[07-05 17:26:30]   favorites: LIVE  KXSOLD-26JUL0520-T81.9999: FAV NO x2 @ 88c cost=$1.77 order=b166b960-f5bf-4973-aa4f-2c0217e92b95
+[07-05 17:26:30]   favorites: done: 1 favorite orders
+[07-05 17:26:30]   h10: h10: 0 in-window | h10 shadow(main): n=54 mean -5.1c total $-2.75 | KXETH15M: n=18 net $+0.63 | KXSOL15M: n=17 net $-3.40 | KXBTC15M: n=19 net $+0.02 | gate: accumulating (2 pending) || H13 final6: n=11 win 11/11 net $+0.33 gate: accumulating
+[07-05 17:26:31]   weather: weather: daily entry cap reached (3)
+[07-05 17:26:33]   stopshadow: STOPGUARD EXIT #168 KXXRPD-26JUL0520-T1.1599: sold x1 @ 26c (bid 0.27, spot losing) — salvaged vs riding to 0
+[07-05 17:26:33]   stopshadow: STOPSHADOW #169 KXETHD-26JUL0520-T1789.99: held-side bid 0.60 <= 0.7 (crossing logged) | spot 1792 vs strike 1790 (+0.09%)
+[07-05 17:26:33]   stopshadow: STOPGUARD HOLD #169 KXETHD-26JUL0520-T1789.99: bid 0.60 but spot safe side & clear — book-only smash, not selling
+[07-05 17:26:33]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-05 17:26:37]   disloc: DISLOC KXBTCD-26JUL0520-T63599.99: fav 0.85->0.64 ask 0.64 [AMBIGUOUS] tau 33m
+[07-05 17:26:37]   disloc: DISLOC KXBTCD-26JUL0520-T63499.99: fav 0.94->0.81 ask 0.81 [AMBIGUOUS] tau 33m
+[07-05 17:26:37]   disloc: DISLOC KXETHD-26JUL0520-T1789.99: fav 0.86->0.60 ask 0.63 [AMBIGUOUS] tau 33m
+[07-05 17:26:37]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=17 win 65% EV -11.3c | BOOK-ONLY: n=15 win 60% EV -13.9c | SPOT-MOVE: n=15 win 47% EV -22.3c | gate: accumulating (40 pending)
+[07-05 17:26:45]   pmwatch: pmwatch: +43 pairs | pmwatch: 1350 rows, 428 kalshi-matched | |divergence| median 5.0c, p90 19.4c (gate n>=300)
+[07-05 17:26:46]   journal: journal written: realized today $-0.19, 68 settled, 71 fills
+[07-05 17:26:47]   report: wrote reports\report_2026-07-05.md
