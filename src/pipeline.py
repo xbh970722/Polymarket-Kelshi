@@ -463,8 +463,9 @@ def cmd_favorites(_args) -> None:
         try:
             # H7 fix: no upward slippage (structural-bias bet, don't chase) + hard
             # price cap at the zone top so a fill can never land in the extreme band.
-            n, px, fee, oid = _decisive_ioc(client, api, m["ticker"], side,
-                                            fc.get("max_contracts", 1),
+            n_ct = (fc.get("max_contracts_by_series") or {}).get(
+                series, fc.get("max_contracts", 1))
+            n, px, fee, oid = _decisive_ioc(client, api, m["ticker"], side, n_ct,
                                             1.0 if side == "yes" else 0.0, -1.0,
                                             slippage=0.0, price_cap=hi)
         except Exception as e:

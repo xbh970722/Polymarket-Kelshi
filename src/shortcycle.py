@@ -16,7 +16,8 @@ import requests
 
 from .kalshi_client import KalshiPublic, normalize_market
 
-SPOT_PRODUCT = {"KXBTCD": "BTC-USD", "KXETHD": "ETH-USD"}
+SPOT_PRODUCT = {"KXBTCD": "BTC-USD", "KXETHD": "ETH-USD",
+                "KXSOLD": "SOL-USD", "KXXRPD": "XRP-USD"}   # lag lane covers all 4 (油门③)
 # 15-minute up/down series: settle = (60s index avg before window end) >= (avg before window start)
 SPOT_15M = {"KXBTC15M": "BTC-USD", "KXETH15M": "ETH-USD", "KXSOL15M": "SOL-USD"}
 

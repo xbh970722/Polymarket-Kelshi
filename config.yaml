@@ -113,7 +113,7 @@ live:
 # ---------- 短波量化通道 (小时级, 无LLM, VALUES.md #11) ----------
 shortcycle:
   enabled: true
-  series: [KXBTCD, KXETHD]       # BTC + ETH 小时市场 (2026-07-03 用户: crypto 也做)
+  series: [KXBTCD, KXETHD, KXSOLD, KXXRPD]   # 油门③: 滞后通道全 4 币覆盖 (2026-07-04)
   # 15分钟涨跌盘已停用 (2026-07-03 数据裁决): v24h=0 无对手盘, 50c处费率4%最狠,
   # 信噪比全通道最差, 实战1笔亏$0.06。代码保留, 改回 [KXBTC15M,KXETH15M,KXSOL15M] 即复活。
   # 注: H5 校准记录器 (src/mktcal.py) 仍免费采样这些市场, 停交易不丢数据。
@@ -125,6 +125,8 @@ shortcycle:
   certainty_band: [0.22, 0.78]   # q 落在带内 = 掷硬币区, 直接跳过
   min_edge_by_series:
     KXETHD: 0.05                 # ETH 价差 3c, 门槛相应更高
+    KXSOLD: 0.05                 # SOL/XRP 书更薄, 同 ETH 门槛
+    KXXRPD: 0.06
     KXBTC15M: 0.04               # 15m盘: 费用占比高 + 指数基差, 门槛 4 点
     KXETH15M: 0.05
     KXSOL15M: 0.05
@@ -160,7 +162,8 @@ favorites:
   # XRP 6.5千勉强; DOGE/BNB/HYPE 死盘不碰。相关性尾巴 ~-$7/暴动小时,
   # 由 $3 回撤复盘中途拦截 (实测过的刹车)。
   series: [KXBTCD, KXETHD, KXSOLD, KXXRPD]
-  zone: [0.86, 0.94]             # 热门侧卖价落在此带才买 (>0.95 一次踏空即灾难, 排除)
+  zone: [0.84, 0.94]             # 2026-07-04 用户开油门①: 底 0.86→0.84 (校准 854 样本
+                                 # 证 0.80-0.85 段仍 +2.7pt; 当初抬底防滑点的理由已被 H7 消除)
   # 2026-07-04 crypto review #2: 底 0.85→0.86。#45(-$1.7)与#30 成交在 0.83-0.84,
   # 低于原 0.85 底 (~1c 泄漏); 抬底 1c 让有效底回到意图值。校准(567快照)证实
   # favorite-longshot 偏差在 0.80-0.85 仍 +2.7pt, 故非结构改动, 仅堵泄漏。见 H6。
@@ -169,8 +172,11 @@ favorites:
   # 成交可上滑 1c。band 数据: 0.94-0.97 共 6 单净 -$1.49 (96c NO 冒 96 博 4, 一翻即毁),
   # 而 0.88-0.94 核心 14 单 0 亏 +$2.09。降顶 1c 让有效顶回到意图 ~0.95。见 H6。
   tau_window_min: [10, 90]
-  max_contracts: 2               # 2026-07-04 用户: 稍增单笔金额 (原1); 单笔亏损上限≈$1.8
-  max_per_trade_usd: 2.00        # 原1.00
+  max_contracts: 2               # 基准 2 张; BTC/ETH 深书可 3 张 (油门②, 见 per_series)
+  max_contracts_by_series:       # 2026-07-04 用户开油门②
+    KXBTCD: 3
+    KXETHD: 3
+  max_per_trade_usd: 3.00        # 3张×~94c 上限配套 (原2.00)
   daily_budget_usd: 4.00         # 2026-07-04 提速: 每天更多热门 (原2.00)
   max_open: 8                    # 2026-07-04 用户"123": 5→8 (4币时段打满; 全局$5熔断兜底)
   max_per_window: 1
