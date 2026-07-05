@@ -720,6 +720,44 @@ def cmd_journal(_args) -> None:
           f"{len(settled_today)} settled, {len(fills_today)} fills")
 
 
+def cmd_blindai_context(_args) -> None:
+    """Print ONE soon-to-settle crypto market as a blind packet (no market price)."""
+    from . import blindai
+    ctx = blindai.pick_context()
+    if not ctx:
+        print("no eligible crypto market (need one settling in 20-50 min, not yet logged)")
+        return
+    blindai.stash_context(ctx)
+    print(json.dumps({"ticker": ctx["ticker"], "question": ctx["question"],
+                      "strike": ctx["strike"], "close_time": ctx["close_time"],
+                      "price_action": ctx["context"],
+                      "instruction": "Estimate P(YES=settles above strike) from price action "
+                                     "ONLY. Do NOT guess or reference any market/prediction "
+                                     "price. Output a probability 0-1."}, ensure_ascii=False))
+
+
+def cmd_blindai_record(args) -> None:
+    from . import blindai
+    ai = args.ai if args.ai is not None else (
+        (args.claude + args.codex) / 2 if args.claude is not None and args.codex is not None
+        else None)
+    if ai is None:
+        print("need --ai or both --claude and --codex")
+        return
+    blindai.record(args.ticker, ai, args.claude, args.codex)
+    print(f"recorded blind call {args.ticker}: ai_yes={ai:.3f} (market fetched independently)")
+
+
+def cmd_blindai_settle(_args) -> None:
+    from . import blindai
+    print(f"blind-AI settled: {blindai.settle()}")
+
+
+def cmd_blindai_report(_args) -> None:
+    from . import blindai
+    print(blindai.report())
+
+
 def cmd_mktsnap(_args) -> None:
     """Zero-cost calibration sampling of soon-to-settle crypto markets (H5)."""
     from .mktcal import snapshot
@@ -831,6 +869,15 @@ def main() -> None:
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)
+    sub.add_parser("blindai-context").set_defaults(fn=cmd_blindai_context)
+    p = sub.add_parser("blindai-record")
+    p.add_argument("--ticker", required=True)
+    p.add_argument("--ai", type=float, default=None)
+    p.add_argument("--claude", type=float, default=None)
+    p.add_argument("--codex", type=float, default=None)
+    p.set_defaults(fn=cmd_blindai_record)
+    sub.add_parser("blindai-settle").set_defaults(fn=cmd_blindai_settle)
+    sub.add_parser("blindai-report").set_defaults(fn=cmd_blindai_report)
     sub.add_parser("report").set_defaults(fn=cmd_report)
     sub.add_parser("status").set_defaults(fn=cmd_status)
     sub.add_parser("pending").set_defaults(fn=cmd_pending)
