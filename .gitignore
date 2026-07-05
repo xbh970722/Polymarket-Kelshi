@@ -10,3 +10,7 @@ review_session.log
 *credential*
 .env
 # 账本 data/ledger.db 和 reports/ 特意纳入版本控制: 它们是审计轨迹
+
+data/ledger.db-shm
+data/ledger.db-wal
+data/quant_loop.pid.lock
