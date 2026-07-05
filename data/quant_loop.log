@@ -4638,3 +4638,20 @@
 [07-05 10:05:46]   wxfade: wxfade: +2 logged, 0 settled | wxfade shadow: 0 settled (33 pending)
 [07-05 10:05:48]   journal: journal written: realized today $-2.80, 45 settled, 45 fills
 [07-05 10:05:49]   report: wrote reports\report_2026-07-05.md
+[07-05 10:05:51] committed + pushed
+[07-05 10:08:20]   h15: done: h15 pass complete
+[07-05 10:08:21]   h10: h10: 0 in-window | h10 shadow(main): n=33 mean -5.3c total $-1.75 | KXETH15M: n=9 net $+0.88 | KXSOL15M: n=13 net $-2.82 | KXBTC15M: n=11 net $+0.19 | gate: accumulating (0 pending) || H13 final6: n=7 win 7/7 net $+0.21 gate: accumulating
+[07-05 10:11:21]   settle: done: 0 settled, 7 still open
+[07-05 10:11:22]   h15: done: h15 pass complete
+[07-05 10:11:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 10:11:28]   shortcycle: shortcycle: 11 candidate strikes | balance $10.00 | today spent $0.85/999999.00
+[07-05 10:11:28]   shortcycle: done: 0 shortcycle orders
+[07-05 10:11:29]   favorites: favorites: 2 favorites in zone | realized $-1.60 | today spent $51.99/999999.00
+[07-05 10:11:29]   favorites: LIVE  KXXRPD-26JUL0513-T1.1399: FAV NO x1 @ 84c cost=$0.85 order=72924002-325f-46f0-9eeb-c3ca0c5c08bb
+[07-05 10:11:29]   favorites: done: 1 favorite orders
+[07-05 10:11:30]   h10: h10: 0 in-window | h10 shadow(main): n=33 mean -5.3c total $-1.75 | KXETH15M: n=9 net $+0.88 | KXSOL15M: n=13 net $-2.82 | KXBTC15M: n=11 net $+0.19 | gate: accumulating (0 pending) || H13 final6: n=7 win 7/7 net $+0.21 gate: accumulating
+[07-05 10:11:31]   weather: weather: daily entry cap reached (3)
+[07-05 10:11:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=10 win 50% EV -24.2c | BOOK-ONLY: n=10 win 60% EV -11.5c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (22 pending)
+[07-05 10:11:41]   pmwatch: pmwatch: +31 pairs | pmwatch: 762 rows, 242 kalshi-matched | |divergence| median 5.0c, p90 17.3c (gate n>=300)
+[07-05 10:11:41]   journal: journal written: realized today $-2.80, 45 settled, 46 fills
+[07-05 10:11:43]   report: wrote reports\report_2026-07-05.md
