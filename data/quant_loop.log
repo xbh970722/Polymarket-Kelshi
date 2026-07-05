@@ -3813,3 +3813,20 @@
 [07-05 05:08:22]   h10: LIVE  KXETH15M-26JUL050715-15: H10 YES x1 @ 83c cost=$0.84 order=fe36952c-e793-4408-b8f6-d7878b1dcaa1
 [07-05 05:08:22]   h10: done: 1 h10 orders
 [07-05 05:08:23]   journal: journal written: realized today $+0.49, 22 settled, 23 fills
+[07-05 05:08:25] light mark committed + pushed
+[07-05 05:11:21]   settle: SETTLED KXHIGHPHIL-26JUL04-B101.5: result=yes LOSS pnl=$-0.44
+[07-05 05:11:21]   settle: SETTLED KXHIGHPHIL-26JUL04-T99: result=no LOSS pnl=$-0.16
+[07-05 05:11:21]   settle: done: 2 settled, 6 still open
+[07-05 05:11:21]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-05 05:11:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 05:11:27]   shortcycle: shortcycle: 9 candidate strikes | balance $15.72 | today spent $0.85/999999.00
+[07-05 05:11:27]   shortcycle: done: 0 shortcycle orders
+[07-05 05:11:29]   favorites: favorites: 2 favorites in zone | realized $+0.54 | today spent $29.12/999999.00
+[07-05 05:11:29]   favorites: done: 0 favorite orders
+[07-05 05:11:30]   h10: h10: 0 in-window | h10 shadow(main): n=12 mean +9.0c total $+1.08 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=5 net $+0.44 | KXBTC15M: n=3 net $+0.29 | gate: accumulating (2 pending) || H13 final6: n=4 win 4/4 net $+0.09 gate: accumulating
+[07-05 05:11:30]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 05:11:30]   weather: done: 0 weather orders
+[07-05 05:11:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=5 win 20% EV -56.0c | BOOK-ONLY: n=3 win 33% EV -44.0c | SPOT-MOVE: n=4 win 50% EV -7.2c | gate: accumulating (9 pending)
+[07-05 05:11:37]   pmwatch: pmwatch: +14 pairs | pmwatch: 292 rows, 92 kalshi-matched | |divergence| median 4.0c, p90 17.0c (gate n>=300)
+[07-05 05:11:38]   journal: journal written: realized today $-0.11, 24 settled, 23 fills
+[07-05 05:11:39]   report: wrote reports\report_2026-07-05.md
