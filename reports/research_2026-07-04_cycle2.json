@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-04",
+  "cycle": "scheduled cycle 2 (independent re-research; confirms morning cycle 1 directional calls)",
+  "protocol": "ensemble 2xOpus + 2xCodex(gpt-5.5 xhigh) blind, arbiter aggregation (opus-4.8 session), half-anchor round-2 on Fed crux, verification layer passed",
+  "infra_note": "Codex round-2 refinement on the Fed crux hung twice at the stdin-read stage amid ~10 concurrent codex processes (quant-loop orphans); codex family fell back to its valid BLIND estimate 0.67. Both families produced complete blind estimates. Directional signal robust to the gap.",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Will the Federal Reserve Hike rates by 0bps (maintain) at their July 29, 2026 meeting?",
+      "q_claude": 0.76,
+      "q_codex": 0.67,
+      "q_all": [0.70, 0.60, 0.68, 0.66],
+      "rationale": "Core: ensemble blind (0.66) AND CME FedWatch fed-funds futures (~0.756) both price P(hold) well below Kalshi's ~0.895 -> Kalshi overprices a July hold (NO edge; the only realistic NO path is a July HIKE, since cuts are off the table). Main risk / crux: does the year's telegraphed hike land at July 29 or a later SEP meeting (Sep/Dec)? Round-2 (Opus) moved 0.66->0.76 on the legitimate no-SEP-timing argument (hawkish new chair Warsh more likely to signal than surprise-hike), anchoring near FedWatch under the 0.7775 half-anchor cap; codex round-2 unavailable -> blind 0.67. Divergence: family div 0.09 (<0.10). Verification (FedWatch, Warsh chair May 2026, no-SEP timing) fed into round-2. Engine outcome: VETO (live daily-risk budget exhausted by quant loop).",
+      "sources": [
+        "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm",
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+        "https://www.forbes.com/sites/investor-hub/article/fed-meeting-tracker-interest-rate-strategy/",
+        "https://www.rexshares.com/fomc-june-2026-preview-the-decision-is-settled-the-dot-plot-isnt/"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "q_claude": 0.95,
+      "q_codex": 0.92,
+      "q_all": [0.95, 0.95, 0.93, 0.91],
+      "rationale": "Core: host-nation president with a publicized plan to attend and co-present the trophy (FIFA's Infantino on Fox & Friends: 'no doubt' about Trump's role), same-venue 2025 Club WC precedent, and extremely loose YES criteria (a brief appearance or self-posted social counts). Main risk: only low-frequency disruptors (health/security/geopolitical) in the ~15-day window. Divergence: family div 0.03; verification confirmed (no health concerns) rather than invalidated blind. Engine outcome: SKIP (net edge +0.017 after fees < 0.035 threshold).",
+      "sources": [
+        "https://www.cnbc.com/2026/07/01/trump-fifa-infantino-world-cup-financial-disclosure.html",
+        "https://www.aljazeera.com/sports/2026/6/23/donald-trump-to-attend-world-cup-final-present-trophy-infantino",
+        "https://www.espn.com/soccer/story/_/id/49154827/donald-trump-present-world-cup-trophy-final-fifa-boss-gianni-infantino-confirms"
+      ]
+    },
+    {
+      "ticker": "KXKASHOUT-26APR-AUG01",
+      "title": "Will Kash Patel leave as FBI Director before Aug 1, 2026?",
+      "q_claude": 0.05,
+      "q_codex": 0.04,
+      "q_all": [0.05, 0.05, 0.04, 0.04],
+      "rationale": "Core: departure needs voluntary resignation (Patel publicly defied the April Atlantic drinking/absence scandal and stayed) or Trump firing a loyalist (no indication) inside a <4-week window; Democratic resignation calls carry no formal power; FBI Director is a 10-yr statutory term. Main risk: sudden scandal escalation. Divergence: family div 0.01; all four clustered 0.04-0.05. Engine outcome: SKIP (net edge +0.023 < 0.035 threshold).",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kash_Patel",
+        "https://www.democrats.senate.gov/news/press-releases/leader-schumer-floor-remarks-demanding-kash-patel-resign-as-fbi-director",
+        "https://www.judiciary.senate.gov/press/dem/releases/durbin-speaks-on-latest-kash-patel-revelations-urges-replacement"
+      ]
+    }
+  ]
+}
