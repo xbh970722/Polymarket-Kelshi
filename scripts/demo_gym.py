@@ -251,6 +251,20 @@ def side_quote(m: dict, side: str) -> dict:
     }
 
 
+def min_legal_price(m: dict) -> float:
+    ranges = (m.get("raw") or {}).get("price_ranges") or []
+    if ranges:
+        r0 = ranges[0]
+        start = fnum(r0.get("start"))
+        step = fnum(r0.get("step"), 0.01)
+        price = start + step
+        return round(max(price, step, 0.0001), 4)
+    structure = str((m.get("raw") or {}).get("price_level_structure") or "")
+    if "deci" in structure:
+        return 0.001
+    return 0.01
+
+
 def discover(client: KalshiLive, baseline: dict[str, float]) -> dict:
     active_order_tickers = set()
     try:
@@ -296,8 +310,8 @@ def discover(client: KalshiLive, baseline: dict[str, float]) -> dict:
     )
     capped_sides.sort(
         key=lambda x: (
-            market_priority(x["market"]),
             max(1.0, x["entry_size"]),
+            market_priority(x["market"]),
             x["entry_ask"],
         )
     )
@@ -416,18 +430,13 @@ class Gym:
                     self.cleanup_errors.append({"flatten": ticker, "error": "market fetch failed"})
                     continue
                 side = "yes" if delta > 0 else "no"
-                count = int(round(abs(delta)))
-                if count <= 0 or abs(abs(delta) - count) > 1e-6:
+                count = int(math.ceil(abs(delta) - 1e-9))
+                if count <= 0:
                     self.cleanup_errors.append(
-                        {"flatten": ticker, "error": f"fractional/unrounded delta {delta}"}
+                        {"flatten": ticker, "error": f"invalid delta {delta}"}
                     )
                     continue
-                price = m["yes_bid"] if side == "yes" else m["no_bid"]
-                if price <= 0:
-                    self.cleanup_errors.append(
-                        {"flatten": ticker, "side": side, "error": "no exit bid"}
-                    )
-                    continue
+                price = min_legal_price(m)
                 try:
                     self.client.place_exit(ticker, side, count, min(max(price, 0.0001), 0.9999))
                 except Exception as exc:
@@ -606,9 +615,10 @@ def test_t3(g: Gym) -> dict:
                     cancel_resp = {"error": api_error(exc)}
                 final = find_order(g.client, ticker=ticker, order_id=oid, client_order_id=coid)
                 filled = fill_count(final or placed)
+                cancel_ack = isinstance(cancel_resp, dict) and fnum(cancel_resp.get("reduced_by")) > 0
                 if filled > 0:
                     cls = "fill_before_cancel"
-                elif str((final or {}).get("status") or "").lower() == "canceled":
+                elif str((final or {}).get("status") or "").lower() == "canceled" or cancel_ack:
                     cls = "cancel_won"
                 else:
                     cls = "unknown"
@@ -623,6 +633,7 @@ def test_t3(g: Gym) -> dict:
                         "classification": cls,
                         "fill_count": filled,
                         "final_status": (final or {}).get("status"),
+                        "cancel_ack": cancel_ack,
                         "cancel": short(cancel_resp, 250),
                         "place": short(resp, 250),
                     }
@@ -648,9 +659,7 @@ def exit_filled_position(g: Gym, ticker: str, side: str, count: int) -> dict:
     m = fetch_market(g.client, ticker)
     if not m:
         return {"error": "market fetch failed"}
-    price = m["yes_bid"] if side == "yes" else m["no_bid"]
-    if price <= 0:
-        return {"error": "no exit bid", "side": side, "market": short(m, 300)}
+    price = min_legal_price(m)
     try:
         return g.client.place_exit(ticker, side, count, min(max(price, 0.0001), 0.9999))
     except Exception as exc:
@@ -660,9 +669,18 @@ def exit_filled_position(g: Gym, ticker: str, side: str, count: int) -> dict:
 def test_t4(g: Gym) -> dict:
     if not g.discovery["live"]:
         return result("SKIP", "no active livebook market; fills-to-cash replay skipped")
-    capped = refreshed_side(g, g.discovery["capped"], cap=0.60)
+    capped = None
+    current_discovery = discover(g.client, g.baseline_positions)
+    for candidate in current_discovery.get("capped_candidates") or []:
+        refreshed = refreshed_side(g, candidate, cap=0.60)
+        if refreshed and refreshed["entry_size"] <= 50:
+            capped = refreshed
+            break
     if not capped:
-        return result("SKIP", "no live side with entry limit <=0.60 for 999-lot IOC replay")
+        return result(
+            "SKIP",
+            "no live side with entry limit <=0.60 and top ask size <=50 for 999-lot IOC replay",
+        )
     ticker = capped["market"]["ticker"]
     side = capped["side"]
     price = min(capped["entry_ask"], 0.60)

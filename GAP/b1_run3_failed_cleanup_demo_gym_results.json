@@ -1,0 +1,253 @@
+{
+  "ts": "2026-07-05T12:49:52+00:00",
+  "env": "demo",
+  "run_id": "dg0fbf678b",
+  "base": "https://demo-api.kalshi.co",
+  "baseline_positions": {},
+  "discovery": {
+    "market_count": 400,
+    "rest_ticker": "KXMLBMENTION-26JUL05PHIKC-KAUF",
+    "live_ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+    "live_side": "yes",
+    "capped_ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+    "capped_side": "yes",
+    "active_order_tickers_skipped": []
+  },
+  "completed_ts": "2026-07-05T12:54:18+00:00",
+  "elapsed_s": 268.454,
+  "results": {
+    "T1": {
+      "status": "FAIL",
+      "evidence": "KXMLBMENTION-26JUL05PHIKC-KAUF no@0.0100; active_before=True; expiry_echo=False; after_status=resting; auto_inactive=False",
+      "ticker": "KXMLBMENTION-26JUL05PHIKC-KAUF",
+      "side": "no",
+      "price": 0.01,
+      "expiration_ts": 1783255912,
+      "order_id": "f43f4da6-fc8c-48ef-b1ea-9459f69dcadc",
+      "place_response": "{\"_gym_client_order_id\": \"dg0fbf678b-T1-8b4ddf\", \"client_order_id\": \"dg0fbf678b-T1-8b4ddf\", \"fill_count\": \"0.00\", \"order_id\": \"f43f4da6-fc8c-48ef-b1ea-9459f69dcadc\", \"remaining_count\": \"1.00\", \"ts_ms\": 1783255792328}",
+      "readback_order": "{\"action\": \"sell\", \"book_side\": \"ask\", \"client_order_id\": \"dg0fbf678b-T1-8b4ddf\", \"created_time\": \"2026-07-05T12:49:52.328276Z\", \"fill_count_fp\": \"0.00\", \"initial_count_fp\": \"1.00\", \"last_update_time\": \"2026-07-05T12:49:52.328276Z\", \"maker_fees_dollars\": \"0.000000\", \"maker_fill_cost_dollars\": \"0.000000\", \"no_price_dollars\": \"0.0100\", \"order_id\": \"f43f4da6-fc8c-48ef-b1ea-9459f69dcadc\", \"outcome_side\": \"no\", \"remaining_count_fp\": \"1.00\", \"self_trade_prevention_type\": \"taker_at_cross\", \"side\": \"yes\", \"status\": \"resting\", \"subaccount_number\": 0, \"taker_fees_dollars\": \"0.000000\", \"taker_fill_cost_dollars\": \"0.000000\", \"ticker\": \"KXMLBMENTION-26JUL05PHIKC-KAUF\", \"type\": \"limit\", \"user_id\": \"06d85a",
+      "expiry_fields": {},
+      "after_order": "{\"action\": \"sell\", \"book_side\": \"ask\", \"client_order_id\": \"dg0fbf678b-T1-8b4ddf\", \"created_time\": \"2026-07-05T12:49:52.328276Z\", \"fill_count_fp\": \"0.00\", \"initial_count_fp\": \"1.00\", \"last_update_time\": \"2026-07-05T12:49:52.328276Z\", \"maker_fees_dollars\": \"0.000000\", \"maker_fill_cost_dollars\": \"0.000000\", \"no_price_dollars\": \"0.0100\", \"order_id\": \"f43f4da6-fc8c-48ef-b1ea-9459f69dcadc\", \"outcome_side\": \"no\", \"remaining_count_fp\": \"1.00\", \"self_trade_prevention_type\": \"taker_at_cross\", \"side\": \"yes\", \"status\": \"resting\", \"subaccount_number\": 0, \"taker_fees_dollars\": \"0.000000\", \"taker_fill_cost_dollars\": \"0.000000\", \"ticker\": \"KXMLBMENTION-26JUL05PHIKC-KAUF\", \"type\": \"limit\", \"user_id\": \"06d85a"
+    },
+    "T2": {
+      "status": "PASS",
+      "evidence": "KXMLBMENTION-26JUL05PHIKC-KAUF order=fe97286e-a002-4f13-9820-14916d77702d; visible=True; cancel_ack=True; orders_readback_status=canceled; second_cancel={\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/fe97286e-a002-4f13-9820-14916d77702d -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_fo",
+      "ticker": "KXMLBMENTION-26JUL05PHIKC-KAUF",
+      "side": "no",
+      "price": 0.01,
+      "order_id": "fe97286e-a002-4f13-9820-14916d77702d",
+      "place_response": "{\"_gym_client_order_id\": \"dg0fbf678b-T2-e26bd5\", \"client_order_id\": \"dg0fbf678b-T2-e26bd5\", \"fill_count\": \"0.00\", \"order_id\": \"fe97286e-a002-4f13-9820-14916d77702d\", \"remaining_count\": \"1.00\", \"ts_ms\": 1783255923942}",
+      "cancel_response": "{\"order_id\": \"fe97286e-a002-4f13-9820-14916d77702d\", \"reduced_by\": \"1.00\", \"ts_ms\": 1783255924262}",
+      "after_cancel": "{\"action\": \"sell\", \"book_side\": \"ask\", \"client_order_id\": \"dg0fbf678b-T2-e26bd5\", \"created_time\": \"2026-07-05T12:52:03.942496Z\", \"fill_count_fp\": \"0.00\", \"initial_count_fp\": \"1.00\", \"last_update_time\": \"2026-07-05T12:52:04.262269Z\", \"maker_fees_dollars\": \"0.000000\", \"maker_fill_cost_dollars\": \"0.000000\", \"no_price_dollars\": \"0.0100\", \"order_id\": \"fe97286e-a002-4f13-9820-14916d77702d\", \"outcome_side\": \"no\", \"remaining_count_fp\": \"0.00\", \"self_trade_prevention_type\": \"taker_at_cross\", \"side\": \"yes\", \"status\": \"canceled\", \"subaccount_number\": 0, \"taker_fees_dollars\": \"0.000000\", \"taker_fill_cost_dollars\": \"0.000000\", \"ticker\": \"KXMLBMENTION-26JUL05PHIKC-KAUF\", \"type\": \"limit\", \"user_id\": \"06d85",
+      "cancel_ack": true,
+      "second_cancel": {
+        "error": {
+          "type": "RuntimeError",
+          "message": "DELETE /trade-api/v2/portfolio/events/orders/fe97286e-a002-4f13-9820-14916d77702d -> HTTP 404: {\"error\":{\"code\":\"not_found\",\"message\":\"not found\",\"service\":\"exchange\"}}",
+          "is_429": false,
+          "is_4xx": true
+        }
+      }
+    },
+    "T3": {
+      "status": "PASS",
+      "evidence": "10 races; fill_before_cancel=10, cancel_won=0, unknown=0",
+      "stats": {
+        "fill_before_cancel": 10,
+        "cancel_won": 0,
+        "unknown": 0
+      },
+      "attempts": [
+        {
+          "i": 1,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "d671f67e-5159-4a60-9fa3-f3274e0e84c3",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/d671f67e-5159-4a60-9fa3-f3274e0e84c3 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-1-6273ab\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-1-6273ab\", \"fill_count\": \"1.00\", \"order_id\": \"d671f67e-5159-4a60-9fa3-f3274e0e84c3\", \"remaining_count\":"
+        },
+        {
+          "i": 2,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "1bad60cf-6d59-4d5a-9013-5e9f96c579b9",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/1bad60cf-6d59-4d5a-9013-5e9f96c579b9 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-2-1a668c\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-2-1a668c\", \"fill_count\": \"1.00\", \"order_id\": \"1bad60cf-6d59-4d5a-9013-5e9f96c579b9\", \"remaining_count\":"
+        },
+        {
+          "i": 3,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "600d2a00-3030-4fa3-be4e-28205362661e",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/600d2a00-3030-4fa3-be4e-28205362661e -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-3-f2bf20\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-3-f2bf20\", \"fill_count\": \"1.00\", \"order_id\": \"600d2a00-3030-4fa3-be4e-28205362661e\", \"remaining_count\":"
+        },
+        {
+          "i": 4,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "b7ba645f-554e-4de8-b122-934b5e1566b0",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/b7ba645f-554e-4de8-b122-934b5e1566b0 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-4-250142\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-4-250142\", \"fill_count\": \"1.00\", \"order_id\": \"b7ba645f-554e-4de8-b122-934b5e1566b0\", \"remaining_count\":"
+        },
+        {
+          "i": 5,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "5121ed28-5a32-45ea-96aa-cccb36a8e276",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/5121ed28-5a32-45ea-96aa-cccb36a8e276 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-5-14cf0d\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-5-14cf0d\", \"fill_count\": \"1.00\", \"order_id\": \"5121ed28-5a32-45ea-96aa-cccb36a8e276\", \"remaining_count\":"
+        },
+        {
+          "i": 6,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "491cd9eb-bb79-4744-aff8-49426328b91c",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/491cd9eb-bb79-4744-aff8-49426328b91c -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-6-666a41\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-6-666a41\", \"fill_count\": \"1.00\", \"order_id\": \"491cd9eb-bb79-4744-aff8-49426328b91c\", \"remaining_count\":"
+        },
+        {
+          "i": 7,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "6decf661-595d-4c0c-a2f5-b013fc046126",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/6decf661-595d-4c0c-a2f5-b013fc046126 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-7-29b8f3\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-7-29b8f3\", \"fill_count\": \"1.00\", \"order_id\": \"6decf661-595d-4c0c-a2f5-b013fc046126\", \"remaining_count\":"
+        },
+        {
+          "i": 8,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "bdf9d236-3a57-4316-b524-30fe8ea27717",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/bdf9d236-3a57-4316-b524-30fe8ea27717 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-8-77dbf6\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-8-77dbf6\", \"fill_count\": \"1.00\", \"order_id\": \"bdf9d236-3a57-4316-b524-30fe8ea27717\", \"remaining_count\":"
+        },
+        {
+          "i": 9,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "cc2530b1-956a-4658-85a8-c418c9e844e5",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/cc2530b1-956a-4658-85a8-c418c9e844e5 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-9-cdd477\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-9-cdd477\", \"fill_count\": \"1.00\", \"order_id\": \"cc2530b1-956a-4658-85a8-c418c9e844e5\", \"remaining_count\":"
+        },
+        {
+          "i": 10,
+          "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+          "side": "yes",
+          "price": 0.43,
+          "order_id": "2c4f67cf-5939-427b-bef5-cfd0cc013195",
+          "classification": "fill_before_cancel",
+          "fill_count": 1.0,
+          "final_status": "executed",
+          "cancel": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"DELETE /trade-api/v2/portfolio/events/orders/2c4f67cf-5939-427b-bef5-cfd0cc013195 -> HTTP 404: {\\\"error\\\":{\\\"code\\\":\\\"not_found\\\",\\\"message\\\":\\\"not found\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"",
+          "place": "{\"_gym_client_order_id\": \"dg0fbf678b-T3-10-f27322\", \"average_fee_paid\": \"0.0172\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T3-10-f27322\", \"fill_count\": \"1.00\", \"order_id\": \"2c4f67cf-5939-427b-bef5-cfd0cc013195\", \"remaining_count"
+        }
+      ]
+    },
+    "T4": {
+      "status": "FAIL",
+      "evidence": "KXMLBGAME-26JUL052130BOSLAA-LAA yes 999@0.4300; fill_count_fp=990.00; remaining=0.0; status=canceled; clean=False",
+      "ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+      "side": "yes",
+      "limit_price": 0.43,
+      "order_id": "eb82428b-5ca9-4dae-a2e0-98907dad8e5c",
+      "fill_count": 990.0,
+      "fill_count_fp": "990.00",
+      "fill_count_has_decimal_point": true,
+      "fill_count_fractional_nonzero": false,
+      "remaining": 0.0,
+      "place_response": "{\"_gym_client_order_id\": \"dg0fbf678b-T4-c412aa\", \"average_fee_paid\": \"0.0171\", \"average_fill_price\": \"0.4300\", \"client_order_id\": \"dg0fbf678b-T4-c412aa\", \"fill_count\": \"990.00\", \"order_id\": \"eb82428b-5ca9-4dae-a2e0-98907dad8e5c\", \"remaining_count\": \"0.00\", \"ts_ms\": 1783255953277}",
+      "final_order": "{\"action\": \"buy\", \"book_side\": \"bid\", \"client_order_id\": \"dg0fbf678b-T4-c412aa\", \"created_time\": \"2026-07-05T12:52:33.277074Z\", \"fill_count_fp\": \"990.00\", \"initial_count_fp\": \"999.00\", \"last_update_time\": \"2026-07-05T12:52:33.277074Z\", \"maker_fees_dollars\": \"0.000000\", \"maker_fill_cost_dollars\": \"0.000000\", \"no_price_dollars\": \"0.5700\", \"order_id\": \"eb82428b-5ca9-4dae-a2e0-98907dad8e5c\", \"outcome_side\": \"yes\", \"remaining_count_fp\": \"0.00\", \"self_trade_prevention_type\": \"taker_at_cross\", \"side\": \"yes\", \"status\": \"canceled\", \"subaccount_number\": 0, \"taker_fees_dollars\": \"16.988400\", \"taker_fill_cost_dollars\": \"425.700000\", \"ticker\": \"KXMLBGAME-26JUL052130BOSLAA-LAA\", \"type\": \"limit\", \"user_id\"",
+      "exit_response": "{\"average_fee_paid\": \"0.0170\", \"average_fill_price\": \"0.4200\", \"client_order_id\": \"f6699ef0-52d1-416c-a93f-884430ab9469\", \"fill_count\": \"54.00\", \"order_id\": \"75b36656-3ff9-4d99-a9ad-9f3342af6794\", \"remaining_count\": \"0.00\", \"ts_ms\": 1783255953967}",
+      "positions_after": {
+        "KXMLBGAME-26JUL052130BOSLAA-LAA": 936.0
+      }
+    },
+    "T5": {
+      "status": "FAIL",
+      "evidence": "no_hold=KXMLBGAME-26JUL052130BOSLAA-LAA yes fill=1.0; over_exit={\"clean\": false, \"entry_fill\": 1.0, \"over_fill\": 1.0, \"positions_after\": {\"KXMLBGAME-26JUL052130BOSLAA-LAA\": 926.0}, \"response\": \"{\\\"average_fee_paid\\\": \\\"0.0155\\\", \\\"average_fill_price\\\": \\\"0.6700\\\", \\\"client_order_id\\\"",
+      "no_hold_ticker": "KXMLBGAME-26JUL052130BOSLAA-LAA",
+      "no_hold_side": "yes",
+      "no_hold": "{\"average_fee_paid\": \"0.0168\", \"average_fill_price\": \"0.4000\", \"client_order_id\": \"3072e681-81dd-45a5-82ee-16cf8d33c40c\", \"fill_count\": \"1.00\", \"order_id\": \"ec142b22-2e1b-4269-8743-bf9c2d727044\", \"remaining_count\": \"0.00\", \"ts_ms\": 1783255964097}",
+      "over_exit": {
+        "ticker": "KXMLBGAME-26JUL051920SDLAD-LAD",
+        "side": "yes",
+        "response": "{\"average_fee_paid\": \"0.0155\", \"average_fill_price\": \"0.6700\", \"client_order_id\": \"0b256fa7-2de7-45b9-a502-eb8a6902bb16\", \"fill_count\": \"1.00\", \"order_id\": \"0f85d603-27d2-4b3a-8436-c4741a5e7c7b\", \"remaining_count\": \"0.00\", \"ts_ms\": 1783255970543}",
+        "over_fill": 1.0,
+        "entry_fill": 1.0,
+        "positions_after": {
+          "KXMLBGAME-26JUL052130BOSLAA-LAA": 926.0
+        },
+        "clean": false
+      },
+      "entry_attempts": []
+    },
+    "T6": {
+      "status": "PASS",
+      "evidence": "237 place/cancel attempts in 64.4s; first_429=None",
+      "ticker": "KXMLBMENTION-26JUL05PHIKC-KAUF",
+      "side": "no",
+      "price": 0.01,
+      "attempts": 237,
+      "first_429": null,
+      "errors": []
+    },
+    "T7": {
+      "status": "PASS",
+      "evidence": "KXMLBMENTION-26JUL05PHIKC-KAUF duplicate coid=dg0fbf678b-T7-dup-febc36; semantic=4xx_reject; second={\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"POST /trade-api/v2/portfolio/events/orders -> HTTP 409: {\\\"error\\\":{\\\"code\\\":\\\"order_already_exists\\\",\\\"message\\\":\\\"order already exists\\\",\\\"service\\\":\\\"exchange\\\"}",
+      "ticker": "KXMLBMENTION-26JUL05PHIKC-KAUF",
+      "side": "no",
+      "price": 0.01,
+      "client_order_id": "dg0fbf678b-T7-dup-febc36",
+      "first_order_id": "48245ca5-6f71-454a-abfe-9adb71cd77c8",
+      "first_response": "{\"_gym_client_order_id\": \"dg0fbf678b-T7-dup-febc36\", \"client_order_id\": \"dg0fbf678b-T7-dup-febc36\", \"fill_count\": \"0.00\", \"order_id\": \"48245ca5-6f71-454a-abfe-9adb71cd77c8\", \"remaining_count\": \"1.00\", \"ts_ms\": 1783256049284}",
+      "second": "{\"error\": {\"is_429\": false, \"is_4xx\": true, \"message\": \"POST /trade-api/v2/portfolio/events/orders -> HTTP 409: {\\\"error\\\":{\\\"code\\\":\\\"order_already_exists\\\",\\\"message\\\":\\\"order already exists\\\",\\\"service\\\":\\\"exchange\\\"}}\", \"type\": \"RuntimeError\"}}",
+      "semantic": "4xx_reject"
+    },
+    "T8": {
+      "status": "SKIP",
+      "evidence": "optional private WS probe skipped: 20-minute single-run budget and no repo implementation for private WS auth"
+    }
+  },
+  "clean_exit": false,
+  "final_positions": {
+    "KXMLBGAME-26JUL052130BOSLAA-LAA": 647.0
+  },
+  "cleanup_errors": []
+}
