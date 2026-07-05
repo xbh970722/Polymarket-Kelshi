@@ -1808,7 +1808,11 @@ def cmd_journal(_args) -> None:
         # exclusion ledger.calibration applies.
         rows = [t for t in all_settled
                 if _lane_of(t["ticker"], t.get("title") or "") == lane
-                and not (t.get("title") or "").startswith("favorite")]
+                and not (t.get("title") or "").startswith("favorite")
+                # rows without a model probability cannot be Brier-scored:
+                # manual/incident bookings (e.g. #97) carry q_consensus NULL
+                and t["q_consensus"] is not None
+                and t["market_prob"] is not None]
         if rows:
             bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
                      for t in rows) / len(rows)
@@ -1841,10 +1845,15 @@ def cmd_journal(_args) -> None:
     if settled_today:
         for t in settled_today:
             tag = t["result"] or (t.get("rationale") or "")[-20:]
+            # manual/incident rows (#97) carry no model probability — print n/a
+            qs = (f"{t['q_consensus']:.2f}" if t["q_consensus"] is not None
+                  else "n/a")
+            ms = (f"{t['market_prob']:.2f}" if t["market_prob"] is not None
+                  else "n/a")
             lines.append(f"- {t['ticker']} {t['side']} x{t['contracts']} @ "
                          f"{t['price'] * 100:.0f}c -> {t['status']}({tag}) "
-                         f"pnl ${t['pnl_usd'] or 0:+.2f} | 模型 q={t['q_consensus']:.2f} "
-                         f"市场 {t['market_prob']:.2f}")
+                         f"pnl ${t['pnl_usd'] or 0:+.2f} | 模型 q={qs} "
+                         f"市场 {ms}")
     else:
         lines.append("_无_")
     REPORTS.mkdir(exist_ok=True)
