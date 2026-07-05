@@ -431,9 +431,28 @@ def cmd_favorites(_args) -> None:
                 cands.append((series, m, fav_side, fav_ask))
     print(f"favorites: {len(cands)} favorites in zone | realized ${realized:+.2f} | "
           f"today spent ${spent:.2f}/{fc['daily_budget_usd']:.2f}")
+    # bug #13 fix: favorites must obey the GLOBAL live brakes too (daily-loss halt,
+    # daily risk, exposure) — previously only its own lane budget/steps applied
+    lv = cfg.get("live", {})
+    cfg_gl = {**cfg, "risk": {**cfg["risk"],
+              "max_per_trade_usd": min(cfg["risk"]["max_per_trade_usd"],
+                                       fc.get("max_per_trade_usd", 2.0)),
+              "max_daily_risk_usd": min(cfg["risk"]["max_daily_risk_usd"],
+                                        lv.get("max_daily_risk_usd", 6)),
+              "max_total_exposure_usd": min(cfg["risk"]["max_total_exposure_usd"],
+                                            lv.get("max_total_exposure_usd", 12)),
+              "max_open_positions": min(cfg["risk"]["max_open_positions"],
+                                        lv.get("max_open_positions", 16)),
+              "daily_loss_halt_usd": min(cfg["risk"]["daily_loss_halt_usd"],
+                                         lv.get("daily_loss_halt_usd", 5))}}
     placed = 0
     for series, m, side, ask in sorted(cands, key=lambda x: x[3]):    # cheapest favorite = most room
         if spent >= fc["daily_budget_usd"] or n_open >= fc.get("max_open", 3):
+            break
+        veto = engine.check_risk(ledger.stats("live"),
+                                 fc.get("max_contracts", 2) * ask + 0.03, cfg_gl)
+        if veto:
+            print(f"VETO  {m['ticker']}: {veto}")
             break
         if ledger.has_open_position(m["ticker"], "live"):
             continue
