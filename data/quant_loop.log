@@ -3066,3 +3066,28 @@
 [07-05 00:41:33]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: 0 settled (8 pending)
 [07-05 00:41:33] janitor: killed stale task sessions ['82004']
 [07-05 00:49:35] === quant_loop started pid=86020 ===
+[07-05 00:50:21]   settle: SETTLED KXETH15M-26JUL050245-45: result=yes WIN pnl=$+0.09
+[07-05 00:50:21]   settle: done: 1 settled, 8 still open
+[07-05 00:50:22]   mktsnap: mktsnap: 7 quotes recorded, 3 outcomes resolved
+[07-05 00:50:26]   shortcycle: shortcycle: 0 candidate strikes | balance $10.92 | today spent $0.00/999999.00
+[07-05 00:50:26]   shortcycle: done: 0 shortcycle orders
+[07-05 00:50:28]   favorites: favorites: 0 favorites in zone | realized $+2.79 | today spent $8.11/999999.00
+[07-05 00:50:28]   favorites: done: 0 favorite orders
+[07-05 00:50:29]   h10: h10: 0 in-window | h10 shadow: n=2 mean net +9.0c/contract total $+0.18 | KXETH15M: n=1 net $+0.09 | KXSOL15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 00:50:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 00:50:30]   weather: done: 0 weather orders
+[07-05 00:50:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (0 pending)
+[07-05 00:50:34]   manage: done: 0 exited, 0 flagged for review, 8 holding
+[07-05 00:50:35]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 00:50:35]   reconcile: OK       KXBTCD-26JUL0503-T62799.99: -3
+[07-05 00:50:35]   reconcile: OK       KXETHD-26JUL0503-T1769.99: -3
+[07-05 00:50:35]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 00:50:35]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 00:50:35]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 00:50:35]   reconcile: OK       KXSOLD-26JUL0503-T79.9999: +2
+[07-05 00:50:35]   reconcile: OK       KXXRPD-26JUL0503-T1.1399: -1
+[07-05 00:50:35]   reconcile: CASH OK: balance $10.92 ~ expected $10.92 (drift $+0.00)
+[07-05 00:50:35]   reconcile: reconcile: 8 tickers, 0 mismatches — ACCOUNTING CLEAN
+[07-05 00:50:36]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: 0 settled (8 pending)
+[07-05 00:50:37]   journal: journal written: realized today $+1.14, 4 settled, 5 fills
+[07-05 00:50:38]   report: wrote reports\report_2026-07-05.md
