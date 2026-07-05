@@ -4335,3 +4335,38 @@
 [07-05 08:20:44]   pmwatch: pmwatch: +54 pairs | pmwatch: 584 rows, 184 kalshi-matched | |divergence| median 4.8c, p90 17.3c (gate n>=300)
 [07-05 08:20:45]   journal: journal written: realized today $+0.68, 34 settled, 34 fills
 [07-05 08:20:46]   report: wrote reports\report_2026-07-05.md
+[07-05 08:20:48] committed + pushed
+[07-05 08:23:20]   h15: done: h15 pass complete
+[07-05 08:23:21]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:26:21]   settle: done: 0 settled, 7 still open
+[07-05 08:26:21]   h15: done: h15 pass complete
+[07-05 08:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 08:26:27]   shortcycle: shortcycle: 8 candidate strikes | balance $13.44 | today spent $0.85/999999.00
+[07-05 08:26:27]   shortcycle: done: 0 shortcycle orders
+[07-05 08:26:29]   favorites: favorites: 3 favorites in zone | realized $+1.33 | today spent $43.25/999999.00
+[07-05 08:26:29]   favorites: done: 0 favorite orders
+[07-05 08:26:30]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:26:30]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 08:26:30]   weather: done: 0 weather orders
+[07-05 08:26:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=9 win 44% EV -29.2c | BOOK-ONLY: n=7 win 71% EV -4.3c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (15 pending)
+[07-05 08:26:44]   pmwatch: pmwatch: +53 pairs | pmwatch: 596 rows, 188 kalshi-matched | |divergence| median 4.0c, p90 17.3c (gate n>=300)
+[07-05 08:30:20]   h15: done: h15 pass complete
+[07-05 08:30:21]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:32:20]   h15: done: h15 pass complete
+[07-05 08:32:21]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:35:21]   settle: SETTLED KXXRPD-26JUL0510-T1.1399: result=no WIN pnl=$+0.12
+[07-05 08:35:21]   settle: done: 1 settled, 6 still open
+[07-05 08:35:22]   h15: done: h15 pass complete
+[07-05 08:35:23]   mktsnap: mktsnap: 12 quotes recorded, 4 outcomes resolved
+[07-05 08:35:28]   shortcycle: shortcycle: 7 candidate strikes | balance $14.44 | today spent $0.85/999999.00
+[07-05 08:35:28]   shortcycle: done: 0 shortcycle orders
+[07-05 08:35:29]   favorites: favorites: 0 favorites in zone | realized $+1.45 | today spent $43.25/999999.00
+[07-05 08:35:29]   favorites: done: 0 favorite orders
+[07-05 08:35:30]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:35:31]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 08:35:31]   weather: done: 0 weather orders
+[07-05 08:35:33]   disloc: DISLOC KXBTCD-26JUL1017-T69999.99: fav 0.96->0.78 ask 0.99 [BOOK-ONLY] tau 7584m
+[07-05 08:35:33]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=9 win 44% EV -29.2c | BOOK-ONLY: n=7 win 71% EV -4.3c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (16 pending)
+[07-05 08:35:44]   pmwatch: pmwatch: +57 pairs | pmwatch: 608 rows, 192 kalshi-matched | |divergence| median 4.0c, p90 17.0c (gate n>=300)
+[07-05 08:35:45]   journal: journal written: realized today $+0.80, 35 settled, 34 fills
+[07-05 08:35:46]   report: wrote reports\report_2026-07-05.md
