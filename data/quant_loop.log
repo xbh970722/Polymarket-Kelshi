@@ -3102,3 +3102,16 @@
 [07-05 00:56:29]   weather: weather: 0 priced buckets | spent $0.00/999999.00
 [07-05 00:56:29]   weather: done: 0 weather orders
 [07-05 00:56:32]   disloc: disloc: +0 events, 0 settled | disloc shadow: 0 settled (0 pending)
+[07-05 01:05:21]   settle: done: 0 settled, 8 still open
+[07-05 01:05:23]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-05 01:05:27]   shortcycle: shortcycle: 8 candidate strikes | balance $10.92 | today spent $0.00/999999.00
+[07-05 01:05:27]   shortcycle: PASS  KXBTCD-26JUL0504-T62599.99: edge below bar at crossed price 0.910
+[07-05 01:05:27]   shortcycle: done: 0 shortcycle orders
+[07-05 01:05:29]   favorites: favorites: 3 favorites in zone | realized $+2.79 | today spent $8.11/999999.00
+[07-05 01:05:29]   favorites: VETO  KXBTCD-26JUL0504-T62599.99: total exposure cap reached
+[07-05 01:05:29]   favorites: done: 0 favorite orders
+[07-05 01:05:30]   h10: h10: 0 in-window | h10 shadow: n=2 mean net +9.0c/contract total $+0.18 | KXETH15M: n=1 net $+0.09 | KXSOL15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 01:05:31]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 01:05:31]   weather: done: 0 weather orders
+[07-05 01:05:34]   disloc: DISLOC KXXRPD-26JUL1017-T1.2999: fav 0.94->0.85 ask 0.99 [BOOK-ONLY] tau 8034m
+[07-05 01:05:34]   disloc: disloc: +1 events, 0 settled | disloc shadow: 0 settled (1 pending)

@@ -1115,6 +1115,14 @@ def cmd_stopshadow(_args) -> None:
         print(f"stopshadow: {n} would-stop event(s) logged")
 
 
+def cmd_pmwatch(_args) -> None:
+    """H14: read-only Polymarket second-opinion logger (no Polymarket trading —
+    data only; gates in SHORTCYCLE_DESIGN H14)."""
+    from . import pmwatch
+    n = pmwatch.scan()
+    print(f"pmwatch: +{n} pairs | {pmwatch.report()}")
+
+
 def cmd_disloc(_args) -> None:
     """H12 dislocation shadow: log book-only favorite smashes with the REAL
     standing ask at detection (the pit a stop-hunter digs is the harvester's
@@ -1791,6 +1799,7 @@ def main() -> None:
     sub.add_parser("stopshadow").set_defaults(fn=cmd_stopshadow)
     sub.add_parser("wxfade").set_defaults(fn=cmd_wxfade)
     sub.add_parser("disloc").set_defaults(fn=cmd_disloc)
+    sub.add_parser("pmwatch").set_defaults(fn=cmd_pmwatch)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)

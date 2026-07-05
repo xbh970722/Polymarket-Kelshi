@@ -216,6 +216,22 @@ n≥40 且 EV ≤ 0 → 归档。警告已注册: print 口径是天花板 (H10 
   disloc 探测器已在前向记录该类真实 ask; 判据: SPOT-MOVE n≥40 且
   ask 口径 EV ≥ +5c → 上评审团。
 
+## H14: Polymarket 跨所联动 (2026-07-05, 用户: "从 polymarket 获取信息数据")
+
+**探测确认**: Polymarket 有与 Kalshi 逐族对应的 crypto up/down 产品 — 小时盘
+(slug 实时命中) + 15 分钟盘 + **5 分钟盘**, BTC/ETH/SOL/XRP 全套。读数据免费
+公开 (gamma-api + clob midpoint), 无需九月; **只读不交易** (美国人士交易受限)。
+**已上线**: src/pmwatch.py 每 mark 记录对齐配对 (poly_mid, kalshi_mid, strike)
+→ data/pmwatch.db。
+**用途路线图**: ① 跨所分歧信号 (谁滞后打谁 — Polymarket crypto 书通常更深,
+可能是领先方); ② lag 门独立确认器 (双源同意 Kalshi 错价才开枪 → 提精度);
+③ H12b 分类器升级 (Kalshi 急跌而 Polymarket 不动 = book-only 铁证, 比现货
+判定更直接 — 它定价的就是同一事件); ④ CLOB prices-history 支持历史回填
+(lead-lag 回测, 待前向数据先证明对齐质量)。
+**预注册判据**: 对齐配对 n≥300 后: |分歧|≥5c 的事件结算偏向 Polymarket ≥60%
+→ 提案把 poly 确认加入 lag 门 (评审团); 偏向 Kalshi 或噪声 → H14 归档,
+记录器保留 (零成本)。
+
 ### 同批决定: 小时盘 (66h 回测 775 笔) + 止损
 
 - **XRP 降权** (用户): 148 笔净 -$2.16, 胜率 88.5% 低于保本线 → max_contracts 1,
