@@ -4300,3 +4300,38 @@
 [07-05 08:05:49]   wxfade: wxfade: +17 logged, 0 settled | wxfade shadow: 0 settled (30 pending)
 [07-05 08:05:51]   journal: journal written: realized today $+0.68, 34 settled, 33 fills
 [07-05 08:05:52]   report: wrote reports\report_2026-07-05.md
+[07-05 08:05:54] committed + pushed
+[07-05 08:08:20]   h15: done: h15 pass complete
+[07-05 08:08:21]   h10: h10: 1 in-window | h10 shadow(main): n=25 mean +5.3c total $+1.33 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=8 net $+0.83 | gate: accumulating (1 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:08:21]   h10: done: 0 h10 orders
+[07-05 08:11:21]   settle: done: 0 settled, 6 still open
+[07-05 08:11:21]   h15: done: h15 pass complete
+[07-05 08:11:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 08:11:27]   shortcycle: shortcycle: 10 candidate strikes | balance $16.02 | today spent $0.85/999999.00
+[07-05 08:11:27]   shortcycle: done: 0 shortcycle orders
+[07-05 08:11:29]   favorites: favorites: 2 favorites in zone | realized $+1.33 | today spent $40.67/999999.00
+[07-05 08:11:29]   favorites: done: 0 favorite orders
+[07-05 08:11:30]   h10: h10: 0 in-window | h10 shadow(main): n=25 mean +5.3c total $+1.33 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=8 net $+0.83 | gate: accumulating (1 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:11:31]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 08:11:31]   weather: done: 0 weather orders
+[07-05 08:11:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=9 win 44% EV -29.2c | BOOK-ONLY: n=7 win 71% EV -4.3c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (15 pending)
+[07-05 08:11:43]   pmwatch: pmwatch: +53 pairs | pmwatch: 572 rows, 180 kalshi-matched | |divergence| median 4.0c, p90 18.0c (gate n>=300)
+[07-05 08:15:20]   h15: done: h15 pass complete
+[07-05 08:15:22]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:17:20]   h15: done: h15 pass complete
+[07-05 08:17:21]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:20:21]   settle: done: 0 settled, 6 still open
+[07-05 08:20:21]   h15: done: h15 pass complete
+[07-05 08:20:23]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-05 08:20:27]   shortcycle: shortcycle: 8 candidate strikes | balance $16.02 | today spent $0.85/999999.00
+[07-05 08:20:27]   shortcycle: done: 0 shortcycle orders
+[07-05 08:20:29]   favorites: favorites: 3 favorites in zone | realized $+1.33 | today spent $40.67/999999.00
+[07-05 08:20:29]   favorites: LIVE  KXETHD-26JUL0511-T1769.99: FAV NO x3 @ 85c cost=$2.58 order=f4d8a2d1-56ef-4987-8211-d4fc3df55fed
+[07-05 08:20:29]   favorites: done: 1 favorite orders
+[07-05 08:20:30]   h10: h10: 0 in-window | h10 shadow(main): n=26 mean +5.7c total $+1.47 | KXETH15M: n=7 net $+0.69 | KXSOL15M: n=10 net $-0.19 | KXBTC15M: n=9 net $+0.97 | gate: accumulating (0 pending) || H13 final6: n=5 win 5/5 net $+0.14 gate: accumulating
+[07-05 08:20:31]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 08:20:31]   weather: done: 0 weather orders
+[07-05 08:20:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=9 win 44% EV -29.2c | BOOK-ONLY: n=7 win 71% EV -4.3c | SPOT-MOVE: n=6 win 67% EV +1.5c | gate: accumulating (15 pending)
+[07-05 08:20:44]   pmwatch: pmwatch: +54 pairs | pmwatch: 584 rows, 184 kalshi-matched | |divergence| median 4.8c, p90 17.3c (gate n>=300)
+[07-05 08:20:45]   journal: journal written: realized today $+0.68, 34 settled, 34 fills
+[07-05 08:20:46]   report: wrote reports\report_2026-07-05.md
