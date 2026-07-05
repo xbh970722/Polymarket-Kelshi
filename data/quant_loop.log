@@ -2623,3 +2623,17 @@
 [07-05 14:23:24]   stopshadow: STOPGUARD HOLD #148 KXXRPD-26JUL0517-T1.1399: bid 0.64 but spot safe side & clear — book-only smash, not selling
 [07-05 14:23:24]   stopshadow: STOPGUARD EXIT #153 KXSOLD-26JUL0517-T80.9999: sold x1 @ 46c (bid 0.46, spot at-line) — salvaged vs riding to 0
 [07-05 14:23:25]   journal: journal written: realized today $-0.79, 59 settled, 62 fills
+[07-05 14:23:26] light mark committed + pushed
+[07-05 14:26:21]   settle: done: 0 settled, 10 still open
+[07-05 14:26:21]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-05 14:26:23]   mktsnap: mktsnap: 2 quotes recorded, 0 outcomes resolved
+[07-05 14:26:27]   shortcycle: shortcycle: 7 candidate strikes | balance $9.52 | today spent $2.26/999999.00
+[07-05 14:26:27]   shortcycle: done: 0 shortcycle orders
+[07-05 14:26:29]   favorites: favorites: 0 favorites in zone | realized $+0.23 | today spent $68.01/999999.00
+[07-05 14:26:29]   favorites: done: 0 favorite orders
+[07-05 14:26:29]   h10: h10: 0 in-window | h10 shadow(main): n=45 mean -5.9c total $-2.67 | KXETH15M: n=14 net $+0.26 | KXSOL15M: n=16 net $-3.49 | KXBTC15M: n=15 net $+0.55 | gate: accumulating (2 pending) || H13 final6: n=10 win 10/10 net $+0.31 gate: accumulating
+[07-05 14:26:30]   weather: weather: daily entry cap reached (3)
+[07-05 14:26:31]   stopshadow: STOPGUARD HOLD #148 KXXRPD-26JUL0517-T1.1399: bid 0.63 but spot safe side & clear — book-only smash, not selling
+[07-05 14:26:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=14 win 57% EV -17.4c | BOOK-ONLY: n=14 win 64% EV -9.7c | SPOT-MOVE: n=7 win 71% EV +8.3c | gate: accumulating (33 pending)
+[07-05 14:26:43]   pmwatch: pmwatch: +52 pairs | pmwatch: 1170 rows, 372 kalshi-matched | |divergence| median 5.0c, p90 19.0c (gate n>=300)
+[07-05 15:40:53] === quant_loop started pid=11200 ===
