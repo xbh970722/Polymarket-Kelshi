@@ -29,6 +29,13 @@ favorites 回撤写 review_due_favorites.json, 双信箱防互相覆盖); **每 
 
 ## 通道分流 (读 review_due_*.json 的 "lane" 字段)
 
+- `lane == "h10fav15m"` (15m 吃单微通道 -$3 硬停) 或 `lane == "h15maker"`
+  (15m 挂单通道 -$3 硬停) → **R7-FABLE 补全**: 拉该 title 全部结算行 + 对应
+  影子库 (data/h10_shadow.db) 对照; 判断亏损是执行问题 (成交率/滑点/队列) 还是
+  论文问题 (热门带失效); 裁决三选一 — 调参数继续 / 转纯影子 / 归档。处理完删
+  **对应的** review_due_{h10fav15m,h15maker}.json; 重启 = 复盘裁决明示后由裁决
+  执行者删停牌文件 (h10_stop_*.json) 或恢复 enabled。
+
 - `lane` 缺省或非 favorites → **短周期策略复盘** (原六步, 针对 shortcycle/15m)。
 - `lane == "favorites"` → **热门收割回撤复盘** (2026-07-03 用户设定的节拍器):
   1. 拉 data/ledger.db 中 title LIKE 'favorite%' 的全部结算交易, 算命中率、

@@ -295,6 +295,11 @@ def _mtm_halt(cfg: dict) -> str | None:
                  - dt.datetime.fromisoformat(snap["ts"])).total_seconds() / 3600
         if age_h > 2:
             return None
+        age_h2 = (dt.datetime.now()
+                  - dt.datetime.fromisoformat(snap["ts"])).total_seconds() / 3600
+        if age_h2 > 1.5:            # R7-FABLE MED: a stale equity snapshot means
+            print("WARN mtm snapshot stale — equity halt degraded to "
+                  "realized-only (is manage failing?)")   # loud, journaled
         lv = cfg.get("live", {})
         halt = lv.get("daily_loss_halt_usd") or cfg["risk"]["daily_loss_halt_usd"]
         eq = ledger.stats("live")["realized_pnl_today"] + snap.get("unrealized", 0)
@@ -1344,8 +1349,11 @@ def cmd_h15(_args) -> None:
             mid = (m["yes_bid"] + m["yes_ask"]) / 2
             side = "yes" if mid >= 0.5 else "no"
             fav_mid = mid if side == "yes" else 1 - mid
-            if fav_mid < h.get("min_fav_mid", 0.86):
-                continue                        # must rest BELOW the market
+            if not (h.get("min_fav_mid", 0.86) <= fav_mid
+                    <= h.get("max_fav_mid", 0.955)):   # R7-FABLE: band, not floor
+                continue                        # — 0.97+ favorites need a 13c
+                                                # collapse to fill us = the most
+                                                # adverse-selected subset
             if ledger.has_open_position(m["ticker"], "live"):
                 continue
             est = round(bid + 0.01, 2)
@@ -1547,7 +1555,9 @@ def _lane_of(ticker: str, title: str = "") -> str:
     # title-first (OPUS-A note): favorites/shortcycle share tickers, only the
     # lane tag in the title distinguishes them
     t = title or ""
-    if t.startswith(("h10fav15m", "h15maker")):
+    if t.startswith("h15maker"):
+        return "h15"
+    if t.startswith("h10fav15m"):
         return "h10"
     if t.startswith("favorite"):
         return "favorites"
@@ -1574,7 +1584,7 @@ def cmd_journal(_args) -> None:
         "SELECT * FROM trades WHERE status='settled' AND result IN ('yes','no')")]
 
     lanes = {"shortcycle": [], "favorites": [], "weather": [], "ensemble": [],
-             "h10": []}
+             "h10": [], "h15": []}
     for t in settled_today:
         lanes[_lane_of(t["ticker"], t.get("title") or "")].append(t)
     realized = {k: round(sum(t["pnl_usd"] or 0 for t in v), 2) for k, v in lanes.items()}
@@ -1609,10 +1619,10 @@ def cmd_journal(_args) -> None:
              f"live 敞口 ${st['open_exposure']:.2f} | 今日已实现 **${total_realized:+.2f}**",
              f"- 今日成交 {len(fills_today)} 笔 | 今日结算 {len(settled_today)} 笔", "",
              "## 分通道", ""]
-    for lane in ("shortcycle", "favorites", "weather", "ensemble", "h10"):
+    for lane in ("shortcycle", "favorites", "weather", "ensemble", "h10", "h15"):
         b = brier.get(lane)
-        if lane in ("favorites", "h10"):   # q = entry price by construction —
-            cal = "Brier: N/A (吃价通道, q≡价格非模型)"   # a Brier here is meaningless
+        if lane in ("favorites", "h10", "h15"):   # q = entry price by construction
+            cal = "Brier: N/A (吃价通道, q≡价格非模型)"   # — a Brier is meaningless
         else:
             cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
         lines.append(f"- **{lane}**: 今日已实现 ${realized[lane]:+.2f} | {cal}")
