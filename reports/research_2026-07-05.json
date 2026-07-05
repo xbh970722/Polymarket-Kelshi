@@ -1,0 +1,44 @@
+{
+  "date": "2026-07-05",
+  "cycle": "ensemble_scheduled",
+  "protocol": "2x Opus 4.8 + 2x Codex gpt-5.5 xhigh blind, arbiter (session) aggregation; round-2 reconciliation on GPT-5.6 crux; verification layer passed",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Fed maintains rate (0bps) at July 29 2026 meeting",
+      "q_claude": 0.895,
+      "q_codex": 0.895,
+      "q_all": [0.90, 0.89, 0.90, 0.89],
+      "rationale": "Core: CME FedWatch ~90% no-change into the Jul 29 meeting, reinforced by soft +57k Jul-1 payrolls that cut hike odds to ~10%; four straight holds at 3.50-3.75%. Risk: residual is a small hawkish-Warsh hike (~10%), cut odds near zero. Divergence: none (families identical at 0.895). Sits on market 0.90 -> no edge, expected skip.",
+      "sources": [
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+        "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "title": "Trump attends 2026 FIFA World Cup Final (Jul 19)",
+      "q_claude": 0.93,
+      "q_codex": 0.895,
+      "q_all": [0.96, 0.90, 0.88, 0.91],
+      "rationale": "Core: WH 'holding' Jul 19 on his schedule; he is set to personally present the trophy (FIFA breaking protocol), attended the 2025 Club WC Final at the same venue, and resolution is extremely lenient (any source incl. own social media, partial counts). Risk: ~2-week tail of health/security/geopolitical shock or last-minute schedule change. Divergence: 0.035 (Opus higher on lenient-resolution weighting). Only ~1-3pt above market 0.90 -> edge below 0.035 threshold, expected skip.",
+      "sources": [
+        "https://www.nbcnewyork.com/world-cup/trump-world-cup-final-fifa-metlife-stadium/6512369/",
+        "https://www.cnbc.com/2026/07/01/trump-fifa-infantino-world-cup-financial-disclosure.html"
+      ]
+    },
+    {
+      "ticker": "KXGPT-OPENB-26JUL10",
+      "title": "OpenAI releases GPT-5.6+ to the public before Jul 10 2026",
+      "q_claude": 0.14,
+      "q_codex": 0.13,
+      "q_all": [0.10, 0.10, 0.27, 0.23],
+      "rationale": "Core: resolution requires a PUBLIC release OUTSIDE closed beta; GPT-5.6 shipped Jun 26 only to ~20 gov-approved partners behind a US-government cyber-safety gate (explicitly not public), with GA guided to 'coming weeks'/mid-July and analyst earliest-GA ~Jul 10-17 -- so a public release inside the ~4.5-day window is unlikely. Risk: fast gate clearance or a high-cost 'public' tier before the cutoff (residual ~13-14%). Divergence: round-1 families split 0.10 vs 0.25 (crux); round-2 with market price revealed + verification converged to 0.14/0.13 (div 0.01). Market 0.735 reads as favorite/hype bias + misreading of the closed-beta clause. Consensus ~0.135 -> NO fair value ~0.865 vs NO ask 0.28 = large NO edge; qualifies high-conviction (edge>=0.10, family-div<=0.05, all four blind estimators below market_mid 0.73).",
+      "sources": [
+        "https://venturebeat.com/technology/openai-unveils-gpt-5-6-sol-terra-and-luna-models-but-only-accessible-to-limited-preview-partners-for-now-per-us-gov",
+        "https://www.axios.com/2026/06/26/openai-gpt-sol-terra-luna-trump",
+        "https://cryptobriefing.com/openai-releases-gpt-56-models-to-20-partners-public-launch-expected-by-july-2026/"
+      ]
+    }
+  ]
+}
