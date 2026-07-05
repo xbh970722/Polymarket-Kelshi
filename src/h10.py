@@ -78,6 +78,39 @@ def scan(cfg: dict) -> list[dict]:
                 out.append({"ticker": m["ticker"], "series": series, "side": side,
                             "ask": ask, "tau": tau,
                             "mid": round(mid if side == "yes" else 1 - mid, 4)})
+        # ---- H13 final-6 shadow (user insight: BTC's volume lives in the last
+        # 6 minutes). Different strategy, own pre-registered gate: closing-lock
+        # extreme-band harvest at tau<=6, judged on its own rows/thresholds. ----
+        f6 = cfg["h10"].get("final6") or {}
+        for series in f6.get("series") or []:
+            try:
+                markets = api.open_markets(series)
+            except Exception as e:
+                print(f"WARN {series}: fetch failed ({e})")
+                continue
+            zlo6, zhi6 = f6.get("zone", [0.94, 0.985])
+            tlo6, thi6 = f6.get("tau_window_min", [0.5, 6])
+            for mr in markets:
+                m = normalize_market(mr)
+                if m["status"] != "active" or not m["close_time"]:
+                    continue
+                close = dt.datetime.fromisoformat(
+                    m["close_time"].replace("Z", "+00:00"))
+                tau = (close - now).total_seconds() / 60.0
+                if not (tlo6 < tau <= thi6):
+                    continue
+                if not (m["yes_bid"] > 0 and 0.01 <= m["yes_ask"] <= 0.99):
+                    continue
+                mid = (m["yes_bid"] + m["yes_ask"]) / 2
+                side = "yes" if mid >= 0.5 else "no"
+                ask = m["yes_ask"] if side == "yes" else m["no_ask"]
+                if not (zlo6 <= ask <= zhi6):
+                    continue
+                c.execute("INSERT OR IGNORE INTO shadow(ticker,ts,series,side,ask,"
+                          "fee,tau_min,close_time) VALUES(?,?,?,?,?,?,?,?)",
+                          (m["ticker"], now.isoformat(timespec="seconds"), series,
+                           side, round(ask, 4), taker_fee_usd(ask, 1),
+                           round(tau, 1), m["close_time"]))
     return out
 
 

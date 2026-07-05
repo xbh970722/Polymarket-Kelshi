@@ -209,6 +209,10 @@ h10:
   max_per_trade_usd: 1.00
   consec_loss_stop:              # 用户 2026-07-05: 连续输 N 把 -> 该币停掉转影子
     KXSOL15M: 2                  # (写 data/h10_stop_KXSOL15M.json; 复盘删文件重启)
+  final6:                        # H13 (用户直觉 2026-07-05): BTC 的量全在最后6分钟
+    series: [KXBTC15M]           # -> 收盘锁定收割影子。历史: 697窗口 0.94+ 带
+    tau_window_min: [0.5, 6]     # 报价.991 实胜1.000; :11/:26/:41/:56 四个闲置
+    zone: [0.94, 0.985]          # mark 正好落在 tau~4min。判据见 SHORTCYCLE_DESIGN
   drawdown_step_usd: 3.00        # C5: 独立回撤记账 (title h10fav15m, 绝不与
   hard_stop_steps: 1             #     favorites 共用刹车); 首步 -$3 即硬停待复盘
 
