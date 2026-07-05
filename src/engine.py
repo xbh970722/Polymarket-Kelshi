@@ -25,6 +25,11 @@ def decide(q_claude: float, q_codex: float, yes_ask: float, no_ask: float, cfg: 
     # sizing and crashed on division by zero — reject invalid quotes up front.
     if not (0.0 < yes_ask < 1.0 and 0.0 < no_ask < 1.0):
         return Decision("skip", f"invalid quote (yes_ask={yes_ask}, no_ask={no_ask})")
+    # CODEX-4 HIGH fix: malformed research probabilities (negative/NaN/>1) previously
+    # produced huge fake edges and max-size orders — reject before any math.
+    for label, qv in (("q_claude", q_claude), ("q_codex", q_codex)):
+        if not (isinstance(qv, (int, float)) and 0.0 <= qv <= 1.0 and qv == qv):
+            return Decision("skip", f"invalid probability {label}={qv}")
     div = abs(q_claude - q_codex)
     if div > cfg["edge"]["consensus_max_divergence"]:
         return Decision("skip", f"model divergence {div:.2f} exceeds limit -> flag for human review")
@@ -49,9 +54,9 @@ def decide(q_claude: float, q_codex: float, yes_ask: float, no_ask: float, cfg: 
 
     fee = taker_fee_usd(price, contracts)
     cost = round(contracts * price + fee, 2)
-    # CODEX-B LOW fix: honor the Kelly stake on an ALL-IN basis (fees included),
-    # not just the hard per-trade cap — floor stays at 1 contract when edge cleared.
-    while contracts > 1 and (cost > cfg["risk"]["max_per_trade_usd"] or cost > stake + price):
+    # CODEX-4 tightened: STRICT all-in Kelly (fees included) — only the explicit
+    # one-contract floor may exceed the stake.
+    while contracts > 1 and (cost > cfg["risk"]["max_per_trade_usd"] or cost > stake):
         contracts -= 1
         fee = taker_fee_usd(price, contracts)
         cost = round(contracts * price + fee, 2)

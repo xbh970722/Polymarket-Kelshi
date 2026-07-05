@@ -38,7 +38,8 @@ favorites 回撤写 review_due_favorites.json, 双信箱防互相覆盖); **每 
      调方向中性平衡、降单笔/日预算; 在 config.yaml `favorites:` 实施。**继续下单是默认。**
   4. 记账: data/fav_review_state.json 已由通道写入 steps_reviewed; 你只需在
      SHORTCYCLE_DESIGN.md 追加 "Favorites Review #N: 数据→诊断→调整"。
-  5. 删 review_due.json, commit+push。
+  5. 删除**你处理的那个文件** (favorites 复盘删 data/review_due_favorites.json;
+     短周期复盘删 data/review_due_shortcycle.json), commit+push。
   - 仅当 hard_stop_steps ($15) 触及时才建议真正停用, 并 PushNotification 用户。
 
 ## 权限边界 (硬约束)

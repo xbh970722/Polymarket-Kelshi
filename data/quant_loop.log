@@ -2746,3 +2746,28 @@
 [07-04 21:20:31]   reconcile: OK       KXRANKLIST1SONG-26JUL25-BEH: +7
 [07-04 21:20:31]   reconcile: reconcile: 5 tickers, 0 mismatches — ACCOUNTING CLEAN
 [07-04 21:20:32] janitor: killed stale task sessions ['42280', '45156', '45512', '63168', '70900', '75676', '79388', '86596', '88716']
+[07-04 21:26:21]   settle: done: 0 settled, 5 still open
+[07-04 21:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-04 21:26:25]   shortcycle: shortcycle: 4 candidate strikes | balance $17.62 | today spent $0.00/4.00
+[07-04 21:26:25]   shortcycle: done: 0 shortcycle orders
+[07-04 21:26:27]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $52.54/15.00
+[07-04 21:26:27]   favorites: done: 0 favorite orders
+[07-04 21:26:29]   weather: weather: 0 priced buckets | spent $1.09/3.00
+[07-04 21:26:29]   weather: done: 0 weather orders
+[07-04 21:35:20]   settle: done: 0 settled, 5 still open
+[07-04 21:35:22]   mktsnap: mktsnap: 8 quotes recorded, 3 outcomes resolved
+[07-04 21:35:26]   shortcycle: shortcycle: 2 candidate strikes | balance $17.62 | today spent $0.00/4.00
+[07-04 21:35:26]   shortcycle: done: 0 shortcycle orders
+[07-04 21:35:27]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $52.54/15.00
+[07-04 21:35:27]   favorites: done: 0 favorite orders
+[07-04 21:35:29]   weather: weather: 0 priced buckets | spent $1.09/3.00
+[07-04 21:35:29]   weather: done: 0 weather orders
+[07-04 21:41:20]   settle: done: 0 settled, 5 still open
+[07-04 21:41:22]   mktsnap: mktsnap: 7 quotes recorded, 0 outcomes resolved
+[07-04 21:41:26]   shortcycle: shortcycle: 2 candidate strikes | balance $17.62 | today spent $0.00/4.00
+[07-04 21:41:26]   shortcycle: done: 0 shortcycle orders
+[07-04 21:41:27]   favorites: favorites: 1 favorites in zone | realized $+1.74 | today spent $52.54/15.00
+[07-04 21:41:27]   favorites: done: 0 favorite orders
+[07-04 21:41:30]   weather: weather: 0 priced buckets | spent $1.09/3.00
+[07-04 21:41:30]   weather: done: 0 weather orders
+[07-04 21:47:32] === quant_loop started pid=88560 ===

@@ -210,9 +210,15 @@ def cmd_manage(_args) -> None:
                     print(f"EXIT NOFILL {t['ticker']}: book gone, keep holding")
                     held += 1
                     continue
-                avg_px = float(resp.get("average_fill_price") or px)
-                if t["side"] == "no":
-                    avg_px = round(1.0 - avg_px, 4)
+                # CODEX-1 CRITICAL fix: convert ONLY exchange-reported averages;
+                # the px fallback is already in held-side frame.
+                raw_avg = resp.get("average_fill_price")
+                if raw_avg is not None and str(raw_avg) != "":
+                    avg_px = float(raw_avg)
+                    if t["side"] == "no":
+                        avg_px = round(1.0 - avg_px, 4)
+                else:
+                    avg_px = px
                 fee_paid = float(resp.get("average_fee_paid") or 0) * filled
                 fee = round(fee_paid, 2) if fee_paid else taker_fee_usd(avg_px, filled)
                 ledger.split_close(t["id"], filled, avg_px, fee, f"{action}@{avg_px * 100:.0f}c")
@@ -234,6 +240,19 @@ def cmd_manage(_args) -> None:
         else:
             held += 1
     print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
+
+
+def _live_risk_overlay(cfg: dict) -> dict:
+    """CODEX-6 HIGH fix: EVERY live lane must trade under the live sub-limits.
+    Shortcycle/weather were checking risk against the paper-scale caps
+    (daily_loss_halt $200 instead of $5). Returns cfg with merged risk."""
+    lv = cfg.get("live", {})
+    merged = {**cfg["risk"]}
+    for cap in ("max_per_trade_usd", "max_daily_risk_usd", "max_total_exposure_usd",
+                "max_open_positions", "daily_loss_halt_usd"):
+        if lv.get(cap) is not None:
+            merged[cap] = min(merged[cap], lv[cap])
+    return {**cfg, "risk": merged}
 
 
 def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
@@ -267,9 +286,15 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
             except Exception:
                 pass
         return 0, "IOC no fill even crossed", None, None
-    avg_px = float(resp.get("average_fill_price") or limit_px)
-    if side == "no":                     # exchange reports fills in YES-leg terms
-        avg_px = round(1.0 - avg_px, 4)
+    # CODEX-1 CRITICAL fix: the YES-leg->held-side conversion applies ONLY to the
+    # exchange-reported average; the limit_px fallback is ALREADY in held-side frame.
+    raw_avg = resp.get("average_fill_price")
+    if raw_avg is not None and str(raw_avg) != "":
+        avg_px = float(raw_avg)
+        if side == "no":                 # exchange reports fills in YES-leg terms
+            avg_px = round(1.0 - avg_px, 4)
+    else:
+        avg_px = limit_px                # held-side frame already; no conversion
     if avg_px > price_cap + 1e-9:        # belt-and-suspenders: fill leaked past the cap
         print(f"WARN {ticker}: fill {avg_px:.3f} exceeded cap {price_cap:.3f} (kept, flagged)")
     fee_per = float(resp.get("average_fee_paid") or 0) * filled
@@ -332,16 +357,20 @@ def cmd_shortcycle(_args) -> None:
             continue
         min_edge = (sc.get("min_edge_by_series") or {}).get(c["series"],
                                                             sc["min_edge_after_fees"])
-        cfg_sc = {**cfg,
+        cfg_sc = _live_risk_overlay({**cfg,      # CODEX-6 HIGH: live sub-limits apply here too
                   "edge": {**cfg["edge"], "min_edge_after_fees": min_edge,
                            "consensus_max_divergence": 1.0},
-                  "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])},
-                  "risk": {**cfg["risk"], "max_per_trade_usd": sc["max_per_trade_usd"]}}
+                  "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])}})
+        cfg_sc["risk"]["max_per_trade_usd"] = min(cfg_sc["risk"]["max_per_trade_usd"],
+                                                  sc["max_per_trade_usd"])
         d = engine.decide(c["q_model"], c["q_model"], c["yes_ask"], c["no_ask"], cfg_sc)
         if d.action != "trade":
             continue
         contracts = min(d.contracts, sc.get("max_contracts", 3))
         est_cost = round(contracts * (d.price + sc.get("slippage", 0.01)) + 0.02, 2)
+        if spent + est_cost > budget:            # CODEX-6 MED: veto on projected overshoot
+            print("budget: next order would exceed shortcycle daily budget")
+            break
         veto = engine.check_risk(ledger.stats("live"), est_cost, cfg_sc)
         if veto:
             print(f"VETO  {c['ticker']}: {veto}")
@@ -453,27 +482,22 @@ def cmd_favorites(_args) -> None:
                 cands.append((series, m, fav_side, fav_ask))
     print(f"favorites: {len(cands)} favorites in zone | realized ${realized:+.2f} | "
           f"today spent ${spent:.2f}/{fc['daily_budget_usd']:.2f}")
-    # bug #13 fix: favorites must obey the GLOBAL live brakes too (daily-loss halt,
-    # daily risk, exposure) — previously only its own lane budget/steps applied
-    lv = cfg.get("live", {})
-    cfg_gl = {**cfg, "risk": {**cfg["risk"],
-              "max_per_trade_usd": min(cfg["risk"]["max_per_trade_usd"],
-                                       fc.get("max_per_trade_usd", 2.0)),
-              "max_daily_risk_usd": min(cfg["risk"]["max_daily_risk_usd"],
-                                        lv.get("max_daily_risk_usd", 6)),
-              "max_total_exposure_usd": min(cfg["risk"]["max_total_exposure_usd"],
-                                            lv.get("max_total_exposure_usd", 12)),
-              "max_open_positions": min(cfg["risk"]["max_open_positions"],
-                                        lv.get("max_open_positions", 16)),
-              "daily_loss_halt_usd": min(cfg["risk"]["daily_loss_halt_usd"],
-                                         lv.get("daily_loss_halt_usd", 5))}}
+    # bug #13 fix (unified via _live_risk_overlay, CODEX-6): favorites obeys the
+    # global live brakes; its own per-trade cap merges on top
+    cfg_gl = _live_risk_overlay(cfg)
+    cfg_gl["risk"]["max_per_trade_usd"] = min(cfg_gl["risk"]["max_per_trade_usd"],
+                                              fc.get("max_per_trade_usd", 2.0))
     placed = 0
     for series, m, side, ask in sorted(cands, key=lambda x: x[3]):    # cheapest favorite = most room
         if spent >= fc["daily_budget_usd"] or n_open >= fc.get("max_open", 3):
             break
         est_ct = (fc.get("max_contracts_by_series") or {}).get(
             series, fc.get("max_contracts", 2))
-        veto = engine.check_risk(ledger.stats("live"), est_ct * ask + 0.03, cfg_gl)
+        est_cost_f = est_ct * ask + 0.03
+        if spent + est_cost_f > fc["daily_budget_usd"]:   # CODEX-6 MED
+            print("budget: next order would exceed favorites daily budget")
+            break
+        veto = engine.check_risk(ledger.stats("live"), est_cost_f, cfg_gl)
         if veto:
             print(f"VETO  {m['ticker']}: {veto}")
             break
@@ -497,19 +521,24 @@ def cmd_favorites(_args) -> None:
         if n < 1:
             continue
         cost = round(n * px + fee, 2)
-        tid = ledger.insert_trade(
-            mode="live", ticker=m["ticker"], title=f"favorite {series}",
-            side=side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
-            q_claude=round(px, 4), q_codex=round(px, 4), q_consensus=round(px, 4),
-            # OPUS-A LOW fix: store market_prob in the SAME frame as q/side
-            market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4) if side == "yes"
-                        else round(1 - (m["yes_bid"] + m["yes_ask"]) / 2, 4),
-            edge_net=0.0,
-            rationale=f"favorite-harvest {side} @ {px*100:.0f}c (direction-neutral bias bet)",
-            status="open")
-        ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
-                             (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
-        ledger.mark_placed(tid, oid)
+        try:
+            tid = ledger.insert_trade(
+                mode="live", ticker=m["ticker"], title=f"favorite {series}",
+                side=side, price=px, contracts=n, cost_usd=cost, fee_usd=fee,
+                q_claude=round(px, 4), q_codex=round(px, 4), q_consensus=round(px, 4),
+                # OPUS-A LOW fix: store market_prob in the SAME frame as q/side
+                market_prob=round((m["yes_bid"] + m["yes_ask"]) / 2, 4) if side == "yes"
+                            else round(1 - (m["yes_bid"] + m["yes_ask"]) / 2, 4),
+                edge_net=0.0,
+                rationale=f"favorite-harvest {side} @ {px*100:.0f}c (direction-neutral bias bet)",
+                status="open")
+            ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                                 (dt.datetime.now() + dt.timedelta(days=1)).isoformat(timespec="seconds"))
+            ledger.mark_placed(tid, oid)
+        except Exception as e:                    # CODEX-1 HIGH: fill exists on exchange!
+            print(f"CRITICAL {m['ticker']}: FILLED x{n} @ {px*100:.0f}c (order {oid}) but "
+                  f"ledger write failed ({e}) — hourly reconcile will flag the orphan")
+            continue
         spent += cost
         n_open += 1
         placed += 1
@@ -564,16 +593,20 @@ def cmd_weather(_args) -> None:
             continue
         if ledger.has_open_position(c["ticker"], "live"):
             continue
-        cfg_w = {**cfg,
+        cfg_w = _live_risk_overlay({**cfg,       # CODEX-6 HIGH: live sub-limits apply here too
                  "edge": {**cfg["edge"], "min_edge_after_fees": wc["min_edge_after_fees"],
                           "consensus_max_divergence": 1.0},
-                 "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])},
-                 "risk": {**cfg["risk"], "max_per_trade_usd": wc["max_per_trade_usd"]}}
+                 "sizing": {**cfg["sizing"], "bankroll_usd": min(balance, cfg["sizing"]["bankroll_usd"])}})
+        cfg_w["risk"]["max_per_trade_usd"] = min(cfg_w["risk"]["max_per_trade_usd"],
+                                                 wc["max_per_trade_usd"])
         d = engine.decide(c["q_model"], c["q_model"], c["yes_ask"], c["no_ask"], cfg_w)
         if d.action != "trade":
             continue
         contracts = min(d.contracts, wc.get("max_contracts", 3))
         est_cost = round(contracts * (d.price + 0.01) + 0.02, 2)
+        if spent + est_cost > wc["daily_budget_usd"]:   # CODEX-6 MED
+            print("budget: next order would exceed weather daily budget")
+            break
         veto = engine.check_risk(ledger.stats("live"), est_cost, cfg_w)
         if veto:
             print(f"VETO  {c['ticker']}: {veto}")
@@ -865,6 +898,12 @@ def cmd_reconcile(_args) -> None:
         if abs(net) > 1e-9:
             exch[p["ticker"]] = net                 # +N = long yes, -N = long no
     led = {}
+    con_r = ledger._conn()
+    unknowns = [dict(r) for r in con_r.execute(
+        "SELECT id, ticker, side, contracts FROM trades WHERE status='unknown'")]
+    for u in unknowns:
+        print(f"UNKNOWN #{u['id']} {u['ticker']} {u['side']} x{u['contracts']} "
+              f"-> resolve via fills API (ambiguous exchange state)")
     for t in ledger.open_trades():
         if t["mode"] != "live":
             continue
@@ -925,8 +964,7 @@ def cmd_execute_live(args) -> None:
             resp = client.place_limit(t["ticker"], t["side"], t["contracts"], t["price"])
             order_id = (resp.get("order") or {}).get("order_id") or resp.get("order_id") or "?"
             # OPUS-A CRITICAL fix: an IOC can return 200 with zero fills — never book
-            # a phantom. Parse fills; 0 -> cancel stray + stay pending; partial ->
-            # rewrite the row to the actual fill before marking placed.
+            # a phantom. Parse fills; 0 -> cancel stray + stay pending.
             filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
             if filled < 1:
                 if order_id != "?":
@@ -937,17 +975,33 @@ def cmd_execute_live(args) -> None:
                 failed += 1
                 print(f"NOFILL #{t['id']} {t['ticker']}: stays pending (book moved)")
                 continue
-            if filled < t["contracts"]:
-                avg_px = float(resp.get("average_fill_price") or t["price"])
+            # CODEX-1/2 fixes: ALWAYS book the actual average (full fills too);
+            # frame-convert only exchange-reported averages; single atomic write
+            # (record_fill) closes the resize->mark crash window.
+            raw_avg = resp.get("average_fill_price")
+            if raw_avg is not None and str(raw_avg) != "":
+                avg_px = float(raw_avg)
                 if t["side"] == "no":
                     avg_px = round(1.0 - avg_px, 4)
-                fee = taker_fee_usd(avg_px, filled)
-                ledger.resize_trade(t["id"], filled, avg_px,
-                                    round(filled * avg_px + fee, 2), fee)
-            ledger.mark_placed(t["id"], str(order_id))
+            else:
+                avg_px = t["price"]
+            fee_paid = float(resp.get("average_fee_paid") or 0) * filled
+            fee = round(fee_paid, 2) if fee_paid else taker_fee_usd(avg_px, filled)
+            try:
+                ledger.record_fill(t["id"], filled, avg_px,
+                                   round(filled * avg_px + fee, 2), fee, str(order_id))
+            except Exception as e:
+                print(f"CRITICAL #{t['id']} {t['ticker']}: FILLED ON EXCHANGE but ledger "
+                      f"write failed ({e}) -> marking unknown; reconcile will flag")
+                try:
+                    ledger.mark_unknown(t["id"], f"filled x{filled} but record failed")
+                except Exception:
+                    pass
+                failed += 1
+                continue
             ok += 1
             print(f"PLACED #{t['id']} {t['ticker']} {t['side'].upper()} x{filled} "
-                  f"@ {t['price'] * 100:.1f}c order_id={order_id}")
+                  f"@ {avg_px * 100:.1f}c order_id={order_id}")
         except Exception as e:
             failed += 1
             print(f"FAILED #{t['id']} {t['ticker']}: {e}")

@@ -17,6 +17,7 @@ ROOT = r"D:\Polymarket-Kelshi"
 LOG = os.path.join(ROOT, "data", "quant_loop.log")
 PIDF = os.path.join(ROOT, "data", "quant_loop.pid")
 MARKS = (5, 11, 20, 26, 35, 41, 50, 56)   # :11/:26/:41/:56 hit each 15m window at tau~4min
+LAST_HOURLY = None                         # elapsed-time tracker for manage/reconcile/janitor
 
 
 def log(msg: str) -> None:
@@ -33,14 +34,25 @@ def log(msg: str) -> None:
         pass
 
 
+def _pid_is_quant_loop(pid: int) -> bool:
+    """CODEX-3 HIGH fix: PID reuse could make any python.exe look like a live loop
+    and suppress restarts forever — verify the command line actually runs this script."""
+    try:
+        out = subprocess.run(
+            ["powershell", "-NoProfile", "-Command",
+             f"(Get-CimInstance Win32_Process -Filter 'ProcessId={pid}').CommandLine"],
+            capture_output=True, text=True, timeout=20).stdout or ""
+        return "quant_loop.py" in out
+    except Exception:
+        return False
+
+
 def already_running() -> bool:
     if not os.path.exists(PIDF):
         return False
     try:
         pid = int(open(PIDF).read().strip())
-        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}"],
-                             capture_output=True, text=True, timeout=15).stdout
-        return str(pid) in out and "python" in out.lower()
+        return _pid_is_quant_loop(pid)
     except Exception:
         return False
 
@@ -55,13 +67,17 @@ def acquire_lock() -> bool:
         os.close(fd)
         return True
     except FileExistsError:
-        # stale lock? valid only if the pid inside is dead
+        # stale lock? valid only if the pid inside is a live quant_loop
         try:
-            old = int(open(lockf).read().strip())
-            out = subprocess.run(["tasklist", "/FI", f"PID eq {old}"],
-                                 capture_output=True, text=True, timeout=15).stdout
-            if str(old) in out and "python" in out.lower():
+            content = open(lockf).read().strip()
+            if content.isdigit() and _pid_is_quant_loop(int(content)):
                 return False
+            # CODEX-3 MED fix: malformed/empty lock (crash before write) recovers
+            # by mtime instead of failing closed forever
+            if not content.isdigit():
+                age_min = (dt.datetime.now().timestamp() - os.path.getmtime(lockf)) / 60
+                if age_min < 10:
+                    return False
             os.remove(lockf)
             return acquire_lock()
         except Exception:
@@ -87,9 +103,18 @@ def git(*args: str) -> None:
         r = subprocess.run(["git", *args], capture_output=True, text=True,
                            timeout=120, cwd=ROOT)
         if args[0] == "push" and r.returncode != 0:
-            log(f"git push rejected: {(r.stderr or '')[:150]} -> pull --rebase + retry")
-            subprocess.run(["git", "pull", "--rebase", "--autostash"],
-                           capture_output=True, text=True, timeout=120, cwd=ROOT)
+            # CODEX-3 HIGH fix: never leave the repo mid-rebase with a binary ledger.
+            # Merge (not rebase) preferring OUR files — the local ledger is the source
+            # of truth — and clean up hard if the merge itself fails.
+            log(f"git push rejected: {(r.stderr or '')[:150]} -> merge -X ours + retry")
+            m = subprocess.run(["git", "pull", "--no-rebase", "--no-edit", "-X", "ours"],
+                               capture_output=True, text=True, timeout=120, cwd=ROOT)
+            if m.returncode != 0:
+                subprocess.run(["git", "merge", "--abort"], capture_output=True,
+                               text=True, timeout=60, cwd=ROOT)
+                log(f"git merge failed and aborted: {(m.stderr or '')[:150]} "
+                    "(will retry next mark)")
+                return
             r2 = subprocess.run(["git", "push"], capture_output=True, text=True,
                                 timeout=120, cwd=ROOT)
             log("git push retry " + ("ok" if r2.returncode == 0
@@ -129,9 +154,10 @@ def check_review_trigger() -> None:
         con.row_factory = sqlite3.Row
         rows = con.execute(
             "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
-            "AND status IN ('settled','closed') AND pnl_usd < 0 AND ("
-            "ticker LIKE 'KXBTC%' OR ticker LIKE 'KXETH%' OR ticker LIKE 'KXSOL%' "
-            "OR ticker LIKE 'KXXRP%')",   # FABLE-C HIGH: XRP was invisible to the brake
+            "AND status IN ('settled','closed') AND pnl_usd < 0 "
+            "AND title LIKE 'shortcycle%'",   # CODEX-6 MED: scope by LANE title —
+            # favorites losses have their own drawdown cadence; ticker prefixes
+            # collide across lanes (XRP blindness fixed via title too)
             (state.get("last_review_id", 0),)).fetchall()
         n_loss = len(rows)
         usd_loss = -sum(r["pnl_usd"] for r in rows)
@@ -166,7 +192,7 @@ def janitor_stale_sessions() -> None:
              "Get-Process claude -ErrorAction SilentlyContinue | "
              "Where-Object { $h = ((Get-Date) - $_.StartTime).TotalHours; "
              "$h -gt 3 -and $h -lt 16 -and "
-             "$_.StartTime.Minute -in 9,10,12,13,14,20,21,22 } | "
+             "$_.StartTime.Minute -in 5,6,7,8,9,10,12,13,14,20,21,22,35,36,37,38,39,40 } | "
              "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
             capture_output=True, text=True, timeout=60)
         killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
@@ -183,7 +209,17 @@ def main() -> None:
         return
     open(PIDF, "w").write(str(os.getpid()))
     import atexit
-    atexit.register(lambda: os.path.exists(PIDF + ".lock") and os.remove(PIDF + ".lock"))
+
+    def _release_lock():
+        # CODEX-3 HIGH fix: only remove the lock if WE still own it — an exiting
+        # old loop must never delete a new loop's fresh lock (double-loop risk)
+        lockf = PIDF + ".lock"
+        try:
+            if os.path.exists(lockf) and open(lockf).read().strip() == str(os.getpid()):
+                os.remove(lockf)
+        except Exception:
+            pass
+    atexit.register(_release_lock)
     log(f"=== quant_loop started pid={os.getpid()} ===")
     while True:
         now = dt.datetime.now()
@@ -201,12 +237,18 @@ def main() -> None:
         out += run_cmd("shortcycle")
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("weather")
-        if nxt.minute == 20:
+        # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —
+        # a mark overrun past :20 no longer skips exits/reconcile for the whole hour
+        global LAST_HOURLY
+        now_ts = dt.datetime.now()
+        if LAST_HOURLY is None or (now_ts - LAST_HOURLY).total_seconds() >= 3540:
+            LAST_HOURLY = now_ts
             out += run_cmd("manage")
-            out += run_cmd("reconcile")   # hourly books-vs-exchange audit; MISMATCH lines
-                                          # land in the log/journal for the reflection to flag
+            out += run_cmd("reconcile")   # books-vs-exchange audit; MISMATCH lines
+                                          # land in the log/journal for the reflection
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
-        changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT "))
+        changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
+                                         "MISMATCH", "UNKNOWN"))
         if changed:
             run_cmd("journal")
             run_cmd("report")

@@ -64,10 +64,11 @@ def forecast_remaining_max_f(lat: float, lon: float, now_utc: dt.datetime,
         return None
     temps = []
     for p in hourly["properties"]["periods"]:
-        t0 = dt.datetime.fromisoformat(p["startTime"])
-        # strict < (CODEX-B fix): the period STARTING at next local midnight belongs
-        # to tomorrow and must not price today's high
-        if now_utc <= t0.astimezone(dt.timezone.utc) < local_day_end_utc:
+        t0 = dt.datetime.fromisoformat(p["startTime"]).astimezone(dt.timezone.utc)
+        t1 = dt.datetime.fromisoformat(p["endTime"]).astimezone(dt.timezone.utc)
+        # CODEX-5 HIGH fix: OVERLAP test — the currently-active period (started
+        # before now) still prices today's high; the next-midnight period does not.
+        if t1 > now_utc and t0 < local_day_end_utc:
             temps.append(float(p["temperature"]))          # already F
     return max(temps) if temps else None
 
@@ -128,7 +129,10 @@ def candidates(cfg: dict) -> list[dict]:
         midnight_local = local_now.replace(hour=0, minute=0, second=0, microsecond=0)
         midnight_utc = (midnight_local.replace(tzinfo=ZoneInfo(tz))
                         .astimezone(dt.timezone.utc).replace(tzinfo=dt.timezone.utc))
-        day_end_utc = midnight_utc + dt.timedelta(hours=24)
+        # CODEX-5 LOW fix: next LOCAL midnight (DST transition days are 23/25h long)
+        next_mid_local = midnight_local + dt.timedelta(days=1)
+        day_end_utc = (next_mid_local.replace(tzinfo=ZoneInfo(tz))
+                       .astimezone(dt.timezone.utc).replace(tzinfo=dt.timezone.utc))
         obs = observed_max_f(stn, midnight_utc)
         fc = forecast_remaining_max_f(lat, lon, now, day_end_utc)
         if obs is None and fc is None:

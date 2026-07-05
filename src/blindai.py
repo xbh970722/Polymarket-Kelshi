@@ -126,7 +126,12 @@ def record(ticker: str, ai_yes: float, ai_claude: float = None, ai_codex: float 
     """Log the blind call and fetch the market price INDEPENDENTLY (for scoring only)."""
     api = KalshiPublic()
     m = api.market_norm(ticker)
-    market_yes = round((m["yes_bid"] + m["yes_ask"]) / 2, 4) if m["yes_bid"] else round(m["yes_ask"], 4)
+    # CODEX-5 MED fix: never score against a one-sided quote (bogus mid corrupts
+    # the AI-vs-market Brier comparison); leave NULL and let a later run rescore.
+    if m["yes_bid"] > 0 and 0.01 <= m["yes_ask"] <= 0.99:
+        market_yes = round((m["yes_bid"] + m["yes_ask"]) / 2, 4)
+    else:
+        market_yes = None
     with _conn() as c:
         row = c.execute("SELECT question, close_time, context FROM calls WHERE ticker=?",
                         (ticker,)).fetchone()

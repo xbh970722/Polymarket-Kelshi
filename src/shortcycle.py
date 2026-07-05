@@ -175,7 +175,11 @@ def candidates(cfg: dict) -> list[dict]:
         except Exception as e:
             print(f"WARN {series}: vol fetch failed ({e})")
             continue
-        page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        try:
+            page = api._get("/markets", series_ticker=series, status="open", limit=100)
+        except Exception as e:                 # CODEX-4 LOW: one series' API hiccup
+            print(f"WARN {series}: market fetch failed ({e})")   # must not kill the
+            continue                                             # other three coins
         for mr in page.get("markets", []):
             m = normalize_market(mr)
             k = strike_of(m["ticker"])

@@ -23,13 +23,15 @@ except Exception as e:
 
 # ---- F2: order far beyond balance -> insufficient funds rejection ----
 target = None
+cands = []
 for series in ("KXBTCD", "KXETHD"):
     page = api._get("/markets", series_ticker=series, status="open", limit=50)
     for mr in page.get("markets", []):
         m = normalize_market(mr)
         if m["status"] == "active" and m["yes_ask"] and 0.3 <= m["yes_ask"] <= 0.95:
-            target = m["ticker"]; ask = m["yes_ask"]; break
-    if target: break
+            cands.append((m["ticker"], m["yes_ask"]))
+if cands:
+    target, ask = cands[0]
 if target:
     try:
         r = live.place_limit(target, "yes", 999, ask)     # ~$500+ >> balance ~$15
@@ -45,10 +47,30 @@ if target:
 else:
     results["F2 超余额下单(999张)"] = "SKIP: 无活跃市场"
 
-# ---- F3: reduce-only exit on a position we don't hold ----
-if target:
+# ---- F3: reduce-only exit on a position we PROVABLY don't hold ----
+# CODEX-6 HIGH fix: the old F3 fired place_exit at whatever ticker F2 found;
+# favorites trades these same series — if we HELD it, this "test" would really
+# dump a live position at 0.30. Preflight positions() and pick an unheld ticker.
+held = set()
+try:
+    for p in live.positions().get("market_positions", []):
+        qty = p.get("position", p.get("position_fp", 0))
+        try:
+            if abs(float(str(qty))) > 0:
+                held.add(p.get("ticker"))
+        except (TypeError, ValueError):
+            held.add(p.get("ticker"))          # unparseable -> assume held (fail safe)
+except Exception:
+    held = None                                # can't verify -> refuse to guess
+target_f3 = (next((t for t, _ in cands if t not in held), None)
+             if held is not None else None)
+if held is None:
+    results["F3 卖出未持有仓位(reduce_only)"] = "SKIP: 持仓查询失败, 拒绝盲测"
+elif not target_f3:
+    results["F3 卖出未持有仓位(reduce_only)"] = "SKIP: 扫到的市场全在持仓中"
+else:
     try:
-        r = live.place_exit(target, "yes", 1, 0.30)
+        r = live.place_exit(target_f3, "yes", 1, 0.30)
         filled = int(float(r.get("fill_count") or r.get("fill_count_fp") or 0))
         results["F3 卖出未持有仓位(reduce_only)"] = ("PASS: 0成交(reduce_only兜住)" if not filled
                                                      else f"异常: 成交了{filled}张!")

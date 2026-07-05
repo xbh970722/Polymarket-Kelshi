@@ -97,6 +97,25 @@ def resize_trade(trade_id: int, contracts: int, price: float,
                   (contracts, price, cost_usd, fee_usd, trade_id))
 
 
+def record_fill(trade_id: int, contracts: int, price: float, cost_usd: float,
+                fee_usd: float, order_id: str) -> None:
+    """CODEX-2 HIGH fix: actual fill + status='open' + order_id in ONE transaction,
+    so no crash window can leave a filled trade looking pending (and later voided)."""
+    with _conn() as c:
+        c.execute("UPDATE trades SET contracts=?, price=?, cost_usd=?, fee_usd=?, "
+                  "order_id=?, status='open' WHERE id=?",
+                  (contracts, price, cost_usd, fee_usd, order_id, trade_id))
+
+
+def mark_unknown(trade_id: int, reason: str) -> None:
+    """Exchange state ambiguous (post-submit exception): freeze the row as 'unknown'
+    — counted as exposure, excluded from auto-retry, surfaced by reconcile."""
+    with _conn() as c:
+        c.execute("UPDATE trades SET status='unknown', "
+                  "rationale = rationale || ' | UNKNOWN: ' || ? WHERE id=?",
+                  (reason, trade_id))
+
+
 def split_close(trade_id: int, filled: int, exit_price: float,
                 fee_actual: float, reason: str) -> None:
     """Partial exit fill (CODEX-A fix): close only the filled contracts at the real
@@ -120,23 +139,28 @@ def split_close(trade_id: int, filled: int, exit_price: float,
                    round((t["fee_usd"] or 0) * rem / t["contracts"], 2), trade_id))
         c.execute("INSERT INTO trades(ts,mode,ticker,title,side,price,contracts,cost_usd,"
                   "fee_usd,q_claude,q_codex,q_consensus,market_prob,edge_net,rationale,"
-                  "status,result,pnl_usd,settled_ts,exit_price) "
-                  "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                  "status,result,pnl_usd,settled_ts,exit_price,order_id,exit_type,"
+                  "target_price,stop_price,review_after_ts) "
+                  "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                   (t["ts"], t["mode"], t["ticker"], t["title"], t["side"], t["price"],
                    filled, cost_f, round((t["fee_usd"] or 0) * frac, 2),
                    t["q_claude"], t["q_codex"], t["q_consensus"], t["market_prob"],
                    t["edge_net"], (t["rationale"] or "") + f" | partial EXIT: {reason}",
-                   "closed", reason, pnl, now, exit_price))
+                   "closed", reason, pnl, now, exit_price,
+                   t["order_id"], t["exit_type"], t["target_price"], t["stop_price"],
+                   t["review_after_ts"]))   # CODEX-2 LOW: keep the audit linkage
 
 
 def void_stale_pending(max_age_min: int = 60) -> int:
     """Pending live orders that never executed keep consuming exposure/slots
-    forever (OPUS-A MED). Auto-void anything pending older than max_age_min."""
+    forever (OPUS-A MED). CODEX-2 HIGH revision: age alone cannot prove the
+    exchange never filled — stale rows become 'unknown' (still counted as
+    exposure, listed by reconcile for human/supervisor resolution), NOT voided."""
     cutoff = (dt.datetime.now() - dt.timedelta(minutes=max_age_min)
               ).isoformat(timespec="seconds")
     with _conn() as c:
-        cur = c.execute("UPDATE trades SET status='voided', "
-                        "rationale = rationale || ' | VOID: stale pending TTL' "
+        cur = c.execute("UPDATE trades SET status='unknown', "
+                        "rationale = rationale || ' | UNKNOWN: stale pending TTL' "
                         "WHERE status='pending' AND ts < ?", (cutoff,))
         return cur.rowcount
 
@@ -201,9 +225,9 @@ def stats(mode: str | None = None) -> dict:
             [today] + ma).fetchone()[0]
         open_exp = c.execute(
             "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
-            f"WHERE status IN ('open','pending'){mc}", ma).fetchone()[0]
+            f"WHERE status IN ('open','pending','unknown'){mc}", ma).fetchone()[0]
         n_open = c.execute(
-            f"SELECT COUNT(*) FROM trades WHERE status IN ('open','pending'){mc}",
+            f"SELECT COUNT(*) FROM trades WHERE status IN ('open','pending','unknown'){mc}",
             ma).fetchone()[0]
         pnl_today = c.execute(
             f"SELECT COALESCE(SUM(pnl_usd),0) FROM trades WHERE settled_ts LIKE ? || '%'{mc}",
