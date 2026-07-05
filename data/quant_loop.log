@@ -3764,3 +3764,46 @@
 [07-05 05:02:20]   h15: done: h15 pass complete
 [07-05 05:02:21]   h10: h10: 0 in-window | h10 shadow(main): n=12 mean +9.0c total $+1.08 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=5 net $+0.44 | KXBTC15M: n=3 net $+0.29 | gate: accumulating (0 pending) || H13 final6: n=4 win 4/4 net $+0.09 gate: accumulating
 [07-05 05:02:46] === quant_loop started pid=65132 ===
+[07-05 05:05:21]   settle: SETTLED KXETHD-26JUL0507-T1749.99: result=yes WIN pnl=$+1.19
+[07-05 05:05:21]   settle: SETTLED KXBTCD-26JUL0507-T62499.99: result=yes WIN pnl=$+0.10
+[07-05 05:05:21]   settle: SETTLED KXSOLD-26JUL0507-T79.9999: result=yes WIN pnl=$+0.28
+[07-05 05:05:21]   settle: done: 3 settled, 6 still open
+[07-05 05:05:22]   h15: done: h15 pass complete
+[07-05 05:05:24]   mktsnap: mktsnap: 3 quotes recorded, 11 outcomes resolved
+[07-05 05:05:28]   shortcycle: shortcycle: 10 candidate strikes | balance $17.43 | today spent $0.85/999999.00
+[07-05 05:05:28]   shortcycle: done: 0 shortcycle orders
+[07-05 05:05:30]   favorites: favorites: 3 favorites in zone | realized $+0.54 | today spent $28.25/999999.00
+[07-05 05:05:30]   favorites: LIVE  KXBTCD-26JUL0508-T62799.99: FAV NO x1 @ 86c cost=$0.87 order=33ac4a0e-4cac-412d-a7eb-ef34d028a3c8
+[07-05 05:05:30]   favorites: done: 1 favorite orders
+[07-05 05:05:31]   h10: h10: 0 in-window | h10 shadow(main): n=12 mean +9.0c total $+1.08 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=5 net $+0.44 | KXBTC15M: n=3 net $+0.29 | gate: accumulating (0 pending) || H13 final6: n=4 win 4/4 net $+0.09 gate: accumulating
+[07-05 05:05:32]   weather: weather: 0 priced buckets | spent $0.89/999999.00
+[07-05 05:05:32]   weather: done: 0 weather orders
+[07-05 05:05:35]   disloc: disloc: +0 events, 1 settled | disloc shadow: AMBIGUOUS: n=5 win 20% EV -56.0c | BOOK-ONLY: n=3 win 33% EV -44.0c | SPOT-MOVE: n=4 win 50% EV -7.2c | gate: accumulating (9 pending)
+[07-05 05:05:39]   pmwatch: pmwatch: +14 pairs | pmwatch: 282 rows, 88 kalshi-matched | |divergence| median 4.9c, p90 17.3c (gate n>=300)
+[07-05 05:05:40]   manage: done: 0 exited, 0 flagged for review, 7 holding
+[07-05 05:05:41]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 05:05:41]   reconcile: OK       KXBTCD-26JUL0508-T62799.99: -1
+[07-05 05:05:41]   reconcile: OK       KXHIGHDEN-26JUL05-B93.5: -1
+[07-05 05:05:41]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 05:05:41]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 05:05:41]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 05:05:41]   reconcile: OK       KXHIGHPHIL-26JUL05-B91.5: -0
+[07-05 05:05:41]   reconcile: CASH OK: adj balance $16.56 ~ expected $16.56 (drift $+0.00, reserved $0.00)
+[07-05 05:05:41]   reconcile: reconcile: 7 tickers, 0 mismatches — ACCOUNTING CLEAN
+[07-05 05:05:42]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: 0 settled (12 pending)
+[07-05 05:05:43] CRITICAL: step journal exited 1
+[07-05 05:05:43]   journal: Traceback (most recent call last):
+[07-05 05:05:43]   journal:   File "<frozen runpy>", line 198, in _run_module_as_main
+[07-05 05:05:43]   journal:   File "<frozen runpy>", line 88, in _run_code
+[07-05 05:05:43]   journal:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2393, in <module>
+[07-05 05:05:43]   journal:     main()
+[07-05 05:05:43]   journal:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2389, in main
+[07-05 05:05:43]   journal:     args.fn(args)
+[07-05 05:05:43]   journal:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 1813, in cmd_journal
+[07-05 05:05:43]   journal:     bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
+[07-05 05:05:43]   journal:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-05 05:05:43]   journal:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 1813, in <genexpr>
+[07-05 05:05:43]   journal:     bm = sum((t["q_consensus"] - (1.0 if t["result"] == "yes" else 0.0)) ** 2
+[07-05 05:05:43]   journal:               ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[07-05 05:05:43]   journal: TypeError: unsupported operand type(s) for -: 'NoneType' and 'float'
+[07-05 05:05:45]   report: wrote reports\report_2026-07-05.md
