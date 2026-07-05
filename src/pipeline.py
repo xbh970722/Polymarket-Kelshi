@@ -1497,9 +1497,15 @@ def cmd_h15(_args) -> None:
                         ledger.set_client_oid(tid, exch_oid_new)   # lookup matches
                     except Exception:           # either field
                         pass
+                # R7 morning item: echo the exchange's expiration back so the
+                # first RESTING placement PROVES expiration_ts round-trips
+                # (field was never live-tested; silent drop would strand bids
+                # on loop crash — the echo makes the verification automatic)
+                exp_echo = (resp.get("expiration_time")
+                            or resp.get("expiration_ts") or "NOT-ECHOED")
                 print(f"H15 RESTING placed {m['ticker']}: {side.upper()} bid "
                       f"{bid * 100:.0f}c fav_mid {fav_mid:.2f} tau {tau:.0f}m "
-                      f"order={exch_oid_new or coid}")
+                      f"order={exch_oid_new or coid} exp={exp_echo}")
             placed = True
             break
     print("done: h15 pass complete")
@@ -2091,6 +2097,15 @@ def cmd_reconcile(_args) -> None:
         bal_now = float(client.balance().get("balance_dollars") or 0)
         snap_path = Path("data") / "cash_check.json"
         now_iso = dt.datetime.now().isoformat(timespec="seconds")
+        # R7 morning item: a RESTING h15 bid makes Kalshi reserve the cash
+        # (balance_dollars drops) while the ledger row is still 'pending' —
+        # invisible to consumed/returned. Track identity on the ADJUSTED
+        # balance (cash + current pending reservations) so maker orders in
+        # flight don't read as booking corruption.
+        reserved = con_r.execute(
+            "SELECT COALESCE(SUM(cost_usd),0) FROM trades "
+            "WHERE mode='live' AND status='pending'").fetchone()[0]
+        adj_now = bal_now + reserved
         if snap_path.exists():
             prev = json.loads(snap_path.read_text(encoding="utf-8"))
             returned = con_r.execute(
@@ -2104,17 +2119,22 @@ def cmd_reconcile(_args) -> None:
                 "AND COALESCE(booked_ts, ts) > ? "
                 "AND status IN ('open','closed','settled','unknown')",
                 (prev["ts"],)).fetchone()[0]
-            expected = prev["balance"] + returned - consumed
-            drift = bal_now - expected
-            if abs(drift) > 1.0:
+            expected = prev.get("adj_balance", prev["balance"]) + returned - consumed
+            drift = adj_now - expected
+            # R7 morning item: $1 on a ~$10 account was deaf; $0.25 hears a
+            # single mispriced contract. Deposits still trip once (documented).
+            if abs(drift) > 0.25:
                 problems_cash = 1
-                print(f"CASH MISMATCH: balance ${bal_now:.2f} vs expected "
+                print(f"CASH MISMATCH: adj balance ${adj_now:.2f} (cash "
+                      f"${bal_now:.2f} + reserved ${reserved:.2f}) vs expected "
                       f"${expected:.2f} (drift ${drift:+.2f}) — booking corruption "
                       f"or external deposit/withdrawal")
             else:
-                print(f"CASH OK: balance ${bal_now:.2f} ~ expected ${expected:.2f} "
-                      f"(drift ${drift:+.2f})")
-        snap_path.write_text(json.dumps({"ts": now_iso, "balance": bal_now}),
+                print(f"CASH OK: adj balance ${adj_now:.2f} ~ expected "
+                      f"${expected:.2f} (drift ${drift:+.2f}, reserved "
+                      f"${reserved:.2f})")
+        snap_path.write_text(json.dumps({"ts": now_iso, "balance": bal_now,
+                                         "adj_balance": adj_now}),
                              encoding="utf-8")
     except Exception as e:
         print(f"WARN cash check failed: {e}")

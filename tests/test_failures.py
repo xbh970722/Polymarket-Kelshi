@@ -21,7 +21,18 @@ except RuntimeError as e:
 except Exception as e:
     results["F1 已结算市场下单"] = f"FAIL: 崩溃类型 {type(e).__name__}: {e}"
 
-# ---- F2: order far beyond balance -> insufficient funds rejection ----
+# ---- F2: RETIRED 2026-07-05 — hypothesis ANSWERED, probe must never run again.
+# The question was "does Kalshi reject an order beyond balance?" Answer, learned
+# the hard way (pytest collection executed this module; the 999-contract probe
+# at the ask FILLED): **Kalshi does NOT reject — it FILLS-TO-AVAILABLE-CASH and
+# cancels the remainder.** It bought 5.4 FRACTIONAL contracts of
+# KXETHD-26JUL0507 @78c ($4.21 + fee, the account's entire free cash) at
+# 04:03:07 and the alarm string below drowned in pytest's captured stdout.
+# Findings now doctrine: (1) balance is NOT an order-size backstop — only our
+# own cost caps are; (2) hourly crypto fills can be FRACTIONAL (not just
+# weather); (3) live probes may only ask questions whose worst-case answer is
+# affordable. Recovered as ledger #97. Do not re-arm; a marketable
+# over-balance order is not a test, it is a market order.
 target = None
 cands = []
 for series in ("KXBTCD", "KXETHD"):
@@ -29,23 +40,9 @@ for series in ("KXBTCD", "KXETHD"):
     for mr in page.get("markets", []):
         m = normalize_market(mr)
         if m["status"] == "active" and m["yes_ask"] and 0.3 <= m["yes_ask"] <= 0.95:
-            cands.append((m["ticker"], m["yes_ask"]))
-if cands:
-    target, ask = cands[0]
-if target:
-    try:
-        r = live.place_limit(target, "yes", 999, ask)     # ~$500+ >> balance ~$15
-        filled = int(float(r.get("fill_count") or r.get("fill_count_fp") or 0))
-        results["F2 超余额下单(999张)"] = (f"异常: 接受且成交{filled}张!" if filled
-                                          else f"部分接受未成交, order={r.get('order_id','?')[:8]}")
-        oid = r.get("order_id")
-        if oid and not filled:
-            try: live.cancel_order(str(oid))
-            except Exception: pass
-    except RuntimeError as e:
-        results["F2 超余额下单(999张)"] = "PASS: 干净拒绝 - " + str(e)[:90]
-else:
-    results["F2 超余额下单(999张)"] = "SKIP: 无活跃市场"
+            cands.append((m["ticker"], m["yes_ask"]))   # F3 still needs cands
+results["F2 超余额下单(999张)"] = ("RETIRED: fills-to-cash, 见注释与 ledger #97 "
+                                   "— 不再实弹重问")
 
 # ---- F3: reduce-only exit on a position we PROVABLY don't hold ----
 # CODEX-6 HIGH fix: the old F3 fired place_exit at whatever ticker F2 found;

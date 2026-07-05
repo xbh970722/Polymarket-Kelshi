@@ -272,25 +272,45 @@ def check_review_trigger() -> None:
 
 
 def janitor_stale_sessions() -> None:
-    """Scheduled-task claude sessions don't exit and leak ~370MB each (found
-    2026-07-04: pagefile exhaustion, fork failures). Kill 'claude' processes
-    aged 3-16h whose start minute matches task-launch minutes. The <16h upper
-    bound protects long-lived interactive sessions (review 2026-07-04: a
-    days-old chat session could otherwise collide on start-minute)."""
+    """Leaked claude-code session backends eat ~130-370MB each plus ~5 MCP
+    child servers (~180MB) — found 2026-07-04 as pagefile exhaustion; audit
+    2026-07-05 found 14 leftovers aged 24-44h that the old start-minute
+    heuristic missed (they were parented by the desktop app, and >16h fell
+    outside the window). Two rules, both PID-recycling-safe:
+      (a) ORPHAN: CLI session whose parent is dead or was created AFTER it
+          (Windows recycles PIDs; existence alone lies), age >3h — classic
+          schtasks leak, any start minute.
+      (b) IDLE LEFTOVER: parent alive (desktop-app-spawned) but age >16h AND
+          lifetime CPU <20min — a finished task session idling for a day.
+          The CPU floor protects genuinely active marathons (a live user
+          session accumulates hours of CPU); transcripts persist on disk,
+          so a killed backend just respawns if its session is reopened.
+    Desktop app itself (--type= electron children / non-CLI) never touched."""
+    ps = (
+        "$all = Get-CimInstance Win32_Process; $byPid = @{}; "
+        "foreach ($p in $all) { $byPid[[int]$p.ProcessId] = $p }; "
+        "$now = Get-Date; "
+        "foreach ($p in $all) { "
+        "if ($p.Name -ne 'claude.exe') { continue }; "
+        "$cl = $p.CommandLine; "
+        "if (-not $cl -or $cl -notmatch 'claude-code' -or $cl -match '--type=') { continue }; "
+        "$age = ($now - $p.CreationDate).TotalHours; "
+        "if ($age -lt 3) { continue }; "
+        "$par = $byPid[[int]$p.ParentProcessId]; "
+        "$orphan = ($null -eq $par -or $par.CreationDate -gt $p.CreationDate); "
+        "$idle = $false; "
+        "if (-not $orphan -and $age -gt 16) { "
+        "$gp = Get-Process -Id $p.ProcessId -ErrorAction SilentlyContinue; "
+        "if ($gp -and $gp.TotalProcessorTime.TotalMinutes -lt 20) { $idle = $true } }; "
+        "if ($orphan -or $idle) { "
+        "try { Stop-Process -Id $p.ProcessId -Force -ErrorAction Stop; $p.ProcessId } catch {} } }"
+    )
     try:
-        out = subprocess.run(
-            ["powershell", "-NoProfile", "-Command",
-             "Get-Process claude -ErrorAction SilentlyContinue | "
-             "Where-Object { $h = ((Get-Date) - $_.StartTime).TotalHours; "
-             "$h -gt 3 -and $h -lt 16 -and "
-             # R3-FABLE MED: cover the real jittered launch windows — daily-cycle
-             # 0-8, blind-AI 12-16, supervisor 20-22, reflection 30-40
-             "$_.StartTime.Minute -in (0..16 + 20..22 + 30..40) } | "
-             "ForEach-Object { Stop-Process -Id $_.Id -Force; $_.Id }"],
-            capture_output=True, text=True, timeout=60)
+        out = subprocess.run(["powershell", "-NoProfile", "-Command", ps],
+                             capture_output=True, text=True, timeout=90)
         killed = [x for x in (out.stdout or "").split() if x.strip().isdigit()]
         if killed:
-            log(f"janitor: killed stale task sessions {killed}")
+            log(f"janitor: reaped leaked sessions {killed}")
     except Exception as e:
         log(f"janitor failed: {e}")
 

@@ -318,7 +318,10 @@ def calibration() -> dict:
             "WHERE status='settled' AND result IN ('yes','no') "
             "AND (title IS NULL OR (title NOT LIKE 'favorite%' "
             "AND title NOT LIKE 'h10fav15m%' AND title NOT LIKE 'h15maker%' "
-            "AND title NOT LIKE 'weather-fade%'))").fetchall()   # price-taking lanes
+            "AND title NOT LIKE 'weather-fade%' "
+            # R7 morning item: manual order-path tests (Alito #62) carry no
+            # model probability — keep them out of the Sept-1 Brier track
+            "AND title NOT LIKE 'manual%'))").fetchall()   # price-taking lanes
     n = len(rows)
     if n == 0:
         return {"n_settled": 0}
