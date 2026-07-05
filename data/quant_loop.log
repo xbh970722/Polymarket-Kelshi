@@ -3289,3 +3289,4 @@
 [07-05 02:26:40]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=1 win 0% EV -84.0c | BOOK-ONLY: n=1 win 0% EV -84.0c | SPOT-MOVE: n=1 win 0% EV -48.0c | gate: accumulating (4 pending)
 [07-05 02:26:51]   pmwatch: pmwatch: +55 pairs | pmwatch: 60 rows, 19 kalshi-matched | |divergence| median 3.0c, p90 12.0c (gate n>=300)
 [07-05 02:30:29] === quant_loop started pid=34308 ===
+[07-05 02:32:15] === quant_loop started pid=75248 ===

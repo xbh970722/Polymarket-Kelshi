@@ -824,7 +824,10 @@ def cmd_weather(_args) -> None:
         s = (r["title"] or "").split(" ")[-1]
         per_city[s] = per_city.get(s, 0) + 1
     for c in sorted(cands, key=lambda x: -abs(x["q_model"] - x["mid"])):
-        if spent >= wc["daily_budget_usd"]:
+        if n_today + placed >= wc.get("max_entries_per_day", 3):   # R7-C6 HIGH:
+            print("weather: daily entry cap reached (in-run)")     # enforce the
+            break                                                  # cap DURING
+        if spent >= wc["daily_budget_usd"]:                        # the loop too
             print("budget: weather daily budget reached")
             break
         if per_city.get(c["series"], 0) >= wc.get("max_trades_per_city_per_day", 1):
@@ -2040,10 +2043,20 @@ def cmd_cancel_pending(args) -> None:
     rows = ledger.pending_trades()
     if args.id:
         rows = [t for t in rows if t["id"] == args.id]
+    done = 0
     for t in rows:
+        # R7-C6 HIGH: a pending row that OWNS an order identity may be a live
+        # resting order (h15) or an ambiguous submit — voiding the ledger row
+        # would strand the exchange order unmanaged. Refuse; the lane lifecycle
+        # or the reconcile resolver owns those.
+        if (t.get("order_id") or "").strip():
+            print(f"SKIP  #{t['id']} {t['ticker']}: owns an order identity — "
+                  f"managed by its lane/resolver, not manual void")
+            continue
         ledger.void_trade(t["id"], args.reason or "cancelled by user")
+        done += 1
         print(f"VOIDED #{t['id']} {t['ticker']}")
-    print(f"done: {len(rows)} voided")
+    print(f"done: {done} voided")
 
 
 def cmd_live_check(_args) -> None:

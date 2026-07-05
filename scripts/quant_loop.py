@@ -347,7 +347,8 @@ def main() -> None:
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
                                          "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",
-                                         "CRITICAL", "FAILED", "REJECTED", "H15 "))
+                                         "CRITICAL", "FAILED", "REJECTED", "H15 ",
+                                         "HARD STOP", "DRAWDOWN REVIEW"))
         if changed:
             run_cmd("journal")
             run_cmd("report")
