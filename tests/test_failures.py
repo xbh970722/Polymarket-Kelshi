@@ -98,7 +98,10 @@ try:
     finally:
         live_mod._SECRETS_DIR = old_dir
 finally:
-    if env_backup: os.environ["KALSHI_PRIVATE_KEY_PATH"] = env_backup
+    if env_backup:
+        os.environ["KALSHI_PRIVATE_KEY_PATH"] = env_backup
+    else:   # backup was None -> restore means REMOVE, not skip (leaked poison
+        os.environ.pop("KALSHI_PRIVATE_KEY_PATH", None)   # to later imports)
     os.environ.pop("KALSHI_API_KEY_ID", None)
 
 # ---- F5: double-start the quant loop -> second instance must refuse ----

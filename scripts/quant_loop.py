@@ -334,11 +334,13 @@ def main() -> None:
             time.sleep(wait)
         if not tree_healthy():     # R4-FABLE-B: never trade a broken working tree
             continue
-        if kind == "light":        # 15m-only pass: h15 lifecycle + h10 scan
+        if kind == "light":        # 15m pass: h15 lifecycle + h10 scan + stop guard
             out = run_cmd("h15", timeout=120)
             out += run_cmd("h10", timeout=120)
-            if any(k in out for k in ("LIVE ", "H15 ", "UNKNOWN", "CRITICAL",
-                                      "HARD STOP")):
+            out += run_cmd("stopshadow", timeout=60)   # live dual-condition stop:
+            #  densest cadence = shortest death-detection latency (~2-3 min)
+            if any(k in out for k in ("LIVE ", "H15 ", "EXIT ", "UNKNOWN",
+                                      "CRITICAL", "HARD STOP")):
                 run_cmd("journal")
                 git("add", "-A")
                 git("commit", "-m",
@@ -358,7 +360,8 @@ def main() -> None:
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("h10", timeout=120)   # 15m shadow + capped probe (R6)
         out += run_cmd("weather")
-        run_cmd("stopshadow", timeout=60)    # 0.70 stop-loss would-fire log
+        out += run_cmd("stopshadow", timeout=60)   # crossing log + LIVE stop guard
+        #  (user 07-05 morning: early-open after shadow caught 2 real BTC deaths)
         run_cmd("disloc", timeout=60)        # H12 dislocation shadow
         run_cmd("pmwatch", timeout=60)       # H14 Polymarket pairs (read-only)
         # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —

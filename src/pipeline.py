@@ -1060,14 +1060,18 @@ def cmd_h10(_args) -> None:
 
 
 def cmd_stopshadow(_args) -> None:
-    """Stop-loss SHADOW (user decision 2026-07-05: one week of shadow before any
-    live stop). Logs a would-stop event the first time an open live crypto
-    position's held-side bid trades at or below 0.70 — the eventual settlement
-    (already in the ledger) tells us what the stop would have saved or cost."""
+    """Crypto stop: SHADOW logger + (since 2026-07-05 morning, user early-open
+    after the shadow caught two real BTC deaths worth ~$2.95 of saves) a LIVE
+    dual-condition GUARD: held-side bid <= trigger AND spot confirms death
+    (crossed the strike OR within the proximity band — tonight's evidence:
+    both real deaths triggered with spot hugging the strike from ABOVE, so a
+    pure crossing test would have missed them). A book-only smash cannot move
+    Coinbase spot -> stop-hunters cannot fire this (VALUES 5e)."""
     import sqlite3 as _sq
     cfg = load_config()
     if not live_active(cfg):
         return
+    guard = cfg.get("crypto_stop") or {}
     con_s = _sq.connect("data/stop_shadow.db", timeout=15)
     con_s.execute("CREATE TABLE IF NOT EXISTS stops("
                   "trade_id INTEGER PRIMARY KEY, ticker TEXT, ts TEXT, "
@@ -1078,39 +1082,39 @@ def cmd_stopshadow(_args) -> None:
         except _sq.OperationalError:
             pass
     api = KalshiPublic()
+    client_s = None
     n = 0
+    trig = guard.get("bid_trigger", 0.70)
     for t in ledger.open_trades():
         if t["mode"] != "live":
             continue
         ttl = t.get("title") or ""
         if not (ttl.startswith("favorite") or ttl.startswith("h10fav15m")
-                or ttl.startswith("shortcycle")):
-            continue
-        if con_s.execute("SELECT 1 FROM stops WHERE trade_id=?",
-                         (t["id"],)).fetchone():
+                or ttl.startswith("shortcycle") or ttl.startswith("h15maker")):
             continue
         try:
             m = api.market_norm(t["ticker"])
         except Exception:
             continue
         bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
-        if 0 < bid <= 0.70:
-            # a Kalshi book-smash cannot move Coinbase spot: spot-vs-strike at
-            # the trigger moment separates real deaths from stop-hunt dislocations
-            spot = strike = None
-            try:
-                from .shortcycle import strike_of
-                strike = strike_of(t["ticker"])
-                prod = {"KXBTC": "BTC-USD", "KXETH": "ETH-USD",
-                        "KXSOL": "SOL-USD", "KXXRP": "XRP-USD"}.get(
-                    t["ticker"][:5])
-                if prod:
-                    import requests as _rq
-                    spot = float(_rq.get(
-                        f"https://api.exchange.coinbase.com/products/{prod}/ticker",
-                        timeout=10).json()["price"])
-            except Exception:
-                pass
+        if not (0 < bid <= trig):
+            continue
+        # spot vs strike: the unmanipulable signal
+        spot = strike = None
+        try:
+            from .shortcycle import strike_of
+            strike = strike_of(t["ticker"])
+            prod = {"KXBTC": "BTC-USD", "KXETH": "ETH-USD",
+                    "KXSOL": "SOL-USD", "KXXRP": "XRP-USD"}.get(t["ticker"][:5])
+            if prod:
+                import requests as _rq
+                spot = float(_rq.get(
+                    f"https://api.exchange.coinbase.com/products/{prod}/ticker",
+                    timeout=10).json()["price"])
+        except Exception:
+            pass
+        if not con_s.execute("SELECT 1 FROM stops WHERE trade_id=?",
+                             (t["id"],)).fetchone():
             con_s.execute("INSERT OR IGNORE INTO stops VALUES(?,?,?,?,?,?,?,?)",
                           (t["id"], t["ticker"],
                            dt.datetime.now().isoformat(timespec="seconds"),
@@ -1119,14 +1123,87 @@ def cmd_stopshadow(_args) -> None:
             n += 1
             tag = ""
             if spot is not None and strike is not None:
-                dist = (spot - strike) / strike * 100
-                tag = f" | spot {spot:.0f} vs strike {strike:.0f} ({dist:+.2f}%)"
+                tag = (f" | spot {spot:.0f} vs strike {strike:.0f} "
+                       f"({(spot - strike) / strike * 100:+.2f}%)")
             print(f"STOPSHADOW #{t['id']} {t['ticker']}: held-side bid "
-                  f"{bid:.2f} <= 0.70 (would exit here){tag}")
+                  f"{bid:.2f} <= {trig} (crossing logged){tag}")
+        # ---- LIVE GUARD (dual condition) ----
+        if not guard.get("enabled"):
+            continue
+        if spot is None or strike is None:
+            continue                    # no unmanipulable confirmation -> hold
+        losing = (spot < strike) if t["side"] == "yes" else (spot > strike)
+        near = abs(spot - strike) / strike <= guard.get(
+            "spot_proximity_pct", 0.05) / 100.0
+        if not (losing or near):
+            print(f"STOPGUARD HOLD #{t['id']} {t['ticker']}: bid {bid:.2f} but "
+                  f"spot safe side & clear — book-only smash, not selling")
+            continue
+        if client_s is None:
+            from .live import KalshiLive, LiveAuthError
+            try:
+                client_s = KalshiLive()
+            except LiveAuthError as e:
+                print(f"STOPGUARD AUTH ERROR: {e}")
+                break
+        px = max(bid - guard.get("exit_cross", 0.02), 0.01)
+        try:
+            resp = client_s.place_exit(t["ticker"], t["side"], t["contracts"], px)
+        except RuntimeError as e:
+            st = _http_status(e)
+            if st is not None and 400 <= st < 500:
+                print(f"STOPGUARD FAILED #{t['id']} {t['ticker']}: {str(e)[:90]}")
+            else:
+                print(f"CRITICAL #{t['id']} {t['ticker']}: stop exit outcome "
+                      f"AMBIGUOUS ({str(e)[:80]}) — reconcile will compare books")
+            continue
+        except Exception as e:
+            print(f"CRITICAL #{t['id']} {t['ticker']}: stop exit AMBIGUOUS "
+                  f"({type(e).__name__}) — reconcile will compare books")
+            continue
+        fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
+        filled = int(fill_raw)
+        if abs(fill_raw - filled) > 1e-9:
+            print(f"CRITICAL #{t['id']} {t['ticker']}: fractional stop fill "
+                  f"{fill_raw} — leaving open, resolver/reconcile owns it")
+            continue
+        if filled < 1:
+            oid = resp.get("order_id")
+            if oid:
+                try:
+                    client_s.cancel_order(str(oid))
+                except Exception:
+                    pass
+            print(f"STOPGUARD NOFILL #{t['id']} {t['ticker']}: bid vanished, "
+                  f"still holding")
+            continue
+        raw_avg = resp.get("average_fill_price")
+        if raw_avg is not None and str(raw_avg) != "":
+            avg_px = float(raw_avg)
+            if t["side"] == "no":
+                avg_px = round(1.0 - avg_px, 4)
+        else:
+            avg_px = px
+        fee_paid = float(resp.get("average_fee_paid") or 0) * filled
+        fee = round(fee_paid, 2) if fee_paid else taker_fee_usd(avg_px, filled)
+        try:
+            ledger.split_close(t["id"], filled, avg_px, fee,
+                               f"stopguard@{avg_px * 100:.0f}c")
+        except Exception as e:
+            print(f"CRITICAL #{t['id']} {t['ticker']}: STOP FILLED x{filled} but "
+                  f"split_close failed ({e}) — freezing")
+            try:
+                ledger.mark_unknown(t["id"], "stop filled, split_close failed")
+            except Exception:
+                pass
+            continue
+        print(f"STOPGUARD EXIT #{t['id']} {t['ticker']}: sold x{filled} "
+              f"@ {avg_px * 100:.0f}c (bid {bid:.2f}, spot "
+              f"{'losing' if losing else 'at-line'}) — salvaged vs riding to 0")
     con_s.commit()
     con_s.close()
     if n:
-        print(f"stopshadow: {n} would-stop event(s) logged")
+        print(f"stopshadow: {n} new crossing(s) logged")
 
 
 def cmd_pmwatch(_args) -> None:

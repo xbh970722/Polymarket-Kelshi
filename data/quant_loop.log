@@ -3598,3 +3598,31 @@
 [07-05 03:50:43]   pmwatch: pmwatch: +44 pairs | pmwatch: 192 rows, 61 kalshi-matched | |divergence| median 4.9c, p90 17.3c (gate n>=300)
 [07-05 03:50:44]   journal: journal written: realized today $+0.98, 15 settled, 18 fills
 [07-05 03:50:45]   report: wrote reports\report_2026-07-05.md
+[07-05 03:50:47] committed + pushed
+[07-05 03:53:21]   h10: h10: 1 in-window | h10 shadow(main): n=8 mean +8.4c total $+0.67 | KXETH15M: n=3 net $+0.20 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=1 net $+0.09 | gate: accumulating (2 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 03:53:21]   h10: done: 0 h10 orders
+[07-05 03:56:21]   settle: done: 0 settled, 10 still open
+[07-05 03:56:23]   mktsnap: mktsnap: 6 quotes recorded, 0 outcomes resolved
+[07-05 03:56:27]   shortcycle: shortcycle: 0 candidate strikes | balance $10.92 | today spent $0.85/999999.00
+[07-05 03:56:27]   shortcycle: done: 0 shortcycle orders
+[07-05 03:56:29]   favorites: favorites: 0 favorites in zone | realized $+2.36 | today spent $25.63/999999.00
+[07-05 03:56:29]   favorites: done: 0 favorite orders
+[07-05 03:56:30]   h10: h10: 0 in-window | h10 shadow(main): n=8 mean +8.4c total $+0.67 | KXETH15M: n=3 net $+0.20 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=1 net $+0.09 | gate: accumulating (2 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 03:56:30] CRITICAL: step weather exited 1
+[07-05 03:56:30]   weather: Traceback (most recent call last):
+[07-05 03:56:30]   weather:   File "<frozen runpy>", line 198, in _run_module_as_main
+[07-05 03:56:30]   weather:   File "<frozen runpy>", line 88, in _run_code
+[07-05 03:56:30]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2295, in <module>
+[07-05 03:56:30]   weather:     main()
+[07-05 03:56:30]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2291, in main
+[07-05 03:56:30]   weather:     args.fn(args)
+[07-05 03:56:30]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 767, in cmd_weather
+[07-05 03:56:30]   weather:     print(f"weather: {len(cands)} priced buckets | spent ${spent:.2f}/{wc['daily_budget_usd']:.2f}")
+[07-05 03:56:30]   weather:                                                                        ~~^^^^^^^^^^^^^^^^^^^^
+[07-05 03:56:30]   weather: KeyError: 'daily_budget_usd'
+[07-05 03:56:34]   disloc: DISLOC KXBTCD-26JUL1017-T69999.99: fav 0.98->0.84 ask 0.99 [BOOK-ONLY] tau 7863m
+[07-05 03:56:34]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=1 win 0% EV -84.0c | BOOK-ONLY: n=1 win 0% EV -84.0c | SPOT-MOVE: n=2 win 50% EV -9.5c | gate: accumulating (14 pending)
+[07-05 03:56:42]   pmwatch: pmwatch: +40 pairs | pmwatch: 204 rows, 64 kalshi-matched | |divergence| median 4.9c, p90 17.3c (gate n>=300)
+[07-05 04:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (0 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 04:02:21]   h10: h10: 0 in-window | h10 shadow(main): n=10 mean +9.5c total $+0.95 | KXETH15M: n=4 net $+0.35 | KXSOL15M: n=4 net $+0.38 | KXBTC15M: n=2 net $+0.22 | gate: accumulating (0 pending) || H13 final6: n=3 win 3/3 net $+0.09 gate: accumulating
+[07-05 04:05:21] === quant_loop started pid=31404 ===
