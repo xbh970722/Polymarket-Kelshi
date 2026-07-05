@@ -90,8 +90,9 @@ class KalshiLive:
         return self._req("GET", f"{API}/portfolio/balance")
 
     def cancel_order(self, order_id: str) -> dict:
-        """Cancel a resting order (used to guarantee no strays after 0-fill responses)."""
-        return self._req("DELETE", f"{API}/portfolio/orders/{order_id}")
+        """Cancel a resting order (V2 path — the bare /portfolio/orders DELETE is
+        deprecated with HTTP 410, found in verification 2026-07-04)."""
+        return self._req("DELETE", f"{API}/portfolio/events/orders/{order_id}")
 
     def positions(self) -> dict:
         return self._req("GET", f"{API}/portfolio/positions")
