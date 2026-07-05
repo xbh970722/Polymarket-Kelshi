@@ -316,7 +316,8 @@ def calibration() -> dict:
         rows = c.execute(
             "SELECT q_consensus, market_prob, side, result, pnl_usd FROM trades "
             "WHERE status='settled' AND result IN ('yes','no') "
-            "AND (title IS NULL OR title NOT LIKE 'favorite%')").fetchall()
+            "AND (title IS NULL OR (title NOT LIKE 'favorite%' "
+            "AND title NOT LIKE 'h10fav15m%'))").fetchall()   # both are price-taking
     n = len(rows)
     if n == 0:
         return {"n_settled": 0}

@@ -179,6 +179,8 @@ favorites:
   max_contracts_by_series:       # 2026-07-04 用户开油门②
     KXBTCD: 3
     KXETHD: 3
+    KXXRPD: 1                    # 2026-07-05 用户: 降权观察 (66h回测148笔净亏-$2.16,
+                                 # 胜率88.5%低于保本线; 反思任务单列XRP统计, +200窗口复议)
   max_per_trade_usd: 3.00        # 3张×~94c 上限配套 (原2.00)
   daily_budget_usd: 999999       # 2026-07-04 深夜用户指令: 预算不设上限 (原$15 诚实口径,
                                  # 只挡了半天)。风险兜底改为: 单笔$3 + 敞口$12 + 日亏$5熔断
@@ -189,6 +191,25 @@ favorites:
   # 每亏 $3 触发一次复盘 -> Fable5 调策略 -> 继续下单 -> 再亏 $3 再复盘, 循环。
   drawdown_step_usd: 3.00        # 每段回撤额度
   hard_stop_steps: 5             # 连续 5 段 ($15) 仍未转正 -> 真正停用, 通知用户
+
+# ---------- H10: 15m 热门收割 (影子+微额探针, 七席评审团仲裁 2026-07-05) ----------
+# 仲裁: 5×MODIFIED-GO 1×NO-GO 1×NEED-MORE-DATA -> 不开正式通道; 影子账本立即跑
+# (每次扫描记录真实可执行ask, 即预注册门的测量仪), 用户授权 ETH 微额自动探针
+# (只回答成交现实, 不作EV证据)。预注册判据: 影子 n>=150 且净EV>=+5c 提案快GO;
+# n>=300 且 >=+2c 慢GO; n>=150 且 <=0 处决。BTC 排除 (tau>6 无散户对手盘)。
+h10:
+  enabled: true
+  series_shadow: [KXETH15M, KXSOL15M]
+  series_probe: [KXETH15M]       # 回测 203-0; SOL 拥有全部15个历史败局 -> 只影子
+  zone: [0.84, 0.94]
+  tau_window_min: [6, 16]
+  max_contracts: 1               # $1 上限在 84-94c 加费后只装得下 1 张 (C2/C4)
+  max_per_trade_usd: 1.00
+  probe_enabled: true
+  probe_max_fills: 20            # C6: 探针样本预算, 到顶自动转纯影子
+  probe_max_loss_usd: 2.00       # C6: 探针累计亏 $2 即停
+  drawdown_step_usd: 3.00        # C5: 独立回撤记账 (title h10fav15m, 绝不与
+  hard_stop_steps: 1             #     favorites 共用刹车); 首步 -$3 即硬停待复盘
 
 # ---------- 天气通道 (每日, NWS 官方数据, 无LLM) ----------
 weather:

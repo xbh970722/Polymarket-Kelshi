@@ -2903,3 +2903,106 @@
 [07-04 23:05:32]   journal: journal written: realized today $+4.10, 40 settled, 39 fills
 [07-04 23:05:33]   report: wrote reports\report_2026-07-04.md
 [07-04 23:05:35] committed + pushed
+[07-04 23:11:21]   settle: done: 0 settled, 7 still open
+[07-04 23:11:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-04 23:11:26]   shortcycle: shortcycle: 10 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:11:26]   shortcycle: done: 0 shortcycle orders
+[07-04 23:11:28]   favorites: favorites: 4 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:11:28]   favorites: done: 0 favorite orders
+[07-04 23:11:28]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:11:28]   weather: done: 0 weather orders
+[07-04 23:20:21]   settle: done: 0 settled, 7 still open
+[07-04 23:20:22]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-04 23:20:26]   shortcycle: shortcycle: 7 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:20:26]   shortcycle: done: 0 shortcycle orders
+[07-04 23:20:28]   favorites: favorites: 4 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:20:28]   favorites: done: 0 favorite orders
+[07-04 23:20:29]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:20:29]   weather: done: 0 weather orders
+[07-04 23:26:21]   settle: done: 0 settled, 7 still open
+[07-04 23:26:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-04 23:26:26]   shortcycle: shortcycle: 6 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:26:26]   shortcycle: done: 0 shortcycle orders
+[07-04 23:26:28]   favorites: favorites: 2 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:26:28]   favorites: done: 0 favorite orders
+[07-04 23:26:29]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:26:29]   weather: done: 0 weather orders
+[07-04 23:35:21]   settle: done: 0 settled, 7 still open
+[07-04 23:35:22]   mktsnap: mktsnap: 12 quotes recorded, 4 outcomes resolved
+[07-04 23:35:28]   shortcycle: shortcycle: 5 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:35:28]   shortcycle: done: 0 shortcycle orders
+[07-04 23:35:30]   favorites: favorites: 1 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:35:30]   favorites: done: 0 favorite orders
+[07-04 23:35:31]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:35:31]   weather: done: 0 weather orders
+[07-04 23:41:21]   settle: done: 0 settled, 7 still open
+[07-04 23:41:22]   mktsnap: mktsnap: 12 quotes recorded, 0 outcomes resolved
+[07-04 23:41:27]   shortcycle: shortcycle: 3 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:41:27]   shortcycle: done: 0 shortcycle orders
+[07-04 23:41:29]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:41:29]   favorites: done: 0 favorite orders
+[07-04 23:41:29]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:41:29]   weather: done: 0 weather orders
+[07-04 23:50:21]   settle: done: 0 settled, 7 still open
+[07-04 23:50:22]   mktsnap: mktsnap: 7 quotes recorded, 3 outcomes resolved
+[07-04 23:50:27]   shortcycle: shortcycle: 0 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:50:27]   shortcycle: done: 0 shortcycle orders
+[07-04 23:50:29]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:50:29]   favorites: done: 0 favorite orders
+[07-04 23:50:30]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:50:30]   weather: done: 0 weather orders
+[07-04 23:56:21]   settle: done: 0 settled, 7 still open
+[07-04 23:56:22]   mktsnap: mktsnap: 5 quotes recorded, 0 outcomes resolved
+[07-04 23:56:27]   shortcycle: shortcycle: 0 candidate strikes | balance $10.93 | today spent $0.00/999999.00
+[07-04 23:56:27]   shortcycle: done: 0 shortcycle orders
+[07-04 23:56:29]   favorites: favorites: 0 favorites in zone | realized $+1.74 | today spent $59.49/999999.00
+[07-04 23:56:29]   favorites: done: 0 favorite orders
+[07-04 23:56:30]   weather: weather: 0 priced buckets | spent $1.09/999999.00
+[07-04 23:56:30]   weather: done: 0 weather orders
+[07-05 00:05:21]   settle: SETTLED KXBTCD-26JUL0502-T62599.99: result=yes WIN pnl=$+0.37
+[07-05 00:05:21]   settle: SETTLED KXETHD-26JUL0502-T1769.99: result=no WIN pnl=$+0.42
+[07-05 00:05:21]   settle: done: 2 settled, 5 still open
+[07-05 00:05:23]   mktsnap: mktsnap: 3 quotes recorded, 12 outcomes resolved
+[07-05 00:05:28]   shortcycle: shortcycle: 10 candidate strikes | balance $16.93 | today spent $0.00/999999.00
+[07-05 00:05:28]   shortcycle: done: 0 shortcycle orders
+[07-05 00:05:30]   favorites: favorites: 5 favorites in zone | realized $+2.53 | today spent $0.00/999999.00
+[07-05 00:05:30]   favorites: LIVE  KXBTCD-26JUL0503-T62799.99: FAV NO x3 @ 86c cost=$2.61 order=955840b1-e03c-43ac-9191-6d234687bb52
+[07-05 00:05:30]   favorites: LIVE  KXSOLD-26JUL0503-T79.9999: FAV YES x2 @ 90c cost=$1.81 order=9f0aef16-4f61-463b-86ff-751a7efcf2f5
+[07-05 00:05:30]   favorites: LIVE  KXETHD-26JUL0503-T1769.99: FAV NO x3 @ 93c cost=$2.80 order=10923740-1791-4d19-afe9-42af6e487512
+[07-05 00:05:30]   favorites: VETO  KXXRPD-26JUL0503-T1.1399: total exposure cap reached
+[07-05 00:05:30]   favorites: done: 3 favorite orders
+[07-05 00:05:31]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 00:05:31]   weather: done: 0 weather orders
+[07-05 00:05:32]   manage: done: 0 exited, 0 flagged for review, 8 holding
+[07-05 00:05:33]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-05 00:05:33]   reconcile: OK       KXBTCD-26JUL0503-T62799.99: -3
+[07-05 00:05:33]   reconcile: OK       KXETHD-26JUL0503-T1769.99: -3
+[07-05 00:05:33]   reconcile: OK       KXHIGHMIA-26JUL04-B90.5: -1
+[07-05 00:05:33]   reconcile: OK       KXHIGHPHIL-26JUL04-B101.5: -1
+[07-05 00:05:33]   reconcile: OK       KXHIGHPHIL-26JUL04-T99: +3
+[07-05 00:05:33]   reconcile: OK       KXSOLD-26JUL0503-T79.9999: +2
+[07-05 00:05:33]   reconcile: OK       KXXRPD-26JUL0502-T1.1399: -2
+[07-05 00:05:33]   reconcile: CASH OK: balance $9.71 ~ expected $9.71 (drift $-0.00)
+[07-05 00:05:33]   reconcile: reconcile: 8 tickers, 0 mismatches — ACCOUNTING CLEAN
+[07-05 00:05:34]   journal: journal written: realized today $+0.79, 2 settled, 3 fills
+[07-05 00:05:35]   report: wrote reports\report_2026-07-05.md
+[07-05 00:05:41] committed + pushed
+[07-05 00:11:21]   settle: done: 0 settled, 8 still open
+[07-05 00:11:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 00:11:26]   shortcycle: shortcycle: 9 candidate strikes | balance $9.71 | today spent $0.00/999999.00
+[07-05 00:11:26]   shortcycle: done: 0 shortcycle orders
+[07-05 00:11:28]   favorites: favorites: 4 favorites in zone | realized $+2.53 | today spent $7.22/999999.00
+[07-05 00:11:28]   favorites: VETO  KXBTCD-26JUL0503-T62799.99: total exposure cap reached
+[07-05 00:11:28]   favorites: done: 0 favorite orders
+[07-05 00:11:29]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 00:11:29]   weather: done: 0 weather orders
+[07-05 00:20:21]   settle: done: 0 settled, 8 still open
+[07-05 00:20:22]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-05 00:20:27]   shortcycle: shortcycle: 6 candidate strikes | balance $9.71 | today spent $0.00/999999.00
+[07-05 00:20:27]   shortcycle: done: 0 shortcycle orders
+[07-05 00:20:29]   favorites: favorites: 3 favorites in zone | realized $+2.53 | today spent $7.22/999999.00
+[07-05 00:20:29]   favorites: VETO  KXBTCD-26JUL0503-T62599.99: total exposure cap reached
+[07-05 00:20:29]   favorites: done: 0 favorite orders
+[07-05 00:20:29]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 00:20:29]   weather: done: 0 weather orders
+[07-05 00:21:25] === quant_loop started pid=79960 ===

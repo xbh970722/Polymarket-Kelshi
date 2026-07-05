@@ -847,6 +847,165 @@ def cmd_weather(_args) -> None:
     print(f"done: {placed} weather orders")
 
 
+def cmd_h10(_args) -> None:
+    """H10 15m shadow ledger + capped ETH micro-probe (7-seat panel arbitration
+    2026-07-05: shadow is the pre-registered gate's measuring instrument; the
+    probe answers fill-reality only — user-authorized minimal-size auto test)."""
+    cfg = load_config()
+    h = cfg.get("h10", {})
+    if not h.get("enabled"):
+        print("h10 disabled")
+        return
+    if not live_active(cfg):
+        print("h10 requires live mode")
+        return
+    from . import h10 as h10mod
+    h10mod.settle()
+    cands = h10mod.scan(cfg)
+    print(f"h10: {len(cands)} in-window | {h10mod.report()}")
+    if not (h.get("probe_enabled") and cands):
+        return
+    # ---- probe budgets (C5/C6): sample cap, loss cap — then shadow-only ----
+    con_h = ledger._conn()
+    fills = con_h.execute(
+        "SELECT COUNT(*) FROM trades WHERE title LIKE 'h10fav15m%' "
+        "AND status IN ('open','closed','settled','unknown')").fetchone()[0]
+    realized = ledger.realized_by_title("h10fav15m")
+    if fills >= h.get("probe_max_fills", 20):
+        print(f"h10 probe: sample budget reached ({fills} fills) — shadow-only")
+        return
+    if realized <= -h.get("probe_max_loss_usd", 2.0):
+        print(f"h10 probe: loss budget reached (${realized:+.2f}) — shadow-only")
+        return
+    mtm = _mtm_halt(cfg)
+    if mtm:
+        print(f"VETO h10 probe: {mtm}")
+        return
+    from .live import KalshiLive, LiveAuthError
+    try:
+        client = KalshiLive()
+    except LiveAuthError as e:
+        print(f"AUTH ERROR: {e}")
+        return
+    api = KalshiPublic()
+    cfg_h = _live_risk_overlay(cfg)
+    cfg_h["risk"]["max_per_trade_usd"] = min(cfg_h["risk"]["max_per_trade_usd"],
+                                             h.get("max_per_trade_usd", 1.0))
+    placed = 0
+    for c0 in cands:
+        if c0["series"] not in (h.get("series_probe") or []):
+            continue
+        if placed >= 1:                # one probe order per mark
+            break
+        # one 15m position across ALL coins (incl. unknown/pending)
+        if any("15M" in t["ticker"].split("-")[0]
+               for t in ledger.active_trades("live")):
+            break
+        if ledger.has_open_position(c0["ticker"], "live"):
+            continue
+        est_cost = round(c0["ask"] + 0.02, 2)
+        veto = engine.check_risk(ledger.stats("live"), est_cost, cfg_h)
+        if veto:
+            print(f"VETO  {c0['ticker']}: {veto}")
+            break
+        coid = str(uuid.uuid4())
+        try:
+            tid = ledger.insert_trade(
+                mode="live", ticker=c0["ticker"], title=f"h10fav15m {c0['series']}",
+                side=c0["side"], price=c0["ask"], contracts=1, cost_usd=est_cost,
+                fee_usd=0.0, q_claude=round(c0["ask"], 4),
+                q_codex=round(c0["ask"], 4), q_consensus=round(c0["ask"], 4),
+                market_prob=c0["mid"], edge_net=0.0,
+                rationale=f"h10 probe (fill-reality test, tau {c0['tau']:.0f}m)",
+                status="pending", order_id=coid)
+        except Exception as e:
+            print(f"FAILED {c0['ticker']}: intent write failed ({e})")
+            continue
+        try:
+            n, px, fee, oid = _decisive_ioc(
+                client, api, c0["ticker"], c0["side"], 1,
+                1.0 if c0["side"] == "yes" else 0.0, -1.0,
+                slippage=0.0, price_cap=h["zone"][1],
+                max_cost_usd=h.get("max_per_trade_usd", 1.0),
+                client_order_id=coid)
+        except OrderAmbiguous as e:
+            ledger.mark_unknown(tid, f"submit ambiguous: {e}")
+            print(f"CRITICAL {c0['ticker']}: order outcome UNKNOWN ({e}) — "
+                  f"row #{tid} frozen; reconcile resolves")
+            break
+        except Exception as e:
+            ledger.void_trade(tid, f"pre-submit failure: {e}")
+            print(f"FAILED {c0['ticker']}: {e}")
+            continue
+        if n < 1:
+            ledger.void_trade(tid, f"no fill: {px}")
+            print(f"PASS  {c0['ticker']}: {px} (fill-reality data point)")
+            continue
+        cost = round(n * px + fee, 2)
+        try:
+            ledger.record_fill(tid, n, px, cost, fee, oid)
+            ledger.set_exit_plan(tid, "hold", 0.0, 0.0,
+                                 (dt.datetime.now() + dt.timedelta(days=1)
+                                  ).isoformat(timespec="seconds"))
+        except Exception as e:
+            print(f"CRITICAL {c0['ticker']}: FILLED x{n} but ledger write failed "
+                  f"({e}) — freezing #{tid} as unknown")
+            try:
+                ledger.mark_unknown(tid, f"filled x{n}@{px} record_fill failed")
+            except Exception:
+                pass
+            continue
+        placed += 1
+        print(f"LIVE  {c0['ticker']}: H10 {c0['side'].upper()} x{n} "
+              f"@ {px * 100:.0f}c cost=${cost:.2f} "
+              f"probe {fills + 1}/{h.get('probe_max_fills', 20)} order={oid}")
+    print(f"done: {placed} h10 probe orders")
+
+
+def cmd_stopshadow(_args) -> None:
+    """Stop-loss SHADOW (user decision 2026-07-05: one week of shadow before any
+    live stop). Logs a would-stop event the first time an open live crypto
+    position's held-side bid trades at or below 0.70 — the eventual settlement
+    (already in the ledger) tells us what the stop would have saved or cost."""
+    import sqlite3 as _sq
+    cfg = load_config()
+    if not live_active(cfg):
+        return
+    con_s = _sq.connect("data/stop_shadow.db", timeout=15)
+    con_s.execute("CREATE TABLE IF NOT EXISTS stops("
+                  "trade_id INTEGER PRIMARY KEY, ticker TEXT, ts TEXT, "
+                  "held_bid REAL, entry_price REAL, contracts INTEGER)")
+    api = KalshiPublic()
+    n = 0
+    for t in ledger.open_trades():
+        if t["mode"] != "live":
+            continue
+        ttl = t.get("title") or ""
+        if not (ttl.startswith("favorite") or ttl.startswith("h10fav15m")
+                or ttl.startswith("shortcycle")):
+            continue
+        if con_s.execute("SELECT 1 FROM stops WHERE trade_id=?",
+                         (t["id"],)).fetchone():
+            continue
+        try:
+            m = api.market_norm(t["ticker"])
+        except Exception:
+            continue
+        bid = m["yes_bid"] if t["side"] == "yes" else m["no_bid"]
+        if 0 < bid <= 0.70:
+            con_s.execute("INSERT OR IGNORE INTO stops VALUES(?,?,?,?,?,?)",
+                          (t["id"], t["ticker"],
+                           dt.datetime.now().isoformat(timespec="seconds"),
+                           round(bid, 4), t["price"], t["contracts"]))
+            n += 1
+            print(f"STOPSHADOW #{t['id']} {t['ticker']}: held-side bid "
+                  f"{bid:.2f} <= 0.70 (would exit here)")
+    con_s.commit()
+    con_s.close()
+    if n:
+        print(f"stopshadow: {n} would-stop event(s) logged")
+
+
 def cmd_settle(_args) -> None:
     api = KalshiPublic()
     stale = ledger.void_stale_pending(60)      # OPUS-A MED: pending TTL
@@ -964,6 +1123,8 @@ def _lane_of(ticker: str, title: str = "") -> str:
     # title-first (OPUS-A note): favorites/shortcycle share tickers, only the
     # lane tag in the title distinguishes them
     t = title or ""
+    if t.startswith("h10fav15m"):
+        return "h10"
     if t.startswith("favorite"):
         return "favorites"
     if t.startswith("shortcycle"):
@@ -988,7 +1149,8 @@ def cmd_journal(_args) -> None:
     all_settled = [dict(r) for r in con.execute(
         "SELECT * FROM trades WHERE status='settled' AND result IN ('yes','no')")]
 
-    lanes = {"shortcycle": [], "favorites": [], "weather": [], "ensemble": []}
+    lanes = {"shortcycle": [], "favorites": [], "weather": [], "ensemble": [],
+             "h10": []}
     for t in settled_today:
         lanes[_lane_of(t["ticker"], t.get("title") or "")].append(t)
     realized = {k: round(sum(t["pnl_usd"] or 0 for t in v), 2) for k, v in lanes.items()}
@@ -1023,10 +1185,10 @@ def cmd_journal(_args) -> None:
              f"live 敞口 ${st['open_exposure']:.2f} | 今日已实现 **${total_realized:+.2f}**",
              f"- 今日成交 {len(fills_today)} 笔 | 今日结算 {len(settled_today)} 笔", "",
              "## 分通道", ""]
-    for lane in ("shortcycle", "favorites", "weather", "ensemble"):
+    for lane in ("shortcycle", "favorites", "weather", "ensemble", "h10"):
         b = brier.get(lane)
-        if lane == "favorites":    # R4-FABLE-B MED: q = entry price by construction
-            cal = "Brier: N/A (吃价通道, q≡价格非模型)"   # — a Brier here is meaningless
+        if lane in ("favorites", "h10"):   # q = entry price by construction —
+            cal = "Brier: N/A (吃价通道, q≡价格非模型)"   # a Brier here is meaningless
         else:
             cal = (f"Brier {b[1]} vs 市场 {b[2]} (n={b[0]})" if b else "尚无结算样本")
         lines.append(f"- **{lane}**: 今日已实现 ${realized[lane]:+.2f} | {cal}")
@@ -1494,6 +1656,8 @@ def main() -> None:
     sub.add_parser("shortcycle").set_defaults(fn=cmd_shortcycle)
     sub.add_parser("weather").set_defaults(fn=cmd_weather)
     sub.add_parser("favorites").set_defaults(fn=cmd_favorites)
+    sub.add_parser("h10").set_defaults(fn=cmd_h10)
+    sub.add_parser("stopshadow").set_defaults(fn=cmd_stopshadow)
     sub.add_parser("journal").set_defaults(fn=cmd_journal)
     sub.add_parser("mktsnap").set_defaults(fn=cmd_mktsnap)
     sub.add_parser("mktcal").set_defaults(fn=cmd_mktcal)

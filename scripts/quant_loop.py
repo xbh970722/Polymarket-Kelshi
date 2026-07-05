@@ -280,7 +280,9 @@ def main() -> None:
         run_cmd("mktsnap")          # zero-cost calibration sampling (H5, never trades)
         out += run_cmd("shortcycle")
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
+        out += run_cmd("h10")        # 15m shadow ledger + capped ETH probe (R6)
         out += run_cmd("weather")
+        run_cmd("stopshadow")        # 0.70 stop-loss would-fire log (R6 shadow week)
         # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —
         # a mark overrun past :20 no longer skips exits/reconcile for the whole hour.
         # R3-CODEX-4 HIGH: monotonic clock, immune to DST wall-clock jumps.
