@@ -94,7 +94,7 @@ live:
   require_confirm: false   # 全自动; 保护 = 下方超小硬限额 (最大总敞口 $8)
   practice: true
   # 练手期风控: 账户仅 ~$9.7, 所有限额等比压缩; bankroll 由 decide 时实时查询余额
-  max_per_trade_usd: 2.50        # 2026-07-04 用户: 提速提量 (原1.50)
+  max_per_trade_usd: 3.00        # 2026-07-04 对齐油门②: BTC/ETH 3张热门 ≈ $2.85 (原2.50)
   high_conviction_max_usd: 4.00  # "极其确定"单上限
   high_conviction:               # 极其确定的机器定义 (三条全满足):
     min_edge: 0.10               #   净优势 ≥10 个概率点

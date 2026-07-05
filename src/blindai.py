@@ -101,7 +101,9 @@ def pick_context(cfg=None) -> dict | None:
                 continue
             tau = (dt.datetime.fromisoformat(m["close_time"].replace("Z", "+00:00"))
                    - now).total_seconds() / 60
-            if not (20 <= tau <= 50):
+            # [15,55] window (was [20,50]): with hourly closes, a :40-ish scan sat in a
+            # permanent dead zone (16min too close / 76min too far) - review 2026-07-04
+            if not (15 <= tau <= 55):
                 continue
             dist = abs((m["yes_bid"] + m["yes_ask"]) / 2 - 0.5)   # closeness to 50/50
             if dist < best_dist:
