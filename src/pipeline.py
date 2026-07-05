@@ -233,8 +233,16 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
     if q_side - limit_px - taker_fee_usd(limit_px, 1) < min_edge:
         return 0, f"edge below bar at crossed price {limit_px:.3f}", None, None
     resp = client.place_limit(ticker, side, contracts, limit_px)
-    filled = int(float(resp.get("fill_count") or 0))
+    # V2 responses use fill_count OR fill_count_fp depending on path (sell-path test
+    # 2026-07-04 caught this: sells reported via _fp and were misread as no-fill)
+    filled = int(float(resp.get("fill_count") or resp.get("fill_count_fp") or 0))
     if filled < 1:
+        oid = resp.get("order_id")
+        if oid:                       # belt-and-suspenders: never leave a resting stray
+            try:
+                client.cancel_order(str(oid))
+            except Exception:
+                pass
         return 0, "IOC no fill even crossed", None, None
     avg_px = float(resp.get("average_fill_price") or limit_px)
     if side == "no":                     # exchange reports fills in YES-leg terms

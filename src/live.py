@@ -79,6 +79,10 @@ class KalshiLive:
     def balance(self) -> dict:
         return self._req("GET", f"{API}/portfolio/balance")
 
+    def cancel_order(self, order_id: str) -> dict:
+        """Cancel a resting order (used to guarantee no strays after 0-fill responses)."""
+        return self._req("DELETE", f"{API}/portfolio/orders/{order_id}")
+
     def positions(self) -> dict:
         return self._req("GET", f"{API}/portfolio/positions")
 
