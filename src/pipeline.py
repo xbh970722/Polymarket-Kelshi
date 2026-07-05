@@ -918,19 +918,26 @@ def cmd_h10(_args) -> None:
     h10mod.settle()
     cands = h10mod.scan(cfg)
     print(f"h10: {len(cands)} in-window | {h10mod.report()}")
-    if not (h.get("probe_enabled") and cands):
+    live_series = h.get("series_live") or []
+    if not (cands and live_series):
         return
-    # ---- probe budgets (C5/C6): sample cap, loss cap — then shadow-only ----
     con_h = ledger._conn()
-    fills = con_h.execute(
-        "SELECT COUNT(*) FROM trades WHERE title LIKE 'h10fav15m%' "
-        "AND status IN ('open','closed','settled','unknown')").fetchone()[0]
+    # ---- lane brake (user 2026-07-05: ETH standing micro lane, count uncapped;
+    # the brake is the isolated drawdown hard stop, not a sample budget) ----
     realized = ledger.realized_by_title("h10fav15m")
-    if fills >= h.get("probe_max_fills", 20):
-        print(f"h10 probe: sample budget reached ({fills} fills) — shadow-only")
-        return
-    if realized <= -h.get("probe_max_loss_usd", 2.0):
-        print(f"h10 probe: loss budget reached (${realized:+.2f}) — shadow-only")
+    hard = h.get("drawdown_step_usd", 3.0) * h.get("hard_stop_steps", 1)
+    if realized <= -hard:
+        due = Path("data") / "review_due_h10fav15m.json"
+        if not due.exists():
+            try:
+                due.write_text(json.dumps(
+                    {"lane": "h10fav15m", "realized": round(realized, 2),
+                     "ts": dt.datetime.now().isoformat(timespec="seconds")}),
+                    encoding="utf-8")
+            except Exception:
+                pass
+        print(f"h10 HARD STOP: realized ${realized:+.2f} <= -${hard:.2f} "
+              f"— lane paused pending review")
         return
     mtm = _mtm_halt(cfg)
     if mtm:
@@ -948,9 +955,31 @@ def cmd_h10(_args) -> None:
                                              h.get("max_per_trade_usd", 1.0))
     placed = 0
     for c0 in cands:
-        if c0["series"] not in (h.get("series_probe") or []):
+        if c0["series"] not in live_series:
             continue
-        if placed >= 1:                # one probe order per mark
+        # user 2026-07-05: per-series consecutive-loss stop (SOL: 2 straight
+        # losses -> stopped, shadow continues; a review deletes the stop file)
+        lim = (h.get("consec_loss_stop") or {}).get(c0["series"])
+        if lim:
+            stopf = Path("data") / f"h10_stop_{c0['series']}.json"
+            if stopf.exists():
+                continue
+            last = con_h.execute(
+                "SELECT pnl_usd FROM trades WHERE title = ? AND status IN "
+                "('settled','closed') ORDER BY id DESC LIMIT ?",
+                (f"h10fav15m {c0['series']}", lim)).fetchall()
+            if len(last) == lim and all((r[0] or 0) < 0 for r in last):
+                try:
+                    stopf.write_text(json.dumps(
+                        {"reason": f"{lim} consecutive losses",
+                         "ts": dt.datetime.now().isoformat(timespec="seconds")}),
+                        encoding="utf-8")
+                except Exception:
+                    pass
+                print(f"H10 STOP {c0['series']}: {lim} consecutive losses -> "
+                      f"shadow-only (delete data/{stopf.name} to re-arm)")
+                continue
+        if placed >= 1:                # one order per mark (pacing)
             break
         # one 15m position across ALL coins (incl. unknown/pending)
         if any("15M" in t["ticker"].split("-")[0]
@@ -1012,9 +1041,8 @@ def cmd_h10(_args) -> None:
             continue
         placed += 1
         print(f"LIVE  {c0['ticker']}: H10 {c0['side'].upper()} x{n} "
-              f"@ {px * 100:.0f}c cost=${cost:.2f} "
-              f"probe {fills + 1}/{h.get('probe_max_fills', 20)} order={oid}")
-    print(f"done: {placed} h10 probe orders")
+              f"@ {px * 100:.0f}c cost=${cost:.2f} order={oid}")
+    print(f"done: {placed} h10 orders")
 
 
 def cmd_stopshadow(_args) -> None:

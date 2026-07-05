@@ -199,15 +199,16 @@ favorites:
 # n>=300 且 >=+2c 慢GO; n>=150 且 <=0 处决。BTC 排除 (tau>6 无散户对手盘)。
 h10:
   enabled: true
-  series_shadow: [KXETH15M, KXSOL15M]
-  series_probe: [KXETH15M]       # 回测 203-0; SOL 拥有全部15个历史败局 -> 只影子
+  series_shadow: [KXBTC15M, KXETH15M, KXSOL15M]   # BTC 进影子监视 (2026-07-05):
+                                 # tau>6 现无散户对手盘, 微观结构变了数据会报告
+  series_live: [KXETH15M, KXSOL15M]  # 用户 2026-07-05: ETH 放开笔数限制 (探针1/1
+                                 # 后转常驻微通道); SOL 准入但连输 2 把即停转影子
   zone: [0.84, 0.94]
   tau_window_min: [6, 16]
-  max_contracts: 1               # $1 上限在 84-94c 加费后只装得下 1 张 (C2/C4)
+  max_contracts: 1               # 最低额度不变 (用户明示): 单张
   max_per_trade_usd: 1.00
-  probe_enabled: true
-  probe_max_fills: 20            # C6: 探针样本预算, 到顶自动转纯影子
-  probe_max_loss_usd: 2.00       # C6: 探针累计亏 $2 即停
+  consec_loss_stop:              # 用户 2026-07-05: 连续输 N 把 -> 该币停掉转影子
+    KXSOL15M: 2                  # (写 data/h10_stop_KXSOL15M.json; 复盘删文件重启)
   drawdown_step_usd: 3.00        # C5: 独立回撤记账 (title h10fav15m, 绝不与
   hard_stop_steps: 1             #     favorites 共用刹车); 首步 -$3 即硬停待复盘
 
