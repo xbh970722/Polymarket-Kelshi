@@ -226,7 +226,9 @@ h15:
   series: [KXETH15M]             # ETH 优先 (回测 98.7% 胜率); SOL 待 ETH 数据后复议
   bid: 0.84
   place_tau_min: [4, 16]         # tau 在此区间且热门价高于挂单价时挂出
-  cancel_tau_min: 2              # 收盘前 2 分钟强制撤单 (回测同款纪律)
+  cancel_tau_min: 4.5            # R7-C3: 原 2 分钟在 mark 节奏下不可达 (mark 只在
+                                 # tau~10/~4 造访) → 改到 tau~4 的 mark 可靠执行;
+                                 # 交易所侧 expiration_ts=close-120s 做崩溃保险
   min_fav_mid: 0.86              # 热门中值须高于此才挂 (否则等于吃单越价)
   max_contracts: 1
   max_per_trade_usd: 1.00

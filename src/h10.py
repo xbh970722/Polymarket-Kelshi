@@ -136,28 +136,45 @@ def settle() -> int:
 
 
 def report() -> str:
+    # R7-C2 LOW: the MAIN gate is judged on tau>6 rows only — H13 final6 rows
+    # (tau<=6, its own pre-registered gate) must not blend into this population
     with _conn() as c:
-        rows = c.execute("SELECT series, side, ask, fee, result FROM shadow "
-                         "WHERE result IN ('yes','no')").fetchall()
+        rows = c.execute("SELECT series, side, ask, fee, result, tau_min "
+                         "FROM shadow WHERE result IN ('yes','no')").fetchall()
         n_open = c.execute("SELECT COUNT(*) FROM shadow WHERE result IS NULL"
                            ).fetchone()[0]
-    n = len(rows)
-    if n == 0:
+    main = [r for r in rows if float(r["tau_min"] or 0) > 6]
+    f6 = [r for r in rows if float(r["tau_min"] or 0) <= 6]
+
+    def _net(r):
+        won = r["result"] == r["side"]
+        return (1 - r["ask"] - r["fee"]) if won else (-r["ask"] - r["fee"])
+
+    if not main and not f6:
         return f"h10 shadow: 0 settled ({n_open} pending)"
     per: dict = {}
     tot = 0.0
-    for r in rows:
-        won = r["result"] == r["side"]
-        net = (1 - r["ask"] - r["fee"]) if won else (-r["ask"] - r["fee"])
+    for r in main:
+        net = _net(r)
         tot += net
         s = per.setdefault(r["series"], [0, 0.0])
         s[0] += 1
         s[1] += net
     parts = " | ".join(f"{k}: n={v[0]} net ${v[1]:+.2f}" for k, v in per.items())
-    mean = tot / n
+    n = len(main)
+    mean = (tot / n) if n else 0.0
     gate = ("FAST-GO" if n >= 150 and mean >= 0.05 else
             "SLOW-GO" if n >= 300 and mean >= 0.02 else
             "KILL" if n >= 150 and mean <= 0 else "accumulating")
-    return (f"h10 shadow: n={n} mean net {mean * 100:+.1f}c/contract "
-            f"total ${tot:+.2f} | {parts} | gate: {gate} "
-            f"(need n>=150; {n_open} unsettled)")
+    out = (f"h10 shadow(main): n={n} mean {mean * 100:+.1f}c total ${tot:+.2f}"
+           f" | {parts} | gate: {gate} ({n_open} pending)")
+    if f6:
+        t6 = sum(_net(r) for r in f6)
+        w6 = sum(1 for r in f6 if r["result"] == r["side"])
+        g6 = ("PROPOSE" if len(f6) >= 150 and t6 / len(f6) >= 0.01
+              and (len(f6) - w6) <= 1 else
+              "ARCHIVE" if (len(f6) - w6) >= 2 or
+              (len(f6) >= 150 and t6 <= 0) else "accumulating")
+        out += (f" || H13 final6: n={len(f6)} win {w6}/{len(f6)} "
+                f"net ${t6:+.2f} gate: {g6}")
+    return out

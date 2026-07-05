@@ -338,7 +338,8 @@ def _http_status(err: Exception) -> int | None:
 def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
                   q_model: float, min_edge: float, slippage: float = 0.01,
                   price_cap: float = 0.99, max_cost_usd: float | None = None,
-                  client_order_id: str | None = None):
+                  client_order_id: str | None = None,
+                  price_floor: float = 0.0):
     """Decisive fill: re-quote fresh, cross up to `slippage` above the ask, but only
     if the edge STILL clears the bar at that worst-case price. `price_cap` hard-limits
     the buy price in the favorite side's own terms (H7 fix, 2026-07-04): the IOC can
@@ -352,6 +353,10 @@ def _decisive_ioc(client, api, ticker: str, side: str, contracts: int,
     limit_px = round(min(ask + slippage, price_cap, 0.99), 4)
     if limit_px < ask:                   # cap sits below the ask -> would only fill worse
         return 0, f"ask {ask:.3f} above price_cap {price_cap:.3f}", None, None
+    if ask < price_floor:                # R7-C2 MED: the setup collapsed between
+        return 0, (f"ask {ask:.3f} fell below floor "   # scan and POST — buying a
+                   f"{price_floor:.3f} (stale setup)"), None, None   # falling knife
+                                                                     # is not harvest
     q_side = q_model if side == "yes" else 1 - q_model
     if q_side - limit_px - taker_fee_usd(limit_px, 1) < min_edge:
         return 0, f"edge below bar at crossed price {limit_px:.3f}", None, None
@@ -1011,7 +1016,8 @@ def cmd_h10(_args) -> None:
                 1.0 if c0["side"] == "yes" else 0.0, -1.0,
                 slippage=0.0, price_cap=h["zone"][1],
                 max_cost_usd=h.get("max_per_trade_usd", 1.0),
-                client_order_id=coid)
+                client_order_id=coid,
+                price_floor=h["zone"][0])   # R7-C2: refuse stale collapsed setups
         except OrderAmbiguous as e:
             ledger.mark_unknown(tid, f"submit ambiguous: {e}")
             print(f"CRITICAL {c0['ticker']}: order outcome UNKNOWN ({e}) — "
@@ -1155,23 +1161,72 @@ def cmd_h15(_args) -> None:
         return
     api = KalshiPublic()
     now = dt.datetime.now(dt.timezone.utc)
-    # ---- 1. manage existing resting order(s): fill? pull? keep? ----
-    resting = [t for t in ledger.pending_trades()
-               if (t.get("title") or "").startswith("h15maker")]
-    for t in resting:
-        coid = (t.get("order_id") or "").strip()
-        exch_oid, o_status, fill_ct = "", "", 0.0
-        try:
-            for o in client.orders(ticker=t["ticker"]):
-                if coid and coid in (str(o.get("client_order_id") or ""),
+    # ---- 1. manage existing order(s): fill? pull? keep? ----
+    # R7-C1 HIGH fixes: manage UNKNOWN rows too (an ambiguous GTC submit may be
+    # a live resting order); never void without PROVING the exchange is flat;
+    # freeze fractional fills instead of rounding.
+    con15 = ledger._conn()
+    resting = [dict(r) for r in con15.execute(
+        "SELECT * FROM trades WHERE title LIKE 'h15maker%' "
+        "AND status IN ('pending','unknown')")]
+
+    def _lookup(tk: str, stored: str):
+        exch, st, fc = "", "", 0.0
+        for o in client.orders(ticker=tk):
+            if stored and stored in (str(o.get("client_order_id") or ""),
                                      str(o.get("order_id") or "")):
-                    exch_oid = str(o.get("order_id") or "")
-                    o_status = str(o.get("status") or "")
-                    fill_ct = float(o.get("fill_count_fp")
-                                    or o.get("fill_count") or 0)
-                    break
+                exch = str(o.get("order_id") or "")
+                st = str(o.get("status") or "")
+                fc = float(o.get("fill_count_fp") or o.get("fill_count") or 0)
+                break
+        return exch, st, fc
+
+    def _record_maker_fill(t: dict, exch_oid: str, fc: float) -> None:
+        n = int(round(fc))
+        avg = t["price"]
+        try:                                   # actual avg from fills by exch oid
+            fl = client.fills(ticker=t["ticker"], limit=100).get("fills") or []
+            mine = [f for f in fl if str(f.get("order_id") or "") == exch_oid]
+            cnt = sum(float(f.get("count_fp") or f.get("count") or 0)
+                      for f in mine)
+            if cnt:
+                tot = 0.0
+                for f in mine:
+                    ci = float(f.get("count_fp") or f.get("count") or 0)
+                    raw = (f.get("no_price_dollars") if t["side"] == "no"
+                           else f.get("yes_price_dollars"))
+                    if raw is not None:
+                        pi = float(raw)
+                    else:
+                        yp = float(f.get("yes_price") or 0)
+                        yp = yp / 100.0 if yp >= 1 else yp
+                        pi = 1 - yp if t["side"] == "no" else yp
+                    tot += ci * pi
+                avg = round(tot / cnt, 4)
+        except Exception:
+            pass
+        try:
+            ledger.record_fill(t["id"], n, avg, round(n * avg, 2), 0.0,
+                               exch_oid or (t.get("order_id") or ""))
+            ledger.set_exit_plan(t["id"], "hold", 0.0, 0.0,
+                                 (dt.datetime.now() + dt.timedelta(days=1)
+                                  ).isoformat(timespec="seconds"))
+            print(f"H15 FILLED {t['ticker']}: {t['side'].upper()} x{n} "
+                  f"@ {avg * 100:.0f}c (maker, queue win)")
         except Exception as e:
-            print(f"WARN h15 order lookup failed ({e}) — keep resting")
+            print(f"CRITICAL h15 {t['ticker']}: FILLED but ledger failed "
+                  f"({e}) — freezing #{t['id']}")
+            try:
+                ledger.mark_unknown(t["id"], "h15 filled, record failed")
+            except Exception:
+                pass
+
+    for t in resting:
+        stored = (t.get("order_id") or "").strip()
+        try:
+            exch_oid, o_status, fill_ct = _lookup(t["ticker"], stored)
+        except Exception as e:
+            print(f"WARN h15 order lookup failed ({e}) — keep as-is")
             continue
         tau = 0.0
         try:
@@ -1182,57 +1237,55 @@ def cmd_h15(_args) -> None:
                 tau = (close - now).total_seconds() / 60
         except Exception:
             pass
-        if fill_ct >= 1:                       # -------- FILLED (maker) --------
-            n = int(round(fill_ct))
-            avg = t["price"]
-            try:                               # actual avg from fills by exch oid
-                fl = client.fills(ticker=t["ticker"], limit=100).get("fills") or []
-                mine = [f for f in fl
-                        if str(f.get("order_id") or "") == exch_oid]
-                cnt = sum(float(f.get("count_fp") or f.get("count") or 0)
-                          for f in mine)
-                if cnt:
-                    tot = 0.0
-                    for f in mine:
-                        ci = float(f.get("count_fp") or f.get("count") or 0)
-                        raw = (f.get("no_price_dollars") if t["side"] == "no"
-                               else f.get("yes_price_dollars"))
-                        if raw is not None:
-                            pi = float(raw)
-                        else:
-                            yp = float(f.get("yes_price") or 0)
-                            yp = yp / 100.0 if yp >= 1 else yp
-                            pi = 1 - yp if t["side"] == "no" else yp
-                        tot += ci * pi
-                    avg = round(tot / cnt, 4)
+        if abs(fill_ct - round(fill_ct)) > 1e-9:   # R7-C1 MED: never round a
+            try:                                    # fractional fill silently
+                ledger.mark_unknown(t["id"], f"h15 fractional fill {fill_ct}")
             except Exception:
                 pass
-            try:
-                ledger.record_fill(t["id"], n, avg, round(n * avg, 2), 0.0,
-                                   exch_oid or coid)   # maker fee = 0
-                ledger.set_exit_plan(t["id"], "hold", 0.0, 0.0,
-                                     (dt.datetime.now() + dt.timedelta(days=1)
-                                      ).isoformat(timespec="seconds"))
-                print(f"H15 FILLED {t['ticker']}: {t['side'].upper()} x{n} "
-                      f"@ {avg * 100:.0f}c (maker, queue win)")
-            except Exception as e:
-                print(f"CRITICAL h15 {t['ticker']}: FILLED but ledger failed "
-                      f"({e}) — freezing #{t['id']}")
-                try:
-                    ledger.mark_unknown(t["id"], "h15 filled, record failed")
-                except Exception:
-                    pass
+            print(f"H15 UNKNOWN {t['ticker']}: fractional fill {fill_ct} — frozen")
             continue
-        if tau <= h.get("cancel_tau_min", 2) or o_status in (
-                "canceled", "cancelled", "expired"):
-            if exch_oid and o_status not in ("canceled", "cancelled", "expired"):
+        if fill_ct >= 1:                       # -------- FILLED (maker) --------
+            _record_maker_fill(t, exch_oid, fill_ct)
+            continue
+        terminal = o_status in ("canceled", "cancelled", "expired", "rejected")
+        if tau <= h.get("cancel_tau_min", 2) or terminal:
+            flat_proven = terminal
+            if not terminal and exch_oid:
                 try:
                     client.cancel_order(exch_oid)
                 except Exception as e:
-                    print(f"WARN h15 cancel failed ({e}) — TTL/resolver will own it")
-            ledger.void_trade(t["id"], f"h15 resting pulled (tau {tau:.1f}m, no fill)")
-            print(f"H15 PULLED {t['ticker']}: no fill, window closing "
-                  f"(queue data point)")
+                    print(f"WARN h15 cancel errored ({e}) — verifying state")
+                # R7-C1 HIGH: post-cancel VERIFICATION — a fill can land between
+                # lookup and cancel, and a failed cancel leaves a live order
+                try:
+                    exch2, st2, fc2 = _lookup(t["ticker"], stored)
+                    if abs(fc2 - round(fc2)) > 1e-9:
+                        ledger.mark_unknown(t["id"], f"h15 fractional fill {fc2}")
+                        print(f"H15 UNKNOWN {t['ticker']}: fractional after cancel")
+                        continue
+                    if fc2 >= 1:               # raced: filled before the cancel
+                        _record_maker_fill(t, exch2 or exch_oid, fc2)
+                        continue
+                    flat_proven = st2 in ("canceled", "cancelled", "expired",
+                                          "rejected") and fc2 == 0
+                except Exception as e:
+                    print(f"WARN h15 post-cancel verify failed ({e})")
+                    flat_proven = False
+            if flat_proven or (not exch_oid and t["status"] == "pending"
+                               and tau <= 0):
+                # terminal-with-zero-fills proven, or the order provably never
+                # existed and the window is over
+                ledger.void_trade(t["id"], f"h15 pulled (tau {tau:.1f}m, no fill)")
+                print(f"H15 PULLED {t['ticker']}: no fill, window closing "
+                      f"(queue data point)")
+            else:
+                try:
+                    ledger.mark_unknown(t["id"], "h15 cancel unverified — "
+                                                 "resolver owns it")
+                except Exception:
+                    pass
+                print(f"H15 UNKNOWN {t['ticker']}: cancel unverified — frozen "
+                      f"as exposure until reconcile resolves")
             continue
         print(f"H15 RESTING {t['ticker']}: bid {t['price'] * 100:.0f}c "
               f"tau {tau:.1f}m")
@@ -1311,9 +1364,13 @@ def cmd_h15(_args) -> None:
                 print(f"FAILED {m['ticker']}: intent write failed ({e})")
                 continue
             try:
+                # R7-C3 HIGH: exchange-side expiry at close-2min = crash-safe
+                # cancel discipline (a dead loop can no longer strand a live bid)
                 resp = client.place_limit(m["ticker"], side, 1, bid,
                                           tif="good_till_canceled",
-                                          client_order_id=coid)
+                                          client_order_id=coid,
+                                          expiration_ts=int(
+                                              close.timestamp()) - 120)
             except RuntimeError as e:
                 st = _http_status(e)
                 if st is not None and 400 <= st < 500:
@@ -1332,15 +1389,28 @@ def cmd_h15(_args) -> None:
                 break
             fill_raw = float(resp.get("fill_count")
                              or resp.get("fill_count_fp") or 0)
-            if fill_raw >= 1:                   # crossed immediately (rare)
+            if abs(fill_raw - round(fill_raw)) > 1e-9:   # R7-C1 MED
+                ledger.mark_unknown(tid, f"h15 fractional instant fill {fill_raw}")
+                print(f"H15 UNKNOWN {m['ticker']}: fractional instant fill — frozen")
+            elif fill_raw >= 1:                 # crossed immediately (rare)
                 n = int(round(fill_raw))
                 ledger.record_fill(tid, n, bid, round(n * bid, 2), 0.0,
                                    str(resp.get("order_id") or coid))
+                ledger.set_exit_plan(tid, "hold", 0.0, 0.0,   # R7-C1 MED: without
+                                     (dt.datetime.now() + dt.timedelta(days=1)
+                                      ).isoformat(timespec="seconds"))  # this,
+                # manage would backfill a swing plan and could exit a hold lane
                 print(f"H15 INSTANT FILL {m['ticker']}: x{n} @ {bid * 100:.0f}c")
             else:
+                exch_oid_new = str(resp.get("order_id") or "")
+                if exch_oid_new:               # R7-C1 MED: persist the EXCHANGE id
+                    try:                        # — fills queries key on it, and the
+                        ledger.set_client_oid(tid, exch_oid_new)   # lookup matches
+                    except Exception:           # either field
+                        pass
                 print(f"H15 RESTING placed {m['ticker']}: {side.upper()} bid "
                       f"{bid * 100:.0f}c fav_mid {fav_mid:.2f} tau {tau:.0f}m "
-                      f"order={resp.get('order_id')}")
+                      f"order={exch_oid_new or coid}")
             placed = True
             break
     print("done: h15 pass complete")
@@ -1677,8 +1747,8 @@ def cmd_reconcile(_args) -> None:
     # ---- unknown resolver (R3-CODEX-7: 'unknown' must not be an absorbing state) --
     con_r = ledger._conn()
     unknowns = [dict(r) for r in con_r.execute(
-        "SELECT id, ts, ticker, side, contracts, price, order_id FROM trades "
-        "WHERE status='unknown'")]
+        "SELECT id, ts, ticker, side, contracts, price, order_id, title "
+        "FROM trades WHERE status='unknown'")]
     for u in unknowns:
         oid = (u.get("order_id") or "").strip()
         resolved = False
@@ -1730,7 +1800,10 @@ def cmd_reconcile(_args) -> None:
                                     pi = yp / 100.0 if yp >= 1 else yp
                             tot += ci * pi
                         avg = round(tot / cnt, 4) if cnt else u["price"]
-                        fee = taker_fee_usd(avg, n)
+                        # R7-C3 LOW: maker lanes pay no taker fee — booking one
+                        # would create false cash-identity drift
+                        fee = (0.0 if (u.get("title") or "").startswith("h15maker")
+                               else taker_fee_usd(avg, n))
                         ledger.record_fill(u["id"], n, avg, round(n * avg + fee, 2),
                                            fee, exch_oid)
                         print(f"RESOLVED #{u['id']} {u['ticker']}: fills prove x{n} "

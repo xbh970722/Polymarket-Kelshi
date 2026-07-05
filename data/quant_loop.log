@@ -3250,3 +3250,42 @@
 [07-05 02:05:49]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: 0 settled (8 pending)
 [07-05 02:05:50]   journal: journal written: realized today $-0.23, 10 settled, 9 fills
 [07-05 02:05:51]   report: wrote reports\report_2026-07-05.md
+[07-05 02:05:53] committed + pushed
+[07-05 02:11:21]   settle: done: 0 settled, 6 still open
+[07-05 02:11:22]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 02:11:26]   shortcycle: shortcycle: 9 candidate strikes | balance $14.17 | today spent $0.85/999999.00
+[07-05 02:11:26]   shortcycle: done: 0 shortcycle orders
+[07-05 02:11:28]   favorites: favorites: 2 favorites in zone | realized $+1.42 | today spent $16.00/999999.00
+[07-05 02:11:28]   favorites: done: 0 favorite orders
+[07-05 02:11:29]   h10: h10: 0 in-window | h10 shadow: n=5 mean net +8.5c/contract total $+0.42 | KXETH15M: n=2 net $+0.14 | KXSOL15M: n=2 net $+0.19 | KXBTC15M: n=1 net $+0.09 | gate: accumulating (need n>=150; 1 unsettled)
+[07-05 02:11:29]   h15: done: h15 pass complete
+[07-05 02:11:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 02:11:30]   weather: done: 0 weather orders
+[07-05 02:11:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=1 win 0% EV -84.0c | BOOK-ONLY: n=1 win 0% EV -84.0c | SPOT-MOVE: n=1 win 0% EV -48.0c | gate: accumulating (3 pending)
+[07-05 02:11:44]   pmwatch: pmwatch: +55 pairs | pmwatch: 36 rows, 11 kalshi-matched | |divergence| median 3.4c, p90 8.5c (gate n>=300)
+[07-05 02:20:22]   settle: done: 0 settled, 6 still open
+[07-05 02:20:24]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-05 02:20:32]   shortcycle: shortcycle: 8 candidate strikes | balance $14.17 | today spent $0.85/999999.00
+[07-05 02:20:32]   shortcycle: done: 0 shortcycle orders
+[07-05 02:20:35]   favorites: favorites: 2 favorites in zone | realized $+1.42 | today spent $16.00/999999.00
+[07-05 02:20:35]   favorites: done: 0 favorite orders
+[07-05 02:20:36]   h10: h10: 0 in-window | h10 shadow: n=6 mean net +7.5c/contract total $+0.45 | KXETH15M: n=2 net $+0.14 | KXSOL15M: n=2 net $+0.19 | KXBTC15M: n=2 net $+0.11 | gate: accumulating (need n>=150; 0 unsettled)
+[07-05 02:20:37]   h15: done: h15 pass complete
+[07-05 02:20:38]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 02:20:38]   weather: done: 0 weather orders
+[07-05 02:20:43]   disloc: DISLOC KXSOLD-26JUL1017-T87.9999: fav 0.86->0.55 ask 0.92 [BOOK-ONLY] tau 7959m
+[07-05 02:20:43]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=1 win 0% EV -84.0c | BOOK-ONLY: n=1 win 0% EV -84.0c | SPOT-MOVE: n=1 win 0% EV -48.0c | gate: accumulating (4 pending)
+[07-05 02:20:54]   pmwatch: pmwatch: +55 pairs | pmwatch: 48 rows, 15 kalshi-matched | |divergence| median 3.4c, p90 12.0c (gate n>=300)
+[07-05 02:26:21]   settle: done: 0 settled, 6 still open
+[07-05 02:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-05 02:26:29]   shortcycle: shortcycle: 7 candidate strikes | balance $14.17 | today spent $0.85/999999.00
+[07-05 02:26:29]   shortcycle: done: 0 shortcycle orders
+[07-05 02:26:33]   favorites: favorites: 3 favorites in zone | realized $+1.42 | today spent $16.00/999999.00
+[07-05 02:26:33]   favorites: done: 0 favorite orders
+[07-05 02:26:34]   h10: h10: 0 in-window | h10 shadow: n=6 mean net +7.5c/contract total $+0.45 | KXETH15M: n=2 net $+0.14 | KXSOL15M: n=2 net $+0.19 | KXBTC15M: n=2 net $+0.11 | gate: accumulating (need n>=150; 1 unsettled)
+[07-05 02:26:35]   h15: done: h15 pass complete
+[07-05 02:26:36]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-05 02:26:36]   weather: done: 0 weather orders
+[07-05 02:26:40]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=1 win 0% EV -84.0c | BOOK-ONLY: n=1 win 0% EV -84.0c | SPOT-MOVE: n=1 win 0% EV -48.0c | gate: accumulating (4 pending)
+[07-05 02:26:51]   pmwatch: pmwatch: +55 pairs | pmwatch: 60 rows, 19 kalshi-matched | |divergence| median 3.0c, p90 12.0c (gate n>=300)
+[07-05 02:30:29] === quant_loop started pid=34308 ===

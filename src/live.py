@@ -134,7 +134,8 @@ class KalshiLive:
     # ---- money-moving ----
     def place_limit(self, ticker: str, side: str, count: int, price_prob: float,
                     tif: str = "immediate_or_cancel",
-                    client_order_id: str | None = None) -> dict:
+                    client_order_id: str | None = None,
+                    expiration_ts: int | None = None) -> dict:
         """Buy `count` contracts of yes/no at a limit price (probability 0-1).
 
         Kalshi V2 single-book model: `side` is the YES leg. bid = buy YES;
@@ -154,6 +155,10 @@ class KalshiLive:
                 # R3 fix: caller-supplied id lets a pre-submit ledger row own the
                 # order identity, so ambiguous submits are recoverable via fills
                 "client_order_id": client_order_id or str(uuid.uuid4())}
+        if expiration_ts is not None:
+            # R7-C3 HIGH: exchange-side auto-expiry — a resting order must die on
+            # schedule even if our process does not survive to cancel it
+            body["expiration_ts"] = int(expiration_ts)
         return self._req("POST", f"{API}/portfolio/events/orders", body)
 
     def place_exit(self, ticker: str, held_side: str, count: int, price_prob: float,

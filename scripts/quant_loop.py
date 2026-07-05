@@ -89,7 +89,9 @@ def acquire_lock() -> bool:
 
 
 _TREE_MODULES = ["src/pipeline.py", "src/ledger.py", "src/live.py", "src/engine.py",
-                 "src/shortcycle.py", "src/weather.py", "src/kalshi_client.py"]
+                 "src/shortcycle.py", "src/weather.py", "src/kalshi_client.py",
+                 "src/h10.py", "src/disloc.py", "src/pmwatch.py", "src/wxfade.py",
+                 "src/blindai.py", "src/mktcal.py"]   # R7-C5: ALL hot-loaded modules
 
 
 def tree_healthy() -> bool:
@@ -108,13 +110,19 @@ def tree_healthy() -> bool:
         return True
 
 
-def run_cmd(*args: str) -> str:
+def run_cmd(*args: str, timeout: int = 300) -> str:
+    """R7-C5: collectors get short leashes — a hanging shadow step must never
+    eat the mark budget that the money lanes (h15 cancel discipline!) need."""
     try:
         r = subprocess.run([sys.executable, "-m", "src.pipeline", *args],
-                           capture_output=True, text=True, timeout=300, cwd=ROOT)
+                           capture_output=True, text=True, timeout=timeout,
+                           cwd=ROOT)
         out = (r.stdout or "") + (r.stderr or "")
+        if r.returncode != 0:
+            log(f"CRITICAL: step {args[0]} exited {r.returncode}")
     except Exception as e:
         out = f"EXC {args}: {e}"
+        log(f"CRITICAL: step {args[0]} raised/timed out: {e}")
     for ln in out.strip().splitlines():
         log(f"  {args[0]}: {ln}")
     return out
@@ -186,26 +194,9 @@ def check_review_trigger() -> None:
                         return
                 except Exception:
                     return
-        if os.path.exists(REVIEW_DUE):        # pending review; respect cooldown
-            # R3-CODEX-4 MED: epoch math, immune to DST wall-clock jumps
-            age_h = (time.time() - os.path.getmtime(REVIEW_DUE)) / 3600
-            if age_h < cr.get("cooldown_hours", 2):
-                return
-        con = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
-        con.row_factory = sqlite3.Row
-        rows = con.execute(
-            "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
-            "AND status IN ('settled','closed') AND pnl_usd < 0 "
-            "AND title LIKE 'shortcycle%'",   # CODEX-6 MED: scope by LANE title —
-            # favorites losses have their own drawdown cadence; ticker prefixes
-            # collide across lanes (XRP blindness fixed via title too)
-            (state.get("last_review_id", 0),)).fetchall()
-        n_loss = len(rows)
-        usd_loss = -sum(r["pnl_usd"] for r in rows)
-        # R6-FABLE governance: weather loss trigger (cum <= -$2 since last weather
-        # review OR 4 consecutive losing settlements) — weather previously had NO
-        # tripwire and could bleed slowly forever. Checked before the crypto
-        # early-return below so one lane's cooldown never blinds the other.
+        # R6-FABLE governance: weather loss trigger — placed BEFORE the crypto
+        # cooldown early-return (R7-C5 MED: it used to sit below it, so a pending
+        # shortcycle review inside cooldown would blind the weather tripwire).
         try:
             wstate_p = os.path.join(ROOT, "data", "weather_review_state.json")
             wdue_p = os.path.join(ROOT, "data", "review_due_weather.json")
@@ -213,11 +204,14 @@ def check_review_trigger() -> None:
             if os.path.exists(wstate_p):
                 wstate = json.load(open(wstate_p, encoding="utf-8"))
             if not os.path.exists(wdue_p):
-                wrows = con.execute(
+                wcon = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
+                wcon.row_factory = sqlite3.Row
+                wrows = wcon.execute(
                     "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
                     "AND status IN ('settled','closed') AND title LIKE 'weather%' "
                     "ORDER BY id",
                     (wstate.get("last_review_id", 0),)).fetchall()
+                wcon.close()
                 cum = sum(r["pnl_usd"] or 0 for r in wrows)
                 streak = 0
                 for r in reversed(wrows):
@@ -235,6 +229,22 @@ def check_review_trigger() -> None:
                         f"streak {streak} -> review_due_weather.json")
         except Exception as e:
             log(f"weather trigger check failed: {e}")
+        if os.path.exists(REVIEW_DUE):        # pending review; respect cooldown
+            # R3-CODEX-4 MED: epoch math, immune to DST wall-clock jumps
+            age_h = (time.time() - os.path.getmtime(REVIEW_DUE)) / 3600
+            if age_h < cr.get("cooldown_hours", 2):
+                return
+        con = sqlite3.connect(os.path.join(ROOT, "data", "ledger.db"))
+        con.row_factory = sqlite3.Row
+        rows = con.execute(
+            "SELECT id, pnl_usd FROM trades WHERE id > ? AND mode='live' "
+            "AND status IN ('settled','closed') AND pnl_usd < 0 "
+            "AND title LIKE 'shortcycle%'",   # CODEX-6 MED: scope by LANE title —
+            # favorites losses have their own drawdown cadence; ticker prefixes
+            # collide across lanes (XRP blindness fixed via title too)
+            (state.get("last_review_id", 0),)).fetchall()
+        n_loss = len(rows)
+        usd_loss = -sum(r["pnl_usd"] for r in rows)
         if n_loss < cr.get("loss_count_trigger", 5) and usd_loss < cr.get("loss_usd_trigger", 1.0):
             return
         # OPUS-B fix: lane-specific file so a favorites drawdown trigger and this
@@ -309,16 +319,20 @@ def main() -> None:
         if not tree_healthy():     # R4-FABLE-B: never trade a broken working tree
             continue
         out = run_cmd("settle")
+        # R7-C4/C5: h15 FIRST after settle — its cancel/fill management is the
+        # most time-critical money path; a slow collector must never delay it.
+        # (Also gives the maker experiment priority over h10's taker on the
+        # shared one-15m-position mutex — R7-C2.)
+        out += run_cmd("h15", timeout=120)
         check_review_trigger()
-        run_cmd("mktsnap")          # zero-cost calibration sampling (H5, never trades)
+        run_cmd("mktsnap", timeout=60)   # zero-cost calibration sampling (H5)
         out += run_cmd("shortcycle")
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
-        out += run_cmd("h10")        # 15m shadow ledger + capped ETH probe (R6)
-        out += run_cmd("h15")        # 15m maker resting-bid lane (H15, ETH micro)
+        out += run_cmd("h10", timeout=120)   # 15m shadow + capped probe (R6)
         out += run_cmd("weather")
-        run_cmd("stopshadow")        # 0.70 stop-loss would-fire log (R6 shadow week)
-        run_cmd("disloc")            # H12 dislocation shadow (smash-pit harvest)
-        run_cmd("pmwatch")           # H14 Polymarket second-opinion pairs (read-only)
+        run_cmd("stopshadow", timeout=60)    # 0.70 stop-loss would-fire log
+        run_cmd("disloc", timeout=60)        # H12 dislocation shadow
+        run_cmd("pmwatch", timeout=60)       # H14 Polymarket pairs (read-only)
         # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —
         # a mark overrun past :20 no longer skips exits/reconcile for the whole hour.
         # R3-CODEX-4 HIGH: monotonic clock, immune to DST wall-clock jumps.
@@ -333,7 +347,7 @@ def main() -> None:
             janitor_stale_sessions()      # scheduled-task claude sessions leak ~370MB each
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
                                          "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",
-                                         "CRITICAL", "FAILED", "REJECTED"))
+                                         "CRITICAL", "FAILED", "REJECTED", "H15 "))
         if changed:
             run_cmd("journal")
             run_cmd("report")
