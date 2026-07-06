@@ -3466,3 +3466,8 @@
 [07-06 14:36:09]   pmwatch: pmwatch: +53 pairs | pmwatch: 3354 rows, 1037 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-06 14:36:09]   journal: journal written: realized today $-4.45, 60 settled, 63 fills
 [07-06 14:36:11]   report: wrote reports\report_2026-07-06.md
+[07-06 14:36:13] committed + pushed
+[07-06 14:38:23]   h15: H15 RESTING KXETH15M-26JUL061645-45: bid 84c tau 6.6m
+[07-06 14:38:24]   h10: h10: 1 in-window | h10 shadow(main): n=148 mean -3.8c total $-5.69 | KXETH15M: n=45 net $+2.64 | KXSOL15M: n=50 net $-7.78 | KXBTC15M: n=53 net $-0.54 | gate: accumulating (3 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 14:38:24]   h10: done: 0 h10 orders
+[07-06 14:38:25]   journal: journal written: realized today $-4.45, 60 settled, 63 fills
