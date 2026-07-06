@@ -2245,3 +2245,10 @@
 [07-06 07:50:37] janitor: reaped leaked sessions ['22888', '28276', '28312', '10292', '10100']
 [07-06 07:50:38]   journal: journal written: realized today $+0.94, 31 settled, 32 fills
 [07-06 07:50:39]   report: wrote reports\report_2026-07-06.md
+[07-06 07:50:43] committed + pushed
+[07-06 07:53:32]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-06 07:53:33]   h10: h10: 1 in-window | h10 shadow(main): n=115 mean -2.0c total $-2.27 | KXETH15M: n=37 net $+2.68 | KXSOL15M: n=40 net $-4.88 | KXBTC15M: n=38 net $-0.07 | gate: accumulating (2 pending) || H13 final6: n=19 win 19/19 net $+0.48 gate: accumulating
+[07-06 07:53:33]   h10: done: 0 h10 orders
+[07-06 07:53:35]   stopshadow: STOPGUARD EXIT #262 KXBTCD-26JUL0610-T61899.99: sold x1 @ 41c (bid 0.40, spot losing) — salvaged vs riding to 0
+[07-06 07:53:35]   stopshadow: STOPGUARD EXIT #263 KXETHD-26JUL0610-T1749.99: sold x3 @ 51c (bid 0.44, spot losing) — salvaged vs riding to 0
+[07-06 07:53:36]   journal: journal written: realized today $-0.67, 33 settled, 32 fills
