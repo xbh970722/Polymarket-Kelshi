@@ -1,6 +1,6 @@
 {
-"last_review_id": 54,
-"review_no": 3,
-"ts": "2026-07-04T12:21:00",
-"note": "Review #3 = favorites-lane loss #52 (-$1.93 @ 96c) via short-cycle path; zone ceiling 0.95->0.94 to close symmetric top leak (mirror of #2 floor fix). H6 RESOLVED: leak = IOC fill upslip ~1c above scan-ask (pipeline.py:414 gates scan ask, :429 IOC fills 1c worse). Band [0.94,0.97) net -$1.49 structural (96c risks 96 to win 4); core [0.88,0.94) 14 trades 0 loss +$2.09. Single loss = noise but fill leaked into net-neg band. H7 opened (code-level post-fill zone recheck if config double-buffer still leaks)."
+ "last_review_id": 54,
+ "review_no": 4,
+ "ts": "2026-07-06T12:28:29",
+ "note": "Review #4 = Favorites lane drawdown -$4.90 (review_due_favorites.json). Favorites net +$11.04/127 (122W-5L, 96%); losses are singletons in otherwise-green bands. BTC only net-neg coin (-$0.60/48, lowest sigma, 3 of 5 losses). Root leak = entry margin quality not price band: z_floor 0.8->1.0, closing net-neg [0.8,1.0) bucket (ledger n=101: z<1 -$4.17 vs z>=1 +$9.87). Pure gate tighten, no dollar-cap change; lane continues. last_review_id kept at 54 (short-cycle cursor; favorites uses full-history title LIKE)."
 }
