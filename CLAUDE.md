@@ -16,3 +16,9 @@
    "print≠fill" 警告; 晋升走预注册门 + 跨体制复现 (SHORTCYCLE_DESIGN.md)。
 7. 实盘循环 (scripts/quant_loop.py, data/quant_loop.pid) 常驻 — 改它的代码
    要重启它; 改 src/pipeline.py 不用 (子进程逐刻加载)。
+8. **崩溃自愈** (2026-07-05 死机后加): scripts/watchdog.ps1 -Loop 每 180s
+   自查, 挂了就拉起 quant_loop + ws_capture (两者都自锁, 重复拉起无害)。
+   开机自启走 HKCU\...\Run 的 "KalshiWatchdog" (无需管理员; 系统计划任务
+   注册需提权, 故走 Run 键)。tick 采集器常驻脚本在 D:\kalshi-ticks\ws_capture.py
+   (仓库外稳定路径), 数据写 D:\kalshi-ticks\ (非仓库, ~14GB/天, 事件驱动
+   重写待施工)。查活: D:\kalshi-ticks\watchdog.log + 三进程 census。
