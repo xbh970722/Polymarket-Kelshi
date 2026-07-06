@@ -2924,3 +2924,18 @@
 [07-06 11:38:23]   h15: H15 RESTING KXETH15M-26JUL061345-45: bid 84c tau 6.6m
 [07-06 11:38:24]   h10: h10: 0 in-window | h10 shadow(main): n=131 mean -5.8c total $-7.66 | KXETH15M: n=40 net $+2.09 | KXSOL15M: n=45 net $-8.40 | KXBTC15M: n=46 net $-1.35 | gate: accumulating (3 pending) || H13 final6: n=20 win 20/20 net $+0.52 gate: accumulating
 [07-06 11:38:25]   journal: journal written: realized today $-3.53, 48 settled, 50 fills
+[07-06 11:38:27] light mark committed + pushed
+[07-06 11:41:28]   settle: done: 0 settled, 8 still open
+[07-06 11:41:29]   h15: H15 UNKNOWN KXETH15M-26JUL061345-45: cancel unverified — frozen as exposure until reconcile resolves
+[07-06 11:41:32]   mktsnap: mktsnap: 17 quotes recorded, 0 outcomes resolved
+[07-06 11:41:37]   shortcycle: shortcycle: 11 candidate strikes | balance $64.12 | today spent $0.79/999999.00
+[07-06 11:41:37]   shortcycle: done: 0 shortcycle orders
+[07-06 11:41:39]   favorites: favorites: 3 favorites in zone | realized $-4.94 | today spent $66.29/999999.00
+[07-06 11:41:39]   favorites: LIVE  KXSOLD-26JUL0614-T81.9999: FAV NO x3 @ 94c cost=$2.83 order=83a56a97-694c-41b0-ae2e-c488eb8fa689
+[07-06 11:41:39]   favorites: done: 1 favorite orders
+[07-06 11:41:40]   h10: h10: 0 in-window | h10 shadow(main): n=131 mean -5.8c total $-7.66 | KXETH15M: n=40 net $+2.09 | KXSOL15M: n=45 net $-8.40 | KXBTC15M: n=46 net $-1.35 | gate: accumulating (3 pending) || H13 final6: n=20 win 20/20 net $+0.52 gate: accumulating
+[07-06 11:41:41]   weather: weather: daily entry cap reached (3)
+[07-06 11:41:43]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=49 win 63% EV -13.2c | BOOK-ONLY: n=34 win 65% EV -8.5c | SPOT-MOVE: n=97 win 62% EV -6.2c | gate: accumulating (123 pending)
+[07-06 11:41:54]   pmwatch: pmwatch: +58 pairs | pmwatch: 3090 rows, 960 kalshi-matched | |divergence| median 5.0c, p90 18.5c (gate n>=300)
+[07-06 11:41:55]   journal: journal written: realized today $-3.53, 48 settled, 51 fills
+[07-06 11:41:56]   report: wrote reports\report_2026-07-06.md
