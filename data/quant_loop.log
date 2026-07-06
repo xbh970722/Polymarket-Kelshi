@@ -3378,3 +3378,21 @@
 [07-06 14:08:24]   h10: done: 0 h10 orders
 [07-06 14:08:25]   stopshadow: STOPGUARD HOLD #300 KXBTCD-26JUL0617-T63499.99: bid 0.68 but spot safe side & clear — book-only smash, not selling
 [07-06 14:08:25]   journal: journal written: realized today $-3.06, 58 settled, 61 fills
+[07-06 14:08:27] light mark committed + pushed
+[07-06 14:11:45]   settle: done: 0 settled, 9 still open
+[07-06 14:11:46]   h15: H15 UNKNOWN KXETH15M-26JUL061615-15: cancel unverified — frozen as exposure until reconcile resolves
+[07-06 14:11:47]   stopshadow: STOPGUARD HOLD #300 KXBTCD-26JUL0617-T63499.99: bid 0.64 but spot safe side & clear — book-only smash, not selling
+[07-06 14:11:49]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[07-06 14:11:52]   shortcycle: shortcycle: 9 candidate strikes | balance $60.02 | today spent $0.79/999999.00
+[07-06 14:11:52]   shortcycle: PASS  KXSOLD-26JUL0617-T82.9999: edge below bar at crossed price 0.950
+[07-06 14:11:52]   shortcycle: done: 0 shortcycle orders
+[07-06 14:11:55]   favorites: favorites: 4 favorites in zone | realized $-4.58 | today spent $87.72/999999.00
+[07-06 14:11:55]   favorites: LIVE  KXSOLD-26JUL0617-T81.9999: FAV NO x3 @ 84c cost=$2.55 order=5f9e8811-4b85-44a5-acef-81a01b1fb17e
+[07-06 14:11:55]   favorites: done: 1 favorite orders
+[07-06 14:11:55]   h10: h10: 0 in-window | h10 shadow(main): n=143 mean -4.4c total $-6.25 | KXETH15M: n=44 net $+2.57 | KXSOL15M: n=48 net $-8.04 | KXBTC15M: n=51 net $-0.78 | gate: accumulating (3 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 14:11:56]   weather: weather: daily entry cap reached (3)
+[07-06 14:11:58]   disloc: DISLOC KXXRPD-26JUL1017-T1.2599: fav 0.95->0.70 ask 0.99 [BOOK-ONLY] tau 5808m
+[07-06 14:11:58]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=59 win 64% EV -12.0c | BOOK-ONLY: n=34 win 65% EV -8.5c | SPOT-MOVE: n=99 win 62% EV -6.6c | gate: accumulating (130 pending)
+[07-06 14:12:10]   pmwatch: pmwatch: +54 pairs | pmwatch: 3318 rows, 1026 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 14:12:11]   journal: journal written: realized today $-3.06, 58 settled, 62 fills
+[07-06 14:12:12]   report: wrote reports\report_2026-07-06.md
