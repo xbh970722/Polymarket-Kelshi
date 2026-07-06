@@ -3093,3 +3093,9 @@
 [07-06 12:36:06]   pmwatch: pmwatch: +53 pairs | pmwatch: 3162 rows, 981 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-06 12:36:07]   journal: journal written: realized today $-3.09, 51 settled, 53 fills
 [07-06 12:36:08]   report: wrote reports\report_2026-07-06.md
+[07-06 12:36:10] committed + pushed
+[07-06 12:38:22]   h15: done: h15 pass complete
+[07-06 12:38:24]   h10: h10: 2 in-window | h10 shadow(main): n=137 mean -5.1c total $-7.04 | KXETH15M: n=42 net $+2.30 | KXSOL15M: n=46 net $-8.28 | KXBTC15M: n=49 net $-1.06 | gate: accumulating (2 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 12:38:24]   h10: LIVE  KXETH15M-26JUL061445-45: H10 YES x1 @ 88c cost=$0.89 order=1c45c264-88cc-469f-bb79-8cff262cd5ea
+[07-06 12:38:24]   h10: done: 1 h10 orders
+[07-06 12:38:26]   journal: journal written: realized today $-3.09, 51 settled, 54 fills
