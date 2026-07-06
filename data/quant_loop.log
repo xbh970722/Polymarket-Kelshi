@@ -3468,3 +3468,41 @@
 [07-06 06:02:54]   h10: h10: 1 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (2 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
 [07-06 06:02:54]   h10: done: 0 h10 orders
 [07-06 06:02:56]   journal: journal written: realized today $+1.42, 24 settled, 25 fills
+[07-06 06:02:58] light mark committed + pushed
+[07-06 06:05:44]   settle: SETTLED KXHIGHMIA-26JUL05-B89.5: result=no LOSS pnl=$-0.43
+[07-06 06:05:44]   settle: SETTLED KXBTCD-26JUL0608-T62999.99: result=no WIN pnl=$+0.13
+[07-06 06:05:44]   settle: SETTLED KXSOLD-26JUL0608-T80.9999: result=no WIN pnl=$+0.28
+[07-06 06:05:44]   settle: done: 3 settled, 4 still open
+[07-06 06:05:45]   h15: H15 RESTING KXETH15M-26JUL060815-15: bid 84c tau 9.3m
+[07-06 06:05:47]   mktsnap: mktsnap: 2 quotes recorded, 10 outcomes resolved
+[07-06 06:05:52]   shortcycle: shortcycle: 24 candidate strikes | balance $73.58 | today spent $0.00/999999.00
+[07-06 06:05:52]   shortcycle: done: 0 shortcycle orders
+[07-06 06:05:56]   favorites: favorites: 8 favorites in zone | realized $+0.24 | today spent $27.76/999999.00
+[07-06 06:05:56]   favorites: LIVE  KXSOLD-26JUL0609-T78.9999: FAV YES x3 @ 86c cost=$2.61 order=bfb528d7-9cb8-43ff-9e28-732f6916fc11
+[07-06 06:05:56]   favorites: LIVE  KXBTCD-26JUL0609-T62299.99: FAV NO x1 @ 88c cost=$0.89 order=0202da2b-25cc-442b-a4b5-6f9599ff7f81
+[07-06 06:05:56]   favorites: done: 2 favorite orders
+[07-06 06:05:56]   h10: h10: 0 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (2 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 06:05:57]   weather: weather: 0 priced buckets | spent $1.31/999999.00
+[07-06 06:05:57]   weather: done: 0 weather orders
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T61999.99: fav 0.83->0.45 ask 0.45 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T61749.99: fav 0.89->0.55 ask 0.55 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T61499.99: fav 0.93->0.64 ask 0.64 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T61249.99: fav 0.94->0.74 ask 0.75 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T60999.99: fav 0.96->0.81 ask 0.81 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL0617-T60749.99: fav 0.96->0.86 ask 0.87 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL1017-T60999.99: fav 0.78->0.64 ask 0.64 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL1017-T60499.99: fav 0.81->0.69 ask 0.70 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL1017-T59999.99: fav 0.87->0.76 ask 0.76 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL1017-T59499.99: fav 0.89->0.80 ask 0.80 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXBTCD-26JUL1017-T58999.99: fav 0.92->0.83 ask 0.84 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXETHD-26JUL0617-T1709.99: fav 0.96->0.77 ask 0.77 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXETHD-26JUL1017-T1659.99: fav 0.88->0.77 ask 0.78 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXSOLD-26JUL0617-T78.9999: fav 0.90->0.61 ask 0.62 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXSOLD-26JUL0617-T77.9999: fav 0.97->0.79 ask 0.79 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXXRPD-26JUL0617-T1.1199: fav 0.91->0.56 ask 0.58 [SPOT-MOVE] tau 534m
+[07-06 06:06:00]   disloc: DISLOC KXXRPD-26JUL1017-T1.0999: fav 0.80->0.66 ask 0.68 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: DISLOC KXXRPD-26JUL1017-T1.0799: fav 0.88->0.79 ask 0.79 [SPOT-MOVE] tau 6294m
+[07-06 06:06:00]   disloc: disloc: +18 events, 2 settled | disloc shadow: AMBIGUOUS: n=44 win 68% EV -8.1c | BOOK-ONLY: n=30 win 67% EV -7.6c | SPOT-MOVE: n=35 win 57% EV -8.0c | gate: accumulating (74 pending)
+[07-06 06:06:10]   pmwatch: pmwatch: +56 pairs | pmwatch: 2550 rows, 799 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 06:06:11]   journal: journal written: realized today $+1.40, 27 settled, 27 fills
+[07-06 06:06:12]   report: wrote reports\report_2026-07-06.md
