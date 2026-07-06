@@ -2252,3 +2252,20 @@
 [07-06 07:53:35]   stopshadow: STOPGUARD EXIT #262 KXBTCD-26JUL0610-T61899.99: sold x1 @ 41c (bid 0.40, spot losing) — salvaged vs riding to 0
 [07-06 07:53:35]   stopshadow: STOPGUARD EXIT #263 KXETHD-26JUL0610-T1749.99: sold x3 @ 51c (bid 0.44, spot losing) — salvaged vs riding to 0
 [07-06 07:53:36]   journal: journal written: realized today $-0.67, 33 settled, 32 fills
+[07-06 07:53:38] light mark committed + pushed
+[07-06 07:56:17]   settle: SETTLED KXETH15M-26JUL060900-00: result=yes WIN pnl=$+0.04
+[07-06 07:56:17]   settle: done: 1 settled, 5 still open
+[07-06 07:56:17]   h15: done: h15 pass complete
+[07-06 07:56:19]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-06 07:56:23]   shortcycle: shortcycle: 0 candidate strikes | balance $68.77 | today spent $0.79/999999.00
+[07-06 07:56:23]   shortcycle: done: 0 shortcycle orders
+[07-06 07:56:25]   favorites: favorites: 0 favorites in zone | realized $-1.43 | today spent $42.08/999999.00
+[07-06 07:56:25]   favorites: done: 0 favorite orders
+[07-06 07:56:26]   h10: h10: 0 in-window | h10 shadow(main): n=115 mean -2.0c total $-2.27 | KXETH15M: n=37 net $+2.68 | KXSOL15M: n=40 net $-4.88 | KXBTC15M: n=38 net $-0.07 | gate: accumulating (2 pending) || H13 final6: n=19 win 19/19 net $+0.48 gate: accumulating
+[07-06 07:56:26]   weather: weather: 0 priced buckets | spent $1.31/999999.00
+[07-06 07:56:26]   weather: done: 0 weather orders
+[07-06 07:56:28]   disloc: DISLOC KXSOLD-26JUL1017-T83.9999: fav 0.83->0.76 ask 0.77 [AMBIGUOUS] tau 6184m
+[07-06 07:56:28]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=46 win 65% EV -11.1c | BOOK-ONLY: n=31 win 68% EV -6.5c | SPOT-MOVE: n=44 win 59% EV -4.6c | gate: accumulating (104 pending)
+[07-06 07:56:39]   pmwatch: pmwatch: +57 pairs | pmwatch: 2730 rows, 855 kalshi-matched | |divergence| median 5.0c, p90 18.5c (gate n>=300)
+[07-06 07:56:40]   journal: journal written: realized today $-0.63, 34 settled, 32 fills
+[07-06 07:56:41]   report: wrote reports\report_2026-07-06.md
