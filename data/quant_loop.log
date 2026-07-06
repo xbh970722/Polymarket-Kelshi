@@ -3266,3 +3266,23 @@
 [07-06 05:05:40]   pmwatch: pmwatch: +22 pairs | pmwatch: 2454 rows, 768 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-06 05:05:40]   journal: journal written: realized today $-0.05, 20 settled, 21 fills
 [07-06 05:05:42]   report: wrote reports\report_2026-07-06.md
+[07-06 05:05:43] committed + pushed
+[07-06 05:08:21]   h15: done: h15 pass complete
+[07-06 05:08:21]   h10: h10: 0 in-window | h10 shadow(main): n=103 mean -2.4c total $-2.49 | KXETH15M: n=33 net $+2.31 | KXSOL15M: n=36 net $-4.27 | KXBTC15M: n=34 net $-0.53 | gate: accumulating (0 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 05:11:21]   settle: SETTLED KXHIGHPHIL-26JUL05-B91.5: result=no WIN pnl=$+0.14
+[07-06 05:11:21]   settle: SETTLED KXHIGHDEN-26JUL05-B93.5: result=no WIN pnl=$+0.37
+[07-06 05:11:21]   settle: done: 2 settled, 6 still open
+[07-06 05:11:21]   h15: done: h15 pass complete
+[07-06 05:11:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-06 05:11:27]   shortcycle: shortcycle: 10 candidate strikes | balance $71.34 | today spent $0.00/999999.00
+[07-06 05:11:27]   shortcycle: done: 0 shortcycle orders
+[07-06 05:11:30]   favorites: favorites: 3 favorites in zone | realized $-0.17 | today spent $25.04/999999.00
+[07-06 05:11:30]   favorites: LIVE  KXSOLD-26JUL0608-T80.9999: FAV NO x3 @ 90c cost=$2.72 order=0f1b2f69-93c9-4e4d-92cb-68b910eb0f3f
+[07-06 05:11:30]   favorites: done: 1 favorite orders
+[07-06 05:11:31]   h10: h10: 0 in-window | h10 shadow(main): n=103 mean -2.4c total $-2.49 | KXETH15M: n=33 net $+2.31 | KXSOL15M: n=36 net $-4.27 | KXBTC15M: n=34 net $-0.53 | gate: accumulating (0 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 05:11:32]   weather: weather: 0 priced buckets | spent $1.31/999999.00
+[07-06 05:11:32]   weather: done: 0 weather orders
+[07-06 05:11:35]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=43 win 67% EV -8.7c | BOOK-ONLY: n=28 win 68% EV -6.4c | SPOT-MOVE: n=35 win 57% EV -8.0c | gate: accumulating (55 pending)
+[07-06 05:11:40]   pmwatch: pmwatch: +23 pairs | pmwatch: 2466 rows, 772 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 05:11:41]   journal: journal written: realized today $+0.46, 22 settled, 22 fills
+[07-06 05:11:42]   report: wrote reports\report_2026-07-06.md
