@@ -287,16 +287,24 @@ _SPOT_LASTGOOD: dict = {}       # series -> (spot, monotonic_ts); z-floor cache
 def _in_macro_window(cfg: dict) -> str | None:
     """R8-C3: minimal storm-protocol gate. Inside a VERIFIED macro event
     window (config macro_windows, UTC pairs) the crypto lanes stop OPENING;
-    managing / canceling / stop-guard exits continue. Returns window label."""
-    try:
-        now = dt.datetime.now(dt.timezone.utc)
-        for w in cfg.get("macro_windows") or []:
+    managing / canceling / stop-guard exits continue. Returns window label.
+    R9-C3: FAIL-CLOSED on unparseable config — one typo used to silently
+    disable every storm gate; now it halts new entries until fixed."""
+    now = dt.datetime.now(dt.timezone.utc)
+    bad = 0
+    for w in cfg.get("macro_windows") or []:
+        try:
             a = dt.datetime.fromisoformat(str(w[0]).replace("Z", "+00:00"))
             b = dt.datetime.fromisoformat(str(w[1]).replace("Z", "+00:00"))
-            if a <= now <= b:
-                return str(w[0])[:16]
-    except Exception:
-        return None
+        except Exception:
+            bad += 1
+            continue
+        if a <= now < b:
+            return str(w[0])[:16]
+    if bad:
+        print(f"WARN macro_windows: {bad} unparseable entry(ies) — FAIL-CLOSED "
+              f"(no new entries until config fixed)")
+        return "CONFIG-ERROR"
     return None
 
 
@@ -727,11 +735,23 @@ def cmd_favorites(_args) -> None:
                             "https://api.exchange.coinbase.com/products/"
                             f"{prod}/ticker", timeout=10).json()["price"])
                         spot_cache[series] = spot
-                        _SPOT_LASTGOOD[series] = (spot, time.monotonic())
+                        try:    # R9-C1: persist — each mark is a FRESH process,
+                            lgp = Path("data") / "spot_lastgood.json"   # in-mem
+                            d = (json.loads(lgp.read_text(encoding="utf-8"))
+                                 if lgp.exists() else {})   # cache never survived
+                            d[series] = [spot, time.time()]
+                            lgp.write_text(json.dumps(d), encoding="utf-8")
+                        except Exception:
+                            pass
                     except Exception:
-                        lg = _SPOT_LASTGOOD.get(series)
-                        if lg and time.monotonic() - lg[1] <= 60:
-                            spot = lg[0]        # last-good, max 60s old
+                        try:                    # last-good from disk, max 60s
+                            lgp = Path("data") / "spot_lastgood.json"
+                            v = json.loads(lgp.read_text(
+                                encoding="utf-8")).get(series)
+                            if v and time.time() - v[1] <= 60:
+                                spot = v[0]
+                        except Exception:
+                            pass
                 if not (spot and sig and tau_h and tau_h > 0):
                     # R8-C3 fail-CLOSED (was fail-open): the same blindness
                     # also blinds the stop guard — never ADD risk while blind.
@@ -1647,7 +1667,22 @@ def cmd_h15(_args) -> None:
                 print(f"H15 UNKNOWN {m['ticker']}: fractional instant fill — frozen")
             elif fill_raw >= 1:                 # crossed immediately (rare)
                 n = int(round(fill_raw))
-                oid_new = str(resp.get("order_id") or "")
+                # R9-C1: order_id can arrive NESTED — normalize, and never
+                # skip residual protection just because the id is missing
+                oid_new = str(resp.get("order_id")
+                              or (resp.get("order") or {}).get("order_id") or "")
+                if n < n_ct and not oid_new:
+                    try:                        # resolve via our client oid
+                        oid_new, _, _ = _lookup(m["ticker"], coid)
+                    except Exception:
+                        oid_new = ""
+                    if not oid_new:
+                        ledger.mark_unknown(tid, f"h15 instant partial {n}/"
+                                                 f"{n_ct}, order id unresolved")
+                        print(f"H15 UNKNOWN {m['ticker']}: instant partial, "
+                              f"no order id — frozen")
+                        placed = True
+                        break
                 if n < n_ct and oid_new:
                     # R8-C1 CRITICAL: partial INSTANT fill at x3 — the GTC
                     # residual keeps resting; cancel + verify before booking,
@@ -1684,18 +1719,21 @@ def cmd_h15(_args) -> None:
                 # manage would backfill a swing plan and could exit a hold lane
                 print(f"H15 INSTANT FILL {m['ticker']}: x{n} @ {bid * 100:.0f}c")
             else:
-                exch_oid_new = str(resp.get("order_id") or "")
+                exch_oid_new = str(resp.get("order_id")
+                                   or (resp.get("order") or {}).get("order_id")
+                                   or "")      # R9-C1: nested-id normalization
                 if exch_oid_new:               # R7-C1 MED: persist the EXCHANGE id
                     try:                        # — fills queries key on it, and the
                         ledger.set_client_oid(tid, exch_oid_new)   # lookup matches
                     except Exception:           # either field
                         pass
-                # R7 morning item: echo the exchange's expiration back so the
-                # first RESTING placement PROVES expiration_ts round-trips
-                # (field was never live-tested; silent drop would strand bids
-                # on loop crash — the echo makes the verification automatic)
+                # R9-C3 semantics: V2 create does NOT echo expiration_time in
+                # the response — NOT-ECHOED here is expected, not a failure.
+                # Validity is PROVEN by demo-gym T1 (order auto-canceled at
+                # deadline after the R8-C5 field-name fix).
                 exp_echo = (resp.get("expiration_time")
-                            or resp.get("expiration_ts") or "NOT-ECHOED")
+                            or resp.get("expiration_ts")
+                            or "not-echoed(normal)")
                 print(f"H15 RESTING placed {m['ticker']}: {side.upper()} bid "
                       f"{bid * 100:.0f}c fav_mid {fav_mid:.2f} tau {tau:.0f}m "
                       f"order={exch_oid_new or coid} exp={exp_echo}")
@@ -2204,6 +2242,26 @@ def cmd_reconcile(_args) -> None:
                               for f in mine)
                     n = int(round(cnt))
                     if n >= 1:
+                        # R9-C3 CRITICAL: residual gate — a partially-filled
+                        # GTC still RESTING must not resolve to open (the
+                        # remainder would keep filling as unregistered money).
+                        # Cancel it and stay unknown; next pass reads the
+                        # terminal state and books the final count.
+                        o_status = str(o.get("status") or "")
+                        want_u = u.get("contracts") or 0
+                        if (n < want_u and o_status not in
+                                ("canceled", "cancelled", "expired",
+                                 "rejected", "executed", "filled")):
+                            try:
+                                client.cancel_order(exch_oid)
+                                print(f"UNKNOWN #{u['id']} {u['ticker']}: "
+                                      f"partial x{n}/{want_u}, residual live "
+                                      f"-> canceled, resolves next pass")
+                            except Exception as e:
+                                print(f"UNKNOWN #{u['id']} {u['ticker']}: "
+                                      f"partial x{n}/{want_u}, residual live, "
+                                      f"cancel errored ({str(e)[:60]}) — frozen")
+                            continue
                         tot = 0.0
                         for f in mine:
                             ci = float(f.get("count_fp") or f.get("count") or 0)

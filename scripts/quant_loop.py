@@ -127,6 +127,9 @@ def run_cmd(*args: str, timeout: int = 300) -> str:
         out = (r.stdout or "") + (r.stderr or "")
         if r.returncode != 0:
             log(f"CRITICAL: step {args[0]} exited {r.returncode}")
+            out += f"\nCRITICAL step {args[0]} exited {r.returncode}"
+            # R9-C2: the synthetic CRITICAL must reach the caller's `out`
+            # so failures trigger journal/commit like any other event
     except Exception as e:
         out = f"EXC {args}: {e}"
         log(f"CRITICAL: step {args[0]} raised/timed out: {e}")
@@ -341,13 +344,13 @@ def main() -> None:
         future = []
         # R8-O2: timing jitter — fixed second=20 made every order land in a
         # 3-second window (:XX:20-22): a metronome any observer can front-run.
-        # Random 8-52s start per mark breaks the beat; tau windows have minutes
-        # of slack so lane semantics are unaffected (VALUES 5g L4 defense).
-        import random as _rnd
-        jitter = _rnd.randint(8, 52)
+        # R9-C2: jitter is derived PER SLOT (hash is process-seeded => stable
+        # within this run, unpredictable across restarts) so re-waking inside
+        # a target minute cannot re-roll the second and skip the mark.
         for m, kind in slots:
+            jit = 8 + (hash((now.date(), m, kind)) % 45)
             t = now.replace(minute=m, second=0, microsecond=0) \
-                + dt.timedelta(seconds=jitter)
+                + dt.timedelta(seconds=jit)
             if t > now:
                 future.append((t, kind))
         if future:
@@ -369,7 +372,7 @@ def main() -> None:
             if any(k in out for k in ("LIVE ", "H15 ", "EXIT ", "UNKNOWN",
                                       "CRITICAL", "HARD STOP")):
                 run_cmd("journal")
-                git("add", "-A")
+                git("add", "data", "reports")   # R8-C2: whitelist — never sweep code
                 git("commit", "-m",
                     f"light mark {nxt:%m-%d %H:%M}: 15m fills")
                 git("push")
@@ -409,11 +412,12 @@ def main() -> None:
         changed = any(k in out for k in ("SETTLED", "LIVE ", "EXIT ", "REVIEW-DUE",
                                          "MISMATCH", "UNKNOWN", "VOIDED", "RESOLVED",
                                          "CRITICAL", "FAILED", "REJECTED", "H15 ",
-                                         "HARD STOP", "DRAWDOWN REVIEW"))
+                                         "HARD STOP", "DRAWDOWN REVIEW",
+                                         "EXC ", "STOPSHADOW", "STOPGUARD"))
         if changed:
             run_cmd("journal")
             run_cmd("report")
-            git("add", "-A")
+            git("add", "data", "reports")   # R8-C2: whitelist — never sweep code
             git("commit", "-m", f"quant loop {nxt:%m-%d %H:%M}: auto fills/settlements")
             git("push")
             log("committed + pushed")
