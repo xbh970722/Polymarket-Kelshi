@@ -374,14 +374,17 @@ def main() -> None:
         # (Also gives the maker experiment priority over h10's taker on the
         # shared one-15m-position mutex — R7-C2.)
         out += run_cmd("h15", timeout=120)
+        # R8-C2 HIGH: stop guard runs IMMEDIATELY after h15 — behind the
+        # collectors it could inherit 10+ min of their worst-case timeouts,
+        # which is exactly the latency a stop must not have.
+        out += run_cmd("stopshadow", timeout=60)
         check_review_trigger()
         run_cmd("mktsnap", timeout=60)   # zero-cost calibration sampling (H5)
         out += run_cmd("shortcycle")
         out += run_cmd("favorites")  # favorite-harvest micro lane (direction-neutral)
         out += run_cmd("h10", timeout=120)   # 15m shadow + capped probe (R6)
         out += run_cmd("weather")
-        out += run_cmd("stopshadow", timeout=60)   # crossing log + LIVE stop guard
-        #  (user 07-05 morning: early-open after shadow caught 2 real BTC deaths)
+        # (stopshadow moved up right after h15 — R8-C2)
         run_cmd("disloc", timeout=60)        # H12 dislocation shadow
         run_cmd("pmwatch", timeout=60)       # H14 Polymarket pairs (read-only)
         # CODEX-3 HIGH fix: hourly duties run on elapsed time, not an exact minute —

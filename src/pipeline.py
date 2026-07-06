@@ -15,6 +15,7 @@ import datetime as dt
 import json
 import re
 import sys
+import time
 import uuid
 from pathlib import Path
 
@@ -280,6 +281,25 @@ def cmd_manage(_args) -> None:
     print(f"done: {exited} exited, {flagged} flagged for review, {held} holding")
 
 
+_SPOT_LASTGOOD: dict = {}       # series -> (spot, monotonic_ts); z-floor cache
+
+
+def _in_macro_window(cfg: dict) -> str | None:
+    """R8-C3: minimal storm-protocol gate. Inside a VERIFIED macro event
+    window (config macro_windows, UTC pairs) the crypto lanes stop OPENING;
+    managing / canceling / stop-guard exits continue. Returns window label."""
+    try:
+        now = dt.datetime.now(dt.timezone.utc)
+        for w in cfg.get("macro_windows") or []:
+            a = dt.datetime.fromisoformat(str(w[0]).replace("Z", "+00:00"))
+            b = dt.datetime.fromisoformat(str(w[1]).replace("Z", "+00:00"))
+            if a <= now <= b:
+                return str(w[0])[:16]
+    except Exception:
+        return None
+    return None
+
+
 def _mtm_halt(cfg: dict) -> str | None:
     """R4-FABLE-B HIGH: daily_loss_halt reads REALIZED pnl only — 8 correlated open
     favorites (~$12) can blow past the $5 halt before anything settles. cmd_manage
@@ -294,10 +314,15 @@ def _mtm_halt(cfg: dict) -> str | None:
         age_h = (dt.datetime.now()
                  - dt.datetime.fromisoformat(snap["ts"])).total_seconds() / 3600
         if age_h > 2:
+            # R8-O1 F3 INVERSION FIX: the old code returned None here — the
+            # equity halt silently DISABLED exactly when manage was failing.
+            # Conservative direction: stale snapshot + open live positions =
+            # refuse to OPEN (flying blind on unrealized); flat book = harmless.
+            if ledger.stats("live")["open_positions"] > 0:
+                return ("mtm snapshot stale >2h (manage failing?) — refusing "
+                        "new entries while blind on unrealized")
             return None
-        age_h2 = (dt.datetime.now()
-                  - dt.datetime.fromisoformat(snap["ts"])).total_seconds() / 3600
-        if age_h2 > 1.5:            # R7-FABLE MED: a stale equity snapshot means
+        if age_h > 1.5:             # R7-FABLE MED: a stale equity snapshot means
             print("WARN mtm snapshot stale — equity halt degraded to "
                   "realized-only (is manage failing?)")   # loud, journaled
         lv = cfg.get("live", {})
@@ -644,6 +669,10 @@ def cmd_favorites(_args) -> None:
         return
     # bug #13 fix (unified via _live_risk_overlay, CODEX-6): favorites obeys the
     # global live brakes; its own per-trade cap merges on top
+    mw = _in_macro_window(cfg)
+    if mw:
+        print(f"MACRO WINDOW {mw}: favorites no-new-entry (storm protocol)")
+        return
     cfg_gl = _live_risk_overlay(cfg)
     cfg_gl["risk"]["max_per_trade_usd"] = min(cfg_gl["risk"]["max_per_trade_usd"],
                                               fc.get("max_per_trade_usd", 2.0))
@@ -676,34 +705,48 @@ def cmd_favorites(_args) -> None:
         # data errors (a Coinbase hiccup must not silence the whole lane).
         zf = fc.get("z_floor")
         if zf:
-            try:
-                from .shortcycle import strike_of
-                import requests as _rq
-                strike = strike_of(m["ticker"])
+            from .shortcycle import strike_of
+            strike = strike_of(m["ticker"])     # None = range bucket -> exempt
+            if strike is not None:
                 sig = (fc.get("sigma_1h") or {}).get(series)
-                close_z = dt.datetime.fromisoformat(
-                    m["close_time"].replace("Z", "+00:00"))
-                tau_h = (close_z - dt.datetime.now(dt.timezone.utc)
-                         ).total_seconds() / 3600
-                if strike and sig and tau_h > 0:
-                    if series not in spot_cache:
+                tau_h = None
+                try:
+                    close_z = dt.datetime.fromisoformat(
+                        m["close_time"].replace("Z", "+00:00"))
+                    tau_h = (close_z - dt.datetime.now(dt.timezone.utc)
+                             ).total_seconds() / 3600
+                except Exception:
+                    pass
+                spot = spot_cache.get(series)
+                if spot is None:
+                    try:
+                        import requests as _rq
                         prod = {"KXBTCD": "BTC-USD", "KXETHD": "ETH-USD",
                                 "KXSOLD": "SOL-USD", "KXXRPD": "XRP-USD"}[series]
-                        spot_cache[series] = float(_rq.get(
+                        spot = float(_rq.get(
                             "https://api.exchange.coinbase.com/products/"
                             f"{prod}/ticker", timeout=10).json()["price"])
-                    dist = (spot_cache[series] - strike) / strike
-                    if side == "no":
-                        dist = -dist
-                    z = dist / (sig * tau_h ** 0.5)
-                    if z < zf:
-                        print(f"Z-REJECT {m['ticker']} {side} @{ask:.2f}: "
-                              f"z={z:.2f} < {zf} — spot too close to strike "
-                              f"for this price (coin flip, not insurance)")
-                        continue
-            except Exception as e:
-                print(f"WARN z-floor check failed ({type(e).__name__}) — "
-                      f"fail-open, entry allowed")
+                        spot_cache[series] = spot
+                        _SPOT_LASTGOOD[series] = (spot, time.monotonic())
+                    except Exception:
+                        lg = _SPOT_LASTGOOD.get(series)
+                        if lg and time.monotonic() - lg[1] <= 60:
+                            spot = lg[0]        # last-good, max 60s old
+                if not (spot and sig and tau_h and tau_h > 0):
+                    # R8-C3 fail-CLOSED (was fail-open): the same blindness
+                    # also blinds the stop guard — never ADD risk while blind.
+                    print(f"Z-SKIP {m['ticker']}: z inputs unavailable "
+                          f"(spot={spot is not None}) — fail-closed, no entry")
+                    continue
+                dist = (spot - strike) / strike
+                if side == "no":
+                    dist = -dist
+                z = dist / (sig * tau_h ** 0.5)
+                if z < zf:
+                    print(f"Z-REJECT {m['ticker']} {side} @{ask:.2f}: "
+                          f"z={z:.2f} < {zf} — spot too close to strike "
+                          f"for this price (coin flip, not insurance)")
+                    continue
         # bet the structural bias, not a model edge -> pass edge check trivially
         n_ct = (fc.get("max_contracts_by_series") or {}).get(
             series, fc.get("max_contracts", 2))   # R4: same default as est_ct
@@ -1000,6 +1043,10 @@ def cmd_h10(_args) -> None:
         print(f"AUTH ERROR: {e}")
         return
     api = KalshiPublic()
+    mw = _in_macro_window(cfg)
+    if mw:
+        print(f"MACRO WINDOW {mw}: h10 live probes paused (shadow continues)")
+        return
     cfg_h = _live_risk_overlay(cfg)
     cfg_h["risk"]["max_per_trade_usd"] = min(cfg_h["risk"]["max_per_trade_usd"],
                                              h.get("max_per_trade_usd", 1.0))
@@ -1182,8 +1229,10 @@ def cmd_stopshadow(_args) -> None:
                   f"strike={strike is not None}) — cannot confirm, holding")
             continue                    # no unmanipulable confirmation -> hold
         losing = (spot < strike) if t["side"] == "yes" else (spot > strike)
-        near = abs(spot - strike) / strike <= guard.get(
-            "spot_proximity_pct", 0.05) / 100.0
+        prox = guard.get("spot_proximity_pct", 0.05)
+        if _in_macro_window(cfg):               # R8-C3/C4 storm ladder: macro
+            prox = guard.get("storm_proximity_pct", 0.10)   # window widens the
+        near = abs(spot - strike) / strike <= prox / 100.0  # uncertainty band
         if not (losing or near):
             print(f"STOPGUARD HOLD #{t['id']} {t['ticker']}: bid {bid:.2f} but "
                   f"spot safe side & clear — book-only smash, not selling")
@@ -1480,6 +1529,10 @@ def cmd_h15(_args) -> None:
               f"tau {tau:.1f}m")
     if resting:
         return                                  # one resting order at a time
+    mw = _in_macro_window(cfg)
+    if mw:                                      # R8-C3: storm窗不挂新单, 撤单/
+        print(f"MACRO WINDOW {mw}: h15 no new resting bids")   # 成交管理照常
+        return
     # ---- 2. place a new resting bid ----
     realized = ledger.realized_by_title("h15maker")
     hard = h.get("drawdown_step_usd", 3.0) * h.get("hard_stop_steps", 1)
