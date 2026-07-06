@@ -3386,3 +3386,7 @@
 [07-05 19:56:46]   pmwatch: pmwatch: +57 pairs | pmwatch: 1590 rows, 506 kalshi-matched | |divergence| median 5.0c, p90 19.0c (gate n>=300)
 [07-05 19:56:46]   journal: journal written: realized today $-1.78, 80 settled, 81 fills
 [07-05 19:56:48]   report: wrote reports\report_2026-07-05.md
+[07-05 19:56:49] committed + pushed
+[07-05 20:00:21]   h15: H15 PULLED KXETH15M-26JUL052200-00: no fill, window closing (queue data point)
+[07-05 20:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=66 mean -2.5c total $-1.64 | KXETH15M: n=22 net $+1.02 | KXSOL15M: n=22 net $-2.97 | KXBTC15M: n=22 net $+0.30 | gate: accumulating (0 pending) || H13 final6: n=13 win 13/13 net $+0.37 gate: accumulating
+[07-05 20:00:23]   journal: journal written: realized today $-1.78, 80 settled, 80 fills
