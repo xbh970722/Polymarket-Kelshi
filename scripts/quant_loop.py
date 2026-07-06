@@ -339,8 +339,15 @@ def main() -> None:
         slots = ([(m, "full") for m in MARKS]
                  + [(m, "light") for m in LIGHT_MARKS])
         future = []
+        # R8-O2: timing jitter — fixed second=20 made every order land in a
+        # 3-second window (:XX:20-22): a metronome any observer can front-run.
+        # Random 8-52s start per mark breaks the beat; tau windows have minutes
+        # of slack so lane semantics are unaffected (VALUES 5g L4 defense).
+        import random as _rnd
+        jitter = _rnd.randint(8, 52)
         for m, kind in slots:
-            t = now.replace(minute=m, second=20, microsecond=0)
+            t = now.replace(minute=m, second=0, microsecond=0) \
+                + dt.timedelta(seconds=jitter)
             if t > now:
                 future.append((t, kind))
         if future:

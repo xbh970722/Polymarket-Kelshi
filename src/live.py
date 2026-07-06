@@ -167,8 +167,12 @@ class KalshiLive:
                 "client_order_id": client_order_id or str(uuid.uuid4())}
         if expiration_ts is not None:
             # R7-C3 HIGH: exchange-side auto-expiry — a resting order must die on
-            # schedule even if our process does not survive to cancel it
-            body["expiration_ts"] = int(expiration_ts)
+            # schedule even if our process does not survive to cancel it.
+            # R8-C5 FIX: the V2 field is `expiration_time` — the old
+            # `expiration_ts` name was silently IGNORED (root cause of the
+            # demo-gym T1 failure: orders resting past expiry). Param name kept
+            # for caller compatibility.
+            body["expiration_time"] = int(expiration_ts)
         return self._req("POST", f"{API}/portfolio/events/orders", body)
 
     def place_exit(self, ticker: str, held_side: str, count: int, price_prob: float,
