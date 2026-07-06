@@ -2582,3 +2582,44 @@
 [07-06 09:45:27]   stopshadow: STOPGUARD EXIT #274 KXETHD-26JUL0612-T1769.99: sold x3 @ 30c (bid 0.29, spot losing) — salvaged vs riding to 0
 [07-06 09:45:27]   stopshadow: stopshadow: 2 new crossing(s) logged
 [07-06 09:45:28]   journal: journal written: realized today $-3.97, 42 settled, 41 fills
+[07-06 09:45:30] light mark committed + pushed
+[07-06 09:47:17]   h15: done: h15 pass complete
+[07-06 09:47:19]   h10: h10: 0 in-window | h10 shadow(main): n=127 mean -6.3c total $-8.00 | KXETH15M: n=39 net $+1.97 | KXSOL15M: n=45 net $-8.40 | KXBTC15M: n=43 net $-1.58 | gate: accumulating (0 pending) || H13 final6: n=20 win 20/20 net $+0.52 gate: accumulating
+[07-06 09:50:09]   settle: done: 0 settled, 6 still open
+[07-06 09:50:09]   h15: done: h15 pass complete
+[07-06 09:50:11]   mktsnap: mktsnap: 18 quotes recorded, 3 outcomes resolved
+[07-06 09:50:16]   shortcycle: shortcycle: 0 candidate strikes | balance $65.41 | today spent $0.79/999999.00
+[07-06 09:50:16]   shortcycle: done: 0 shortcycle orders
+[07-06 09:50:18]   favorites: DRAWDOWN REVIEW: favorites $-4.90 (step 1) -> review raised, TRADING CONTINUES
+[07-06 09:50:18]   favorites: favorites: 2 favorites in zone | realized $-4.90 | today spent $54.42/999999.00
+[07-06 09:50:18]   favorites: LIVE  KXBTCD-26JUL0612-T63099.99: FAV NO x1 @ 93c cost=$0.93 order=b426dea2-dc0e-46c8-b759-c66a8b2224e7
+[07-06 09:50:18]   favorites: done: 1 favorite orders
+[07-06 09:50:19]   h10: h10: 0 in-window | h10 shadow(main): n=127 mean -6.3c total $-8.00 | KXETH15M: n=39 net $+1.97 | KXSOL15M: n=45 net $-8.40 | KXBTC15M: n=43 net $-1.58 | gate: accumulating (0 pending) || H13 final6: n=20 win 20/20 net $+0.52 gate: accumulating
+[07-06 09:50:20]   weather: weather: daily entry cap reached (3)
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0612-T62999.99: fav 0.98->0.82 ask 0.83 [SPOT-MOVE] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0612-T62899.99: fav 0.98->0.65 ask 0.65 [SPOT-MOVE] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0612-T62799.99: fav 0.95->0.40 ask 0.40 [SPOT-MOVE] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0612-T62699.99: fav 0.90->0.18 ask 0.18 [SPOT-MOVE] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0617-T63499.99: fav 0.94->0.81 ask 0.82 [SPOT-MOVE] tau 310m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0617-T63249.99: fav 0.90->0.71 ask 0.72 [SPOT-MOVE] tau 310m
+[07-06 09:50:22]   disloc: DISLOC KXBTCD-26JUL0617-T62999.99: fav 0.82->0.57 ask 0.58 [SPOT-MOVE] tau 310m
+[07-06 09:50:22]   disloc: DISLOC KXETHD-26JUL0612-T1769.99: fav 0.80->0.27 ask 0.28 [SPOT-MOVE] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXETHD-26JUL0617-T1789.99: fav 0.85->0.74 ask 0.76 [AMBIGUOUS] tau 310m
+[07-06 09:50:22]   disloc: DISLOC KXSOLD-26JUL0612-T80.9999: fav 0.86->0.33 ask 0.34 [BOOK-ONLY] tau 10m
+[07-06 09:50:22]   disloc: DISLOC KXSOLD-26JUL0617-T81.9999: fav 0.89->0.79 ask 0.81 [BOOK-ONLY] tau 310m
+[07-06 09:50:22]   disloc: disloc: +11 events, 0 settled | disloc shadow: AMBIGUOUS: n=48 win 65% EV -11.8c | BOOK-ONLY: n=32 win 66% EV -8.6c | SPOT-MOVE: n=68 win 71% EV +3.4c | gate: accumulating (123 pending)
+[07-06 09:50:31]   pmwatch: pmwatch: +44 pairs | pmwatch: 2910 rows, 910 kalshi-matched | |divergence| median 5.0c, p90 19.0c (gate n>=300)
+[07-06 09:50:32]   manage: done: 0 exited, 0 flagged for review, 7 holding
+[07-06 09:50:33]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-06 09:50:33]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-06 09:50:33]   reconcile: OK       KXBTCD-26JUL0612-T63099.99: -1
+[07-06 09:50:33]   reconcile: OK       KXHIGHAUS-26JUL06-B98.5: -1
+[07-06 09:50:33]   reconcile: OK       KXHIGHCHI-26JUL06-B78.5: -1
+[07-06 09:50:33]   reconcile: OK       KXHIGHMIA-26JUL06-B89.5: +1
+[07-06 09:50:33]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-06 09:50:33]   reconcile: OK       KXTRUMPATTEND: +2
+[07-06 09:50:33]   reconcile: CASH OK: adj balance $64.47 ~ expected $64.48 (drift $-0.01, reserved $0.00)
+[07-06 09:50:33]   reconcile: reconcile: 7 tickers, 1 mismatches — INVESTIGATE
+[07-06 09:50:34]   wxfade: wxfade: +1 logged, 0 settled | wxfade shadow: n=15 win 73.3% mean net -2.5c/contract total $-0.37 | gate: accumulating (35 pending)
+[07-06 09:50:36]   journal: journal written: realized today $-3.97, 42 settled, 42 fills
+[07-06 09:50:37]   report: wrote reports\report_2026-07-06.md
