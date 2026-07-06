@@ -1139,8 +1139,17 @@ def cmd_stopshadow(_args) -> None:
         # spot vs strike: the unmanipulable signal
         spot = strike = None
         try:
-            from .shortcycle import strike_of
+            from .shortcycle import strike_of, _prev_settlement
             strike = strike_of(t["ticker"])
+            if strike is None and "15M" in t["ticker"].split("-")[0] \
+                    and m.get("close_time"):
+                # R8-C1 HIGH: 15m tickers carry no T-strike — the reference is
+                # the previous window's settlement. Without this the guard
+                # NEVER fired on h10/h15 positions (whitelist was a lie).
+                close_g = dt.datetime.fromisoformat(
+                    m["close_time"].replace("Z", "+00:00"))
+                strike = _prev_settlement(api, t["ticker"].split("-")[0],
+                                          close_g - dt.timedelta(minutes=15))
             prod = {"KXBTC": "BTC-USD", "KXETH": "ETH-USD",
                     "KXSOL": "SOL-USD", "KXXRP": "XRP-USD"}.get(t["ticker"][:5])
             if prod:
@@ -1168,6 +1177,9 @@ def cmd_stopshadow(_args) -> None:
         if not guard.get("enabled"):
             continue
         if spot is None or strike is None:
+            print(f"STOPGUARD HOLD #{t['id']} {t['ticker']}: reference "
+                  f"unavailable (spot={spot is not None} "
+                  f"strike={strike is not None}) — cannot confirm, holding")
             continue                    # no unmanipulable confirmation -> hold
         losing = (spot < strike) if t["side"] == "yes" else (spot > strike)
         near = abs(spot - strike) / strike <= guard.get(
@@ -1201,8 +1213,30 @@ def cmd_stopshadow(_args) -> None:
         fill_raw = float(resp.get("fill_count") or resp.get("fill_count_fp") or 0)
         filled = int(fill_raw)
         if abs(fill_raw - filled) > 1e-9:
-            print(f"CRITICAL #{t['id']} {t['ticker']}: fractional stop fill "
-                  f"{fill_raw} — leaving open, resolver/reconcile owns it")
+            # R8-C1 HIGH: book the fractional exit honestly (split_close is
+            # float-safe) instead of keeping a full-size open row the next
+            # pass would try to sell AGAIN. Exit oid goes into the reason so
+            # reconcile can trace the order.
+            raw_avg = resp.get("average_fill_price")
+            avg_f = float(raw_avg) if raw_avg not in (None, "") else px
+            if t["side"] == "no" and raw_avg not in (None, ""):
+                avg_f = round(1.0 - avg_f, 4)
+            fee_f = round(float(resp.get("average_fee_paid") or 0) * fill_raw, 2)
+            try:
+                ledger.split_close(t["id"], fill_raw, avg_f, fee_f,
+                                   f"stopguard-frac@{avg_f * 100:.0f}c "
+                                   f"oid={resp.get('order_id')}")
+                print(f"STOPGUARD PARTIAL #{t['id']} {t['ticker']}: fractional "
+                      f"exit x{fill_raw} booked, residual stays open")
+            except Exception as e:
+                try:
+                    ledger.mark_unknown(t["id"],
+                                        f"fractional stop fill {fill_raw} "
+                                        f"booking failed: {str(e)[:60]}")
+                except Exception:
+                    pass
+                print(f"CRITICAL #{t['id']} {t['ticker']}: fractional stop "
+                      f"booking failed — frozen")
             continue
         if filled < 1:
             oid = resp.get("order_id")
@@ -1367,6 +1401,39 @@ def cmd_h15(_args) -> None:
             print(f"H15 UNKNOWN {t['ticker']}: fractional fill {fill_ct} — frozen")
             continue
         if fill_ct >= 1:                       # -------- FILLED (maker) --------
+            want = t["contracts"] or 1
+            if fill_ct < want and exch_oid:
+                # R8-C1 CRITICAL: x3 partial fill — the GTC residual is still
+                # LIVE; recording the row open now would orphan it (later fills
+                # = unregistered money). Cancel residual, re-verify, record the
+                # FINAL count; anything unproven freezes for the resolver.
+                try:
+                    client.cancel_order(exch_oid)
+                except Exception as e:
+                    print(f"WARN h15 residual cancel errored ({e}) — verifying")
+                try:
+                    _, st3, fc3 = _lookup(t["ticker"], stored)
+                    if abs(fc3 - round(fc3)) > 1e-9:
+                        ledger.mark_unknown(t["id"],
+                                            f"h15 partial->fractional {fc3}")
+                        print(f"H15 UNKNOWN {t['ticker']}: fractional after "
+                              f"residual cancel — frozen")
+                        continue
+                    if st3 in ("canceled", "cancelled", "expired", "rejected"):
+                        fill_ct = max(fill_ct, int(round(fc3)))
+                    else:
+                        ledger.mark_unknown(t["id"],
+                                            f"h15 partial {fill_ct}/{want}, "
+                                            f"residual state '{st3}' unproven")
+                        print(f"H15 UNKNOWN {t['ticker']}: residual not proven "
+                              f"terminal — frozen")
+                        continue
+                except Exception as e:
+                    ledger.mark_unknown(t["id"], f"h15 partial {fill_ct}/{want}, "
+                                                 f"verify failed: {str(e)[:60]}")
+                    print(f"H15 UNKNOWN {t['ticker']}: partial verify failed — "
+                          f"frozen")
+                    continue
             _record_maker_fill(t, exch_oid, fill_ct)
             continue
         terminal = o_status in ("canceled", "cancelled", "expired", "rejected")
@@ -1527,8 +1594,37 @@ def cmd_h15(_args) -> None:
                 print(f"H15 UNKNOWN {m['ticker']}: fractional instant fill — frozen")
             elif fill_raw >= 1:                 # crossed immediately (rare)
                 n = int(round(fill_raw))
+                oid_new = str(resp.get("order_id") or "")
+                if n < n_ct and oid_new:
+                    # R8-C1 CRITICAL: partial INSTANT fill at x3 — the GTC
+                    # residual keeps resting; cancel + verify before booking,
+                    # else the remainder fills as unregistered money.
+                    try:
+                        client.cancel_order(oid_new)
+                    except Exception as e:
+                        print(f"WARN h15 instant-residual cancel errored ({e})")
+                    try:
+                        _, st4, fc4 = _lookup(m["ticker"], coid)
+                        if st4 in ("canceled", "cancelled", "expired",
+                                   "rejected") and abs(fc4 - round(fc4)) < 1e-9:
+                            n = max(n, int(round(fc4)))
+                        else:
+                            ledger.mark_unknown(tid,
+                                                f"h15 instant partial {n}/{n_ct},"
+                                                f" residual '{st4}' unproven")
+                            print(f"H15 UNKNOWN {m['ticker']}: instant partial, "
+                                  f"residual unproven — frozen")
+                            placed = True
+                            break
+                    except Exception as e:
+                        ledger.mark_unknown(tid, f"h15 instant partial verify "
+                                                 f"failed: {str(e)[:60]}")
+                        print(f"H15 UNKNOWN {m['ticker']}: instant partial "
+                              f"verify failed — frozen")
+                        placed = True
+                        break
                 ledger.record_fill(tid, n, bid, round(n * bid, 2), 0.0,
-                                   str(resp.get("order_id") or coid))
+                                   oid_new or coid)
                 ledger.set_exit_plan(tid, "hold", 0.0, 0.0,   # R7-C1 MED: without
                                      (dt.datetime.now() + dt.timedelta(days=1)
                                       ).isoformat(timespec="seconds"))  # this,
