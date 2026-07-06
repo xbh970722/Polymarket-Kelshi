@@ -83,11 +83,17 @@ class KalshiLive:
         # signature covers the BARE path only — query params must go via `params`
         # (passing them inside `path` breaks the signature -> 401, found 2026-07-04)
         bare = path.split("?")[0]
-        r = self.s.request(method, self.base + bare, json=body, params=params,
-                           headers=self._headers(method, bare), timeout=self.timeout)
-        if r.status_code >= 400:
-            raise RuntimeError(f"{method} {bare} -> HTTP {r.status_code}: {r.text[:400]}")
-        return r.json() if r.text else {}
+        for attempt, delay in enumerate((0, 1, 2, 4)):
+            if delay:
+                time.sleep(delay)
+            r = self.s.request(method, self.base + bare, json=body, params=params,
+                               headers=self._headers(method, bare), timeout=self.timeout)
+            if r.status_code == 429 and attempt < 3:
+                continue
+            if r.status_code >= 400:
+                raise RuntimeError(
+                    f"{method} {bare} -> HTTP {r.status_code}: {r.text[:400]}")
+            return r.json() if r.text else {}
 
     def fills(self, ticker: str | None = None, limit: int = 50) -> dict:
         p = {"limit": limit}

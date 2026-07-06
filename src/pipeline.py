@@ -2282,6 +2282,16 @@ def cmd_reconcile(_args) -> None:
         net = t["contracts"] if t["side"] == "yes" else -t["contracts"]
         led[t["ticker"]] = led.get(t["ticker"], 0) + net
     problems = 0
+    booked_ts_holes = [dict(r) for r in con_r.execute(
+        "SELECT id, ts, ticker, side, contracts, status, order_id FROM trades "
+        "WHERE mode='live' AND status IN ('open','unknown') "
+        "AND booked_ts IS NULL ORDER BY ts")]
+    for h in booked_ts_holes:
+        problems += 1
+        oid = (h.get("order_id") or "?").strip() or "?"
+        print(f"WARN BOOKED_TS NULL #{h['id']} {h['ticker']} "
+              f"{h['side'].upper()} x{h['contracts']} status={h['status']} "
+              f"order_id={oid} ts={h['ts']} — active ledger row lacks cash-move time")
     for tk in sorted(set(exch) | set(led)):
         e, l = exch.get(tk, 0), led.get(tk, 0)
         if abs(e - l) > 1e-9:
