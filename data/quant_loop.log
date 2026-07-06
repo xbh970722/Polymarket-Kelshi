@@ -3318,3 +3318,24 @@
 [07-06 13:50:34] janitor: reaped leaked sessions ['7616', '33100', '34084']
 [07-06 13:50:35]   journal: journal written: realized today $-2.22, 55 settled, 60 fills
 [07-06 13:50:36]   report: wrote reports\report_2026-07-06.md
+[07-06 13:50:38] committed + pushed
+[07-06 13:53:33]   h15: done: h15 pass complete
+[07-06 13:53:34]   h10: h10: 0 in-window | h10 shadow(main): n=142 mean -4.5c total $-6.34 | KXETH15M: n=44 net $+2.57 | KXSOL15M: n=47 net $-8.13 | KXBTC15M: n=51 net $-0.78 | gate: accumulating (1 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 13:53:35]   stopshadow: STOPSHADOW #303 KXSOLD-26JUL0616-T81.9999: held-side bid 0.58 <= 0.7 (crossing logged) | spot 82 vs strike 82 (-0.07%)
+[07-06 13:53:35]   stopshadow: STOPGUARD HOLD #303 KXSOLD-26JUL0616-T81.9999: bid 0.58 but spot safe side & clear — book-only smash, not selling
+[07-06 13:53:35]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-06 13:56:17]   settle: done: 0 settled, 12 still open
+[07-06 13:56:18]   h15: done: h15 pass complete
+[07-06 13:56:20]   stopshadow: STOPGUARD EXIT #303 KXSOLD-26JUL0616-T81.9999: sold x3 @ 42c (bid 0.41, spot losing) — salvaged vs riding to 0
+[07-06 13:56:21]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-06 13:56:26]   shortcycle: shortcycle: 11 candidate strikes | balance $56.02 | today spent $0.79/999999.00
+[07-06 13:56:26]   shortcycle: PASS  KXETHD-26JUL0617-T1789.99: IOC no fill even crossed
+[07-06 13:56:26]   shortcycle: done: 0 shortcycle orders
+[07-06 13:56:28]   favorites: favorites: 2 favorites in zone | realized $-4.99 | today spent $87.72/999999.00
+[07-06 13:56:28]   favorites: done: 0 favorite orders
+[07-06 13:56:28]   h10: h10: 0 in-window | h10 shadow(main): n=142 mean -4.5c total $-6.34 | KXETH15M: n=44 net $+2.57 | KXSOL15M: n=47 net $-8.13 | KXBTC15M: n=51 net $-0.78 | gate: accumulating (1 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 13:56:29]   weather: weather: daily entry cap reached (3)
+[07-06 13:56:31]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=54 win 63% EV -13.7c | BOOK-ONLY: n=34 win 65% EV -8.5c | SPOT-MOVE: n=99 win 62% EV -6.6c | gate: accumulating (130 pending)
+[07-06 13:56:39]   pmwatch: pmwatch: +34 pairs | pmwatch: 3294 rows, 1022 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 13:56:40]   journal: journal written: realized today $-3.47, 56 settled, 60 fills
+[07-06 13:56:42]   report: wrote reports\report_2026-07-06.md
