@@ -248,8 +248,10 @@ h15:
                                  # tau~10/~4 造访) → 改到 tau~4 的 mark 可靠执行;
                                  # 交易所侧 expiration_ts=close-120s 做崩溃保险
   min_fav_mid: 0.86              # 热门中值须高于此才挂 (否则等于吃单越价)
-  max_contracts: 1
-  max_per_trade_usd: 1.00
+  max_contracts: 3               # 2026-07-06 用户拍板×3 (11/20 笔全胜后, 用户
+  max_per_trade_usd: 3.00        # 专属杠杆)。注册簿注记: 成交 #1-11 = x1,
+                                 # #12 起 = x3 — 队列门按成交事件计, 经济学
+                                 # 对比须分段。一笔 84c 死单在 x3 下 = -$2.52。
   max_fav_mid: 0.955             # R7-FABLE: 0.97+ 热门跌 13c 才成交 = 逆向选择
                                  # 最毒段; 带上界让队列数据对准 H12 回弹人群
   drawdown_step_usd: 3.00        # 独立回撤记账 (title h15maker); 首步 -$3 硬停

@@ -1434,7 +1434,10 @@ def cmd_h15(_args) -> None:
                                                 # adverse-selected subset
             if ledger.has_open_position(m["ticker"], "live"):
                 continue
-            est = round(bid + 0.01, 2)
+            # 2026-07-06 user lever: x3 (fills #1-11 were x1 — registry notes
+            # the segment boundary for the queue gate's economics comparison)
+            n_ct = max(1, int(h.get("max_contracts", 1)))
+            est = round(n_ct * bid + 0.01, 2)
             veto = engine.check_risk(ledger.stats("live"), est, cfg_m)
             if veto:
                 print(f"VETO  {m['ticker']}: {veto}")
@@ -1444,18 +1447,22 @@ def cmd_h15(_args) -> None:
                 tid = ledger.insert_trade(
                     mode="live", ticker=m["ticker"],
                     title=f"h15maker {series}", side=side, price=bid,
-                    contracts=1, cost_usd=est, fee_usd=0.0,
+                    contracts=n_ct, cost_usd=est, fee_usd=0.0,
                     q_claude=bid, q_codex=bid, q_consensus=bid,
                     market_prob=round(fav_mid, 4), edge_net=0.0,
                     rationale=f"h15 resting bid (maker), fav_mid {fav_mid:.2f} "
-                              f"tau {tau:.0f}m", status="pending", order_id=coid)
+                              f"tau {tau:.0f}m x{n_ct}", status="pending",
+                    order_id=coid)
             except Exception as e:
                 print(f"FAILED {m['ticker']}: intent write failed ({e})")
                 continue
             try:
-                # R7-C3 HIGH: exchange-side expiry at close-2min = crash-safe
-                # cancel discipline (a dead loop can no longer strand a live bid)
-                resp = client.place_limit(m["ticker"], side, 1, bid,
+                # R7-C3 HIGH: exchange-side expiry at close-2min was MEANT as
+                # crash insurance — B1 demo torture proved the field is NOT
+                # honored (order stays resting); mark-cancel discipline + the
+                # watchdog are the real insurance. Field kept: harmless, and
+                # prod may differ (echo print verifies on each placement).
+                resp = client.place_limit(m["ticker"], side, n_ct, bid,
                                           tif="good_till_canceled",
                                           client_order_id=coid,
                                           expiration_ts=int(
