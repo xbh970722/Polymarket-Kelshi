@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-06",
+  "cycle": "live ensemble (2x Opus 4.8 + 2x Codex gpt-5.5 xhigh, arbiter Opus 4.8)",
+  "note": "Two markets (CPI, LLM1) had their round-1 blind estimates VOIDED by the verification layer (PROTOCOL 3.5) after hard primary-source data refuted the round-1 factual basis; q_claude/q_codex below are the round-2 corrected family finals. See rationale.",
+  "items": [
+    {
+      "ticker": "KXCPIYOY-26JUN-T3.9",
+      "title": "Will the rate of CPI inflation be above 3.9% for the year ending in June 2026?",
+      "q_claude": 0.09,
+      "q_codex": 0.08,
+      "q_all": [0.09, 0.08, 0.09, 0.08],
+      "rationale": "Core argument: June-2026 headline CPI m/m is NEGATIVE, driven by a sharp one-month gasoline collapse, so YoY falls from May's 4.2% to ~3.7-3.8%, BELOW the >3.9% threshold. Main risk: rounding if headline prints 3.95-3.99% (rounds to 4.0=YES) or a core/shelter upside surprise. Divergence: none - both families 0.08-0.09, matching market ~0.08. VERIFICATION VOID (PROTOCOL 3.5): round-1 blind ensemble was 0.67-0.80 (consensus 0.74) on the FALSE premise that 'retail gasoline lags crude and stayed elevated in June' (seeded by an Al Jazeera 'months to normalize' line). EIA weekly data REFUTED this: US regular gasoline monthly avg May $4.479 -> June $4.050 = -9.6% m/m (weekly June: 4.305/4.146/4.052/3.914/3.831). ~3.3% CPI gasoline weight => ~-0.32pp drag; core ~+0.16pp + food ~+0.03pp => implied June m/m ~= -0.13%. Base effect: 4.2% + (June m/m) - (June-2025 base +0.3%) ~= 3.7-3.8%. Market 0.08 was CORRECT; ensemble was fooled by a misleading secondary source. Corrected consensus ~0.085 = market -> NO edge -> no trade.",
+      "sources": [
+        "https://www.bls.gov/news.release/cpi.nr0.htm (May 2026 CPI YoY 4.2%, core 2.9%, energy +23.5% YoY)",
+        "https://tradingeconomics.com/united-states/inflation-cpi (Apr 3.8 -> May 4.2; June TEforecast 3.9)",
+        "https://fred.stlouisfed.org/graph/fredgraph.csv?id=GASREGW (weekly regular gasoline: May avg 4.479, June avg 4.050, -9.6% m/m)",
+        "https://www.eia.gov/petroleum/gasdiesel/ (EIA weekly gasoline, 06/29/26 3.831, -0.083 w/w)",
+        "https://www.bls.gov/news.release/archives/cpi_07152025.htm (June 2025 SA m/m +0.3%, YoY 2.7% = the base)",
+        "https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting (June nowcast ~3.96%, appears to lag late-June energy)"
+      ]
+    },
+    {
+      "ticker": "KXPLATNERDROPOUT-26",
+      "title": "Will Graham Platner drop out of the 2026 U.S. Senate election in Maine before Jul 14, 2026?",
+      "q_claude": 0.025,
+      "q_codex": 0.02,
+      "q_all": [0.03, 0.02, 0.02, 0.02],
+      "rationale": "Core argument: Platner WON the June 9 Democratic primary (beat Gov. Mills) and is the actual nominee vs Sen. Collins; base rate for a just-nominated Senate candidate voluntarily quitting in an ~8-day window is <1%. Main risk: a new disqualifying scandal + party pressure. Divergence: none (all four 0.02-0.03). His controversies (old Reddit posts, tattoo, 'toxic behavior' allegations) surfaced DURING the primary, which he survived and won; competitive polling (Collins +3) gives no incentive to quit; no public withdrawal signal. Consensus 0.022 vs market 0.04 -> NO-side edge only ~0.018 < 0.035 bar -> no trade (efficiently priced).",
+      "sources": [
+        "https://www.nbcnews.com/politics/2026-election/democrats-new-graham-platner-controversy-maine-rcna348538",
+        "https://thehill.com/homenews/campaign/5949541-susan-collins-graham-platner-maine-senate-race-fox-survey/ (Fox poll Collins 50 / Platner 47)",
+        "https://www.washingtonpost.com/elections/2026/06/09/maine-senate-primary-election-live-results-embattled-graham-platner-runs/ (won June 9 primary)"
+      ]
+    },
+    {
+      "ticker": "KXLLM1-26JUL31-A",
+      "title": "Best AI in Jul 2026? (Anthropic top-ranked LLM on LMArena on Jul 31, 2026)",
+      "q_claude": 0.88,
+      "q_codex": 0.88,
+      "q_all": [0.88, 0.88, 0.88, 0.88],
+      "rationale": "Core argument: as of Jul 1 2026 Anthropic occupies LMArena Text-Arena ranks 1-5 (fable-5 1509, opus-4-6-thinking 1504, opus-4-7-thinking 1502, opus-4-6 1499, opus-4-7 1494); best non-Anthropic (#6 Meta muse-spark 1487 prelim, #7 gemini-3.1-pro 1486) trails #1 by ~22 Elo behind a 5-model buffer; even a Fable-5 export-control delisting hands #1 to opus-4-6 (1504) - still Anthropic. Main risk: a Google/OpenAI/Meta frontier drop mid-July leapfrogging multiple Anthropic models, or a board/methodology recompute. Divergence: none (both families 0.88). VERIFICATION VOID (PROTOCOL 3.5): round-1 blind consensus was 0.64 (below market) on the premise the frontier was tight and Fable-5 possibly suspended -> implied a spurious NO edge. Actual board REFUTED it: Anthropic dominates the top 5. Corrected consensus 0.88 vs market ~0.83 -> small YES edge; engine + fee bar decide sizing.",
+      "sources": [
+        "https://arena.ai/leaderboard/text (LMArena Text-Arena Overall, dated Jul 1 2026: Anthropic ranks 1-5; top non-Anthropic #6 muse-spark 1487, #7 gemini-3.1-pro 1486)",
+        "https://www.swfte.com/ai/leaderboard (composite quality index: Fable 5 #1, Opus 4.8 #2, GPT-5.5 Pro #3)"
+      ]
+    }
+  ]
+}
