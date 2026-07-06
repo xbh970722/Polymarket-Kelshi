@@ -3261,3 +3261,22 @@
 [07-06 13:36:08]   pmwatch: pmwatch: +38 pairs | pmwatch: 3258 rows, 1010 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-06 13:36:09]   journal: journal written: realized today $-2.22, 55 settled, 58 fills
 [07-06 13:36:11]   report: wrote reports\report_2026-07-06.md
+[07-06 13:36:12] committed + pushed
+[07-06 13:38:22]   h15: done: h15 pass complete
+[07-06 13:38:24]   h10: h10: 1 in-window | h10 shadow(main): n=141 mean -4.6c total $-6.47 | KXETH15M: n=43 net $+2.44 | KXSOL15M: n=47 net $-8.13 | KXBTC15M: n=51 net $-0.78 | gate: accumulating (1 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 13:38:24]   h10: PASS  KXETH15M-26JUL061545-45: IOC no fill even crossed (fill-reality data point)
+[07-06 13:38:24]   h10: done: 0 h10 orders
+[07-06 13:41:28]   settle: done: 0 settled, 10 still open
+[07-06 13:41:29]   h15: done: h15 pass complete
+[07-06 13:41:31]   mktsnap: mktsnap: 12 quotes recorded, 0 outcomes resolved
+[07-06 13:41:35]   shortcycle: shortcycle: 7 candidate strikes | balance $60.10 | today spent $0.79/999999.00
+[07-06 13:41:35]   shortcycle: done: 0 shortcycle orders
+[07-06 13:41:38]   favorites: favorites: 5 favorites in zone | realized $-3.74 | today spent $82.43/999999.00
+[07-06 13:41:38]   favorites: LIVE  KXXRPD-26JUL0617-T1.1599: FAV NO x3 @ 94c cost=$2.83 order=4d498dae-14cb-4f4c-bd6e-7512f3fbdae6
+[07-06 13:41:38]   favorites: done: 1 favorite orders
+[07-06 13:41:39]   h10: h10: 0 in-window | h10 shadow(main): n=141 mean -4.6c total $-6.47 | KXETH15M: n=43 net $+2.44 | KXSOL15M: n=47 net $-8.13 | KXBTC15M: n=51 net $-0.78 | gate: accumulating (1 pending) || H13 final6: n=21 win 21/21 net $+0.54 gate: accumulating
+[07-06 13:41:40]   weather: weather: daily entry cap reached (3)
+[07-06 13:41:42]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=54 win 63% EV -13.7c | BOOK-ONLY: n=34 win 65% EV -8.5c | SPOT-MOVE: n=99 win 62% EV -6.6c | gate: accumulating (130 pending)
+[07-06 13:41:51]   pmwatch: pmwatch: +40 pairs | pmwatch: 3270 rows, 1014 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 13:41:52]   journal: journal written: realized today $-2.22, 55 settled, 59 fills
+[07-06 13:41:54]   report: wrote reports\report_2026-07-06.md
