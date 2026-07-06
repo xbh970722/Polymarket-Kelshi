@@ -3442,3 +3442,29 @@
 [07-06 05:50:31]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=7 win 71.4% mean net -3.0c/contract total $-0.21 | gate: accumulating (29 pending)
 [07-06 05:50:32]   journal: journal written: realized today $+1.42, 24 settled, 24 fills
 [07-06 05:50:33]   report: wrote reports\report_2026-07-06.md
+[07-06 05:50:38] committed + pushed
+[07-06 05:53:32]   h15: done: h15 pass complete
+[07-06 05:53:33]   h10: h10: 0 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (0 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 05:56:17]   settle: done: 0 settled, 7 still open
+[07-06 05:56:18]   h15: done: h15 pass complete
+[07-06 05:56:20]   mktsnap: mktsnap: 7 quotes recorded, 0 outcomes resolved
+[07-06 05:56:24]   shortcycle: shortcycle: 0 candidate strikes | balance $69.58 | today spent $0.00/999999.00
+[07-06 05:56:24]   shortcycle: done: 0 shortcycle orders
+[07-06 05:56:26]   favorites: favorites: 0 favorites in zone | realized $-0.17 | today spent $27.76/999999.00
+[07-06 05:56:26]   favorites: done: 0 favorite orders
+[07-06 05:56:27]   h10: h10: 0 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (0 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 05:56:27]   weather: weather: 0 priced buckets | spent $1.31/999999.00
+[07-06 05:56:27]   weather: done: 0 weather orders
+[07-06 05:56:29]   disloc: DISLOC KXSOLD-26JUL1017-T75.9999: fav 0.82->0.57 ask 0.87 [BOOK-ONLY] tau 6304m
+[07-06 05:56:29]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=43 win 67% EV -8.7c | BOOK-ONLY: n=28 win 68% EV -6.4c | SPOT-MOVE: n=35 win 57% EV -8.0c | gate: accumulating (59 pending)
+[07-06 05:56:35]   pmwatch: pmwatch: +22 pairs | pmwatch: 2538 rows, 795 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-06 06:00:20]   h15: done: h15 pass complete
+[07-06 06:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (0 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 06:00:51]   h15: done: h15 pass complete
+[07-06 06:00:52]   h10: h10: 1 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (1 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 06:00:52]   h10: done: 0 h10 orders
+[07-06 06:02:53]   h15: H15 RESTING placed KXETH15M-26JUL060815-15: NO bid 84c fav_mid 0.93 tau 12m order=7b312463-9a33-4070-9cdf-47e64d8c2f65 exp=not-echoed(normal)
+[07-06 06:02:53]   h15: done: h15 pass complete
+[07-06 06:02:54]   h10: h10: 1 in-window | h10 shadow(main): n=107 mean -1.9c total $-2.06 | KXETH15M: n=34 net $+2.41 | KXSOL15M: n=37 net $-4.16 | KXBTC15M: n=36 net $-0.31 | gate: accumulating (2 pending) || H13 final6: n=18 win 18/18 net $+0.46 gate: accumulating
+[07-06 06:02:54]   h10: done: 0 h10 orders
+[07-06 06:02:56]   journal: journal written: realized today $+1.42, 24 settled, 25 fills
