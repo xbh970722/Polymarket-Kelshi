@@ -648,6 +648,7 @@ def cmd_favorites(_args) -> None:
     cfg_gl["risk"]["max_per_trade_usd"] = min(cfg_gl["risk"]["max_per_trade_usd"],
                                               fc.get("max_per_trade_usd", 2.0))
     placed = 0
+    spot_cache: dict = {}          # one Coinbase spot fetch per series per pass
     for series, m, side, ask in sorted(cands, key=lambda x: x[3]):    # cheapest favorite = most room
         if spent >= fc["daily_budget_usd"] or n_open >= fc.get("max_open", 3):
             break
@@ -667,6 +668,42 @@ def cmd_favorites(_args) -> None:
         if any(t["ticker"].startswith(window)          # R3-FABLE HIGH: incl. unknown
                for t in ledger.active_trades("live")):
             continue
+        # ---- z-floor (2026-07-06 BTC autopsy): all three BTC deaths entered
+        # at z<0.8 — an ~0.89 favorite with spot one wiggle from the strike is
+        # a fair-priced coin flip, not cheap insurance. O1 pre-registered 0.8;
+        # ledger evidence n=101: z<1 bucket net -$4.17 vs z>=1 +$9.87.
+        # T-strikes only (range buckets skip via strike_of); fail-open on
+        # data errors (a Coinbase hiccup must not silence the whole lane).
+        zf = fc.get("z_floor")
+        if zf:
+            try:
+                from .shortcycle import strike_of
+                import requests as _rq
+                strike = strike_of(m["ticker"])
+                sig = (fc.get("sigma_1h") or {}).get(series)
+                close_z = dt.datetime.fromisoformat(
+                    m["close_time"].replace("Z", "+00:00"))
+                tau_h = (close_z - dt.datetime.now(dt.timezone.utc)
+                         ).total_seconds() / 3600
+                if strike and sig and tau_h > 0:
+                    if series not in spot_cache:
+                        prod = {"KXBTCD": "BTC-USD", "KXETHD": "ETH-USD",
+                                "KXSOLD": "SOL-USD", "KXXRPD": "XRP-USD"}[series]
+                        spot_cache[series] = float(_rq.get(
+                            "https://api.exchange.coinbase.com/products/"
+                            f"{prod}/ticker", timeout=10).json()["price"])
+                    dist = (spot_cache[series] - strike) / strike
+                    if side == "no":
+                        dist = -dist
+                    z = dist / (sig * tau_h ** 0.5)
+                    if z < zf:
+                        print(f"Z-REJECT {m['ticker']} {side} @{ask:.2f}: "
+                              f"z={z:.2f} < {zf} — spot too close to strike "
+                              f"for this price (coin flip, not insurance)")
+                        continue
+            except Exception as e:
+                print(f"WARN z-floor check failed ({type(e).__name__}) — "
+                      f"fail-open, entry allowed")
         # bet the structural bias, not a model edge -> pass edge check trivially
         n_ct = (fc.get("max_contracts_by_series") or {}).get(
             series, fc.get("max_contracts", 2))   # R4: same default as est_ct
