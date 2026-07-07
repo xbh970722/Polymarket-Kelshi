@@ -2207,3 +2207,21 @@
 [07-07 02:20:49]   pmwatch: pmwatch: +52 pairs | pmwatch: 4482 rows, 1372 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
 [07-07 02:20:50]   journal: journal written: realized today $-1.18, 9 settled, 13 fills
 [07-07 02:20:51]   report: wrote reports\report_2026-07-07.md
+[07-07 02:20:53] committed + pushed
+[07-07 02:23:14]   h15: done: h15 pass complete
+[07-07 02:23:15]   h10: h10: 0 in-window | h10 shadow(main): n=209 mean -2.9c total $-6.05 | KXETH15M: n=64 net $+2.75 | KXSOL15M: n=71 net $-7.48 | KXBTC15M: n=74 net $-1.32 | gate: KILL (0 pending) || H13 final6: n=24 win 24/24 net $+0.62 gate: accumulating
+[07-07 02:26:35]   settle: SETTLED KXSOLD-26JUL0704-T81.9999: result=no WIN pnl=$+0.22
+[07-07 02:26:35]   settle: done: 1 settled, 11 still open
+[07-07 02:26:36]   h15: done: h15 pass complete
+[07-07 02:26:38]   mktsnap: mktsnap: 3 quotes recorded, 2 outcomes resolved
+[07-07 02:26:42]   shortcycle: shortcycle: 10 candidate strikes | balance $57.83 | today spent $0.00/999999.00
+[07-07 02:26:42]   shortcycle: done: 0 shortcycle orders
+[07-07 02:26:44]   favorites: favorites: 2 favorites in zone | realized $-6.87 | today spent $17.09/999999.00
+[07-07 02:26:44]   favorites: done: 0 favorite orders
+[07-07 02:26:45]   h10: h10: 0 in-window | h10 shadow(main): n=209 mean -2.9c total $-6.05 | KXETH15M: n=64 net $+2.75 | KXSOL15M: n=71 net $-7.48 | KXBTC15M: n=74 net $-1.32 | gate: KILL (0 pending) || H13 final6: n=24 win 24/24 net $+0.62 gate: accumulating
+[07-07 02:26:46]   weather: weather: 0 priced buckets | spent $1.27/999999.00
+[07-07 02:26:46]   weather: done: 0 weather orders
+[07-07 02:26:48]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=88 win 72% EV -4.1c | BOOK-ONLY: n=45 win 62% EV -12.3c | SPOT-MOVE: n=166 win 62% EV -6.6c | gate: ARCHIVE (101 pending)
+[07-07 02:27:00]   pmwatch: pmwatch: +53 pairs | pmwatch: 4494 rows, 1376 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
+[07-07 02:27:00]   journal: journal written: realized today $-0.96, 10 settled, 13 fills
+[07-07 02:27:02]   report: wrote reports\report_2026-07-07.md
