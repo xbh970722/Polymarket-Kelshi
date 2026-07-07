@@ -3501,3 +3501,19 @@
 [07-07 00:38:17]   h15: H15 RESTING KXETH15M-26JUL070245-45: bid 84c tau 6.7m
 [07-07 00:38:18]   h10: h10: 0 in-window | h10 shadow(main): n=203 mean -2.8c total $-5.76 | KXETH15M: n=61 net $+3.38 | KXSOL15M: n=70 net $-7.53 | KXBTC15M: n=72 net $-1.60 | gate: KILL (3 pending) || H13 final6: n=23 win 23/23 net $+0.60 gate: accumulating
 [07-07 00:38:19]   journal: journal written: realized today $+0.15, 2 settled, 4 fills
+[07-07 00:38:21] light mark committed + pushed
+[07-07 00:41:24]   settle: done: 0 settled, 9 still open
+[07-07 00:41:25]   h15: H15 PULLED KXETH15M-26JUL070245-45: no fill, window closing (queue data point)
+[07-07 00:41:28]   mktsnap: mktsnap: 13 quotes recorded, 0 outcomes resolved
+[07-07 00:41:32]   shortcycle: shortcycle: 9 candidate strikes | balance $60.29 | today spent $0.00/999999.00
+[07-07 00:41:32]   shortcycle: done: 0 shortcycle orders
+[07-07 00:41:35]   favorites: favorites: 3 favorites in zone | realized $-6.64 | today spent $3.56/999999.00
+[07-07 00:41:35]   favorites: LIVE  KXETHD-26JUL0703-T1769.99: FAV YES x3 @ 85c cost=$2.58 order=183484ad-5598-4f13-b30d-77af5c90d46f
+[07-07 00:41:35]   favorites: done: 1 favorite orders
+[07-07 00:41:35]   h10: h10: 0 in-window | h10 shadow(main): n=203 mean -2.8c total $-5.76 | KXETH15M: n=61 net $+3.38 | KXSOL15M: n=70 net $-7.53 | KXBTC15M: n=72 net $-1.60 | gate: KILL (3 pending) || H13 final6: n=23 win 23/23 net $+0.60 gate: accumulating
+[07-07 00:41:36]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-07 00:41:36]   weather: done: 0 weather orders
+[07-07 00:41:38]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=83 win 72% EV -3.6c | BOOK-ONLY: n=44 win 61% EV -13.0c | SPOT-MOVE: n=164 win 63% EV -5.9c | gate: ARCHIVE (101 pending)
+[07-07 00:41:49]   pmwatch: pmwatch: +57 pairs | pmwatch: 4326 rows, 1324 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
+[07-07 00:41:50]   journal: journal written: realized today $+0.15, 2 settled, 4 fills
+[07-07 00:41:51]   report: wrote reports\report_2026-07-07.md
