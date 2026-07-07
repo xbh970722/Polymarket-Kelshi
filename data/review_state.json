@@ -1,6 +1,1 @@
-{
- "last_review_id": 54,
- "review_no": 4,
- "ts": "2026-07-06T12:28:29",
- "note": "Review #4 = Favorites lane drawdown -$4.90 (review_due_favorites.json). Favorites net +$11.04/127 (122W-5L, 96%); losses are singletons in otherwise-green bands. BTC only net-neg coin (-$0.60/48, lowest sigma, 3 of 5 losses). Root leak = entry margin quality not price band: z_floor 0.8->1.0, closing net-neg [0.8,1.0) bucket (ledger n=101: z<1 -$4.17 vs z>=1 +$9.87). Pure gate tighten, no dollar-cap change; lane continues. last_review_id kept at 54 (short-cycle cursor; favorites uses full-history title LIKE)."
-}
+﻿{"ts":"2026-07-07T00:22:00","review_no":5,"note":"Favorites Review #5 = drawdown step2 (realized -.04, loop accum -.64). Favorites n=153 net +.53, 148W-5L (96.7%). All 5 losses predate Review#4 (07-04/07-05); ZERO losses since Review#4 (07-06T12:28), 5 consecutive wins. z_floor=1.0 gate (fail-closed) LIVE \u0026 firing: 10 Z-REJECTs, 3 today (XRP z=0.53-0.81\u003c1.0). Accumulator -6.04-\u003e-6.64 drift = entry fees/marks on profitable open book, not new loss. VERDICT: prior fix confirmed sufficient, CONTINUE unchanged, no new tightening (over-tightening +16.53/96.7% core has no evidence), no dollar-cap change. last_review_id kept 54 (favorites uses full-history title LIKE).","last_review_id":54}
