@@ -2924,3 +2924,20 @@
 [07-07 15:38:18]   h10: done: 0 h10 orders
 [07-07 15:38:20]   stopshadow: STOPGUARD NOFILL #451 KXBTCD-26JUL0718-T63299.99: bid vanished, still holding
 [07-07 15:38:21]   journal: journal written: realized today $-3.05, 64 settled, 69 fills
+[07-07 15:38:23] light mark committed + pushed
+[07-07 15:41:24]   settle: done: 0 settled, 12 still open
+[07-07 15:41:26]   h15: H15 UNKNOWN KXETH15M-26JUL071745-45: cancel unverified — frozen as exposure until reconcile resolves
+[07-07 15:41:27]   stopshadow: STOPGUARD HOLD #451 KXBTCD-26JUL0718-T63299.99: bid 0.65 but spot safe side & clear — book-only smash, not selling
+[07-07 15:41:30]   mktsnap: mktsnap: 6 quotes recorded, 0 outcomes resolved
+[07-07 15:41:34]   shortcycle: shortcycle: 10 candidate strikes | balance $48.07 | today spent $1.82/999999.00
+[07-07 15:41:34]   shortcycle: done: 0 shortcycle orders
+[07-07 15:41:37]   favorites: favorites: 2 favorites in zone | realized $-6.39 | today spent $92.30/999999.00
+[07-07 15:41:37]   favorites: done: 0 favorite orders
+[07-07 15:41:37]   h10: h10: 0 in-window | h10 shadow(main): n=281 mean -3.4c total $-9.46 | KXETH15M: n=86 net $+3.25 | KXSOL15M: n=92 net $-9.35 | KXBTC15M: n=103 net $-3.36 | gate: KILL (3 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:41:38]   weather: weather: daily entry cap reached (3)
+[07-07 15:41:41]   disloc: DISLOC KXBTCD-26JUL0718-T63299.99: fav 0.86->0.67 ask 0.67 [AMBIGUOUS] tau 18m
+[07-07 15:41:41]   disloc: DISLOC KXETHD-26JUL0718-T1769.99: fav 0.85->0.74 ask 0.77 [AMBIGUOUS] tau 18m
+[07-07 15:41:41]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=103 win 73% EV -2.8c | BOOK-ONLY: n=74 win 68% EV -8.8c | SPOT-MOVE: n=224 win 68% EV -1.2c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (115 pending)
+[07-07 15:41:53]   pmwatch: pmwatch: +52 pairs | pmwatch: 5742 rows, 1746 kalshi-matched | |divergence| median 4.9c, p90 18.0c (gate n>=300)
+[07-07 15:41:54]   journal: journal written: realized today $-3.05, 64 settled, 69 fills
+[07-07 15:41:55]   report: wrote reports\report_2026-07-07.md
