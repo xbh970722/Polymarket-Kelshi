@@ -1,0 +1,54 @@
+{
+  "date": "2026-07-07",
+  "cycle": 2,
+  "mode": "live",
+  "ensemble": "2x Opus 4.8 (inside/outside) + 2x Codex gpt-5.5 xhigh (inside/outside); arbiter Opus 4.8",
+  "items": [
+    {
+      "ticker": "KXGPT-OPENB-26JUL10",
+      "title": "Will OpenAI release GPT-5.6 (or greater) publicly before Jul 10, 2026?",
+      "q_claude": 0.06,
+      "q_codex": 0.09,
+      "q_all": [0.06, 0.06, 0.11, 0.07],
+      "family_divergence": 0.03,
+      "rationale": "Core: settlement requires a PUBLIC release outside a closed beta (a high-cost subscription tier is OK); as of 07-07 GPT-5.6 (Sol/Terra/Luna) remains gated to ~20 US-government-vetted partner orgs via API/Codex preview, and independent reporting puts the earliest reasonable public GA at ~Jul 10-17 -- i.e. AT or AFTER the Jul 10 03:59 UTC close. Risk: a surprise Jul 8-9 public drop, OR Kalshi resolving the existing partner/API preview as 'released' despite the explicit closed-beta exclusion (settlement-interpretation tail). Divergence: both families tightly agree NO (Opus 0.06/0.06, Codex 0.11/0.07, div 0.03); all four estimators sit far below market ~0.82, consistent with retail anchoring on the 'GPT-5.6 released June 26' headline. Verification (press/social, 24h) reinforced partner-only status with no GA announced for Jul 8; round-1 facts NOT invalidated, half-anchor applies normally.",
+      "sources": [
+        "https://cryptobriefing.com/openai-releases-gpt-56-models-to-20-partners-public-launch-expected-by-july-2026/",
+        "https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/",
+        "https://www.axios.com/2026/06/26/openai-gpt-sol-terra-luna-trump",
+        "https://en.wikipedia.org/wiki/GPT-5.6",
+        "https://kalshi.com/markets/kxgpt/chatgpt-release-date/kxgpt-openb"
+      ]
+    },
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-TJAC",
+      "title": "Will Troy Jackson be the Maine Democratic US Senate nominee as of Jul 31, 2026?",
+      "q_claude": 0.155,
+      "q_codex": 0.23,
+      "q_all": [0.17, 0.14, 0.22, 0.24],
+      "family_divergence": 0.075,
+      "rationale": "Core: YES needs BOTH (1) Platner out as nominee by Jul 31 AND (2) Troy Jackson SPECIFICALLY chosen from a crowded field via an undefined insider committee process (Platner won the 06-09 primary; a 07-06 Politico sexual-assault allegation triggered near-total party-leadership abandonment incl. Warren, Schumer, and now Bernie Sanders). Risk: if leaders quickly coalesce around Jackson post-withdrawal YES jumps; the funding cutoff + Jul 13 withdrawal deadline raise P(Platner out). Divergence: Opus 0.155 vs Codex 0.23 = 0.075 (<0.10). Consensus ~0.19 sits well below market ~0.52 -- Newsweek lists NINE possible contenders (Jackson, Bellows, Shah, Costello, Wood, possibly Mills, et al.) and Jackson just LOST the June gubernatorial primary, so the market appears to overweight his loud public campaigning vs the reality of a contested committee pick. Verification (07-07/08) reinforced the crowded field; round-1 facts NOT invalidated.",
+      "sources": [
+        "https://www.politico.com/news/2026/07/06/graham-platner-sexual-assault-allegation-00987737",
+        "https://www.wbur.org/news/2026/07/07/graham-platner-potential-replacements-maine-senate",
+        "https://www.nbcnews.com/politics/2026-election/replace-graham-platner-maine-democratic-senate-nominee-rcna353326",
+        "https://www.newsweek.com/who-could-replace-graham-platner-in-maine-race-nine-possible-contenders-12163774",
+        "https://www.washingtonexaminer.com/news/campaigns/congressional/4638366/troy-jackson-calls-graham-platner-drop-out-maine-senate-race/"
+      ]
+    },
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey (Nolan) Rotten Tomatoes Tomatometer above 90 on Monday after wide release?",
+      "q_claude": 0.55,
+      "q_codex": 0.45,
+      "q_all": [0.55, 0.55, 0.47, 0.43],
+      "family_divergence": 0.10,
+      "rationale": "Core: Nolan base rate ~5/12 films strictly above 90 (Oppenheimer 93, Dark Knight 94, Memento 93, Dunkirk 92, Insomnia 92); uniformly glowing early reactions push above base rate, but the SCORED reviews that feed RT are embargoed until ~Jul 16-17. Risk: strictly >90 (needs 91+) excludes the crowded 88-92 band, and early social mini-reviews are positive-biased and do NOT feed the Tomatometer. Divergence: Opus family 0.55 vs Codex family 0.45 = 0.10 (exactly at the 0.10 gate); consensus 0.50 below market ~0.65. CROSS-RUN NOTE: cycle-1 today independently estimated 0.585 -- B is a genuine coin-flip and any edge is within run-to-run noise, LOW conviction; recorded primarily for calibration.",
+      "sources": [
+        "https://www.forbes.com/sites/paultassi/2026/07/07/the-odyssey-early-critic-reviews-render-a-unanimous-verdict/",
+        "https://deadline.com/2026/07/the-odyssey-movie-first-reactions-critics-fanboys-1236975274/",
+        "https://editorial.rottentomatoes.com/article/everything-we-know-about-the-odyssey/"
+      ]
+    }
+  ]
+}
