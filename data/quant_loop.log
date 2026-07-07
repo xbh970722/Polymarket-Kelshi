@@ -2378,3 +2378,64 @@
 [07-07 12:35:48]   pmwatch: pmwatch: +49 pairs | pmwatch: 5442 rows, 1655 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-07 12:35:49]   journal: journal written: realized today $-3.85, 54 settled, 54 fills
 [07-07 12:35:50]   report: wrote reports\report_2026-07-07.md
+[07-07 12:35:54] committed + pushed
+[07-07 12:38:16]   h15: done: h15 pass complete
+[07-07 12:38:17]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:41:24]   settle: done: 0 settled, 8 still open
+[07-07 12:41:25]   h15: done: h15 pass complete
+[07-07 12:41:27]   mktsnap: mktsnap: 12 quotes recorded, 0 outcomes resolved
+[07-07 12:41:31]   shortcycle: shortcycle: 7 candidate strikes | balance $59.15 | today spent $1.82/999999.00
+[07-07 12:41:31]   shortcycle: done: 0 shortcycle orders
+[07-07 12:41:33]   favorites: favorites: 1 favorites in zone | realized $-6.71 | today spent $69.79/999999.00
+[07-07 12:41:33]   favorites: done: 0 favorite orders
+[07-07 12:41:34]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:41:34]   weather: weather: daily entry cap reached (3)
+[07-07 12:41:36]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=96 win 72% EV -3.8c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (136 pending)
+[07-07 12:41:47]   pmwatch: pmwatch: +50 pairs | pmwatch: 5454 rows, 1659 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 12:45:49]   h15: done: h15 pass complete
+[07-07 12:45:49]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:47:11]   h15: done: h15 pass complete
+[07-07 12:47:12]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:50:48]   settle: done: 0 settled, 8 still open
+[07-07 12:50:49]   h15: H15 RESTING placed KXETH15M-26JUL071500-00: NO bid 84c fav_mid 0.95 tau 9m order=b43a22d7-5460-4c45-a3ba-59c7f46cbe11 exp=not-echoed(normal)
+[07-07 12:50:49]   h15: done: h15 pass complete
+[07-07 12:50:50]   stopshadow: STOPSHADOW #431 KXBTCD-26JUL0715-T63799.99: held-side bid 0.62 <= 0.7 (crossing logged)
+[07-07 12:50:50]   stopshadow: STOPGUARD HOLD #431 KXBTCD-26JUL0715-T63799.99: reference unavailable (spot=False strike=True) — cannot confirm, holding
+[07-07 12:50:50]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-07 12:50:52]   mktsnap: mktsnap: 12 quotes recorded, 3 outcomes resolved
+[07-07 12:50:54]   shortcycle: WARN KXBTCD: vol fetch failed (403 Client Error: Forbidden for url: https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=60&start=2026-07-07T15%3A45%3A53.192261%2B00%3A00&end=2026-07-07T18%3A50%3A53.192261%2B00%3A00)
+[07-07 12:50:54]   shortcycle: WARN KXETHD: vol fetch failed (403 Client Error: Forbidden for url: https://api.exchange.coinbase.com/products/ETH-USD/candles?granularity=60&start=2026-07-07T15%3A45%3A53.570639%2B00%3A00&end=2026-07-07T18%3A50%3A53.570639%2B00%3A00)
+[07-07 12:50:54]   shortcycle: WARN KXSOLD: vol fetch failed (403 Client Error: Forbidden for url: https://api.exchange.coinbase.com/products/SOL-USD/candles?granularity=60&start=2026-07-07T15%3A45%3A53.989376%2B00%3A00&end=2026-07-07T18%3A50%3A53.989376%2B00%3A00)
+[07-07 12:50:54]   shortcycle: WARN KXXRPD: vol fetch failed (403 Client Error: Forbidden for url: https://api.exchange.coinbase.com/products/XRP-USD/candles?granularity=60&start=2026-07-07T15%3A45%3A54.365701%2B00%3A00&end=2026-07-07T18%3A50%3A54.365701%2B00%3A00)
+[07-07 12:50:54]   shortcycle: shortcycle: 0 candidate strikes | balance $59.15 | today spent $1.82/999999.00
+[07-07 12:50:54]   shortcycle: done: 0 shortcycle orders
+[07-07 12:50:57]   favorites: favorites: 2 favorites in zone | realized $-6.71 | today spent $69.79/999999.00
+[07-07 12:50:57]   favorites: done: 0 favorite orders
+[07-07 12:50:57]   h10: h10: 1 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (1 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:50:57]   h10: done: 0 h10 orders
+[07-07 12:50:58]   weather: weather: daily entry cap reached (3)
+[07-07 12:51:01]   disloc: DISLOC KXBTCD-26JUL0715-T63899.99: fav 0.81->0.29 ask 0.29 [UNKNOWN] tau 9m
+[07-07 12:51:01]   disloc: DISLOC KXBTCD-26JUL0715-T63799.99: fav 0.95->0.62 ask 0.63 [UNKNOWN] tau 9m
+[07-07 12:51:01]   disloc: DISLOC KXBTCD-26JUL0715-T63699.99: fav 0.98->0.89 ask 0.89 [UNKNOWN] tau 9m
+[07-07 12:51:01]   disloc: DISLOC KXBTCD-26JUL0717-T63499.99: fav 0.91->0.81 ask 0.82 [UNKNOWN] tau 129m
+[07-07 12:51:01]   disloc: DISLOC KXETHD-26JUL0717-T1789.99: fav 0.81->0.61 ask 0.62 [UNKNOWN] tau 129m
+[07-07 12:51:01]   disloc: DISLOC KXSOLD-26JUL1017-T76.9999: fav 0.88->0.63 ask 0.97 [UNKNOWN] tau 4449m
+[07-07 12:51:01]   disloc: DISLOC KXXRPD-26JUL0717-T1.1199: fav 0.79->0.56 ask 0.59 [UNKNOWN] tau 129m
+[07-07 12:51:01]   disloc: disloc: +7 events, 0 settled | disloc shadow: AMBIGUOUS: n=96 win 72% EV -3.8c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (143 pending)
+[07-07 12:51:08]   pmwatch: pmwatch: +30 pairs | pmwatch: 5466 rows, 1663 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 12:51:10]   manage: done: 0 exited, 0 flagged for review, 8 holding
+[07-07 12:51:11]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-07 12:51:11]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-07 12:51:11]   reconcile: OK       KXBTCD-26JUL0715-T63799.99: +1
+[07-07 12:51:11]   reconcile: OK       KXETHD-26JUL0715-T1809.99: -3
+[07-07 12:51:11]   reconcile: OK       KXHIGHDEN-26JUL07-T96: -1
+[07-07 12:51:11]   reconcile: OK       KXHIGHMIA-26JUL07-B92.5: -1
+[07-07 12:51:11]   reconcile: OK       KXHIGHPHIL-26JUL07-B79.5: -1
+[07-07 12:51:11]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-07 12:51:11]   reconcile: OK       KXTRUMPATTEND: +2
+[07-07 12:51:11]   reconcile: CASH MISMATCH: adj balance $61.68 (cash $59.15 + reserved $2.53) vs expected $59.15 (drift $+2.53) — booking corruption or external deposit/withdrawal
+[07-07 12:51:11]   reconcile: reconcile: 8 tickers, 2 mismatches — INVESTIGATE
+[07-07 12:51:12]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (39 pending)
+[07-07 12:51:13] janitor: reaped leaked sessions ['32960']
+[07-07 12:51:14]   journal: journal written: realized today $-3.85, 54 settled, 55 fills
+[07-07 12:51:15]   report: wrote reports\report_2026-07-07.md
