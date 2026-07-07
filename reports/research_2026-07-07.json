@@ -1,0 +1,52 @@
+{
+  "date": "2026-07-07",
+  "mode": "live",
+  "ensemble": "2x Opus 4.8 (inside/outside) + 2x Codex gpt-5.5 xhigh (inside/outside); arbiter Opus 4.8",
+  "items": [
+    {
+      "ticker": "KXPLATNERDROPOUT-26",
+      "title": "Will Graham Platner drop out of the 2026 Maine US Senate election before Jul 14, 2026?",
+      "q_claude": 0.525,
+      "q_codex": 0.73,
+      "q_all": [0.60, 0.45, 0.72, 0.74],
+      "family_divergence": 0.205,
+      "rationale": "Core: sexual-assault allegation (Politico, 07-06) triggered total party-leadership abandonment (Schumer+Gillibrand+DSCC funding cutoff, endorsers pulling) with a hard Maine replacement deadline (07-13 5pm) inside the window. Risk: Platner ran as anti-establishment populist, forcefully denied, and is 'reflecting' not withdrawing. Divergence: Codex family weighted the funding-cutoff+deadline forcing function (0.72-0.74); Opus family weighted the outsider dig-in dynamic (0.45-0.60). Family divergence 0.205 > 0.10 -> engine auto-skips, FLAG FOR HUMAN. Note all 4 estimators are BELOW market (0.91), i.e. ensemble thinks dropout is overpriced, but the two families disagree too much to trade.",
+      "sources": [
+        "https://www.politico.com (Racicot allegation, 2026-07-06)",
+        "https://thehill.com/homenews/campaign/5955965-schumer-gillibrand-call-platner-withdraw/",
+        "https://www.washingtonpost.com/politics/2026/07/06/top-democrats-pull-graham-platner-endorsements-call-him-end-maine-senate-campaign/",
+        "https://www.nbcnews.com/politics/2026-election/democratic-senate-graham-platner-dropping-out-maine-senate-race-rcna353241",
+        "https://talkingpointsmemo.com/news/the-brief-graham-platners-exit-would-set-up-a-busy-few-weeks-in-maine (Maine 07-13 deadline)"
+      ]
+    },
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey (Nolan) Rotten Tomatoes Tomatometer above 90 on Monday after wide release?",
+      "q_claude": 0.58,
+      "q_codex": 0.592,
+      "q_all": [0.55, 0.55, 0.54, 0.58],
+      "family_divergence": 0.012,
+      "rationale": "Core: Nolan base rate ~5/12 films strictly above 90; uniformly glowing early reactions ('one of his best', Best Picture frontrunner) push above base rate. Risk: strictly >90 excludes the crowded 88-92 cluster; early social mini-reviews don't feed RT and are positive-biased. Round-2 crux (revealed to estimators): settlement is only ~3 days post-release (07-20), so first-wave-review inflation modestly favors a higher score -> both families moved up (half-anchor capped) from blind 0.555 to finals 0.58/0.592, still below market ~0.64. Disagreement point: whether the 3-day timing inflation offsets the knife-edge threshold.",
+      "sources": [
+        "https://www.forbes.com/sites/paultassi/2026/07/07/the-odyssey-early-critic-reviews-render-a-unanimous-verdict/",
+        "https://www.theguardian.com/film/2026/jul/07/christopher-nolan-odyssey-critic-reactions-damon-pattinson-holland-hathaway",
+        "https://ew.com/the-odyssey-first-reactions-raves-for-christopher-nolan-must-see-epic-12013163",
+        "https://editorial.rottentomatoes.com/article/everything-we-know-about-the-odyssey/"
+      ]
+    },
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Will the Fed maintain rates (hike 0bps) at the July 29, 2026 FOMC meeting?",
+      "q_claude": 0.85,
+      "q_codex": 0.805,
+      "q_all": [0.85, 0.85, 0.78, 0.83],
+      "family_divergence": 0.045,
+      "rationale": "Core: high base rate for no-change at any given meeting; CME FedWatch (~73% hold as of 07-07) and Kalshi ladder concentrate residual risk on a 25bp HIKE (hawkish regime), not a cut; 22 days out with no scheduled CPI/PCE/speeches in the given evidence. Consensus 0.828 sits essentially AT market (~0.84) -> no edge, no trade. Reported for calibration; the ensemble correctly declines to force a trade on the most efficiently-priced macro market.",
+      "sources": [
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+        "https://cryptorank.io/news/feed/2d990-fed-rate-hold-july-cme-fedwatch",
+        "https://fedratecalc.com/fomc-meeting-schedule/ (FOMC 2026-07-29)"
+      ]
+    }
+  ]
+}
