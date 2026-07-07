@@ -2300,3 +2300,21 @@
 [07-07 12:06:03]   pmwatch: pmwatch: +41 pairs | pmwatch: 5394 rows, 1641 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-07 12:06:04]   journal: journal written: realized today $-3.01, 52 settled, 53 fills
 [07-07 12:06:05]   report: wrote reports\report_2026-07-07.md
+[07-07 12:06:07] committed + pushed
+[07-07 12:08:18]   h15: done: h15 pass complete
+[07-07 12:08:19]   h10: h10: 0 in-window | h10 shadow(main): n=260 mean -3.7c total $-9.61 | KXETH15M: n=80 net $+2.55 | KXSOL15M: n=85 net $-9.02 | KXBTC15M: n=95 net $-3.13 | gate: KILL (3 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:11:41]   settle: done: 0 settled, 9 still open
+[07-07 12:11:42]   h15: done: h15 pass complete
+[07-07 12:11:45]   mktsnap: mktsnap: 1 quotes recorded, 0 outcomes resolved
+[07-07 12:11:54]   shortcycle: shortcycle: 14 candidate strikes | balance $57.18 | today spent $1.82/999999.00
+[07-07 12:11:54]   shortcycle: done: 0 shortcycle orders
+[07-07 12:11:57]   favorites: favorites: 5 favorites in zone | realized $-5.87 | today spent $67.21/999999.00
+[07-07 12:11:57]   favorites: LIVE  KXETHD-26JUL0715-T1809.99: FAV NO x3 @ 85c cost=$2.58 order=7a48504d-2257-4162-81d2-2d03f4d61d09
+[07-07 12:11:57]   favorites: done: 1 favorite orders
+[07-07 12:11:58]   h10: h10: 0 in-window | h10 shadow(main): n=260 mean -3.7c total $-9.61 | KXETH15M: n=80 net $+2.55 | KXSOL15M: n=85 net $-9.02 | KXBTC15M: n=95 net $-3.13 | gate: KILL (3 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:11:59]   weather: weather: daily entry cap reached (3)
+[07-07 12:12:02]   disloc: DISLOC KXSOLD-26JUL0715-T81.9999: fav 0.85->0.76 ask 0.78 [BOOK-ONLY] tau 48m
+[07-07 12:12:02]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=96 win 72% EV -3.8c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (134 pending)
+[07-07 12:12:13]   pmwatch: pmwatch: +42 pairs | pmwatch: 5406 rows, 1643 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 12:12:14]   journal: journal written: realized today $-3.01, 52 settled, 54 fills
+[07-07 12:12:15]   report: wrote reports\report_2026-07-07.md
