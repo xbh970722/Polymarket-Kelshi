@@ -2902,3 +2902,25 @@
 [07-07 15:27:03]   pmwatch: pmwatch: +53 pairs | pmwatch: 5718 rows, 1738 kalshi-matched | |divergence| median 4.9c, p90 18.0c (gate n>=300)
 [07-07 15:27:04]   journal: journal written: realized today $-3.05, 64 settled, 68 fills
 [07-07 15:27:05]   report: wrote reports\report_2026-07-07.md
+[07-07 15:27:07] committed + pushed
+[07-07 15:30:31]   h15: done: h15 pass complete
+[07-07 15:30:32]   h10: h10: 0 in-window | h10 shadow(main): n=281 mean -3.4c total $-9.46 | KXETH15M: n=86 net $+3.25 | KXSOL15M: n=92 net $-9.35 | KXBTC15M: n=103 net $-3.36 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:32:10]   h15: done: h15 pass complete
+[07-07 15:32:10]   h10: h10: 0 in-window | h10 shadow(main): n=281 mean -3.4c total $-9.46 | KXETH15M: n=86 net $+3.25 | KXSOL15M: n=92 net $-9.35 | KXBTC15M: n=103 net $-3.36 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:35:24]   settle: done: 0 settled, 12 still open
+[07-07 15:35:24]   h15: done: h15 pass complete
+[07-07 15:35:28]   mktsnap: mktsnap: 7 quotes recorded, 6 outcomes resolved
+[07-07 15:35:33]   shortcycle: shortcycle: 10 candidate strikes | balance $48.07 | today spent $1.82/999999.00
+[07-07 15:35:33]   shortcycle: done: 0 shortcycle orders
+[07-07 15:35:35]   favorites: favorites: 4 favorites in zone | realized $-6.39 | today spent $92.30/999999.00
+[07-07 15:35:35]   favorites: done: 0 favorite orders
+[07-07 15:35:36]   h10: h10: 0 in-window | h10 shadow(main): n=281 mean -3.4c total $-9.46 | KXETH15M: n=86 net $+3.25 | KXSOL15M: n=92 net $-9.35 | KXBTC15M: n=103 net $-3.36 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:35:37]   weather: weather: daily entry cap reached (3)
+[07-07 15:35:40]   disloc: disloc: +0 events, 4 settled | disloc shadow: AMBIGUOUS: n=103 win 73% EV -2.8c | BOOK-ONLY: n=74 win 68% EV -8.8c | SPOT-MOVE: n=224 win 68% EV -1.2c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (113 pending)
+[07-07 15:35:53]   pmwatch: pmwatch: +51 pairs | pmwatch: 5730 rows, 1742 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 15:38:17]   h15: H15 RESTING placed KXETH15M-26JUL071745-45: NO bid 84c fav_mid 0.89 tau 7m order=1f9d1f6e-57ff-4e8e-8530-0df274ea2980 exp=not-echoed(normal)
+[07-07 15:38:17]   h15: done: h15 pass complete
+[07-07 15:38:18]   h10: h10: 3 in-window | h10 shadow(main): n=281 mean -3.4c total $-9.46 | KXETH15M: n=86 net $+3.25 | KXSOL15M: n=92 net $-9.35 | KXBTC15M: n=103 net $-3.36 | gate: KILL (3 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:38:18]   h10: done: 0 h10 orders
+[07-07 15:38:20]   stopshadow: STOPGUARD NOFILL #451 KXBTCD-26JUL0718-T63299.99: bid vanished, still holding
+[07-07 15:38:21]   journal: journal written: realized today $-3.05, 64 settled, 69 fills
