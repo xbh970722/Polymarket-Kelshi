@@ -3543,3 +3543,41 @@
 [07-07 09:41:45]   pmwatch: pmwatch: +33 pairs | pmwatch: 5166 rows, 1572 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-07 09:41:46]   journal: journal written: realized today $-3.42, 41 settled, 43 fills
 [07-07 09:41:48]   report: wrote reports\report_2026-07-07.md
+[07-07 09:41:50] committed + pushed
+[07-07 09:45:48]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 09:45:49]   h10: h10: 0 in-window | h10 shadow(main): n=249 mean -2.4c total $-5.88 | KXETH15M: n=78 net $+3.38 | KXSOL15M: n=81 net $-7.50 | KXBTC15M: n=90 net $-1.75 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 09:47:11]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 09:47:12]   h10: h10: 0 in-window | h10 shadow(main): n=249 mean -2.4c total $-5.88 | KXETH15M: n=78 net $+3.38 | KXSOL15M: n=81 net $-7.50 | KXBTC15M: n=90 net $-1.75 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 09:50:49]   settle: SETTLED KXETH15M-26JUL071145-45: result=yes WIN pnl=$+0.10
+[07-07 09:50:49]   settle: done: 1 settled, 9 still open
+[07-07 09:50:50]   h15: done: h15 pass complete
+[07-07 09:50:52]   mktsnap: mktsnap: 15 quotes recorded, 3 outcomes resolved
+[07-07 09:50:56]   shortcycle: shortcycle: 0 candidate strikes | balance $57.29 | today spent $1.82/999999.00
+[07-07 09:50:56]   shortcycle: done: 0 shortcycle orders
+[07-07 09:50:58]   favorites: favorites: 4 favorites in zone | realized $-8.22 | today spent $51.14/999999.00
+[07-07 09:50:58]   favorites: done: 0 favorite orders
+[07-07 09:50:59]   h10: h10: 2 in-window | h10 shadow(main): n=249 mean -2.4c total $-5.88 | KXETH15M: n=78 net $+3.38 | KXSOL15M: n=81 net $-7.50 | KXBTC15M: n=90 net $-1.75 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 09:50:59]   h10: done: 0 h10 orders
+[07-07 09:51:00]   weather: weather: daily entry cap reached (3)
+[07-07 09:51:03]   disloc: DISLOC KXBTCD-26JUL0712-T64099.99: fav 0.94->0.84 ask 0.85 [SPOT-MOVE] tau 9m
+[07-07 09:51:03]   disloc: DISLOC KXBTCD-26JUL0712-T63999.99: fav 0.91->0.66 ask 0.66 [SPOT-MOVE] tau 9m
+[07-07 09:51:03]   disloc: DISLOC KXBTCD-26JUL0712-T63899.99: fav 0.80->0.41 ask 0.41 [SPOT-MOVE] tau 9m
+[07-07 09:51:03]   disloc: DISLOC KXBTCD-26JUL0717-T64249.99: fav 0.79->0.70 ask 0.70 [SPOT-MOVE] tau 309m
+[07-07 09:51:03]   disloc: disloc: +4 events, 0 settled | disloc shadow: AMBIGUOUS: n=92 win 72% EV -4.0c | BOOK-ONLY: n=60 win 62% EV -13.3c | SPOT-MOVE: n=185 win 63% EV -5.5c | gate: ARCHIVE (136 pending)
+[07-07 09:51:10]   pmwatch: pmwatch: +28 pairs | pmwatch: 5178 rows, 1575 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 09:51:11]   manage: done: 0 exited, 0 flagged for review, 9 holding
+[07-07 09:51:12]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-07 09:51:12]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-07 09:51:12]   reconcile: OK       KXBTCD-26JUL0712-T62999.99: +1
+[07-07 09:51:12]   reconcile: OK       KXETHD-26JUL0712-T1769.99: +3
+[07-07 09:51:12]   reconcile: OK       KXHIGHDEN-26JUL07-T96: -1
+[07-07 09:51:12]   reconcile: OK       KXHIGHMIA-26JUL07-B92.5: -1
+[07-07 09:51:12]   reconcile: OK       KXHIGHPHIL-26JUL07-B79.5: -1
+[07-07 09:51:12]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-07 09:51:12]   reconcile: OK       KXSOLD-26JUL0712-T80.9999: +3
+[07-07 09:51:12]   reconcile: OK       KXTRUMPATTEND: +2
+[07-07 09:51:12]   reconcile: CASH OK: adj balance $57.29 ~ expected $57.29 (drift $+0.00, reserved $0.00)
+[07-07 09:51:12]   reconcile: reconcile: 9 tickers, 1 mismatches — INVESTIGATE
+[07-07 09:51:14]   wxfade: wxfade: +4 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (37 pending)
+[07-07 09:51:15]   journal: journal written: realized today $-3.32, 42 settled, 43 fills
+[07-07 09:51:16]   report: wrote reports\report_2026-07-07.md
