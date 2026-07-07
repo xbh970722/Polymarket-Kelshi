@@ -3085,3 +3085,37 @@
 [07-07 07:06:05]   pmwatch: pmwatch: +58 pairs | pmwatch: 4926 rows, 1506 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
 [07-07 07:06:06]   journal: journal written: realized today $-2.24, 31 settled, 33 fills
 [07-07 07:06:07]   report: wrote reports\report_2026-07-07.md
+[07-07 07:06:09] committed + pushed
+[07-07 07:08:18]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 07:08:19]   h10: h10: 0 in-window | h10 shadow(main): n=234 mean -1.9c total $-4.41 | KXETH15M: n=73 net $+3.82 | KXSOL15M: n=77 net $-6.91 | KXBTC15M: n=84 net $-1.32 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 07:11:41]   settle: done: 0 settled, 10 still open
+[07-07 07:11:41]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 07:11:43]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[07-07 07:11:47]   shortcycle: shortcycle: 21 candidate strikes | balance $54.50 | today spent $1.82/999999.00
+[07-07 07:11:47]   shortcycle: done: 0 shortcycle orders
+[07-07 07:11:49]   favorites: favorites: 6 favorites in zone | realized $-7.08 | today spent $36.46/999999.00
+[07-07 07:11:49]   favorites: done: 0 favorite orders
+[07-07 07:11:50]   h10: h10: 0 in-window | h10 shadow(main): n=234 mean -1.9c total $-4.41 | KXETH15M: n=73 net $+3.82 | KXSOL15M: n=77 net $-6.91 | KXBTC15M: n=84 net $-1.32 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 07:11:50]   weather: weather: 0 priced buckets | spent $1.27/999999.00
+[07-07 07:11:50]   weather: done: 0 weather orders
+[07-07 07:11:53]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=91 win 73% EV -3.1c | BOOK-ONLY: n=54 win 63% EV -11.6c | SPOT-MOVE: n=175 win 62% EV -5.8c | gate: ARCHIVE (109 pending)
+[07-07 07:12:04]   pmwatch: pmwatch: +56 pairs | pmwatch: 4938 rows, 1506 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
+[07-07 07:15:36]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 07:15:37]   h10: h10: 0 in-window | h10 shadow(main): n=236 mean -1.8c total $-4.27 | KXETH15M: n=74 net $+3.90 | KXSOL15M: n=77 net $-6.91 | KXBTC15M: n=85 net $-1.26 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 07:17:51]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 07:17:52]   h10: h10: 0 in-window | h10 shadow(main): n=236 mean -1.8c total $-4.27 | KXETH15M: n=74 net $+3.90 | KXSOL15M: n=77 net $-6.91 | KXBTC15M: n=85 net $-1.26 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 07:20:27]   settle: SETTLED KXETH15M-26JUL070915-15: result=no WIN pnl=$+0.07
+[07-07 07:20:27]   settle: done: 1 settled, 9 still open
+[07-07 07:20:28]   h15: done: h15 pass complete
+[07-07 07:20:30]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-07 07:20:34]   shortcycle: shortcycle: 19 candidate strikes | balance $55.50 | today spent $1.82/999999.00
+[07-07 07:20:34]   shortcycle: done: 0 shortcycle orders
+[07-07 07:20:36]   favorites: favorites: 3 favorites in zone | realized $-7.08 | today spent $36.46/999999.00
+[07-07 07:20:36]   favorites: done: 0 favorite orders
+[07-07 07:20:36]   h10: h10: 0 in-window | h10 shadow(main): n=236 mean -1.8c total $-4.27 | KXETH15M: n=74 net $+3.90 | KXSOL15M: n=77 net $-6.91 | KXBTC15M: n=85 net $-1.26 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 07:20:37]   weather: weather: 0 priced buckets | spent $1.27/999999.00
+[07-07 07:20:37]   weather: done: 0 weather orders
+[07-07 07:20:39]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=91 win 73% EV -3.1c | BOOK-ONLY: n=54 win 63% EV -11.6c | SPOT-MOVE: n=175 win 62% EV -5.8c | gate: ARCHIVE (109 pending)
+[07-07 07:20:50]   pmwatch: pmwatch: +57 pairs | pmwatch: 4950 rows, 1510 kalshi-matched | |divergence| median 4.9c, p90 17.5c (gate n>=300)
+[07-07 07:20:51]   journal: journal written: realized today $-2.17, 32 settled, 33 fills
+[07-07 07:20:52]   report: wrote reports\report_2026-07-07.md
