@@ -2361,3 +2361,20 @@
 [07-07 12:30:32]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
 [07-07 12:30:37]   stopshadow: STOPGUARD EXIT #432 KXSOLD-26JUL0715-T81.9999: sold x3 @ 53c (bid 0.55, spot at-line) — salvaged vs riding to 0
 [07-07 12:30:37]   journal: journal written: realized today $-4.02, 53 settled, 54 fills
+[07-07 12:30:39] light mark committed + pushed
+[07-07 12:32:09]   h15: done: h15 pass complete
+[07-07 12:32:10]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:35:23]   settle: SETTLED KXXRPD-26JUL0714-T1.1199: result=yes WIN pnl=$+0.17
+[07-07 12:35:23]   settle: done: 1 settled, 8 still open
+[07-07 12:35:24]   h15: done: h15 pass complete
+[07-07 12:35:26]   mktsnap: mktsnap: 15 quotes recorded, 4 outcomes resolved
+[07-07 12:35:30]   shortcycle: shortcycle: 10 candidate strikes | balance $59.15 | today spent $1.82/999999.00
+[07-07 12:35:30]   shortcycle: done: 0 shortcycle orders
+[07-07 12:35:32]   favorites: favorites: 2 favorites in zone | realized $-6.71 | today spent $69.79/999999.00
+[07-07 12:35:32]   favorites: done: 0 favorite orders
+[07-07 12:35:33]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:35:34]   weather: weather: daily entry cap reached (3)
+[07-07 12:35:36]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=96 win 72% EV -3.8c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (136 pending)
+[07-07 12:35:48]   pmwatch: pmwatch: +49 pairs | pmwatch: 5442 rows, 1655 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 12:35:49]   journal: journal written: realized today $-3.85, 54 settled, 54 fills
+[07-07 12:35:50]   report: wrote reports\report_2026-07-07.md
