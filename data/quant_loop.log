@@ -2977,3 +2977,22 @@
 [07-07 06:35:47]   pmwatch: pmwatch: +56 pairs | pmwatch: 4878 rows, 1493 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-07 06:35:48]   journal: journal written: realized today $-3.14, 27 settled, 28 fills
 [07-07 06:35:49]   report: wrote reports\report_2026-07-07.md
+[07-07 06:35:51] committed + pushed
+[07-07 06:38:16]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 06:38:17]   h10: h10: 1 in-window | h10 shadow(main): n=229 mean -2.1c total $-4.92 | KXETH15M: n=71 net $+3.59 | KXSOL15M: n=76 net $-7.00 | KXBTC15M: n=82 net $-1.51 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 06:38:17]   h10: done: 0 h10 orders
+[07-07 06:41:24]   settle: done: 0 settled, 9 still open
+[07-07 06:41:24]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 06:41:27]   mktsnap: mktsnap: 13 quotes recorded, 0 outcomes resolved
+[07-07 06:41:32]   shortcycle: shortcycle: 8 candidate strikes | balance $54.90 | today spent $1.82/999999.00
+[07-07 06:41:32]   shortcycle: done: 0 shortcycle orders
+[07-07 06:41:34]   favorites: favorites: 3 favorites in zone | realized $-7.50 | today spent $29.68/999999.00
+[07-07 06:41:34]   favorites: CRITICAL KXETHD-26JUL0709-T1789.99: order outcome UNKNOWN (fractional fill_count 0.3) — row #398 frozen; reconcile resolves via fills
+[07-07 06:41:34]   favorites: done: 0 favorite orders
+[07-07 06:41:35]   h10: h10: 0 in-window | h10 shadow(main): n=229 mean -2.1c total $-4.92 | KXETH15M: n=71 net $+3.59 | KXSOL15M: n=76 net $-7.00 | KXBTC15M: n=82 net $-1.51 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 06:41:36]   weather: weather: 0 priced buckets | spent $1.27/999999.00
+[07-07 06:41:36]   weather: done: 0 weather orders
+[07-07 06:41:39]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=90 win 72% EV -3.5c | BOOK-ONLY: n=54 win 63% EV -11.6c | SPOT-MOVE: n=169 win 61% EV -6.9c | gate: ARCHIVE (116 pending)
+[07-07 06:41:51]   pmwatch: pmwatch: +58 pairs | pmwatch: 4890 rows, 1495 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 06:41:52]   journal: journal written: realized today $-3.14, 27 settled, 29 fills
+[07-07 06:41:54]   report: wrote reports\report_2026-07-07.md
