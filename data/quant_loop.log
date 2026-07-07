@@ -2585,3 +2585,22 @@
 [07-06 19:02:54]   h10: h10: 3 in-window | h10 shadow(main): n=167 mean -2.7c total $-4.55 | KXETH15M: n=51 net $+3.33 | KXSOL15M: n=57 net $-7.03 | KXBTC15M: n=59 net $-0.86 | gate: KILL (3 pending) || H13 final6: n=22 win 22/22 net $+0.57 gate: accumulating
 [07-06 19:02:54]   h10: done: 0 h10 orders
 [07-06 19:02:55]   journal: journal written: realized today $-2.52, 75 settled, 79 fills
+[07-06 19:02:57] light mark committed + pushed
+[07-06 19:05:44]   settle: SETTLED KXETHD-26JUL0621-T1789.99: result=yes WIN pnl=$+0.31
+[07-06 19:05:44]   settle: SETTLED KXBTCD-26JUL0621-T63799.99: result=yes WIN pnl=$+0.09
+[07-06 19:05:44]   settle: SETTLED KXSOLD-26JUL0621-T81.9999: result=yes WIN pnl=$+0.45
+[07-06 19:05:44]   settle: done: 3 settled, 7 still open
+[07-06 19:05:45]   h15: H15 RESTING KXETH15M-26JUL062115-15: bid 84c tau 9.3m
+[07-06 19:05:47]   mktsnap: mktsnap: 3 quotes recorded, 7 outcomes resolved
+[07-06 19:05:51]   shortcycle: shortcycle: 17 candidate strikes | balance $65.10 | today spent $0.79/999999.00
+[07-06 19:05:51]   shortcycle: done: 0 shortcycle orders
+[07-06 19:05:53]   favorites: favorites: 3 favorites in zone | realized $-4.70 | today spent $113.48/999999.00
+[07-06 19:05:53]   favorites: LIVE  KXBTCD-26JUL0622-T63599.99: FAV YES x1 @ 88c cost=$0.89 order=991c8541-d091-4c8f-a40b-1f4a362746f7
+[07-06 19:05:53]   favorites: done: 1 favorite orders
+[07-06 19:05:54]   h10: h10: 0 in-window | h10 shadow(main): n=167 mean -2.7c total $-4.55 | KXETH15M: n=51 net $+3.33 | KXSOL15M: n=57 net $-7.03 | KXBTC15M: n=59 net $-0.86 | gate: KILL (3 pending) || H13 final6: n=22 win 22/22 net $+0.57 gate: accumulating
+[07-06 19:05:55]   weather: weather: daily entry cap reached (3)
+[07-06 19:05:58]   disloc: DISLOC KXBTCD-26JUL0717-T63249.99: fav 0.82->0.73 ask 0.74 [SPOT-MOVE] tau 1194m
+[07-06 19:05:58]   disloc: disloc: +1 events, 7 settled | disloc shadow: AMBIGUOUS: n=69 win 68% EV -8.4c | BOOK-ONLY: n=40 win 62% EV -12.0c | SPOT-MOVE: n=156 win 64% EV -4.8c | gate: ARCHIVE (95 pending)
+[07-06 19:06:09]   pmwatch: pmwatch: +55 pairs | pmwatch: 3786 rows, 1163 kalshi-matched | |divergence| median 5.0c, p90 17.5c (gate n>=300)
+[07-06 19:06:10]   journal: journal written: realized today $-1.67, 78 settled, 80 fills
+[07-06 19:06:11]   report: wrote reports\report_2026-07-06.md
