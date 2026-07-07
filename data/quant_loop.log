@@ -2160,3 +2160,20 @@
 [07-07 11:17:53]   h10: h10: 2 in-window | h10 shadow(main): n=257 mean -2.7c total $-6.98 | KXETH15M: n=79 net $+3.44 | KXSOL15M: n=84 net $-8.14 | KXBTC15M: n=94 net $-2.27 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
 [07-07 11:17:53]   h10: done: 0 h10 orders
 [07-07 11:17:54]   journal: journal written: realized today $-1.29, 48 settled, 50 fills
+[07-07 11:17:56] light mark committed + pushed
+[07-07 11:20:27]   settle: done: 0 settled, 9 still open
+[07-07 11:20:28]   h15: H15 FILLED KXETH15M-26JUL071330-30: NO x3 @ 84c (maker, queue win)
+[07-07 11:20:30]   stopshadow: STOPSHADOW #429 KXETH15M-26JUL071330-30: held-side bid 0.70 <= 0.7 (crossing logged) | spot 1800 vs strike 1803 (-0.15%)
+[07-07 11:20:30]   stopshadow: STOPGUARD HOLD #429 KXETH15M-26JUL071330-30: bid 0.70 but spot safe side & clear — book-only smash, not selling
+[07-07 11:20:30]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-07 11:20:31]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-07 11:20:36]   shortcycle: shortcycle: 15 candidate strikes | balance $56.22 | today spent $1.82/999999.00
+[07-07 11:20:36]   shortcycle: done: 0 shortcycle orders
+[07-07 11:20:38]   favorites: favorites: 5 favorites in zone | realized $-6.67 | today spent $61.18/999999.00
+[07-07 11:20:38]   favorites: done: 0 favorite orders
+[07-07 11:20:39]   h10: h10: 0 in-window | h10 shadow(main): n=257 mean -2.7c total $-6.98 | KXETH15M: n=79 net $+3.44 | KXSOL15M: n=84 net $-8.14 | KXBTC15M: n=94 net $-2.27 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 11:20:40]   weather: weather: daily entry cap reached (3)
+[07-07 11:20:42]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=95 win 72% EV -4.1c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (133 pending)
+[07-07 11:20:52]   pmwatch: pmwatch: +40 pairs | pmwatch: 5322 rows, 1617 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 11:20:53]   journal: journal written: realized today $-1.29, 48 settled, 50 fills
+[07-07 11:20:54]   report: wrote reports\report_2026-07-07.md
