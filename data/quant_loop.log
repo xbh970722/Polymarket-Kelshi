@@ -2444,3 +2444,19 @@
 [07-07 12:53:52]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (1 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
 [07-07 12:53:53]   stopshadow: STOPGUARD HOLD #431 KXBTCD-26JUL0715-T63799.99: reference unavailable (spot=False strike=True) — cannot confirm, holding
 [07-07 12:53:54]   journal: journal written: realized today $-3.85, 54 settled, 55 fills
+[07-07 12:53:56] light mark committed + pushed
+[07-07 12:56:20]   settle: done: 0 settled, 8 still open
+[07-07 12:56:21]   h15: H15 PULLED KXETH15M-26JUL071500-00: no fill, window closing (queue data point)
+[07-07 12:56:23]   stopshadow: STOPGUARD EXIT #431 KXBTCD-26JUL0715-T63799.99: sold x1 @ 13c (bid 0.15, spot losing) — salvaged vs riding to 0
+[07-07 12:56:24]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-07 12:56:28]   shortcycle: WARN KXETHD: vol fetch failed (403 Client Error: Forbidden for url: https://api.exchange.coinbase.com/products/ETH-USD/candles?granularity=60&start=2026-07-07T15%3A51%3A26.785469%2B00%3A00&end=2026-07-07T18%3A56%3A26.785469%2B00%3A00)
+[07-07 12:56:28]   shortcycle: shortcycle: 0 candidate strikes | balance $59.27 | today spent $1.82/999999.00
+[07-07 12:56:28]   shortcycle: done: 0 shortcycle orders
+[07-07 12:56:30]   favorites: favorites: 0 favorites in zone | realized $-7.44 | today spent $69.79/999999.00
+[07-07 12:56:30]   favorites: done: 0 favorite orders
+[07-07 12:56:31]   h10: h10: 0 in-window | h10 shadow(main): n=264 mean -3.9c total $-10.21 | KXETH15M: n=81 net $+2.70 | KXSOL15M: n=86 net $-8.93 | KXBTC15M: n=97 net $-3.97 | gate: KILL (1 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 12:56:32]   weather: weather: daily entry cap reached (3)
+[07-07 12:56:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=96 win 72% EV -3.8c | BOOK-ONLY: n=65 win 65% EV -10.4c | SPOT-MOVE: n=188 win 63% EV -4.8c | gate: ARCHIVE (143 pending)
+[07-07 12:56:42]   pmwatch: pmwatch: +30 pairs | pmwatch: 5478 rows, 1666 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 12:56:42]   journal: journal written: realized today $-4.58, 55 settled, 54 fills
+[07-07 12:56:44]   report: wrote reports\report_2026-07-07.md
