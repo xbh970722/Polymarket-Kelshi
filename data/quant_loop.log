@@ -2983,3 +2983,11 @@
 [07-07 15:51:19]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (41 pending)
 [07-07 15:51:21]   journal: journal written: realized today $-3.05, 64 settled, 69 fills
 [07-07 15:51:23]   report: wrote reports\report_2026-07-07.md
+[07-07 15:51:25] committed + pushed
+[07-07 15:53:50]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 15:53:51]   h10: h10: 1 in-window | h10 shadow(main): n=284 mean -3.2c total $-9.18 | KXETH15M: n=87 net $+3.35 | KXSOL15M: n=93 net $-9.25 | KXBTC15M: n=104 net $-3.28 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 15:53:51]   h10: done: 0 h10 orders
+[07-07 15:53:53]   stopshadow: STOPSHADOW #458 KXETH15M-26JUL071800-00: held-side bid 0.65 <= 0.7 (crossing logged) | spot 1774 vs strike 1774 (+0.03%)
+[07-07 15:53:53]   stopshadow: STOPGUARD EXIT #458 KXETH15M-26JUL071800-00: sold x3 @ 64c (bid 0.65, spot at-line) — salvaged vs riding to 0
+[07-07 15:53:53]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-07 15:53:54]   journal: journal written: realized today $-3.70, 65 settled, 69 fills
