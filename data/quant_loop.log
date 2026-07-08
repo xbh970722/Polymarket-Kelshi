@@ -2598,3 +2598,52 @@
 [07-08 16:05:53]   pmwatch: pmwatch: +48 pairs | pmwatch: 8082 rows, 2483 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 16:05:55]   journal: journal written: realized today $-6.93, 43 settled, 39 fills
 [07-08 16:05:57]   report: wrote reports\report_2026-07-08.md
+[07-08 16:06:00] committed + pushed
+[07-08 16:08:13]   h15: done: h15 pass complete
+[07-08 16:08:15]   h10: h10: 3 in-window | h10 shadow(main): n=408 mean -2.6c total $-10.66 | KXETH15M: n=126 net $+2.40 | KXSOL15M: n=136 net $-7.04 | KXBTC15M: n=146 net $-6.03 | gate: KILL (3 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:08:15]   h10: PASS  KXETH15M-26JUL081815-15: IOC no fill even crossed (fill-reality data point)
+[07-08 16:08:15]   h10: done: 0 h10 orders
+[07-08 16:11:33]   settle: done: 0 settled, 11 still open
+[07-08 16:11:34]   h15: done: h15 pass complete
+[07-08 16:11:37]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 16:11:42]   shortcycle: shortcycle: 13 candidate strikes | balance $44.68 | today spent $1.53/999999.00
+[07-08 16:11:42]   shortcycle: done: 0 shortcycle orders
+[07-08 16:11:45]   favorites: favorites: 4 favorites in zone | realized $-8.87 | today spent $51.36/999999.00
+[07-08 16:11:45]   favorites: done: 0 favorite orders
+[07-08 16:11:46]   h10: h10: 0 in-window | h10 shadow(main): n=408 mean -2.6c total $-10.66 | KXETH15M: n=126 net $+2.40 | KXSOL15M: n=136 net $-7.04 | KXBTC15M: n=146 net $-6.03 | gate: KILL (3 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:11:47]   weather: weather: daily entry cap reached (3)
+[07-08 16:11:49]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=156 win 74% EV -1.6c | BOOK-ONLY: n=96 win 72% EV -4.7c | SPOT-MOVE: n=322 win 69% EV +0.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (123 pending)
+[07-08 16:12:00]   pmwatch: pmwatch: +48 pairs | pmwatch: 8094 rows, 2487 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 16:15:29]   h15: done: h15 pass complete
+[07-08 16:15:31]   h10: h10: 0 in-window | h10 shadow(main): n=411 mean -2.7c total $-11.29 | KXETH15M: n=127 net $+2.50 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=147 net $-5.88 | gate: KILL (0 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:17:53]   h15: done: h15 pass complete
+[07-08 16:17:54]   h10: h10: 0 in-window | h10 shadow(main): n=411 mean -2.7c total $-11.29 | KXETH15M: n=127 net $+2.50 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=147 net $-5.88 | gate: KILL (0 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:20:29]   settle: done: 0 settled, 11 still open
+[07-08 16:20:30]   h15: done: h15 pass complete
+[07-08 16:20:38]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 16:20:59]   shortcycle: shortcycle: 9 candidate strikes | balance $44.68 | today spent $1.53/999999.00
+[07-08 16:20:59]   shortcycle: done: 0 shortcycle orders
+[07-08 16:21:02]   favorites: favorites: 3 favorites in zone | realized $-8.87 | today spent $51.36/999999.00
+[07-08 16:21:02]   favorites: done: 0 favorite orders
+[07-08 16:21:03]   h10: h10: 0 in-window | h10 shadow(main): n=411 mean -2.7c total $-11.29 | KXETH15M: n=127 net $+2.50 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=147 net $-5.88 | gate: KILL (0 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:21:04]   weather: weather: daily entry cap reached (3)
+[07-08 16:21:09]   disloc: DISLOC KXSOLD-26JUL0819-T76.9999: fav 0.83->0.75 ask 0.77 [AMBIGUOUS] tau 39m
+[07-08 16:21:09]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=156 win 74% EV -1.6c | BOOK-ONLY: n=96 win 72% EV -4.7c | SPOT-MOVE: n=322 win 69% EV +0.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (124 pending)
+[07-08 16:21:19]   pmwatch: pmwatch: +47 pairs | pmwatch: 8106 rows, 2491 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 16:23:38]   h15: done: h15 pass complete
+[07-08 16:23:40]   h10: h10: 0 in-window | h10 shadow(main): n=411 mean -2.7c total $-11.29 | KXETH15M: n=127 net $+2.50 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=147 net $-5.88 | gate: KILL (0 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:26:16]   settle: done: 0 settled, 11 still open
+[07-08 16:26:17]   h15: done: h15 pass complete
+[07-08 16:26:20]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 16:26:24]   shortcycle: shortcycle: 10 candidate strikes | balance $44.68 | today spent $1.53/999999.00
+[07-08 16:26:24]   shortcycle: done: 0 shortcycle orders
+[07-08 16:26:27]   favorites: favorites: 3 favorites in zone | realized $-8.87 | today spent $51.36/999999.00
+[07-08 16:26:27]   favorites: LIVE  KXSOLD-26JUL0819-T76.9999: FAV YES x3 @ 90c cost=$2.72 order=f60752ce-f971-4f5d-b4fe-5cb6fdb02594
+[07-08 16:26:27]   favorites: done: 1 favorite orders
+[07-08 16:26:28]   h10: h10: 0 in-window | h10 shadow(main): n=411 mean -2.7c total $-11.29 | KXETH15M: n=127 net $+2.50 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=147 net $-5.88 | gate: KILL (0 pending) || H13 final6: n=40 win 40/40 net $+1.08 gate: accumulating
+[07-08 16:26:29]   weather: weather: daily entry cap reached (3)
+[07-08 16:26:31]   disloc: DISLOC KXBTCD-26JUL0819-T62299.99: fav 0.88->0.72 ask 0.73 [BOOK-ONLY] tau 34m
+[07-08 16:26:31]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=156 win 74% EV -1.6c | BOOK-ONLY: n=96 win 72% EV -4.7c | SPOT-MOVE: n=322 win 69% EV +0.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (125 pending)
+[07-08 16:26:41]   pmwatch: pmwatch: +45 pairs | pmwatch: 8118 rows, 2495 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 16:26:42]   journal: journal written: realized today $-6.93, 43 settled, 40 fills
+[07-08 16:26:44]   report: wrote reports\report_2026-07-08.md
