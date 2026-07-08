@@ -2227,3 +2227,36 @@
 [07-08 06:05:47]   pmwatch: pmwatch: +58 pairs | pmwatch: 7122 rows, 2187 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
 [07-08 06:05:48]   journal: journal written: realized today $+1.02, 11 settled, 3 fills
 [07-08 06:05:50]   report: wrote reports\report_2026-07-08.md
+[07-08 06:05:52] committed + pushed
+[07-08 06:08:13]   h15: done: h15 pass complete
+[07-08 06:08:14]   h10: h10: 0 in-window | h10 shadow(main): n=363 mean -2.3c total $-8.52 | KXETH15M: n=110 net $+2.62 | KXSOL15M: n=122 net $-6.49 | KXBTC15M: n=131 net $-4.65 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 06:11:33]   settle: done: 0 settled, 7 still open
+[07-08 06:11:34]   h15: done: h15 pass complete
+[07-08 06:11:37]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 06:11:42]   shortcycle: shortcycle: 16 candidate strikes | balance $55.19 | today spent $0.00/999999.00
+[07-08 06:11:42]   shortcycle: done: 0 shortcycle orders
+[07-08 06:11:45]   favorites: favorites: 5 favorites in zone | realized $-5.22 | today spent $3.68/999999.00
+[07-08 06:11:45]   favorites: done: 0 favorite orders
+[07-08 06:11:46]   h10: h10: 0 in-window | h10 shadow(main): n=363 mean -2.3c total $-8.52 | KXETH15M: n=110 net $+2.62 | KXSOL15M: n=122 net $-6.49 | KXBTC15M: n=131 net $-4.65 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 06:11:47]   weather: weather: 0 priced buckets | spent $0.67/999999.00
+[07-08 06:11:47]   weather: done: 0 weather orders
+[07-08 06:11:50]   disloc: DISLOC KXBTCD-26JUL0809-T62499.99: fav 0.82->0.74 ask 0.75 [BOOK-ONLY] tau 48m
+[07-08 06:11:50]   disloc: DISLOC KXSOLD-26JUL1017-T73.9999: fav 0.82->0.58 ask 0.87 [BOOK-ONLY] tau 3408m
+[07-08 06:11:50]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=131 win 74% EV -1.9c | BOOK-ONLY: n=86 win 71% EV -5.4c | SPOT-MOVE: n=279 win 65% EV -2.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (135 pending)
+[07-08 06:12:04]   pmwatch: pmwatch: +58 pairs | pmwatch: 7134 rows, 2191 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
+[07-08 06:15:29]   h15: done: h15 pass complete
+[07-08 06:15:30]   h10: h10: 0 in-window | h10 shadow(main): n=363 mean -2.3c total $-8.52 | KXETH15M: n=110 net $+2.62 | KXSOL15M: n=122 net $-6.49 | KXBTC15M: n=131 net $-4.65 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 06:17:53]   h15: done: h15 pass complete
+[07-08 06:17:53]   h10: h10: 0 in-window | h10 shadow(main): n=363 mean -2.3c total $-8.52 | KXETH15M: n=110 net $+2.62 | KXSOL15M: n=122 net $-6.49 | KXBTC15M: n=131 net $-4.65 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 06:20:28]   settle: done: 0 settled, 7 still open
+[07-08 06:20:29]   h15: done: h15 pass complete
+[07-08 06:20:33]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 06:20:38]   shortcycle: shortcycle: 14 candidate strikes | balance $55.19 | today spent $0.00/999999.00
+[07-08 06:20:38]   shortcycle: done: 0 shortcycle orders
+[07-08 06:20:40]   favorites: favorites: 4 favorites in zone | realized $-5.22 | today spent $3.68/999999.00
+[07-08 06:20:40]   favorites: done: 0 favorite orders
+[07-08 06:20:41]   h10: h10: 0 in-window | h10 shadow(main): n=363 mean -2.3c total $-8.52 | KXETH15M: n=110 net $+2.62 | KXSOL15M: n=122 net $-6.49 | KXBTC15M: n=131 net $-4.65 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 06:20:42]   weather: weather: 0 priced buckets | spent $0.67/999999.00
+[07-08 06:20:42]   weather: done: 0 weather orders
+[07-08 06:20:45]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=131 win 74% EV -1.9c | BOOK-ONLY: n=86 win 71% EV -5.4c | SPOT-MOVE: n=279 win 65% EV -2.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (135 pending)
+[07-08 06:20:56]   pmwatch: pmwatch: +56 pairs | pmwatch: 7146 rows, 2195 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
