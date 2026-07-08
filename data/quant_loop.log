@@ -2774,3 +2774,446 @@
 [07-08 00:20:44]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
 [07-08 00:20:48]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (123 pending)
 [07-08 00:21:00]   pmwatch: pmwatch: +57 pairs | pmwatch: 6570 rows, 2008 kalshi-matched | |divergence| median 4.6c, p90 17.5c (gate n>=300)
+[07-08 00:23:30]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:23:31]   h10: h10: 1 in-window | h10 shadow(main): n=331 mean -2.6c total $-8.48 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=109 net $-7.61 | KXBTC15M: n=121 net $-3.60 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:23:31]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:26:17]   settle: done: 0 settled, 15 still open
+[07-08 00:26:17]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 00:26:25]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:26:28]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 00:26:28]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:26:29]   h10: h10: 0 in-window | h10 shadow(main): n=331 mean -2.6c total $-8.48 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=109 net $-7.61 | KXBTC15M: n=121 net $-3.60 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:26:30]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:26:35]   disloc: DISLOC KXBTCD-26JUL0803-T62699.99: fav 0.89->0.78 ask 0.78 [AMBIGUOUS] tau 33m
+[07-08 00:26:35]   disloc: DISLOC KXSOLD-26JUL0803-T77.9999: fav 0.88->0.77 ask 0.79 [BOOK-ONLY] tau 33m
+[07-08 00:26:35]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (125 pending)
+[07-08 00:26:47]   pmwatch: pmwatch: +57 pairs | pmwatch: 6582 rows, 2012 kalshi-matched | |divergence| median 4.7c, p90 17.3c (gate n>=300)
+[07-08 00:30:25]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:30:26]   h10: h10: 0 in-window | h10 shadow(main): n=332 mean -2.5c total $-8.36 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=121 net $-3.60 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:32:09]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:32:11]   h10: h10: 0 in-window | h10 shadow(main): n=332 mean -2.5c total $-8.36 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=121 net $-3.60 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:35:35]   settle: done: 0 settled, 15 still open
+[07-08 00:35:35]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:35:41]   mktsnap: mktsnap: 12 quotes recorded, 3 outcomes resolved
+[07-08 00:35:43]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:35:46]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 00:35:46]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:35:47]   h10: h10: 1 in-window | h10 shadow(main): n=332 mean -2.5c total $-8.36 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=121 net $-3.60 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:35:47]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:35:48]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:35:53]   disloc: DISLOC KXBTCD-26JUL0803-T62399.99: fav 0.88->0.78 ask 0.78 [AMBIGUOUS] tau 24m
+[07-08 00:35:53]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (126 pending)
+[07-08 00:36:05]   pmwatch: pmwatch: +57 pairs | pmwatch: 6594 rows, 2016 kalshi-matched | |divergence| median 4.7c, p90 17.3c (gate n>=300)
+[07-08 00:38:43]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:38:44]   h10: h10: 2 in-window | h10 shadow(main): n=332 mean -2.5c total $-8.36 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=121 net $-3.60 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:38:44]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:41:19]   settle: done: 0 settled, 15 still open
+[07-08 00:41:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:41:25]   mktsnap: mktsnap: 10 quotes recorded, 0 outcomes resolved
+[07-08 00:41:27]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:41:30]   favorites: favorites: 3 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 00:41:30]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:41:31]   h10: h10: 0 in-window | h10 shadow(main): n=332 mean -2.5c total $-8.36 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=121 net $-3.60 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:41:32]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:41:35]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (126 pending)
+[07-08 00:41:47]   pmwatch: pmwatch: +57 pairs | pmwatch: 6606 rows, 2020 kalshi-matched | |divergence| median 4.6c, p90 17.3c (gate n>=300)
+[07-08 00:45:13]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:45:15]   h10: h10: 0 in-window | h10 shadow(main): n=333 mean -2.5c total $-8.24 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=110 net $-7.49 | KXBTC15M: n=122 net $-3.48 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:47:37]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:47:39]   h10: h10: 0 in-window | h10 shadow(main): n=334 mean -2.5c total $-8.18 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=111 net $-7.43 | KXBTC15M: n=122 net $-3.48 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:50:14]   settle: done: 0 settled, 15 still open
+[07-08 00:50:15]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:50:22]   mktsnap: mktsnap: 11 quotes recorded, 3 outcomes resolved
+[07-08 00:50:23]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:50:26]   favorites: favorites: 3 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 00:50:26]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:50:28]   h10: h10: 2 in-window | h10 shadow(main): n=334 mean -2.5c total $-8.18 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=111 net $-7.43 | KXBTC15M: n=122 net $-3.48 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:50:28]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:50:29]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:50:33]   disloc: DISLOC KXETHD-26JUL0803-T1749.99: fav 0.86->0.24 ask 0.26 [SPOT-MOVE] tau 9m
+[07-08 00:50:33]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 00:50:46]   pmwatch: pmwatch: +58 pairs | pmwatch: 6618 rows, 2024 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 00:53:23]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:53:24]   h10: h10: 0 in-window | h10 shadow(main): n=334 mean -2.5c total $-8.18 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=111 net $-7.43 | KXBTC15M: n=122 net $-3.48 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:56:37]   settle: done: 0 settled, 15 still open
+[07-08 00:56:38]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:56:44]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-08 00:56:45]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:56:48]   favorites: favorites: 0 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 00:56:48]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:56:49]   h10: h10: 0 in-window | h10 shadow(main): n=334 mean -2.5c total $-8.18 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=111 net $-7.43 | KXBTC15M: n=122 net $-3.48 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 00:56:51]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.02 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:56:54]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 00:57:06]   pmwatch: pmwatch: +57 pairs | pmwatch: 6630 rows, 2026 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 00:57:08]   manage: done: 0 exited, 0 flagged for review, 15 holding
+[07-08 00:57:10]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-08 00:57:10]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-08 00:57:10]   reconcile: OK       KXBTCD-26JUL0800-T63299.99: -1
+[07-08 00:57:10]   reconcile: OK       KXBTCD-26JUL0801-T62999.99: -1
+[07-08 00:57:10]   reconcile: OK       KXBTCD-26JUL0802-T62499.99: +1
+[07-08 00:57:10]   reconcile: OK       KXETHD-26JUL0801-T1749.99: +3
+[07-08 00:57:10]   reconcile: OK       KXETHD-26JUL0802-T1749.99: +3
+[07-08 00:57:10]   reconcile: OK       KXHIGHDEN-26JUL07-T96: -1
+[07-08 00:57:10]   reconcile: OK       KXHIGHMIA-26JUL07-B92.5: -1
+[07-08 00:57:10]   reconcile: OK       KXHIGHPHIL-26JUL07-B79.5: -1
+[07-08 00:57:10]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-08 00:57:10]   reconcile: OK       KXMEDNOMJUL-26AUG01-TJAC: -5
+[07-08 00:57:10]   reconcile: OK       KXSOLD-26JUL0801-T78.9999: -3
+[07-08 00:57:10]   reconcile: OK       KXSOLD-26JUL0802-T78.9999: -3
+[07-08 00:57:10]   reconcile: OK       KXTRUMPATTEND: +2
+[07-08 00:57:10]   reconcile: OK       KXXRPD-26JUL0802-T1.0999: -3
+[07-08 00:57:10]   reconcile: CASH OK: adj balance $40.53 ~ expected $40.53 (drift $+0.00, reserved $0.00)
+[07-08 00:57:10]   reconcile: reconcile: 15 tickers, 1 mismatches — INVESTIGATE
+[07-08 00:57:13]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (43 pending)
+[07-08 00:57:13]   wxfade: VETO wxfade live: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 00:57:14] janitor: reaped leaked sessions ['26028']
+[07-08 01:00:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:00:26]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:00:27]   h10: h10: 0 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:02:11]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:02:12]   h10: h10: 0 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:05:20]   settle: done: 0 settled, 15 still open
+[07-08 01:05:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:05:26]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 01:05:27]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:05:30]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:05:30]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:05:31]   h10: h10: 2 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:05:31]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:05:32]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:05:37]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 01:05:49]   pmwatch: pmwatch: +58 pairs | pmwatch: 6642 rows, 2030 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 01:08:12]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:08:13]   h10: h10: 1 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (3 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:08:13]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:11:34]   settle: done: 0 settled, 15 still open
+[07-08 01:11:34]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:11:40]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 01:11:41]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:11:44]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:11:44]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:11:45]   h10: h10: 0 in-window | h10 shadow(main): n=336 mean -2.4c total $-8.08 | KXETH15M: n=101 net $+2.73 | KXSOL15M: n=112 net $-7.38 | KXBTC15M: n=123 net $-3.43 | gate: KILL (3 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:11:45]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:11:49]   disloc: DISLOC KXBTCD-26JUL0804-T62699.99: fav 0.81->0.72 ask 0.73 [AMBIGUOUS] tau 48m
+[07-08 01:11:49]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (128 pending)
+[07-08 01:12:01]   pmwatch: pmwatch: +57 pairs | pmwatch: 6654 rows, 2034 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 01:15:28]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:15:30]   h10: h10: 0 in-window | h10 shadow(main): n=339 mean -2.6c total $-8.81 | KXETH15M: n=102 net $+2.78 | KXSOL15M: n=113 net $-7.25 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:17:52]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:17:53]   h10: h10: 0 in-window | h10 shadow(main): n=339 mean -2.6c total $-8.81 | KXETH15M: n=102 net $+2.78 | KXSOL15M: n=113 net $-7.25 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:20:29]   settle: done: 0 settled, 15 still open
+[07-08 01:20:29]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:20:35]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 01:20:36]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:20:39]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:20:39]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:20:40]   h10: h10: 0 in-window | h10 shadow(main): n=339 mean -2.6c total $-8.81 | KXETH15M: n=102 net $+2.78 | KXSOL15M: n=113 net $-7.25 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:20:41]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:20:45]   disloc: DISLOC KXSOLD-26JUL1017-T74.9999: fav 0.79->0.64 ask 0.97 [BOOK-ONLY] tau 3699m
+[07-08 01:20:45]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (129 pending)
+[07-08 01:20:56]   pmwatch: pmwatch: +59 pairs | pmwatch: 6666 rows, 2038 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 01:23:30]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:23:31]   h10: h10: 2 in-window | h10 shadow(main): n=339 mean -2.6c total $-8.81 | KXETH15M: n=102 net $+2.78 | KXSOL15M: n=113 net $-7.25 | KXBTC15M: n=124 net $-4.34 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:23:31]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:26:17]   settle: done: 0 settled, 15 still open
+[07-08 01:26:17]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:26:23]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 01:26:24]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:26:26]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:26:26]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:26:27]   h10: h10: 0 in-window | h10 shadow(main): n=339 mean -2.6c total $-8.81 | KXETH15M: n=102 net $+2.78 | KXSOL15M: n=113 net $-7.25 | KXBTC15M: n=124 net $-4.34 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:26:28]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:26:32]   disloc: DISLOC KXBTCD-26JUL0804-T62899.99: fav 0.94->0.82 ask 0.83 [AMBIGUOUS] tau 33m
+[07-08 01:26:32]   disloc: DISLOC KXBTCD-26JUL0804-T62799.99: fav 0.82->0.59 ask 0.60 [AMBIGUOUS] tau 33m
+[07-08 01:26:32]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (131 pending)
+[07-08 01:26:43]   pmwatch: pmwatch: +57 pairs | pmwatch: 6678 rows, 2042 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 01:30:24]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:30:26]   h10: h10: 0 in-window | h10 shadow(main): n=341 mean -2.8c total $-9.56 | KXETH15M: n=103 net $+1.93 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:32:09]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:32:10]   h10: h10: 0 in-window | h10 shadow(main): n=341 mean -2.8c total $-9.56 | KXETH15M: n=103 net $+1.93 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:35:34]   settle: done: 0 settled, 15 still open
+[07-08 01:35:35]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:35:43]   mktsnap: mktsnap: 17 quotes recorded, 3 outcomes resolved
+[07-08 01:35:44]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:35:49]   favorites: favorites: 3 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:35:49]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:35:51]   h10: h10: 1 in-window | h10 shadow(main): n=341 mean -2.8c total $-9.56 | KXETH15M: n=103 net $+1.93 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:35:51]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:35:53]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:35:58]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (131 pending)
+[07-08 01:36:12]   pmwatch: pmwatch: +57 pairs | pmwatch: 6690 rows, 2046 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 01:38:43]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:38:44]   h10: h10: 0 in-window | h10 shadow(main): n=341 mean -2.8c total $-9.56 | KXETH15M: n=103 net $+1.93 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:41:20]   settle: done: 0 settled, 15 still open
+[07-08 01:41:21]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:41:29]   mktsnap: mktsnap: 14 quotes recorded, 0 outcomes resolved
+[07-08 01:41:31]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:41:35]   favorites: favorites: 1 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:41:35]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:41:37]   h10: h10: 0 in-window | h10 shadow(main): n=341 mean -2.8c total $-9.56 | KXETH15M: n=103 net $+1.93 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:41:39]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:41:48]   disloc: DISLOC KXBTCD-26JUL0804-T62699.99: fav 0.85->0.74 ask 0.75 [BOOK-ONLY] tau 18m
+[07-08 01:41:48]   disloc: DISLOC KXETHD-26JUL0804-T1749.99: fav 0.87->0.78 ask 0.79 [BOOK-ONLY] tau 18m
+[07-08 01:41:48]   disloc: DISLOC KXSOLD-26JUL0804-T77.9999: fav 0.78->0.59 ask 0.63 [AMBIGUOUS] tau 18m
+[07-08 01:41:48]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (134 pending)
+[07-08 01:42:03]   pmwatch: pmwatch: +57 pairs | pmwatch: 6702 rows, 2050 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 01:45:13]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:45:15]   h10: h10: 0 in-window | h10 shadow(main): n=342 mean -2.8c total $-9.48 | KXETH15M: n=104 net $+2.01 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:47:37]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:47:38]   h10: h10: 0 in-window | h10 shadow(main): n=342 mean -2.8c total $-9.48 | KXETH15M: n=104 net $+2.01 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:50:14]   settle: done: 0 settled, 15 still open
+[07-08 01:50:14]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:50:20]   mktsnap: mktsnap: 12 quotes recorded, 3 outcomes resolved
+[07-08 01:50:21]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:50:24]   favorites: favorites: 1 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:50:24]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:50:25]   h10: h10: 1 in-window | h10 shadow(main): n=342 mean -2.8c total $-9.48 | KXETH15M: n=104 net $+2.01 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:50:25]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:50:26]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:50:30]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (134 pending)
+[07-08 01:50:41]   pmwatch: pmwatch: +56 pairs | pmwatch: 6714 rows, 2054 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
+[07-08 01:53:22]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:53:24]   h10: h10: 1 in-window | h10 shadow(main): n=342 mean -2.8c total $-9.48 | KXETH15M: n=104 net $+2.01 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:53:24]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:56:37]   settle: done: 0 settled, 15 still open
+[07-08 01:56:37]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:56:42]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-08 01:56:43]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:56:46]   favorites: favorites: 0 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 01:56:46]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:56:46]   h10: h10: 0 in-window | h10 shadow(main): n=342 mean -2.8c total $-9.48 | KXETH15M: n=104 net $+2.01 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=124 net $-4.34 | gate: KILL (2 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 01:56:47]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:56:51]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (134 pending)
+[07-08 01:57:02]   pmwatch: pmwatch: +54 pairs | pmwatch: 6726 rows, 2058 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
+[07-08 01:57:04]   manage: done: 0 exited, 0 flagged for review, 15 holding
+[07-08 01:57:05]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-08 01:57:05]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-08 01:57:05]   reconcile: OK       KXBTCD-26JUL0800-T63299.99: -1
+[07-08 01:57:05]   reconcile: OK       KXBTCD-26JUL0801-T62999.99: -1
+[07-08 01:57:05]   reconcile: OK       KXBTCD-26JUL0802-T62499.99: +1
+[07-08 01:57:05]   reconcile: OK       KXETHD-26JUL0801-T1749.99: +3
+[07-08 01:57:05]   reconcile: OK       KXETHD-26JUL0802-T1749.99: +3
+[07-08 01:57:05]   reconcile: OK       KXHIGHDEN-26JUL07-T96: -1
+[07-08 01:57:05]   reconcile: OK       KXHIGHMIA-26JUL07-B92.5: -1
+[07-08 01:57:05]   reconcile: OK       KXHIGHPHIL-26JUL07-B79.5: -1
+[07-08 01:57:05]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-08 01:57:05]   reconcile: OK       KXMEDNOMJUL-26AUG01-TJAC: -5
+[07-08 01:57:05]   reconcile: OK       KXSOLD-26JUL0801-T78.9999: -3
+[07-08 01:57:05]   reconcile: OK       KXSOLD-26JUL0802-T78.9999: -3
+[07-08 01:57:05]   reconcile: OK       KXTRUMPATTEND: +2
+[07-08 01:57:05]   reconcile: OK       KXXRPD-26JUL0802-T1.0999: -3
+[07-08 01:57:05]   reconcile: CASH OK: adj balance $40.53 ~ expected $40.53 (drift $+0.00, reserved $0.00)
+[07-08 01:57:05]   reconcile: reconcile: 15 tickers, 1 mismatches — INVESTIGATE
+[07-08 01:57:07]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (43 pending)
+[07-08 01:57:07]   wxfade: VETO wxfade live: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 01:57:08] janitor: reaped leaked sessions ['28748', '31448', '57156']
+[07-08 02:00:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:00:26]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:00:28]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:02:11]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:02:13]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:05:20]   settle: done: 0 settled, 15 still open
+[07-08 02:05:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:05:26]   mktsnap: mktsnap: 3 quotes recorded, 2 outcomes resolved
+[07-08 02:05:28]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:05:31]   favorites: favorites: 2 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:05:31]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:05:32]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:05:33]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:05:40]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (134 pending)
+[07-08 02:05:51]   pmwatch: pmwatch: +53 pairs | pmwatch: 6738 rows, 2062 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
+[07-08 02:08:12]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:08:13]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:11:34]   settle: done: 0 settled, 15 still open
+[07-08 02:11:34]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:11:40]   mktsnap: mktsnap: 3 quotes recorded, 1 outcomes resolved
+[07-08 02:11:41]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:11:43]   favorites: favorites: 4 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:11:43]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:11:45]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-08 02:11:46]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:11:50]   disloc: DISLOC KXBTCD-26JUL0805-T62699.99: fav 0.79->0.64 ask 0.64 [AMBIGUOUS] tau 48m
+[07-08 02:11:50]   disloc: DISLOC KXBTCD-26JUL0805-T62599.99: fav 0.91->0.81 ask 0.81 [AMBIGUOUS] tau 48m
+[07-08 02:11:50]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (136 pending)
+[07-08 02:12:01]   pmwatch: pmwatch: +55 pairs | pmwatch: 6750 rows, 2066 kalshi-matched | |divergence| median 4.8c, p90 17.0c (gate n>=300)
+[07-08 02:15:28]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:15:30]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:17:52]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:17:53]   h10: h10: 2 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:17:53]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:20:30]   settle: done: 0 settled, 15 still open
+[07-08 02:20:31]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:20:41]   mktsnap: mktsnap: 3 quotes recorded, 2 outcomes resolved
+[07-08 02:20:43]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:20:47]   favorites: favorites: 8 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:20:47]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:20:49]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:20:50]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0805-T62599.99: fav 0.81->0.24 ask 0.25 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0805-T62499.99: fav 0.91->0.35 ask 0.36 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0805-T62399.99: fav 0.95->0.48 ask 0.49 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0805-T62299.99: fav 0.97->0.60 ask 0.61 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0817-T61999.99: fav 0.80->0.66 ask 0.66 [SPOT-MOVE] tau 759m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0817-T61749.99: fav 0.84->0.73 ask 0.74 [SPOT-MOVE] tau 759m
+[07-08 02:20:56]   disloc: DISLOC KXBTCD-26JUL0817-T61499.99: fav 0.91->0.81 ask 0.81 [SPOT-MOVE] tau 759m
+[07-08 02:20:56]   disloc: DISLOC KXETHD-26JUL0805-T1749.99: fav 0.82->0.28 ask 0.29 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXETHD-26JUL0817-T1709.99: fav 0.90->0.81 ask 0.82 [SPOT-MOVE] tau 759m
+[07-08 02:20:56]   disloc: DISLOC KXSOLD-26JUL0805-T77.9999: fav 0.83->0.23 ask 0.26 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXSOLD-26JUL0805-T76.9999: fav 0.98->0.89 ask 0.91 [SPOT-MOVE] tau 39m
+[07-08 02:20:56]   disloc: DISLOC KXSOLD-26JUL1017-T72.9999: fav 0.91->0.65 ask 0.98 [SPOT-MOVE] tau 3639m
+[07-08 02:20:56]   disloc: disloc: +12 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (148 pending)
+[07-08 02:21:07]   pmwatch: pmwatch: +54 pairs | pmwatch: 6762 rows, 2070 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 02:23:30]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:23:32]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:26:18]   settle: done: 0 settled, 15 still open
+[07-08 02:26:19]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:26:26]   mktsnap: mktsnap: 2 quotes recorded, 1 outcomes resolved
+[07-08 02:26:27]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:26:30]   favorites: favorites: 6 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:26:30]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:26:31]   h10: h10: 0 in-window | h10 shadow(main): n=344 mean -2.7c total $-9.21 | KXETH15M: n=105 net $+2.14 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=125 net $-4.20 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:26:32]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:26:37]   disloc: DISLOC KXBTCD-26JUL0805-T62099.99: fav 0.81->0.62 ask 0.63 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: DISLOC KXBTCD-26JUL0805-T61999.99: fav 0.88->0.73 ask 0.74 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: DISLOC KXBTCD-26JUL0805-T61899.99: fav 0.94->0.83 ask 0.84 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: DISLOC KXBTCD-26JUL0817-T61499.99: fav 0.81->0.72 ask 0.73 [SPOT-MOVE] tau 753m
+[07-08 02:26:37]   disloc: DISLOC KXETHD-26JUL0805-T1729.99: fav 0.91->0.68 ask 0.69 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: DISLOC KXETHD-26JUL0817-T1709.99: fav 0.81->0.73 ask 0.74 [SPOT-MOVE] tau 753m
+[07-08 02:26:37]   disloc: DISLOC KXETHD-26JUL1017-T1859.99: fav 0.94->0.85 ask 0.95 [AMBIGUOUS] tau 3633m
+[07-08 02:26:37]   disloc: DISLOC KXSOLD-26JUL0805-T76.9999: fav 0.89->0.74 ask 0.76 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: DISLOC KXXRPD-26JUL0805-T1.0799: fav 0.86->0.70 ask 0.71 [SPOT-MOVE] tau 33m
+[07-08 02:26:37]   disloc: disloc: +9 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (157 pending)
+[07-08 02:26:48]   pmwatch: pmwatch: +54 pairs | pmwatch: 6774 rows, 2073 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 02:30:24]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:30:26]   h10: h10: 0 in-window | h10 shadow(main): n=346 mean -2.6c total $-9.06 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=126 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:32:09]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:32:10]   h10: h10: 0 in-window | h10 shadow(main): n=346 mean -2.6c total $-9.06 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=126 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:35:34]   settle: done: 0 settled, 15 still open
+[07-08 02:35:34]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:35:40]   mktsnap: mktsnap: 17 quotes recorded, 2 outcomes resolved
+[07-08 02:35:41]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:35:43]   favorites: favorites: 5 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:35:43]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:35:44]   h10: h10: 0 in-window | h10 shadow(main): n=346 mean -2.6c total $-9.06 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=126 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:35:45]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:35:50]   disloc: DISLOC KXBTCD-26JUL0805-T61899.99: fav 0.83->0.73 ask 0.74 [AMBIGUOUS] tau 24m
+[07-08 02:35:50]   disloc: DISLOC KXSOLD-26JUL1017-T82.9999: fav 0.92->0.68 ask 0.95 [AMBIGUOUS] tau 3624m
+[07-08 02:35:50]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (159 pending)
+[07-08 02:36:00]   pmwatch: pmwatch: +54 pairs | pmwatch: 6786 rows, 2077 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 02:38:42]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:38:43]   h10: h10: 2 in-window | h10 shadow(main): n=346 mean -2.6c total $-9.06 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=126 net $-4.11 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:38:43]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:41:19]   settle: done: 0 settled, 15 still open
+[07-08 02:41:19]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:41:25]   mktsnap: mktsnap: 13 quotes recorded, 1 outcomes resolved
+[07-08 02:41:26]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:41:28]   favorites: favorites: 5 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:41:28]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:41:29]   h10: h10: 0 in-window | h10 shadow(main): n=346 mean -2.6c total $-9.06 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=114 net $-7.15 | KXBTC15M: n=126 net $-4.11 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:41:30]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:41:34]   disloc: DISLOC KXBTCD-26JUL0805-T61799.99: fav 0.85->0.70 ask 0.71 [AMBIGUOUS] tau 18m
+[07-08 02:41:34]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (160 pending)
+[07-08 02:41:44]   pmwatch: pmwatch: +55 pairs | pmwatch: 6798 rows, 2081 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 02:45:13]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:45:15]   h10: h10: 0 in-window | h10 shadow(main): n=348 mean -2.6c total $-8.88 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=115 net $-7.02 | KXBTC15M: n=127 net $-4.06 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:47:37]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:47:38]   h10: h10: 2 in-window | h10 shadow(main): n=348 mean -2.6c total $-8.88 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=115 net $-7.02 | KXBTC15M: n=127 net $-4.06 | gate: KILL (2 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:47:38]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:14]   settle: done: 0 settled, 15 still open
+[07-08 02:50:14]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:20]   mktsnap: mktsnap: 10 quotes recorded, 2 outcomes resolved
+[07-08 02:50:21]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:23]   favorites: favorites: 4 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:50:23]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:24]   h10: h10: 1 in-window | h10 shadow(main): n=348 mean -2.6c total $-8.88 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=115 net $-7.02 | KXBTC15M: n=127 net $-4.06 | gate: KILL (3 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:50:24]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:25]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:50:29]   disloc: DISLOC KXBTCD-26JUL0805-T62199.99: fav 0.92->0.71 ask 0.71 [SPOT-MOVE] tau 10m
+[07-08 02:50:29]   disloc: DISLOC KXBTCD-26JUL0805-T62099.99: fav 0.84->0.45 ask 0.46 [SPOT-MOVE] tau 10m
+[07-08 02:50:29]   disloc: DISLOC KXXRPD-26JUL0805-T1.0799: fav 0.83->0.19 ask 0.22 [SPOT-MOVE] tau 10m
+[07-08 02:50:29]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (163 pending)
+[07-08 02:50:39]   pmwatch: pmwatch: +54 pairs | pmwatch: 6810 rows, 2085 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
+[07-08 02:53:22]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:53:23]   h10: h10: 1 in-window | h10 shadow(main): n=348 mean -2.6c total $-8.88 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=115 net $-7.02 | KXBTC15M: n=127 net $-4.06 | gate: KILL (3 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:53:23]   h10: VETO h10 probe: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:56:37]   settle: done: 0 settled, 15 still open
+[07-08 02:56:37]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:56:43]   mktsnap: mktsnap: 4 quotes recorded, 1 outcomes resolved
+[07-08 02:56:44]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:56:47]   favorites: favorites: 0 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 02:56:47]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:56:48]   h10: h10: 0 in-window | h10 shadow(main): n=348 mean -2.6c total $-8.88 | KXETH15M: n=106 net $+2.20 | KXSOL15M: n=115 net $-7.02 | KXBTC15M: n=127 net $-4.06 | gate: KILL (3 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 02:56:49]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.10 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:56:53]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (163 pending)
+[07-08 02:57:05]   pmwatch: pmwatch: +53 pairs | pmwatch: 6822 rows, 2088 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 02:57:07]   manage: done: 0 exited, 0 flagged for review, 15 holding
+[07-08 02:57:09]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-08 02:57:09]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-08 02:57:09]   reconcile: OK       KXBTCD-26JUL0800-T63299.99: -1
+[07-08 02:57:09]   reconcile: OK       KXBTCD-26JUL0801-T62999.99: -1
+[07-08 02:57:09]   reconcile: OK       KXBTCD-26JUL0802-T62499.99: +1
+[07-08 02:57:09]   reconcile: OK       KXETHD-26JUL0801-T1749.99: +3
+[07-08 02:57:09]   reconcile: OK       KXETHD-26JUL0802-T1749.99: +3
+[07-08 02:57:09]   reconcile: OK       KXHIGHDEN-26JUL07-T96: -1
+[07-08 02:57:09]   reconcile: OK       KXHIGHMIA-26JUL07-B92.5: -1
+[07-08 02:57:09]   reconcile: OK       KXHIGHPHIL-26JUL07-B79.5: -1
+[07-08 02:57:09]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-08 02:57:09]   reconcile: OK       KXMEDNOMJUL-26AUG01-TJAC: -5
+[07-08 02:57:09]   reconcile: OK       KXSOLD-26JUL0801-T78.9999: -3
+[07-08 02:57:09]   reconcile: OK       KXSOLD-26JUL0802-T78.9999: -3
+[07-08 02:57:09]   reconcile: OK       KXTRUMPATTEND: +2
+[07-08 02:57:09]   reconcile: OK       KXXRPD-26JUL0802-T1.0999: -3
+[07-08 02:57:09]   reconcile: CASH OK: adj balance $40.53 ~ expected $40.53 (drift $+0.00, reserved $0.00)
+[07-08 02:57:09]   reconcile: reconcile: 15 tickers, 1 mismatches — INVESTIGATE
+[07-08 02:57:12]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=37 win 75.7% mean net -3.9c/contract total $-1.43 | gate: accumulating (43 pending)
+[07-08 02:57:12]   wxfade: VETO wxfade live: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 02:57:14] janitor: reaped leaked sessions ['42700']
+[07-08 03:00:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:00:26]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:00:27]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:02:11]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:02:12]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:05:20]   settle: done: 0 settled, 15 still open
+[07-08 03:05:20]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:05:26]   mktsnap: mktsnap: 3 quotes recorded, 2 outcomes resolved
+[07-08 03:05:27]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:05:29]   favorites: favorites: 5 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 03:05:29]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:05:30]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:05:30]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:05:35]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (163 pending)
+[07-08 03:05:47]   pmwatch: pmwatch: +58 pairs | pmwatch: 6834 rows, 2092 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 03:08:12]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.07 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:08:13]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:11:34]   settle: done: 0 settled, 15 still open
+[07-08 03:11:34]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:11:40]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 03:11:41]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:11:43]   favorites: favorites: 4 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 03:11:43]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:11:44]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:11:45]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:11:51]   disloc: DISLOC KXBTCD-26JUL0806-T61799.99: fav 0.81->0.70 ask 0.71 [SPOT-MOVE] tau 48m
+[07-08 03:11:51]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (164 pending)
+[07-08 03:12:02]   pmwatch: pmwatch: +57 pairs | pmwatch: 6846 rows, 2096 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 03:15:28]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:15:29]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:17:52]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:17:53]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:20:29]   settle: done: 0 settled, 15 still open
+[07-08 03:20:29]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:20:35]   mktsnap: mktsnap: 3 quotes recorded, 2 outcomes resolved
+[07-08 03:20:36]   shortcycle: VETO shortcycle lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:20:38]   favorites: favorites: 4 favorites in zone | realized $-6.90 | today spent $0.00/999999.00
+[07-08 03:20:38]   favorites: VETO favorites lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:20:39]   h10: h10: 0 in-window | h10 shadow(main): n=351 mean -2.7c total $-9.63 | KXETH15M: n=107 net $+2.27 | KXSOL15M: n=116 net $-6.90 | KXBTC15M: n=128 net $-5.00 | gate: KILL (0 pending) || H13 final6: n=32 win 32/32 net $+0.81 gate: accumulating
+[07-08 03:20:40]   weather: VETO weather lane: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
+[07-08 03:20:45]   disloc: DISLOC KXBTCD-26JUL0806-T61699.99: fav 0.81->0.64 ask 0.64 [AMBIGUOUS] tau 39m
+[07-08 03:20:45]   disloc: DISLOC KXBTCD-26JUL0806-T61599.99: fav 0.90->0.78 ask 0.78 [AMBIGUOUS] tau 39m
+[07-08 03:20:45]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=114 win 74% EV -2.1c | BOOK-ONLY: n=80 win 69% EV -7.3c | SPOT-MOVE: n=254 win 67% EV -2.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (166 pending)
+[07-08 03:20:57]   pmwatch: pmwatch: +57 pairs | pmwatch: 6858 rows, 2100 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 03:23:30]   h15: VETO h15: mark-to-market halt: realized+unrealized $-18.08 <= -$12.00 (open positions bleeding — stop opening)
