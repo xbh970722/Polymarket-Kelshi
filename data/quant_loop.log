@@ -3600,3 +3600,34 @@
 [07-07 19:27:01]   pmwatch: pmwatch: +56 pairs | pmwatch: 6102 rows, 1855 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
 [07-07 19:27:02]   journal: journal written: realized today $-2.46, 77 settled, 82 fills
 [07-07 19:27:03]   report: wrote reports\report_2026-07-07.md
+[07-07 19:27:05] committed + pushed
+[07-07 19:30:30]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 19:30:31]   h10: h10: 0 in-window | h10 shadow(main): n=314 mean -2.6c total $-8.12 | KXETH15M: n=96 net $+3.24 | KXSOL15M: n=103 net $-8.14 | KXBTC15M: n=115 net $-3.22 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 19:30:33]   stopshadow: STOPSHADOW #485 KXETHD-26JUL0722-T1769.99: held-side bid 0.60 <= 0.7 (crossing logged) | spot 1772 vs strike 1770 (+0.09%)
+[07-07 19:30:33]   stopshadow: STOPGUARD HOLD #485 KXETHD-26JUL0722-T1769.99: bid 0.60 but spot safe side & clear — book-only smash, not selling
+[07-07 19:30:33]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-07 19:32:09]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-07 19:32:10]   h10: h10: 0 in-window | h10 shadow(main): n=314 mean -2.6c total $-8.12 | KXETH15M: n=96 net $+3.24 | KXSOL15M: n=103 net $-8.14 | KXBTC15M: n=115 net $-3.22 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 19:32:11]   stopshadow: STOPGUARD HOLD #485 KXETHD-26JUL0722-T1769.99: bid 0.66 but spot safe side & clear — book-only smash, not selling
+[07-07 19:35:23]   settle: SETTLED KXXRPD-26JUL0721-T1.1199: result=no WIN pnl=$+0.22
+[07-07 19:35:23]   settle: SETTLED KXETH15M-26JUL072130-30: result=no WIN pnl=$+0.48
+[07-07 19:35:23]   settle: done: 2 settled, 11 still open
+[07-07 19:35:24]   h15: H15 RESTING placed KXETH15M-26JUL072145-45: NO bid 84c fav_mid 0.92 tau 10m order=7d1144d6-deec-4fb1-a0ab-b72f60d58a5c exp=not-echoed(normal)
+[07-07 19:35:24]   h15: done: h15 pass complete
+[07-07 19:35:26]   stopshadow: STOPGUARD EXIT #485 KXETHD-26JUL0722-T1769.99: sold x3 @ 37c (bid 0.37, spot losing) — salvaged vs riding to 0
+[07-07 19:35:27]   mktsnap: mktsnap: 6 quotes recorded, 4 outcomes resolved
+[07-07 19:35:31]   shortcycle: shortcycle: 9 candidate strikes | balance $52.89 | today spent $1.82/999999.00
+[07-07 19:35:31]   shortcycle: done: 0 shortcycle orders
+[07-07 19:35:33]   favorites: favorites: 1 favorites in zone | realized $-6.57 | today spent $114.79/999999.00
+[07-07 19:35:33]   favorites: done: 0 favorite orders
+[07-07 19:35:34]   h10: h10: 3 in-window | h10 shadow(main): n=314 mean -2.6c total $-8.12 | KXETH15M: n=96 net $+3.24 | KXSOL15M: n=103 net $-8.14 | KXBTC15M: n=115 net $-3.22 | gate: KILL (3 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 19:35:34]   h10: done: 0 h10 orders
+[07-07 19:35:35]   weather: weather: daily entry cap reached (3)
+[07-07 19:35:37]   disloc: DISLOC KXBTCD-26JUL0722-T63399.99: fav 0.89->0.23 ask 0.23 [SPOT-MOVE] tau 24m
+[07-07 19:35:37]   disloc: DISLOC KXBTCD-26JUL0722-T63299.99: fav 0.97->0.55 ask 0.55 [SPOT-MOVE] tau 24m
+[07-07 19:35:37]   disloc: DISLOC KXBTCD-26JUL0722-T63199.99: fav 0.98->0.81 ask 0.81 [SPOT-MOVE] tau 24m
+[07-07 19:35:37]   disloc: DISLOC KXETHD-26JUL0722-T1769.99: fav 0.84->0.40 ask 0.41 [SPOT-MOVE] tau 24m
+[07-07 19:35:37]   disloc: disloc: +4 events, 0 settled | disloc shadow: AMBIGUOUS: n=113 win 74% EV -1.5c | BOOK-ONLY: n=78 win 68% EV -8.2c | SPOT-MOVE: n=236 win 67% EV -1.5c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (111 pending)
+[07-07 19:35:47]   pmwatch: pmwatch: +54 pairs | pmwatch: 6114 rows, 1859 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 19:35:48]   journal: journal written: realized today $-3.28, 80 settled, 83 fills
+[07-07 19:35:49]   report: wrote reports\report_2026-07-07.md
