@@ -2375,3 +2375,10 @@
 [07-07 21:51:17] janitor: reaped leaked sessions ['30464']
 [07-07 21:51:17]   journal: journal written: realized today $-6.24, 87 settled, 89 fills
 [07-07 21:51:19]   report: wrote reports\report_2026-07-07.md
+[07-07 21:51:21] committed + pushed
+[07-07 21:53:51]   h15: H15 RESTING KXETH15M-26JUL080000-00: bid 84c tau 6.2m
+[07-07 21:53:52]   h10: h10: 0 in-window | h10 shadow(main): n=325 mean -2.8c total $-9.09 | KXETH15M: n=100 net $+2.61 | KXSOL15M: n=107 net $-7.73 | KXBTC15M: n=118 net $-3.96 | gate: KILL (1 pending) || H13 final6: n=31 win 31/31 net $+0.78 gate: accumulating
+[07-07 21:53:54]   stopshadow: STOPSHADOW #494 KXETHD-26JUL0800-T1749.99: held-side bid 0.63 <= 0.7 (crossing logged) | spot 1750 vs strike 1750 (+0.02%)
+[07-07 21:53:54]   stopshadow: STOPGUARD EXIT #494 KXETHD-26JUL0800-T1749.99: sold x3 @ 61c (bid 0.63, spot at-line) — salvaged vs riding to 0
+[07-07 21:53:54]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-07 21:53:54]   journal: journal written: realized today $-7.07, 88 settled, 89 fills
