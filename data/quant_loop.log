@@ -3247,3 +3247,34 @@
 [07-08 12:06:05]   pmwatch: pmwatch: +56 pairs | pmwatch: 7698 rows, 2361 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
 [07-08 12:06:06]   journal: journal written: realized today $-3.14, 31 settled, 23 fills
 [07-08 12:06:08]   report: wrote reports\report_2026-07-08.md
+[07-08 12:06:10] committed + pushed
+[07-08 12:08:12]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:08:13]   h10: h10: 1 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (3 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:08:13]   h10: MACRO WINDOW 2026-07-08T17:30: h10 live probes paused (shadow continues)
+[07-08 12:11:34]   settle: done: 0 settled, 7 still open
+[07-08 12:11:34]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:11:36]   mktsnap: mktsnap: 1 quotes recorded, 0 outcomes resolved
+[07-08 12:11:43]   shortcycle: shortcycle: 15 candidate strikes | balance $53.75 | today spent $0.80/999999.00
+[07-08 12:11:43]   shortcycle: done: 0 shortcycle orders
+[07-08 12:11:46]   favorites: favorites: 3 favorites in zone | realized $-9.37 | today spent $29.62/999999.00
+[07-08 12:11:46]   favorites: MACRO WINDOW 2026-07-08T17:30: favorites no-new-entry (storm protocol)
+[07-08 12:11:47]   h10: h10: 0 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (3 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:11:48]   weather: weather: daily entry cap reached (3)
+[07-08 12:11:50]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=145 win 73% EV -2.6c | BOOK-ONLY: n=93 win 71% EV -5.5c | SPOT-MOVE: n=302 win 67% EV -0.2c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (136 pending)
+[07-08 12:12:02]   pmwatch: pmwatch: +56 pairs | pmwatch: 7710 rows, 2363 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 12:15:28]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:15:30]   h10: h10: 0 in-window | h10 shadow(main): n=392 mean -2.4c total $-9.52 | KXETH15M: n=120 net $+3.70 | KXSOL15M: n=131 net $-7.70 | KXBTC15M: n=141 net $-5.53 | gate: KILL (0 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:17:52]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:17:53]   h10: h10: 0 in-window | h10 shadow(main): n=392 mean -2.4c total $-9.52 | KXETH15M: n=120 net $+3.70 | KXSOL15M: n=131 net $-7.70 | KXBTC15M: n=141 net $-5.53 | gate: KILL (0 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:20:28]   settle: done: 0 settled, 7 still open
+[07-08 12:20:29]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:20:31]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 12:20:37]   shortcycle: shortcycle: 12 candidate strikes | balance $53.75 | today spent $0.80/999999.00
+[07-08 12:20:37]   shortcycle: PASS  KXBTCD-26JUL0815-T62299.99: edge below bar at crossed price 0.650
+[07-08 12:20:37]   shortcycle: done: 0 shortcycle orders
+[07-08 12:20:40]   favorites: favorites: 2 favorites in zone | realized $-9.37 | today spent $29.62/999999.00
+[07-08 12:20:40]   favorites: MACRO WINDOW 2026-07-08T17:30: favorites no-new-entry (storm protocol)
+[07-08 12:20:41]   h10: h10: 0 in-window | h10 shadow(main): n=392 mean -2.4c total $-9.52 | KXETH15M: n=120 net $+3.70 | KXSOL15M: n=131 net $-7.70 | KXBTC15M: n=141 net $-5.53 | gate: KILL (0 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:20:42]   weather: weather: daily entry cap reached (3)
+[07-08 12:20:44]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=145 win 73% EV -2.6c | BOOK-ONLY: n=93 win 71% EV -5.5c | SPOT-MOVE: n=302 win 67% EV -0.2c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (136 pending)
+[07-08 12:20:57]   pmwatch: pmwatch: +56 pairs | pmwatch: 7722 rows, 2367 kalshi-matched | |divergence| median 4.6c, p90 17.0c (gate n>=300)
