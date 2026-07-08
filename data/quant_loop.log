@@ -3375,3 +3375,18 @@
 [07-07 18:08:20]   h10: h10: 1 in-window | h10 shadow(main): n=302 mean -2.8c total $-8.43 | KXETH15M: n=93 net $+2.86 | KXSOL15M: n=99 net $-8.61 | KXBTC15M: n=110 net $-2.69 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
 [07-07 18:08:20]   h10: done: 0 h10 orders
 [07-07 18:08:22]   journal: journal written: realized today $-3.39, 73 settled, 76 fills
+[07-07 18:08:23] light mark committed + pushed
+[07-07 18:11:41]   settle: done: 0 settled, 10 still open
+[07-07 18:11:43]   h15: H15 UNKNOWN KXETH15M-26JUL072015-15: cancel unverified — frozen as exposure until reconcile resolves
+[07-07 18:11:45]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-07 18:11:50]   shortcycle: shortcycle: 12 candidate strikes | balance $52.83 | today spent $1.82/999999.00
+[07-07 18:11:50]   shortcycle: done: 0 shortcycle orders
+[07-07 18:11:53]   favorites: favorites: 3 favorites in zone | realized $-6.08 | today spent $103.17/999999.00
+[07-07 18:11:53]   favorites: LIVE  KXSOLD-26JUL0721-T80.9999: FAV NO x3 @ 85c cost=$2.58 order=997cb25e-70af-4ca1-bfa7-5e8111bef804
+[07-07 18:11:53]   favorites: done: 1 favorite orders
+[07-07 18:11:54]   h10: h10: 0 in-window | h10 shadow(main): n=302 mean -2.8c total $-8.43 | KXETH15M: n=93 net $+2.86 | KXSOL15M: n=99 net $-8.61 | KXBTC15M: n=110 net $-2.69 | gate: KILL (2 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 18:11:55]   weather: weather: daily entry cap reached (3)
+[07-07 18:11:58]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=109 win 73% EV -2.2c | BOOK-ONLY: n=78 win 68% EV -8.2c | SPOT-MOVE: n=235 win 67% EV -1.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (107 pending)
+[07-07 18:12:09]   pmwatch: pmwatch: +56 pairs | pmwatch: 5982 rows, 1817 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
+[07-07 18:12:10]   journal: journal written: realized today $-3.39, 73 settled, 77 fills
+[07-07 18:12:12]   report: wrote reports\report_2026-07-07.md
