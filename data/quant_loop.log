@@ -2200,3 +2200,36 @@
 [07-08 13:53:24]   h10: h10: 1 in-window | h10 shadow(main): n=398 mean -2.2c total $-8.88 | KXETH15M: n=123 net $+4.11 | KXSOL15M: n=132 net $-7.57 | KXBTC15M: n=143 net $-5.43 | gate: KILL (2 pending) || H13 final6: n=37 win 37/37 net $+1.01 gate: accumulating
 [07-08 13:53:24]   h10: done: 0 h10 orders
 [07-08 13:53:26]   journal: journal written: realized today $-3.14, 31 settled, 29 fills
+[07-08 13:53:28] light mark committed + pushed
+[07-08 13:56:37]   settle: done: 0 settled, 12 still open
+[07-08 13:56:38]   h15: H15 FILLED KXETH15M-26JUL081600-00: NO x3 @ 84c (maker, queue win)
+[07-08 13:56:41]   mktsnap: mktsnap: 4 quotes recorded, 0 outcomes resolved
+[07-08 13:56:47]   shortcycle: shortcycle: 10 candidate strikes | balance $41.24 | today spent $0.80/999999.00
+[07-08 13:56:47]   shortcycle: done: 0 shortcycle orders
+[07-08 13:56:49]   favorites: favorites: 2 favorites in zone | realized $-9.37 | today spent $39.61/999999.00
+[07-08 13:56:49]   favorites: done: 0 favorite orders
+[07-08 13:56:50]   h10: h10: 0 in-window | h10 shadow(main): n=398 mean -2.2c total $-8.88 | KXETH15M: n=123 net $+4.11 | KXSOL15M: n=132 net $-7.57 | KXBTC15M: n=143 net $-5.43 | gate: KILL (2 pending) || H13 final6: n=37 win 37/37 net $+1.01 gate: accumulating
+[07-08 13:56:51]   weather: weather: daily entry cap reached (3)
+[07-08 13:56:54]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=148 win 74% EV -2.0c | BOOK-ONLY: n=93 win 71% EV -5.5c | SPOT-MOVE: n=304 win 67% EV -0.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (145 pending)
+[07-08 13:57:02]   pmwatch: pmwatch: +30 pairs | pmwatch: 7878 rows, 2417 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 13:57:03]   manage: done: 0 exited, 0 flagged for review, 13 holding
+[07-08 13:57:04]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-08 13:57:04]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-08 13:57:04]   reconcile: OK       KXBTCD-26JUL0816-T62299.99: -1
+[07-08 13:57:04]   reconcile: OK       KXBTCD-26JUL0817-T62499.99: -1
+[07-08 13:57:04]   reconcile: OK       KXETH15M-26JUL081600-00: -3
+[07-08 13:57:04]   reconcile: OK       KXETHD-26JUL0817-T1749.99: -3
+[07-08 13:57:04]   reconcile: OK       KXHIGHAUS-26JUL08-B97.5: -1
+[07-08 13:57:04]   reconcile: OK       KXHIGHCHI-26JUL08-B90.5: -1
+[07-08 13:57:04]   reconcile: OK       KXHIGHMIA-26JUL08-B91.5: +2
+[07-08 13:57:04]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-08 13:57:04]   reconcile: OK       KXMEDNOMJUL-26AUG01-TJAC: -5
+[07-08 13:57:04]   reconcile: OK       KXSOLD-26JUL0816-T76.9999: +3
+[07-08 13:57:04]   reconcile: OK       KXTRUMPATTEND: +2
+[07-08 13:57:04]   reconcile: OK       KXXRPD-26JUL0817-T1.0799: +3
+[07-08 13:57:04]   reconcile: CASH OK: adj balance $41.24 ~ expected $41.24 (drift $+0.00, reserved $0.00)
+[07-08 13:57:04]   reconcile: reconcile: 13 tickers, 1 mismatches — INVESTIGATE
+[07-08 13:57:06]   wxfade: wxfade: +1 logged, 0 settled | wxfade shadow: n=57 win 75.4% mean net -4.0c/contract total $-2.26 | gate: accumulating (40 pending)
+[07-08 13:57:07] janitor: reaped leaked sessions ['36712', '30540', '47692']
+[07-08 13:57:08]   journal: journal written: realized today $-3.14, 31 settled, 29 fills
+[07-08 13:57:10]   report: wrote reports\report_2026-07-08.md
