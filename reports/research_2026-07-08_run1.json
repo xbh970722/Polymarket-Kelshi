@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-08",
+  "cycle": "scheduled-live-ensemble",
+  "arbiter": "opus-4.8 (Fable quota deferred)",
+  "ensemble": "2x opus-4.8 (inside/outside) + 2x codex gpt-5.5 xhigh; round-2 half-anchor on cruxes",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Fed maintains rate (0bps hike) at the July 29, 2026 FOMC meeting",
+      "q_claude": 0.745,
+      "q_codex": 0.715,
+      "q_all": [0.74, 0.75, 0.72, 0.71],
+      "rationale": "CORE: CME FedWatch (2026-07-07) implies ~73% hold / ~26% 25bp-hike, no cut priced; consensus 0.73 vs market ~0.77. RISK: incoming data / FOMC June minutes (07-08) could firm the hike tail. DISAGREEMENT: none material (family divergence 0.03); NO-side edge only ~3pt, below the 0.035 live gate. Won't fade CME on noise -> no-trade.",
+      "sources": [
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
+        "https://cryptorank.io/news/feed/2d990-fed-rate-hold-july-cme-fedwatch"
+      ]
+    },
+    {
+      "ticker": "KXSPACEXSTARSHIP-13-26JUL16",
+      "title": "SpaceX launches Starship flight test #13 before July 17, 2026",
+      "q_claude": 0.32,
+      "q_codex": 0.22,
+      "q_all": [0.32, 0.32, 0.22, 0.22],
+      "rationale": "BLIND ESTIMATE VOIDED BY VERIFICATION: round-1 was fed a stale 'NET July 31' date and returned ~0.04 (strong NO). VERIFIED (2026-07-08) nextspaceflight + spacelaunchschedule now show NET Tue July 14, 22:45 UTC -- INSIDE the window ('Date/Time May Change'). Re-estimated free of half-anchor per PROTOCOL 3.5. CORE: NET is real but soft; Ship 40 static fire done (Jul 1) BUT Booster 20 (first-flight 33-engine Super Heavy) static fire unconfirmed and FAA launch license unconfirmed ~6 days out; new-vehicle debut NETs slip more often than hold. Corrected consensus 0.27 vs market ~0.22 -> ~3pt YES edge, below gate; Codex landed exactly on market. Family divergence 0.10 (borderline). NO-TRADE (efficient after correction; verification prevented a wrong-signed NO bet).",
+      "sources": [
+        "https://nextspaceflight.com/launches/details/8279/",
+        "https://www.spacelaunchschedule.com/launch/starship-flight-13/",
+        "https://www.nasaspaceflight.com/2026/06/booster-20-cryogenic-testing-ahead-flight-13/"
+      ]
+    },
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey (Nolan) Rotten Tomatoes Tomatometer above 90 (settle 2026-07-20)",
+      "q_claude": 0.66,
+      "q_codex": 0.68,
+      "q_all": [0.72, 0.60, 0.66, 0.58],
+      "rationale": "CORE: embargoed premiere reactions (07-06 London) overwhelmingly positive, Best Picture frontrunner; Nolan prestige-epic cluster (Oppenheimer 93 / Dark Knight 94 / Dunkirk 92) all cleared 90 and this film is in that mode. RISK: strict >90 bar is fragile once wide-release reviews broaden; one mixed dissent (IndieWire 'too clunky'). DISAGREEMENT: Opus intra-family blind spread 0.72 vs 0.60 = 0.12 (>0.10) -> FLAGGED for human review (inside-view vs base-rate tension). Round-2 (half-anchor, market 0.72 revealed) lifted family finals to 0.66/0.68; consensus 0.67 vs market 0.72 -> NO edge ~4pt, sub-threshold after fees -> no-trade.",
+      "sources": [
+        "https://variety.com/2026/film/news/the-odyssey-first-reactions-christopher-nolan-1236802321/",
+        "https://deadline.com/2026/07/the-odyssey-movie-first-reactions-critics-fanboys-1236975274/",
+        "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
+      ]
+    }
+  ]
+}

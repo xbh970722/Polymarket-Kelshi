@@ -1,8 +1,8 @@
 {
   "date": "2026-07-08",
-  "cycle": "scheduled-live-ensemble",
+  "cycle": "scheduled-live-ensemble (authoritative; pools two independent same-day ensemble runs, run1 archived as research_2026-07-08_run1.json)",
   "arbiter": "opus-4.8 (Fable quota deferred)",
-  "ensemble": "2x opus-4.8 (inside/outside) + 2x codex gpt-5.5 xhigh; round-2 half-anchor on cruxes",
+  "ensemble": "2x opus-4.8 (inside/outside) + 2x codex gpt-5.5 xhigh; round-2 half-anchor on cruxes; verification per PROTOCOL 3.5; final q = mean of run1 and run2 family finals",
   "items": [
     {
       "ticker": "KXFEDDECISION-26JUL-H0",
@@ -10,36 +10,35 @@
       "q_claude": 0.745,
       "q_codex": 0.715,
       "q_all": [0.74, 0.75, 0.72, 0.71],
-      "rationale": "CORE: CME FedWatch (2026-07-07) implies ~73% hold / ~26% 25bp-hike, no cut priced; consensus 0.73 vs market ~0.77. RISK: incoming data / FOMC June minutes (07-08) could firm the hike tail. DISAGREEMENT: none material (family divergence 0.03); NO-side edge only ~3pt, below the 0.035 live gate. Won't fade CME on noise -> no-trade.",
+      "rationale": "Carried from run1 (not re-run in run2). CME FedWatch (07-07) ~73% hold vs market ~0.77; consensus 0.73, family divergence 0.03; NO-side edge ~3pt below the 0.035 live gate. Won't fade CME on noise -> no-trade. (3.17M-OI market, no realistic edge.)",
       "sources": [
-        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html",
-        "https://cryptorank.io/news/feed/2d990-fed-rate-hold-july-cme-fedwatch"
+        "https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
       ]
     },
     {
       "ticker": "KXSPACEXSTARSHIP-13-26JUL16",
       "title": "SpaceX launches Starship flight test #13 before July 17, 2026",
-      "q_claude": 0.32,
-      "q_codex": 0.22,
-      "q_all": [0.32, 0.32, 0.22, 0.22],
-      "rationale": "BLIND ESTIMATE VOIDED BY VERIFICATION: round-1 was fed a stale 'NET July 31' date and returned ~0.04 (strong NO). VERIFIED (2026-07-08) nextspaceflight + spacelaunchschedule now show NET Tue July 14, 22:45 UTC -- INSIDE the window ('Date/Time May Change'). Re-estimated free of half-anchor per PROTOCOL 3.5. CORE: NET is real but soft; Ship 40 static fire done (Jul 1) BUT Booster 20 (first-flight 33-engine Super Heavy) static fire unconfirmed and FAA launch license unconfirmed ~6 days out; new-vehicle debut NETs slip more often than hold. Corrected consensus 0.27 vs market ~0.22 -> ~3pt YES edge, below gate; Codex landed exactly on market. Family divergence 0.10 (borderline). NO-TRADE (efficient after correction; verification prevented a wrong-signed NO bet).",
+      "q_claude": 0.26,
+      "q_codex": 0.265,
+      "q_all": [0.295, 0.225, 0.245, 0.20],
+      "rationale": "POOLED of two same-day runs (run1 0.32/0.22; run2 0.20/0.31). Timing bet: Flight 13 (return-to-flight after Flight 12's May 22 booster-reignition anomaly / hard splashdown) must launch before Jul 17 03:59Z; NET Jul 14-15 leaves only ~29h slack. VERIFICATION (both runs) found the key fact the initial blind lacked: Ship 40 completed a full 6-engine static fire on Jul 2 -> blind (which assumed NET stale / static fire unconfirmed) voided and re-estimated free of half-anchor per PROTOCOL 3.5. Binding UNCONFIRMED gates remain: Booster 20 static fire + FAA launch license, ~6 days out; new V3/Block-3 vehicle + near-new pad (OLP-2) whose debut NETs slip more often than hold. Pooled consensus 0.263 vs market ~0.29 -> ~3pt sub-threshold; pooled family divergence 0.005. NO-TRADE (efficient after correction; verification prevented a wrong-signed NO bet).",
       "sources": [
-        "https://nextspaceflight.com/launches/details/8279/",
         "https://www.spacelaunchschedule.com/launch/starship-flight-13/",
-        "https://www.nasaspaceflight.com/2026/06/booster-20-cryogenic-testing-ahead-flight-13/"
+        "https://eciks.org/11838-69122-spacex-starship-flight-13-engine-test",
+        "https://nextspaceflight.com/launches/details/8279/"
       ]
     },
     {
       "ticker": "KXRT-ODY-90",
       "title": "The Odyssey (Nolan) Rotten Tomatoes Tomatometer above 90 (settle 2026-07-20)",
-      "q_claude": 0.66,
-      "q_codex": 0.68,
-      "q_all": [0.72, 0.60, 0.66, 0.58],
-      "rationale": "CORE: embargoed premiere reactions (07-06 London) overwhelmingly positive, Best Picture frontrunner; Nolan prestige-epic cluster (Oppenheimer 93 / Dark Knight 94 / Dunkirk 92) all cleared 90 and this film is in that mode. RISK: strict >90 bar is fragile once wide-release reviews broaden; one mixed dissent (IndieWire 'too clunky'). DISAGREEMENT: Opus intra-family blind spread 0.72 vs 0.60 = 0.12 (>0.10) -> FLAGGED for human review (inside-view vs base-rate tension). Round-2 (half-anchor, market 0.72 revealed) lifted family finals to 0.66/0.68; consensus 0.67 vs market 0.72 -> NO edge ~4pt, sub-threshold after fees -> no-trade.",
+      "q_claude": 0.653,
+      "q_codex": 0.623,
+      "q_all": [0.66, 0.60, 0.57, 0.505],
+      "rationale": "POOLED of two same-day runs (run1 0.66/0.68 consensus 0.67; run2 0.645/0.565 consensus 0.605). Strict >90 (91+) bar, locked Mon Jul 20; wide release Jul 17, full critic embargo lifts ~Jul 15 (NO official score exists yet). Core bull: uniformly glowing early reactions (Variety 'astonishing achievement'; 'best Greek-myth adaptation ever'; BP frontrunner; Oppenheimer-tier), and Nolan prestige films all cleared 90 (Oppenheimer 93/Dunkirk 92/Dark Knight 94). Core bear (divergence source): strict cutoff + hyped-opening drift as full review body lands; only ~4/9 Nolan films clear 91+ across whole filmography. VERIFICATION: no leaked Tomatometer, buzz only reinforced; the Polymarket '92%' is the >=60% strike, not this >90 strike. All 8 same-day blind estimates (0.43-0.72) sit at/below market 0.70 -> NO direction robust, but pooled consensus 0.638 gives NO edge only ~4.25pt gross (~2.7pt after fees) < 0.035 live gate -> NO-TRADE. Note calibration humility: recent model Brier 0.125 > market 0.079, so a marginal soft-target fade defers to market. Pooled family divergence 0.03 (converged; not human-flagged).",
       "sources": [
-        "https://variety.com/2026/film/news/the-odyssey-first-reactions-christopher-nolan-1236802321/",
-        "https://deadline.com/2026/07/the-odyssey-movie-first-reactions-critics-fanboys-1236975274/",
-        "https://en.wikipedia.org/wiki/The_Odyssey_(2026_film)"
+        "https://www.forbes.com/sites/paultassi/2026/07/07/the-odyssey-early-critic-reviews-render-a-unanimous-verdict/",
+        "https://www.thewrap.com/creative-content/movies/the-odyssey-reviews-first-reactions-christopher-nolan/",
+        "https://variety.com/2026/film/news/the-odyssey-first-reactions-christopher-nolan-1236802321/"
       ]
     }
   ]

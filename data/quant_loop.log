@@ -2465,3 +2465,17 @@
 [07-08 15:20:46]   disloc: DISLOC KXSOLD-26JUL1017-T88.9999: fav 0.98->0.68 ask 0.99 [BOOK-ONLY] tau 2859m
 [07-08 15:20:46]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=155 win 74% EV -1.6c | BOOK-ONLY: n=95 win 72% EV -5.0c | SPOT-MOVE: n=320 win 68% EV +0.6c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (126 pending)
 [07-08 15:20:58]   pmwatch: pmwatch: +54 pairs | pmwatch: 8010 rows, 2460 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 15:23:31]   h15: done: h15 pass complete
+[07-08 15:23:32]   h10: h10: 2 in-window | h10 shadow(main): n=404 mean -2.8c total $-11.21 | KXETH15M: n=125 net $+2.29 | KXSOL15M: n=134 net $-7.33 | KXBTC15M: n=145 net $-6.18 | gate: KILL (2 pending) || H13 final6: n=39 win 39/39 net $+1.07 gate: accumulating
+[07-08 15:23:32]   h10: done: 0 h10 orders
+[07-08 15:26:16]   settle: done: 0 settled, 9 still open
+[07-08 15:26:17]   h15: done: h15 pass complete
+[07-08 15:26:20]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 15:26:26]   shortcycle: shortcycle: 11 candidate strikes | balance $44.92 | today spent $1.53/999999.00
+[07-08 15:26:26]   shortcycle: done: 0 shortcycle orders
+[07-08 15:26:28]   favorites: favorites: 2 favorites in zone | realized $-9.63 | today spent $42.22/999999.00
+[07-08 15:26:28]   favorites: done: 0 favorite orders
+[07-08 15:26:29]   h10: h10: 0 in-window | h10 shadow(main): n=404 mean -2.8c total $-11.21 | KXETH15M: n=125 net $+2.29 | KXSOL15M: n=134 net $-7.33 | KXBTC15M: n=145 net $-6.18 | gate: KILL (2 pending) || H13 final6: n=39 win 39/39 net $+1.07 gate: accumulating
+[07-08 15:26:30]   weather: weather: daily entry cap reached (3)
+[07-08 15:26:34]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=155 win 74% EV -1.6c | BOOK-ONLY: n=95 win 72% EV -5.0c | SPOT-MOVE: n=320 win 68% EV +0.6c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (126 pending)
+[07-08 15:26:44]   pmwatch: pmwatch: +51 pairs | pmwatch: 8022 rows, 2464 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
