@@ -3394,3 +3394,17 @@
 [07-07 18:15:37]   h15: H15 PULLED KXETH15M-26JUL072015-15: no fill, window closing (queue data point)
 [07-07 18:15:38]   h10: h10: 0 in-window | h10 shadow(main): n=304 mean -2.7c total $-8.22 | KXETH15M: n=93 net $+2.86 | KXSOL15M: n=100 net $-8.46 | KXBTC15M: n=111 net $-2.62 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
 [07-07 18:15:40]   journal: journal written: realized today $-3.39, 73 settled, 76 fills
+[07-07 18:15:42] light mark committed + pushed
+[07-07 18:17:51]   h15: done: h15 pass complete
+[07-07 18:17:52]   h10: h10: 0 in-window | h10 shadow(main): n=304 mean -2.7c total $-8.22 | KXETH15M: n=93 net $+2.86 | KXSOL15M: n=100 net $-8.46 | KXBTC15M: n=111 net $-2.62 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 18:20:27]   settle: done: 0 settled, 11 still open
+[07-07 18:20:28]   h15: done: h15 pass complete
+[07-07 18:20:31]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-07 18:20:35]   shortcycle: shortcycle: 12 candidate strikes | balance $50.26 | today spent $1.82/999999.00
+[07-07 18:20:35]   shortcycle: done: 0 shortcycle orders
+[07-07 18:20:38]   favorites: favorites: 3 favorites in zone | realized $-6.08 | today spent $105.75/999999.00
+[07-07 18:20:38]   favorites: done: 0 favorite orders
+[07-07 18:20:39]   h10: h10: 0 in-window | h10 shadow(main): n=304 mean -2.7c total $-8.22 | KXETH15M: n=93 net $+2.86 | KXSOL15M: n=100 net $-8.46 | KXBTC15M: n=111 net $-2.62 | gate: KILL (0 pending) || H13 final6: n=29 win 29/29 net $+0.74 gate: accumulating
+[07-07 18:20:40]   weather: weather: daily entry cap reached (3)
+[07-07 18:20:42]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=109 win 73% EV -2.2c | BOOK-ONLY: n=78 win 68% EV -8.2c | SPOT-MOVE: n=235 win 67% EV -1.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (107 pending)
+[07-07 18:20:54]   pmwatch: pmwatch: +56 pairs | pmwatch: 5994 rows, 1821 kalshi-matched | |divergence| median 5.0c, p90 18.0c (gate n>=300)
