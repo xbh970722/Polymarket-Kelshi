@@ -3223,3 +3223,27 @@
 [07-08 11:57:11]   wxfade: wxfade: +1 logged, 0 settled | wxfade shadow: n=57 win 75.4% mean net -4.0c/contract total $-2.26 | gate: accumulating (39 pending)
 [07-08 11:57:13]   journal: journal written: realized today $-3.34, 30 settled, 23 fills
 [07-08 11:57:15]   report: wrote reports\report_2026-07-08.md
+[07-08 11:57:17] committed + pushed
+[07-08 12:00:20]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (0 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:00:26]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:00:27]   h10: h10: 0 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (0 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:02:11]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:02:12]   h10: h10: 3 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (3 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:02:12]   h10: MACRO WINDOW 2026-07-08T17:30: h10 live probes paused (shadow continues)
+[07-08 12:05:20]   settle: SETTLED KXETHD-26JUL0814-T1729.99: result=yes WIN pnl=$+0.20
+[07-08 12:05:20]   settle: done: 1 settled, 7 still open
+[07-08 12:05:20]   h15: MACRO WINDOW 2026-07-08T17:30: h15 no new resting bids
+[07-08 12:05:30]   mktsnap: mktsnap: 3 quotes recorded, 11 outcomes resolved
+[07-08 12:05:38]   shortcycle: shortcycle: 17 candidate strikes | balance $53.75 | today spent $0.80/999999.00
+[07-08 12:05:38]   shortcycle: done: 0 shortcycle orders
+[07-08 12:05:42]   favorites: favorites: 3 favorites in zone | realized $-9.37 | today spent $29.62/999999.00
+[07-08 12:05:42]   favorites: MACRO WINDOW 2026-07-08T17:30: favorites no-new-entry (storm protocol)
+[07-08 12:05:43]   h10: h10: 2 in-window | h10 shadow(main): n=389 mean -2.5c total $-9.88 | KXETH15M: n=119 net $+3.59 | KXSOL15M: n=130 net $-7.83 | KXBTC15M: n=140 net $-5.65 | gate: KILL (3 pending) || H13 final6: n=35 win 35/35 net $+0.94 gate: accumulating
+[07-08 12:05:43]   h10: MACRO WINDOW 2026-07-08T17:30: h10 live probes paused (shadow continues)
+[07-08 12:05:44]   weather: weather: daily entry cap reached (3)
+[07-08 12:05:48]   disloc: DISLOC KXETHD-26JUL0817-T1749.99: fav 0.87->0.77 ask 0.78 [SPOT-MOVE] tau 174m
+[07-08 12:05:48]   disloc: disloc: +1 events, 3 settled | disloc shadow: AMBIGUOUS: n=145 win 73% EV -2.6c | BOOK-ONLY: n=93 win 71% EV -5.5c | SPOT-MOVE: n=302 win 67% EV -0.2c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (136 pending)
+[07-08 12:06:05]   pmwatch: pmwatch: +56 pairs | pmwatch: 7698 rows, 2361 kalshi-matched | |divergence| median 4.7c, p90 17.0c (gate n>=300)
+[07-08 12:06:06]   journal: journal written: realized today $-3.14, 31 settled, 23 fills
+[07-08 12:06:08]   report: wrote reports\report_2026-07-08.md
