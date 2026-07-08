@@ -2751,3 +2751,9 @@
 [07-08 09:05:49]   pmwatch: pmwatch: +44 pairs | pmwatch: 7410 rows, 2276 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 09:05:50]   journal: journal written: realized today $-3.40, 22 settled, 16 fills
 [07-08 09:05:51]   report: wrote reports\report_2026-07-08.md
+[07-08 09:05:54] committed + pushed
+[07-08 09:08:13]   h15: H15 RESTING placed KXETH15M-26JUL081115-15: NO bid 84c fav_mid 0.91 tau 7m order=18c438cd-bf58-47e9-a4d9-610d5d8b0ca0 exp=not-echoed(normal)
+[07-08 09:08:13]   h15: done: h15 pass complete
+[07-08 09:08:14]   h10: h10: 1 in-window | h10 shadow(main): n=377 mean -2.2c total $-8.22 | KXETH15M: n=114 net $+3.07 | KXSOL15M: n=128 net $-7.06 | KXBTC15M: n=135 net $-4.23 | gate: KILL (1 pending) || H13 final6: n=34 win 34/34 net $+0.89 gate: accumulating
+[07-08 09:08:14]   h10: done: 0 h10 orders
+[07-08 09:08:16]   journal: journal written: realized today $-3.40, 22 settled, 17 fills
