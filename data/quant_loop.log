@@ -2342,3 +2342,12 @@
 [07-08 14:36:00]   pmwatch: pmwatch: +53 pairs | pmwatch: 7938 rows, 2436 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 14:36:01]   journal: journal written: realized today $-7.83, 35 settled, 31 fills
 [07-08 14:36:02]   report: wrote reports\report_2026-07-08.md
+[07-08 14:36:05] committed + pushed
+[07-08 14:38:43]   h15: H15 RESTING placed KXETH15M-26JUL081645-45: NO bid 84c fav_mid 0.95 tau 6m order=dc0441be-9925-49fe-aaaa-97fd37c361ce exp=not-echoed(normal)
+[07-08 14:38:43]   h15: done: h15 pass complete
+[07-08 14:38:44]   h10: h10: 0 in-window | h10 shadow(main): n=403 mean -2.8c total $-11.32 | KXETH15M: n=125 net $+2.29 | KXSOL15M: n=133 net $-7.44 | KXBTC15M: n=145 net $-6.18 | gate: KILL (1 pending) || H13 final6: n=37 win 37/37 net $+1.01 gate: accumulating
+[07-08 14:38:47]   stopshadow: STOPGUARD HOLD #562 KXXRPD-26JUL0817-T1.0799: bid 0.03 but spot safe side & clear — book-only smash, not selling
+[07-08 14:38:47]   stopshadow: STOPSHADOW #567 KXSOLD-26JUL0817-T76.9999: held-side bid 0.52 <= 0.7 (crossing logged) | spot 77 vs strike 77 (+0.04%)
+[07-08 14:38:47]   stopshadow: STOPGUARD EXIT #567 KXSOLD-26JUL0817-T76.9999: sold x3 @ 53c (bid 0.52, spot at-line) — salvaged vs riding to 0
+[07-08 14:38:47]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-08 14:38:48]   journal: journal written: realized today $-8.90, 36 settled, 32 fills
