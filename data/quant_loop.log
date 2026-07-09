@@ -2317,3 +2317,73 @@
 [07-08 22:05:48]   pmwatch: pmwatch: +58 pairs | pmwatch: 8658 rows, 2664 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 22:05:49]   journal: journal written: realized today $-9.96, 63 settled, 58 fills
 [07-08 22:05:50]   report: wrote reports\report_2026-07-08.md
+[07-08 22:05:53] committed + pushed
+[07-08 22:08:13]   h15: done: h15 pass complete
+[07-08 22:08:14]   h10: h10: 2 in-window | h10 shadow(main): n=434 mean -2.1c total $-9.01 | KXETH15M: n=134 net $+3.22 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=156 net $-4.98 | gate: KILL (2 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:08:14]   h10: PASS  KXETH15M-26JUL090015-15: ask 0.820 fell below floor 0.840 (stale setup) (fill-reality data point)
+[07-08 22:08:14]   h10: done: 0 h10 orders
+[07-08 22:11:33]   settle: done: 0 settled, 10 still open
+[07-08 22:11:34]   h15: done: h15 pass complete
+[07-08 22:11:37]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 22:11:42]   shortcycle: shortcycle: 12 candidate strikes | balance $42.67 | today spent $1.53/999999.00
+[07-08 22:11:42]   shortcycle: done: 0 shortcycle orders
+[07-08 22:11:44]   favorites: favorites: 1 favorites in zone | realized $-13.18 | today spent $80.52/999999.00
+[07-08 22:11:44]   favorites: done: 0 favorite orders
+[07-08 22:11:45]   h10: h10: 0 in-window | h10 shadow(main): n=434 mean -2.1c total $-9.01 | KXETH15M: n=134 net $+3.22 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=156 net $-4.98 | gate: KILL (2 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:11:46]   weather: weather: daily entry cap reached (3)
+[07-08 22:11:49]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=168 win 73% EV -3.0c | BOOK-ONLY: n=102 win 74% EV -3.1c | SPOT-MOVE: n=341 win 68% EV +0.5c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 22:12:00]   pmwatch: pmwatch: +57 pairs | pmwatch: 8670 rows, 2668 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 22:15:29]   h15: done: h15 pass complete
+[07-08 22:15:30]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:17:53]   h15: done: h15 pass complete
+[07-08 22:17:54]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:20:28]   settle: done: 0 settled, 10 still open
+[07-08 22:20:29]   h15: done: h15 pass complete
+[07-08 22:20:32]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-08 22:20:38]   shortcycle: shortcycle: 12 candidate strikes | balance $42.67 | today spent $1.53/999999.00
+[07-08 22:20:38]   shortcycle: done: 0 shortcycle orders
+[07-08 22:20:40]   favorites: favorites: 2 favorites in zone | realized $-13.18 | today spent $80.52/999999.00
+[07-08 22:20:40]   favorites: done: 0 favorite orders
+[07-08 22:20:42]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:20:42]   weather: weather: daily entry cap reached (3)
+[07-08 22:20:45]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=168 win 73% EV -3.0c | BOOK-ONLY: n=102 win 74% EV -3.1c | SPOT-MOVE: n=341 win 68% EV +0.5c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 22:20:58]   pmwatch: pmwatch: +57 pairs | pmwatch: 8682 rows, 2672 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 22:23:31]   h15: done: h15 pass complete
+[07-08 22:23:31]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:26:16]   settle: done: 0 settled, 10 still open
+[07-08 22:26:17]   h15: done: h15 pass complete
+[07-08 22:26:20]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 22:26:25]   shortcycle: shortcycle: 10 candidate strikes | balance $42.67 | today spent $1.53/999999.00
+[07-08 22:26:25]   shortcycle: done: 0 shortcycle orders
+[07-08 22:26:27]   favorites: favorites: 1 favorites in zone | realized $-13.18 | today spent $80.52/999999.00
+[07-08 22:26:27]   favorites: done: 0 favorite orders
+[07-08 22:26:28]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:26:29]   weather: weather: daily entry cap reached (3)
+[07-08 22:26:32]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=168 win 73% EV -3.0c | BOOK-ONLY: n=102 win 74% EV -3.1c | SPOT-MOVE: n=341 win 68% EV +0.5c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (127 pending)
+[07-08 22:26:43]   pmwatch: pmwatch: +57 pairs | pmwatch: 8694 rows, 2676 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 22:30:25]   h15: done: h15 pass complete
+[07-08 22:30:26]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:32:10]   h15: done: h15 pass complete
+[07-08 22:32:11]   h10: h10: 0 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (0 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:35:33]   settle: done: 0 settled, 10 still open
+[07-08 22:35:35]   h15: H15 RESTING placed KXETH15M-26JUL090045-45: YES bid 84c fav_mid 0.94 tau 9m order=4555d9af-40c0-425d-bd8c-4ebbcff7a27f exp=not-echoed(normal)
+[07-08 22:35:35]   h15: done: h15 pass complete
+[07-08 22:35:37]   stopshadow: STOPSHADOW #608 KXBTCD-26JUL0901-T62199.99: held-side bid 0.50 <= 0.7 (crossing logged) | spot 62202 vs strike 62200 (+0.00%)
+[07-08 22:35:37]   stopshadow: STOPGUARD NOFILL #608 KXBTCD-26JUL0901-T62199.99: bid vanished, still holding
+[07-08 22:35:37]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-08 22:35:39]   mktsnap: mktsnap: 16 quotes recorded, 6 outcomes resolved
+[07-08 22:35:45]   shortcycle: shortcycle: 7 candidate strikes | balance $42.67 | today spent $1.53/999999.00
+[07-08 22:35:45]   shortcycle: done: 0 shortcycle orders
+[07-08 22:35:47]   favorites: favorites: 2 favorites in zone | realized $-13.18 | today spent $80.52/999999.00
+[07-08 22:35:47]   favorites: done: 0 favorite orders
+[07-08 22:35:48]   h10: h10: 1 in-window | h10 shadow(main): n=436 mean -2.0c total $-8.72 | KXETH15M: n=135 net $+3.37 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=157 net $-4.84 | gate: KILL (1 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 22:35:48]   h10: done: 0 h10 orders
+[07-08 22:35:49]   weather: weather: daily entry cap reached (3)
+[07-08 22:35:51]   disloc: DISLOC KXBTCD-26JUL0901-T62299.99: fav 0.98->0.80 ask 0.81 [SPOT-MOVE] tau 24m
+[07-08 22:35:51]   disloc: DISLOC KXBTCD-26JUL0901-T62199.99: fav 0.95->0.45 ask 0.46 [SPOT-MOVE] tau 24m
+[07-08 22:35:51]   disloc: DISLOC KXBTCD-26JUL0901-T62099.99: fav 0.81->0.16 ask 0.16 [SPOT-MOVE] tau 24m
+[07-08 22:35:51]   disloc: DISLOC KXETHD-26JUL0901-T1739.99: fav 0.96->0.83 ask 0.84 [SPOT-MOVE] tau 24m
+[07-08 22:35:51]   disloc: disloc: +4 events, 0 settled | disloc shadow: AMBIGUOUS: n=168 win 73% EV -3.0c | BOOK-ONLY: n=102 win 74% EV -3.1c | SPOT-MOVE: n=341 win 68% EV +0.5c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (131 pending)
+[07-08 22:36:03]   pmwatch: pmwatch: +57 pairs | pmwatch: 8706 rows, 2680 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 22:36:04]   journal: journal written: realized today $-9.96, 63 settled, 59 fills
+[07-08 22:36:05]   report: wrote reports\report_2026-07-08.md
