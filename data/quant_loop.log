@@ -2223,3 +2223,4 @@
 [07-08 21:38:44]   h10: done: 0 h10 orders
 [07-08 21:38:46]   stopshadow: STOPGUARD HOLD #604 KXBTCD-26JUL0900-T61999.99: bid 0.64 but spot safe side & clear — book-only smash, not selling
 [07-08 21:38:47]   journal: journal written: realized today $-9.45, 59 settled, 56 fills
+[07-08 21:38:49] light mark committed + pushed
