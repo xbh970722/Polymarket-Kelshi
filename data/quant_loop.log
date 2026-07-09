@@ -2183,3 +2183,22 @@
 [07-09 17:26:50]   pmwatch: pmwatch: +49 pairs | pmwatch: 10392 rows, 3136 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-09 17:26:52]   journal: journal written: realized today $+1.02, 19 settled, 20 fills
 [07-09 17:26:53]   report: wrote reports\report_2026-07-09.md
+[07-09 17:26:56] committed + pushed
+[07-09 17:30:38]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 17:30:40]   h10: h10: 0 in-window | h10 shadow(main): n=512 mean -2.1c total $-10.79 | KXETH15M: n=160 net $+1.62 | KXSOL15M: n=168 net $-7.56 | KXBTC15M: n=184 net $-4.85 | gate: KILL (0 pending) || H13 final6: n=46 win 46/46 net $+1.25 gate: accumulating
+[07-09 17:32:43]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 17:32:47]   h10: h10: 0 in-window | h10 shadow(main): n=512 mean -2.1c total $-10.79 | KXETH15M: n=160 net $+1.62 | KXSOL15M: n=168 net $-7.56 | KXBTC15M: n=184 net $-4.85 | gate: KILL (0 pending) || H13 final6: n=46 win 46/46 net $+1.25 gate: accumulating
+[07-09 17:35:27]   settle: SETTLED KXETH15M-26JUL091930-30: result=yes LOSS pnl=$-2.52
+[07-09 17:35:27]   settle: done: 1 settled, 8 still open
+[07-09 17:35:28]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-09 17:35:31]   mktsnap: mktsnap: 17 quotes recorded, 3 outcomes resolved
+[07-09 17:35:37]   shortcycle: shortcycle: 9 candidate strikes | balance $44.42 | today spent $3.42/999999.00
+[07-09 17:35:37]   shortcycle: done: 0 shortcycle orders
+[07-09 17:35:38]   favorites: favorites lane disabled
+[07-09 17:35:39]   h10: h10: 0 in-window | h10 shadow(main): n=512 mean -2.1c total $-10.79 | KXETH15M: n=160 net $+1.62 | KXSOL15M: n=168 net $-7.56 | KXBTC15M: n=184 net $-4.85 | gate: KILL (0 pending) || H13 final6: n=46 win 46/46 net $+1.25 gate: accumulating
+[07-09 17:35:41]   weather: weather: daily entry cap reached (3)
+[07-09 17:35:43]   disloc: DISLOC KXBTCD-26JUL0920-T63099.99: fav 0.86->0.76 ask 0.76 [BOOK-ONLY] tau 24m
+[07-09 17:35:43]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=195 win 73% EV -2.3c | BOOK-ONLY: n=108 win 74% EV -2.4c | SPOT-MOVE: n=401 win 70% EV +1.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (142 pending)
+[07-09 17:35:55]   pmwatch: pmwatch: +50 pairs | pmwatch: 10404 rows, 3140 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 17:35:56]   journal: journal written: realized today $-1.50, 20 settled, 20 fills
+[07-09 17:35:58]   report: wrote reports\report_2026-07-09.md
