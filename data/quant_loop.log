@@ -2893,3 +2893,34 @@
 [07-09 10:53:35]   h15: done: h15 pass complete
 [07-09 10:53:36]   h10: h10: 0 in-window | h10 shadow(main): n=485 mean -1.8c total $-8.65 | KXETH15M: n=152 net $+1.88 | KXSOL15M: n=158 net $-6.73 | KXBTC15M: n=175 net $-3.81 | gate: KILL (0 pending) || H13 final6: n=43 win 43/43 net $+1.13 gate: accumulating
 [07-09 10:53:38]   journal: journal written: realized today $+1.75, 12 settled, 14 fills
+[07-09 10:53:41] light mark committed + pushed
+[07-09 10:56:48]   settle: done: 0 settled, 10 still open
+[07-09 10:56:49]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 10:56:51]   stopshadow: STOPSHADOW #663 KXETH15M-26JUL091300-00: held-side bid 0.54 <= 0.7 (crossing logged) | spot 1737 vs strike 1737 (-0.02%)
+[07-09 10:56:51]   stopshadow: STOPGUARD EXIT #663 KXETH15M-26JUL091300-00: sold x3 @ 55c (bid 0.54, spot at-line) — salvaged vs riding to 0
+[07-09 10:56:51]   stopshadow: stopshadow: 1 new crossing(s) logged
+[07-09 10:56:52]   mktsnap: mktsnap: 6 quotes recorded, 0 outcomes resolved
+[07-09 10:56:57]   shortcycle: shortcycle: 0 candidate strikes | balance $44.16 | today spent $1.80/999999.00
+[07-09 10:56:57]   shortcycle: done: 0 shortcycle orders
+[07-09 10:56:57]   favorites: favorites lane disabled
+[07-09 10:56:58]   h10: h10: 0 in-window | h10 shadow(main): n=485 mean -1.8c total $-8.65 | KXETH15M: n=152 net $+1.88 | KXSOL15M: n=158 net $-6.73 | KXBTC15M: n=175 net $-3.81 | gate: KILL (0 pending) || H13 final6: n=43 win 43/43 net $+1.13 gate: accumulating
+[07-09 10:56:59]   weather: weather: daily entry cap reached (3)
+[07-09 10:57:01]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=178 win 72% EV -3.0c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=372 win 69% EV +0.6c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (153 pending)
+[07-09 10:57:05]   pmwatch: pmwatch: +9 pairs | pmwatch: 9864 rows, 2965 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 10:57:07]   manage: done: 0 exited, 0 flagged for review, 9 holding
+[07-09 10:57:08]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-09 10:57:08]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-09 10:57:08]   reconcile: OK       KXFEDDECISION-26JUL-H0: -3
+[07-09 10:57:08]   reconcile: OK       KXFEDDECISION-26JUL-H25: +9
+[07-09 10:57:08]   reconcile: OK       KXHIGHMIA-26JUL09-B94.5: -1
+[07-09 10:57:08]   reconcile: OK       KXHIGHNY-26JUL09-B83.5: -1
+[07-09 10:57:08]   reconcile: OK       KXHIGHPHIL-26JUL09-B85.5: -1
+[07-09 10:57:08]   reconcile: OK       KXLLM1-26JUL31-A: +3
+[07-09 10:57:08]   reconcile: OK       KXMEDNOMJUL-26AUG01-TJAC: -5
+[07-09 10:57:08]   reconcile: OK       KXTRUMPATTEND: +2
+[07-09 10:57:08]   reconcile: CASH OK: adj balance $44.16 ~ expected $44.13 (drift $+0.03, reserved $0.00)
+[07-09 10:57:08]   reconcile: reconcile: 9 tickers, 1 mismatches — INVESTIGATE
+[07-09 10:57:09]   wxfade: wxfade: +1 logged, 0 settled | wxfade shadow: n=81 win 74.1% mean net -4.6c/contract total $-3.74 | gate: ARCHIVE (edge dead) (41 pending)
+[07-09 10:57:10] janitor: reaped leaked sessions ['30628', '33888', '46820']
+[07-09 10:57:12]   journal: journal written: realized today $+0.83, 13 settled, 14 fills
+[07-09 10:57:13]   report: wrote reports\report_2026-07-09.md
