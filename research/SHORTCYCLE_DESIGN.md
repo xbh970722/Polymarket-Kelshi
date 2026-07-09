@@ -710,3 +710,46 @@ favorite-longshot 在该子带整体衰减, 需考虑再收窄或降 ×3; 若 YE
 
 **动作**: config enabled=false (loop 逐刻重载, 无需重启; `python -m src.pipeline favorites`
 已冒烟 = "favorites lane disabled" 无 KeyError)。触及 $15 硬停 → **PushNotification 用户**。
+
+---
+
+## Review #9 (2026-07-09 09:2x, lane=shortcycle, 监工执行)
+
+**触发**: `review_due_shortcycle.json` — {n_losses:3, usd_loss:1.21, since_id:54}。
+crypto_review 聚合器把四币 (含 15M) 的亏损计一个计数器, 但只写默认 "shortcycle" 信箱,
+故 lane 缺省=shortcycle → 走六步策略复盘。
+
+**拉数据 (ledger.db id>54, status=settled, 四币前缀)**: n=283, W270/L13, **净 +$32.27**。
+按 `title` 分车道归因 (关键步骤 — 不看归因会被 13 笔亏损误导):
+- **shortcycle 本车道**: n=7 (KXBTC/ETH/SOL/XRP D "strike"), **7/7 全胜, 净 +$1.06**。
+  全是 lag_only 单 (q 远离市价的确定单, 如 id634 NO@0.90 q=0.05 mktp=0.125), 零亏损。
+- favorites: n=215, 已由 Review #8 停用 (enabled=false), 不在本复盘裁决范围。
+- **h15maker** (15m 挂单微通道, 自带 -$3 硬停): n=38, W34/L4, **净 +$2.28**。
+- h10fav15m (15m 吃单微通道): n=22, W19/L3, 净 -$0.51 (亏损均为 07-05 存量 SOL15M)。
+- 注: config line 127 `series_15m: []` — shortcycle 车道的 15M 早已停用 (07-03), 故
+  台账里的 ETH15M/SOL15M 单**不属于** shortcycle, 全部来自 h10/h15 微通道。
+
+**找模式 (不数尸体)**:
+1. shortcycle 车道零亏损, 无可诊断的泄漏细胞。q=0.8 级确定单在 id>54 窗口 7/7, 整体
+   crypto 95.4% 胜率 (远高于 ~86c 均价隐含), 亏损数低于二项期望 (283×~14%≈40 期望 vs 实测 13)
+   —— **实力, 非运气**; 触发是聚合计数噪声, 不是 shortcycle 结构偏差。
+2. 触发的真实亏损源 = **h15maker ETH15M NO@0.84 同构簇** (id 429/565/568/656, 各 -$2.52,
+   3 张全额吃满 -$3 硬停)。4 笔结构完全一致: 挂 NO@0.84, 15m market_prob 逆向漂到
+   0.88→0.94 (对手侧) 仍持仓 → 硬停出场。这是"同构输四笔=偏差"信号, 但**属 h15maker 车道**。
+3. h15maker 仍净 +$2.28, 且每笔亏损都是设计内的 -$3 硬停在正常工作 (非失控失血);
+   其亏损细胞在 15m ETH 逆向趋势, 非 shortcycle 的日线 lag 逻辑。
+
+**裁决 (三选一 → 参数调整: 维持, 零改动)**: shortcycle 车道 **HOLD**, 不动任何门/参数。
+依据: (1) 本车道 7/7 净 +$1.06, 无泄漏细胞 — 对零亏损车道强行收紧 = 过度拟合, 违反证据纪律
+(VALUES 5f) 与协议"区分实力与运气"; (2) 触发亏损归因于 h15maker 车道 (lane 字段本应=h15maker,
+但聚合器写了默认信箱), 该车道有独立 -$3 硬停且净正; (3) 越权改 h15maker 参数 = 处理未举旗的
+车道, 违反"处理被举的那面旗"纪律。**零美元上限改动** (硬边界内)。
+
+**跨车道观察 (watch-item, 不在本旗裁决内实施)**: h15maker 的 ETH15M NO@0.84 同构簇
+(07-08 起 3/4 集中) 是真实偏差, 非噪声。若复发, 应由 **h15maker 自身车道复盘** (协议 §32-37)
+裁决 —— 候选: 逆向 15m market_prob≥0.90 时跳过挂单, 或 ETH15M 降张数。本次不代行, 因:
+(a) 不在本 scheduled-task 的 review_due 检查清单 (仅 shortcycle/favorites/legacy);
+(b) h15maker 旗未举; (c) 车道仍净正 +$2.28, 硬停已兜底。记此以备下次 h15maker 触发时优先切入。
+
+**记账**: review_state.json last_review_id 54→656 (本复盘覆盖到的最大已结算 crypto id),
+review_no→9。删 review_due_shortcycle.json。静默完成 (无死刑裁决, 无改动失败, 无 PushNotification)。

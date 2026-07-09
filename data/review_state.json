@@ -1,6 +1,6 @@
 {
-"ts": "2026-07-09T00:25:00",
-"review_no": 8,
-"note": "Favorites Review #8 = HARD STOP. drawdown hit hard_stop_steps=5 ($15, realized dipped to -15.03, now -14.78=step4 flickering on boundary). Diagnosis: in-zone(>=0.86) n=233 net only -3.09 (noise); entire drawdown = pre-zone<0.86 legacy sunk cost -11.69 + FOMC-window stopguard exits (SOL/ETH). 289 live trades, paper favorite-longshot edge net NEGATIVE, no fixable in-zone leak left. VERDICT: favorites.enabled true->false (sticky disable, risk-reducing, AI-permitted). Resume=user lever. Zero dollar-cap change. last_review_id unchanged (54) — favorites review does not advance shortcycle cursor. $15 hard-stop touched -> PushNotification sent.",
-"last_review_id": 54
+ "ts": "2026-07-09T09:28:36",
+ "review_no": 9,
+ "note": "Shortcycle Review #9 = HOLD (zero change). lane=shortcycle 六步复盘: 本车道(title LIKE shortcycle%) id>54 结算 7/7 全胜 净 +1.06, 无泄漏细胞。触发的 3 亏(1.21)聚合自四币计数器, 真实亏损源=h15maker ETH15M NO@0.84 同构簇(id429/565/568/656 各-2.52, 各自-3硬停正常兜底, 车道仍净+2.28)。shortcycle 15M 早停(series_15m:[]),故台账 15M 单不属本车道。裁决: 对零亏损车道不收紧(过度拟合/越权改未举旗车道均拒)。h15maker 同构簇记为 watch-item, 复发时由其自身车道复盘处置。零美元上限改动。cursor 54->656。",
+ "last_review_id": 656
 }
