@@ -1,1 +1,6 @@
-{"ts": "2026-07-08T21:28:29", "review_no": 7, "note": "Favorites Review #7 = drawdown step4 (loop accum -12.22). in-zone(>=0.86) n=203 net -2.12; headline -12.55 mostly pre-R6 <0.86 legacy (-10.43). side x band decisive: NO profitable all bands (low+2.09/high+3.63), YES-high +1.23, but YES-low[0.86,0.90) n=45 net -9.07 win 67% vs ~88% implied = sole in-zone loss cell. VERDICT structural: new favorites.yes_zone_floor=0.90 (direction-conditional floor, YES only; NO keeps 0.86) — surgically excises the cell, keeps NO-low profit. one lever = conditioning variable (side). Zero dollar-cap change. last_review_id unchanged (54) — favorites review does not advance shortcycle six-step cursor. Below 15usd hard-stop (step4/5), no notification.", "last_review_id": 54}
+{
+"ts": "2026-07-09T00:25:00",
+"review_no": 8,
+"note": "Favorites Review #8 = HARD STOP. drawdown hit hard_stop_steps=5 ($15, realized dipped to -15.03, now -14.78=step4 flickering on boundary). Diagnosis: in-zone(>=0.86) n=233 net only -3.09 (noise); entire drawdown = pre-zone<0.86 legacy sunk cost -11.69 + FOMC-window stopguard exits (SOL/ETH). 289 live trades, paper favorite-longshot edge net NEGATIVE, no fixable in-zone leak left. VERDICT: favorites.enabled true->false (sticky disable, risk-reducing, AI-permitted). Resume=user lever. Zero dollar-cap change. last_review_id unchanged (54) — favorites review does not advance shortcycle cursor. $15 hard-stop touched -> PushNotification sent.",
+"last_review_id": 54
+}

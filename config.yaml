@@ -190,7 +190,11 @@ crypto_review:
 # 收割 favorite-longshot bias: 买"热门那一侧"(不管YES/NO), 方向中性防单边污染。
 # 数据仅43样本尚未证实, 用户明示先小额实战; 亏损触发自动复盘/熔断。
 favorites:
-  enabled: true
+  enabled: false                 # 2026-07-09 Favorites Review #8: 回撤触及 hard_stop_steps=5
+                                 # ($15, 实测低至 -15.03) -> 真正停用, 待用户裁决 (恢复=用户专属杠杆)。
+                                 # 诊断: in-zone(>=0.86) n=233 net 仅 -3.09 (噪声); 全部回撤来自
+                                 # pre-zone<0.86 遗留单 -11.69 (沉没, 无参数可救) + FOMC 窗口
+                                 # stopguard 出场 (SOL/ETH)。289 单后纸面 longshot 优势净负, 无可调杠杆。
   # 2026-07-04 用户批准扩到 4 币 (每小时上限 2→4 笔)。SOL 3.1万手/日充足,
   # XRP 6.5千勉强; DOGE/BNB/HYPE 死盘不碰。相关性尾巴 ~-$7/暴动小时,
   # 由 $3 回撤复盘中途拦截 (实测过的刹车)。
