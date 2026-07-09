@@ -2535,3 +2535,37 @@
 [07-09 08:21:05]   pmwatch: pmwatch: +57 pairs | pmwatch: 9642 rows, 2901 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-09 08:21:06]   journal: journal written: realized today $+4.19, 10 settled, 10 fills
 [07-09 08:21:08]   report: wrote reports\report_2026-07-09.md
+[07-09 08:21:10] committed + pushed
+[07-09 08:23:49]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 08:23:50]   h10: h10: 3 in-window | h10 shadow(main): n=476 mean -1.6c total $-7.58 | KXETH15M: n=149 net $+3.61 | KXSOL15M: n=155 net $-7.03 | KXBTC15M: n=172 net $-4.16 | gate: KILL (3 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 08:23:50]   h10: done: 0 h10 orders
+[07-09 08:26:50]   settle: done: 0 settled, 8 still open
+[07-09 08:26:51]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 08:26:53]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-09 08:26:58]   shortcycle: shortcycle: 17 candidate strikes | balance $48.40 | today spent $1.80/999999.00
+[07-09 08:26:58]   shortcycle: done: 0 shortcycle orders
+[07-09 08:26:58]   favorites: favorites lane disabled
+[07-09 08:26:59]   h10: h10: 0 in-window | h10 shadow(main): n=476 mean -1.6c total $-7.58 | KXETH15M: n=149 net $+3.61 | KXSOL15M: n=155 net $-7.03 | KXBTC15M: n=172 net $-4.16 | gate: KILL (3 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 08:27:00]   weather: weather: 0 priced buckets | spent $1.34/999999.00
+[07-09 08:27:00]   weather: done: 0 weather orders
+[07-09 08:27:02]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=176 win 72% EV -3.3c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=357 win 68% EV -0.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (149 pending)
+[07-09 08:27:13]   pmwatch: pmwatch: +57 pairs | pmwatch: 9654 rows, 2904 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 08:30:36]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 08:30:38]   h10: h10: 0 in-window | h10 shadow(main): n=479 mean -1.5c total $-7.34 | KXETH15M: n=150 net $+3.69 | KXSOL15M: n=156 net $-6.96 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 08:32:37]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 08:32:38]   h10: h10: 0 in-window | h10 shadow(main): n=479 mean -1.5c total $-7.34 | KXETH15M: n=150 net $+3.69 | KXSOL15M: n=156 net $-6.96 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 08:35:13]   settle: SETTLED KXETH15M-26JUL091030-30: result=no WIN pnl=$+0.08
+[07-09 08:35:13]   settle: done: 1 settled, 7 still open
+[07-09 08:35:14]   h15: done: h15 pass complete
+[07-09 08:35:16]   mktsnap: mktsnap: 18 quotes recorded, 4 outcomes resolved
+[07-09 08:35:22]   shortcycle: shortcycle: 12 candidate strikes | balance $49.40 | today spent $1.80/999999.00
+[07-09 08:35:22]   shortcycle: done: 0 shortcycle orders
+[07-09 08:35:22]   favorites: favorites lane disabled
+[07-09 08:35:23]   h10: h10: 1 in-window | h10 shadow(main): n=479 mean -1.5c total $-7.34 | KXETH15M: n=150 net $+3.69 | KXSOL15M: n=156 net $-6.96 | KXBTC15M: n=173 net $-4.08 | gate: KILL (1 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 08:35:23]   h10: done: 0 h10 orders
+[07-09 08:35:24]   weather: weather: 0 priced buckets | spent $1.34/999999.00
+[07-09 08:35:24]   weather: done: 0 weather orders
+[07-09 08:35:26]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=176 win 72% EV -3.3c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=357 win 68% EV -0.0c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (149 pending)
+[07-09 08:35:38]   pmwatch: pmwatch: +57 pairs | pmwatch: 9666 rows, 2908 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 08:35:39]   journal: journal written: realized today $+4.27, 11 settled, 10 fills
+[07-09 08:35:40]   report: wrote reports\report_2026-07-09.md
