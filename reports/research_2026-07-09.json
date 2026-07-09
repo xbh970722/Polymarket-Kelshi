@@ -1,0 +1,48 @@
+{
+  "date": "2026-07-09",
+  "cycle": "scheduled-live-ensemble",
+  "arbiter": "opus-4.8 (Fable quota deferred; desktop default model)",
+  "ensemble": "2x opus (inside/outside personas) + 2x codex gpt-5.5 xhigh, all blind (no market prices); round-2 focused re-estimate on GOOG after verification voided stale leaderboard facts (PROTOCOL 3.5 / VALUES.md #3 exception); verification layer on both trade candidates (Fed, GOOG).",
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H25",
+      "title": "Fed hikes 25bps at the July 29, 2026 FOMC meeting",
+      "q_claude": 0.225,
+      "q_codex": 0.26,
+      "q_all": [0.25, 0.20, 0.27, 0.25],
+      "rationale": "CORE: consensus ~0.24 (opus 0.225 / codex 0.26; family divergence 0.035, tight) vs Kalshi H25 ask 0.15 -> ~+9pt YES edge. RISK: settlement needs EXACTLY a 25bp hike on Jul 29; base case is still 'wait-and-see' hold, and Chair Warsh (Jul 1) did NOT commit to July, so the first hike could slip to Sept. DIVERGENCE: none material. VERIFICATION (reinforced, did not void): May CPI 4.2% YoY / May PCE >4% (3yr high, Iran-war energy shock); June dots show 9/18 FOMC now see >=1 hike by year-end (up from 0 in March); Hammack hawkish. Cross-venue July-hike odds 21% (Octagon/Polymarket-class) to ~30% (CME FedWatch move-implied) -> Kalshi's 14.5% is an outlier LOW, corroborating the underprice. Aligned with existing KXFEDDECISION-26JUL-H0 NO position (same 'Fed moves' thesis, cleaner expression). June CPI (Jul 14) is a known pre-meeting catalyst. Edge 0.095 < 0.10 -> normal tier, not high-conviction $4.",
+      "sources": [
+        "https://growbeansprout.com/tools/fedwatch",
+        "https://centralbank.watch/federal-reserve/",
+        "https://www.interactivecrypto.com/fed-s-july-crossroads-weaker-jobs-data-shifts-rate-hike-odds-amid-inflation-watch-jul-2026",
+        "https://www.cnbc.com/2026/06/17/fed-interest-rate-decision-june-2026.html"
+      ]
+    },
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
+      "title": "Nirav Shah is the Maine Democratic U.S. Senate nominee on July 31, 2026",
+      "q_claude": 0.11,
+      "q_codex": 0.12,
+      "q_all": [0.12, 0.10, 0.11, 0.13],
+      "rationale": "CORE: Graham Platner WITHDREW Jul 8 after a sexual-assault allegation; Maine Dems voted Jul 8 to hold a nominating convention. Shah is only one of >=4 contenders (Troy Jackson ex-Senate Pres, Shenna Bellows Sec of State, Dan Kleban, Shah) and as of Jul 9 is only 'weighing' a bid; he lost the 2026 Dem gubernatorial primary. RISK/settlement: YES needs a convention scheduled+held+concluded with Shah selected on/before Jul 31 (real timing risk). Consensus ~0.115 (divergence 0.01, very tight) vs market 0.145 -> NO-side edge only ~+2.5pt after fees, < 0.035 live gate. NO-TRADE (engine skips; correct). We already hold TJAC NO in this same event.",
+      "sources": [
+        "https://www.cnbc.com/2026/07/08/platner-quits-maine-senate-race-midterm-elections.html",
+        "https://www.nbcnews.com/politics/2026-election/replace-graham-platner-maine-democratic-senate-nominee-rcna353326",
+        "https://thehill.com/homenews/campaign/5957033-graham-platner-maine-senate/"
+      ]
+    },
+    {
+      "ticker": "KXLLM1-26JUL31-GOOG",
+      "title": "Google (Gemini) is the #1 LMArena Overall model on July 31, 2026",
+      "q_claude": 0.10,
+      "q_codex": 0.07,
+      "q_all": [0.10, 0.10, 0.07, 0.07],
+      "rationale": "VERIFICATION VOIDED THE BLIND (PROTOCOL 3.5 / VALUES.md #3): blind estimators used a stale June snapshot (Gemini assumed #3, ~0.20 consensus). Live Arena Overall board (Jul 1, 2026) shows the top 5 are ALL Anthropic (Fable-5 #1 1509; four Opus-4.6/4.7 variants 1494-1504); Google's best is #7 gemini-3.1-pro-preview (1486, ~23 ELO back). Catalyst: Gemini 3.5 Pro (full rebuild) delayed to ~Jul 17 -- real but public (already priced) and only ~2 weeks to accumulate votes + clear a 5-deep Anthropic wall for sole Rank(UB) #1. Round-2 free re-estimate: opus 0.10 / codex 0.07 -> consensus ~0.085, BELOW market 0.115. NO-side edge ~+2.5pt < gate. NO-TRADE (verification prevented a wrong-signed YES bet). Interest-conflict noted (VALUES.md #9): Claude family judged an Anthropic-vs-Google market and actually came in LOWER than Codex -- no pro-Anthropic inflation. INTEREST-CONFLICT DECLARED. We already hold KXLLM1-A (Anthropic) YES in this event.",
+      "sources": [
+        "https://lmarena.ai/leaderboard/text",
+        "https://finance.biggo.com/news/6f0c6bb2-795f-4c57-9d09-6db691d7638a",
+        "https://cryptobriefing.com/google-delays-gemini-35-pro-launch-to-july-2026/"
+      ]
+    }
+  ]
+}
