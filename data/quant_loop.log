@@ -2309,3 +2309,19 @@
 [07-09 07:08:25]   h15: H15 RESTING KXETH15M-26JUL090915-15: bid 84c tau 6.6m
 [07-09 07:08:26]   h10: h10: 0 in-window | h10 shadow(main): n=470 mean -1.7c total $-8.18 | KXETH15M: n=146 net $+3.39 | KXSOL15M: n=154 net $-7.15 | KXBTC15M: n=170 net $-4.42 | gate: KILL (3 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
 [07-09 07:08:28]   journal: journal written: realized today $+3.90, 7 settled, 7 fills
+[07-09 07:08:30] light mark committed + pushed
+[07-09 07:11:16]   settle: done: 0 settled, 7 still open
+[07-09 07:11:18]   h15: H15 UNKNOWN KXETH15M-26JUL090915-15: cancel unverified — frozen as exposure until reconcile resolves
+[07-09 07:11:19]   mktsnap: mktsnap: 2 quotes recorded, 0 outcomes resolved
+[07-09 07:11:25]   shortcycle: shortcycle: 19 candidate strikes | balance $49.03 | today spent $0.91/999999.00
+[07-09 07:11:25]   shortcycle: PASS  KXETHD-26JUL0910-T1739.99: edge below bar at crossed price 0.770
+[07-09 07:11:25]   shortcycle: PASS  KXBTCD-26JUL0910-T62499.99: edge below bar at crossed price 0.840
+[07-09 07:11:25]   shortcycle: done: 0 shortcycle orders
+[07-09 07:11:25]   favorites: favorites lane disabled
+[07-09 07:11:26]   h10: h10: 0 in-window | h10 shadow(main): n=470 mean -1.7c total $-8.18 | KXETH15M: n=146 net $+3.39 | KXSOL15M: n=154 net $-7.15 | KXBTC15M: n=170 net $-4.42 | gate: KILL (3 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-09 07:11:27]   weather: weather: 0 priced buckets | spent $1.34/999999.00
+[07-09 07:11:27]   weather: done: 0 weather orders
+[07-09 07:11:29]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=174 win 73% EV -2.5c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=351 win 68% EV +0.1c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (142 pending)
+[07-09 07:11:40]   pmwatch: pmwatch: +53 pairs | pmwatch: 9534 rows, 2865 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 07:11:41]   journal: journal written: realized today $+3.90, 7 settled, 7 fills
+[07-09 07:11:42]   report: wrote reports\report_2026-07-09.md
