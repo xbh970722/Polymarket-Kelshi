@@ -2898,3 +2898,21 @@
 [07-08 18:05:49]   pmwatch: pmwatch: +56 pairs | pmwatch: 8274 rows, 2546 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 18:05:50]   journal: journal written: realized today $-5.70, 48 settled, 44 fills
 [07-08 18:05:51]   report: wrote reports\report_2026-07-08.md
+[07-08 18:05:57] committed + pushed
+[07-08 18:08:13]   h15: done: h15 pass complete
+[07-08 18:08:14]   h10: h10: 2 in-window | h10 shadow(main): n=414 mean -2.6c total $-10.93 | KXETH15M: n=129 net $+2.77 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=148 net $-5.79 | gate: KILL (2 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 18:08:14]   h10: done: 0 h10 orders
+[07-08 18:11:34]   settle: done: 0 settled, 11 still open
+[07-08 18:11:35]   h15: done: h15 pass complete
+[07-08 18:11:37]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-08 18:11:42]   shortcycle: shortcycle: 13 candidate strikes | balance $46.00 | today spent $1.53/999999.00
+[07-08 18:11:42]   shortcycle: done: 0 shortcycle orders
+[07-08 18:11:46]   favorites: favorites: 4 favorites in zone | realized $-8.12 | today spent $60.64/999999.00
+[07-08 18:11:46]   favorites: LIVE  KXSOLD-26JUL0821-T77.9999: FAV NO x3 @ 89c cost=$2.69 order=96a2ed58-842f-4eb8-ad62-bb6acffc4aa1
+[07-08 18:11:46]   favorites: done: 1 favorite orders
+[07-08 18:11:47]   h10: h10: 0 in-window | h10 shadow(main): n=414 mean -2.6c total $-10.93 | KXETH15M: n=129 net $+2.77 | KXSOL15M: n=137 net $-7.92 | KXBTC15M: n=148 net $-5.79 | gate: KILL (2 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 18:11:48]   weather: weather: daily entry cap reached (3)
+[07-08 18:11:50]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=157 win 75% EV -1.5c | BOOK-ONLY: n=98 win 72% EV -4.1c | SPOT-MOVE: n=322 win 69% EV +0.7c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (123 pending)
+[07-08 18:12:02]   pmwatch: pmwatch: +56 pairs | pmwatch: 8286 rows, 2550 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-08 18:12:03]   journal: journal written: realized today $-5.70, 48 settled, 45 fills
+[07-08 18:12:05]   report: wrote reports\report_2026-07-08.md
