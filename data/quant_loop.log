@@ -2217,3 +2217,9 @@
 [07-08 21:36:11]   pmwatch: pmwatch: +56 pairs | pmwatch: 8610 rows, 2648 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-08 21:36:12]   journal: journal written: realized today $-9.45, 59 settled, 56 fills
 [07-08 21:36:13]   report: wrote reports\report_2026-07-08.md
+[07-08 21:36:16] committed + pushed
+[07-08 21:38:43]   h15: H15 RESTING KXETH15M-26JUL082345-45: bid 84c tau 6.3m
+[07-08 21:38:44]   h10: h10: 1 in-window | h10 shadow(main): n=432 mean -2.1c total $-9.18 | KXETH15M: n=133 net $+3.15 | KXSOL15M: n=144 net $-7.26 | KXBTC15M: n=155 net $-5.07 | gate: KILL (2 pending) || H13 final6: n=41 win 41/41 net $+1.09 gate: accumulating
+[07-08 21:38:44]   h10: done: 0 h10 orders
+[07-08 21:38:46]   stopshadow: STOPGUARD HOLD #604 KXBTCD-26JUL0900-T61999.99: bid 0.64 but spot safe side & clear — book-only smash, not selling
+[07-08 21:38:47]   journal: journal written: realized today $-9.45, 59 settled, 56 fills
