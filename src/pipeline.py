@@ -328,13 +328,17 @@ def _vol_regime(cfg: dict) -> str:
         now_utc = dt.datetime.now(dt.timezone.utc)
         start = (now_utc - dt.timedelta(hours=24)).isoformat()
         comp = 0.0
-        for pair in ("BTC-USD", "ETH-USD"):
+        # R10-S2 (b): SOL joins the composite — its RV runs above BTC/ETH
+        # 90% of the time; a BTC/ETH-only composite misses SOL storms.
+        for pair in ("BTC-USD", "ETH-USD", "SOL-USD"):
             rows = _rq.get(
                 f"https://api.exchange.coinbase.com/products/{pair}/candles",
                 params={"granularity": 300, "start": start,
                         "end": now_utc.isoformat()},
                 timeout=10).json()
             closes = [r[4] for r in sorted(rows)]
+            if len(closes) < 100:       # R10-S2 (d4): thin/empty candle payload
+                raise ValueError(f"{pair}: only {len(closes)} candles")
             rets = [math.log(closes[i + 1] / closes[i])
                     for i in range(len(closes) - 1) if closes[i] > 0]
             rv = math.sqrt(sum(x * x for x in rets))
@@ -346,8 +350,15 @@ def _vol_regime(cfg: dict) -> str:
             {"ts": time.time(), "regime": reg, "rv": round(comp, 5)}),
             encoding="utf-8")
         return reg
-    except Exception:
-        return (c or {}).get("regime", "elevated")
+    except Exception as e:
+        # R10-S2 击穿修复: the old last-known fallback had NO age limit — one
+        # successful cache write made 'fail->elevated' unreachable forever.
+        # Last-known is honored for 2h, then blind = elevated, LOUDLY.
+        if c and time.time() - c.get("ts", 0) <= 7200:
+            return c.get("regime", "elevated")
+        print(f"WARN vol_regime blind >2h ({type(e).__name__}) — "
+              f"defaulting to ELEVATED (throttled while blind)")
+        return "elevated"
 
 
 def _mtm_halt(cfg: dict) -> str | None:
@@ -1309,9 +1320,12 @@ def cmd_stopshadow(_args) -> None:
             continue                    # no unmanipulable confirmation -> hold
         losing = (spot < strike) if t["side"] == "yes" else (spot > strike)
         prox = guard.get("spot_proximity_pct", 0.05)
-        if _in_macro_window(cfg) or _vol_regime(cfg) == "storm":
-            prox = guard.get("storm_proximity_pct", 0.10)   # storm ladder:
-        near = abs(spot - strike) / strike <= prox / 100.0  # wider = warier
+        reg_g = _vol_regime(cfg)
+        if _in_macro_window(cfg) or reg_g == "storm":
+            prox = guard.get("storm_proximity_pct", 0.10)   # R10-S2 (e): the
+        elif reg_g == "elevated":                           # registry promised
+            prox = guard.get("elevated_proximity_pct", 0.075)   # THREE tiers —
+        near = abs(spot - strike) / strike <= prox / 100.0  # now code has three
         if not (losing or near):
             print(f"STOPGUARD HOLD #{t['id']} {t['ticker']}: bid {bid:.2f} but "
                   f"spot safe side & clear — book-only smash, not selling")

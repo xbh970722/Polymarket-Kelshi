@@ -173,11 +173,18 @@ macro_windows:
   - ["2026-08-19T17:30:00Z", "2026-08-19T19:30:00Z"]   # FOMC Minutes
   - ["2026-08-26T12:00:00Z", "2026-08-26T14:00:00Z"]   # PCE Jul
 
+# R10-S2 (a): 体制阈值原先只存在于代码默认值 — "可调"是假象; 现落成真键。
+# 数值 = C4 冻结校准 (90d 分位); S2 又证基线非平稳 (120d 非calm占比42%) —
+# 周度反思任务负责用滚动窗重校并在此留痕, 不许静默漂移。
+regime_calm_max: 0.02727         # 24h 复合RV < 此值 = calm
+regime_storm_min: 0.03709        # > 此值 = storm; 之间 = elevated
+
 crypto_stop:
   enabled: true
   bid_trigger: 0.70              # 持仓侧 bid 触线
   spot_proximity_pct: 0.05       # 现货在 strike ±0.05% 内 = "贴线即不确定"
-  storm_proximity_pct: 0.10      # R8: 宏观窗内自动切换 (C4 风暴梯)
+  elevated_proximity_pct: 0.075  # R10-S2 (e): 注册簿承诺的三档表, 补齐中档
+  storm_proximity_pct: 0.10      # R8: 宏观窗/风暴内自动切换 (C4 风暴梯)
                                  # (今晚两笔触发时现货都贴线上方, 纯穿越判定会漏)
   exit_cross: 0.02               # 卖出限价 = bid - 2c (确保快市成交)
 
