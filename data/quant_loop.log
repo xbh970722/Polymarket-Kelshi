@@ -3020,3 +3020,22 @@
 [07-09 11:38:11]   h10: h10: 1 in-window | h10 shadow(main): n=490 mean -1.9c total $-9.11 | KXETH15M: n=154 net $+2.09 | KXSOL15M: n=159 net $-6.64 | KXBTC15M: n=177 net $-4.57 | gate: KILL (1 pending) || H13 final6: n=43 win 43/43 net $+1.13 gate: accumulating
 [07-09 11:38:11]   h10: done: 0 h10 orders
 [07-09 11:38:13]   journal: journal written: realized today $+1.31, 14 settled, 16 fills
+[07-09 11:38:15] light mark committed + pushed
+[07-09 11:41:30]   settle: done: 0 settled, 9 still open
+[07-09 11:41:32]   h15: H15 UNKNOWN KXETH15M-26JUL091345-45: cancel unverified — frozen as exposure until reconcile resolves
+[07-09 11:41:34]   mktsnap: mktsnap: 15 quotes recorded, 0 outcomes resolved
+[07-09 11:41:38]   shortcycle: shortcycle: 11 candidate strikes | balance $44.73 | today spent $1.80/999999.00
+[07-09 11:41:38]   shortcycle: done: 0 shortcycle orders
+[07-09 11:41:39]   favorites: favorites lane disabled
+[07-09 11:41:40]   h10: h10: 0 in-window | h10 shadow(main): n=490 mean -1.9c total $-9.11 | KXETH15M: n=154 net $+2.09 | KXSOL15M: n=159 net $-6.64 | KXBTC15M: n=177 net $-4.57 | gate: KILL (1 pending) || H13 final6: n=43 win 43/43 net $+1.13 gate: accumulating
+[07-09 11:41:41]   weather: weather: daily entry cap reached (3)
+[07-09 11:41:43]   disloc: DISLOC KXBTCD-26JUL0914-T63099.99: fav 0.98->0.83 ask 0.84 [SPOT-MOVE] tau 18m
+[07-09 11:41:43]   disloc: DISLOC KXBTCD-26JUL0914-T62999.99: fav 0.95->0.62 ask 0.63 [SPOT-MOVE] tau 18m
+[07-09 11:41:43]   disloc: DISLOC KXBTCD-26JUL0914-T62899.99: fav 0.84->0.34 ask 0.35 [SPOT-MOVE] tau 18m
+[07-09 11:41:43]   disloc: DISLOC KXBTCD-26JUL0917-T63249.99: fav 0.85->0.76 ask 0.77 [SPOT-MOVE] tau 198m
+[07-09 11:41:43]   disloc: DISLOC KXSOLD-26JUL0914-T77.9999: fav 0.93->0.42 ask 0.43 [SPOT-MOVE] tau 18m
+[07-09 11:41:43]   disloc: DISLOC KXXRPD-26JUL0917-T1.0999: fav 0.79->0.66 ask 0.68 [SPOT-MOVE] tau 198m
+[07-09 11:41:43]   disloc: disloc: +6 events, 0 settled | disloc shadow: AMBIGUOUS: n=182 win 73% EV -3.0c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=376 win 69% EV +0.9c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (154 pending)
+[07-09 11:41:50]   pmwatch: pmwatch: +28 pairs | pmwatch: 9936 rows, 2988 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 11:41:51]   journal: journal written: realized today $+1.31, 14 settled, 16 fills
+[07-09 11:41:53]   report: wrote reports\report_2026-07-09.md
