@@ -3527,3 +3527,25 @@
 [07-09 14:57:19] janitor: reaped leaked sessions ['64356']
 [07-09 14:57:20]   journal: journal written: realized today $+1.54, 16 settled, 17 fills
 [07-09 14:57:21]   report: wrote reports\report_2026-07-09.md
+[07-09 14:57:24] committed + pushed
+[07-09 15:00:21]   h15: done: h15 pass complete
+[07-09 15:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=505 mean -1.7c total $-8.58 | KXETH15M: n=159 net $+2.51 | KXSOL15M: n=164 net $-6.98 | KXBTC15M: n=182 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 15:00:39]   h15: done: h15 pass complete
+[07-09 15:00:40]   h10: h10: 0 in-window | h10 shadow(main): n=505 mean -1.7c total $-8.58 | KXETH15M: n=159 net $+2.51 | KXSOL15M: n=164 net $-6.98 | KXBTC15M: n=182 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 15:02:53]   h15: done: h15 pass complete
+[07-09 15:02:54]   h10: h10: 0 in-window | h10 shadow(main): n=505 mean -1.7c total $-8.58 | KXETH15M: n=159 net $+2.51 | KXSOL15M: n=164 net $-6.98 | KXBTC15M: n=182 net $-4.11 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 15:05:31]   settle: done: 0 settled, 9 still open
+[07-09 15:05:33]   h15: H15 RESTING placed KXETH15M-26JUL091715-15: YES bid 84c fav_mid 0.88 tau 9m order=5c4d0db8-7bed-445c-9590-3c95d63edcaf exp=not-echoed(normal)
+[07-09 15:05:33]   h15: done: h15 pass complete
+[07-09 15:05:35]   mktsnap: mktsnap: 3 quotes recorded, 9 outcomes resolved
+[07-09 15:05:40]   shortcycle: shortcycle: 13 candidate strikes | balance $44.99 | today spent $2.49/999999.00
+[07-09 15:05:40]   shortcycle: PASS  KXBTCD-26JUL0918-T62999.99: edge below bar at crossed price 0.970
+[07-09 15:05:40]   shortcycle: done: 0 shortcycle orders
+[07-09 15:05:41]   favorites: favorites lane disabled
+[07-09 15:05:42]   h10: h10: 2 in-window | h10 shadow(main): n=505 mean -1.7c total $-8.58 | KXETH15M: n=159 net $+2.51 | KXSOL15M: n=164 net $-6.98 | KXBTC15M: n=182 net $-4.11 | gate: KILL (2 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 15:05:42]   h10: done: 0 h10 orders
+[07-09 15:05:43]   weather: weather: daily entry cap reached (3)
+[07-09 15:05:46]   disloc: disloc: +0 events, 11 settled | disloc shadow: AMBIGUOUS: n=193 win 73% EV -2.6c | BOOK-ONLY: n=108 win 74% EV -2.4c | SPOT-MOVE: n=399 win 70% EV +1.6c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (140 pending)
+[07-09 15:05:58]   pmwatch: pmwatch: +56 pairs | pmwatch: 10260 rows, 3092 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 15:05:59]   journal: journal written: realized today $+1.54, 16 settled, 18 fills
+[07-09 15:06:01]   report: wrote reports\report_2026-07-09.md
