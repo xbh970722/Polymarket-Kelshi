@@ -668,6 +668,14 @@ def cmd_favorites(_args) -> None:
             fav_side = "yes" if (m["yes_bid"] + m["yes_ask"]) / 2 >= 0.5 else "no"
             fav_ask = m["yes_ask"] if fav_side == "yes" else m["no_ask"]
             if lo <= fav_ask <= hi:
+                # R7 (2026-07-08): direction-conditional floor. Ledger n=256
+                # in-zone: NO-side profitable across the whole zone, but YES-side
+                # [0.86,0.90) is the sole loss cell (n=45 net -$9.07, 67% realized
+                # vs ~88% implied). Lift ONLY the yes floor to excise it; NO keeps
+                # zone[0]. Fail-open: absent config key => no extra gate.
+                yzf = fc.get("yes_zone_floor")
+                if fav_side == "yes" and yzf and fav_ask < yzf:
+                    continue
                 cands.append((series, m, fav_side, fav_ask))
     print(f"favorites: {len(cands)} favorites in zone | realized ${realized:+.2f} | "
           f"today spent ${spent:.2f}/{fc['daily_budget_usd']:.2f}")
