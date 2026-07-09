@@ -2635,3 +2635,26 @@
 [07-09 08:57:13] janitor: reaped leaked sessions ['45656']
 [07-09 08:57:15]   journal: journal written: realized today $+4.27, 11 settled, 11 fills
 [07-09 08:57:16]   report: wrote reports\report_2026-07-09.md
+[07-09 08:57:18] committed + pushed
+[07-09 09:00:20]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 09:00:22]   h10: h10: 0 in-window | h10 shadow(main): n=481 mean -1.7c total $-8.18 | KXETH15M: n=151 net $+2.74 | KXSOL15M: n=157 net $-6.85 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 09:00:38]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 09:00:39]   h10: h10: 0 in-window | h10 shadow(main): n=481 mean -1.7c total $-8.18 | KXETH15M: n=151 net $+2.74 | KXSOL15M: n=157 net $-6.85 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 09:02:52]   h15: h15 idle: 15m slot held by another lane (one-position mutex)
+[07-09 09:02:53]   h10: h10: 0 in-window | h10 shadow(main): n=481 mean -1.7c total $-8.18 | KXETH15M: n=151 net $+2.74 | KXSOL15M: n=157 net $-6.85 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 09:05:31]   settle: SETTLED KXETH15M-26JUL091100-00: result=yes LOSS pnl=$-2.52
+[07-09 09:05:31]   settle: done: 1 settled, 7 still open
+[07-09 09:05:32]   h15: done: h15 pass complete
+[07-09 09:05:35]   mktsnap: mktsnap: 3 quotes recorded, 18 outcomes resolved
+[07-09 09:05:40]   shortcycle: shortcycle: 18 candidate strikes | balance $46.88 | today spent $1.80/999999.00
+[07-09 09:05:40]   shortcycle: done: 0 shortcycle orders
+[07-09 09:05:41]   favorites: favorites lane disabled
+[07-09 09:05:42]   h10: h10: 0 in-window | h10 shadow(main): n=481 mean -1.7c total $-8.18 | KXETH15M: n=151 net $+2.74 | KXSOL15M: n=157 net $-6.85 | KXBTC15M: n=173 net $-4.08 | gate: KILL (0 pending) || H13 final6: n=42 win 42/42 net $+1.12 gate: accumulating
+[07-09 09:05:45]   weather: weather: 13 priced buckets | spent $1.34/999999.00
+[07-09 09:05:45]   weather: LIVE  KXHIGHNY-26JUL09-B83.5: NO x1 @ 38.0c cost=$0.40 q_model=0.37 vs mkt=0.62 mu=84.0F sigma=2.0 order=db49b7a6-b3e7-4464-a659-ef891e54746a
+[07-09 09:05:45]   weather: weather: daily entry cap reached (in-run)
+[07-09 09:05:45]   weather: done: 1 weather orders
+[07-09 09:05:49]   disloc: disloc: +0 events, 8 settled | disloc shadow: AMBIGUOUS: n=176 win 72% EV -3.3c | BOOK-ONLY: n=106 win 74% EV -3.0c | SPOT-MOVE: n=366 win 68% EV +0.3c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (143 pending)
+[07-09 09:05:56]   pmwatch: pmwatch: +31 pairs | pmwatch: 9714 rows, 2924 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-09 09:05:57]   journal: journal written: realized today $+1.75, 12 settled, 12 fills
+[07-09 09:05:59]   report: wrote reports\report_2026-07-09.md
