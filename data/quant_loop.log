@@ -3438,3 +3438,11 @@
 [07-09 14:27:14]   pmwatch: pmwatch: +52 pairs | pmwatch: 10200 rows, 3073 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-09 14:27:15]   journal: journal written: realized today $+1.31, 14 settled, 16 fills
 [07-09 14:27:17]   report: wrote reports\report_2026-07-09.md
+[07-09 14:27:19] committed + pushed
+[07-09 14:30:37]   h15: done: h15 pass complete
+[07-09 14:30:38]   h10: h10: 0 in-window | h10 shadow(main): n=501 mean -1.8c total $-9.04 | KXETH15M: n=157 net $+2.30 | KXSOL15M: n=163 net $-7.09 | KXBTC15M: n=181 net $-4.26 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 14:30:40]   stopshadow: STOPGUARD NOFILL #675 KXBTCD-26JUL0917-T63249.99: bid vanished, still holding
+[07-09 14:32:38]   h15: done: h15 pass complete
+[07-09 14:32:39]   h10: h10: 0 in-window | h10 shadow(main): n=501 mean -1.8c total $-9.04 | KXETH15M: n=157 net $+2.30 | KXSOL15M: n=163 net $-7.09 | KXBTC15M: n=181 net $-4.26 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating
+[07-09 14:32:40]   stopshadow: STOPGUARD EXIT #675 KXBTCD-26JUL0917-T63249.99: sold x1 @ 46c (bid 0.45, spot at-line) — salvaged vs riding to 0
+[07-09 14:32:41]   journal: journal written: realized today $+1.06, 15 settled, 16 fills
