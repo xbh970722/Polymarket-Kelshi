@@ -308,6 +308,48 @@ def _in_macro_window(cfg: dict) -> str | None:
     return None
 
 
+def _vol_regime(cfg: dict) -> str:
+    """C4's frozen composite-RV ladder, LIVE (strategy fix 07-08: the
+    classifier existed since GAP-245 but was never wired to sizing — two
+    trend days ate ten calm days' premiums). 24h realized vol from 5m
+    candles, composite = max(BTC, ETH); calm < 2.727% <= elevated <=
+    3.709% < storm. 10-min disk cache; on data failure returns last known
+    (else 'elevated' — throttling while blind is the safe direction)."""
+    import math
+    cache = Path("data") / "vol_regime.json"
+    try:
+        c = json.loads(cache.read_text(encoding="utf-8"))
+        if time.time() - c["ts"] < 600:
+            return c["regime"]
+    except Exception:
+        c = None
+    try:
+        import requests as _rq
+        now_utc = dt.datetime.now(dt.timezone.utc)
+        start = (now_utc - dt.timedelta(hours=24)).isoformat()
+        comp = 0.0
+        for pair in ("BTC-USD", "ETH-USD"):
+            rows = _rq.get(
+                f"https://api.exchange.coinbase.com/products/{pair}/candles",
+                params={"granularity": 300, "start": start,
+                        "end": now_utc.isoformat()},
+                timeout=10).json()
+            closes = [r[4] for r in sorted(rows)]
+            rets = [math.log(closes[i + 1] / closes[i])
+                    for i in range(len(closes) - 1) if closes[i] > 0]
+            rv = math.sqrt(sum(x * x for x in rets))
+            comp = max(comp, rv)
+        lo = cfg.get("regime_calm_max", 0.02727)
+        hi = cfg.get("regime_storm_min", 0.03709)
+        reg = "storm" if comp > hi else ("elevated" if comp >= lo else "calm")
+        cache.write_text(json.dumps(
+            {"ts": time.time(), "regime": reg, "rv": round(comp, 5)}),
+            encoding="utf-8")
+        return reg
+    except Exception:
+        return (c or {}).get("regime", "elevated")
+
+
 def _mtm_halt(cfg: dict) -> str | None:
     """R4-FABLE-B HIGH: daily_loss_halt reads REALIZED pnl only — 8 correlated open
     favorites (~$12) can blow past the $5 halt before anything settles. cmd_manage
@@ -689,6 +731,13 @@ def cmd_favorites(_args) -> None:
     if mw:
         print(f"MACRO WINDOW {mw}: favorites no-new-entry (storm protocol)")
         return
+    reg = _vol_regime(cfg)
+    if reg == "storm":
+        print("VOL REGIME storm: favorites no-new-entry (RV ladder)")
+        return
+    if reg == "elevated":
+        print("VOL REGIME elevated: favorites size throttled to x1 "
+              "(trend days pay out the insurance we sell)")
     cfg_gl = _live_risk_overlay(cfg)
     cfg_gl["risk"]["max_per_trade_usd"] = min(cfg_gl["risk"]["max_per_trade_usd"],
                                               fc.get("max_per_trade_usd", 2.0))
@@ -778,6 +827,8 @@ def cmd_favorites(_args) -> None:
         # bet the structural bias, not a model edge -> pass edge check trivially
         n_ct = (fc.get("max_contracts_by_series") or {}).get(
             series, fc.get("max_contracts", 2))   # R4: same default as est_ct
+        if reg == "elevated":
+            n_ct = min(n_ct, 1)     # regime throttle: x1 in trend/vol expansion
         # R3 consensus (CRITICAL): durable intent row BEFORE the POST
         coid = str(uuid.uuid4())     # R4: pure UUID (no prefix; format-safe)
         try:
@@ -1258,9 +1309,9 @@ def cmd_stopshadow(_args) -> None:
             continue                    # no unmanipulable confirmation -> hold
         losing = (spot < strike) if t["side"] == "yes" else (spot > strike)
         prox = guard.get("spot_proximity_pct", 0.05)
-        if _in_macro_window(cfg):               # R8-C3/C4 storm ladder: macro
-            prox = guard.get("storm_proximity_pct", 0.10)   # window widens the
-        near = abs(spot - strike) / strike <= prox / 100.0  # uncertainty band
+        if _in_macro_window(cfg) or _vol_regime(cfg) == "storm":
+            prox = guard.get("storm_proximity_pct", 0.10)   # storm ladder:
+        near = abs(spot - strike) / strike <= prox / 100.0  # wider = warier
         if not (losing or near):
             print(f"STOPGUARD HOLD #{t['id']} {t['ticker']}: bid {bid:.2f} but "
                   f"spot safe side & clear — book-only smash, not selling")
@@ -1560,6 +1611,13 @@ def cmd_h15(_args) -> None:
     mw = _in_macro_window(cfg)
     if mw:                                      # R8-C3: storm窗不挂新单, 撤单/
         print(f"MACRO WINDOW {mw}: h15 no new resting bids")   # 成交管理照常
+        return
+    reg15 = _vol_regime(cfg)
+    if reg15 in ("elevated", "storm"):
+        # 07-07 evidence: 4/8 fills died in the downtrend — a maker's fill
+        # IS the adverse selection in a trend. Bids rest only in calm.
+        print(f"VOL REGIME {reg15}: h15 no new resting bids (fills = knives "
+              f"in a trend; today 4/8 proved it)")
         return
     # ---- 2. place a new resting bid ----
     realized = ledger.realized_by_title("h15maker")

@@ -82,7 +82,10 @@ swing:
   # (评审团清理: manage_intraday 为死旋钮已删 — 日内扫描频率由 quant_loop MARKS 决定)
 
 risk:                      # ===== 硬限额: paper 和 live 都强制执行 =====
-  max_per_trade_usd: 25
+  max_per_trade_usd: 2.50    # 2026-07-08 Fable 策略复盘 (降风险): ensemble 单笔
+                             # $25→$2.50 — 07-07 KXGPT x18 ($3.78, 账户 9%) 一笔
+                             # 占日亏 40%, 尺寸与其证据等级不配。恢复 $25 = 加风
+                             # 险 = 用户杠杆 (原值留档)。quant 通道各有独立小帽。
   max_daily_risk_usd: 999999   # 2026-07-04 深夜用户指令: 预算不设上限 (原100;
                                # 日投放闸全部解除, 风险由单笔/敞口/日亏熔断/余额兜底)
   max_total_exposure_usd: 300
@@ -268,12 +271,17 @@ h10:
   enabled: true
   series_shadow: [KXBTC15M, KXETH15M, KXSOL15M]   # BTC 进影子监视 (2026-07-05):
                                  # tau>6 现无散户对手盘, 微观结构变了数据会报告
-  series_live: [KXETH15M, KXSOL15M]  # 用户 2026-07-05: ETH 放开笔数限制 (探针1/1
-                                 # 后转常驻微通道); SOL 准入但连输 2 把即停转影子
+  # (series_live 见下方 07-08 暂停条目 — 原 [KXETH15M, KXSOL15M], 2026-07-05
+  #  用户开的 ETH 常驻 + SOL 连败条款; 重复 key 会静默覆盖, 故此行移除)
   zone: [0.84, 0.94]
   tau_window_min: [6, 16]
   max_contracts: 1               # 最低额度不变 (用户明示): 单张
   max_per_trade_usd: 1.00
+  # 2026-07-08 Fable 策略复盘: 实盘探针暂停 (降风险)。影子 n=103 均值 -2.4c
+  # (print 幻影在 quote 现实里持续缩水), 实盘 micro 累计亦为负 — "执行现实"
+  # 的问题已有答案, 不需要继续付费采样。影子照跑, n=150 门照裁; 门若翻正
+  # 再复播 (恢复 series_live 是加风险, 届时提案给用户)。
+  series_live: []                # (原 [KXETH15M, KXSOL15M])
   consec_loss_stop:              # 用户 2026-07-05: 连续输 N 把 -> 该币停掉转影子
     KXSOL15M: 2                  # (写 data/h10_stop_KXSOL15M.json; 复盘删文件重启)
   drawdown_step_usd: 3.00        # R7-FABLE: 粘贴事故修复 — 此键此前被吸进 h15 块,
