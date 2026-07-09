@@ -2014,3 +2014,5 @@
 [07-09 15:21:10]   journal: journal written: realized today $+0.86, 17 settled, 19 fills
 [07-09 15:21:12]   report: wrote reports\report_2026-07-09.md
 [07-09 15:21:15] committed + pushed
+[07-09 15:23:50]   h15: done: h15 pass complete
+[07-09 15:23:51]   h10: h10: 0 in-window | h10 shadow(main): n=508 mean -1.8c total $-9.25 | KXETH15M: n=160 net $+1.62 | KXSOL15M: n=165 net $-6.87 | KXBTC15M: n=183 net $-4.00 | gate: KILL (0 pending) || H13 final6: n=45 win 45/45 net $+1.20 gate: accumulating

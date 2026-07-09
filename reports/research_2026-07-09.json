@@ -1,8 +1,8 @@
 {
   "date": "2026-07-09",
-  "cycle": "scheduled-live-ensemble",
+  "cycle": "scheduled-live-ensemble (2 cycles this date; NSHA re-researched in cycle 2 after Shah formally declared)",
   "arbiter": "opus-4.8 (Fable quota deferred; desktop default model)",
-  "ensemble": "2x opus (inside/outside personas) + 2x codex gpt-5.5 xhigh, all blind (no market prices); round-2 focused re-estimate on GOOG after verification voided stale leaderboard facts (PROTOCOL 3.5 / VALUES.md #3 exception); verification layer on both trade candidates (Fed, GOOG).",
+  "ensemble": "2x opus (inside/outside personas) + 2x codex gpt-5.5 xhigh, all blind (no market prices); round-2 focused re-estimate after verification per PROTOCOL 3.5 / VALUES.md #3.",
   "items": [
     {
       "ticker": "KXFEDDECISION-26JUL-H25",
@@ -10,7 +10,7 @@
       "q_claude": 0.225,
       "q_codex": 0.26,
       "q_all": [0.25, 0.20, 0.27, 0.25],
-      "rationale": "CORE: consensus ~0.24 (opus 0.225 / codex 0.26; family divergence 0.035, tight) vs Kalshi H25 ask 0.15 -> ~+9pt YES edge. RISK: settlement needs EXACTLY a 25bp hike on Jul 29; base case is still 'wait-and-see' hold, and Chair Warsh (Jul 1) did NOT commit to July, so the first hike could slip to Sept. DIVERGENCE: none material. VERIFICATION (reinforced, did not void): May CPI 4.2% YoY / May PCE >4% (3yr high, Iran-war energy shock); June dots show 9/18 FOMC now see >=1 hike by year-end (up from 0 in March); Hammack hawkish. Cross-venue July-hike odds 21% (Octagon/Polymarket-class) to ~30% (CME FedWatch move-implied) -> Kalshi's 14.5% is an outlier LOW, corroborating the underprice. Aligned with existing KXFEDDECISION-26JUL-H0 NO position (same 'Fed moves' thesis, cleaner expression). June CPI (Jul 14) is a known pre-meeting catalyst. Edge 0.095 < 0.10 -> normal tier, not high-conviction $4.",
+      "rationale": "[CYCLE 1] CORE: consensus ~0.24 (opus 0.225 / codex 0.26; family divergence 0.035, tight) vs Kalshi H25 ask 0.15 -> ~+9pt YES edge. RISK: settlement needs EXACTLY a 25bp hike on Jul 29; base case is still 'wait-and-see' hold, and Chair Warsh (Jul 1) did NOT commit to July, so the first hike could slip to Sept. VERIFICATION: May CPI 4.2% YoY / May PCE >4% (3yr high, Iran-war energy shock); June dots show 9/18 FOMC now see >=1 hike by year-end; cross-venue July-hike odds 21-30% -> Kalshi's 14.5% is an outlier LOW. Edge 0.095 < 0.10 -> normal tier. Executed cycle 1 (now hold 9 @ 15c).",
       "sources": [
         "https://growbeansprout.com/tools/fedwatch",
         "https://centralbank.watch/federal-reserve/",
@@ -20,15 +20,29 @@
     },
     {
       "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
-      "title": "Nirav Shah is the Maine Democratic U.S. Senate nominee on July 31, 2026",
+      "title": "Nirav Shah is the Democratic nominee for U.S. Senate in Maine as of Jul 31, 2026",
       "q_claude": 0.11,
-      "q_codex": 0.12,
-      "q_all": [0.12, 0.10, 0.11, 0.13],
-      "rationale": "CORE: Graham Platner WITHDREW Jul 8 after a sexual-assault allegation; Maine Dems voted Jul 8 to hold a nominating convention. Shah is only one of >=4 contenders (Troy Jackson ex-Senate Pres, Shenna Bellows Sec of State, Dan Kleban, Shah) and as of Jul 9 is only 'weighing' a bid; he lost the 2026 Dem gubernatorial primary. RISK/settlement: YES needs a convention scheduled+held+concluded with Shah selected on/before Jul 31 (real timing risk). Consensus ~0.115 (divergence 0.01, very tight) vs market 0.145 -> NO-side edge only ~+2.5pt after fees, < 0.035 live gate. NO-TRADE (engine skips; correct). We already hold TJAC NO in this same event.",
+      "q_codex": 0.11,
+      "q_all": [0.28, 0.22, 0.34, 0.21],
+      "rationale": "[CYCLE 2 re-research; Shah declared 07-09 AM] CORE: Platner dropped out 07-08 (assault allegation); replacement picked by a 600-delegate convention (500 county-proportional + 100 state-committee) by the 07-27 statutory deadline. Round-1 blind ensemble (0.21-0.34) ran WELL above market 0.12 because it lacked the delegate/endorsement map. VERIFICATION (mandatory) closed the gap: Troy Jackson is the consolidated frontrunner (only FEC filer, ~52% external), Jackson + Sec. of State Shenna Bellows CROSS-ENDORSED and campaign together, and Our Revolution (progressive PAC) endorsed Jackson -- establishment AND labor/progressive blocs both behind one man. RISK: delegate-count surprise or Jackson stumble; Shah retains statewide COVID-era name ID. DIVERGENCE: round-1 co-leader premise vs verified Jackson-consolidated insider convention. Both families' round-2 finals collapsed to 0.11 (Codex independently re-verified AP/Guardian). Consensus 0.11 ~= market 0.12 -> NO EDGE, no trade. We already hold TJAC NO in this same event.",
       "sources": [
-        "https://www.cnbc.com/2026/07/08/platner-quits-maine-senate-race-midterm-elections.html",
-        "https://www.nbcnews.com/politics/2026-election/replace-graham-platner-maine-democratic-senate-nominee-rcna353326",
-        "https://thehill.com/homenews/campaign/5957033-graham-platner-maine-senate/"
+        "https://www.nbcnews.com/politics/2026-election/graham-platner-drops-senate-bid-maine-rcna353199",
+        "https://www.bangordailynews.com/2026/07/08/politics/elections/maine-democrats-want-convention-replace-graham-platner/",
+        "https://prospect.org/2026/07/09/three-likely-replacements-for-graham-platner-maine-senate-democrats/",
+        "https://www.bangordailynews.com/2026/07/09/politics/elections/maine-election-senate-nirav-shah-campaign-graham-platner-replacement/"
+      ]
+    },
+    {
+      "ticker": "KXKASHOUT-26APR-AUG01",
+      "title": "Kash Patel leaves as FBI Director before Aug 1, 2026",
+      "q_claude": 0.09,
+      "q_codex": 0.04,
+      "q_all": [0.08, 0.10, 0.04, 0.04],
+      "rationale": "[CYCLE 2] CORE: resolves YES only if Patel actually VACATES the role before Aug 1 (~3-week window); Schumer/Durbin resignation demands have no procedural power and Trump (sole decider) has signaled no removal. The Atlantic reporting (drinking/absenteeism) + FBI purges create genuine tail risk but no departure event. RISK: sudden Trump decision if he deems Patel a liability. DIVERGENCE: Opus weighted the controversy tail higher (0.08-0.10) than Codex (0.04); family divergence 0.05, within tolerance -> not a crux, no round 2. Consensus ~0.065 vs market ~0.05; edge below the 0.035-after-fees threshold and yes bid/ask (0.023/0.052) is wide -> no tradable edge, no trade.",
+      "sources": [
+        "https://www.democrats.senate.gov/news/press-releases/leader-schumer-floor-remarks-demanding-kash-patel-resign-as-fbi-director",
+        "https://www.judiciary.senate.gov/press/dem/releases/durbin-speaks-on-latest-kash-patel-revelations-urges-replacement",
+        "https://www.ms.now/rachel-maddow-show/maddowblog/kash-patel-fbi-purge-defining-feature"
       ]
     },
     {
@@ -37,12 +51,17 @@
       "q_claude": 0.10,
       "q_codex": 0.07,
       "q_all": [0.10, 0.10, 0.07, 0.07],
-      "rationale": "VERIFICATION VOIDED THE BLIND (PROTOCOL 3.5 / VALUES.md #3): blind estimators used a stale June snapshot (Gemini assumed #3, ~0.20 consensus). Live Arena Overall board (Jul 1, 2026) shows the top 5 are ALL Anthropic (Fable-5 #1 1509; four Opus-4.6/4.7 variants 1494-1504); Google's best is #7 gemini-3.1-pro-preview (1486, ~23 ELO back). Catalyst: Gemini 3.5 Pro (full rebuild) delayed to ~Jul 17 -- real but public (already priced) and only ~2 weeks to accumulate votes + clear a 5-deep Anthropic wall for sole Rank(UB) #1. Round-2 free re-estimate: opus 0.10 / codex 0.07 -> consensus ~0.085, BELOW market 0.115. NO-side edge ~+2.5pt < gate. NO-TRADE (verification prevented a wrong-signed YES bet). Interest-conflict noted (VALUES.md #9): Claude family judged an Anthropic-vs-Google market and actually came in LOWER than Codex -- no pro-Anthropic inflation. INTEREST-CONFLICT DECLARED. We already hold KXLLM1-A (Anthropic) YES in this event.",
+      "rationale": "[CYCLE 1] VERIFICATION VOIDED THE BLIND (PROTOCOL 3.5): blind used a stale June snapshot (Gemini ~#3). Live Arena Overall board (Jul 1) top 5 all Anthropic; Google's best is #7 (~23 ELO back). Gemini 3.5 Pro delayed to ~Jul 17 (public, priced). Round-2: opus 0.10 / codex 0.07 -> consensus ~0.085 < market 0.115 -> NO-side edge ~+2.5pt < gate. NO-TRADE. Interest-conflict declared (VALUES.md #9): Claude family came in LOWER than Codex -- no pro-Anthropic inflation. We already hold KXLLM1-A (Anthropic) YES.",
       "sources": [
         "https://lmarena.ai/leaderboard/text",
-        "https://finance.biggo.com/news/6f0c6bb2-795f-4c57-9d09-6db691d7638a",
         "https://cryptobriefing.com/google-delays-gemini-35-pro-launch-to-july-2026/"
       ]
+    }
+  ],
+  "skipped": [
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000",
+      "reason": "[CYCLE 2] Settlement-clause ambiguity (memory-flagged MAXMON trap). Friendly title 'How high will BTC get' implies touch/max (market's 0.71), but rules_secondary literally describes a cumulative TRIMMED MEAN (top/bottom 20% trimmed) -> ~0.20 reading. ~50pt gap turns entirely on reading an ambiguous clause; being wrong on real money is catastrophic. Verified: BTC never touched $65k in July (month high $64,659 on 07-05; spot $63,278 on 07-09). Even under the favorable touch reading, +2.7% over 22 days makes market's 0.71 roughly fair -> no edge. PROTOCOL iron rule #4: unreadable settlement -> skip, do not force-estimate."
     }
   ]
 }
