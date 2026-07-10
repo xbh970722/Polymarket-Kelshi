@@ -24,71 +24,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
       "rules_sha256": "b20b9c5ac5b2ca3b60a7e4cd9e123432bcd7e71de27c977451fd3390d5fb150a",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "imf-portwatch-hormuz",
+          "url": "https://portwatch.imf.org/pages/chokepoint6",
+          "title": "Strait of Hormuz — IMF PortWatch chokepoint dashboard",
+          "claim": "这是规则指定的霍尔木兹海峡 Transit Calls 数据页；IMF 同时提示 AIS 数据存在覆盖与识别局限。",
+          "stance": "context",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "macromicro-portwatch-jul5",
+          "url": "https://en.macromicro.me/charts/94482/imf-strait-of-hormuz-number-of-ships-and-transit-volume",
+          "title": "IMF - Strait of Hormuz - Daily Transit Calls & Transit Trade Volume",
+          "claim": "转录自 IMF PortWatch 的 2026-07-05 数据为单日 34 次、7 日移动平均 32.14，均显著低于 60。",
+          "stance": "supports_no",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "axios-hormuz-talks-jul10",
+          "url": "https://www.axios.com/2026/07/10/iran-strait-hormuz-attacks-mou-deal",
+          "title": "U.S. gives Iran Saturday deadline to publicly renounce Hormuz attacks",
+          "claim": "美方要求伊朗公开承诺停止袭船并承认海峡各航道开放；双方拟于 7 月 11 日在阿曼讨论，既提供恢复催化剂，也显示协议脆弱。",
+          "stance": "mixed",
+          "published_at": "2026-07-10T21:15:46Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.22,
           "ci80": [
-            null,
-            null
+            0.08,
+            0.45
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事情景派：7 月 5 日 7 日均值仅 32.14，需在三周内出现并维持接近翻倍的航运恢复。",
+            "7 月 11 日阿曼会谈与美方开放航道要求，构成快速正常化的明确催化剂。",
+            "均值阈值要求至少约一周持续高流量，比单日冲高更难。"
+          ],
+          "counterevidence": [
+            "战前日均约 91，若安全安排可信，积压船只可能使恢复速度非线性。",
+            "AIS 关闭或覆盖不足可能使公开数据低估实际通行，但结算仍以 PortWatch 为准。"
+          ],
+          "what_would_change_mind": [
+            "PortWatch 连续 3 至 4 天升至 55 以上，会显著上调。",
+            "阿曼会谈失败、再次袭船或保险撤保，会显著下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.34,
           "ci80": [
-            null,
-            null
+            0.12,
+            0.62
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 恢复基率派：战前基准约 91，解除封锁后 7 日均值跨过 60 并非极端终点。",
+            "尚有约三周，足以让滚动均值消化当前低值。",
+            "但停火反复和航运保险摩擦通常使重启慢于外交声明。"
+          ],
+          "counterevidence": [
+            "最新 7 日均值约 32，离阈值很远。",
+            "7 月 7 至 10 日再度交火削弱了“平滑恢复”的历史类比。"
+          ],
+          "what_would_change_mind": [
+            "正式、可核验的无袭击通航协议将上调至过半。",
+            "7 月中旬均值仍低于 40 将下调至低双位数。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.24,
           "ci80": [
-            null,
-            null
+            0.09,
+            0.48
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：截至 7 月 5 日 7 日均值为 32.14，阈值是严格“above 60”，不是触及 60。",
+            "新一轮袭船和美伊互袭压低船东、船员与承保方立即复航的意愿。",
+            "7 月 11 日外交窗口保留快速修复路径，但需随后一周持续放量。"
+          ],
+          "counterevidence": [
+            "战前日均约 91，物理运力并非约束，主要约束是安全和保险。",
+            "积压船舶集中通过可能快速拉高短期均值。"
+          ],
+          "what_would_change_mind": [
+            "看到连续一周日流量 60 至 70 以上。",
+            "出现新的商业船舶遇袭或主要承保机构进一步退出。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.31,
           "ci80": [
-            null,
-            null
+            0.11,
+            0.58
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：重大航运中断后的恢复通常呈阶跃而非线性，一旦政治安全门槛解除，三周足够跨越中间阈值。",
+            "60 低于约 91 的战前平均水平，因此无需完全恢复。",
+            "滚动均值的惯性与协议执行风险使成功率仍低于一半。"
+          ],
+          "counterevidence": [
+            "当前均值只约为阈值的一半。",
+            "双方刚发生新的交火，既有谅解备忘录可信度下降。"
+          ],
+          "what_would_change_mind": [
+            "7 月 15 日前恢复稳定的双向免费通航将明显上调。",
+            "7 月 20 日后 7 日均值仍未超过 45 将明显下调。"
+          ]
         }
       ],
       "round2": {
@@ -137,71 +205,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
       "rules_sha256": "3d930354a14137fd390a04fee7cd27c2ad1c68720533b31cc8b0a837587ab662",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "kworb-spotify-global-jul9",
+          "url": "https://kworb.net/spotify/country/global_daily.html",
+          "title": "Spotify Daily Chart - Global - 2026/07/09",
+          "claim": "7 月 9 日榜单中 Ariana Grande 以 4,305,870 次流媒体位列第 1，Shakira 以 4,268,922 位列第 2，领先不足 1%。",
+          "stance": "mixed",
+          "published_at": "2026-07-09T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "vagalume-spotify-jul1",
+          "url": "https://www.vagalume.com.br/news/2026/07/01/dai-dai-de-shakira-chega-ao-numero-1-do-spotify-global-pela-primeira-vez-veja-o-top-10.html",
+          "title": "“Dai Dai”, de Shakira, chega ao número 1 do Spotify Global pela primeira vez",
+          "claim": "7 月 1 日 Shakira 的 Dai Dai 位列 Spotify Global 第 1，Ariana Grande 的单曲位列第 4。",
+          "stance": "supports_no",
+          "published_at": "2026-07-01T16:52:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "vagalume-petal-release",
+          "url": "https://www.vagalume.com.br/news/2026/04/28/ariana-grande-anuncia-petal-seu-8-album-e-a-mensagem-do-nome-e-mais-profunda-do-que-parece.html",
+          "title": "Ariana Grande anuncia “petal”, seu 8º álbum",
+          "claim": "Ariana Grande 的新专辑计划 7 月 31 日发行，绝大部分 7 月榜单日不会得到专辑发行推动。",
+          "stance": "supports_no",
+          "published_at": "2026-04-28T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.4,
           "ci80": [
-            null,
-            null
+            0.18,
+            0.64
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 动量派：7 月 9 日 Ariana 已回到第 1，但对 Shakira 的日流量领先不足 1%，极易反转。",
+            "从 7 月 5 日第 4、7 月 6 日第 2 到 7 月 9 日第 1，短期动量有利。",
+            "要达到 12 天仍需在剩余月份拿下约十个榜单日，要求近半时间守住榜首。"
+          ],
+          "counterevidence": [
+            "Shakira 的世界杯主题曲在 7 月 19 日决赛前有持续事件催化。",
+            "Ariana 专辑到 7 月 31 日才发行，对累计 12 天帮助很小。"
+          ],
+          "what_would_change_mind": [
+            "若 Ariana 连续领先至 7 月 13 日且日流量差扩大到 5% 以上，将上调。",
+            "若 Shakira 在周末重新夺回并保持榜首，将显著下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.3,
           "ci80": [
-            null,
-            null
+            0.11,
+            0.55
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率派：单曲在发行第六周后仍累计 12 个单月榜首日，通常需要明显而稳定的领先。",
+            "当前第一、第二名几乎打平，领先不具备安全垫。",
+            "月内仍有多个周五新歌发行和世界杯决赛催化，增加被替换风险。"
+          ],
+          "counterevidence": [
+            "Ariana 已证明该曲有多次回到全球榜首的能力。",
+            "巡演和新专辑预热可延长单曲热度。"
+          ],
+          "what_would_change_mind": [
+            "未来一周累计拿到 5 个以上榜首日将显著上调。",
+            "出现大型艺人强势新单首发或 Ariana 跌出前二将下调。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.42,
           "ci80": [
-            null,
-            null
+            0.19,
+            0.66
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：7 月 9 日位列第 1，日流量领先约 3.7 万，但相对差不足 1%。",
+            "截至 7 月 5 日累计生涯榜首次数仍为 14，7 月 9 日为 16，表明最近数日新增约两个榜首日。",
+            "若当前近乎平手状态随机摆动，拿到剩余所需天数有现实路径但不是基准结果。"
+          ],
+          "counterevidence": [
+            "Shakira 的 7 日流量总和仍高于 Ariana，显示短期日榜第一未必代表更强底盘。",
+            "7 月 31 日专辑发行太晚，无法覆盖大部分所需榜单日。"
+          ],
+          "what_would_change_mind": [
+            "连续三日领先幅度扩大会上调。",
+            "下一轮周末效应使 Ariana 连续跌到第二或更低会下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.32,
           "ci80": [
-            null,
-            null
+            0.12,
+            0.57
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：12 天是高持续性门槛，且目前大约只积累了少数 7 月榜首日。",
+            "头部歌曲日流量高度相关，微小领先很容易被赛事、周末与新发行冲击。",
+            "Ariana 的艺人规模与既往 16 个该曲全球日榜榜首日避免了极低先验。"
+          ],
+          "counterevidence": [
+            "当前已经重新登顶，且歌曲发行数周后仍有韧性。",
+            "新专辑预热和巡演可能提供非典型的长尾支持。"
+          ],
+          "what_would_change_mind": [
+            "到 7 月 16 日累计至少 6 个本月榜首日将上调至过半。",
+            "世界杯决赛前 Shakira 建立 5% 以上稳定领先将明显下调。"
+          ]
         }
       ],
       "round2": {
@@ -250,71 +386,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
       "rules_sha256": "f8946ca6a6f10bd42e1da82e4755e8df5268f686651866b7058b0098eb5d583d",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "imf-portwatch-hormuz",
+          "url": "https://portwatch.imf.org/pages/chokepoint6",
+          "title": "Strait of Hormuz — IMF PortWatch chokepoint dashboard",
+          "claim": "这是规则指定的霍尔木兹海峡 Transit Calls 数据页；IMF 同时提示 AIS 数据存在覆盖与识别局限。",
+          "stance": "context",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "novem-portwatch-jul5",
+          "url": "https://novem.io/u/trt/p/hormuz-portwatch.pdf",
+          "title": "Strait of Hormuz – Daily Vessel Transits",
+          "claim": "基于 IMF PortWatch 的图表显示数据截至 7 月 5 日为 34 艘/日，战前平均约 91 艘/日。",
+          "stance": "mixed",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "axios-hormuz-talks-jul10",
+          "url": "https://www.axios.com/2026/07/10/iran-strait-hormuz-attacks-mou-deal",
+          "title": "U.S. gives Iran Saturday deadline to publicly renounce Hormuz attacks",
+          "claim": "美方要求伊朗公开承诺停止袭船并承认海峡各航道开放；双方拟于 7 月 11 日在阿曼讨论，既提供恢复催化剂，也显示协议脆弱。",
+          "stance": "mixed",
+          "published_at": "2026-07-10T21:15:46Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.49,
           "ci80": [
-            null,
-            null
+            0.24,
+            0.73
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事情景派：截至 7 月 5 日最高可见水平仍只有约 34，但单日 60 只需一次恢复尖峰。",
+            "阿曼会谈若恢复安全承诺，积压船只集中通行可在很短时间内越过 60。",
+            "新一轮袭船与互袭使近期复航窗口高度二元化。"
+          ],
+          "counterevidence": [
+            "战前平均约 91，说明 60 不是接近容量上限的阈值。",
+            "船东和保险方可能在政治协议后仍分阶段恢复，单日也未必迅速到 60。"
+          ],
+          "what_would_change_mind": [
+            "任一 PortWatch 日值升至 50 以上会明显上调。",
+            "阿曼会谈破裂并出现新袭船会明显下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.61,
           "ci80": [
-            null,
-            null
+            0.32,
+            0.83
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 阈值基率派：60 仅约为战前日均 91 的三分之二，且只需 7 月内一天达标。",
+            "剩余约三周提供多个外交和运营恢复机会。",
+            "中断恢复常伴随清理积压造成的单日尖峰。"
+          ],
+          "counterevidence": [
+            "当前通行约 34，且 7 月上旬安全形势重新恶化。",
+            "PortWatch 的 AIS 口径可能与媒体所称“开放”不同步。"
+          ],
+          "what_would_change_mind": [
+            "7 月中旬前达成可执行通航安排会大幅上调。",
+            "到 7 月 22 日仍无单日超过 45 会下调至不足三成。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.52,
           "ci80": [
-            null,
-            null
+            0.26,
+            0.76
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：单日阈值比 7 日均值容易得多，任何一次有组织的船队放行都可能达标。",
+            "截至 7 月 5 日仍为 34，显示仅有外交表态不足以触发正常化。",
+            "7 月 11 日会谈是最接近的关键分叉点。"
+          ],
+          "counterevidence": [
+            "战前平均 91 为上行空间提供强证据。",
+            "新的商业船遇袭会令承保和船员安排继续受阻。"
+          ],
+          "what_would_change_mind": [
+            "会谈后 72 小时内日值上穿 45。",
+            "出现正式关闭、布雷或主要航运协会暂停通行建议。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.58,
           "ci80": [
-            null,
-            null
+            0.3,
+            0.81
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：低于历史常态的单日一次性阈值，在三周期限内应给予略高于五成的恢复机会。",
+            "只看月内最高值会放大一次短暂开放或积压释放的影响。",
+            "战争状态使常规恢复基率需大幅折价。"
+          ],
+          "counterevidence": [
+            "最新日值与阈值仍差 26。",
+            "现有谅解备忘录已被新的袭船和互袭削弱。"
+          ],
+          "what_would_change_mind": [
+            "可核验的保险恢复和主要船东复航将上调。",
+            "7 月第三周仍维持 30 至 40 区间将下调。"
+          ]
         }
       ],
       "round2": {
@@ -363,71 +567,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
       "rules_sha256": "a56d9455e991f90fe634a1e12b9c1be75f6bbd402c40d2f03714b0dc3c6c56fa",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "imf-portwatch-hormuz",
+          "url": "https://portwatch.imf.org/pages/chokepoint6",
+          "title": "Strait of Hormuz — IMF PortWatch chokepoint dashboard",
+          "claim": "这是规则指定的霍尔木兹海峡 Transit Calls 数据页；IMF 同时提示 AIS 数据存在覆盖与识别局限。",
+          "stance": "context",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "novem-portwatch-jul5",
+          "url": "https://novem.io/u/trt/p/hormuz-portwatch.pdf",
+          "title": "Strait of Hormuz – Daily Vessel Transits",
+          "claim": "基于 IMF PortWatch 的图表显示数据截至 7 月 5 日为 34 艘/日，战前平均约 91 艘/日。",
+          "stance": "mixed",
+          "published_at": "2026-07-05T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "axios-hormuz-talks-jul10",
+          "url": "https://www.axios.com/2026/07/10/iran-strait-hormuz-attacks-mou-deal",
+          "title": "U.S. gives Iran Saturday deadline to publicly renounce Hormuz attacks",
+          "claim": "美方要求伊朗公开承诺停止袭船并承认海峡各航道开放；双方拟于 7 月 11 日在阿曼讨论，既提供恢复催化剂，也显示协议脆弱。",
+          "stance": "mixed",
+          "published_at": "2026-07-10T21:15:46Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.31,
           "ci80": [
-            null,
-            null
+            0.13,
+            0.56
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事情景派：70 需要从 34 以上翻倍，且新一轮交火使短期船东响应更谨慎。",
+            "只需一个自然日达标，积压释放仍保留明显尾部机会。",
+            "7 月 11 日阿曼会谈决定能否重建最低安全信心。"
+          ],
+          "counterevidence": [
+            "战前日均约 91，完全恢复并非必要。",
+            "单日最大值对短暂船队放行非常敏感。"
+          ],
+          "what_would_change_mind": [
+            "PortWatch 单日先升破 50 且外交协议得到执行会大幅上调。",
+            "再次发生商业船遇袭或主要船东暂停将下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.43,
           "ci80": [
-            null,
-            null
+            0.19,
+            0.7
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 阈值基率派：70 仍低于战前 91 的日均，但比 60 更需要广泛而非象征性复航。",
+            "三周内存在多次谈判和运营重启机会。",
+            "最高值口径使一次积压释放足以结算。"
+          ],
+          "counterevidence": [
+            "截至 7 月 5 日只有 34，当前差距很大。",
+            "协议执行已因袭船和互袭遭受实质打击。"
+          ],
+          "what_would_change_mind": [
+            "主要油轮和非油轮同时恢复将上调。",
+            "7 月 20 日前最高值仍未达 50 将下调。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.34,
           "ci80": [
-            null,
-            null
+            0.14,
+            0.6
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：70 比当前观测约 34 高 36，需明显的安全状态切换。",
+            "单日口径避免了均值惯性，但不能避免保险和船员调度滞后。",
+            "外交窗口存在，故不能压到极低概率。"
+          ],
+          "counterevidence": [
+            "战前平均 91，物理通航能力足够。",
+            "积压船只集中释放可能直接跨越 70。"
+          ],
+          "what_would_change_mind": [
+            "出现免费、双向、无袭击通航的联合声明并被船东验证。",
+            "出现新布雷、扣船或撤保事件。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.4,
           "ci80": [
-            null,
-            null
+            0.18,
+            0.67
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：一次性达到战前平均的约 77% 在恢复月份并不罕见，但战争状态显著降低基率。",
+            "剩余时间足够，但阈值越高越依赖广泛复航。",
+            "PortWatch AIS 口径可能使实际复航与记录达标之间存在差异。"
+          ],
+          "counterevidence": [
+            "当前值不足阈值一半。",
+            "谅解备忘录刚受到新的军事冲突冲击。"
+          ],
+          "what_would_change_mind": [
+            "连续两日超过 55 会显著上调。",
+            "至 7 月第三周仍低于 40 会显著下调。"
+          ]
         }
       ],
       "round2": {
@@ -476,71 +748,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
       "rules_sha256": "9cc802662c2dd8833dfa49c0e5d25646d3dd6c7552dd6ef6667436b8e21d43de",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "ap-platner-withdrawal-jul10",
+          "url": "https://apnews.com/article/graham-platner-maine-senate-53839ed2762e9f84557a299ae922f2dd",
+          "title": "Graham Platner formally withdraws from Maine Senate race",
+          "claim": "Platner 已正式提交退选文件；民主党须在 7 月 27 日前提名替补，100 多名州委员会成员已同意举行提名大会。",
+          "stance": "supports_yes",
+          "published_at": "2026-07-10T20:58:37Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "bdn-convention-jul8",
+          "url": "https://www.bangordailynews.com/2026/07/08/politics/elections/maine-democrats-want-convention-replace-graham-platner/",
+          "title": "Maine Democrats approve 600-person convention to pick Graham Platner’s replacement",
+          "claim": "州委员会投票批准约 600 人的提名大会流程，由 500 名县级比例代表和州委员会成员组成。",
+          "stance": "supports_yes",
+          "published_at": "2026-07-08T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "maine-statute-374a",
+          "url": "https://legislature.maine.gov/statutes/21-a/title21-Asec374-A.html",
+          "title": "Title 21-A, §374-A: General election candidates; vacancy",
+          "claim": "缅因州法允许政治委员会在符合期限的退选后补提名，并要求在 7 月第四个星期一下午 5 时前完成。",
+          "stance": "context",
+          "published_at": "2025-10-20T14:32:56Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.93,
           "ci80": [
-            null,
-            null
+            0.79,
+            0.99
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 流程派：Platner 已正式退选，州委员会已表决采用约 600 人提名大会，且法定替补截止日为 7 月 27 日。",
+            "事件要求实际选出而非仅宣布；当前唯一明显剩余步骤是按已批准流程完成大会。",
+            "政党有强烈动机在法定期限内保住参议院选票席位。"
+          ],
+          "counterevidence": [
+            "党尚未公开大会日期和完整细则，执行时间非常紧。",
+            "规则中的“special state convention”与媒体“nominating convention”措辞仍有小幅分类风险。"
+          ],
+          "what_would_change_mind": [
+            "党正式撤销大会、改由州委员会直接提名将大幅下调。",
+            "公布大会日期、代表规则和候选人名单将进一步上调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.86,
           "ci80": [
-            null,
-            null
+            0.65,
+            0.96
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 机构基率派：政党在关键全州选举中通常会在法定期限前补齐候选人。",
+            "正式表决采用大会使路径依赖很强，临时改制成本高。",
+            "首次采用此规模大会、细则未定使执行失败或重新分类并非零概率。"
+          ],
+          "counterevidence": [
+            "州法只授权政治委员会补提名，没有强制必须用大会。",
+            "紧迫期限可能促使党改用更快的州委员会流程。"
+          ],
+          "what_would_change_mind": [
+            "正式会议通知和代表分配完成将上调。",
+            "法律顾问或州务卿质疑大会程序将显著下调。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.92,
           "ci80": [
-            null,
-            null
+            0.77,
+            0.98
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：正式退选已消除最大前置不确定性，且州委员会已明确投票选择提名大会。",
+            "7 月 27 日法定期限早于市场的 8 月 1 日期限，提供清晰执行时钟。",
+            "多名候选人已公开争取提名，降低无人可选风险。"
+          ],
+          "counterevidence": [
+            "大会具体日期和完整细则尚未公开。",
+            "结算对“特殊州大会”的定义可能比新闻用语更窄。"
+          ],
+          "what_would_change_mind": [
+            "党发布正式大会通知会接近确认。",
+            "任何改由州委员会直接表决或全州党团会议的正式决定会大幅下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.85,
           "ci80": [
-            null,
-            null
+            0.63,
+            0.96
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：关键席位出现合法空缺时，政党放弃补提名的基率很低。",
+            "已完成治理机构表决后，保持既定流程通常比重新设计更容易。",
+            "首创 600 人大会和极短筹备期带来高于普通流程的操作风险。"
+          ],
+          "counterevidence": [
+            "法律允许“政治委员会”补提名，未将大会写入法定必需程序。",
+            "媒体报道的批准仍可能在实际执行前被修改。"
+          ],
+          "what_would_change_mind": [
+            "公布确定日期、地点与代表名单将上调。",
+            "出现程序诉讼、法定期限争议或党内正式改制将下调。"
+          ]
         }
       ],
       "round2": {
@@ -589,71 +929,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
       "rules_sha256": "b768c901b3fdbbd029d3a952dbd62c8b234243df5664dda8546db4b50a2ec1d4",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "ap-platner-withdrawal-jul10",
+          "url": "https://apnews.com/article/graham-platner-maine-senate-53839ed2762e9f84557a299ae922f2dd",
+          "title": "Graham Platner formally withdraws from Maine Senate race",
+          "claim": "Platner 已正式退选；州委员会成员已批准使用提名大会，且党须在 7 月 27 日前完成替补提名。",
+          "stance": "supports_no",
+          "published_at": "2026-07-10T20:58:37Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "bdn-convention-jul8",
+          "url": "https://www.bangordailynews.com/2026/07/08/politics/elections/maine-democrats-want-convention-replace-graham-platner/",
+          "title": "Maine Democrats approve 600-person convention to pick Graham Platner’s replacement",
+          "claim": "州委员会已投票批准约 600 人提名大会，而非未定义的其他流程。",
+          "stance": "supports_no",
+          "published_at": "2026-07-08T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "maine-statute-374a",
+          "url": "https://legislature.maine.gov/statutes/21-a/title21-Asec374-A.html",
+          "title": "Title 21-A, §374-A: General election candidates; vacancy",
+          "claim": "州法允许政治委员会补提名但不指定唯一内部流程，因此理论上仍可临时改用其他合法方法。",
+          "stance": "supports_yes",
+          "published_at": "2025-10-20T14:32:56Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.03,
           "ci80": [
-            null,
-            null
+            0.005,
+            0.12
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 流程派：州委员会已明确投票采用提名大会，其他流程需先推翻刚形成的正式决定。",
+            "Platner 正式退选后，党更可能立即执行既定方案而非重新谈判。",
+            "“另一流程”仅保留给大会无法及时组织或出现法律障碍的尾部情景。"
+          ],
+          "counterevidence": [
+            "大会细则和日期尚未发布，极短期限可能迫使党改用更快方法。",
+            "州法并不强制大会，政治委员会有内部选择空间。"
+          ],
+          "what_would_change_mind": [
+            "正式取消大会或宣布州委员会直接提名会大幅上调。",
+            "正式大会通知发出会进一步下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.07,
           "ci80": [
-            null,
-            null
+            0.01,
+            0.22
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 组织基率派：紧迫选举流程偶尔会因物流、诉讼或规则争议在最后时刻改制。",
+            "但治理机构已经表决，制度惯性强烈偏向大会。",
+            "候选人和代表已围绕大会路径组织，切换成本逐日上升。"
+          ],
+          "counterevidence": [
+            "尚未公布完整时间表，说明执行仍未锁死。",
+            "州法只要求政治委员会补提名，不要求某一种会议形式。"
+          ],
+          "what_would_change_mind": [
+            "大会筹备失败、法律意见否定代表结构或截止期压缩会显著上调。",
+            "正式确定大会日期和代表资格会下调至接近零。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.04,
           "ci80": [
-            null,
-            null
+            0.005,
+            0.15
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：现有事实直接指向特殊提名大会，而非另一流程。",
+            "正式退选使执行时钟启动，重新设计流程的时间和政治收益都很小。",
+            "仅在大会程序失效时，其他流程才成为实质路径。"
+          ],
+          "counterevidence": [
+            "首次举行此规模大会，操作复杂度高。",
+            "完整细则与日期尚未公开，仍有改动空间。"
+          ],
+          "what_would_change_mind": [
+            "任何党方文件用州委员会、党团会议或其他机制取代大会。",
+            "媒体确认大会场地和日期后进一步下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.08,
           "ci80": [
-            null,
-            null
+            0.01,
+            0.24
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：最后期限前的替补流程有少量临时变更基率，尤其是新创、多人参与的大会。",
+            "州法赋予政治委员会弹性，为替代机制留下合法空间。",
+            "不过刚完成的正式表决与高切换成本使其仍是低概率尾部。"
+          ],
+          "counterevidence": [
+            "大会尚无公开日期或最终细则。",
+            "若程序争议升级，党可能优先确保按期提名。"
+          ],
+          "what_would_change_mind": [
+            "出现法律挑战或无法召集代表的可靠报道会显著上调。",
+            "正式大会通知和已完成代表遴选会显著下调。"
+          ]
         }
       ],
       "round2": {
@@ -702,71 +1110,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
       "rules_sha256": "63ddffa265d43e72e1562176b5e7adab013ed96c62993c67119688e81b9cebb6",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "efe-trump-final-jun23",
+          "url": "https://efe.com/deportes/2026-06-23/trump-mundial-final/",
+          "title": "Trump asistirá a la final del Mundial de fútbol y entregará el trofeo junto a Infantino",
+          "claim": "FIFA 主席 Infantino 表示 Trump 将于 7 月 19 日出席决赛、与其同坐并共同颁发奖杯。",
+          "stance": "supports_yes",
+          "published_at": "2026-06-23T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "reuters-trump-final-jun23",
+          "url": "https://www.aljazeera.com/sports/2026/6/23/donald-trump-to-attend-world-cup-final-present-trophy-infantino",
+          "title": "Donald Trump to attend World Cup final, present trophy: Infantino",
+          "claim": "Reuters 报道 Infantino 明确确认计划与 Trump 一同观看决赛并颁发奖杯；Trump 也曾出席同场馆的 2025 俱乐部世界杯决赛。",
+          "stance": "supports_yes",
+          "published_at": "2026-06-23T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "lemonde-final-security-jun2",
+          "url": "https://www.lemonde.fr/en/sports/article/2026/06/02/2026-world-cup-poses-massive-security-challenge-for-us-law-enforcement_6754065_9.html",
+          "title": "2026 World Cup poses massive security challenge for US law enforcement",
+          "claim": "决赛被指定为国家特别安全事件，报道预计 Trump 与其他国家领导人出席；高安保等级既支持计划真实性，也保留突发取消风险。",
+          "stance": "mixed",
+          "published_at": "2026-06-02T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.95,
           "ci80": [
-            null,
-            null
+            0.84,
+            0.99
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 日程派：FIFA 主席已公开确认 Trump 会在决赛现场共同颁奖，这比一般意向性邀请强。",
+            "决赛在美国新泽西举行，且 Trump 2025 年曾出席同场馆俱乐部世界杯决赛。",
+            "国家特别安全事件安保筹备意味着出席计划很可能已进入执行层。"
+          ],
+          "counterevidence": [
+            "Trump 截至 6 月 23 日尚未出席本届赛事其他比赛。",
+            "总统日程、安全事件、健康或国际危机可在最后九天内造成取消。"
+          ],
+          "what_would_change_mind": [
+            "白宫正式日程或现场安保通告将进一步上调。",
+            "白宫宣布同日外访、重大危机行程或 FIFA 撤回颁奖安排会显著下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.88,
           "ci80": [
-            null,
-            null
+            0.67,
+            0.97
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率派：主办国总统出席本国举办的全球体育决赛是高基率事件，公开颁奖安排进一步提高。",
+            "特朗普与 Infantino 关系紧密，且已有同场馆出席先例。",
+            "国家元首活动存在不可忽略的最后时刻取消率。"
+          ],
+          "counterevidence": [
+            "尚未找到白宫公开日程中的最终确认。",
+            "赛事为高威胁级别活动，安全态势变化可能覆盖礼仪计划。"
+          ],
+          "what_would_change_mind": [
+            "白宫发布 7 月 19 日正式日程会升至约 97%。",
+            "确认重大替代行程或安保威胁会降至过半附近。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.94,
           "ci80": [
-            null,
-            null
+            0.82,
+            0.99
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：Infantino 明确使用共同观看和共同颁奖的确定措辞，且时间、地点具体。",
+            "Trump 已深度介入本届世界杯事务并频繁与 Infantino 沟通。",
+            "2025 年同场馆决赛出席是高度相关的个人行为先例。"
+          ],
+          "counterevidence": [
+            "规则只需短暂出现即可算出席，但目前仍缺白宫最终日程文件。",
+            "未来九天的安全、健康和外交冲击仍可导致临时改变。"
+          ],
+          "what_would_change_mind": [
+            "正式总统日程、飞行限制或现场彩排信息会进一步上调。",
+            "可靠报道指向远程颁奖或取消现场环节会显著下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.87,
           "ci80": [
-            null,
-            null
+            0.65,
+            0.96
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：东道国总统参加本土世界杯决赛且承担颁奖角色，先验应很高。",
+            "Trump 对高曝光体育活动的偏好和去年同场馆先例进一步加成。",
+            "预定出席到实际出席之间仍有总统级行程取消风险。"
+          ],
+          "counterevidence": [
+            "本届赛事此前尚无 Trump 现场观赛记录。",
+            "安保等级高意味着小概率威胁也可能改变安排。"
+          ],
+          "what_would_change_mind": [
+            "白宫最终日程确认会显著上调。",
+            "同日国内或国际危机进入总统必须亲自处理的阶段会显著下调。"
+          ]
         }
       ],
       "round2": {
@@ -815,71 +1291,139 @@
       "asof": "2026-07-10T22:00:27Z",
       "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
       "rules_sha256": "105ed9c9ec541f96de5cd9dfde36f875c28ee7cb2b19e2b5868db33bf514978d",
-      "sources": [],
+      "sources": [
+        {
+          "source_id": "reuters-wti-jul7",
+          "url": "https://www.marketscreener.com/news/oil-jumps-after-settlement-as-us-revokes-general-license-for-iran-oil-sales-ce7f5ed8dd81f221",
+          "title": "Oil jumps after settlement as US revokes general license for Iran oil sales",
+          "claim": "7 月 7 日 WTI 前月合约结算于 70.44 美元；袭船与美军打击使盘后价格跳升，显示事件波动很高但尚远低于严格大于 82 的门槛。",
+          "stance": "mixed",
+          "published_at": "2026-07-07T22:12:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "reuters-wti-jul8",
+          "url": "https://www.marketscreener.com/news/oil-up-over-3-as-us-and-iran-trade-strikes-raising-fears-over-shaky-truce-ce7f5ed8df8ff12c",
+          "title": "Oil settles at multi-week high as US-Iran truce buckles under fresh hostilities",
+          "claim": "7 月 8 日 WTI 结算上涨 4.4% 至 73.52 美元；盘中涨幅一度接近 9%，说明升级情景可快速逼近阈值。",
+          "stance": "mixed",
+          "published_at": "2026-07-08T19:45:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        },
+        {
+          "source_id": "eia-steo-jul2026",
+          "url": "https://www.eia.gov/outlooks/steo/archives/jul26.pdf",
+          "title": "Short-Term Energy Outlook — July 2026",
+          "claim": "EIA 在 7 月 1 日完成的基准预测中预计 2026 年第三季度 WTI 现货均价约 71.06 美元，并认为增供和库存改善带来下行压力；该预测早于 7 月 7 至 8 日再升级。",
+          "stance": "supports_no",
+          "published_at": "2026-07-07T00:00:00Z",
+          "retrieved_at": "2026-07-10T22:07:44Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.46,
           "ci80": [
-            null,
-            null
+            0.22,
+            0.7
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 事件风险派：7 月 8 日单日结算已上涨 4.4% 至 73.52，盘中接近 9% 的涨幅显示两到三次升级冲击即可越过 82。",
+            "海峡通行仍远低于常态，且美伊协议刚受袭船和互袭冲击。",
+            "规则只认结算价且必须严格高于 82，盘中尖峰本身不够。"
+          ],
+          "counterevidence": [
+            "当前需再上涨约 11.5%，而 7 月只剩约 15 个结算日。",
+            "EIA 基准判断增供、需求调整和库存恢复会对价格形成下行压力。"
+          ],
+          "what_would_change_mind": [
+            "新的船只遇袭、海峡正式关闭或产量大规模再停摆会显著上调。",
+            "可执行的美伊通航协议及日结算跌回 70 以下会显著下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.34,
           "ci80": [
-            null,
-            null
+            0.15,
+            0.58
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 障碍触及基率派：三周内从 73.52 的结算价上穿 82 需要约 11.5% 涨幅，普通月份并非基准路径。",
+            "战争月份波动显著高于常态，不能使用平静油市基率。",
+            "结算价障碍比盘中高点障碍更难，且基准价格趋势偏下。"
+          ],
+          "counterevidence": [
+            "3 月战争期间 WTI 曾出现远大于 11.5% 的短期上行，尾部很厚。",
+            "全球关键航道再次受袭使单一周末新闻即可产生跳空。"
+          ],
+          "what_would_change_mind": [
+            "周结算站上 77 至 78 且谈判恶化会明显上调。",
+            "海峡流量恢复、停火可信度提高会下调。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.44,
           "ci80": [
-            null,
-            null
+            0.21,
+            0.68
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "当前状态派：符合规则的已知结算为 70.44 和 73.52，尚未接近 82.01，但两日波动显示升级敏感度很高。",
+            "美国要求伊朗保证开放海峡，若失败可能触发进一步军事行动和供应风险溢价。",
+            "只有 ICE 所指前月合约的正式结算超过 82 才算，盘中或盘后触及均不算。"
+          ],
+          "counterevidence": [
+            "EIA 7 月基准预测第三季度 WTI 约 71，供需中枢低于门槛。",
+            "7 月 8 日近 9% 的盘中涨幅最终只结算上涨 4.4%，显示冲高会被卖出。"
+          ],
+          "what_would_change_mind": [
+            "结算突破 77 或出现可量化的新增停产会显著上调。",
+            "阿曼会谈达成并被航运流量验证会显著下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.36,
           "ci80": [
-            null,
-            null
+            0.16,
+            0.6
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率派：约 11.5% 的三周结算障碍在高波动原油环境中有实质机会，但仍低于五成。",
+            "均值回归和全球需求适应使高价冲击通常需要持续供应恶化。",
+            "月内最高值口径比月底终值容易，适度上调障碍触及概率。"
+          ],
+          "counterevidence": [
+            "海峡冲突曾使油价出现远超门槛所需幅度的跳涨。",
+            "库存紧张和中东停产仍可能放大任何新袭击。"
+          ],
+          "what_would_change_mind": [
+            "出现连续两个 76 美元以上结算或新一轮大规模停产将上调。",
+            "一周内回落到 70 以下且船流改善将下调。"
+          ]
         }
       ],
       "round2": {
