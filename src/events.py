@@ -31,7 +31,7 @@ from pathlib import Path
 
 import yaml
 
-from . import engine
+from . import engine, event_research
 from .kalshi_client import KalshiPublic, normalize_market, taker_fee_usd
 
 # ---- paths (always relative Path("data")/...) ----
@@ -127,7 +127,9 @@ CREATE TABLE IF NOT EXISTS paper_trades(
   rationale TEXT,
   status TEXT NOT NULL DEFAULT 'open',
   result TEXT, pnl_usd REAL, settled_ts TEXT,
-  close_time TEXT
+  close_time TEXT,
+  research_run_id TEXT, causal_cluster_id TEXT,
+  brief_sha256 TEXT, blind_packet_sha256 TEXT
 );
 CREATE TABLE IF NOT EXISTS marks(
   trade_id INTEGER NOT NULL,
@@ -164,12 +166,39 @@ def _cfg(cfg: dict) -> dict:
     return out
 
 
+# additive, idempotent paper-DB columns (older events.db predates the audit cols)
+_MIGRATE = {
+    "paper_trades": {
+        "research_run_id": "TEXT", "causal_cluster_id": "TEXT",
+        "brief_sha256": "TEXT", "blind_packet_sha256": "TEXT",
+    },
+}
+
+
+def _migrate(c: sqlite3.Connection) -> None:
+    """Add any missing audit columns. Additive only, never touches ledger.db."""
+    for table, cols in _MIGRATE.items():
+        have = {r["name"] for r in c.execute(f"PRAGMA table_info({table})")}
+        for name, typ in cols.items():
+            if name not in have:
+                c.execute(f"ALTER TABLE {table} ADD COLUMN {name} {typ}")
+
+
 def _conn() -> sqlite3.Connection:
     DB.parent.mkdir(exist_ok=True)
     c = sqlite3.connect(DB)
     c.row_factory = sqlite3.Row
     c.executescript(SCHEMA)
+    _migrate(c)
     return c
+
+
+def _load_json(path):
+    """Read+parse a JSON file, or None on any read/parse failure (read-only)."""
+    try:
+        return json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
 
 
 def _now_utc() -> dt.datetime:
@@ -517,8 +546,9 @@ def _book_for_buy(api, ticker: str, side: str) -> list:
     """Buy-side cost ladder [(cost_px, qty), ...] ascending by cost.
 
     orderbook_fp holds BID arrays. Buying YES consumes NO bids (cost = 1-no_px);
-    buying NO consumes YES bids (cost = 1-yes_px). Any parse failure returns []
-    (caller falls back to top-ask booking and notes 'book_unavailable').
+    buying NO consumes YES bids (cost = 1-yes_px). Any parse failure or empty
+    ladder returns []; the caller (_size_vwap) then HARD-SKIPS the candidate.
+    There is deliberately no top-ask fallback -- a faked full fill is forbidden.
     """
     try:
         resp = api._get(f"/markets/{ticker}/orderbook")
@@ -598,10 +628,22 @@ def _overlay(cfg: dict, ec: dict) -> dict:
     return ov
 
 
-def _has_open(ticker: str, thesis: str) -> bool:
+def _has_open(ticker: str, thesis: str, event_ticker: str = None,
+              cluster: str = None) -> bool:
+    """Correlation gate: block a new paper open if any open position shares the
+    ticker, thesis_id, event_ticker or causal_cluster_id (spec 4.2.7)."""
+    conds = ["ticker=?", "thesis_id=?"]
+    params = [ticker, thesis]
+    if event_ticker:
+        conds.append("(event_ticker IS NOT NULL AND event_ticker=?)")
+        params.append(event_ticker)
+    if cluster:
+        conds.append("(causal_cluster_id IS NOT NULL AND causal_cluster_id=?)")
+        params.append(cluster)
+    q = ("SELECT COUNT(*) n FROM paper_trades WHERE status='open' AND ("
+         + " OR ".join(conds) + ")")
     with _conn() as c:
-        r = c.execute("SELECT COUNT(*) n FROM paper_trades WHERE status='open'"
-                      " AND (ticker=? OR thesis_id=?)", (ticker, thesis)).fetchone()
+        r = c.execute(q, params).fetchone()
     return bool(r and r["n"] > 0)
 
 
@@ -639,9 +681,87 @@ def _reentry_blocked(ticker: str, thesis: str, item: dict, file_sha: str):
     return "reentry_blocked_same_thesis"
 
 
+def make_research_template(cfg: dict, out_path: str) -> int:
+    """Write a fill-in d1-research-v2 skeleton covering the WHOLE current brief.
+    Paper-only, no market access. Returns the item count (0 if brief missing)."""
+    ec = _cfg(cfg)
+    if not BRIEF_JSON.exists():
+        print("template: data/events_brief.json missing; run events-brief first")
+        return 0
+    doc = event_research.make_template(BRIEF_JSON, SCAN_JSON, ec)
+    out = Path(out_path)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(doc, indent=2, ensure_ascii=False), encoding="utf-8")
+    return len(doc.get("items") or [])
+
+
+def validate_research_file(cfg: dict, research_path: str):
+    """Pure read-only preflight against the current brief+scan. Returns
+    (ok: bool, errors: list[str]). Never touches the market or any DB."""
+    ec = _cfg(cfg)
+    doc = _load_json(research_path)
+    if doc is None:
+        return False, [f"cannot read/parse research file {research_path!r}"]
+    brief = _load_json(BRIEF_JSON)
+    scan = _load_json(SCAN_JSON)
+    if brief is None:
+        return False, ["data/events_brief.json missing; run events-brief first"]
+    if scan is None:
+        return False, ["data/events_scan.json missing; run events-scan first"]
+    errors = event_research.validate_research(doc, brief, scan, ec, _now_utc())
+    return (not errors), errors
+
+
+def _size_vwap(api, ticker: str, q_opus: float, q_codex: float,
+               ya: float, na: float, cfg_ov: dict):
+    """Executable-price sizing. Fetch both order books once, then fixed-point
+    Kelly on the intended-size VWAP (<=3 rounds). NO top-of-book fallback: an
+    absent/empty book or zero fillable depth on the chosen side is a hard skip.
+
+    Returns ('skip', reason) or ('ok', decision, vwap, n_eff, filled, consumed,
+    top_ask). `decision` is a genuine engine.Decision computed at the executable
+    VWAP, so its side/contracts/cost/edge are all re-derived after depth."""
+    levels_yes = _book_for_buy(api, ticker, "yes")
+    levels_no = _book_for_buy(api, ticker, "no")
+    if not levels_yes and not levels_no:
+        return ("skip", "no order book depth on either side (no top-ask fallback)")
+    seed = engine.decide(q_opus, q_codex, ya, na, cfg_ov)
+    if seed.action == "skip":
+        return ("skip", seed.reason)
+    target = seed.contracts
+    last = None
+    conv = None
+    for _ in range(3):
+        vwy, fy, _cy = _vwap_fill(levels_yes, target)
+        vwn, fn, _cn = _vwap_fill(levels_no, target)
+        exec_ya = vwy if fy >= 1 else 0.999      # price an un-fillable side out
+        exec_na = vwn if fn >= 1 else 0.999
+        d2 = engine.decide(q_opus, q_codex, exec_ya, exec_na, cfg_ov)
+        if d2.action == "skip":
+            return ("skip", f"at executable VWAP: {d2.reason}")
+        state = (d2.side, d2.contracts, round(d2.price, 4))
+        if state == last:
+            conv = d2
+            break
+        last = state
+        target = d2.contracts
+    if conv is None:
+        return ("skip", "side/size/VWAP did not converge in 3 rounds")
+    levels = levels_yes if conv.side == "yes" else levels_no
+    if not levels:
+        return ("skip", f"no order book depth on chosen side {conv.side}")
+    vwap, filled, consumed = _vwap_fill(levels, conv.contracts)
+    if filled < 1:
+        return ("skip", f"zero fillable depth on chosen side {conv.side}")
+    n_eff = min(conv.contracts, filled)
+    top_ask = ya if conv.side == "yes" else na
+    return ("ok", conv, round(vwap, 4), n_eff, filled, consumed, round(top_ask, 4))
+
+
 def decide_paper(cfg: dict, research_path: str) -> None:
-    """Read research JSON -> fail-closed validation chain -> engine.decide +
-    check_risk (100% reused) -> depth-adjusted VWAP fill -> paper_trades."""
+    """Full-file preflight (fail the WHOLE file closed on any schema/integrity
+    error) -> archive once -> per-item engine.decide/check_risk (reused) ->
+    executable-VWAP re-sizing -> paper_trades. Never a top-of-book fake fill."""
     ec = _cfg(cfg)
     pc = ec["paper"]
     path = Path(research_path)
@@ -656,47 +776,52 @@ def decide_paper(cfg: dict, research_path: str) -> None:
     except (ValueError, UnicodeDecodeError) as e:
         print(f"SKIP file: cannot parse research JSON ({e})")
         return
-    if doc.get("schema") != "d1-research-v2":
-        print(f"SKIP file: schema != d1-research-v2 (got {doc.get('schema')!r})")
+
+    brief = _load_json(BRIEF_JSON)
+    scan = _load_json(SCAN_JSON)
+    if brief is None:
+        print("SKIP file: data/events_brief.json missing; run events-brief first")
         return
+    if scan is None:
+        print("SKIP file: data/events_scan.json missing; run events-scan first")
+        return
+
+    now = _now_utc()
+    doc_for_check = dict(doc)
+    doc_for_check["_file_sha256"] = file_sha         # enables prior-hash != self check
+    errors = event_research.validate_research(doc_for_check, brief, scan, ec, now)
+    if errors:
+        print(f"REJECT research {path.name}: {len(errors)} schema/integrity error(s)"
+              f" - ZERO paper writes")
+        for e in errors:
+            print(f"  - {e}")
+        print(FOOTER)
+        return
+
+    # Valid research: archive the immutable original ONCE, even if every item is
+    # no_trade (audit trail must not depend on a position being opened).
+    _archive(path, file_sha)
 
     api = KalshiPublic()
     cfg_ov = _overlay(cfg, ec)
     placed = skipped = 0
+    file_clusters = set()
     for item in doc.get("items") or []:
         ticker = item.get("ticker")
         tag = ticker or "?"
-        if item.get("recommended_action") != "trade":
-            print(f"SKIP {tag}: recommended_action={item.get('recommended_action')!r} (not trade)")
+        action = item.get("recommended_action")
+        if action != "trade":
+            print(f"SKIP {tag}: recommended_action={action!r} (research archived, no position)")
             skipped += 1
             continue
-        if (item.get("arbiter") or {}).get("veto"):
-            print(f"SKIP {tag}: arbiter veto ({(item.get('arbiter') or {}).get('reason', '')})")
-            skipped += 1
-            continue
-        qc, qx = item.get("q_claude"), item.get("q_codex")
-        if not (_isprob(qc) and _isprob(qx)):
-            print(f"SKIP {tag}: q_claude/q_codex out of [0,1]")
-            skipped += 1
-            continue
-        q_all = item.get("q_all")
-        if not (isinstance(q_all, list) and len(q_all) == 4 and all(_isprob(x) for x in q_all)):
-            print(f"SKIP {tag}: q_all must be a length-4 array in [0,1]")
-            skipped += 1
-            continue
-        asof = _parse_iso(item.get("asof"))
-        if asof is None:
-            print(f"SKIP {tag}: asof unparseable")
-            skipped += 1
-            continue
-        age_h = (_now_utc() - asof).total_seconds() / 3600.0
-        if age_h > pc["research_max_age_hours"]:
-            print(f"SKIP {tag}: research asof {age_h:.1f}h exceeds max {pc['research_max_age_hours']}h")
-            skipped += 1
-            continue
+
         thesis = _norm_thesis(item.get("thesis_id"))
-        if not thesis:
-            print(f"SKIP {tag}: missing thesis_id")
+        event_ticker = item.get("event_ticker")
+        cluster = item.get("causal_cluster_id") or event_ticker or ticker
+        # one trade expression per event/cluster per file (validator already caps
+        # this at 1; belt-and-suspenders for a hand-edited file).
+        if cluster in file_clusters:
+            print(f"SKIP {tag}: another trade in this file already expresses cluster {cluster!r}")
             skipped += 1
             continue
         blocked = _reentry_blocked(ticker, thesis, item, file_sha)
@@ -704,11 +829,12 @@ def decide_paper(cfg: dict, research_path: str) -> None:
             print(f"SKIP {tag}: {blocked}")
             skipped += 1
             continue
-        if _has_open(ticker, thesis):
-            print(f"SKIP {tag}: already holding an open paper position on same ticker/thesis")
+        if _has_open(ticker, thesis, event_ticker, cluster):
+            print(f"SKIP {tag}: existing open paper exposure on same ticker/thesis/event/cluster")
             skipped += 1
             continue
 
+        q_opus, q_codex, q_all = event_research.family_outputs(item)
         try:
             mn = api.market_norm(ticker)
         except Exception as e:                       # noqa: BLE001
@@ -720,41 +846,38 @@ def decide_paper(cfg: dict, research_path: str) -> None:
             print(f"SKIP {tag}: no live two-sided quote")
             skipped += 1
             continue
-        d = engine.decide(qc, qx, ya, na, cfg_ov)
-        if d.action == "skip":
-            print(f"SKIP {tag}: {d.reason}")
+
+        outcome = _size_vwap(api, ticker, q_opus, q_codex, ya, na, cfg_ov)
+        if outcome[0] == "skip":
+            print(f"SKIP {tag}: {outcome[1]}")
             skipped += 1
             continue
-        veto = engine.check_risk(_paper_stats(), d.cost_usd, cfg_ov)
+        _, d, vwap, n_eff, filled, consumed, top_ask = outcome
+
+        # final cost is re-derived at the executable VWAP and actual fill, then
+        # re-cleared through the per-trade cap and every hard risk limit.
+        fee = taker_fee_usd(vwap, n_eff)
+        cost = round(n_eff * vwap + fee, 2)
+        if cost > cfg_ov["risk"]["max_per_trade_usd"] + 1e-9:
+            print(f"SKIP {tag}: final cost ${cost:.2f} exceeds per-trade cap "
+                  f"${cfg_ov['risk']['max_per_trade_usd']:.2f}")
+            skipped += 1
+            continue
+        veto = engine.check_risk(_paper_stats(), cost, cfg_ov)
         if veto:
             print(f"VETO {tag}: {veto}")
             skipped += 1
             continue
-
-        levels = _book_for_buy(api, ticker, d.side)
-        if levels:
-            vwap, filled, consumed = _vwap_fill(levels, d.contracts)
-            book_summary = json.dumps({"consumed": consumed,
-                                       "quote_asof": _now_utc().isoformat(timespec="seconds")})
-        else:
-            vwap, filled, consumed = d.price, d.contracts, []
-            book_summary = json.dumps({"book_unavailable": True,
-                                       "quote_asof": _now_utc().isoformat(timespec="seconds")})
-        n_eff = min(d.contracts, filled)
-        if n_eff < 1:
-            print(f"SKIP {tag}: no book depth to fill")
-            skipped += 1
-            continue
         q_side = d.q_consensus if d.side == "yes" else 1.0 - d.q_consensus
-        edge_v = q_side - vwap - taker_fee_usd(vwap, 1)
+        edge_v = round(q_side - vwap - taker_fee_usd(vwap, 1), 4)
         if edge_v < pc["min_edge_after_fees"]:
-            print(f"SKIP {tag}: depth-adjusted edge {edge_v:+.3f} below threshold {pc['min_edge_after_fees']}")
+            print(f"SKIP {tag}: executable edge {edge_v:+.3f} below threshold {pc['min_edge_after_fees']}")
             skipped += 1
             continue
 
-        fee = taker_fee_usd(vwap, n_eff)
-        cost = round(n_eff * vwap + fee, 2)
         market_prob = round((yb + ya) / 2.0, 4) if yb else round(ya, 4)
+        book_summary = json.dumps({"consumed": consumed, "top_ask": top_ask,
+                                   "quote_asof": now.isoformat(timespec="seconds")})
         now_iso = _now_utc().isoformat(timespec="seconds")
         with _conn() as c:
             c.execute(
@@ -762,15 +885,18 @@ def decide_paper(cfg: dict, research_path: str) -> None:
                 " thesis_id, side, price, top_ask, contracts, contracts_intended,"
                 " cost_usd, fee_usd, q_claude, q_codex, q_all, q_consensus,"
                 " market_prob, edge_net, book_summary, action, research_sha256,"
-                " research_file, rationale, status, close_time)"
-                " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                (now_iso, ticker, item.get("event_ticker"), item.get("title"),
+                " research_file, rationale, status, close_time,"
+                " research_run_id, causal_cluster_id, brief_sha256, blind_packet_sha256)"
+                " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (now_iso, ticker, event_ticker, item.get("title"),
                  item.get("category_override") or item.get("category"), thesis,
-                 d.side, vwap, d.price, n_eff, d.contracts, cost, fee, qc, qx,
-                 json.dumps(q_all), d.q_consensus, market_prob, round(edge_v, 4),
-                 book_summary, item.get("recommended_action"), file_sha, path.name,
-                 item.get("rationale"), "open", item.get("close_time")))
-        _archive(path, file_sha)
+                 d.side, vwap, top_ask, n_eff, d.contracts, cost, fee, q_opus, q_codex,
+                 json.dumps(q_all), d.q_consensus, market_prob, edge_v,
+                 book_summary, action, file_sha, path.name,
+                 item.get("rationale"), "open", item.get("close_time"),
+                 doc.get("research_run_id"), cluster, doc.get("brief_sha256"),
+                 item.get("blind_packet_sha256")))
+        file_clusters.add(cluster)
         placed += 1
         fill_ratio = n_eff / d.contracts if d.contracts else 1.0
         min_fill = ec["gate"]["min_fill_ratio"]
@@ -838,31 +964,46 @@ def settle(cfg: dict):
     return n_settled, n_marked, round(pnl_delta, 4)
 
 
+def _liq_net(bid, contracts):
+    """Net liquidation value of a held position: sell into the held-side bid and
+    subtract the estimated exit taker fee. mid is never used as a mark."""
+    if bid is None or contracts is None:
+        return None
+    exit_fee = taker_fee_usd(bid, contracts) if bid > 0 else 0.0
+    return bid * contracts - exit_fee
+
+
+def _latest_mark(c, trade_id):
+    mk = c.execute("SELECT sellable_bid FROM marks WHERE trade_id=?"
+                   " ORDER BY ts DESC LIMIT 1", (trade_id,)).fetchone()
+    return mk["sellable_bid"] if (mk and mk["sellable_bid"] is not None) else None
+
+
 def _nav_snapshot(c: sqlite3.Connection, cfg: dict, now: dt.datetime) -> None:
+    """NAV = bankroll + realized net + open unrealized net. Open positions with
+    no mark are UNKNOWN: excluded from both the mark and the cost side (never
+    valued at entry or mid), and reported separately as n_unknown."""
     bankroll = _cfg(cfg)["paper"]["bankroll_usd"]
     realized = sum((r["pnl_usd"] or 0.0) for r in
                    c.execute("SELECT pnl_usd FROM paper_trades WHERE status='settled'"))
-    open_cost = mtm = 0.0
-    n_open = 0
-    for r in c.execute("SELECT id, price, contracts, cost_usd FROM paper_trades"
+    open_cost_known = mtm_net = 0.0
+    n_open = n_unknown = 0
+    for r in c.execute("SELECT id, contracts, cost_usd FROM paper_trades"
                        " WHERE status='open'"):
-        open_cost += r["cost_usd"] or 0.0
         n_open += 1
-        mk = c.execute("SELECT sellable_bid FROM marks WHERE trade_id=?"
-                       " ORDER BY ts DESC LIMIT 1", (r["id"],)).fetchone()
-        # No mark row yet (e.g. a transient market() fetch failure skipped this
-        # ticker's mark this round) -> unknown liquidation value defaults to 0,
-        # never to entry price (that would overstate NAV; a genuine zero bid is
-        # already stored as a real 0.0 row and handled by the branch above).
-        bid = mk["sellable_bid"] if (mk and mk["sellable_bid"] is not None) else 0.0
-        mtm += bid * r["contracts"]
+        bid = _latest_mark(c, r["id"])
+        if bid is None:
+            n_unknown += 1
+            continue
+        mtm_net += _liq_net(bid, r["contracts"])
+        open_cost_known += r["cost_usd"] or 0.0
     n_settled = c.execute("SELECT COUNT(*) n FROM paper_trades"
                           " WHERE status='settled'").fetchone()["n"]
-    nav = bankroll + realized + (mtm - open_cost)
+    nav = bankroll + realized + (mtm_net - open_cost_known)
     c.execute("INSERT OR REPLACE INTO nav(d, realized_pnl, open_cost, mtm_value,"
               " nav, n_open, n_settled) VALUES (?,?,?,?,?,?,?)",
-              (now.date().isoformat(), round(realized, 4), round(open_cost, 4),
-               round(mtm, 4), round(nav, 4), n_open, n_settled))
+              (now.date().isoformat(), round(realized, 4), round(open_cost_known, 4),
+               round(mtm_net, 4), round(nav, 4), n_open, n_settled))
 
 
 # --------------------------------------------------------------- report ------
@@ -897,6 +1038,88 @@ def _summary(rows, label: str) -> None:
           f" net_pnl=${pnl:+.2f} fees=${fees:.2f}")
 
 
+def _rate(num, den):
+    """None-safe ratio: n/a when no sample (0% would mislead), else num/den."""
+    return (num / den) if den else None
+
+
+def _section7(c, settled, opens, navs, ec) -> None:
+    """Section 7 P&L & hit-rate ledger. Binary hit rates use ONLY final binary
+    results (yes/no); voided/non-binary finals never enter the denominator."""
+    bankroll = ec["paper"]["bankroll_usd"]
+    binary = [r for r in settled if r["result"] in ("yes", "no")]
+    voided = c.execute("SELECT COUNT(*) n FROM paper_trades WHERE status='voided'").fetchone()["n"]
+
+    realized_net = sum((r["pnl_usd"] or 0.0) for r in settled)
+    # open liquidation value (net of exit fee); unknown marks are excluded
+    open_liq = open_cost_known = 0.0
+    n_unknown = 0
+    for r in opens:
+        bid = _latest_mark(c, r["id"])
+        if bid is None:
+            n_unknown += 1
+            continue
+        open_liq += _liq_net(bid, r["contracts"])
+        open_cost_known += r["cost_usd"] or 0.0
+    open_unreal = open_liq - open_cost_known
+    paper_nav = bankroll + realized_net + open_unreal
+
+    # binary hit rate (per-trade and thesis-deduped)
+    hit_trade = sum(1 for r in binary if r["result"] == r["side"])
+    bhr_trade = _rate(hit_trade, len(binary))
+    thesis_hit = {}
+    for r in binary:
+        thesis_hit.setdefault(r["thesis_id"], r["result"] == r["side"])
+    bhr_thesis = _rate(sum(1 for v in thesis_hit.values() if v), len(thesis_hit))
+
+    n_settled = len(settled)
+    wins = sum(1 for r in settled if (r["pnl_usd"] or 0.0) > 0)
+    win_rate = _rate(wins, n_settled)
+    pos = sum((r["pnl_usd"] or 0.0) for r in settled if (r["pnl_usd"] or 0.0) > 0)
+    neg = -sum((r["pnl_usd"] or 0.0) for r in settled if (r["pnl_usd"] or 0.0) < 0)
+    if n_settled == 0:
+        pf = None
+    elif neg <= 0:
+        pf = math.inf
+    else:
+        pf = pos / neg
+    settled_cost = sum((r["cost_usd"] or 0.0) for r in settled)
+    rodc = _rate(realized_net, settled_cost)
+    mdd = _max_dd(navs)
+
+    def pct(x):
+        return "n/a" if x is None else ("inf" if x == math.inf else f"{x * 100:.1f}%")
+
+    def num(x):
+        return "n/a" if x is None else ("inf" if x == math.inf else f"{x:.3f}")
+
+    liq_str = f"${open_liq:+.2f}" + (f" (+{n_unknown} unknown)" if n_unknown else "")
+    print("-- SECTION 7: P&L & HIT RATE (paper, D-class) --")
+    print(f"  starting_bankroll        ${bankroll:.2f}")
+    print(f"  realized_net_pnl         ${realized_net:+.2f}")
+    print(f"  open_liquidation_net     {liq_str}")
+    print(f"  open_unrealized_net      ${open_unreal:+.2f}")
+    print(f"  paper_nav                ${paper_nav:+.2f}")
+    print(f"  binary_hit_rate_trade    {pct(bhr_trade)}  ({hit_trade}/{len(binary)})")
+    print(f"  binary_hit_rate_thesis   {pct(bhr_thesis)}  "
+          f"({sum(1 for v in thesis_hit.values() if v)}/{len(thesis_hit)})")
+    print(f"  win_rate_after_fees      {pct(win_rate)}  ({wins}/{n_settled})")
+    print(f"  profit_factor            {num(pf)}")
+    print(f"  return_on_deployed_cost  {num(rodc)}")
+    print(f"  max_drawdown             ${mdd:.2f}")
+    print(f"  counts                   settled={n_settled} open={len(opens)}"
+          f" voided={voided} unknown_marks={n_unknown}")
+
+    clus = {}
+    for r in settled:
+        k = r["causal_cluster_id"] or "-"
+        clus[k] = clus.get(k, 0.0) + (r["pnl_usd"] or 0.0)
+    if clus:
+        print("  -- settled P&L by causal cluster --")
+        for k in sorted(clus):
+            print(f"    {str(k)[:32]:<32} ${clus[k]:+.2f}")
+
+
 def report(cfg: dict, legacy: bool = False) -> None:
     if legacy:
         _legacy_report()
@@ -912,6 +1135,7 @@ def report(cfg: dict, legacy: bool = False) -> None:
         _summary(settled, "ALL settled")
         _summary([r for r in settled if (r["edge_net"] or 0.0) >= 0.05],
                  "edge>=0.05 subset")
+        _section7(c, settled, opens, navs, ec)
 
         # NAV tail + max drawdown
         print(f"-- NAV (last {min(10, len(navs))} of {len(navs)}; max_dd=${_max_dd(navs):.2f}) --")
@@ -1075,6 +1299,10 @@ def main() -> None:
     pb = sub.add_parser("brief")
     pb.add_argument("--tickers", default="")
     pb.add_argument("--top", type=int, default=3)
+    pt = sub.add_parser("research-template")
+    pt.add_argument("--out", required=True)
+    pv = sub.add_parser("validate-research")
+    pv.add_argument("--research", required=True)
     pd = sub.add_parser("decide")
     pd.add_argument("--research", required=True)
     sub.add_parser("settle")
@@ -1095,6 +1323,18 @@ def main() -> None:
                    if args.tickers.strip() else top_tickers(args.top))
         b = brief(cfg, tickers)
         print(f"brief: {len(b)} tickers -> data/events_brief.json")
+    elif args.cmd == "research-template":
+        n = make_research_template(cfg, args.out)
+        print(f"research-template: {n} item(s) -> {args.out}")
+    elif args.cmd == "validate-research":
+        ok, errors = validate_research_file(cfg, args.research)
+        if ok:
+            print(f"validate-research: OK ({args.research})")
+        else:
+            print(f"validate-research: {len(errors)} error(s)")
+            for e in errors:
+                print(f"  - {e}")
+            sys.exit(1)
     elif args.cmd == "decide":
         decide_paper(cfg, args.research)
     elif args.cmd == "settle":

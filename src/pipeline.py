@@ -8,6 +8,8 @@
     python -m src.pipeline status                     # one-line ledger status
     python -m src.pipeline events-scan                # D1 mechanical mispricing scan -> data/events_scan.json
     python -m src.pipeline events-brief --top N       # standardized blind/arbiter brief -> data/events_brief.json
+    python -m src.pipeline events-research-template --out F  # fill-in d1-research-v2 skeleton for the whole brief
+    python -m src.pipeline events-validate-research --research F  # strict read-only preflight (exit!=0 on error)
     python -m src.pipeline events-decide --research F # paper-only D1 research JSON -> data/events.db (no live path)
     python -m src.pipeline events-settle              # settle/mark paper event positions + NAV snapshot
     python -m src.pipeline events-report [--legacy]   # paper P&L / gate lights (--legacy audits live ledger, ro)
@@ -2740,6 +2742,28 @@ def cmd_events_report(args) -> None:
     events.report(cfg, legacy=args.legacy)
 
 
+def cmd_events_research_template(args) -> None:
+    """Paper-only: write a fill-in d1-research-v2 skeleton for the whole brief."""
+    from . import events
+    cfg = load_config()
+    n = events.make_research_template(cfg, args.out)
+    print(f"events-research-template: {n} item(s) -> {args.out}")
+
+
+def cmd_events_validate_research(args) -> None:
+    """Paper-only read-only preflight; exit 0 valid, non-zero on any error."""
+    from . import events
+    cfg = load_config()
+    ok, errors = events.validate_research_file(cfg, args.research)
+    if ok:
+        print(f"events-validate-research: OK ({args.research})")
+        return
+    print(f"events-validate-research: {len(errors)} error(s) in {args.research}")
+    for e in errors:
+        print(f"  - {e}")
+    sys.exit(1)
+
+
 def main() -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -2793,6 +2817,12 @@ def main() -> None:
     p.add_argument("--tickers", default="")
     p.add_argument("--top", type=int, default=3)
     p.set_defaults(fn=cmd_events_brief)
+    p = sub.add_parser("events-research-template")
+    p.add_argument("--out", required=True)
+    p.set_defaults(fn=cmd_events_research_template)
+    p = sub.add_parser("events-validate-research")
+    p.add_argument("--research", required=True)
+    p.set_defaults(fn=cmd_events_validate_research)
     p = sub.add_parser("events-decide")
     p.add_argument("--research", required=True)
     p.set_defaults(fn=cmd_events_decide)
