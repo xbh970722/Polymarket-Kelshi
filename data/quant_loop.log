@@ -2898,3 +2898,19 @@
 [07-10 06:38:43]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
 [07-10 06:38:44]   h10: h10: 2 in-window | h10 shadow(main): n=567 mean -1.6c total $-8.99 | KXETH15M: n=178 net $+1.44 | KXSOL15M: n=187 net $-6.37 | KXBTC15M: n=202 net $-4.07 | gate: KILL (2 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
 [07-10 06:38:45]   journal: journal written: realized today $+0.19, 9 settled, 8 fills
+[07-10 06:38:49] light mark committed + pushed
+[07-10 06:41:46]   settle: done: 0 settled, 6 still open
+[07-10 06:41:46]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-10 06:41:47]   mktsnap: mktsnap: 14 quotes recorded, 0 outcomes resolved
+[07-10 06:41:51]   shortcycle: shortcycle: 8 candidate strikes | balance $46.86 | today spent $5.13/999999.00
+[07-10 06:41:51]   shortcycle: done: 0 shortcycle orders
+[07-10 06:41:52]   favorites: favorites lane disabled
+[07-10 06:41:52]   h10: h10: 0 in-window | h10 shadow(main): n=567 mean -1.6c total $-8.99 | KXETH15M: n=178 net $+1.44 | KXSOL15M: n=187 net $-6.37 | KXBTC15M: n=202 net $-4.07 | gate: KILL (2 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
+[07-10 06:41:53]   weather: weather: 0 priced buckets | spent $1.34/999999.00
+[07-10 06:41:53]   weather: done: 0 weather orders
+[07-10 06:41:55]   disloc: DISLOC KXBTCD-26JUL1009-T64299.99: fav 0.80->0.71 ask 0.72 [BOOK-ONLY] tau 18m
+[07-10 06:41:55]   disloc: DISLOC KXSOLD-26JUL1009-T78.9999: fav 0.85->0.68 ask 0.70 [SPOT-MOVE] tau 18m
+[07-10 06:41:55]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=218 win 75% EV -0.5c | BOOK-ONLY: n=117 win 76% EV -0.6c | SPOT-MOVE: n=429 win 68% EV +1.3c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (146 pending)
+[07-10 06:42:05]   pmwatch: pmwatch: +57 pairs | pmwatch: 11664 rows, 3543 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-10 06:42:06]   journal: journal written: realized today $+0.19, 9 settled, 8 fills
+[07-10 06:42:07]   report: wrote reports\report_2026-07-10.md
