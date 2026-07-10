@@ -24,71 +24,132 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
       "rules_sha256": "3d930354a14137fd390a04fee7cd27c2ad1c68720533b31cc8b0a837587ab662",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://kworb.net/spotify/track/20jbSiX29FDX4oQxBXyUEi.html",
+          "title": "Ariana Grande - hate that i made you love me - Spotify Chart History",
+          "asof": "2026-07-08T00:00:00Z"
+        },
+        {
+          "url": "https://www.universalmusic.ca/press-releases/ariana-grande-announces-eighth-studio-album-petal-to-be-released-july-31/",
+          "title": "Ariana Grande announces eighth studio album petal to be released July 31",
+          "asof": "2026-04-28T15:17:21Z"
+        },
+        {
+          "url": "https://www.billboard.com/music/pop/ariana-grande-hate-that-i-made-you-love-me-stream-it-now-1236259537/",
+          "title": "Ariana Grande unveils 'Hate That I Made You Love Me'",
+          "asof": "2026-05-29T04:02:09Z"
+        },
+        {
+          "url": "https://www.officialcharts.com/chart-news/new-music-friday-playlist-songs-singles-albums-dvds-9th-july-2026/",
+          "title": "New Music Friday: July 10, 2026 releases",
+          "asof": "2026-07-09T16:21:54Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.42,
           "ci80": [
-            null,
-            null
+            0.2,
+            0.66
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：截至7月8日，Ariana在8个已公布的七月榜日中有3天位列全球第1。",
+            "7月8日该曲以约432万播放回到第1，领先第2名约10万，说明后续仍有反复夺冠的现实路径。",
+            "达标还需在7月9日至31日的23个榜日中取得9天第1；7月31日发行新专辑可能贡献很晚的一次推动。"
+          ],
+          "counterevidence": [
+            "7月3日至5日均排第4、7月6日至7日排第2，当前不是稳定垄断型榜首。",
+            "歌曲已发行约六周，且7月10日后仍有Future等新专辑进入竞争，存量单曲通常随时间衰减。"
+          ],
+          "what_would_change_mind": [
+            "若接下来5个榜日再拿到至少3天第1，将上调至约0.6；若一日未得，将下调至约0.2。",
+            "若确认7月31日发行产生的榜日不计入七月，将小幅下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.34,
           "ci80": [
-            null,
-            null
+            0.13,
+            0.59
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率框架：把前8个七月榜日的3次第1作为起点，剩余23天需要至少9次，门槛略高于已观察频率。",
+            "对已发行约六周的单曲施加随时间衰减，并把周五新歌冲榜视为额外失败日。",
+            "榜首日具有连串相关性，当前短暂回到第1并不等同于后续每天独立保持同一成功率。"
+          ],
+          "counterevidence": [
+            "当前播放量与第2名非常接近，少量日波动即可带来多个额外榜首日。",
+            "Ariana的专辑宣传和月底发行可能延长歌曲寿命，使普通单曲衰减基率偏悲观。"
+          ],
+          "what_would_change_mind": [
+            "若未来7天的榜首占比达到一半以上，将明显上调。",
+            "若新发行歌曲把该曲连续压到第3名以下，将下调至0.15附近。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.44,
           "ci80": [
-            null,
-            null
+            0.22,
+            0.68
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/竞争机制框架：7月1、2、8日已拿到3个榜首日，且7月8日仍有432万播放，歌曲没有退出争冠区。",
+            "剩余需求是23天中的9天，约39%；这与目前3/8的实现率接近。",
+            "第1与第2名仅相差约2%，日度波动足以让Ariana多次回到榜首。"
+          ],
+          "counterevidence": [
+            "7月3日至7日连续5天未居首，说明竞争者可形成持续压制。",
+            "7月10日的新发行潮及之后每周的新歌会减少可争夺天数；月底专辑的帮助来得很晚。"
+          ],
+          "what_would_change_mind": [
+            "未来一周若取得4个以上榜首日，上调至0.65以上。",
+            "若未来一周没有榜首日或播放量跌出前三，下调至0.2以下。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.33,
           "ci80": [
-            null,
-            null
+            0.12,
+            0.58
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/生命周期框架：用3/8更新日度榜首率后，再对六周龄单曲加入衰减，预测均值略低于还需的9天。",
+            "剩余23天跨过三个主要发行周五，榜首竞争集会刷新，不能把7月初频率机械外推。",
+            "月底专辑发行最多只直接影响很少的七月榜日，无法单独补足缺口。"
+          ],
+          "counterevidence": [
+            "榜首竞争非常接近，歌曲在跌到第4后仍能重返第1，生命周期并非单调下降。",
+            "巡演和专辑宣传可能提供普通历史样本没有的持续曝光。"
+          ],
+          "what_would_change_mind": [
+            "若7月15日前累计达到7个榜首日，将把概率上调到0.55以上。",
+            "若7月15日前仍只有3个榜首日，将下调到0.1附近。"
+          ]
         }
       ],
       "round2": {
@@ -144,71 +205,132 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
       "rules_sha256": "5b39f39c700a1e55cd86908063380ad73d7599871e43dcae8c6f98c158bf7f66",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://mainedems.org/statement-from-maine-democratic-party-leadership-on-allegations-against-graham-platner/",
+          "title": "Statement from Maine Democratic Party leadership on allegations against Graham Platner",
+          "asof": "2026-07-06T21:52:49Z"
+        },
+        {
+          "url": "https://www.mainepublic.org/politics/2026-07-09/now-that-graham-platner-is-out-who-is-running-to-replace-him",
+          "title": "Now that Graham Platner is out, who is running to replace him?",
+          "asof": "2026-07-09T14:32:56Z"
+        },
+        {
+          "url": "https://www.bangordailynews.com/2026/07/09/politics/elections/democrats-running-replace-graham-platner/",
+          "title": "Democrats running to replace Graham Platner have to run 3 races in 3 weeks",
+          "asof": "2026-07-09T19:29:48Z"
+        },
+        {
+          "url": "https://www.axios.com/2026/07/09/democrats-maine-senate-race-replace-platner",
+          "title": "Who replaces Graham Platner in Maine Senate race? These Democrats could",
+          "asof": "2026-07-09T00:59:22Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.055,
           "ci80": [
-            null,
-            null
+            0.015,
+            0.14
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：Dan Kleban已重新参选，但至少8名民主党人同时争取约600名大会代表。",
+            "Kleban是Maine Beer Company联合创始人，可用商业履历和非职业政客定位争取局外人票。",
+            "代表制短跑更奖励现成组织、背书和党内关系；Kleban在这些方面落后于Troy Jackson、Nirav Shah和Shenna Bellows。"
+          ],
+          "counterevidence": [
+            "他在2025年曾启动参议员竞选，具有现成的联邦竞选叙事和部分筹款关系。",
+            "多人大会可能多轮投票，若领先候选人互相阻挡，妥协型商业人士存在小概率上位路径。"
+          ],
+          "what_would_change_mind": [
+            "若Kleban在大会前获得主要工会、州级民选官员或100名以上公开代表支持，将大幅上调。",
+            "若大会规则采用需要广泛第二选择的多轮淘汰制，将小幅上调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.07,
           "ci80": [
-            null,
-            null
+            0.02,
+            0.16
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率框架：8名以上已宣布候选人的对称起点低于0.125，再按知名度、组织和近期选举验证程度折价。",
+            "临时党代会通常偏向有党内网络或最近州级竞选机器的候选人，Kleban是政治新人。",
+            "他在Janet Mills入局后退出过上一轮参议员竞选，缺少近期选民或代表支持的硬数据。"
+          ],
+          "counterevidence": [
+            "非传统候选人在丑闻触发的替补程序中可能因形象反差而受益。",
+            "候选人数多会分散首轮票，增加黑马进入后续轮次的可能。"
+          ],
+          "what_would_change_mind": [
+            "公开代表计票显示Kleban进入前三时，上调到0.15至0.25。",
+            "若主要候选人减少到三四人且Kleban仍在场，上调；若其缺席正式大会名单，下调至接近0。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.05,
           "ci80": [
-            null,
-            null
+            0.015,
+            0.13
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/代表机制框架：大会将由约500名县级代表和100多名州委员会成员组成，Kleban目前没有可见的代表块。",
+            "Troy Jackson在宣布后数小时内已有50多项背书，Shah与Bellows刚完成全州初选，三人都拥有更成熟的动员网络。",
+            "Kleban的商业与局外人形象提供差异化，但两周窗口不足以自然转化为多数代表。"
+          ],
+          "counterevidence": [
+            "Kleban已提交联邦竞选文件，并在此前参议员竞选中建立过基础设施。",
+            "若代表重视对阵Susan Collins的商业温和形象，他可能成为派系妥协人选。"
+          ],
+          "what_would_change_mind": [
+            "获得显著县级代表名单或一项重量级全州背书会使我上调。",
+            "大会规则若限制进入者或给予早期参选人程序优势，会重新评估。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.065,
           "ci80": [
-            null,
-            null
+            0.02,
+            0.15
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/竞争集框架：从至少8人的均分基率出发，对没有近期州级得票、党内职位或大型背书网络的候选人做约一半折扣。",
+            "600人大会中的组织摩擦高，短时间内的知名度和关系网比政策平台更可预测。",
+            "多数替补提名会集中到少数已有政治基础设施者，长尾候选人的合计概率虽大，单人概率仍低。"
+          ],
+          "counterevidence": [
+            "大会可能出现多轮死锁，长尾候选人并非独立且可被迅速整合为妥协阵营。",
+            "丑闻后的声誉修复需求可能让代表偏好没有传统政治包袱的企业家。"
+          ],
+          "what_would_change_mind": [
+            "首轮代表调查达到10%以上时，上调至0.15左右。",
+            "若Jackson、Shah或Bellows之一获得接近多数的公开承诺，进一步下调。"
+          ]
         }
       ],
       "round2": {
@@ -264,71 +386,137 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
       "rules_sha256": "9802cc9cdf32736d2e19d1c9acb6192cff1d91119be96d5dbc0de94bfde1d94d",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://mainedems.org/statement-from-maine-democratic-party-leadership-on-allegations-against-graham-platner/",
+          "title": "Statement from Maine Democratic Party leadership on allegations against Graham Platner",
+          "asof": "2026-07-06T21:52:49Z"
+        },
+        {
+          "url": "https://www.bangordailynews.com/2026/07/09/politics/elections/maine-election-senate-nirav-shah-campaign-graham-platner-replacement/",
+          "title": "Nirav Shah seeks to replace Graham Platner in Maine's U.S. Senate race",
+          "asof": "2026-07-09T12:20:14Z"
+        },
+        {
+          "url": "https://www.bangordailynews.com/2026/07/09/politics/elections/democrats-graham-platners-base/",
+          "title": "Democrats distance themselves from Graham Platner while trying to win his base",
+          "asof": "2026-07-09T21:04:21Z"
+        },
+        {
+          "url": "https://www.maine.gov/sos/news/maine-secretary-states-office-announces-ranked-choice-tabulations",
+          "title": "Maine Secretary of State's Office announces ranked-choice tabulations",
+          "asof": "2026-06-19T00:00:00Z"
+        },
+        {
+          "url": "https://www.axios.com/2026/07/09/democrats-maine-senate-race-replace-platner",
+          "title": "Who replaces Graham Platner in Maine Senate race? These Democrats could",
+          "asof": "2026-07-09T00:59:22Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.23,
           "ci80": [
-            null,
-            null
+            0.1,
+            0.39
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：Nirav Shah刚在全州民主党州长初选进入最终两强，拥有近期知名度、名单和竞选团队。",
+            "他迅速宣布参选，并以与Platner在医保、贫困和对外政策上的接近争取原提名人的进步派基础。",
+            "约600名代表的大会既需要基层动员也需要党内可接受性，Shah在局外人品牌与政府履历之间较平衡。"
+          ],
+          "counterevidence": [
+            "Troy Jackson已拿到50多项快速背书且与Platner及工会关系更深，可能更直接继承进步派代表。",
+            "Shenna Bellows拥有党内和全州职位网络；候选人至少8名，任何单人都难成为明确多数。"
+          ],
+          "what_would_change_mind": [
+            "县级代表选择结果若显示Shah居首或获得Platner基层组织的成建制支持，将上调到0.35以上。",
+            "若Jackson的公开代表承诺接近多数，或Pingree等重量级人物入场并吸走Shah阵营，将下调。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.19,
           "ci80": [
-            null,
-            null
+            0.07,
+            0.34
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率框架：8名以上候选人的均分起点约0.125，按Shah近期全州初选两强和组织资产上调。",
+            "临时大会的赢家通常来自少数有现成州级知名度的候选人；Shah、Jackson和Bellows构成第一梯队。",
+            "第一梯队内部仍有明显派系相关性，Shah的温和政府履历未必最适合继承Platner代表。"
+          ],
+          "counterevidence": [
+            "州长初选证明Shah能从较大的全州选民池获得首选和转移票，普通多人基率可能低估他。",
+            "大会若把11月可选性置于意识形态延续之上，Shah可能成为更强的共识候选人。"
+          ],
+          "what_would_change_mind": [
+            "有可信代表计数时将放弃均分基率，直接按首轮支持与第二选择结构更新。",
+            "大会规则若采用单轮复数制而非多轮多数制，会增加领先阵营的重要性并扩大区间。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.24,
           "ci80": [
-            null,
-            null
+            0.11,
+            0.4
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/代表机制框架：Shah是刚结束的民主党州长初选最终两强之一，已经具备全州认知、筹款关系和可迅速重启的组织。",
+            "他主动向Platner支持者强调政策接近，同时拒绝Platner背书，试图兼顾进步派延续与声誉切割。",
+            "多人大会若进入多轮，Shah可能比派系色彩更强的候选人拥有更广的第二选择吸引力。"
+          ],
+          "counterevidence": [
+            "Jackson与Platner共同竞选并获工会支持，且宣布后很快累积50多项背书。",
+            "Bellows是现任州务卿并有2014年参议员提名经历；大会代表不是州长初选选民的随机样本。"
+          ],
+          "what_would_change_mind": [
+            "公开代表名单显示Shah在县级代表中领先，会把概率提高到0.4附近。",
+            "若大会采取由党内州委员会强主导的封闭程序，将下调并提高Bellows等党内候选人的权重。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.2,
           "ci80": [
-            null,
-            null
+            0.08,
+            0.36
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/竞争集框架：将候选人分为三名有近期州级机器的前排与至少五名长尾，给Shah约五分之一的总质量。",
+            "Shah在州长初选中证明了跨地区吸引力，但替补大会的600名代表比普通初选更偏党内活跃人士。",
+            "短周期程序使新信息传播受限，因此近期选举表现比新政策承诺更有预测力。"
+          ],
+          "counterevidence": [
+            "代表选择规则仍未完全公布，任何基于普通大会的外推都可能错配。",
+            "Platner基层若协调支持Jackson，第一梯队不再近似对称，Shah会明显落后。"
+          ],
+          "what_would_change_mind": [
+            "县委员会的实际代表分配和首轮承诺是最能收窄区间的信息。",
+            "若主要报导显示Shah成为党内和全国民主党共同偏好，将上调至0.3以上。"
+          ]
         }
       ],
       "round2": {

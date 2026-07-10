@@ -2669,3 +2669,7 @@
 [07-10 05:20:35]   wxfade: wxfade: +0 logged, 8 settled | wxfade shadow: n=89 win 74.2% mean net -4.6c/contract total $-4.08 | gate: ARCHIVE (edge dead) (37 pending)
 [07-10 05:20:37]   journal: journal written: realized today $-0.31, 6 settled, 7 fills
 [07-10 05:20:38]   report: wrote reports\report_2026-07-10.md
+[07-10 05:20:41] committed + pushed
+[07-10 05:23:30]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-10 05:23:31]   h10: h10: 1 in-window | h10 shadow(main): n=557 mean -1.4c total $-7.99 | KXETH15M: n=174 net $+2.06 | KXSOL15M: n=184 net $-6.71 | KXBTC15M: n=199 net $-3.35 | gate: KILL (1 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
+[07-10 05:23:32]   journal: journal written: realized today $-0.31, 6 settled, 7 fills
