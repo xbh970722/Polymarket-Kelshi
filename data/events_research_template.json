@@ -1,0 +1,736 @@
+{
+  "schema": "d1-research-v2",
+  "research_run_id": "84812dc5-b59e-474d-98f1-a36d2f988436",
+  "created_at": "2026-07-10T11:11:46Z",
+  "scan_run_id": "2026-07-10T11:10:22+00:00",
+  "brief_file": "data/events_brief.json",
+  "brief_sha256": "6e727990df04cfecb167746491aa69db7fbe8bfbbcf427cdb071f2eda635a429",
+  "producer": {
+    "orchestrator": "ev-research-orchestrator",
+    "protocol": "research/PROTOCOL.md",
+    "ensemble_config_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "arbiter_model": "fable-5"
+  },
+  "items": [
+    {
+      "ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12",
+      "event_ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "title": "Will Ariana Grande be #1 on Spotify's Daily Top Songs Global chart for at least 12 chart days in July 2026?",
+      "category": "Entertainment",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+      "rules_sha256": "3d930354a14137fd390a04fee7cd27c2ad1c68720533b31cc8b0a837587ab662",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.06,
+        "yes_ask": 0.07,
+        "no_bid": 0.93,
+        "no_ask": 0.94
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "04ab915bae03c26b30bf7d3213bb87118cda11ff997d82e47f04645990dd4f74",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-DKLE",
+      "event_ticker": "KXMEDNOMJUL-26AUG01",
+      "title": "Will it be confirmed that Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "category": "Elections",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXMEDNOMJUL-26AUG01",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+      "rules_sha256": "5b39f39c700a1e55cd86908063380ad73d7599871e43dcae8c6f98c158bf7f66",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.04,
+        "yes_ask": 0.05,
+        "no_bid": 0.95,
+        "no_ask": 0.96
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "f5bc99ea615dbc727b8b5b1e13f81cdbeb41012e3723c10014be6d0580ebf663",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
+      "event_ticker": "KXMEDNOMJUL-26AUG01",
+      "title": "Will it be confirmed that Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "category": "Elections",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXMEDNOMJUL-26AUG01",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+      "rules_sha256": "9802cc9cdf32736d2e19d1c9acb6192cff1d91119be96d5dbc0de94bfde1d94d",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.08,
+        "yes_ask": 0.09,
+        "no_bid": 0.91,
+        "no_ask": 0.92
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "9d74f88984dc8afacb1e44bce586707e170e202cda8e12812279f03d6431dd01",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXRT-ODY-85",
+      "event_ticker": "KXRT-ODY",
+      "title": "The Odyssey Rotten Tomatoes score?",
+      "category": "Entertainment",
+      "category_override": null,
+      "close_time": "2026-07-20T14:00:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXRT-ODY",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+      "rules_sha256": "8b1a1e029e1fb4c4c56305d6fd7c916cea43e7ade12b8d9908d2fe37c3c86925",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.85,
+        "yes_ask": 0.87,
+        "no_bid": 0.13,
+        "no_ask": 0.15
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXTOPMONTHLY-26JUL-BRU",
+      "event_ticker": "KXTOPMONTHLY-26JUL",
+      "title": "Artist with the most monthly Spotify listeners at the end of Jul 2026?",
+      "category": "Entertainment",
+      "category_override": null,
+      "close_time": "2026-07-31T15:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXTOPMONTHLY-26JUL",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+      "rules_sha256": "44e16a9b93b08f95622bc2aa338d17ff04e91bed0dc0032d5576c958b1752b19",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.66,
+        "yes_ask": 0.67,
+        "no_bid": 0.33,
+        "no_ask": 0.34
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "event_ticker": "KXTRUMPATTEND",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "category": "Politics",
+      "category_override": null,
+      "close_time": "2026-07-20T14:00:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXTRUMPATTEND",
+      "asof": "2026-07-10T11:11:46Z",
+      "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+      "rules_sha256": "63ddffa265d43e72e1562176b5e7adab013ed96c62993c67119688e81b9cebb6",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter_market_snapshot": {
+        "asof": "2026-07-10T11:11:46Z",
+        "yes_bid": 0.914,
+        "yes_ask": 0.916,
+        "no_bid": 0.084,
+        "no_ask": 0.086
+      },
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    }
+  ]
+}
