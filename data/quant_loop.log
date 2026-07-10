@@ -2512,3 +2512,8 @@
 [07-10 04:26:37]   pmwatch: pmwatch: +55 pairs | pmwatch: 11448 rows, 3474 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-10 04:26:38]   journal: journal written: realized today $-0.30, 4 settled, 7 fills
 [07-10 04:26:39]   report: wrote reports\report_2026-07-10.md
+[07-10 04:26:41] committed + pushed
+[07-10 04:30:40]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-10 04:30:41]   h10: h10: 0 in-window | h10 shadow(main): n=556 mean -1.4c total $-8.06 | KXETH15M: n=173 net $+2.00 | KXSOL15M: n=184 net $-6.71 | KXBTC15M: n=199 net $-3.35 | gate: KILL (0 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
+[07-10 04:30:43]   stopshadow: STOPGUARD EXIT #700 KXBTCD-26JUL1007-T64399.99: sold x1 @ 52c (bid 0.54, spot at-line) — salvaged vs riding to 0
+[07-10 04:30:44]   journal: journal written: realized today $-0.67, 5 settled, 7 fills
