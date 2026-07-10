@@ -1,0 +1,255 @@
+{
+  "generated": "2026-07-10T09:15:02+00:00",
+  "scan_run_id": "2026-07-10T09:15:02+00:00",
+  "categories_seen": {
+    "World": 8,
+    "Elections": 2294,
+    "Climate and Weather": 96,
+    "Science and Technology": 119,
+    "Politics": 399,
+    "Sports": 2696,
+    "Financials": 319,
+    "Social": 10,
+    "Entertainment": 672,
+    "Economics": 333,
+    "Health": 6,
+    "Companies": 68,
+    "Transportation": 1,
+    "Commodities": 30,
+    "Crypto": 74,
+    "": 3,
+    "Mentions": 48
+  },
+  "n_swept": 68445,
+  "n_gated": 1773,
+  "candidates": [
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
+      "event_ticker": "KXMEDNOMJUL-26AUG01",
+      "category": "Elections",
+      "title": "Will it be confirmed that Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "subtitle": "Nirav Shah",
+      "mid": 0.085,
+      "spread": 0.01,
+      "volume_24h": 62188.62,
+      "open_interest": 64944.84,
+      "d2c": 21.781,
+      "mp_score": 3.9087,
+      "flags": [
+        "overround"
+      ]
+    },
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-DKLE",
+      "event_ticker": "KXMEDNOMJUL-26AUG01",
+      "category": "Elections",
+      "title": "Will it be confirmed that Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "subtitle": "Dan Kleban",
+      "mid": 0.045,
+      "spread": 0.01,
+      "volume_24h": 29809.91,
+      "open_interest": 62998.82,
+      "d2c": 21.781,
+      "mp_score": 3.8449,
+      "flags": [
+        "overround"
+      ]
+    },
+    {
+      "ticker": "KXMAXSHIPSHORMUZ-26JUL31-AL60",
+      "event_ticker": "KXMAXSHIPSHORMUZ-26JUL31",
+      "category": "Politics",
+      "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 60 in Jul 2026?",
+      "subtitle": "At least 60",
+      "mid": 0.075,
+      "spread": 0.03,
+      "volume_24h": 262.0,
+      "open_interest": 7614.77,
+      "d2c": 25.312,
+      "mp_score": 2.834,
+      "flags": []
+    },
+    {
+      "ticker": "KXSPOTIFYNUM1USA-26AUG01-OLI-3",
+      "event_ticker": "KXSPOTIFYNUM1USA-26AUG01-OLI",
+      "category": "Entertainment",
+      "title": "Will Olivia Rodrigo be #1 on Spotify's Daily Top Songs USA chart for at least 3 chart days in July 2026?",
+      "subtitle": "At least 3 days",
+      "mid": 0.045,
+      "spread": 0.01,
+      "volume_24h": 1480.66,
+      "open_interest": 2876.19,
+      "d2c": 21.781,
+      "mp_score": 2.1589,
+      "flags": [
+        "ladder"
+      ]
+    },
+    {
+      "ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12",
+      "event_ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "category": "Entertainment",
+      "title": "Will Ariana Grande be #1 on Spotify's Daily Top Songs Global chart for at least 12 chart days in July 2026?",
+      "subtitle": "At least 12 days",
+      "mid": 0.065,
+      "spread": 0.01,
+      "volume_24h": 1330.9,
+      "open_interest": 1308.02,
+      "d2c": 21.781,
+      "mp_score": 2.1524,
+      "flags": [
+        "ladder"
+      ]
+    },
+    {
+      "ticker": "KXSPOTIFYNUM1USA-26AUG01-OLI-6",
+      "event_ticker": "KXSPOTIFYNUM1USA-26AUG01-OLI",
+      "category": "Entertainment",
+      "title": "Will Olivia Rodrigo be #1 on Spotify's Daily Top Songs USA chart for at least 6 chart days in July 2026?",
+      "subtitle": "At least 6 days",
+      "mid": 0.055,
+      "spread": 0.01,
+      "volume_24h": 733.22,
+      "open_interest": 1442.97,
+      "d2c": 21.781,
+      "mp_score": 2.1162,
+      "flags": [
+        "ladder"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "event_ticker": "KXTRUMPATTEND",
+      "category": "Politics",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "subtitle": "Yes",
+      "mid": 0.9145,
+      "spread": 0.003,
+      "volume_24h": 127886.77,
+      "open_interest": 652371.7,
+      "d2c": 10.198,
+      "mp_score": 1.985,
+      "flags": []
+    },
+    {
+      "ticker": "KXCRYPTOSTRUCTURE-26JAN-AUG",
+      "event_ticker": "KXCRYPTOSTRUCTURE-26JAN",
+      "category": "Politics",
+      "title": "Will a crypto market structure bill becomes law before Aug 1, 2026?",
+      "subtitle": "Before Aug 1, 2026",
+      "mid": 0.0775,
+      "spread": 0.009,
+      "volume_24h": 41761.76,
+      "open_interest": 197957.05,
+      "d2c": 22.198,
+      "mp_score": 1.8792,
+      "flags": []
+    },
+    {
+      "ticker": "KXALITOANNOUNCERETIRE-26JUN-AUG01",
+      "event_ticker": "KXALITOANNOUNCERETIRE-26JUN",
+      "category": "Politics",
+      "title": "Will Samuel Alito announce their departure as Supreme Court justice before Aug 1, 2026?",
+      "subtitle": "Before Aug 1, 2026",
+      "mid": 0.065,
+      "spread": 0.01,
+      "volume_24h": 20812.43,
+      "open_interest": 73653.9,
+      "d2c": 21.781,
+      "mp_score": 1.8137,
+      "flags": []
+    },
+    {
+      "ticker": "KXPLATNERREPLACE-26-OTHE",
+      "event_ticker": "KXPLATNERREPLACE-26",
+      "category": "Elections",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through another process before Aug 1, 2026?",
+      "subtitle": "Another process",
+      "mid": 0.045,
+      "spread": 0.01,
+      "volume_24h": 11577.51,
+      "open_interest": 10564.53,
+      "d2c": 21.781,
+      "mp_score": 1.7627,
+      "flags": []
+    },
+    {
+      "ticker": "KXPLATNERREPLACE-26-CONV",
+      "event_ticker": "KXPLATNERREPLACE-26",
+      "category": "Elections",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through a special state convention before Aug 1, 2026?",
+      "subtitle": "Special convention",
+      "mid": 0.915,
+      "spread": 0.01,
+      "volume_24h": 7769.17,
+      "open_interest": 16277.18,
+      "d2c": 21.781,
+      "mp_score": 1.7281,
+      "flags": []
+    },
+    {
+      "ticker": "KXUFCVICROUND-26JUL11MCGHOL-MCG3",
+      "event_ticker": "KXUFCVICROUND-26JUL11MCGHOL",
+      "category": "Sports",
+      "title": "Will Conor McGregor win the Conor McGregor vs. Max Holloway 329 fight in Round 3",
+      "subtitle": "Conor McGregor to win in Round 3",
+      "mid": 0.05,
+      "spread": 0.02,
+      "volume_24h": 47560.81,
+      "open_interest": 51421.19,
+      "d2c": 15.712,
+      "mp_score": 1.5342,
+      "flags": [
+        "overround"
+      ]
+    },
+    {
+      "ticker": "KXUFCVICROUND-26JUL11MCGHOL-MCG2",
+      "event_ticker": "KXUFCVICROUND-26JUL11MCGHOL",
+      "category": "Sports",
+      "title": "Will Conor McGregor win the Conor McGregor vs. Max Holloway 329 fight in Round 2",
+      "subtitle": "Conor McGregor to win in Round 2",
+      "mid": 0.08,
+      "spread": 0.02,
+      "volume_24h": 32818.37,
+      "open_interest": 39848.85,
+      "d2c": 15.712,
+      "mp_score": 1.5213,
+      "flags": [
+        "overround"
+      ]
+    },
+    {
+      "ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-9",
+      "event_ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "category": "Entertainment",
+      "title": "Will Ariana Grande be #1 on Spotify's Daily Top Songs Global chart for at least 9 chart days in July 2026?",
+      "subtitle": "At least 9 days",
+      "mid": 0.485,
+      "spread": 0.01,
+      "volume_24h": 2105.17,
+      "open_interest": 2044.65,
+      "d2c": 21.781,
+      "mp_score": 1.4803,
+      "flags": [
+        "ladder"
+      ]
+    },
+    {
+      "ticker": "KXWTIMAX-26JUL31-T82",
+      "event_ticker": "KXWTIMAX-26JUL31",
+      "category": "Commodities",
+      "title": "Will the maximum WTI front month settle price reach $82 by Jul 31, 2026?",
+      "subtitle": "82.01 or above",
+      "mid": 0.04,
+      "spread": 0.02,
+      "volume_24h": 341.93,
+      "open_interest": 2189.01,
+      "d2c": 21.385,
+      "mp_score": 1.4535,
+      "flags": [
+        "ladder"
+      ]
+    }
+  ]
+}
