@@ -306,6 +306,13 @@ h10:
 h15:
   enabled: true
   series: [KXETH15M]             # ETH 优先 (回测 98.7% 胜率); SOL 待 ETH 数据后复议
+  live_sides: ["yes"]            # h15maker Review #10 (2026-07-09): NO 侧降为纯影子。
+                                 # (必须加引号: 裸 yes 会被 YAML 解析成布尔 True → 连 YES 侧也误杀)
+                                 # 48 笔实证: YES@0.84 = 89% 胜 +$6.48 (对齐回测),
+                                 # NO@0.84 = 57% 胜 -$11.04 (五笔同构 -$2.52 满损,
+                                 # id429/565/568/656/684 全 result=yes = ETH 上穿撞进
+                                 # 挂着的 NO bid, 下行热门带失效)。恢复 NO 需跨体制复现
+                                 # (Review#9 已预注册, 现兑现)。降风险动作, 无美元上限改动。
   bid: 0.84
   place_tau_min: [5.5, 16]       # R7-C6: 下界须高于 cancel_tau (4.5) — 不许在
                                  # 自己的撤单带内开新挂单

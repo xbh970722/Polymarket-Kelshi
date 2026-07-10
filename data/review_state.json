@@ -1,6 +1,6 @@
 {
- "ts": "2026-07-09T09:28:36",
- "review_no": 9,
- "note": "Shortcycle Review #9 = HOLD (zero change). lane=shortcycle 六步复盘: 本车道(title LIKE shortcycle%) id>54 结算 7/7 全胜 净 +1.06, 无泄漏细胞。触发的 3 亏(1.21)聚合自四币计数器, 真实亏损源=h15maker ETH15M NO@0.84 同构簇(id429/565/568/656 各-2.52, 各自-3硬停正常兜底, 车道仍净+2.28)。shortcycle 15M 早停(series_15m:[]),故台账 15M 单不属本车道。裁决: 对零亏损车道不收紧(过度拟合/越权改未举旗车道均拒)。h15maker 同构簇记为 watch-item, 复发时由其自身车道复盘处置。零美元上限改动。cursor 54->656。",
- "last_review_id": 656
+ "ts": "2026-07-09T18:27:42",
+ "review_no": 10,
+ "note": "h15maker Review #10 = STRUCTURAL: NO side demoted to shadow-only (config h15.live_sides=[\"yes\"]). Evidence 48 fills: YES@0.84 89% +$6.48 (matches backtest), NO@0.84 57% -$11.04 with 5 isomorphic -$2.52 max-losses (id429/565/568/656/684 all result=yes = ETH ran up through strike into resting NO bid = downside hot-band invalidation, not execution). Review#9 pre-registered this cluster; id684 = recurrence. Risk-reducing (side kill), zero dollar-cap change. Smoke caught YAML bare-yes->bool True paste bug, fixed to quoted. cursor 656->684.",
+ "last_review_id": 684
 }

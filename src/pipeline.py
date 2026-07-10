@@ -1684,6 +1684,19 @@ def cmd_h15(_args) -> None:
             mid = (m["yes_bid"] + m["yes_ask"]) / 2
             side = "yes" if mid >= 0.5 else "no"
             fav_mid = mid if side == "yes" else 1 - mid
+            # h15maker Review #10 (2026-07-09): NO side demoted to shadow-only.
+            # 48-fill evidence: YES@0.84 = 89% win, +$6.48 (matches 91.3% backtest);
+            # NO@0.84 = 57% win, -$11.04 — five isomorphic -$2.52 max-losses
+            # (id 429/565/568/656/684, all result=yes: ETH ran UP through strike
+            # into the resting NO bid = downside hot-band invalidation, not a
+            # queue/execution problem). Review #9 pre-registered this cluster as a
+            # watch-item on recurrence; id684 is the recurrence. Restricting a side
+            # is a risk-reducing rule tighten (no dollar cap touched). Shadow
+            # collector keeps recording NO queue events for future re-registration.
+            if side not in h.get("live_sides", ["yes", "no"]):
+                print(f"h15 SHADOW-ONLY {m['ticker']}: {side} side demoted "
+                      f"(Review #10, NO -$11.04/57%) — no live rest")
+                continue
             if not (h.get("min_fav_mid", 0.86) <= fav_mid
                     <= h.get("max_fav_mid", 0.955)):   # R7-FABLE: band, not floor
                 continue                        # — 0.97+ favorites need a 13c
