@@ -1,118 +1,86 @@
 {
-  "KXMEDNOMJUL-26AUG01-NSHA": {
+  "KXMAXSHIPSHORMUZ-26JUL31-AL60": {
     "blind": {
-      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
-      "title": "Will it be confirmed that Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
-      "subtitle": "Nirav Shah",
-      "rules_primary": "If Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026, then the market resolves to Yes.",
-      "rules_secondary": "If Graham Platner withdraws or is replaced as the nominee by the Maine Democratic State Committee, the market will resolve to whichever individual is the Democratic nominee as of July 31, 2026. If Graham Platner withdraws and no replacement nominee has been selected as of July 31, 2026, the market will resolve to \"No one.\" If Graham Platner remains the nominee as of July 31, 2026, the market will resolve to Graham Platner. For purposes of this market, the relevant question is who holds the Democratic nomination as of July 31, 2026, regardless of when that status was first established or reported.",
-      "close_time": "2026-08-01T03:59:00Z",
-      "category": "Elections",
+      "ticker": "KXMAXSHIPSHORMUZ-26JUL31-AL60",
+      "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 60 in Jul 2026?",
+      "subtitle": "At least 60",
+      "rules_primary": "If the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch is at least 60 in Jul 2026, then the market resolves to Yes.",
+      "rules_secondary": "",
+      "close_time": "2026-08-04T16:45:00Z",
+      "category": "Politics",
       "doctrine": "",
       "sibling_titles": [
-        "Graham Platner",
-        "Jordan Wood",
-        "Patrick Dempsey",
-        "Mattie Daughtrey",
-        "Shenna Bellows",
-        "Troy Jackson",
-        "Dan Kleban",
-        "Valli Geiger",
-        "No one",
-        "Janet Mills",
-        "Brian Bryant",
-        "Chellie Pingree",
-        "Sara Gideon",
-        "Emily Cain",
-        "Jared Golden"
+        "At least 70",
+        "At least 50",
+        "At least 30",
+        "At least 40",
+        "At least 80",
+        "At least 90",
+        "At least 100"
       ]
     },
     "arbiter": {
       "yes_bid": 0.08,
       "yes_ask": 0.09,
       "mid": 0.085,
-      "volume_24h": 62188.62,
-      "oi": 64944.84,
+      "volume_24h": 250.0,
+      "oi": 7835.77,
       "sibling_mids": [
-        0.035,
-        0.035,
-        0.005,
-        0.005,
-        0.36,
-        0.475,
-        0.045,
+        0.065,
+        0.26,
+        0.5,
+        0.5,
+        0.025,
         0.015,
-        0.005,
-        0.005,
-        0.005,
-        0.005,
-        0.005,
-        0.005,
-        0.005
+        0.02
       ],
       "mp_flags": [
-        "overround",
+        "ladder",
         "longshot"
       ],
-      "mp_score": 3.9087
+      "mp_score": 2.9299
     }
   },
-  "KXMEDNOMJUL-26AUG01-DKLE": {
+  "KXMAXSHIPSHORMUZ-26JUL31-AL70": {
     "blind": {
-      "ticker": "KXMEDNOMJUL-26AUG01-DKLE",
-      "title": "Will it be confirmed that Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
-      "subtitle": "Dan Kleban",
-      "rules_primary": "If Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026, then the market resolves to Yes.",
-      "rules_secondary": "If Graham Platner withdraws or is replaced as the nominee by the Maine Democratic State Committee, the market will resolve to whichever individual is the Democratic nominee as of July 31, 2026. If Graham Platner withdraws and no replacement nominee has been selected as of July 31, 2026, the market will resolve to \"No one.\" If Graham Platner remains the nominee as of July 31, 2026, the market will resolve to Graham Platner. For purposes of this market, the relevant question is who holds the Democratic nomination as of July 31, 2026, regardless of when that status was first established or reported.",
-      "close_time": "2026-08-01T03:59:00Z",
-      "category": "Elections",
+      "ticker": "KXMAXSHIPSHORMUZ-26JUL31-AL70",
+      "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 70 in Jul 2026?",
+      "subtitle": "At least 70",
+      "rules_primary": "If the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch is at least 70 in Jul 2026, then the market resolves to Yes.",
+      "rules_secondary": "",
+      "close_time": "2026-08-04T16:45:00Z",
+      "category": "Politics",
       "doctrine": "",
       "sibling_titles": [
-        "Graham Platner",
-        "Jordan Wood",
-        "Patrick Dempsey",
-        "Mattie Daughtrey",
-        "Shenna Bellows",
-        "Troy Jackson",
-        "Valli Geiger",
-        "No one",
-        "Janet Mills",
-        "Nirav Shah",
-        "Brian Bryant",
-        "Chellie Pingree",
-        "Sara Gideon",
-        "Emily Cain",
-        "Jared Golden"
+        "At least 50",
+        "At least 60",
+        "At least 30",
+        "At least 40",
+        "At least 80",
+        "At least 90",
+        "At least 100"
       ]
     },
     "arbiter": {
       "yes_bid": 0.04,
-      "yes_ask": 0.05,
-      "mid": 0.045,
-      "volume_24h": 22768.06,
-      "oi": 62987.82,
+      "yes_ask": 0.09,
+      "mid": 0.065,
+      "volume_24h": 899.61,
+      "oi": 2417.32,
       "sibling_mids": [
-        0.035,
-        0.035,
-        0.005,
-        0.005,
-        0.36,
-        0.475,
-        0.015,
-        0.005,
-        0.005,
+        0.26,
         0.085,
-        0.005,
-        0.005,
-        0.005,
-        0.005,
-        0.005
+        0.5,
+        0.5,
+        0.025,
+        0.015,
+        0.02
       ],
       "mp_flags": [
-        "overround",
+        "ladder",
         "longshot"
       ],
-      "mp_score": 3.8215
+      "mp_score": 2.8409
     }
   },
   "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12": {
@@ -126,83 +94,29 @@
       "category": "Entertainment",
       "doctrine": "",
       "sibling_titles": [
-        "At least 15 days",
+        "At least 6 days",
         "At least 9 days",
-        "At least 3 days",
-        "At least 6 days"
+        "At least 15 days",
+        "At least 3 days"
       ]
     },
     "arbiter": {
-      "yes_bid": 0.06,
-      "yes_ask": 0.07,
-      "mid": 0.065,
-      "volume_24h": 1330.9,
-      "oi": 1308.02,
+      "yes_bid": 0.08,
+      "yes_ask": 0.09,
+      "mid": 0.085,
+      "volume_24h": 1777.9,
+      "oi": 1751.02,
       "sibling_mids": [
-        0.015,
+        0.89,
         0.485,
-        0.5,
-        0.965
+        0.015,
+        0.5
       ],
       "mp_flags": [
         "ladder",
         "longshot"
       ],
-      "mp_score": 2.1524
-    }
-  },
-  "KXRT-ODY-85": {
-    "blind": {
-      "ticker": "KXRT-ODY-85",
-      "title": "The Odyssey Rotten Tomatoes score?",
-      "subtitle": "Above 85",
-      "rules_primary": "If The Odyssey has a Tomatometer score of above 85 on the Monday after wide release at 10:00 AM ET, then the market resolves to Yes.",
-      "rules_secondary": "The \"Fresh!\" and \"Certified Fresh!\" subtitles are meant for illustrative purposes only. The Tomatometer score must be above the strike value to resolve as YES (for example, a score of 75 would resolve \"Above 75\" as No.) The market will be determined the Monday after wide release at 10:00 AM ET.",
-      "close_time": "2026-07-20T14:00:00Z",
-      "category": "Entertainment",
-      "doctrine": "",
-      "sibling_titles": [
-        "Above 90",
-        "Above 95",
-        "Above 87",
-        "Above 92",
-        "Above 50",
-        "Above 65",
-        "Above 45",
-        "Above 75",
-        "Above 80",
-        "Above 97",
-        "Above 55",
-        "Above 60",
-        "Above 70"
-      ]
-    },
-    "arbiter": {
-      "yes_bid": 0.85,
-      "yes_ask": 0.87,
-      "mid": 0.86,
-      "volume_24h": 1162.06,
-      "oi": 37803.01,
-      "sibling_mids": [
-        0.625,
-        0.245,
-        0.735,
-        0.475,
-        0.995,
-        0.99,
-        0.995,
-        0.965,
-        0.925,
-        0.095,
-        0.995,
-        0.995,
-        0.985
-      ],
-      "mp_flags": [
-        "longshot",
-        "stale"
-      ],
-      "mp_score": 2.1092
+      "mp_score": 2.17
     }
   },
   "KXTRUMPATTEND": {
@@ -218,65 +132,207 @@
       "sibling_titles": []
     },
     "arbiter": {
-      "yes_bid": 0.914,
-      "yes_ask": 0.916,
-      "mid": 0.915,
-      "volume_24h": 128844.87,
-      "oi": 652555.86,
+      "yes_bid": 0.908,
+      "yes_ask": 0.909,
+      "mid": 0.9085,
+      "volume_24h": 167154.17,
+      "oi": 686152.17,
       "sibling_mids": [],
       "mp_flags": [
         "longshot"
       ],
-      "mp_score": 1.99
+      "mp_score": 1.995
     }
   },
-  "KXTOPMONTHLY-26JUL-BRU": {
+  "KXHORMUZNORM-26MAR17-B260801": {
     "blind": {
-      "ticker": "KXTOPMONTHLY-26JUL-BRU",
-      "title": "Artist with the most monthly Spotify listeners at the end of Jul 2026?",
-      "subtitle": "Bruno Mars",
-      "rules_primary": "If the artist with the most monthly listeners on Spotify on Jul 31, 2026 at 12:00 PM ET is Bruno Mars, then the market resolves to Yes.",
-      "rules_secondary": "This market and these products have not been endorsed by Spotify. Any references to Spotify, Spotify charts, streaming data, or any associated marks are descriptive only and do not indicate an endorsement of this product or any affiliation between Spotify and Kalshi.",
-      "close_time": "2026-07-31T15:59:00Z",
-      "category": "Entertainment",
+      "ticker": "KXHORMUZNORM-26MAR17-B260801",
+      "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before August 1, 2026?",
+      "subtitle": "Before Aug 1, 2026",
+      "rules_primary": "If the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch is above 60 before August 1, 2026, then the market resolves to Yes.",
+      "rules_secondary": "",
+      "close_time": "2026-08-01T13:59:00Z",
+      "category": "Politics",
       "doctrine": "",
       "sibling_titles": [
-        "Kendrick Lamar",
-        "Taylor Swift",
-        "Justin Bieber",
-        "Ed Sheeran",
-        "Drake",
-        "Rihanna",
-        "The Weeknd",
-        "Coldplay",
-        "Bad Bunny",
-        "Billie Eilish",
-        "Lady Gaga"
+        "Before Nov 1, 2026",
+        "Before Oct 1, 2026",
+        "Before Sep 1, 2026",
+        "Before Jul 1, 2027",
+        "Before Aug 15, 2026",
+        "Before Jan 1, 2027",
+        "Before Dec 1, 2026",
+        "Before Apr 1, 2027",
+        "Before May 1, 2026",
+        "Before Jun 15, 2026",
+        "Before Jun 1, 2026",
+        "Before May 15, 2026",
+        "Before Jul 15, 2026",
+        "Before Jul 1, 2026"
       ]
     },
     "arbiter": {
-      "yes_bid": 0.66,
-      "yes_ask": 0.67,
-      "mid": 0.665,
-      "volume_24h": 7360.0,
-      "oi": 17200.49,
+      "yes_bid": 0.05,
+      "yes_ask": 0.06,
+      "mid": 0.055,
+      "volume_24h": 147973.87,
+      "oi": 1118247.22,
       "sibling_mids": [
+        0.395,
+        0.3,
+        0.19,
+        0.8,
+        0.085,
+        0.575,
+        0.475,
+        0.745,
+        0.5,
+        0.5,
+        0.5,
+        0.0005,
         0.005,
-        0.035,
-        0.325,
-        0.005,
-        0.005,
-        0.005,
-        0.015,
-        0.005,
-        0.005,
-        0.005,
-        0.005
+        0.5
       ],
       "mp_flags": [
-        "overround"
+        "longshot"
       ],
-      "mp_score": 1.9064
+      "mp_score": 1.95
+    }
+  },
+  "KXPLATNERREPLACE-26-CONV": {
+    "blind": {
+      "ticker": "KXPLATNERREPLACE-26-CONV",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through a special state convention before Aug 1, 2026?",
+      "subtitle": "Special convention",
+      "rules_primary": "If the Maine Democratic Party selects Graham Platner's replacement through a special state convention  after Issuance and before Aug 1, 2026, then the market resolves to Yes.",
+      "rules_secondary": "Only reporting from any of the Source Agencies qualifies for the purposes of this market. Reports that merely reference prior publications (from before Issuance) do not qualify. Republishing of content originally produced by other sources (e.g., wire services) only qualifies if the content is hosted on the outlet's official platform and the outlet is clearly identified as the publishing entity. If, under some scenario, multiple strikes should resolve to Yes, the market will resolve to 1 / N where N is the number of tied markets.",
+      "close_time": "2026-08-01T03:59:00Z",
+      "category": "Elections",
+      "doctrine": "",
+      "sibling_titles": [
+        "Platner remains nominee",
+        "State committee",
+        "Platner drops out with no replacement",
+        "Another process",
+        "Statewide caucuses"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.93,
+      "yes_ask": 0.94,
+      "mid": 0.935,
+      "volume_24h": 11403.83,
+      "oi": 21740.15,
+      "sibling_mids": [
+        0.5,
+        0.005,
+        0.005,
+        0.065,
+        0.025
+      ],
+      "mp_flags": [
+        "longshot"
+      ],
+      "mp_score": 1.7614
+    }
+  },
+  "KXPLATNERREPLACE-26-OTHE": {
+    "blind": {
+      "ticker": "KXPLATNERREPLACE-26-OTHE",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through another process before Aug 1, 2026?",
+      "subtitle": "Another process",
+      "rules_primary": "If the Maine Democratic Party selects Graham Platner's replacement through another process  after Issuance and before Aug 1, 2026, then the market resolves to Yes.",
+      "rules_secondary": "Only reporting from any of the Source Agencies qualifies for the purposes of this market. Reports that merely reference prior publications (from before Issuance) do not qualify. Republishing of content originally produced by other sources (e.g., wire services) only qualifies if the content is hosted on the outlet's official platform and the outlet is clearly identified as the publishing entity. If, under some scenario, multiple strikes should resolve to Yes, the market will resolve to 1 / N where N is the number of tied markets.",
+      "close_time": "2026-08-01T03:59:00Z",
+      "category": "Elections",
+      "doctrine": "",
+      "sibling_titles": [
+        "Platner remains nominee",
+        "State committee",
+        "Platner drops out with no replacement",
+        "Special convention",
+        "Statewide caucuses"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.06,
+      "yes_ask": 0.07,
+      "mid": 0.065,
+      "volume_24h": 8095.28,
+      "oi": 13696.42,
+      "sibling_mids": [
+        0.5,
+        0.005,
+        0.005,
+        0.935,
+        0.025
+      ],
+      "mp_flags": [
+        "longshot"
+      ],
+      "mp_score": 1.7317
+    }
+  },
+  "KXWTIMAX-26JUL31-T82": {
+    "blind": {
+      "ticker": "KXWTIMAX-26JUL31-T82",
+      "title": "Will the maximum WTI front month settle price reach $82 by Jul 31, 2026?",
+      "subtitle": "82.01 or above",
+      "rules_primary": "If ICE reports that the maximum price of oil (as defined exclusively by the set of WTI front-month settle prices) is above $82 between Issuance and Jul 31, 2026, then the market resolves to Yes.",
+      "rules_secondary": "Market issuance - July 6th, 2026 at 6:00PM ET.\n\n",
+      "close_time": "2026-07-31T18:30:00Z",
+      "category": "Commodities",
+      "doctrine": "",
+      "sibling_titles": [
+        "74.01 or above",
+        "81.51 or above",
+        "81.01 or above",
+        "77.01 or above",
+        "75.51 or above",
+        "78.01 or above",
+        "78.51 or above",
+        "76.51 or above",
+        "80.01 or above",
+        "74.51 or above",
+        "75.01 or above",
+        "79.51 or above",
+        "80.51 or above",
+        "76.01 or above",
+        "79.01 or above",
+        "73.01 or above",
+        "73.51 or above"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.06,
+      "yes_ask": 0.08,
+      "mid": 0.07,
+      "volume_24h": 896.68,
+      "oi": 2769.18,
+      "sibling_mids": [
+        0.835,
+        0.08,
+        0.105,
+        0.33,
+        0.61,
+        0.31,
+        0.24,
+        0.38,
+        0.12,
+        0.785,
+        0.6,
+        0.165,
+        0.115,
+        0.61,
+        0.18,
+        0.5,
+        0.5
+      ],
+      "mp_flags": [
+        "ladder",
+        "longshot"
+      ],
+      "mp_score": 1.4953
     }
   }
 }
