@@ -1,0 +1,920 @@
+{
+  "schema": "d1-research-v2",
+  "research_run_id": "2266d54c-59a2-4829-adda-dca1ab680480",
+  "created_at": "2026-07-10T22:00:27Z",
+  "scan_run_id": "2026-07-10T22:00:16+00:00",
+  "brief_file": "data/events_brief.json",
+  "brief_sha256": "3d5459a9a58e34cf9b97628632dea45293f0aaa4b286d22c1de7fda633fbe758",
+  "producer": {
+    "orchestrator": "ev-research-orchestrator",
+    "protocol": "research/PROTOCOL.md",
+    "ensemble_config_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "arbiter_model": "fable-5"
+  },
+  "items": [
+    {
+      "ticker": "KXHORMUZNORM-26MAR17-B260801",
+      "event_ticker": "KXHORMUZNORM-26MAR17",
+      "title": "Will the 7-day moving average of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be above 60 before August 1, 2026?",
+      "category": "Politics",
+      "category_override": null,
+      "close_time": "2026-08-01T13:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXHORMUZNORM-26MAR17",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+      "rules_sha256": "b20b9c5ac5b2ca3b60a7e4cd9e123432bcd7e71de27c977451fd3390d5fb150a",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "74929e6de843aed58fffdb81a0382b257cea53a7d71153d6c795767096b098b4",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12",
+      "event_ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "title": "Will Ariana Grande be #1 on Spotify's Daily Top Songs Global chart for at least 12 chart days in July 2026?",
+      "category": "Entertainment",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+      "rules_sha256": "3d930354a14137fd390a04fee7cd27c2ad1c68720533b31cc8b0a837587ab662",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "f51fb3355d614c27430b5184d10ea149c366e815ceb9aa5fe2ac50947fd98859",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXMAXSHIPSHORMUZ-26JUL31-AL60",
+      "event_ticker": "KXMAXSHIPSHORMUZ-26JUL31",
+      "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 60 in Jul 2026?",
+      "category": "Politics",
+      "category_override": null,
+      "close_time": "2026-08-04T16:45:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXMAXSHIPSHORMUZ-26JUL31",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+      "rules_sha256": "f8946ca6a6f10bd42e1da82e4755e8df5268f686651866b7058b0098eb5d583d",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "00120c86ff7b6a8fd5e2303c87b80902006df6672f7bc0eef95de05257d840ea",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXMAXSHIPSHORMUZ-26JUL31-AL70",
+      "event_ticker": "KXMAXSHIPSHORMUZ-26JUL31",
+      "title": "Will the highest daily number of transit calls through the Strait of Hormuz as reported by the IMF PortWatch be at least 70 in Jul 2026?",
+      "category": "Politics",
+      "category_override": null,
+      "close_time": "2026-08-04T16:45:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXMAXSHIPSHORMUZ-26JUL31",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+      "rules_sha256": "a56d9455e991f90fe634a1e12b9c1be75f6bbd402c40d2f03714b0dc3c6c56fa",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "3ae67714569cb65b09d9c3ec1223984473a5ad7afac94040d519f592892fb288",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXPLATNERREPLACE-26-CONV",
+      "event_ticker": "KXPLATNERREPLACE-26",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through a special state convention before Aug 1, 2026?",
+      "category": "Elections",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXPLATNERREPLACE-26",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+      "rules_sha256": "9cc802662c2dd8833dfa49c0e5d25646d3dd6c7552dd6ef6667436b8e21d43de",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "34335e107f5f4e3574d051e459d9c8877c6a1efe461be93ee7bcf1544feedc53",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXPLATNERREPLACE-26-OTHE",
+      "event_ticker": "KXPLATNERREPLACE-26",
+      "title": "Will it be reported by any of the Source Agencies that the Maine Democratic Party selects Graham Platner's replacement through another process before Aug 1, 2026?",
+      "category": "Elections",
+      "category_override": null,
+      "close_time": "2026-08-01T03:59:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXPLATNERREPLACE-26",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+      "rules_sha256": "b768c901b3fdbbd029d3a952dbd62c8b234243df5664dda8546db4b50a2ec1d4",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "913b4752c91fa0fe9c807b19909a08363c8a0d121a6d9562352a40019a86a788",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXTRUMPATTEND",
+      "event_ticker": "KXTRUMPATTEND",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "category": "Politics",
+      "category_override": null,
+      "close_time": "2026-07-20T14:00:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXTRUMPATTEND",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+      "rules_sha256": "63ddffa265d43e72e1562176b5e7adab013ed96c62993c67119688e81b9cebb6",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    },
+    {
+      "ticker": "KXWTIMAX-26JUL31-T82",
+      "event_ticker": "KXWTIMAX-26JUL31",
+      "title": "Will the maximum WTI front month settle price reach $82 by Jul 31, 2026?",
+      "category": "Commodities",
+      "category_override": null,
+      "close_time": "2026-07-31T18:30:00Z",
+      "thesis_id": "FILL-thesis-id",
+      "causal_cluster_id": "KXWTIMAX-26JUL31",
+      "asof": "2026-07-10T22:00:27Z",
+      "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+      "rules_sha256": "105ed9c9ec541f96de5cd9dfde36f875c28ee7cb2b19e2b5868db33bf514978d",
+      "sources": [],
+      "estimators": [
+        {
+          "estimator_id": "opus_inside",
+          "family": "opus",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "opus_outside",
+          "family": "opus",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_inside",
+          "family": "codex",
+          "persona": "inside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        },
+        {
+          "estimator_id": "codex_outside",
+          "family": "codex",
+          "persona": "outside_view",
+          "model": "FILL-exact-model-version",
+          "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+          "market_price_seen": false,
+          "p_yes": null,
+          "ci80": [
+            null,
+            null
+          ],
+          "key_drivers": [],
+          "counterevidence": [],
+          "what_would_change_mind": []
+        }
+      ],
+      "round2": {
+        "required": false,
+        "blind_voided": false,
+        "factual_basis_error": null,
+        "opus": null,
+        "codex": null
+      },
+      "q_all": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "q_claude": null,
+      "q_codex": null,
+      "arbiter": {
+        "model": "fable-5",
+        "blind_packet_sha256": "c4cb66363f544ebb6f852ab940cb9e83b092af44674cba990fe0dbe79b16df70",
+        "rules_clear": null,
+        "sources_fresh": null,
+        "blind_integrity": null,
+        "round2_required": false,
+        "veto": null,
+        "trade_eligible": null,
+        "reason_codes": [],
+        "cruxes": [],
+        "reason": ""
+      },
+      "recommended_action": "no_trade",
+      "rationale": "",
+      "material_evidence_delta": false,
+      "delta_note": "",
+      "prior_research_sha256": null
+    }
+  ]
+}
