@@ -1,0 +1,32 @@
+{
+  "date": "2026-07-10",
+  "items": [
+    {
+      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
+      "title": "Nirav Shah the Democratic US Senate nominee in Maine on Jul 31, 2026?",
+      "q_claude": 0.03,
+      "q_codex": 0.04,
+      "q_all": [0.03, 0.03, 0.04, 0.04],
+      "rationale": "Core: Nirav Shah is NOT a declared candidate for the July 27 replacement convention (Platner won the June primary in a landslide but is pending withdrawal after a scandal; declared replacements are Bellows, Costello, Jackson, with potential heavyweights Gideon/Mills/Pingree). Risk: a 'pro-Shah' pollster hints at a possible draft, but he must still declare, file 500 signatures (>=50 in 8 counties), and win a 600-delegate convention before 07-27. Divergence: negligible (0.03 vs 0.04); no edge (NO already priced ~0.96).",
+      "sources": ["https://en.wikipedia.org/wiki/2026_United_States_Senate_election_in_Maine"]
+    },
+    {
+      "ticker": "KXLLM1-26JUL31-GOOG",
+      "title": "Google (Gemini) has the top-ranked LLM on Jul 31, 2026 (LMArena Rank UB)?",
+      "q_claude": 0.065,
+      "q_codex": 0.125,
+      "q_all": [0.07, 0.06, 0.14, 0.11],
+      "rationale": "Core: on the LMArena Text Overall board (fetched 2026-07-10), Google's best model (gemini-3-pro, 1486) sits ~#8-9, ~23 Elo below the #1 Anthropic model (claude-fable-5, 1509); the entire top cluster is Claude. Risk: 21 days is enough runway for a surprise Gemini flagship (3.5/4) to leapfrog. Divergence: 0.06 (codex weighs release-cadence upside higher). Consensus ~0.095 vs market ~0.085 -> essentially fair, no edge.",
+      "sources": ["https://lmarena.ai/leaderboard"]
+    }
+  ],
+  "skipped": [
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
+      "title": "BTC trimmed mean ever above $67,500 by 11:59pm ET Jul 31, 2026?",
+      "q_all": [0.14, 0.29, 0.11, 0.31],
+      "reason": "ARBITER KILL (settlement ambiguity, 铁律#4). All four estimators flagged the same crux: 'cumulative dataset' trimmed-mean wording admits two incompatible readings -- (i) intramonth TOUCH of a robustly-smoothed BRTI spot -> q~0.31-0.45; (ii) a running cumulative trimmed AVERAGE that must cross $67,500 -> q~0.03-0.10. The 0.21 family consensus is an averaging artifact, not a probability. The market's own strike ladder (>65k @ 0.80, >67.5k @ 0.43) is only consistent with a TOUCH model (running average is ~$62k, could never justify 80% for >65k), under which the touch-conditional estimates bracket the market -> no edge. Not fed to decide to prevent a phantom NO-edge order. BTC spot $63,715; July high ~$64,072; strike is +5.9% away; 21 days left.",
+      "sources": ["https://api.coinbase.com/v2/prices/BTC-USD/spot", "kalshi rules KXBTCMAXMON-BTC-26JUL31-6750000"]
+    }
+  ]
+}
