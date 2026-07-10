@@ -3116,3 +3116,20 @@
 [07-10 07:47:37]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
 [07-10 07:47:38]   h10: h10: 0 in-window | h10 shadow(main): n=573 mean -1.4c total $-8.28 | KXETH15M: n=181 net $+1.76 | KXSOL15M: n=188 net $-6.23 | KXBTC15M: n=204 net $-3.82 | gate: KILL (0 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
 [07-10 07:47:39]   journal: journal written: realized today $+0.04, 10 settled, 12 fills
+[07-10 07:47:41] light mark committed + pushed
+[07-10 07:50:41]   settle: done: 0 settled, 9 still open
+[07-10 07:50:43]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-10 07:50:45]   mktsnap: mktsnap: 12 quotes recorded, 3 outcomes resolved
+[07-10 07:50:49]   shortcycle: shortcycle: 0 candidate strikes | balance $44.25 | today spent $8.24/999999.00
+[07-10 07:50:49]   shortcycle: done: 0 shortcycle orders
+[07-10 07:50:49]   favorites: favorites lane disabled
+[07-10 07:50:50]   h10: h10: 0 in-window | h10 shadow(main): n=573 mean -1.4c total $-8.28 | KXETH15M: n=181 net $+1.76 | KXSOL15M: n=188 net $-6.23 | KXBTC15M: n=204 net $-3.82 | gate: KILL (0 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
+[07-10 07:50:51]   weather: weather: 0 priced buckets | spent $1.34/999999.00
+[07-10 07:50:51]   weather: done: 0 weather orders
+[07-10 07:50:53]   disloc: DISLOC KXBTCD-26JUL1010-T64599.99: fav 0.96->0.80 ask 0.81 [SPOT-MOVE] tau 9m
+[07-10 07:50:53]   disloc: DISLOC KXBTCD-26JUL1010-T64499.99: fav 0.91->0.55 ask 0.56 [SPOT-MOVE] tau 9m
+[07-10 07:50:53]   disloc: DISLOC KXBTCD-26JUL1017-T64999.99: fav 0.86->0.78 ask 0.79 [SPOT-MOVE] tau 429m
+[07-10 07:50:53]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=219 win 75% EV -0.4c | BOOK-ONLY: n=119 win 76% EV -1.0c | SPOT-MOVE: n=430 win 68% EV +1.1c | UNKNOWN: n=6 win 17% EV -49.2c | gate: ARCHIVE (147 pending)
+[07-10 07:51:04]   pmwatch: pmwatch: +56 pairs | pmwatch: 11772 rows, 3578 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-10 07:51:04]   journal: journal written: realized today $+0.04, 10 settled, 12 fills
+[07-10 07:51:06]   report: wrote reports\report_2026-07-10.md
