@@ -572,71 +572,137 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
       "rules_sha256": "8b1a1e029e1fb4c4c56305d6fd7c916cea43e7ade12b8d9908d2fe37c3c86925",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://www.rottentomatoes.com/m/the_odyssey_2026",
+          "title": "The Odyssey (2026) | Rotten Tomatoes",
+          "asof": "2026-07-10T11:11:46Z"
+        },
+        {
+          "url": "https://variety.com/2026/film/news/the-odyssey-first-reactions-christopher-nolan-1236802321/",
+          "title": "The Odyssey first reactions go wild for Christopher Nolan epic",
+          "asof": "2026-07-06T21:43:24Z"
+        },
+        {
+          "url": "https://www.hollywoodreporter.com/movies/movie-news/the-odyssey-first-reactions-reviews-1236638991/",
+          "title": "The Odyssey first reactions: Nolan's biggest film to date",
+          "asof": "2026-07-06T21:57:00Z"
+        },
+        {
+          "url": "https://www.forbes.com/sites/paultassi/2026/07/07/the-odyssey-early-critic-reviews-render-a-unanimous-verdict/",
+          "title": "The Odyssey early critic reviews render a unanimous verdict",
+          "asof": "2026-07-07T13:00:07Z"
+        },
+        {
+          "url": "https://metro.co.uk/2026/07/07/odyssey-hailed-cinematic-triumph-first-reactions-christopher-nolans-epic-29075208/",
+          "title": "The Odyssey hailed as cinematic triumph in first reactions",
+          "asof": "2026-07-07T15:04:31Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.92,
           "ci80": [
-            null,
-            null
+            0.78,
+            0.98
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：7月6日伦敦首映后的专业记者首波反应近乎一致强烈正面，反复使用年度最佳、Nolan代表作和奖季领跑等评价。",
+            "样本不只包含粉丝博主，也有Variety、IndieWire、Time Out、Guardian、LA Times等评论岗位人员。",
+            "少数保留意见主要是叙事偏笨重或改编取舍，而非整体负评，较可能落在新鲜但非满分。"
+          ],
+          "counterevidence": [
+            "社交反应禁令先于完整评论解禁，宣传筛选和首映氛围会系统性高估最终Tomatometer。",
+            "严格条件是高于85，最终86附近时少量后续负评即可改变结果。"
+          ],
+          "what_would_change_mind": [
+            "7月15日完整评论解禁后若首批50篇中低于85%新鲜，将大幅下调。",
+            "若主流媒体正式评分集中在四星或A档并且样本超过100篇，将上调至0.97。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.75,
           "ci80": [
-            null,
-            null
+            0.55,
+            0.9
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 导演基率框架：Forbes列出的12部Nolan长片中，7部最终Tomatometer严格高于85，未经影片信息的基率约0.58。",
+            "把广泛且来自专业评论人的正面首波反应作为强更新，但对社交禁令选择偏差保留明显折扣。",
+            "Nolan近期两部中Oppenheimer和Dunkirk均在90以上，Tenet则显示其高概念大片也可能明显失手。"
+          ],
+          "counterevidence": [
+            "首波反应的强度与覆盖面高于普通宣传场，可能值得比历史基率更大的更新。",
+            "职业评论人已经点名第三幕、表演与改编主题，而非只赞视觉规模，减少纯首映兴奋偏差。"
+          ],
+          "what_would_change_mind": [
+            "完整评论中若出现对情感、节奏或改编的重复性核心批评，下调到0.55附近。",
+            "正式评分聚合在90以上且评论数快速超过80篇，上调到0.93以上。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.9,
           "ci80": [
-            null,
-            null
+            0.76,
+            0.97
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/评论生成框架：首映覆盖了大量未来Tomatometer合格评论人，观察到的反应几乎全部为新鲜方向。",
+            "最明确的负面措辞只是“太笨重，非S级Nolan”，同时仍肯定第三幕，按二元新鲜判定很可能仍计Fresh。",
+            "被反复称赞的表演、情感、恐怖段落和改编思路扩大了支持面，不只依赖IMAX奇观。"
+          ],
+          "counterevidence": [
+            "完整影评尚未解禁，当前Rotten Tomatoes页面仍为0篇评论，无法直接观察合格样本。",
+            "世界首映嘉宾和提前获邀媒体存在礼貌偏差；更广泛评论人可能对片长、密度和改编更苛刻。"
+          ],
+          "what_would_change_mind": [
+            "正式解禁后的前30篇若有6篇以上Rotten，将把概率降到0.65以下。",
+            "前50篇达到90%以上Fresh，则上调到0.97。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "8dae7f197b1bd70430e8948194b234f5186b9714ea95d4c3dd9d8d599747aadb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.76,
           "ci80": [
-            null,
-            null
+            0.56,
+            0.91
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/阈值框架：Nolan历史上约58%的长片严格高于85；85本身按规则仍失败，因此阈值比Certified Fresh更苛刻。",
+            "以专业首波反应作似然更新后，越过85比落在75至85更可能，但没有高到忽略宣传筛选。",
+            "周一上午的早期分数可能由较小样本决定，单篇影评对86附近结果的影响较大。"
+          ],
+          "counterevidence": [
+            "当前首波比典型大片更统一，且包含通常较挑剔的评论人。",
+            "Oppenheimer与Dunkirk的90以上成绩说明Nolan在严肃历史/史诗模式下的近期基率强于全生涯平均。"
+          ],
+          "what_would_change_mind": [
+            "完整影评的分数分布和Rotten比例会替代导演基率。",
+            "若首批评论仅略高于85且后续样本偏负面，概率会迅速下调。"
+          ]
         }
       ],
       "round2": {
@@ -692,71 +758,132 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
       "rules_sha256": "44e16a9b93b08f95622bc2aa338d17ff04e91bed0dc0032d5576c958b1752b19",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://open.spotify.com/artist/0du5cEVh5yTK9QJze8zA0C",
+          "title": "Bruno Mars | Spotify",
+          "asof": "2026-07-10T11:11:46Z"
+        },
+        {
+          "url": "https://open.spotify.com/artist/1uNFoZAHBGtllmzznpCI3s",
+          "title": "Justin Bieber | Spotify",
+          "asof": "2026-07-10T11:11:46Z"
+        },
+        {
+          "url": "https://chartmasters.org/most-monthly-listeners-on-spotify/",
+          "title": "Most monthly listeners on Spotify: daily ranking",
+          "asof": "2026-07-08T00:00:00Z"
+        },
+        {
+          "url": "https://ca.billboard.com/business/streaming/justin-bieber-spotify-monthly-listeners",
+          "title": "Justin Bieber returns to No. 1 as most listened-to artist on Spotify",
+          "asof": "2026-05-04T16:21:52Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.91,
           "ci80": [
-            null,
-            null
+            0.76,
+            0.98
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：Spotify公开页显示Bruno约1.336亿月听众、Justin约1.253亿，领先约830万；不同抓取时点仍给出600万以上差距。",
+            "Chartmasters截至7月8日显示Bruno过去30天减少约470万、Justin减少约770万，当前趋势使差距扩大而非收窄。",
+            "Bruno的新专辑The Romantic仍在推广且7月有欧洲体育场巡演，能支撑持续的独立听众覆盖。"
+          ],
+          "counterevidence": [
+            "月听众是28天滚动窗口，旧活动流量退出窗口时会产生非线性变化，不能按单日变化直线外推。",
+            "Justin曾因Coachella在不到一个月内从约9900万升到超过1.4亿，说明一次新发行或事件足以逆转数百万差距。"
+          ],
+          "what_would_change_mind": [
+            "Justin在7月中旬宣布或发布大型合作/专辑，并把日变化转为连续显著净增，将大幅下调。",
+            "若7月20日Bruno仍领先600万以上，上调至0.97附近。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.83,
           "ci80": [
-            null,
-            null
+            0.64,
+            0.94
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率框架：Spotify月听众榜首历史上只由少数超级艺人轮换，但三周内跨越600万至800万差距仍需要明显事件冲击。",
+            "把当前领先视为缓冲，并用过去30天差分判断两位都在回落、Justin回落更快。",
+            "除Justin外下一名约1.14亿，距Bruno近两千万，主要失败路径集中在单一对手。"
+          ],
+          "counterevidence": [
+            "滚动窗口高度路径依赖；Coachella峰值何时退出28天窗口会同时改变Justin的下降速度。",
+            "流行艺人的突发合作和平台歌单变化难以从既有趋势预测，尾部风险高于普通领先榜。"
+          ],
+          "what_would_change_mind": [
+            "若Bruno与Justin的差距在一周内缩小200万以上，下调到0.6附近。",
+            "若差距保持且两人的日变化继续同向下降，上调到0.9以上。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.92,
           "ci80": [
-            null,
-            null
+            0.78,
+            0.98
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/滚动窗口框架：当前官方页差距约830万，第三方同日附近快照差距也超过600万，结论不依赖单一抓取延迟。",
+            "Justin的高点由4月Coachella驱动；截至7月上旬其30天降幅大于Bruno，活动冲击正在消退。",
+            "Bruno仍有The Romantic专辑与密集欧洲巡演曝光，减少了其领先完全靠旧流量维持的风险。"
+          ],
+          "counterevidence": [
+            "月听众统计独立用户而非总播放量，单首病毒传播或合作歌可迅速增加覆盖面。",
+            "Spotify页面数字会持续更新，第三方抓取有时点差；三周预测仍缺少未来发行的完整信息。"
+          ],
+          "what_would_change_mind": [
+            "Justin发布能进入全球头部歌单的新作，或其日增转为比Bruno高20万以上并持续一周，将下调。",
+            "到7月24日领先仍在500万以上，则接近锁定。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "e75573f271e030b993ffa3089af28022a2e9f021e3fe7c1f46c03e00bd6244cb",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.84,
           "ci80": [
-            null,
-            null
+            0.66,
+            0.95
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/领先幅度框架：把约700万的跨源中间差距与21天剩余时间比较，常态漂移不足以完成反超。",
+            "前二之外的候选人至少落后约1800万，因此失败概率主要来自Justin的特定冲击，而非多人累计风险。",
+            "用月度变化作保守外推时，Bruno到月底仍扩大领先；再为未知发行和滚动窗口断点保留约一成多尾部。"
+          ],
+          "counterevidence": [
+            "Justin在春季曾于约24天增加四千多万月听众，说明“数百万领先”并非结构性护城河。",
+            "历史榜首轮换样本很小，外部基率对突发宣传周期的刻画较弱。"
+          ],
+          "what_would_change_mind": [
+            "任何确认的Justin大型现场、专辑或跨艺人合作都需重新估计冲击大小。",
+            "若7月中旬差距低于300万，将把比赛视为接近五五开。"
+          ]
         }
       ],
       "round2": {
@@ -812,71 +939,137 @@
       "asof": "2026-07-10T11:11:46Z",
       "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
       "rules_sha256": "63ddffa265d43e72e1562176b5e7adab013ed96c62993c67119688e81b9cebb6",
-      "sources": [],
+      "sources": [
+        {
+          "url": "https://www.bbc.com/sport/football/articles/cze9wp8r6lno",
+          "title": "World Cup 2026: Donald Trump to attend final and present winner",
+          "asof": "2026-06-23T17:47:25Z"
+        },
+        {
+          "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/fifa-world-cup-26-match-schedule-revealed",
+          "title": "FIFA World Cup 26 match schedule, final and opening match",
+          "asof": "2026-07-10T11:11:46Z"
+        },
+        {
+          "url": "https://www.cnbc.com/2026/07/01/trump-fifa-infantino-world-cup-financial-disclosure.html",
+          "title": "Trump financial disclosure shows close FIFA, Infantino ties",
+          "asof": "2026-07-01T21:48:39Z"
+        },
+        {
+          "url": "https://www.aljazeera.com/sports/2026/6/23/donald-trump-to-attend-world-cup-final-present-trophy-infantino",
+          "title": "Donald Trump to attend World Cup final, present trophy: Infantino",
+          "asof": "2026-06-23T21:44:47Z"
+        },
+        {
+          "url": "https://www.clickorlando.com/news/politics/2026/07/06/red-card-furor-puts-trump-and-infantinos-relationship-under-the-spotlight-again/",
+          "title": "Red card furor puts Trump and Infantino's relationship under the spotlight again",
+          "asof": "2026-07-06T19:57:23Z"
+        }
+      ],
       "estimators": [
         {
           "estimator_id": "opus_inside",
           "family": "opus",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.97,
           "ci80": [
-            null,
-            null
+            0.9,
+            0.995
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 时事机制框架：FIFA主席Infantino已公开表示会与Trump一同观看决赛并共同向冠军颁杯，这是具体角色而非模糊意向。",
+            "Trump在2025年已到同一座MetLife体育场参加世俱杯决赛并与Infantino颁杯，行为先例完全匹配。",
+            "决赛在新泽西举行，Trump常往返纽约及Bedminster；规则又允许短暂或部分出席，执行门槛低。"
+          ],
+          "counterevidence": [
+            "截至研究时点，公开确认主要来自Infantino而非白宫正式日程；总统日程可因安全、健康或国际危机临时改变。",
+            "Trump尚未出席本届世界杯任何比赛，说明世界杯本身不足以保证到场。"
+          ],
+          "what_would_change_mind": [
+            "白宫7月17日至19日周末指引若安排冲突行程或明确不出席，将大幅下调。",
+            "场馆安保通知、总统旅行禁飞区或白宫当日行程确认会把概率推近0.995。"
+          ]
         },
         {
           "estimator_id": "opus_outside",
           "family": "opus",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.91,
           "ci80": [
-            null,
-            null
+            0.78,
+            0.97
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "[CODEX-DRAFT 待Fable仲裁] 基率框架：国家元首被主办机构公开安排具体颁奖角色后通常会出席，但为临时行程变化保留约一成失败率。",
+            "同场馆、同主办方、同颁杯环节的2025年先例显著提高条件基率。",
+            "部分出席也计入，减少因迟到、提前离场或只参加颁奖而失败的路径。"
+          ],
+          "counterevidence": [
+            "第三方宣布比白宫正式日程的兑现率低，Infantino可能把预期说成确定安排。",
+            "总统级活动尾部风险集中在不可预测的安全和外交事件，历史频率虽低但不能忽略。"
+          ],
+          "what_would_change_mind": [
+            "白宫正式预告或Bedminster周末行程会把概率上调到0.97以上。",
+            "若到7月18日仍无安保或日程迹象，或出现重大国际危机，下调到0.7至0.8。"
+          ]
         },
         {
           "estimator_id": "codex_inside",
           "family": "codex",
           "persona": "inside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.97,
           "ci80": [
-            null,
-            null
+            0.91,
+            0.995
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "时事/执行链框架：Infantino在电视采访中给出共同观看并颁杯的明确安排，多家媒体独立转述同一原始声明。",
+            "Trump与Infantino关系密切，FIFA在Trump Tower设有办公室，Trump也积极介入本届赛事事务。",
+            "2025年Trump已在同场馆完成几乎相同的颁奖动作；地理、安保和仪式流程都有现成模板。"
+          ],
+          "counterevidence": [
+            "白宫尚未发布7月19日正式行程，最后一刻取消仍是主要残余风险。",
+            "他本届赛事此前零出席，繁忙日程确实曾阻止较低优先级的比赛访问。"
+          ],
+          "what_would_change_mind": [
+            "周末指引确认新泽西行程后，上调至0.995。",
+            "重大安全威胁、健康事件或白宫安排远距离出访会立即大幅下调。"
+          ]
         },
         {
           "estimator_id": "codex_outside",
           "family": "codex",
           "persona": "outside_view",
-          "model": "FILL-exact-model-version",
+          "model": "gpt-5.6-sol",
           "blind_packet_sha256": "047b9ff6aace8ded851b37b54f8b80ac125fed46d595381d7b5f0df3f4f1344e",
           "market_price_seen": false,
-          "p_yes": null,
+          "p_yes": 0.9,
           "ci80": [
-            null,
-            null
+            0.76,
+            0.97
           ],
-          "key_drivers": [],
-          "counterevidence": [],
-          "what_would_change_mind": []
+          "key_drivers": [
+            "基率/承诺兑现框架：将“主办机构负责人宣布具体总统角色”视为高兑现承诺，但区别于白宫正式旅行通知。",
+            "同一人物在同一场馆参加上一届相关决赛并颁杯，为极强的可执行性先例。",
+            "市场规则只要求被可靠来源报道在场，短暂亮相即可，因出席形式不完整导致失败的概率很低。"
+          ],
+          "counterevidence": [
+            "总统行程具有比普通贵宾更高的安保取消率，且尾部风险在最后48小时才可见。",
+            "公开宣布距决赛近四周，时间越长，外生冲击窗口越大。"
+          ],
+          "what_would_change_mind": [
+            "总统旅行限制、临时外交峰会或医疗消息会使历史兑现基率失效。",
+            "若白宫先遣和当地交通通告出现，可把残余失败率压到约3%。"
+          ]
         }
       ],
       "round2": {
