@@ -377,3 +377,36 @@ live_gate:                 # 建议性指标 (报告展示, 不再硬拦; 未达
   min_settled_trades: 30
   max_brier: 0.22
   # (R3-FABLE: require_positive_pnl 旋钮已删 — 无代码读取, 留着会误导)
+
+# ---------- D1 事件研究盘 (paper-only; 上线走既有 decide 通道, 零新增钱路) ----------
+# 共识蓝图: build_d1_spec.md v1.0 (Fable5 架构 + codex5.6-sol 设计)。代码内 DEFAULTS
+# 是单一真源, 本段可整段缺失不影响任何路径 (src/events.py::DEFAULTS 全量兜底)。
+# events.py 禁止 import live/ledger, 无下单代码; 生产 ledger 仅 --legacy 只读对账。
+events:
+  scan:
+    max_pages: 40                # 实测 36 页扫尽全量 ~7100 事件
+    min_volume_24h: 200          # 实测联合门放行 ~1900 盘 (中位事件盘 vol=0/OI=7)
+    min_open_interest: 300
+    max_spread_cents: 8          # 实测 spread p50=7c
+    min_days_to_close: 0.25
+    max_days_to_close: 30
+    shortlist_size: 15
+    max_per_category: 4          # 实测 Sports 占过门盘 71%, 无配额淹没短名单
+    exclude_categories: [Crypto, "Climate and Weather", Mentions]
+    exclude_series_prefixes: [KXBTC, KXETH, KXSOL, KXXRP]
+  paper:
+    bankroll_usd: 150
+    kelly_fraction: 0.333
+    max_per_trade_usd: 5.00
+    min_edge_after_fees: 0.035   # C4: 低门跑量; report 固定并列 >=0.05 子集
+    consensus_max_divergence: 0.10
+    max_open_positions: 10
+    max_daily_risk_usd: 25
+    daily_loss_halt_usd: 10
+    max_total_exposure_usd: 60
+    research_max_age_hours: 24   # asof 超龄 fail-closed
+  gate:                          # 预注册晋升门 (提案 — 终裁归主AI+用户, 实现者不得改)
+    min_settled_theses: 20       # 按独立 thesis 计, 不按笔数
+    min_net_pnl_usd: 0.0
+    min_days: 14
+    min_fill_ratio: 0.5          # codex r3: D/N < 0.5 的尘埃仓不计入晋升样本

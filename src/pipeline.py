@@ -6,6 +6,11 @@
     python -m src.pipeline settle                     # settle any resolved open positions
     python -m src.pipeline report                     # write reports/report_<date>.md
     python -m src.pipeline status                     # one-line ledger status
+    python -m src.pipeline events-scan                # D1 mechanical mispricing scan -> data/events_scan.json
+    python -m src.pipeline events-brief --top N       # standardized blind/arbiter brief -> data/events_brief.json
+    python -m src.pipeline events-decide --research F # paper-only D1 research JSON -> data/events.db (no live path)
+    python -m src.pipeline events-settle              # settle/mark paper event positions + NAV snapshot
+    python -m src.pipeline events-report [--legacy]   # paper P&L / gate lights (--legacy audits live ledger, ro)
 
 The research step (intel gathering + dual-model debate) happens in Claude Code,
 following research/PROTOCOL.md. This CLI only does the deterministic parts.
@@ -2700,6 +2705,41 @@ def cmd_live_check(_args) -> None:
     print(f"READY: balance={bal} | open API positions={n_pos}")
 
 
+def cmd_events_scan(_args) -> None:
+    from . import events
+    cfg = load_config()
+    rows = events.scan(cfg)
+    print(f"events-scan: {len(rows)} shortlisted -> data/events_scan.json")
+
+
+def cmd_events_brief(args) -> None:
+    from . import events
+    cfg = load_config()
+    tickers = ([t.strip() for t in (args.tickers or "").split(",") if t.strip()]
+               if (args.tickers or "").strip() else events.top_tickers(args.top))
+    b = events.brief(cfg, tickers)
+    print(f"events-brief: {len(b)} tickers -> data/events_brief.json")
+
+
+def cmd_events_decide(args) -> None:
+    from . import events
+    cfg = load_config()
+    events.decide_paper(cfg, args.research)
+
+
+def cmd_events_settle(_args) -> None:
+    from . import events
+    cfg = load_config()
+    ns, nm, pnl = events.settle(cfg)
+    print(f"events-settle: {ns} settled, {nm} marked, pnl_delta=${pnl:+.2f}")
+
+
+def cmd_events_report(args) -> None:
+    from . import events
+    cfg = load_config()
+    events.report(cfg, legacy=args.legacy)
+
+
 def main() -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -2748,6 +2788,18 @@ def main() -> None:
     p.set_defaults(fn=cmd_cancel_pending)
     sub.add_parser("live-check").set_defaults(fn=cmd_live_check)
     sub.add_parser("reconcile").set_defaults(fn=cmd_reconcile)
+    sub.add_parser("events-scan").set_defaults(fn=cmd_events_scan)
+    p = sub.add_parser("events-brief")
+    p.add_argument("--tickers", default="")
+    p.add_argument("--top", type=int, default=3)
+    p.set_defaults(fn=cmd_events_brief)
+    p = sub.add_parser("events-decide")
+    p.add_argument("--research", required=True)
+    p.set_defaults(fn=cmd_events_decide)
+    sub.add_parser("events-settle").set_defaults(fn=cmd_events_settle)
+    p = sub.add_parser("events-report")
+    p.add_argument("--legacy", action="store_true")
+    p.set_defaults(fn=cmd_events_report)
     args = ap.parse_args()
     args.fn(args)
 
