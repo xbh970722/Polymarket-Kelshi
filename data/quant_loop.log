@@ -2517,3 +2517,7 @@
 [07-10 04:30:41]   h10: h10: 0 in-window | h10 shadow(main): n=556 mean -1.4c total $-8.06 | KXETH15M: n=173 net $+2.00 | KXSOL15M: n=184 net $-6.71 | KXBTC15M: n=199 net $-3.35 | gate: KILL (0 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
 [07-10 04:30:43]   stopshadow: STOPGUARD EXIT #700 KXBTCD-26JUL1007-T64399.99: sold x1 @ 52c (bid 0.54, spot at-line) — salvaged vs riding to 0
 [07-10 04:30:44]   journal: journal written: realized today $-0.67, 5 settled, 7 fills
+[07-10 04:30:46] light mark committed + pushed
+[07-10 04:32:25]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-10 04:32:26]   h10: h10: 0 in-window | h10 shadow(main): n=556 mean -1.4c total $-8.06 | KXETH15M: n=173 net $+2.00 | KXSOL15M: n=184 net $-6.71 | KXBTC15M: n=199 net $-3.35 | gate: KILL (0 pending) || H13 final6: n=54 win 54/54 net $+1.50 gate: accumulating
+[07-10 04:32:27]   journal: journal written: realized today $-0.67, 5 settled, 7 fills
