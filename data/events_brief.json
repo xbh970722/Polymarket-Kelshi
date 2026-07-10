@@ -1,0 +1,282 @@
+{
+  "KXMEDNOMJUL-26AUG01-NSHA": {
+    "blind": {
+      "ticker": "KXMEDNOMJUL-26AUG01-NSHA",
+      "title": "Will it be confirmed that Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "subtitle": "Nirav Shah",
+      "rules_primary": "If Nirav Shah is the Democratic nominee for U.S. Senate in Maine on July 31, 2026, then the market resolves to Yes.",
+      "rules_secondary": "If Graham Platner withdraws or is replaced as the nominee by the Maine Democratic State Committee, the market will resolve to whichever individual is the Democratic nominee as of July 31, 2026. If Graham Platner withdraws and no replacement nominee has been selected as of July 31, 2026, the market will resolve to \"No one.\" If Graham Platner remains the nominee as of July 31, 2026, the market will resolve to Graham Platner. For purposes of this market, the relevant question is who holds the Democratic nomination as of July 31, 2026, regardless of when that status was first established or reported.",
+      "close_time": "2026-08-01T03:59:00Z",
+      "category": "Elections",
+      "doctrine": "",
+      "sibling_titles": [
+        "Graham Platner",
+        "Jordan Wood",
+        "Patrick Dempsey",
+        "Mattie Daughtrey",
+        "Shenna Bellows",
+        "Troy Jackson",
+        "Dan Kleban",
+        "Valli Geiger",
+        "No one",
+        "Janet Mills",
+        "Brian Bryant",
+        "Chellie Pingree",
+        "Sara Gideon",
+        "Emily Cain",
+        "Jared Golden"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.08,
+      "yes_ask": 0.09,
+      "mid": 0.085,
+      "volume_24h": 62188.62,
+      "oi": 64944.84,
+      "sibling_mids": [
+        0.035,
+        0.035,
+        0.005,
+        0.005,
+        0.36,
+        0.475,
+        0.045,
+        0.015,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005
+      ],
+      "mp_flags": [
+        "overround",
+        "longshot"
+      ],
+      "mp_score": 3.9087
+    }
+  },
+  "KXMEDNOMJUL-26AUG01-DKLE": {
+    "blind": {
+      "ticker": "KXMEDNOMJUL-26AUG01-DKLE",
+      "title": "Will it be confirmed that Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026?",
+      "subtitle": "Dan Kleban",
+      "rules_primary": "If Dan Kleban is the Democratic nominee for U.S. Senate in Maine on July 31, 2026, then the market resolves to Yes.",
+      "rules_secondary": "If Graham Platner withdraws or is replaced as the nominee by the Maine Democratic State Committee, the market will resolve to whichever individual is the Democratic nominee as of July 31, 2026. If Graham Platner withdraws and no replacement nominee has been selected as of July 31, 2026, the market will resolve to \"No one.\" If Graham Platner remains the nominee as of July 31, 2026, the market will resolve to Graham Platner. For purposes of this market, the relevant question is who holds the Democratic nomination as of July 31, 2026, regardless of when that status was first established or reported.",
+      "close_time": "2026-08-01T03:59:00Z",
+      "category": "Elections",
+      "doctrine": "",
+      "sibling_titles": [
+        "Graham Platner",
+        "Jordan Wood",
+        "Patrick Dempsey",
+        "Mattie Daughtrey",
+        "Shenna Bellows",
+        "Troy Jackson",
+        "Valli Geiger",
+        "No one",
+        "Janet Mills",
+        "Nirav Shah",
+        "Brian Bryant",
+        "Chellie Pingree",
+        "Sara Gideon",
+        "Emily Cain",
+        "Jared Golden"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.04,
+      "yes_ask": 0.05,
+      "mid": 0.045,
+      "volume_24h": 22768.06,
+      "oi": 62987.82,
+      "sibling_mids": [
+        0.035,
+        0.035,
+        0.005,
+        0.005,
+        0.36,
+        0.475,
+        0.015,
+        0.005,
+        0.005,
+        0.085,
+        0.005,
+        0.005,
+        0.005,
+        0.005,
+        0.005
+      ],
+      "mp_flags": [
+        "overround",
+        "longshot"
+      ],
+      "mp_score": 3.8215
+    }
+  },
+  "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12": {
+    "blind": {
+      "ticker": "KXKXSPOTIFYNUM1GLB-26AUG01-ARI-12",
+      "title": "Will Ariana Grande be #1 on Spotify's Daily Top Songs Global chart for at least 12 chart days in July 2026?",
+      "subtitle": "At least 12 days",
+      "rules_primary": "If  Ariana Grande is #1 on the Spotify Daily Top Songs Global chart for at least 12 chart days in July 2026, then the market resolves to Yes.",
+      "rules_secondary": "",
+      "close_time": "2026-08-01T03:59:00Z",
+      "category": "Entertainment",
+      "doctrine": "",
+      "sibling_titles": [
+        "At least 15 days",
+        "At least 9 days",
+        "At least 3 days",
+        "At least 6 days"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.06,
+      "yes_ask": 0.07,
+      "mid": 0.065,
+      "volume_24h": 1330.9,
+      "oi": 1308.02,
+      "sibling_mids": [
+        0.015,
+        0.485,
+        0.5,
+        0.965
+      ],
+      "mp_flags": [
+        "ladder",
+        "longshot"
+      ],
+      "mp_score": 2.1524
+    }
+  },
+  "KXRT-ODY-85": {
+    "blind": {
+      "ticker": "KXRT-ODY-85",
+      "title": "The Odyssey Rotten Tomatoes score?",
+      "subtitle": "Above 85",
+      "rules_primary": "If The Odyssey has a Tomatometer score of above 85 on the Monday after wide release at 10:00 AM ET, then the market resolves to Yes.",
+      "rules_secondary": "The \"Fresh!\" and \"Certified Fresh!\" subtitles are meant for illustrative purposes only. The Tomatometer score must be above the strike value to resolve as YES (for example, a score of 75 would resolve \"Above 75\" as No.) The market will be determined the Monday after wide release at 10:00 AM ET.",
+      "close_time": "2026-07-20T14:00:00Z",
+      "category": "Entertainment",
+      "doctrine": "",
+      "sibling_titles": [
+        "Above 90",
+        "Above 95",
+        "Above 87",
+        "Above 92",
+        "Above 50",
+        "Above 65",
+        "Above 45",
+        "Above 75",
+        "Above 80",
+        "Above 97",
+        "Above 55",
+        "Above 60",
+        "Above 70"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.85,
+      "yes_ask": 0.87,
+      "mid": 0.86,
+      "volume_24h": 1162.06,
+      "oi": 37803.01,
+      "sibling_mids": [
+        0.625,
+        0.245,
+        0.735,
+        0.475,
+        0.995,
+        0.99,
+        0.995,
+        0.965,
+        0.925,
+        0.095,
+        0.995,
+        0.995,
+        0.985
+      ],
+      "mp_flags": [
+        "longshot",
+        "stale"
+      ],
+      "mp_score": 2.1092
+    }
+  },
+  "KXTRUMPATTEND": {
+    "blind": {
+      "ticker": "KXTRUMPATTEND",
+      "title": "Will Donald J. Trump attend The 2026 FIFA World Cup Final?",
+      "subtitle": "Yes",
+      "rules_primary": "If Donald J. Trump attends The 2026 FIFA World Cup Final, then the market resolves to Yes.",
+      "rules_secondary": "Attendance is confirmed if the person is reported present at the event by any Source Agency, including social media posts by the person themselves. Brief appearances or partial attendance count as attendance. Kalshi is not affiliated, associated, authorized, endorsed by, or in any way officially connected with the Fédération Internationale de Football Association (FIFA) or the World Cup. All trademarks, logos, and brand names are the property of their respective owners.",
+      "close_time": "2026-07-20T14:00:00Z",
+      "category": "Politics",
+      "doctrine": "",
+      "sibling_titles": []
+    },
+    "arbiter": {
+      "yes_bid": 0.914,
+      "yes_ask": 0.916,
+      "mid": 0.915,
+      "volume_24h": 128844.87,
+      "oi": 652555.86,
+      "sibling_mids": [],
+      "mp_flags": [
+        "longshot"
+      ],
+      "mp_score": 1.99
+    }
+  },
+  "KXTOPMONTHLY-26JUL-BRU": {
+    "blind": {
+      "ticker": "KXTOPMONTHLY-26JUL-BRU",
+      "title": "Artist with the most monthly Spotify listeners at the end of Jul 2026?",
+      "subtitle": "Bruno Mars",
+      "rules_primary": "If the artist with the most monthly listeners on Spotify on Jul 31, 2026 at 12:00 PM ET is Bruno Mars, then the market resolves to Yes.",
+      "rules_secondary": "This market and these products have not been endorsed by Spotify. Any references to Spotify, Spotify charts, streaming data, or any associated marks are descriptive only and do not indicate an endorsement of this product or any affiliation between Spotify and Kalshi.",
+      "close_time": "2026-07-31T15:59:00Z",
+      "category": "Entertainment",
+      "doctrine": "",
+      "sibling_titles": [
+        "Kendrick Lamar",
+        "Taylor Swift",
+        "Justin Bieber",
+        "Ed Sheeran",
+        "Drake",
+        "Rihanna",
+        "The Weeknd",
+        "Coldplay",
+        "Bad Bunny",
+        "Billie Eilish",
+        "Lady Gaga"
+      ]
+    },
+    "arbiter": {
+      "yes_bid": 0.66,
+      "yes_ask": 0.67,
+      "mid": 0.665,
+      "volume_24h": 7360.0,
+      "oi": 17200.49,
+      "sibling_mids": [
+        0.005,
+        0.035,
+        0.325,
+        0.005,
+        0.005,
+        0.005,
+        0.015,
+        0.005,
+        0.005,
+        0.005,
+        0.005
+      ],
+      "mp_flags": [
+        "overround"
+      ],
+      "mp_score": 1.9064
+    }
+  }
+}
