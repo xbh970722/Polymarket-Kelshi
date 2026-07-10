@@ -102,9 +102,13 @@ def _bucket_prob(mu: float, sigma: float, sub: str, strike: float) -> float | No
     lo_tail = "<" in sub or "below" in sub.lower()
     if abs(strike - round(strike)) > 0.01:                 # B-style bucket, e.g. 98.5
         return _phi((strike + 1.0 - mu) / sigma) - _phi((strike - 1.0 - mu) / sigma)
-    if lo_tail:                                            # settled high < strike
-        return _phi((strike - 0.5 - mu) / sigma)
-    return 1.0 - _phi((strike - 0.5 - mu) / sigma)         # strike or above
+    if lo_tail:                                            # T-low 'X or below': 真阈值
+        return _phi((strike - 0.5 - mu) / sigma)           # = strike-1, P(H≤strike-1) ✓
+    # 2026-07-09 D2 天气会 CRITICAL 修 (实盘数据实证, T94→'95 or above' 跨三城一致):
+    # T-high 的 ticker 数字比真阈值小 1 (副标题 = 'strike+1 or above'), 旧代码
+    # strike-0.5 算 P(H≥strike), 把不赔付的 P(H==strike) 算进 YES, 主峰虚高 10-20pt
+    # = "W1 Brier 输市场"的机械成因之一。改 strike+0.5 = P(H≥strike+1)。
+    return 1.0 - _phi((strike + 0.5 - mu) / sigma)         # T-high: 'strike+1 or above'
 
 
 def candidates(cfg: dict) -> list[dict]:
