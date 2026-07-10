@@ -18,6 +18,24 @@
       "q_all": [0.07, 0.06, 0.14, 0.11],
       "rationale": "Core: on the LMArena Text Overall board (fetched 2026-07-10), Google's best model (gemini-3-pro, 1486) sits ~#8-9, ~23 Elo below the #1 Anthropic model (claude-fable-5, 1509); the entire top cluster is Claude. Risk: 21 days is enough runway for a surprise Gemini flagship (3.5/4) to leapfrog. Divergence: 0.06 (codex weighs release-cadence upside higher). Consensus ~0.095 vs market ~0.085 -> essentially fair, no edge.",
       "sources": ["https://lmarena.ai/leaderboard"]
+    },
+    {
+      "ticker": "KXLLM1-26JUL31-A",
+      "title": "Best AI in Jul 2026? | Claude (Anthropic top-ranked LLM on LMArena on Jul 31)",
+      "q_claude": 0.945,
+      "q_codex": 0.91,
+      "q_all": [0.96, 0.93, 0.91, 0.91],
+      "rationale": "CORE: Live LMArena board (pulled 2026-07-10 20:34Z, corroborated by a 07-09 snapshot) shows Anthropic claude-fable-5 at Overall Rank(UB) #1 (1509+-9) with ranks #2-#5 ALSO Anthropic; top non-Anthropic (Meta muse-spark 1487 prelim, gemini-3.1-pro 1486, gpt-5.5-high 1481) sits ~22 Elo back. This is the exact YES complement of KXLLM1-GOOG above. RISK: only NO path in 21 days is a brand-new non-Anthropic frontier model released AND overtaking a 5-deep Anthropic lead to sole #1. DIVERGENCE: family finals 0.945 (Opus) vs 0.91 (Codex), spread 0.035 < 0.10 = consensus. Edge vs market (~0.91) ~+0.02, below live threshold -> expect no-trade.",
+      "sources": ["https://lmarena.ai/leaderboard"]
+    },
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000",
+      "title": "BTC ever above $65,000 during July 2026? (touch/running-max on CF BRTI)",
+      "q_claude": 0.85,
+      "q_codex": 0.81,
+      "q_all": [0.90, 0.83, 0.88, 0.78],
+      "rationale": "CORE: touch market (running-max), not close-above; the earlier-cycle arbiter note confirms the strike ladder (>65k@0.80,>67.5k@0.43) is only consistent with a TOUCH reading. BTC July MTD high $64,669 (Coinbase, hit 07-06 and today 07-10), came within $331 (0.51%) of $65k twice this week; spot ~$63,873, barrier +1.76% away, ~21 days left. Driftless reflection-principle (2.3%/day vol) -> ~0.87 touch prob. VERIFICATION: independent Polymarket prices 'hit $65k in July' at 71% (dated ~07-08 when BTC was $62k / barrier +4.8% away), plus June spot-BTC-ETF outflows ~$4.5B (worst month on record) and one bank cutting 12m inflow forecast to zero = real downside drift the blind estimators lacked. These trim the honest consensus down toward ~0.83. DIVERGENCE: 0.85 vs 0.81, spread 0.04 < 0.10. Post-verification consensus ~0.83 ~= market ~0.80-0.82 -> no material edge. Half-anchor respected (blind consensus 0.8475, market mid ~0.805, final 0.83 >= 0.826 floor).",
+      "sources": ["https://api.exchange.coinbase.com/products/BTC-USD/candles", "https://www.kucoin.com/news/flash/bitcoin-price-prediction-btc-eyes-65k-in-july-2026-amid-on-chain-signals"]
     }
   ],
   "skipped": [
@@ -25,8 +43,15 @@
       "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
       "title": "BTC trimmed mean ever above $67,500 by 11:59pm ET Jul 31, 2026?",
       "q_all": [0.14, 0.29, 0.11, 0.31],
-      "reason": "ARBITER KILL (settlement ambiguity, 铁律#4). All four estimators flagged the same crux: 'cumulative dataset' trimmed-mean wording admits two incompatible readings -- (i) intramonth TOUCH of a robustly-smoothed BRTI spot -> q~0.31-0.45; (ii) a running cumulative trimmed AVERAGE that must cross $67,500 -> q~0.03-0.10. The 0.21 family consensus is an averaging artifact, not a probability. The market's own strike ladder (>65k @ 0.80, >67.5k @ 0.43) is only consistent with a TOUCH model (running average is ~$62k, could never justify 80% for >65k), under which the touch-conditional estimates bracket the market -> no edge. Not fed to decide to prevent a phantom NO-edge order. BTC spot $63,715; July high ~$64,072; strike is +5.9% away; 21 days left.",
+      "reason": "ARBITER KILL (settlement ambiguity, tie-law #4). All four estimators flagged the same crux: 'cumulative dataset' trimmed-mean wording admits two incompatible readings -- (i) intramonth TOUCH of a robustly-smoothed BRTI spot -> q~0.31-0.45; (ii) a running cumulative trimmed AVERAGE that must cross $67,500 -> q~0.03-0.10. The 0.21 family consensus is an averaging artifact, not a probability. Not fed to decide to prevent a phantom NO-edge order. Strike is +5.9% away; 21 days left.",
       "sources": ["https://api.coinbase.com/v2/prices/BTC-USD/spot", "kalshi rules KXBTCMAXMON-BTC-26JUL31-6750000"]
+    },
+    {
+      "ticker": "KXFED-26JUL-T3.75",
+      "title": "Fed funds upper bound above 3.75% after Jul 29, 2026 FOMC? (= a July hike)",
+      "q_all": [0.02, 0.03, 0.02, 0.03],
+      "reason": "ARBITER KILL (voided blind premise, tie-law #4). Blind ensemble returned P(hike)=0.025 on a FALSE digest premise ('no sign of imminent hike'). Verification layer (WebSearch + CME FedWatch + June 2026 FOMC dot plot) found the actual 2026 regime is HAWKISH: 9 participants see >=1 hike this year, median end-2026 rate 3.8%, July FOMC preserves the option to tighten; FedWatch hold 78.1% / hike 21.9%. Current upper bound 3.75% (range 3.50-3.75); a hike -> 4.00% = YES. Market's ~0.20 is well-calibrated; own open KXFEDDECISION-H25 (model q 0.24) agrees with market. The 0.025 blind is discarded (verification voids it) and the market is SKIPPED to avoid a spurious large NO order. Honest verified estimate ~0.21 ~= market -> no edge regardless.",
+      "sources": ["https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html", "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260617a.htm"]
     }
   ]
 }
