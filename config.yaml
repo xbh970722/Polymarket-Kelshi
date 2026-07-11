@@ -122,7 +122,14 @@ live:
 
 # ---------- 短波量化通道 (小时级, 无LLM, VALUES.md #11) ----------
 shortcycle:
-  enabled: true
+  enabled: false                 # 2026-07-11 8人策略会全票关停 (纯降险, FREEZE-14 ②类):
+  # 单边 maker-harvest 结构性负 EV。pooled 406 笔 -$0.062/笔 t=-2.02, 8天7负; codex 定量证
+  # 每个价 band 实际胜率 < 入场价隐含盈亏平衡胜率 (L 10%<33%, M 73%<85%, H 87%<92%),
+  # 无任何 +EV band; "+EV 子集"(ETH-yes/XRP-no) bootstrap CI 全跨0 = 过拟合本周up-drift。
+  # shortcycle 尤为最差 (max_contracts=5 全账户最大敞口, edge -0.155/合约)。零漂移对数正态
+  # 模型在上漂体制系统性高估 NO=signal-miss。mktcal 仍免费采样, 停交易不丢数据。
+  # 复活预注册判据 (data/change_proposals.jsonl, 07-23 裁决): 下行体制周重累 n>=100 且
+  # 费后 pooled edge > +2c。恢复=用户专属杠杆。
   series: [KXBTCD, KXETHD, KXSOLD, KXXRPD]   # 油门③: 滞后通道全 4 币覆盖 (2026-07-04)
   # 15分钟涨跌盘已停用 (2026-07-03 数据裁决): v24h=0 无对手盘, 50c处费率4%最狠,
   # 信噪比全通道最差, 实战1笔亏$0.06。代码保留, 改回 [KXBTC15M,KXETH15M,KXSOL15M] 即复活。
