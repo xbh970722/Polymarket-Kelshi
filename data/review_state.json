@@ -1,6 +1,6 @@
 {
- "ts": "2026-07-09T18:27:42",
- "review_no": 10,
- "note": "h15maker Review #10 = STRUCTURAL: NO side demoted to shadow-only (config h15.live_sides=[\"yes\"]). Evidence 48 fills: YES@0.84 89% +$6.48 (matches backtest), NO@0.84 57% -$11.04 with 5 isomorphic -$2.52 max-losses (id429/565/568/656/684 all result=yes = ETH ran up through strike into resting NO bid = downside hot-band invalidation, not execution). Review#9 pre-registered this cluster; id684 = recurrence. Risk-reducing (side kill), zero dollar-cap change. Smoke caught YAML bare-yes->bool True paste bug, fixed to quoted. cursor 656->684.",
- "last_review_id": 684
+ "ts": "2026-07-10T18:25",
+ "review_no": 11,
+ "note": "Review #11 = FREEZE-14 HOLD (no config change). Trigger id>684: 5-7 stopguard-early-stop losses ALL side=no DAILY crypto (KXBTCD/KXSOLD @0.86-0.87 hot band, exited 28-52c, -$0.06..-$0.61 ea); same window 7 settled crypto ALL wins +$0.91, every YES won. H-h15-side NO-side adverse-selection now generalizes 15M->daily, but stopguard caps daily NO downside (<$0.61 vs 15M -$2.52) and is working. Natural fix (extend live_sides=[yes] to daily / tighten NO entry) = GATE change forbidden under freeze -> logged to change_proposals.jsonl for 07-23 adjudicator. cursor 684->739.",
+ "last_review_id": 739
 }
