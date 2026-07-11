@@ -1,6 +1,6 @@
 {
- "ts": "2026-07-10T18:25",
- "review_no": 11,
- "note": "Review #11 = FREEZE-14 HOLD (no config change). Trigger id>684: 5-7 stopguard-early-stop losses ALL side=no DAILY crypto (KXBTCD/KXSOLD @0.86-0.87 hot band, exited 28-52c, -$0.06..-$0.61 ea); same window 7 settled crypto ALL wins +$0.91, every YES won. H-h15-side NO-side adverse-selection now generalizes 15M->daily, but stopguard caps daily NO downside (<$0.61 vs 15M -$2.52) and is working. Natural fix (extend live_sides=[yes] to daily / tighten NO entry) = GATE change forbidden under freeze -> logged to change_proposals.jsonl for 07-23 adjudicator. cursor 684->739.",
+ "ts": "2026-07-11T15:22",
+ "review_no": 12,
+ "note": "Review #12 = h15maker FREEZE-14 HOLD (no config change). Trigger review_due_h15maker realized -$4.56 (past h15 first -$3 hard-stop step -> loop drawdown guard already halted h15 live placement). h15 already at freeze floor: live_sides=[yes] (NO shadow since #10), max_contracts=1 (down from x3), hard_stop_steps=1. Disabling would truncate the pre-registered isolation sample the 8-seat maker-harvest council reserved for 07-23 adjudication, so HOLD (not enabled->false, not tighten). Proposal logged for 07-23 adjudicator. last_review_id unchanged (drawdown trigger, no id cursor).",
  "last_review_id": 739
 }
