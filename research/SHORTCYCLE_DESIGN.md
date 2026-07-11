@@ -789,3 +789,37 @@ review_no→9。删 review_due_shortcycle.json。静默完成 (无死刑裁决, 
 **新假设 (H-h15-side)**: h15maker 的 maker edge 是**单向**的 —— 仅在 YES(上行热门) 侧为正,
 NO(下行热门) 侧因标的上行漂移被系统性逆选。待验: 影子库继续记 NO 队列事件; 若未来某体制
 NO 侧连续为正且跨周复现, 方可预注册恢复。静默完成 (无死刑, 无改动失败; 见下 PushNotification 判据)。
+
+## Review #11 (2026-07-10 18:2x, lane=shortcycle, 监工执行, **FREEZE-14 冻结期 HOLD**)
+
+触发: review_due_shortcycle.json (16:11:22, n_losses=5, usd_loss=$1.63, since_id=684)。
+
+**1. 拉数据 (id>684, 自 Review #10 光标)**:
+- 结算 (settled) 7 笔 crypto **全胜**, 净 **+$0.91** —— YES 侧 id695/707/708/709 = +$0.65
+  (含 id708 ETH@0.70 →+$0.29), NO 侧 id689/698/728 (BTC 日线 0.88~0.92) = +$0.26。
+- 提前平仓 (closed=stopguard 早停) 7 笔, **全部 side=no**, 全负: id696 BTC日线 -$0.61、
+  id700 BTC -$0.37、id703 BTC -$0.40、id710 SOL -$0.15、id734 BTC -$0.10、id738 BTC -$0.35、
+  id739 BTC -$0.06 (后三笔 07-10 19:xx, 触发后新增)。触发时刻(16:11)前 5 笔 ≈ -$1.53~1.63。
+- void 38 笔 (队列撤单, 机制健康)。
+
+**2. 找模式**: 五笔"亏损"**全是日线 crypto NO 侧、买价 0.86~0.87 热门带、被 stopguard 在
+  28c/30c/51c/52c 早停切出**。这是 Review #9/#10 预注册的 "NO(下行热门)侧因标的上行漂移被
+  系统性逆选" (H-h15-side) 从 **15M 车道泛化到日线短周期车道**的实证复发。关键差异: Review #10
+  的 15M NO 是满损 -$2.52/笔; 本轮日线 NO 全部被 stopguard 早停, 单笔封顶 <$0.61 —— **止损守卫
+  正按设计生效** (安全类①机制), 同窗口 crypto 净 ≈ 打平偏正 (YES 干净盈利抵住 NO 早停小损)。
+
+**3. 裁决 (FREEZE-14 冻结期, 裁决权被夺 → HOLD + 记提案)**: 冻结契约 (CLAUDE.md §9,
+  至 2026-07-23) 明令: 监工发现 review_due **只许 HOLD / 记提案, 不许改任何 config 数值**。
+  自然修法 = 把 Review #10 的 `live_sides:["yes"]` NO 侧降级从 15M 扩到日线短周期车道 (或收紧
+  日线 NO 入场门) —— 属**结构/门变更**, 冻结期禁止自主执行。故本轮 **HOLD**, 不动任何 config,
+  将该修法写入 data/change_proposals.jsonl 交边界日 (07-23) 裁决官按预注册判据统一处置。
+  兜底: 全局 $5 日亏熔断 + 逐仓 stopguard 均在位且已证生效 (本轮即由 stopguard 封住 NO 侧下行)。
+
+**4. 实施**: **无** (冻结期零 config/代码改动, 故无需 py_compile)。
+
+**5. 记账**: review_state.json last_review_id 684→739, review_no→11。删 review_due_shortcycle.json。
+  提案追加 change_proposals.jsonl (提议: 日线短周期 NO 侧比照 h15 降为影子/收紧, 由边界日裁决)。
+
+**假设更新 (H-h15-side 泛化)**: NO(下行热门) 侧的系统性逆选**不限 15M, 日线同样成立**; 唯日线
+  由 stopguard 封顶下行, 故危害远小于 15M 满损。待边界日: 若裁决官认定判据可推导, 则将 NO 降级
+  统一到全 crypto 短周期车道; 否则保持现状 (stopguard 兜底) 继续跨体制取证。静默完成 (无死刑)。
