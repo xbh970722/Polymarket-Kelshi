@@ -2886,3 +2886,20 @@
 [07-11 11:32:39]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-11 11:32:41]   h10: h10: 0 in-window | h10 shadow(main): n=697 mean -1.6c total $-11.19 | KXETH15M: n=227 net $-0.98 | KXSOL15M: n=232 net $-8.68 | KXBTC15M: n=238 net $-1.53 | gate: KILL (0 pending) || H13 final6: n=67 win 66/67 net $+0.83 gate: accumulating
 [07-11 11:32:42]   journal: journal written: realized today $+1.39, 4 settled, 4 fills
+[07-11 11:33:35] light mark committed + pushed
+[07-11 11:35:28]   settle: done: 0 settled, 7 still open
+[07-11 11:35:28]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-11 11:35:31]   mktsnap: mktsnap: 13 quotes recorded, 5 outcomes resolved
+[07-11 11:35:31]   shortcycle: shortcycle disabled
+[07-11 11:35:31]   favorites: favorites lane disabled
+[07-11 11:35:32]   h10: h10: 3 in-window | h10 shadow(main): n=697 mean -1.6c total $-11.19 | KXETH15M: n=227 net $-0.98 | KXSOL15M: n=232 net $-8.68 | KXBTC15M: n=238 net $-1.53 | gate: KILL (3 pending) || H13 final6: n=67 win 66/67 net $+0.83 gate: accumulating
+[07-11 11:35:33]   weather: weather: daily entry cap reached (3)
+[07-11 11:35:36]   disloc: DISLOC KXBTCD-26JUL1114-T64399.99: fav 0.94->0.79 ask 0.79 [AMBIGUOUS] tau 24m
+[07-11 11:35:36]   disloc: DISLOC KXBTCD-26JUL1117-T64499.99: fav 0.85->0.75 ask 0.76 [AMBIGUOUS] tau 204m
+[07-11 11:35:36]   disloc: DISLOC KXETHD-26JUL1114-T1829.99: fav 0.97->0.88 ask 0.90 [SPOT-MOVE] tau 24m
+[07-11 11:35:36]   disloc: DISLOC KXETHD-26JUL1117-T1829.99: fav 0.80->0.66 ask 0.66 [SPOT-MOVE] tau 204m
+[07-11 11:35:36]   disloc: DISLOC KXSOLD-26JUL1717-T85.9999: fav 0.92->0.64 ask 0.96 [AMBIGUOUS] tau 8844m
+[07-11 11:35:36]   disloc: disloc: +5 events, 1 settled | disloc shadow: AMBIGUOUS: n=291 win 77% EV -1.3c | BOOK-ONLY: n=217 win 84% EV +1.9c | SPOT-MOVE: n=495 win 70% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (45 pending)
+[07-11 11:35:47]   pmwatch: pmwatch: +56 pairs | pmwatch: 14219 rows, 4369 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-11 11:35:48]   journal: journal written: realized today $+1.39, 4 settled, 4 fills
+[07-11 11:35:49]   report: wrote reports\report_2026-07-11.md
