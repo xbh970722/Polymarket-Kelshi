@@ -3587,3 +3587,7 @@
 [07-11 15:51:06]   pmwatch: pmwatch: +51 pairs | pmwatch: 14627 rows, 4505 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-11 15:51:06]   journal: journal written: realized today $+1.39, 4 settled, 4 fills
 [07-11 15:51:08]   report: wrote reports\report_2026-07-11.md
+[07-11 15:51:10] committed + pushed
+[07-11 15:53:29]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-11 15:53:30]   h10: h10: 2 in-window | h10 shadow(main): n=714 mean -1.6c total $-11.34 | KXETH15M: n=234 net $-0.23 | KXSOL15M: n=237 net $-8.13 | KXBTC15M: n=243 net $-2.98 | gate: KILL (2 pending) || H13 final6: n=69 win 68/69 net $+0.88 gate: accumulating
+[07-11 15:53:31]   journal: journal written: realized today $+1.39, 4 settled, 4 fills
