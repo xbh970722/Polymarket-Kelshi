@@ -1,7 +1,32 @@
 {
   "date": "2026-07-11",
-  "items": [],
+  "items": [
+    {
+      "ticker": "KXLLM1-26JUL31-OAI",
+      "title": "Best AI in Jul 2026? | ChatGPT (OpenAI top-ranked LLM on LMArena Rank(UB) on Jul 31)",
+      "q_claude": 0.035,
+      "q_codex": 0.075,
+      "q_all": [0.03, 0.04, 0.09, 0.06],
+      "rationale": "Core: live LMArena Text Arena Overall board (primary source, Jul 10 2026, 7.27M votes) is Anthropic-dominated -> top FIVE slots all Anthropic (claude-fable-5 #1 at 1509), while OpenAI's best (gpt-5.6-sol-xhigh) is rank 8 at 1486, ~23 Elo below #1 with a wide +-14 CI. For YES, OpenAI must ship a new flagship that clears the tight-CI Anthropic cluster and holds the single top Rank(UB) slot within ~20 days; gpt-5.6-sol is already their newest entry. Risk: a surprise post-5.6 OpenAI launch debuting >1502 with enough votes before ~Jul 24. Divergence: Codex family (0.075) slightly above Opus family (0.035) on how much a wide-CI late entrant exploits Rank(UB), but both agree it is a low-probability tail; consensus ~0.055 sits inside the 0.04/0.05 market -> no tradeable edge. Ensemble ran full 2xOpus + 2xCodex(gpt-5.5 xhigh); no round-2 (no crux).",
+      "sources": [
+        "https://lmarena.ai/leaderboard/text (Text Arena Overall, Jul 10 2026, 7,274,904 votes, 374 models)",
+        "Kalshi rules KXLLM1-26JUL31-OAI: resolves YES if OpenAI has top-ranked LLM (LMArena Rank UB) on 2026-07-31"
+      ]
+    }
+  ],
   "skipped": [
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6750000",
+      "title": "BTC trimmed mean ever above $67,500 by 11:59pm ET Jul 31, 2026?",
+      "q_all": [],
+      "reason": "SKIP (settlement ambiguity, PROTOCOL tie-law #4) - re-examined the exact $67.5k strike today. Primary rule says 'if price is ever above' (spot touch) but secondary methodology resolves on a trimmed mean of the CUMULATIVE minute dataset (an average, far harder to breach). Independent check: BTC spot $64,352 (Coinbase), July daily highs ~$63.4k-$64.7k -> never touched $67.5k this cycle. Market at coin-flip 0.49. A liquid MM holding minute BRTI data prices this; the touch-vs-cumulative-average ambiguity is not resolvable to real-money precision. Reaffirms 07-10 arbiter KILL of this strike.",
+      "sources": [
+        "https://api.coinbase.com/v2/prices/BTC-USD/spot (BTC $64,352)",
+        "https://api.exchange.coinbase.com/products/BTC-USD/candles (July daily highs $63.4k-$64.7k)",
+        "kalshi rules KXBTCMAXMON-BTC-26JUL31-6750000",
+        "reports/research_2026-07-10.json (prior arbiter KILL, same crux)"
+      ]
+    },
     {
       "ticker": "KXBTCMAXMON-BTC-26JUL31-7000000",
       "title": "BTC trimmed mean ever above $70,000 by 11:59pm ET Jul 31, 2026?",
