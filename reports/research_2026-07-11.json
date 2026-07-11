@@ -1,0 +1,46 @@
+{
+  "date": "2026-07-11",
+  "items": [],
+  "skipped": [
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-7000000",
+      "title": "BTC trimmed mean ever above $70,000 by 11:59pm ET Jul 31, 2026?",
+      "q_all": [],
+      "reason": "SKIP (settlement ambiguity, PROTOCOL tie-law #4; consistent with 07-10 arbiter KILL of the sibling $67.5k strike). Same 'cumulative dataset' trimmed-mean wording that split the ensemble yesterday: touch reading -> q high, running-cumulative-average reading -> q low. Independent primary-source check today: issuance 2026-07-01T16:04Z (full-month cumulative window); BTC (Coinbase spot) $64,416 now; July daily range $57,717-$64,669 -> BTC has NEVER touched $67.5k let alone $70k this month and the cumulative trimmed mean sits ~$62-63k. Yet market prices YES at 0.25-0.28 (OI 75k, liquid). A ~15-20pt naive gap against a liquid, minute-data-holding MM is a vol-model disagreement, not an information edge. Not priceable to real-money precision -> skip.",
+      "sources": [
+        "https://api.coinbase.com/v2/prices/BTC-USD/spot (BTC $64,416)",
+        "https://api.exchange.coinbase.com/products/BTC-USD/candles (July daily: high-so-far $64,669)",
+        "kalshi rules KXBTCMAXMON-BTC-26JUL31-7000000",
+        "reports/research_2026-07-10.json (prior arbiter KILL of $67.5k strike, same crux)"
+      ]
+    },
+    {
+      "ticker": "KXETHMAXMON-ETH-26JUL31-225000",
+      "title": "ETH trimmed mean ever above $2,250 by 11:59pm ET Jul 31, 2026?",
+      "q_all": [],
+      "reason": "SKIP. Same MAXMON settlement ambiguity as BTC strikes. ETH (Coinbase spot) $1,821 now; July daily range $1,550-$1,831 -> never near $2,250 (+23.5% away). YES priced 0.07-0.09. Even under the favorable NO reading, buying deep NO at 0.91-0.93 for a few cents is the structurally negative-EV favorite-longshot leg the 8-person maker-harvest review already killed; and settlement is not priceable to precision. Skip.",
+      "sources": [
+        "https://api.coinbase.com/v2/prices/ETH-USD/spot (ETH $1,821)",
+        "https://api.exchange.coinbase.com/products/ETH-USD/candles (July daily: high-so-far $1,831)",
+        "kalshi rules KXETHMAXMON-ETH-26JUL31-225000"
+      ]
+    },
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0 / -H25 / KXFED-26JUL-T3.75",
+      "title": "Fed July 2026 decision family (maintain / hike 25bps / funds-rate above 3.75%)",
+      "q_all": [],
+      "reason": "SKIP. (1) Already positioned: ledger holds H0-no (q0.73) and H25-yes (q0.24) as active swing legs, so the auto-pick 'no existing open position' rule excludes them. (2) No available edge: FOMC is 2026-07-29 (18d out) with a CPI print 2026-07-14 pending; the strikes carry FedWatch-grade efficiency (OI 2.4-3.5M). A blind LLM estimate's information set is a subset of this market's -> the blind-digest failure mode (memory: 07-10 Fed 0.025 nearly forced a false NO). No informational edge to manufacture; not researched further.",
+      "sources": [
+        "kalshi rules KXFEDDECISION-26JUL-H0",
+        "reports/report_2026-07-11.md (open Fed positions)"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND / KXKASHOUT / KXMEDNOMJUL-TJAC / KXMEDNOMJUL-NSHA / KXLAGODAYS / KXALITOANNOUNCERETIRE",
+      "title": "Political / current-events shortlist (6 markets: Trump World Cup, Kash Patel FBI, Maine Senate nominee x2, Mar-a-Lago visits, Alito retirement)",
+      "q_all": [],
+      "reason": "SKIP (CORE moratorium, CLAUDE.md #10, 5-person council unanimous 2026-07-11). No new LLM direct-bet live positions on political/current-events binaries until 2026-07-23: blind estimate info-set subset of market -> structurally negative EV (>12pt divergence trades went 0/3 -$4.87). Stopping this channel is a risk-reducing action, permitted under FREEZE-14 class-2. Existing MEDNOM-TJAC and Alito positions are managed by the mechanical swing/stop engine, not re-opened here.",
+      "sources": ["CLAUDE.md #10 (CORE moratorium)", "research/CORE_LLM_COUNCIL_2026-07-11.md"]
+    }
+  ]
+}
