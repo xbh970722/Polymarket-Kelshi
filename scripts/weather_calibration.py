@@ -67,9 +67,17 @@ def cmd_backfill(_args) -> None:
         outcome = None
         if (r["result"] or "").lower() in ("yes", "no"):
             outcome = 1.0 if r["result"].lower() == "yes" else 0.0
+        # BUGFIX (codex-verify 2026-07-11): q_consensus/market_prob are stored in
+        # the FILLED SIDE's convention; a NO-side fill records P(NO). Convert to a
+        # consistent YES-convention before Brier, or NO-side rows score the wrong
+        # probability against the YES outcome (inflated model Brier, false "no edge").
+        q_side, m_side = r["q_consensus"], r["market_prob"]
+        yes_flip = (r["side"] == "no")
+        q_yes = None if q_side is None else (1.0 - q_side if yes_flip else q_side)
+        m_yes = None if m_side is None else (1.0 - m_side if yes_flip else m_side)
         row = {"ticker": r["ticker"], "source": "ledger-traded",
-               "recorded_ts": r["ts"], "q_model": r["q_consensus"],
-               "market_mid": r["market_prob"], "side": r["side"],
+               "recorded_ts": r["ts"], "q_model": q_yes,
+               "market_mid": m_yes, "side": r["side"],
                "lane": "W1" if (r["rationale"] or "").startswith("NWS") else "W2",
                "outcome": outcome, "result": (r["result"] or None), "resolved_ts": None}
         if _key(row) in have:
