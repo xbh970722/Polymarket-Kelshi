@@ -2269,3 +2269,7 @@
 [07-12 04:12:00] janitor: reaped leaked sessions ['45800']
 [07-12 04:12:01]   journal: journal written: realized today $+0.00, 0 settled, 2 fills
 [07-12 04:12:02]   report: wrote reports\report_2026-07-12.md
+[07-12 04:12:05] committed + pushed
+[07-12 04:15:33]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-12 04:15:34]   h10: h10: 0 in-window | h10 shadow(main): n=776 mean -1.3c total $-9.77 | KXETH15M: n=258 net $+0.10 | KXSOL15M: n=257 net $-7.85 | KXBTC15M: n=261 net $-2.03 | gate: KILL (0 pending) || H13 final6: n=79 win 78/79 net $+1.12 gate: accumulating (clean n=4)
+[07-12 04:15:36]   journal: journal written: realized today $+0.00, 0 settled, 2 fills
