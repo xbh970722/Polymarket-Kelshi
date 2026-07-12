@@ -1,6 +1,6 @@
 ﻿{
- "ts": "2026-07-11T21:22",
- "review_no": 13,
- "note": "Review #13 = h15maker DUPLICATE re-flag of #12 (same lane, same realized -$4.56 drawdown). quant_loop re-emits review_due_h15maker each tick while drawdown persists below -$3 hard-stop; #12 already adjudicated (HOLD, proposal logged, live placement halted: live_sides=[yes], max_contracts=1, hard_stop fired). No new h15 fills, no new info. FREEZE-14 HOLD, zero config change; proposal NOT re-logged (already in change_proposals.jsonl via #12). Deleted duplicate flag to stop 3h re-trigger. last_review_id unchanged (drawdown trigger, no id cursor).",
- "last_review_id": 739
+    "ts":  "2026-07-12T06:22",
+    "review_no":  14,
+    "note":  "Review #14 = h15maker DUPLICATE re-flag #3 (same lane, same realized -$4.56 drawdown as #12/#13). quant_loop re-emits review_due_h15maker each tick while drawdown persists below -$3 hard-stop; #12 already adjudicated (HOLD, proposal logged, live placement halted: live_sides=[yes], max_contracts=1, hard_stop fired). No new h15 fills, no new info. Config h15 confirmed at floor. FREEZE-14 HOLD, zero config change; proposal NOT re-logged (already in change_proposals.jsonl via #12). Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor).",
+    "last_review_id":  739
 }
