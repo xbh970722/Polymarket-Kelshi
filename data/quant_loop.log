@@ -3291,3 +3291,7 @@
 [07-12 00:12:00]   wxfade: LIVE  KXHIGHDEN-26JUL12-B96.5: W2 FADE NO x1 @ 63c cost=$0.65 (yes was 0.38) order=d451297a-9e2d-41c1-b250-19859b040195
 [07-12 00:12:01]   journal: journal written: realized today $+0.00, 0 settled, 1 fills
 [07-12 00:12:03]   report: wrote reports\report_2026-07-12.md
+[07-12 00:12:05] committed + pushed
+[07-12 00:15:34]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-12 00:15:36]   h10: h10: 0 in-window | h10 shadow(main): n=762 mean -1.5c total $-11.18 | KXETH15M: n=253 net $-0.36 | KXSOL15M: n=253 net $-8.36 | KXBTC15M: n=256 net $-2.46 | gate: KILL (0 pending) || H13 final6: n=73 win 72/73 net $+1.00 gate: accumulating
+[07-12 00:15:37]   journal: journal written: realized today $+0.00, 0 settled, 1 fills
