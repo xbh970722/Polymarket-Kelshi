@@ -1,0 +1,61 @@
+{
+  "date": "2026-07-12",
+  "items": [
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey (Nolan) Rotten Tomatoes Tomatometer strictly above 90 on Mon Jul 20 (opening score)",
+      "q_claude": 0.76,
+      "q_codex": 0.545,
+      "q_all": [0.82, 0.70, 0.62, 0.47],
+      "rationale": "Core: Nolan's The Odyssey (wide release Jul 17; resolves Mon Jul 20 10:00 ET on the OPENING Tomatometer). As of Jul 12, 0 reviews posted (critic embargo not lifted); social-reaction embargo lifted ~2wk early with uniformly glowing early takes ('one of Nolan's best', Best Picture frontrunner, Forbes Jul 7). Bull case (Opus family, q 0.70-0.82): opening Tomatometer from a small curated early-critic sample skews HIGH, hyped prestige films often open 95-100%. Bear case (Codex family, q 0.47-0.62): strict >90 (a 90 = No) is Nolan's TOP tier - cleared only by Oppenheimer (93) and Dunkirk (92); missed by Inception (87), Interstellar (72), Tenet (69). Divergence: family means 0.76 vs 0.545 = 0.215 > consensus_max_divergence 0.10 -> engine AUTO-SKIPS and flags for human review (system working as designed). Even the ~0.65 midpoint over 0.58/0.59 market is only ~6pt raw, marginal after fees; genuine crux (how much opening samples skew vs strict threshold) is unresolved. WATCH: revisit once real reviews post (~Jul 15-17) when it becomes near-deterministic. Ensemble ran full 2xOpus(inside/outside) + 2xCodex(gpt-5.5 xhigh); no round-2 (divergence already blocks a trade; converging a coin-flip Entertainment market to force a marginal bet = the over-trading FREEZE-14 guards against).",
+      "sources": [
+        "https://www.rottentomatoes.com/m/the_odyssey_2026 (0 reviews as of Jul 12; In Theaters Jul 17)",
+        "https://www.forbes.com/sites/paultassi/2026/07/07/the-odyssey-early-critic-reviews-render-a-unanimous-verdict/ (uniformly glowing early reactions)",
+        "Kalshi rules KXRT-ODY-90: Tomatometer above 90 on Monday after wide release at 10:00 AM ET"
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "ticker": "KXLLM1-26JUL31-OAI",
+      "title": "Best AI Jul 2026? | ChatGPT (OpenAI top-ranked LLM on LMArena Rank(UB) on Jul 31)",
+      "q_all": [0.37, 0.33, 0.43, 0.43],
+      "reason": "SKIP (verification voided the blind ensemble - a calibration lesson). Blind 4-estimator run produced 0.33-0.43 (consensus ~0.39), a ~35pt apparent YES edge over the 0.04/0.05 market. VERIFICATION-LAYER FINDING: those estimates were anchored on SECONDARY variant boards (openlm.ai 'Arena+' agent-driven variant, swfte mirror) that framed OpenAI's GPT-5.6 as a ~1-Elo co-leader. The actual RESOLUTION SOURCE (lmarena.ai Text Arena Overall) - read directly in yesterday's 07-11 cycle (7.27M votes) - puts OpenAI's best (gpt-5.6-sol) at RANK 8, 1486 Elo, ~23 Elo below the Anthropic-swept top 5 (claude-fable-5 #1). Under Rank(UB) rules the 'top-ranked LLM' tiebreak = highest Arena Score = an Anthropic model -> NO today; OpenAI must net-overtake a stable leader within 19 days. The 35pt divergence is the textbook 'large divergence from a liquid board-watching market = estimators behind the market' trap (same mechanism as the CORE moratorium). Corrected q ~= market 0.05; no edge. NOTE: KXLLM1 is Science/Tech (NOT under CORE political moratorium) - skipped purely on no-edge/verification grounds.",
+      "sources": [
+        "https://lmarena.ai/leaderboard/text (Text Arena Overall; per 07-11 primary read: OpenAI best = rank 8, 1486, top 5 all Anthropic)",
+        "https://openlm.ai/chatbot-arena/ (Arena+ VARIANT, Jul 9 - misleading co-leader framing)",
+        "https://www.swfte.com/lmarena (Jul 9 mirror - Fable 5 1525 #1, OpenAI best #3-4)",
+        "reports/research_2026-07-11.json (prior primary-source read, same ticker)"
+      ]
+    },
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0 / -H25",
+      "title": "Fed July 2026 decision family (maintain 0bps / hike 25bps)",
+      "q_all": [],
+      "reason": "SKIP. (1) ALREADY POSITIONED: ledger holds Fed-family swing legs (H0-no ~q0.73, H25-yes ~q0.24 per 07-11), so the auto-pick 'no existing open position' rule (SKILL step 3) excludes new orders here - the existing H0-no leg already expresses the 'hold is slightly rich' view. (2) NO CONFIRMABLE EDGE: blind ensemble ~0.70 (anchored to a STALE Jul-8 secondary FedWatch ~70-75%) vs Kalshi market 0.80. The apparent ~10pt NO edge rests on 4-day-old secondary-mirror FedWatch I could not refresh to a confirmed current reading; the market carries the live futures curve (info set superset). June CPI (Jul 14, 2 days out) is a coin-flip catalyst with no informational edge. Half-anchor caps any final at 0.75; combined with imminent CPI event risk and market-replication discipline -> no trade. FOMC 2026-07-29, OI 2.4-3.5M (FedWatch-grade efficiency).",
+      "sources": [
+        "kalshi rules KXFEDDECISION-26JUL-H0 (mutually-exclusive buckets; canceled meeting -> maintain YES)",
+        "CME FedWatch (Jul 8 2026, secondary mirrors): ~70-75% hold, 25% hike, 0% cut",
+        "reports/research_2026-07-11.json (open Fed positions documented)"
+      ]
+    },
+    {
+      "ticker": "KXTRUMPATTEND / KXKASHOUT / KXMEDNOMJUL-TJAC / KXMEDNOMJUL-NSHA / KXLAGODAYS-26JUL-1 / KXALITOANNOUNCERETIRE",
+      "title": "Political / current-events shortlist (Trump World Cup, Kash Patel FBI, Maine Senate nominee x2, Mar-a-Lago visits, Alito retirement)",
+      "q_all": [],
+      "reason": "SKIP (CORE moratorium, CLAUDE.md #10, 5-person council unanimous 2026-07-11). No new LLM direct-bet live positions on political/current-events binaries until 2026-07-23: blind estimate info-set is a subset of the market -> structurally negative EV (council evidence: >12pt-divergence trades went 0/3 -$4.87). Stopping this channel is a risk-reducing action, permitted under FREEZE-14 class-2. Existing MEDNOM-TJAC and Alito positions remain managed by the mechanical swing/stop engine, not re-opened here.",
+      "sources": ["CLAUDE.md #10 (CORE moratorium)", "research/CORE_LLM_COUNCIL_2026-07-11.md"]
+    },
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000 / -6750000",
+      "title": "How high will BTC get in July? ($65k / $67.5k strikes)",
+      "q_all": [],
+      "reason": "SKIP (settlement ambiguity + BLIND-AI-crypto rejection). MAXMON 'How high' strikes carry the touch-vs-cumulative-trimmed-mean settlement ambiguity that split the ensemble on 07-10/07-11 (arbiter KILL, PROTOCOL tie-law #4). Separately, the LLM crypto blind-estimate experiment was judged dead (n=63, Brier(AI) 0.2323 > Brier(market) 0.2046) - LLM price-momentum blind estimates do not beat the market on crypto. Not priceable to real-money precision; no edge. Not researched further.",
+      "sources": [
+        "kalshi rules KXBTCMAXMON (touch vs cumulative trimmed-mean methodology conflict)",
+        "reports/research_2026-07-10.json / 2026-07-11.json (prior arbiter KILLs, same crux)",
+        "memory: blind-ai-crypto-experiment-rejected"
+      ]
+    }
+  ]
+}
