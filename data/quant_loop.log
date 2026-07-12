@@ -2171,3 +2171,15 @@
 [07-12 13:47:58]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-12 13:48:02]   h10: h10: 0 in-window | h10 shadow(main): n=824 mean -1.5c total $-12.54 | KXETH15M: n=276 net $-2.95 | KXSOL15M: n=273 net $-7.14 | KXBTC15M: n=275 net $-2.44 | gate: KILL (0 pending) || H13 final6: n=93 win 92/93 net $+1.45 gate: accumulating (clean n=18)
 [07-12 13:48:08]   journal: journal written: realized today $+3.38, 3 settled, 3 fills
+[07-12 13:48:13] light mark committed + pushed
+[07-12 13:50:14]   settle: done: 0 settled, 7 still open
+[07-12 13:50:16]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-12 13:50:21]   mktsnap: mktsnap: 7 quotes recorded, 3 outcomes resolved
+[07-12 13:50:23]   shortcycle: shortcycle disabled
+[07-12 13:50:24]   favorites: favorites lane disabled
+[07-12 13:50:26]   h10: h10: 1 in-window | h10 shadow(main): n=824 mean -1.5c total $-12.54 | KXETH15M: n=276 net $-2.95 | KXSOL15M: n=273 net $-7.14 | KXBTC15M: n=275 net $-2.44 | gate: KILL (1 pending) || H13 final6: n=93 win 92/93 net $+1.45 gate: accumulating (clean n=18)
+[07-12 13:50:28]   weather: weather: daily entry cap reached (3)
+[07-12 13:50:33]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=317 win 77% EV -1.2c | BOOK-ONLY: n=241 win 85% EV +2.8c | SPOT-MOVE: n=519 win 70% EV +2.3c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (60 pending)
+[07-12 13:50:52]   pmwatch: pmwatch: +48 pairs | pmwatch: 16667 rows, 5150 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-12 13:50:54]   journal: journal written: realized today $+3.38, 3 settled, 3 fills
+[07-12 13:50:57]   report: wrote reports\report_2026-07-12.md
