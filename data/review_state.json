@@ -1,6 +1,6 @@
-{
- "ts": "2026-07-11T15:22",
- "review_no": 12,
- "note": "Review #12 = h15maker FREEZE-14 HOLD (no config change). Trigger review_due_h15maker realized -$4.56 (past h15 first -$3 hard-stop step -> loop drawdown guard already halted h15 live placement). h15 already at freeze floor: live_sides=[yes] (NO shadow since #10), max_contracts=1 (down from x3), hard_stop_steps=1. Disabling would truncate the pre-registered isolation sample the 8-seat maker-harvest council reserved for 07-23 adjudication, so HOLD (not enabled->false, not tighten). Proposal logged for 07-23 adjudicator. last_review_id unchanged (drawdown trigger, no id cursor).",
+﻿{
+ "ts": "2026-07-11T21:22",
+ "review_no": 13,
+ "note": "Review #13 = h15maker DUPLICATE re-flag of #12 (same lane, same realized -$4.56 drawdown). quant_loop re-emits review_due_h15maker each tick while drawdown persists below -$3 hard-stop; #12 already adjudicated (HOLD, proposal logged, live placement halted: live_sides=[yes], max_contracts=1, hard_stop fired). No new h15 fills, no new info. FREEZE-14 HOLD, zero config change; proposal NOT re-logged (already in change_proposals.jsonl via #12). Deleted duplicate flag to stop 3h re-trigger. last_review_id unchanged (drawdown trigger, no id cursor).",
  "last_review_id": 739
 }
