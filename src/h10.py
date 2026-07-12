@@ -29,12 +29,20 @@ CREATE TABLE IF NOT EXISTS shadow(
 )
 """
 
+# 2026-07-11 仪器修复 (FREEZE14_ADJUDICATION H13 预注册判据①"先修/绕过 ticker 主键
+# 漏记"): f6 与主窗共用 shadow 表的 ticker 主键时, 先被主窗(τ>6)抓走的市场永远进不了
+# f6 样本 —— 被锁的是从 0.84-0.94 争夺带爬上来的苦战盘, 留下的是一步锁死的稳盘, 胜率
+# 被系统性抬高 (取证时已锁 257 个同系列市场)。f6 独立建表后互不抢占; 旧行保留原位,
+# report 分列 legacy/clean 供 07-23 裁决者分段。测量基础设施, 非交易参数, 不下单。
+SCHEMA_F6 = SCHEMA.replace("shadow(", "shadow_f6(", 1)
+
 
 def _conn() -> sqlite3.Connection:
     DB.parent.mkdir(exist_ok=True)
     c = sqlite3.connect(DB, timeout=15)
     c.row_factory = sqlite3.Row
     c.execute(SCHEMA)
+    c.execute(SCHEMA_F6)
     return c
 
 
@@ -106,7 +114,7 @@ def scan(cfg: dict) -> list[dict]:
                 ask = m["yes_ask"] if side == "yes" else m["no_ask"]
                 if not (zlo6 <= ask <= zhi6):
                     continue
-                c.execute("INSERT OR IGNORE INTO shadow(ticker,ts,series,side,ask,"
+                c.execute("INSERT OR IGNORE INTO shadow_f6(ticker,ts,series,side,ask,"
                           "fee,tau_min,close_time) VALUES(?,?,?,?,?,?,?,?)",
                           (m["ticker"], now.isoformat(timespec="seconds"), series,
                            side, round(ask, 4), taker_fee_usd(ask, 1),
@@ -119,17 +127,18 @@ def settle() -> int:
     now = dt.datetime.now(dt.timezone.utc).isoformat()
     done = 0
     with _conn() as c:
-        pend = [r["ticker"] for r in c.execute(
-            "SELECT ticker FROM shadow WHERE result IS NULL AND close_time < ?",
-            (now,))]
-        for t in pend[:60]:
+        pend = [(tab, r["ticker"]) for tab in ("shadow", "shadow_f6")
+                for r in c.execute(
+                    f"SELECT ticker FROM {tab} WHERE result IS NULL AND close_time < ?",
+                    (now,))]
+        for tab, t in pend[:60]:
             try:
                 mk = api.market(t)
             except Exception:
                 continue
             if mk.get("status") in ("settled", "finalized") and \
                     mk.get("result") in ("yes", "no"):
-                c.execute("UPDATE shadow SET result=?, settled_ts=? WHERE ticker=?",
+                c.execute(f"UPDATE {tab} SET result=?, settled_ts=? WHERE ticker=?",
                           (mk["result"], now, t))
                 done += 1
     return done
@@ -141,10 +150,14 @@ def report() -> str:
     with _conn() as c:
         rows = c.execute("SELECT series, side, ask, fee, result, tau_min "
                          "FROM shadow WHERE result IN ('yes','no')").fetchall()
-        n_open = c.execute("SELECT COUNT(*) FROM shadow WHERE result IS NULL"
-                           ).fetchone()[0]
+        clean6 = c.execute("SELECT series, side, ask, fee, result, tau_min "
+                           "FROM shadow_f6 WHERE result IN ('yes','no')").fetchall()
+        n_open = c.execute(
+            "SELECT (SELECT COUNT(*) FROM shadow WHERE result IS NULL) + "
+            "(SELECT COUNT(*) FROM shadow_f6 WHERE result IS NULL)").fetchone()[0]
     main = [r for r in rows if float(r["tau_min"] or 0) > 6]
-    f6 = [r for r in rows if float(r["tau_min"] or 0) <= 6]
+    # legacy = 仪器修复前混在 shadow 表里的 f6 行 (有主键漏记偏差); clean = shadow_f6
+    f6 = [r for r in rows if float(r["tau_min"] or 0) <= 6] + list(clean6)
 
     def _net(r):
         won = r["result"] == r["side"]
@@ -176,5 +189,5 @@ def report() -> str:
               "ARCHIVE" if (len(f6) - w6) >= 2 or
               (len(f6) >= 150 and t6 <= 0) else "accumulating")
         out += (f" || H13 final6: n={len(f6)} win {w6}/{len(f6)} "
-                f"net ${t6:+.2f} gate: {g6}")
+                f"net ${t6:+.2f} gate: {g6} (clean n={len(clean6)})")
     return out
