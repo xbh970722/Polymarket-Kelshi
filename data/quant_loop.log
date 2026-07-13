@@ -3538,3 +3538,4 @@
 [07-12 21:41:37]   pmwatch: pmwatch: +53 pairs | pmwatch: 17411 rows, 5374 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-12 21:41:38]   journal: journal written: realized today $+3.74, 4 settled, 3 fills
 [07-12 21:41:39]   report: wrote reports\report_2026-07-12.md
+[07-12 21:41:41] committed + pushed
