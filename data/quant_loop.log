@@ -2589,3 +2589,128 @@
 [07-13 02:35:41]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=152 win 73.7% mean net -4.4c/contract total $-6.69 | gate: ARCHIVE (edge dead) (45 pending)
 [07-13 02:35:43]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-13 02:35:44]   report: wrote reports\report_2026-07-13.md
+[07-13 02:35:47] committed + pushed
+[07-13 02:38:37]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:38:38]   h10: h10: 0 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (0 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:41:12]   settle: done: 0 settled, 6 still open
+[07-13 02:41:13]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:41:15]   mktsnap: mktsnap: 11 quotes recorded, 0 outcomes resolved
+[07-13 02:41:15]   shortcycle: shortcycle disabled
+[07-13 02:41:15]   favorites: favorites lane disabled
+[07-13 02:41:16]   h10: h10: 0 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (0 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:41:17]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 02:41:17]   weather: done: 0 weather orders
+[07-13 02:41:19]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=342 win 77% EV -0.7c | BOOK-ONLY: n=255 win 84% EV +2.8c | SPOT-MOVE: n=561 win 69% EV +2.6c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (85 pending)
+[07-13 02:41:30]   pmwatch: pmwatch: +58 pairs | pmwatch: 17891 rows, 5527 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 02:45:08]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:45:09]   h10: h10: 0 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (0 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:47:32]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:47:33]   h10: h10: 0 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (0 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:50:38]   settle: done: 0 settled, 6 still open
+[07-13 02:50:38]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:50:40]   mktsnap: mktsnap: 10 quotes recorded, 3 outcomes resolved
+[07-13 02:50:41]   shortcycle: shortcycle disabled
+[07-13 02:50:41]   favorites: favorites lane disabled
+[07-13 02:50:42]   h10: h10: 1 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (1 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:50:43]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 02:50:43]   weather: done: 0 weather orders
+[07-13 02:50:45]   disloc: DISLOC KXBTCD-26JUL1305-T63199.99: fav 0.96->0.84 ask 0.85 [SPOT-MOVE] tau 9m
+[07-13 02:50:45]   disloc: DISLOC KXBTCD-26JUL1305-T63099.99: fav 0.81->0.30 ask 0.30 [SPOT-MOVE] tau 9m
+[07-13 02:50:45]   disloc: DISLOC KXXRPD-26JUL1305-T1.0799: fav 0.79->0.29 ask 0.34 [SPOT-MOVE] tau 9m
+[07-13 02:50:45]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=342 win 77% EV -0.7c | BOOK-ONLY: n=255 win 84% EV +2.8c | SPOT-MOVE: n=561 win 69% EV +2.6c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (88 pending)
+[07-13 02:50:59]   pmwatch: pmwatch: +55 pairs | pmwatch: 17903 rows, 5531 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 02:53:28]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:53:29]   h10: h10: 1 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (2 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:56:53]   settle: done: 0 settled, 6 still open
+[07-13 02:56:53]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 02:56:55]   mktsnap: mktsnap: 7 quotes recorded, 0 outcomes resolved
+[07-13 02:56:55]   shortcycle: shortcycle disabled
+[07-13 02:56:55]   favorites: favorites lane disabled
+[07-13 02:56:56]   h10: h10: 0 in-window | h10 shadow(main): n=877 mean -1.6c total $-13.86 | KXETH15M: n=292 net $-3.06 | KXSOL15M: n=294 net $-8.00 | KXBTC15M: n=291 net $-2.81 | gate: KILL (3 pending) || H13 final6: n=103 win 102/103 net $+1.69 gate: accumulating (clean n=28)
+[07-13 02:57:17] CRITICAL: step weather exited 1
+[07-13 02:57:17]   weather: Traceback (most recent call last):
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+[07-13 02:57:17]   weather:     self._validate_conn(conn)
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+[07-13 02:57:17]   weather:     conn.connect()
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 741, in connect
+[07-13 02:57:17]   weather:     sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+[07-13 02:57:17]   weather:                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 920, in _ssl_wrap_socket_and_match_hostname
+[07-13 02:57:17]   weather:     ssl_sock = ssl_wrap_socket(
+[07-13 02:57:17]   weather:                ^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\ssl_.py", line 460, in ssl_wrap_socket
+[07-13 02:57:17]   weather:     ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+[07-13 02:57:17]   weather:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\ssl_.py", line 504, in _ssl_wrap_socket_impl
+[07-13 02:57:17]   weather:     return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+[07-13 02:57:17]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 455, in wrap_socket
+[07-13 02:57:17]   weather:     return self.sslsocket_class._create(
+[07-13 02:57:17]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1042, in _create
+[07-13 02:57:17]   weather:     self.do_handshake()
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 1320, in do_handshake
+[07-13 02:57:17]   weather:     self._sslobj.do_handshake()
+[07-13 02:57:17]   weather: TimeoutError: _ssl.c:983: The handshake operation timed out
+[07-13 02:57:17]   weather: 
+[07-13 02:57:17]   weather: The above exception was the direct cause of the following exception:
+[07-13 02:57:17]   weather: 
+[07-13 02:57:17]   weather: Traceback (most recent call last):
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 645, in send
+[07-13 02:57:17]   weather:     resp = conn.urlopen(
+[07-13 02:57:17]   weather:            ^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+[07-13 02:57:17]   weather:     retries = retries.increment(
+[07-13 02:57:17]   weather:               ^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 474, in increment
+[07-13 02:57:17]   weather:     raise reraise(type(error), error, _stacktrace)
+[07-13 02:57:17]   weather:           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\util.py", line 39, in reraise
+[07-13 02:57:17]   weather:     raise value
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+[07-13 02:57:17]   weather:     response = self._make_request(
+[07-13 02:57:17]   weather:                ^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+[07-13 02:57:17]   weather:     raise new_e
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 466, in _make_request
+[07-13 02:57:17]   weather:     self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 367, in _raise_timeout
+[07-13 02:57:17]   weather:     raise ReadTimeoutError(
+[07-13 02:57:17]   weather: urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Read timed out. (read timeout=20)
+[07-13 02:57:17]   weather: 
+[07-13 02:57:17]   weather: During handling of the above exception, another exception occurred:
+[07-13 02:57:17]   weather: 
+[07-13 02:57:17]   weather: Traceback (most recent call last):
+[07-13 02:57:17]   weather:   File "<frozen runpy>", line 198, in _run_module_as_main
+[07-13 02:57:17]   weather:   File "<frozen runpy>", line 88, in _run_code
+[07-13 02:57:17]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2838, in <module>
+[07-13 02:57:17]   weather:     main()
+[07-13 02:57:17]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2834, in main
+[07-13 02:57:17]   weather:     args.fn(args)
+[07-13 02:57:17]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 925, in cmd_weather
+[07-13 02:57:17]   weather:     balance = float(client.balance().get("balance_dollars") or 0)
+[07-13 02:57:17]   weather:                     ^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 125, in balance
+[07-13 02:57:17]   weather:     return self._req("GET", f"{API}/portfolio/balance")
+[07-13 02:57:17]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 89, in _req
+[07-13 02:57:17]   weather:     r = self.s.request(method, self.base + bare, json=body, params=params,
+[07-13 02:57:17]   weather:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 592, in request
+[07-13 02:57:17]   weather:     resp = self.send(prep, **send_kwargs)
+[07-13 02:57:17]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 706, in send
+[07-13 02:57:17]   weather:     r = adapter.send(request, **kwargs)
+[07-13 02:57:17]   weather:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-13 02:57:17]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 691, in send
+[07-13 02:57:17]   weather:     raise ReadTimeout(e, request=request)
+[07-13 02:57:17]   weather: requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Read timed out. (read timeout=20)
+[07-13 02:57:17]   weather: 
+[07-13 02:57:17]   weather: CRITICAL step weather exited 1
+[07-13 02:58:17] CRITICAL: step disloc raised/timed out: Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'disloc']' timed out after 60 seconds
+[07-13 02:58:17]   disloc: EXC ('disloc',): Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'disloc']' timed out after 60 seconds
+[07-13 02:59:17] CRITICAL: step pmwatch raised/timed out: Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'pmwatch']' timed out after 60 seconds
+[07-13 02:59:17]   pmwatch: EXC ('pmwatch',): Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'pmwatch']' timed out after 60 seconds
+[07-13 03:00:37]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-13 03:05:12]   report: wrote reports\report_2026-07-13.md
