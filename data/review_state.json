@@ -1,6 +1,6 @@
-﻿{
-    "ts":  "2026-07-12T06:22",
-    "review_no":  14,
-    "note":  "Review #14 = h15maker DUPLICATE re-flag #3 (same lane, same realized -$4.56 drawdown as #12/#13). quant_loop re-emits review_due_h15maker each tick while drawdown persists below -$3 hard-stop; #12 already adjudicated (HOLD, proposal logged, live placement halted: live_sides=[yes], max_contracts=1, hard_stop fired). No new h15 fills, no new info. Config h15 confirmed at floor. FREEZE-14 HOLD, zero config change; proposal NOT re-logged (already in change_proposals.jsonl via #12). Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor).",
-    "last_review_id":  739
+{
+    "ts": "2026-07-12T18:22",
+    "review_no": 15,
+    "note": "Review #15 = h15maker DUPLICATE re-flag #4 (same lane KXETH15M, same persistent realized -4.56 drawdown as #12/#13/#14). Verified ledger: 26 rows since cursor 739 are all shortcycle KXBTCD/KXETHD + weather; ZERO new h15maker fills, no new info. Config h15 confirmed at floor: max_contracts=1, live_sides=[yes], hard_stop_steps=1 @ drawdown_step 3.0 (hard_stop already fired, live placement halted by own safety brake). FREEZE-14 HOLD, zero config change; proposal NOT re-logged (already in change_proposals.jsonl via #12). Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor). h15 isolation adjudication deferred to 07-23 per maker-harvest moratorium.",
+    "last_review_id": 739
 }
