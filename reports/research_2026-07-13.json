@@ -1,0 +1,51 @@
+{
+  "date": "2026-07-13",
+  "cycle": "scheduled-live-ensemble",
+  "freeze14_active": true,
+  "items": [
+    {
+      "ticker": "KXFEDDECISION-26JUL-H0",
+      "title": "Fed maintains rate (0bps hike) at July 29 2026 FOMC meeting?",
+      "q_claude": 0.66,
+      "q_codex": 0.66,
+      "q_all": [0.66, 0.66, 0.66, 0.66],
+      "rationale": "Core: 4 blind estimators independently converged on ~0.66, exactly the CME FedWatch futures-implied hold probability (~64-70% as of 07-08). Risk: June CPI 07-14 08:30 ET is a two-sided catalyst that could shift odds. Divergence: none (0.00). Fed-funds futures are among the most efficient markets; blind estimate = market -> zero edge, expected engine no-trade. Included to exercise the pipeline honestly.",
+      "sources": [
+        "CME FedWatch via cryptorank/growbeansprout (~2026-07-08): ~64-70% hold, ~30-36% hike 25bps",
+        "rules: KXFEDDECISION-26JUL-H0 resolves on 2026-07-29 FOMC decision, 0bps hike = YES"
+      ]
+    }
+  ],
+  "arbiter_vetoed": [
+    {
+      "ticker": "KXRT-ODY-90",
+      "title": "The Odyssey Rotten Tomatoes Tomatometer score above 90 (resolves Mon 2026-07-20 opening score)",
+      "q_claude": 0.55,
+      "q_codex": 0.47,
+      "q_all": [0.65, 0.45, 0.50, 0.44],
+      "market_mid": 0.795,
+      "veto_reason": "STRUCTURAL-DIVERGENCE / WE-ARE-BEHIND. Blind consensus 0.51 vs liquid market ~0.79 (v24h=30.7k, oi=89k). Verification (07-13) found the review embargo has NOT lifted (lifts 07-15 12pm ET), RT shows zero scored reviews, no Tomatometer exists -> market and estimators see identical facts, no informational edge. Estimators anchored on Nolan FINAL-score base rate (4/12 >90) but market resolves on the FIRST-MONDAY OPENING score, which skews high for glowing-reaction prestige films (conditional class Oppenheimer 93 / Dunkirk 92 / Dark Knight 94 all >90). Two of four estimator CIs do not even reach the market price = confidently-wrong-against-liquid-market signature. Same species (LLM-priced binary event vs liquid market) the project twice judged structurally negative-EV: blind-ai (Brier 0.23>0.20, killed) and CORE council moratorium. Arbiter kills the mechanical NO bet decide() would otherwise fire (family div 0.08<0.10 passes the gate).",
+      "sources": [
+        "Forbes 2026-07-07: early social reactions uniformly glowing, 'one of Nolan's best', BP frontrunner",
+        "X/@NolanAnalyst + Kalshi news 2026-07: full review embargo lifts 2026-07-15 12pm ET; no Tomatometer yet",
+        "Nolan final Tomatometers: >90 = Memento 92, Dunkirk 92, Dark Knight 94, Oppenheimer 93; 85-89 = Inception 87, DKR 87, Batman Begins 85"
+      ]
+    },
+    {
+      "ticker": "KXRT-ODY-85",
+      "title": "The Odyssey Rotten Tomatoes Tomatometer score above 85 (resolves Mon 2026-07-20 opening score)",
+      "q_claude": 0.80,
+      "q_codex": 0.765,
+      "q_all": [0.88, 0.72, 0.77, 0.76],
+      "market_mid": 0.945,
+      "veto_reason": "Same structural veto as KXRT-ODY-90. Blind consensus 0.78 vs market 0.945 would fire a NO bet at 6c (betting a glowing-reaction Nolan epic opens <=85 on RT). Verification found no info edge; opening-score skew + no-informational-basis divergence = we-are-behind, not edge. Arbiter kills."
+    }
+  ],
+  "skipped": [
+    {
+      "ticker": "KXBTCMAXMON-BTC-26JUL31-6500000",
+      "title": "BTC trimmed-mean ever above $65,000 by Jul 31 2026",
+      "reason": "SETTLEMENT-AMBIGUITY (tie-le #4). BTC opened July at $73,674 (well above $65k) then fell to ~$62-63k on 07-13. Market resolves YES if the cumulative trimmed-mean BRTI is EVER above $65k from issuance; if issued at month-start it should already be YES (~1.00), yet it trades 0.56 -> issuance/trigger state ambiguous to me. Per tie-le #4 and maxmon-trap memory: settlement not fully understood -> skip, do not force-estimate."
+    }
+  ]
+}
