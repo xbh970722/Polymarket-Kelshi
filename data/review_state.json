@@ -1,6 +1,6 @@
-{
-  "ts": "2026-07-13T21:55",
-  "review_no": 16,
-  "note": "Review #16 = h15maker DUPLICATE re-flag #5 (same lane KXETH15M, same persistent realized -4.56 drawdown as #12/#13/#14/#15). Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=765, newer rows all KXHIGH weather. No new h15maker fills, no new info. Config h15 confirmed floor: max_contracts=1, live_sides=[yes], per-position -3 hard_stop already fired. FREEZE-14 HOLD, zero config change; proposal already in change_proposals.jsonl via #12, not re-logged. Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor). Appended Review #16 to SHORTCYCLE_DESIGN.md (also backfilled #15 continuity note). h15 isolation adjudication deferred to 07-23.",
+﻿{
+  "ts": "2026-07-14T00:22",
+  "review_no": 17,
+  "note": "Review #17 = h15maker DUPLICATE re-flag #6 (same lane KXETH15M, same persistent realized -4.56 drawdown as #12/#13/#14/#15/#16). Flag ts 2026-07-13T22:00:21, ~5 min after #16 (review_state 21:55) — quant_loop rewrites per-tick on persistent drawdown, not a new event. Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=765, newer rows all KXHIGH weather; KXETH*15M settled=61 (unchanged). Config h15 confirmed floor: live_sides=[yes], max_contracts=1, hard_stop_steps=1, per-position -3 hard_stop already fired. FREEZE-14 HOLD, zero config change; proposal already in change_proposals.jsonl via #12, not re-logged. Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor). Appended Review #17 to SHORTCYCLE_DESIGN.md. h15 isolation adjudication deferred to 07-23.",
   "last_review_id": 739
 }
