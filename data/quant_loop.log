@@ -3137,3 +3137,50 @@
 [07-14 05:56:53]   wxfade: wxfade: +1 logged, 8 settled | wxfade shadow: n=184 win 72.8% mean net -5.5c/contract total $-10.05 | gate: ARCHIVE (edge dead) (26 pending)
 [07-14 05:56:54]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-14 05:56:55]   report: wrote reports\report_2026-07-14.md
+[07-14 05:56:57] committed + pushed
+[07-14 06:00:20]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:00:24]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:00:25]   h10: h10: 0 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:02:14]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:02:15]   h10: h10: 0 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:05:33]   settle: done: 0 settled, 1 still open
+[07-14 06:05:34]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:05:36]   mktsnap: mktsnap: 3 quotes recorded, 13 outcomes resolved
+[07-14 06:05:36]   shortcycle: shortcycle disabled
+[07-14 06:05:36]   favorites: favorites lane disabled
+[07-14 06:05:37]   h10: h10: 0 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:05:38]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-14 06:05:38]   weather: done: 0 weather orders
+[07-14 06:05:40]   disloc: disloc: +0 events, 2 settled | disloc shadow: AMBIGUOUS: n=368 win 77% EV -0.6c | BOOK-ONLY: n=267 win 84% EV +2.5c | SPOT-MOVE: n=586 win 69% EV +2.1c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (77 pending)
+[07-14 06:05:50]   pmwatch: pmwatch: +53 pairs | pmwatch: 19127 rows, 5922 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-14 06:08:17]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:08:18]   h10: h10: 1 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (1 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:11:34]   settle: done: 0 settled, 1 still open
+[07-14 06:11:35]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:11:36]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-14 06:11:36]   shortcycle: shortcycle disabled
+[07-14 06:11:36]   favorites: favorites lane disabled
+[07-14 06:11:37]   h10: h10: 0 in-window | h10 shadow(main): n=928 mean -1.5c total $-13.70 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=310 net $-8.47 | KXBTC15M: n=307 net $-1.94 | gate: KILL (2 pending) || H13 final6: n=118 win 117/118 net $+2.01 gate: accumulating (clean n=43)
+[07-14 06:11:38]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-14 06:11:38]   weather: done: 0 weather orders
+[07-14 06:11:40]   disloc: DISLOC KXETHD-26JUL1409-T1789.99: fav 0.81->0.70 ask 0.71 [AMBIGUOUS] tau 48m
+[07-14 06:11:40]   disloc: DISLOC KXSOLD-26JUL1409-T74.9999: fav 0.79->0.70 ask 0.71 [AMBIGUOUS] tau 48m
+[07-14 06:11:40]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=368 win 77% EV -0.6c | BOOK-ONLY: n=267 win 84% EV +2.5c | SPOT-MOVE: n=586 win 69% EV +2.1c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (79 pending)
+[07-14 06:11:50]   pmwatch: pmwatch: +53 pairs | pmwatch: 19139 rows, 5925 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-14 06:15:18]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:15:19]   h10: h10: 0 in-window | h10 shadow(main): n=929 mean -1.5c total $-13.63 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=311 net $-8.40 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=119 win 118/119 net $+2.05 gate: accumulating (clean n=44)
+[07-14 06:17:12]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:17:13]   h10: h10: 0 in-window | h10 shadow(main): n=929 mean -1.5c total $-13.63 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=311 net $-8.40 | KXBTC15M: n=307 net $-1.94 | gate: KILL (0 pending) || H13 final6: n=119 win 118/119 net $+2.05 gate: accumulating (clean n=44)
+[07-14 06:20:29]   settle: done: 0 settled, 1 still open
+[07-14 06:20:30]   h15: MACRO WINDOW 2026-07-14T12:00: h15 no new resting bids
+[07-14 06:20:31]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-14 06:20:31]   shortcycle: shortcycle disabled
+[07-14 06:20:31]   favorites: favorites lane disabled
+[07-14 06:20:32]   h10: h10: 3 in-window | h10 shadow(main): n=929 mean -1.5c total $-13.63 | KXETH15M: n=311 net $-3.29 | KXSOL15M: n=311 net $-8.40 | KXBTC15M: n=307 net $-1.94 | gate: KILL (3 pending) || H13 final6: n=119 win 118/119 net $+2.05 gate: accumulating (clean n=44)
+[07-14 06:20:33]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-14 06:20:33]   weather: done: 0 weather orders
+[07-14 06:20:35]   disloc: DISLOC KXBTCD-26JUL1409-T62999.99: fav 0.94->0.83 ask 0.84 [AMBIGUOUS] tau 39m
+[07-14 06:20:35]   disloc: DISLOC KXBTCD-26JUL1409-T62899.99: fav 0.83->0.59 ask 0.60 [AMBIGUOUS] tau 39m
+[07-14 06:20:35]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=368 win 77% EV -0.6c | BOOK-ONLY: n=267 win 84% EV +2.5c | SPOT-MOVE: n=586 win 69% EV +2.1c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (81 pending)
+[07-14 06:20:45]   pmwatch: pmwatch: +53 pairs | pmwatch: 19151 rows, 5929 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
