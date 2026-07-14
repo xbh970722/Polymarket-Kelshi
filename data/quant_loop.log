@@ -3167,3 +3167,127 @@
 [07-13 06:35:39]   wxfade: wxfade: +0 logged, 13 settled | wxfade shadow: n=176 win 73.3% mean net -5.0c/contract total $-8.75 | gate: ARCHIVE (edge dead) (21 pending)
 [07-13 06:35:40]   journal: journal written: realized today $+0.20, 3 settled, 0 fills
 [07-13 06:35:41]   report: wrote reports\report_2026-07-13.md
+[07-13 06:35:44] committed + pushed
+[07-13 06:38:37]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:38:38]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:41:12]   settle: done: 0 settled, 3 still open
+[07-13 06:41:13]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:41:14]   mktsnap: mktsnap: 6 quotes recorded, 0 outcomes resolved
+[07-13 06:41:15]   shortcycle: shortcycle disabled
+[07-13 06:41:15]   favorites: favorites lane disabled
+[07-13 06:41:16]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:41:16]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 06:41:16]   weather: done: 0 weather orders
+[07-13 06:41:18]   disloc: DISLOC KXBTCD-26JUL1309-T62499.99: fav 0.90->0.61 ask 0.62 [AMBIGUOUS] tau 19m
+[07-13 06:41:18]   disloc: DISLOC KXBTCD-26JUL1309-T62399.99: fav 0.96->0.89 ask 0.89 [AMBIGUOUS] tau 19m
+[07-13 06:41:18]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=347 win 77% EV -1.0c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (90 pending)
+[07-13 06:41:29]   pmwatch: pmwatch: +57 pairs | pmwatch: 18263 rows, 5644 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 06:45:08]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:45:09]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:47:32]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:47:33]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:50:35]   settle: done: 0 settled, 3 still open
+[07-13 06:50:36]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:50:37]   mktsnap: mktsnap: 6 quotes recorded, 3 outcomes resolved
+[07-13 06:50:38]   shortcycle: shortcycle disabled
+[07-13 06:50:38]   favorites: favorites lane disabled
+[07-13 06:50:39]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:50:40]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 06:50:40]   weather: done: 0 weather orders
+[07-13 06:50:42]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=347 win 77% EV -1.0c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (90 pending)
+[07-13 06:50:53]   pmwatch: pmwatch: +57 pairs | pmwatch: 18275 rows, 5648 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 06:53:27]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:53:29]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:56:53]   settle: done: 0 settled, 3 still open
+[07-13 06:56:53]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 06:56:54]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-13 06:56:54]   shortcycle: shortcycle disabled
+[07-13 06:56:55]   favorites: favorites lane disabled
+[07-13 06:56:55]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 06:56:56]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 06:56:56]   weather: done: 0 weather orders
+[07-13 06:56:58]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=347 win 77% EV -1.0c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (90 pending)
+[07-13 06:57:10]   pmwatch: pmwatch: +55 pairs | pmwatch: 18287 rows, 5652 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 07:00:20]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 07:02:45]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:02:46]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 07:05:33]   settle: done: 0 settled, 3 still open
+[07-13 07:05:34]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:05:36]   mktsnap: mktsnap: 3 quotes recorded, 10 outcomes resolved
+[07-13 07:05:37]   shortcycle: shortcycle disabled
+[07-13 07:05:37]   favorites: favorites lane disabled
+[07-13 07:05:38]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 07:05:38]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 07:05:38]   weather: done: 0 weather orders
+[07-13 07:05:41]   disloc: disloc: +0 events, 3 settled | disloc shadow: AMBIGUOUS: n=350 win 77% EV -1.1c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (87 pending)
+[07-13 07:05:55]   pmwatch: pmwatch: +57 pairs | pmwatch: 18299 rows, 5656 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 07:08:39]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:08:40]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 07:11:27]   settle: done: 0 settled, 3 still open
+[07-13 07:11:27]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:11:28]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-13 07:11:28]   shortcycle: shortcycle disabled
+[07-13 07:11:29]   favorites: favorites lane disabled
+[07-13 07:11:29]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (1 pending) || H13 final6: n=106 win 105/106 net $+1.74 gate: accumulating (clean n=31)
+[07-13 07:11:30]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 07:11:30]   weather: done: 0 weather orders
+[07-13 07:11:33]   disloc: DISLOC KXBTCD-26JUL1310-T62399.99: fav 0.79->0.67 ask 0.67 [AMBIGUOUS] tau 48m
+[07-13 07:11:33]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=350 win 77% EV -1.1c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (88 pending)
+[07-13 07:11:45]   pmwatch: pmwatch: +57 pairs | pmwatch: 18311 rows, 5660 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 07:15:26]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:15:29]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 07:17:38]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:17:40]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (0 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 07:20:23]   settle: done: 0 settled, 3 still open
+[07-13 07:20:24]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:20:28]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-13 07:20:29]   shortcycle: shortcycle disabled
+[07-13 07:20:30]   favorites: favorites lane disabled
+[07-13 07:20:32]   h10: h10: 2 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (2 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 07:20:34]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 07:20:34]   weather: done: 0 weather orders
+[07-13 07:20:38]   disloc: DISLOC KXBTCD-26JUL1310-T62299.99: fav 0.82->0.72 ask 0.73 [AMBIGUOUS] tau 39m
+[07-13 07:20:38]   disloc: DISLOC KXETHD-26JUL1310-T1759.99: fav 0.84->0.68 ask 0.70 [AMBIGUOUS] tau 39m
+[07-13 07:20:38]   disloc: DISLOC KXSOLD-26JUL1717-T82.9999: fav 0.94->0.64 ask 0.98 [AMBIGUOUS] tau 6219m
+[07-13 07:20:38]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=350 win 77% EV -1.1c | BOOK-ONLY: n=259 win 84% EV +2.7c | SPOT-MOVE: n=567 win 69% EV +2.5c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (91 pending)
+[07-13 07:20:52]   pmwatch: pmwatch: +57 pairs | pmwatch: 18323 rows, 5664 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 07:25:43]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:25:44]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000269FC3CD430>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:25:44]   h10: WARN KXETH15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXETH15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000269FC3CDAC0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:25:44]   h10: WARN KXSOL15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXSOL15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000269FC3CDDF0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:25:44]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000269FC3CE270>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:25:44]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (2 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 07:29:41] CRITICAL: step stopshadow raised/timed out: Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'stopshadow']' timed out after -177.10899999999674 seconds
+[07-13 07:29:41]   stopshadow: EXC ('stopshadow',): Command '['C:\\Users\\xuboh\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-m', 'src.pipeline', 'stopshadow']' timed out after -177.10899999999674 seconds
+[07-13 07:30:52]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:30:53]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002048940E270>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:30:53]   h10: WARN KXETH15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXETH15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002048940E630>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:30:53]   h10: WARN KXSOL15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXSOL15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002048940EB70>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:30:53]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000204893EBCE0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:30:53]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (2 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 07:32:37]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-13 07:32:38]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001FF2FC7E270>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:32:38]   h10: WARN KXETH15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXETH15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001FF2FC7E630>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:32:38]   h10: WARN KXSOL15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXSOL15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001FF2FC7EB70>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:32:38]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001FF2FC5BCE0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-13 07:32:38]   h10: h10: 0 in-window | h10 shadow(main): n=892 mean -1.7c total $-15.49 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=298 net $-8.65 | KXBTC15M: n=297 net $-2.20 | gate: KILL (2 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 21:55:27]   settle: done: 0 settled, 3 still open
+[07-13 21:55:34]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-13 21:55:37]   mktsnap: mktsnap: 4 quotes recorded, 4 outcomes resolved
+[07-13 21:55:37]   shortcycle: shortcycle disabled
+[07-13 21:55:37]   favorites: favorites lane disabled
+[07-13 21:55:39]   h10: h10: 0 in-window | h10 shadow(main): n=894 mean -1.8c total $-16.34 | KXETH15M: n=297 net $-4.65 | KXSOL15M: n=299 net $-8.56 | KXBTC15M: n=298 net $-3.13 | gate: KILL (1 pending) || H13 final6: n=107 win 106/107 net $+1.76 gate: accumulating (clean n=32)
+[07-13 21:55:41]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-13 21:55:41]   weather: done: 0 weather orders
+[07-13 21:55:45]   disloc: disloc: +0 events, 18 settled | disloc shadow: AMBIGUOUS: n=354 win 77% EV -1.6c | BOOK-ONLY: n=261 win 84% EV +2.7c | SPOT-MOVE: n=581 win 69% EV +2.3c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (71 pending)
+[07-13 21:55:56]   pmwatch: pmwatch: +53 pairs | pmwatch: 18335 rows, 5668 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-13 21:55:57]   manage: done: 0 exited, 0 flagged for review, 1 holding
+[07-13 21:55:58]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 â€” active ledger row lacks cash-move time
+[07-13 21:55:58]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-13 21:55:58]   reconcile: CASH OK: adj balance $57.52 ~ expected $57.52 (drift $-0.00, reserved $0.00)
+[07-13 21:55:58]   reconcile: reconcile: 1 tickers, 1 mismatches â€” INVESTIGATE
+[07-13 21:55:59]   wxfade: wxfade: +10 logged, 0 settled | wxfade shadow: n=176 win 73.3% mean net -5.0c/contract total $-8.75 | gate: ARCHIVE (edge dead) (31 pending)
+[07-13 21:56:00] janitor: reaped leaked sessions ['25660', '37564', '3020', '35884', '36580', '29160', '38940', '20996', '48448', '47008', '36664']
+[07-13 21:56:01]   journal: journal written: realized today $-0.92, 5 settled, 0 fills
+[07-13 21:56:01]   report: wrote reports\report_2026-07-13.md
