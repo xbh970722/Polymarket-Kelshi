@@ -3247,3 +3247,16 @@
 [07-16 08:11:34]   wxfade: wxfade: +19 logged, 0 settled | wxfade shadow: n=210 win 72.9% mean net -5.4c/contract total $-11.25 | gate: ARCHIVE (edge dead) (34 pending)
 [07-16 08:11:35]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-16 08:11:36]   report: wrote reports\report_2026-07-16.md
+[07-16 08:11:38] committed + pushed
+[07-16 08:11:45]   settle: done: 0 settled, 1 still open
+[07-16 08:11:46]   h15: h15 HARD STOP: realized $-4.56 — paused pending review
+[07-16 08:11:47]   mktsnap: mktsnap: 2 quotes recorded, 0 outcomes resolved
+[07-16 08:11:47]   shortcycle: shortcycle disabled
+[07-16 08:11:48]   favorites: favorites lane disabled
+[07-16 08:11:49]   h10: h10: 0 in-window | h10 shadow(main): n=965 mean -1.3c total $-12.94 | KXETH15M: n=323 net $-2.09 | KXSOL15M: n=322 net $-9.35 | KXBTC15M: n=320 net $-1.51 | gate: KILL (3 pending) || H13 final6: n=132 win 130/132 net $+1.37 gate: ARCHIVE (clean n=57)
+[07-16 08:11:49]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-16 08:11:49]   weather: done: 0 weather orders
+[07-16 08:11:51]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=380 win 77% EV -1.1c | BOOK-ONLY: n=273 win 84% EV +2.3c | SPOT-MOVE: n=627 win 67% EV +0.5c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (88 pending)
+[07-16 08:12:01]   pmwatch: pmwatch: +47 pairs | pmwatch: 20051 rows, 6197 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 08:12:01]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-16 08:12:02]   report: wrote reports\report_2026-07-16.md
