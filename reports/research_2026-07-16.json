@@ -1,0 +1,47 @@
+{
+  "date": "2026-07-16",
+  "cycle": "scheduled-live-ensemble",
+  "freeze14_active": true,
+  "items": [
+    {
+      "ticker": "KXPCECORE-26JUN-T0.2",
+      "title": "Will the rate of core PCE inflation be above 0.2% in June 2026? (single-decimal MoM > 0.2%, i.e. rounds to >= 0.3%)",
+      "q_claude": 0.115,
+      "q_codex": 0.10,
+      "q_all": [0.10, 0.13, 0.10, 0.10],
+      "rationale": "Core: 4 blind estimators independently clustered tight at 0.10-0.13 (family div 0.015). Cleveland Fed nowcast (updated 07-16, with June CPI/PPI source data already in) = 0.19% MoM, which rounds to single-decimal 0.2% -> YES needs actual >= 0.25% (~+0.06pp, ~1.3-1.7 sigma above a late-stage tight nowcast). Risk: core PCE can run hotter than core CPI via healthcare/PPI/portfolio-mgmt components. Verification (07-16): June core CPI printed FLAT (0.0% MoM, below 0.2% expected, 12m core 2.6%) -> a soft print that CONFIRMS/mildly lowers the estimate; round-1 facts intact so no upward re-estimation. Small mechanism-grounded edge (~5pt) vs 5c market, NOT a large-divergence pattern.",
+      "sources": [
+        "Cleveland Fed Inflation Nowcasting (updated 2026-07-16): June 2026 Core PCE MoM nowcast = 0.19%, headline PCE -0.12%, Core PCE YoY 3.33%",
+        "BLS CPI June 2026 (released 2026-07-14): core CPI flat 0.0% MoM, below 0.2% expected; 12-month core 2.6% (via CNBC / tradingeconomics / IG)",
+        "Market rules verbatim: BEA single-decimal MoM core PCE excl food&energy > 0.2% -> YES; close 2026-07-30 08:25 ET"
+      ]
+    },
+    {
+      "ticker": "KXRANKLISTSONGSPOTUSA-26AUG01-ARI",
+      "title": "Will Ariana Grande be #1 on Any Spotify Daily Top Songs USA chart in July 2026? (at least one day)",
+      "q_claude": 0.51,
+      "q_codex": 0.69,
+      "q_all": [0.47, 0.55, 0.70, 0.68],
+      "rationale": "Family divergence 0.18 EXCEEDS the 0.10 gate -> engine auto-skips + flags for human review (protocol tie-le #2, system working). Opus family (0.47/0.55) skeptical: lead single 'hate that i made you love me' fell off #1 in early June, now #4 and declining, no July #1 yet -> whole outcome hinges on the ONE-day July 31 'Petal' album release. Codex family (0.68/0.70) leans to the superstar-album-day base rate (release-day track commonly tops Spotify US Daily). Also a 32pt divergence below the ~$26M-volume liquid market (0.92), which likely prices pre-save/streaming data the estimators lack. No trade.",
+      "sources": [
+        "kworb.net Spotify US Daily (07-16): 'hate that i made you love me' #4, peak #1 x4 all early June (weekly US: 06-04 #1, 06-11 #1, 06-18 #3, 06-25 #3, 07-02 #4); incumbent #1 Ella Langley 'Choosin Texas' ~1.5M/day",
+        "Variety/Billboard 2026: Ariana Grande album 'Petal' releases 2026-07-31 (Republic/Babydoll); teasing 'Oh Well'/'Freak' on IG 07-08"
+      ]
+    }
+  ],
+  "arbiter_vetoed": [
+    {
+      "ticker": "KXLLM1-26JUL31-A",
+      "title": "Best AI in Jul 2026? (Anthropic top-ranked LLM on LMArena Overall on Jul 31, 2026)",
+      "q_claude": 0.445,
+      "q_codex": 0.425,
+      "q_all": [0.42, 0.47, 0.42, 0.43],
+      "market_mid": 0.945,
+      "veto_reason": "STRUCTURAL-DIVERGENCE / WE-ARE-BEHIND. Blind consensus 0.435 vs liquid market 0.945 (oi 52k) = 51pt gap, and family div is tight (0.02) so decide() would fire a large NO bet at 6c that no code gate stops. All four estimators mis-modeled leaderboard dynamics: they treated Claude Fable 5's 1-point Arena-Score lead over GPT-5.6 Sol as a coin-flip that random-walks 1-2pts/day, but established Arena scores with ~7.3M votes are STICKY (new votes barely move a high-N score), Rank(UB) is already CI-aware, and Anthropic holds slots 1/3/7 + the highest-Arena-Score tiebreak. For Anthropic to lose, a non-Anthropic model must beat ALL Anthropic top models on Rank(UB) within 15 days -- a high bar. True value is far closer to the market (~0.85-0.92) than to the ensemble's 0.44; the ensemble number is unreliable for Kelly sizing and the arbiter may not substitute its own number, so the correct action is to KILL, not create a corrected NO. Same species (LLM-priced binary vs liquid market, big divergence = we-are-behind) as the 07-13 KXRT-ODY vetoes and the blind-ai/CORE-council moratorium findings.",
+      "sources": [
+        "openlm.ai / Chatbot Arena Overall (07-16): 1. Claude Fable 5 1510, 2. GPT-5.6 Sol 1509, 3. Claude Opus 4.8 Thinking 1506, 4. GPT-5.5-high 1506, 5. GPT-5.6 Terra 1505, 6. Grok-4.5 1505, 7. Claude Opus 4.7 Thinking 1504, 8. Gemini-3.1-Pro 1504"
+      ]
+    }
+  ],
+  "skipped": []
+}
