@@ -28,10 +28,23 @@ function Running($needle) {
 
 function Check-Once {
     # --- quant loop (money path) ---
-    if (-not (Running "quant_loop.py")) {
+    # 2026-07-16 修 07-13 事故盲区: 进程存在但挂死 14.4h, 旧检查只看进程在不在。
+    # 循环正常每刻 (~5-9min) 必写日志; >30min 没动 = 挂死 -> 杀掉, 由下面重启逻辑拉起。
+    $alive = Running "quant_loop.py"
+    if ($alive) {
+        $lw = (Get-Item "$repo\data\quant_loop.log" -ErrorAction SilentlyContinue).LastWriteTime
+        if ((-not $lw) -or (((Get-Date) - $lw).TotalMinutes -gt 30)) {
+            Get-CimInstance Win32_Process -Filter "Name='python.exe'" |
+                Where-Object { $_.CommandLine -like "*quant_loop.py*" } |
+                ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
+            Log "KILL quant_loop (hung: log stale >30min)"
+            $alive = $false
+        }
+    }
+    if (-not $alive) {
         Start-Process -FilePath $py -ArgumentList "scripts\quant_loop.py" `
             -WorkingDirectory $repo -WindowStyle Hidden
-        Log "RESTART quant_loop (was down)"
+        Log "RESTART quant_loop (was down/hung)"
     }
     # --- tick capture daemon (data path) ---
     if (-not (Running "ws_capture.py")) {
