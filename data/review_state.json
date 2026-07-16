@@ -1,6 +1,6 @@
 {
-  "ts": "2026-07-14T00:22",
-  "review_no": 17,
-  "note": "Review #17 = h15maker DUPLICATE re-flag #6 (same lane KXETH15M, same persistent realized -4.56 drawdown as #12/#13/#14/#15/#16). Flag ts 2026-07-13T22:00:21, ~5 min after #16 (review_state 21:55) — quant_loop rewrites per-tick on persistent drawdown, not a new event. Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=765, newer rows all KXHIGH weather; KXETH*15M settled=61 (unchanged). Config h15 confirmed floor: live_sides=[yes], max_contracts=1, hard_stop_steps=1, per-position -3 hard_stop already fired. FREEZE-14 HOLD, zero config change; proposal already in change_proposals.jsonl via #12, not re-logged. Deleted duplicate flag. last_review_id unchanged (drawdown trigger, no id cursor). Appended Review #17 to SHORTCYCLE_DESIGN.md. h15 isolation adjudication deferred to 07-23.",
+  "ts": "2026-07-16T04:09",
+  "review_no": 18,
+  "note": "Review #18 = h15maker DUPLICATE re-flag #7 (same lane KXETH15M, same persistent realized -4.56 drawdown as #12-#17). Flag ts 2026-07-14T00:32:44, ~10min after #17. Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=765, 740-765 all daily disloc rows; KXETH15M settled=61 net +1.73 unchanged (-4.56 is h10_shadow maker figure). Config h15 confirmed floor; -3 per-position hard_stop already fired. FREEZE-14 HOLD, zero config change. Strategy proposal already logged via #12 (proposal[7]); NOT re-logged. NEW: appended operational proposal to suppress re-flag storm (loop rewrites review_due every ~10min on persistent floor-config drawdown, burned 7 review cycles). Deleted review_due_h15maker.json + stale .parked-freeze14. Appended Review #18 to SHORTCYCLE_DESIGN.md. h15 isolation adjudication deferred to 07-23.",
   "last_review_id": 739
 }

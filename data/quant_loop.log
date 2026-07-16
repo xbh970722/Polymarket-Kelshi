@@ -2171,3 +2171,15 @@
 [07-16 04:06:51] janitor: reaped leaked sessions ['65776', '65836', '70596', '69112', '63012', '60324', '66120', '44636', '67548', '61276', '57688', '19104', '55788', '37320', '35036', '59860', '73204', '66248', '62636']
 [07-16 04:06:52]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-16 04:06:53]   report: wrote reports\report_2026-07-16.md
+[07-16 04:07:00] committed + pushed
+[07-16 04:08:51]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:08:53]   h10: h10: 1 in-window | h10 shadow(main): n=940 mean -1.3c total $-12.57 | KXETH15M: n=314 net $-3.06 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (1 pending) || H13 final6: n=120 win 119/120 net $+2.06 gate: accumulating (clean n=45)
+[07-16 04:11:18]   settle: done: 0 settled, 1 still open
+[07-16 04:11:20]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:11:26]   mktsnap: mktsnap: 3 quotes recorded, 29 outcomes resolved
+[07-16 04:11:26]   shortcycle: shortcycle disabled
+[07-16 04:11:26]   favorites: favorites lane disabled
+[07-16 04:11:27]   h10: h10: 0 in-window | h10 shadow(main): n=940 mean -1.3c total $-12.57 | KXETH15M: n=314 net $-3.06 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (2 pending) || H13 final6: n=120 win 119/120 net $+2.06 gate: accumulating (clean n=45)
+[07-16 04:11:28]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-16 04:11:28]   weather: done: 0 weather orders
+[07-16 04:11:34]   disloc: disloc: +0 events, 14 settled | disloc shadow: AMBIGUOUS: n=375 win 77% EV -1.2c | BOOK-ONLY: n=267 win 84% EV +2.5c | SPOT-MOVE: n=621 win 67% EV +0.4c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (79 pending)
