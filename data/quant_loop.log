@@ -3298,3 +3298,13 @@
 [07-16 08:20:53]   pmwatch: pmwatch: +47 pairs | pmwatch: 20063 rows, 6201 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-16 08:20:54]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-16 08:20:55]   report: wrote reports\report_2026-07-16.md
+[07-16 08:20:57] committed + pushed
+[07-16 08:21:01]   pmwatch: pmwatch: +47 pairs | pmwatch: 20075 rows, 6205 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 08:21:02]   manage: done: 0 exited, 0 flagged for review, 1 holding
+[07-16 08:21:03]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 — active ledger row lacks cash-move time
+[07-16 08:21:03]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-16 08:21:03]   reconcile: CASH OK: adj balance $44.52 ~ expected $44.52 (drift $+0.00, reserved $0.00)
+[07-16 08:21:03]   reconcile: reconcile: 1 tickers, 1 mismatches — INVESTIGATE
+[07-16 08:21:04]   wxfade: wxfade: +3 logged, 0 settled | wxfade shadow: n=210 win 72.9% mean net -5.4c/contract total $-11.25 | gate: ARCHIVE (edge dead) (37 pending)
+[07-16 08:21:06]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-16 08:21:07]   report: wrote reports\report_2026-07-16.md
