@@ -2219,3 +2219,28 @@ bash: line 1: /de
 [07-16 09:23:49]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-16 09:23:50]   h10: h10: 0 in-window | h10 shadow(main): n=971 mean -1.3c total $-12.35 | KXETH15M: n=325 net $-1.90 | KXSOL15M: n=324 net $-9.12 | KXBTC15M: n=322 net $-1.33 | gate: KILL (1 pending) || H13 final6: n=132 win 130/132 net $+1.37 gate: ARCHIVE (clean n=57)
 [07-16 09:23:50]   journal: journal written: realized today $+0.00, 0 settled, 2 fills
+[07-16 09:23:51] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-16 09:23:52] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-16 09:23:52] light mark committed + pushed
+[07-16 09:26:35]   settle: done: 0 settled, 3 still open
+[07-16 09:26:35]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-16 09:26:36]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[07-16 09:26:36]   shortcycle: shortcycle disabled
+[07-16 09:26:37]   favorites: favorites lane disabled
+[07-16 09:26:37]   h10: h10: 0 in-window | h10 shadow(main): n=971 mean -1.3c total $-12.35 | KXETH15M: n=325 net $-1.90 | KXSOL15M: n=324 net $-9.12 | KXBTC15M: n=322 net $-1.33 | gate: KILL (1 pending) || H13 final6: n=132 win 130/132 net $+1.37 gate: ARCHIVE (clean n=57)
+[07-16 09:26:40]   weather: weather: 12 priced buckets | spent $0.90/999999.00
+[07-16 09:26:40]   weather: done: 0 weather orders
+[07-16 09:26:43]   disloc: DISLOC KXBTCD-26JUL1612-T64899.99: fav 0.96->0.84 ask 0.85 [SPOT-MOVE] tau 33m
+[07-16 09:26:43]   disloc: DISLOC KXBTCD-26JUL1612-T64799.99: fav 0.92->0.72 ask 0.73 [SPOT-MOVE] tau 33m
+[07-16 09:26:43]   disloc: DISLOC KXBTCD-26JUL1612-T64699.99: fav 0.85->0.54 ask 0.54 [SPOT-MOVE] tau 33m
+[07-16 09:26:43]   disloc: DISLOC KXBTCD-26JUL1617-T64999.99: fav 0.79->0.71 ask 0.71 [SPOT-MOVE] tau 333m
+[07-16 09:26:43]   disloc: DISLOC KXETHD-26JUL1612-T1889.99: fav 0.94->0.80 ask 0.81 [SPOT-MOVE] tau 33m
+[07-16 09:26:43]   disloc: DISLOC KXSOLD-26JUL1617-T76.9999: fav 0.84->0.72 ask 0.74 [SPOT-MOVE] tau 333m
+[07-16 09:26:43]   disloc: disloc: +6 events, 0 settled | disloc shadow: AMBIGUOUS: n=381 win 77% EV -1.1c | BOOK-ONLY: n=273 win 84% EV +2.3c | SPOT-MOVE: n=631 win 67% EV +0.6c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (91 pending)
+[07-16 09:26:50]   pmwatch: pmwatch: +28 pairs | pmwatch: 20183 rows, 6233 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 09:26:51]   journal: journal written: realized today $+0.00, 0 settled, 2 fills
+[07-16 09:26:51]   report: wrote reports\report_2026-07-16.md
