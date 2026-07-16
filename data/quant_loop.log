@@ -3210,3 +3210,8 @@
 [07-16 08:05:33]   pmwatch: pmwatch: +46 pairs | pmwatch: 20015 rows, 6188 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-16 08:05:34]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-16 08:05:35]   report: wrote reports\report_2026-07-16.md
+[07-16 08:05:35]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=380 win 77% EV -1.1c | BOOK-ONLY: n=273 win 84% EV +2.3c | SPOT-MOVE: n=627 win 67% EV +0.5c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (83 pending)
+[07-16 08:05:37] committed + pushed
+[07-16 08:05:45]   pmwatch: pmwatch: +46 pairs | pmwatch: 20027 rows, 6192 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 08:05:46]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-16 08:05:47]   report: wrote reports\report_2026-07-16.md
