@@ -2190,3 +2190,12 @@
 [07-16 04:11:46]   reconcile: CASH OK: adj balance $57.52 ~ expected $57.52 (drift $+0.00, reserved $0.00)
 [07-16 04:11:46]   reconcile: reconcile: 1 tickers, 1 mismatches â€” INVESTIGATE
 [07-16 04:11:47]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=210 win 72.9% mean net -5.4c/contract total $-11.25 | gate: ARCHIVE (edge dead) (14 pending)
+[07-16 04:14:40] === quant_loop started pid=57996 ===
+[07-16 04:15:12]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:15:15]   h10: h10: 0 in-window | h10 shadow(main): n=941 mean -1.3c total $-12.51 | KXETH15M: n=315 net $-2.99 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (0 pending) || H13 final6: n=121 win 120/121 net $+2.07 gate: accumulating (clean n=46)
+[07-16 04:15:21]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:15:22]   h10: h10: 0 in-window | h10 shadow(main): n=941 mean -1.3c total $-12.51 | KXETH15M: n=315 net $-2.99 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (0 pending) || H13 final6: n=121 win 120/121 net $+2.07 gate: accumulating (clean n=46)
+[07-16 04:17:45]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:17:46]   h10: h10: 0 in-window | h10 shadow(main): n=941 mean -1.3c total $-12.51 | KXETH15M: n=315 net $-2.99 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (0 pending) || H13 final6: n=121 win 120/121 net $+2.07 gate: accumulating (clean n=46)
+[07-16 04:17:51]   h15: VOL REGIME elevated: h15 no new resting bids (fills = knives in a trend; today 4/8 proved it)
+[07-16 04:17:52]   h10: h10: 0 in-window | h10 shadow(main): n=941 mean -1.3c total $-12.51 | KXETH15M: n=315 net $-2.99 | KXSOL15M: n=316 net $-7.93 | KXBTC15M: n=310 net $-1.58 | gate: KILL (0 pending) || H13 final6: n=121 win 120/121 net $+2.07 gate: accumulating (clean n=46)
