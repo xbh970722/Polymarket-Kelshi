@@ -3129,3 +3129,7 @@
 [07-16 07:50:26]   pmwatch: pmwatch: +48 pairs | pmwatch: 19967 rows, 6172 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-16 07:50:27]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-16 07:50:27]   report: wrote reports\report_2026-07-16.md
+[07-16 07:50:30] committed + pushed
+[07-16 07:50:35]   pmwatch: pmwatch: +48 pairs | pmwatch: 19979 rows, 6176 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 07:50:36]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-16 07:50:36]   report: wrote reports\report_2026-07-16.md
