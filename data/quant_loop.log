@@ -2183,3 +2183,10 @@
 [07-16 04:11:28]   weather: weather: 0 priced buckets | spent $0.00/999999.00
 [07-16 04:11:28]   weather: done: 0 weather orders
 [07-16 04:11:34]   disloc: disloc: +0 events, 14 settled | disloc shadow: AMBIGUOUS: n=375 win 77% EV -1.2c | BOOK-ONLY: n=267 win 84% EV +2.5c | SPOT-MOVE: n=621 win 67% EV +0.4c | UNKNOWN: n=7 win 29% EV -41.9c | gate: accumulating (79 pending)
+[07-16 04:11:45]   pmwatch: pmwatch: +57 pairs | pmwatch: 19283 rows, 5957 kalshi-matched | |divergence| median 4.4c, p90 17.0c (gate n>=300)
+[07-16 04:11:45]   manage: done: 0 exited, 0 flagged for review, 1 holding
+[07-16 04:11:46]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 â€” active ledger row lacks cash-move time
+[07-16 04:11:46]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-16 04:11:46]   reconcile: CASH OK: adj balance $57.52 ~ expected $57.52 (drift $+0.00, reserved $0.00)
+[07-16 04:11:46]   reconcile: reconcile: 1 tickers, 1 mismatches â€” INVESTIGATE
+[07-16 04:11:47]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=210 win 72.9% mean net -5.4c/contract total $-11.25 | gate: ARCHIVE (edge dead) (14 pending)
