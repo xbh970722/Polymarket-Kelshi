@@ -1,6 +1,6 @@
 {
-  "ts": "2026-07-17T00:22",
-  "review_no": 19,
-  "note": "Review #19 = h15maker DUPLICATE re-flag #8 (same lane KXETH15M, same persistent -4.56 h10_shadow drawdown as #12-#18). Flag ts 2026-07-16T06:45:14, ~2.6h after #18, quant_loop re-wrote on next calm-vol tick (pipeline.py:1644-1656). Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=769 (766-769 daily disloc); KXETH15M settled=61 net +1.73 unchanged; no live/pending 15M exposure. Config h15 at floor. FREEZE-14 HOLD, zero config change. Did NOT disable h15 (would make revival user-exclusive, pre-empting 07-23 isolation adjudication). Operational dedup proposal already logged #18 (2026-07-16T04:09); NOT re-logged. Deleted review_due_h15maker.json. Appended Review #19 to SHORTCYCLE_DESIGN.md.",
+  "ts": "2026-07-17T03:22",
+  "review_no": 20,
+  "note": "Review #20 = h15maker DUPLICATE re-flag #9 (same lane KXETH15M, same static -4.56 h10_shadow drawdown as #12-#19). Flag ts 2026-07-17T00:30:36, ~8min after #19 (review_state ts 2026-07-17T00:22), quant_loop re-wrote on next calm-vol tick (pipeline.py:1644-1656; -4.56<=-3 floor + if-not-exists). Verified ledger.db: ZERO rows id>739 with 15M ticker; max(id)=769 unchanged (740-769 all daily-disloc/weather/PCE); KXETH15M settled=61 net +1.73 (live positive, unchanged); no live/pending/open 15M exposure. Config h15 at floor. FREEZE-14 HOLD, zero config change. Did NOT disable h15 (revival would become user-exclusive, pre-empting 07-23 isolation adjudication). Operational dedup proposal already logged #18 (2026-07-16T04:09); NOT re-logged. Deleted review_due_h15maker.json. Appended Review #20 to SHORTCYCLE_DESIGN.md.",
   "last_review_id": 739
 }
