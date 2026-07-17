@@ -4044,3 +4044,10 @@ bash: line 1: /de
 [07-16 21:41:35]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=210 win 72.9% mean net -5.4c/contract total $-11.25 | gate: ARCHIVE (edge dead) (46 pending)
 [07-16 21:41:37]   journal: journal written: realized today $-0.57, 1 settled, 4 fills
 [07-16 21:41:38]   report: wrote reports\report_2026-07-16.md
+[07-16 21:41:39] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-16 21:41:40] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-16 21:41:40] committed + pushed
