@@ -3375,3 +3375,21 @@ bash: line 1: /de
 [07-16 19:23:49]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-16 19:23:49]   h10: h10: 1 in-window | h10 shadow(main): n=1021 mean -1.1c total $-11.33 | KXETH15M: n=346 net $-1.60 | KXSOL15M: n=339 net $-7.72 | KXBTC15M: n=336 net $-2.00 | gate: KILL (3 pending) || H13 final6: n=143 win 140/143 net $+0.63 gate: ARCHIVE (clean n=68)
 [07-16 19:23:50]   journal: journal written: realized today $-0.57, 1 settled, 4 fills
+[07-16 19:23:51] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-16 19:23:52] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-16 19:23:52] light mark committed + pushed
+[07-16 19:26:36]   settle: done: 0 settled, 4 still open
+[07-16 19:26:36]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-16 19:26:37]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-16 19:26:38]   shortcycle: shortcycle disabled
+[07-16 19:26:38]   favorites: favorites lane disabled
+[07-16 19:26:39]   h10: h10: 0 in-window | h10 shadow(main): n=1021 mean -1.1c total $-11.33 | KXETH15M: n=346 net $-1.60 | KXSOL15M: n=339 net $-7.72 | KXBTC15M: n=336 net $-2.00 | gate: KILL (4 pending) || H13 final6: n=143 win 140/143 net $+0.63 gate: ARCHIVE (clean n=68)
+[07-16 19:26:40]   weather: weather: daily entry cap reached (3)
+[07-16 19:26:42]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=402 win 76% EV -1.5c | BOOK-ONLY: n=286 win 84% EV +2.6c | SPOT-MOVE: n=649 win 68% EV +1.1c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (85 pending)
+[07-16 19:26:56]   pmwatch: pmwatch: +52 pairs | pmwatch: 21113 rows, 6524 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-16 19:26:57]   journal: journal written: realized today $-0.57, 1 settled, 4 fills
+[07-16 19:26:57]   report: wrote reports\report_2026-07-16.md
