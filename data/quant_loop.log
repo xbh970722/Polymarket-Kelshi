@@ -3077,3 +3077,10 @@ bash: line 1: /de
 [07-16 18:20:33]   pmwatch: pmwatch: +44 pairs | pmwatch: 21005 rows, 6490 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-16 18:20:34]   journal: journal written: realized today $-0.57, 1 settled, 4 fills
 [07-16 18:20:35]   report: wrote reports\report_2026-07-16.md
+[07-16 18:20:35] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-16 18:20:37] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-16 18:20:37] committed + pushed
