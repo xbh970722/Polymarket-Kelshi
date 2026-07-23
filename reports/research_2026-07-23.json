@@ -1,0 +1,43 @@
+{
+  "date": "2026-07-23",
+  "items": [
+    {
+      "ticker": "KXHOOD-26JULFUNDED-P28000000.0",
+      "title": "Will Robinhood Markets Inc. report above 28 million funded customers in Q2 2026?",
+      "q_claude": 0.04,
+      "q_codex": 0.10,
+      "q_all": [0.03, 0.05, 0.08, 0.12],
+      "rationale": "Core: end-May 2026 funded customers = 27.7M with decelerating monthly net adds (Mar->Apr ~+190K, Apr->May ~+110K); a June-end figure above 28.0M requires ~+300-350K in one month, roughly 3x recent pace, so NO is strongly favored (consensus P(YES)~0.07). Risk: June figure not yet public; a crypto/retail signup surge could re-accelerate adds. Divergence: tight (Opus family 0.04 vs Codex family 0.10, div 0.06). Verification (2026-07-23): Q2 2026 earnings confirmed for July 29, 2026 (resolves before Aug 28 close); no June operating data pre-released and no breaking news of a June surge; April's record trading volumes/$5B net deposits reflect existing-customer activity, not new funded-customer adds. All four estimators same direction (NO) vs market YES ~0.42.",
+      "sources": [
+        "https://investors.robinhood.com/news-releases/news-release-details/robinhood-reports-first-quarter-2026-results",
+        "https://investors.robinhood.com/static-files/fba0ca81-7ab8-4ffe-b979-ef477c569fbb",
+        "https://investors.robinhood.com/events/event-details/robinhood-q2-2026-earnings"
+      ]
+    },
+    {
+      "ticker": "KXCPIYOY-26JUL-T3.4",
+      "title": "Will the rate of CPI inflation be above 3.4% for the year ending in July 2026?",
+      "q_claude": 0.21,
+      "q_codex": 0.295,
+      "q_all": [0.22, 0.20, 0.30, 0.29],
+      "rationale": "Core: resolution uses the one-decimal BLS value, so 'above 3.4%' requires a reported >=3.5% (true YoY ~>=3.45%). Cleveland Fed nowcast (updated 2026-07-22) = 3.37%, which rounds to 3.4% = NO; YES needs ~+0.08pp above nowcast, within normal one-month CPI nowcast error, so ~0.20-0.30. Risk/divergence: Codex family (0.295) weights July energy rebound risk higher than Opus family (0.21), div 0.085 (below 0.10 gate). Verification (2026-07-23): gasoline rose $3.777->$3.855 (Jul 6->13) and base case is a July headline rebound since energy will not repeat June's -5.7% drop; but the 07-22 nowcast post-dates this and already embeds it at 3.37%. Consensus ~0.25 vs market ~0.30 = thin NO edge; likely no-trade after fees.",
+      "sources": [
+        "https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting",
+        "https://www.bls.gov/opub/ted/2026/consumer-prices-up-3-5-percent-over-the-year-ended-june-2026.htm",
+        "https://qz.com/us-cpi-june-2026-inflation-gasoline-071426"
+      ]
+    },
+    {
+      "ticker": "KXSPACEXCOUNT-26JUL-14",
+      "title": "How many launches will SpaceX have in July 2026? (Above 14)",
+      "q_claude": 0.385,
+      "q_codex": 0.255,
+      "q_all": [0.45, 0.32, 0.24, 0.27],
+      "rationale": "Core: 'more than 14' = >=15 SpaceX launches in July 2026 (FAA source). ~10 Falcon launches through July 21 (Jul 2,5,7,9,11,14x2,16,21x2); named remaining manifest (Jul 25,29,30) only reaches ~13; reaching 15 needs 5 more in the final 10 days. FAMILY DIVERGENCE 0.13 > 0.10 -> engine auto-skips (flagged for human review). Crux: Opus family extrapolates the ~0.47/day pace to ~14.8 (0.385); Codex family weights the thin named manifest and 2026 base rate (only 1 of 6 months exceeded 14) to ~0.255. Not traded; market YES ~0.10 vs consensus ~0.32. No round-2 forced: low confidence the ensemble beats a manifest-tracking liquid market, and freeze discipline argues against manufacturing a trade against divergence.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
+        "https://www.nasaspaceflight.com/2026/07/launch-preview-072026/"
+      ]
+    }
+  ]
+}
