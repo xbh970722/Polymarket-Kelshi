@@ -3128,3 +3128,40 @@ bash: line 1: /de
 [07-23 01:02:54]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-23 01:02:55]   h10: h10: 0 in-window | h10 shadow(main): n=1151 mean -0.6c total $-6.85 | KXETH15M: n=390 net $-0.15 | KXSOL15M: n=380 net $-4.42 | KXBTC15M: n=381 net $-2.28 | gate: KILL (0 pending) || H13 final6: n=164 win 161/164 net $+1.03 gate: ARCHIVE (clean n=89)
 [07-23 01:02:57]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-23 01:02:58] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-23 01:03:00] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-23 01:03:00] light mark committed + pushed
+[07-23 01:05:51]   settle: WARN  KXALITOANNOUNCERETIRE-26JUN-AUG01: fetch failed (503 Server Error: Service Unavailable for url: https://api.elections.kalshi.com/trade-api/v2/markets/KXALITOANNOUNCERETIRE-26JUN-AUG01)
+[07-23 01:05:51]   settle: done: 0 settled, 1 still open
+[07-23 01:05:51]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-23 01:05:55]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[07-23 01:05:56]   shortcycle: shortcycle disabled
+[07-23 01:05:56]   favorites: favorites lane disabled
+[07-23 01:05:58]   h10: h10: 0 in-window | h10 shadow(main): n=1151 mean -0.6c total $-6.85 | KXETH15M: n=390 net $-0.15 | KXSOL15M: n=380 net $-4.42 | KXBTC15M: n=381 net $-2.28 | gate: KILL (0 pending) || H13 final6: n=164 win 161/164 net $+1.03 gate: ARCHIVE (clean n=89)
+[07-23 01:06:03] CRITICAL: step weather exited 1
+[07-23 01:06:03]   weather: Traceback (most recent call last):
+[07-23 01:06:03]   weather:   File "<frozen runpy>", line 198, in _run_module_as_main
+[07-23 01:06:03]   weather:   File "<frozen runpy>", line 88, in _run_code
+[07-23 01:06:03]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2838, in <module>
+[07-23 01:06:03]   weather:     main()
+[07-23 01:06:03]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2834, in main
+[07-23 01:06:03]   weather:     args.fn(args)
+[07-23 01:06:03]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 925, in cmd_weather
+[07-23 01:06:03]   weather:     balance = float(client.balance().get("balance_dollars") or 0)
+[07-23 01:06:03]   weather:                     ^^^^^^^^^^^^^^^^
+[07-23 01:06:03]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 125, in balance
+[07-23 01:06:03]   weather:     return self._req("GET", f"{API}/portfolio/balance")
+[07-23 01:06:03]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[07-23 01:06:03]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 94, in _req
+[07-23 01:06:03]   weather:     raise RuntimeError(
+[07-23 01:06:03]   weather: RuntimeError: GET /trade-api/v2/portfolio/balance -> HTTP 503: {"error":{"code":"service_unavailable","message":"service_unavailable","service":"query-exchange"}}
+[07-23 01:06:03]   weather: 
+[07-23 01:06:03]   weather: CRITICAL step weather exited 1
+[07-23 01:06:06]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=464 win 78% EV -0.8c | BOOK-ONLY: n=362 win 86% EV +2.8c | SPOT-MOVE: n=717 win 67% EV +0.4c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (22 pending)
+[07-23 01:06:23]   pmwatch: pmwatch: +56 pairs | pmwatch: 23264 rows, 7168 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-23 01:06:24]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-23 01:06:25]   report: wrote reports\report_2026-07-23.md
