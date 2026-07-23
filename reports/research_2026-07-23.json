@@ -1,42 +1,44 @@
 {
   "date": "2026-07-23",
+  "cycle": "scheduled ensemble (2xOpus4.8 + 2xCodex gpt-5.5 xhigh, arbiter Opus 4.8)",
   "items": [
     {
       "ticker": "KXHOOD-26JULFUNDED-P28000000.0",
       "title": "Will Robinhood Markets Inc. report above 28 million funded customers in Q2 2026?",
-      "q_claude": 0.04,
-      "q_codex": 0.10,
-      "q_all": [0.03, 0.05, 0.08, 0.12],
-      "rationale": "Core: end-May 2026 funded customers = 27.7M with decelerating monthly net adds (Mar->Apr ~+190K, Apr->May ~+110K); a June-end figure above 28.0M requires ~+300-350K in one month, roughly 3x recent pace, so NO is strongly favored (consensus P(YES)~0.07). Risk: June figure not yet public; a crypto/retail signup surge could re-accelerate adds. Divergence: tight (Opus family 0.04 vs Codex family 0.10, div 0.06). Verification (2026-07-23): Q2 2026 earnings confirmed for July 29, 2026 (resolves before Aug 28 close); no June operating data pre-released and no breaking news of a June surge; April's record trading volumes/$5B net deposits reflect existing-customer activity, not new funded-customer adds. All four estimators same direction (NO) vs market YES ~0.42.",
+      "q_claude": 0.115,
+      "q_codex": 0.16,
+      "q_all": [0.15, 0.08, 0.16, 0.16],
+      "rationale": "Core: funded customers grew a mechanically steady +110k in BOTH Mar->Apr (to 27.6M) and Apr->May (to 27.7M); the Q2 (June-30) figure projects to ~27.8M. '>28,000,000' needs +~300k in June = ~2.7x the consistent pace, with no surge evidence. Q2 earnings confirmed July 29, 2026 (resolves before Aug 28 close). Family divergence 0.045 < 0.10 -> valid consensus ~0.14. Market YES ~0.42 looks like genuine mispricing (or pricing an unproven Trump-Accounts/Gold-Card catalyst). Strong NO lean; strict threshold (28.0M exactly = NO). Independently corroborated by an earlier same-day ensemble draw (consensus ~0.07 NO).",
       "sources": [
-        "https://investors.robinhood.com/news-releases/news-release-details/robinhood-reports-first-quarter-2026-results",
-        "https://investors.robinhood.com/static-files/fba0ca81-7ab8-4ffe-b979-ef477c569fbb",
-        "https://investors.robinhood.com/events/event-details/robinhood-q2-2026-earnings"
+        "https://www.globenewswire.com/news-release/2026/07/02/3321550/0/en/Robinhood-Markets-Inc-to-Announce-Second-Quarter-2026-Results-on-July-29-2026.html",
+        "https://www.quiverquant.com/news/Robinhood+Reports+Significant+Growth+in+May+2026+Monthly+Operating+Data",
+        "https://www.octagonai.co/markets/companies/kpis/robinhood-funded-customers-in-2026/"
       ]
     },
     {
       "ticker": "KXCPIYOY-26JUL-T3.4",
       "title": "Will the rate of CPI inflation be above 3.4% for the year ending in July 2026?",
-      "q_claude": 0.21,
-      "q_codex": 0.295,
-      "q_all": [0.22, 0.20, 0.30, 0.29],
-      "rationale": "Core: resolution uses the one-decimal BLS value, so 'above 3.4%' requires a reported >=3.5% (true YoY ~>=3.45%). Cleveland Fed nowcast (updated 2026-07-22) = 3.37%, which rounds to 3.4% = NO; YES needs ~+0.08pp above nowcast, within normal one-month CPI nowcast error, so ~0.20-0.30. Risk/divergence: Codex family (0.295) weights July energy rebound risk higher than Opus family (0.21), div 0.085 (below 0.10 gate). Verification (2026-07-23): gasoline rose $3.777->$3.855 (Jul 6->13) and base case is a July headline rebound since energy will not repeat June's -5.7% drop; but the 07-22 nowcast post-dates this and already embeds it at 3.37%. Consensus ~0.25 vs market ~0.30 = thin NO edge; likely no-trade after fees.",
+      "q_claude": 0.145,
+      "q_codex": 0.21,
+      "q_all": [0.10, 0.19, 0.20, 0.22],
+      "rationale": "Core: BLS one-decimal rounding means '>3.4%' requires a reported >=3.5%, i.e. true YoY >=3.45%. Cleveland Fed nowcast (updated 07/22) = 3.37% YoY (Motley Fool cites 3.32%), core 2.52%; July MoM 0.04%. Central rounds to 3.4% => NO; YES needs ~+0.08pp surprise (~0.8 sigma). Family divergence 0.065 < 0.10 (valid consensus ~0.18). RISK (verification 07/23): June CPI printed ~3.5% YoY on a large one-off energy DROP; the Iran ceasefire collapsed and oil is SPIKING late July -> real upside risk to July CPI that the blind estimators underweighted and that the elevated ~0.31 market may already price. NO remains the base case but edge is compressed and boundary-fragile; likely thin/no-trade after fees.",
       "sources": [
         "https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting",
-        "https://www.bls.gov/opub/ted/2026/consumer-prices-up-3-5-percent-over-the-year-ended-june-2026.htm",
-        "https://qz.com/us-cpi-june-2026-inflation-gasoline-071426"
+        "https://www.fool.com/investing/2026/07/20/federal-reserve-july-inflation-forecast-red-flag/",
+        "https://www.cnbc.com/2026/07/14/consumer-price-index-inflation-report-june-2026.html"
       ]
     },
     {
       "ticker": "KXSPACEXCOUNT-26JUL-14",
       "title": "How many launches will SpaceX have in July 2026? (Above 14)",
-      "q_claude": 0.385,
-      "q_codex": 0.255,
-      "q_all": [0.45, 0.32, 0.24, 0.27],
-      "rationale": "Core: 'more than 14' = >=15 SpaceX launches in July 2026 (FAA source). ~10 Falcon launches through July 21 (Jul 2,5,7,9,11,14x2,16,21x2); named remaining manifest (Jul 25,29,30) only reaches ~13; reaching 15 needs 5 more in the final 10 days. FAMILY DIVERGENCE 0.13 > 0.10 -> engine auto-skips (flagged for human review). Crux: Opus family extrapolates the ~0.47/day pace to ~14.8 (0.385); Codex family weights the thin named manifest and 2026 base rate (only 1 of 6 months exceeded 14) to ~0.255. Not traded; market YES ~0.10 vs consensus ~0.32. No round-2 forced: low confidence the ensemble beats a manifest-tracking liquid market, and freeze discipline argues against manufacturing a trade against divergence.",
+      "q_claude": 0.645,
+      "q_codex": 0.24,
+      "q_all": [0.94, 0.35, 0.26, 0.22],
+      "rationale": "Core: 'more than 14' = >=15 SpaceX launches in July 2026 (FAA source). 9 Falcon 9 launches completed July 1-21 (anchors: Jul1=77th F9, Jul10=81st, Jul21=85th of 2026); ~8 days left, need 6 more; ~0.67/day required vs ~0.43/day month pace; named remaining manifest (Jul 25/29/30 F9 + Starship NET Jul23, already aborted once) only reaches ~13, so 15+ hinges on 2+ unscheduled Starlink adds. FAMILY DIVERGENCE 0.405 >> 0.10 -> ENGINE AUTO-SKIP / FLAG FOR HUMAN. Opus-inside 0.94 is an outlier (assumed easy adds). NOTE all four estimators sit ABOVE the ~7% market, hinting the market may underprice >=15, but buying a 7c longshot on manifest-timing is the favorite-longshot trap; skip is disciplined. Prior same-day draw also skipped (div 0.13).",
       "sources": [
-        "https://en.wikipedia.org/wiki/List_of_Falcon_9_and_Falcon_Heavy_launches",
-        "https://www.nasaspaceflight.com/2026/07/launch-preview-072026/"
+        "https://spaceflightnow.com/2026/07/",
+        "https://spaceflightnow.com/2026/07/21/live-coverage-spacex-tries-again-to-launch-starlink-mission-from-california-following-abort/",
+        "https://www.space.com/space-exploration/launches-spacecraft/spacex-starlink-17-46-b1100-vsfb-ocisly"
       ]
     }
   ]
