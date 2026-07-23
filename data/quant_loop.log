@@ -2775,3 +2775,22 @@ bash: line 1: /de
 [07-23 07:02:52]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-23 07:02:53]   h10: h10: 0 in-window | h10 shadow(main): n=1174 mean -0.5c total $-5.34 | KXETH15M: n=397 net $+0.61 | KXSOL15M: n=386 net $-4.78 | KXBTC15M: n=391 net $-1.17 | gate: KILL (0 pending) || H13 final6: n=171 win 168/171 net $+1.21 gate: ARCHIVE (clean n=96)
 [07-23 07:02:54]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-23 07:02:54] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-23 07:02:55] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-23 07:02:55] light mark committed + pushed
+[07-23 07:05:47]   settle: done: 0 settled, 1 still open
+[07-23 07:05:48]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-23 07:05:51]   mktsnap: mktsnap: 3 quotes recorded, 17 outcomes resolved
+[07-23 07:05:51]   shortcycle: shortcycle disabled
+[07-23 07:05:51]   favorites: favorites lane disabled
+[07-23 07:05:52]   h10: h10: 0 in-window | h10 shadow(main): n=1174 mean -0.5c total $-5.34 | KXETH15M: n=397 net $+0.61 | KXSOL15M: n=386 net $-4.78 | KXBTC15M: n=391 net $-1.17 | gate: KILL (0 pending) || H13 final6: n=171 win 168/171 net $+1.21 gate: ARCHIVE (clean n=96)
+[07-23 07:05:53]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-23 07:05:53]   weather: done: 0 weather orders
+[07-23 07:05:57]   disloc: disloc: +0 events, 14 settled | disloc shadow: AMBIGUOUS: n=471 win 77% EV -0.9c | BOOK-ONLY: n=368 win 85% EV +2.1c | SPOT-MOVE: n=727 win 67% EV -0.0c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (31 pending)
+[07-23 07:06:07]   pmwatch: pmwatch: +57 pairs | pmwatch: 23820 rows, 7292 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-23 07:06:08]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-23 07:06:09]   report: wrote reports\report_2026-07-23.md
