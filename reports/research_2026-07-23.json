@@ -40,6 +40,32 @@
         "https://spaceflightnow.com/2026/07/21/live-coverage-spacex-tries-again-to-launch-starlink-mission-from-california-following-abort/",
         "https://www.space.com/space-exploration/launches-spacecraft/spacex-starlink-17-46-b1100-vsfb-ocisly"
       ]
+    },
+    {
+      "ticker": "KXCPI-26JUL-T0.1",
+      "title": "Will CPI rise more than 0.1% in July 2026? | Above 0.1% (single-decimal headline MoM)",
+      "q_claude": 0.22,
+      "q_codex": 0.21,
+      "q_all": [0.16, 0.28, 0.20, 0.22],
+      "rationale": "SECOND cycle of 2026-07-23. Core: Cleveland Fed nowcast (updated 2026-07-23) puts July HEADLINE CPI MoM at +0.04%, rounding to 0.0% single-decimal; YES ('>0.1%') requires published >=0.2%, i.e. true monthly change >=~0.15% (a ~+0.11pp upside surprise). All four blind estimators clustered 0.16-0.28; family means 0.22 vs 0.21 diverge 0.01. Main risk: nowcast monthly error band +/-0.1-0.15pp; late-July oil spike could lift headline (same energy risk flagged on the sibling CPIYoY-3.4 held position). Divergence point: outside-view (0.28) weights nowcast upper-tail; inside-view (0.16) trusts the point. Verification: same-day (07-23) Cleveland nowcast is the authoritative data-layer check; release Aug 12, social adds no edge. Modest NO lean; edge is thin after fees.",
+      "sources": [
+        "https://www.clevelandfed.org/indicators-and-data/inflation-nowcasting (2026-07-23: headline CPI MoM +0.04%, core +0.21%, YoY 3.37%)"
+      ]
+    },
+    {
+      "ticker": "KXHOOD-26JULFUNDED-P27900000.0",
+      "title": "Will Robinhood report above 27.9 million funded customers in Q2 2026 (as of June 30)?",
+      "q_claude": 0.43,
+      "q_codex": 0.47,
+      "q_all": [0.10, 0.30, 0.28, 0.18],
+      "rationale": "SECOND cycle of 2026-07-23; nested-band sibling of the held NO@28M. Blind consensus P(YES)~0.21 from trend: May 27.7M + steady ~110k/mo (Apr +110k, May +110k) -> June ~27.81M, below 27.9M. VERIFICATION FOUND MATERIAL DISCONFIRMING EVIDENCE: June 2026 was a RECORD month (SpaceX IPO drove record platform traffic; event-contract vol +60% MoM, options +38%, equity +27%, crypto +38%; WonderFi close; analysts expect >28M funded in 2026). This falsifies the blind 'steady/decelerating adds' premise -> half-anchor cap lifted, re-estimate free. BUT funded-customers is a slow metric (two months of exactly +110k), trading-activity records != funded-account adds, and WonderFi Canadian customers most likely do NOT count toward RH's funded definition; clearing 27.9M needs ~+200k June adds (near double trend). Round-2 family finals raised to ~0.45 (still slight NO lean, conviction sharply reduced from blind 0.21). Divergence point: market ~0.74 far above model -- market may conflate 'record activity' with 'record signups' or hold Q1-call guidance we lack. INTRA-FAMILY FLAG: Opus inside/outside blind spread 0.10 vs 0.30 = 0.20 (>0.10) -> human review. Concentration: already hold correlated NO@28M; $3 per-trade cap governs size.",
+      "sources": [
+        "https://investors.robinhood.com/news-releases/news-release-details/robinhood-reports-first-quarter-2026-results (Q1 2026: 27.4M funded, +6% YoY)",
+        "https://www.globenewswire.com/news-release/2026/06/09/ (May 2026 operating data: 27.7M funded, +~110k MoM, $377B assets)",
+        "https://www.fool.com/investing/2026/05/27/ (27.6M funded accounts, late May)",
+        "https://finance.yahoo.com/markets/stocks/articles/robinhood-record-june-winning-more-124646210.html (record June activity; SpaceX IPO traffic surge; WonderFi close)",
+        "https://www.octagonai.co/markets/companies/kpis/robinhood-funded-customers-in-2026/ (consensus expects >28M funded in 2026)"
+      ]
     }
   ]
 }
