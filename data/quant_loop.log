@@ -2948,3 +2948,22 @@ bash: line 1: /de
 [07-23 15:17:09]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-23 15:17:10]   h10: h10: 0 in-window | h10 shadow(main): n=1221 mean -0.6c total $-7.47 | KXETH15M: n=415 net $-1.50 | KXSOL15M: n=400 net $-5.28 | KXBTC15M: n=406 net $-0.69 | gate: KILL (0 pending) || H13 final6: n=182 win 179/182 net $+1.50 gate: ARCHIVE (clean n=107)
 [07-23 15:17:11]   journal: journal written: realized today $+0.00, 0 settled, 5 fills
+[07-23 15:17:12] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-23 15:17:13] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-23 15:17:13] light mark committed + pushed
+[07-23 15:20:37]   settle: done: 0 settled, 6 still open
+[07-23 15:20:38]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-23 15:20:40]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-23 15:20:40]   shortcycle: shortcycle disabled
+[07-23 15:20:41]   favorites: favorites lane disabled
+[07-23 15:20:41]   h10: h10: 0 in-window | h10 shadow(main): n=1221 mean -0.6c total $-7.47 | KXETH15M: n=415 net $-1.50 | KXSOL15M: n=400 net $-5.28 | KXBTC15M: n=406 net $-0.69 | gate: KILL (0 pending) || H13 final6: n=182 win 179/182 net $+1.50 gate: ARCHIVE (clean n=107)
+[07-23 15:20:42]   weather: weather: daily entry cap reached (3)
+[07-23 15:20:45]   disloc: DISLOC KXSOLD-26JUL2318-T75.7499: fav 0.90->0.80 ask 0.81 [AMBIGUOUS] tau 39m
+[07-23 15:20:45]   disloc: disloc: +1 events, 0 settled | disloc shadow: AMBIGUOUS: n=497 win 77% EV -1.3c | BOOK-ONLY: n=376 win 85% EV +2.2c | SPOT-MOVE: n=746 win 67% EV -0.2c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (34 pending)
+[07-23 15:20:52]   pmwatch: pmwatch: +34 pairs | pmwatch: 24512 rows, 7497 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-23 15:20:53]   journal: journal written: realized today $+0.00, 0 settled, 5 fills
+[07-23 15:20:53]   report: wrote reports\report_2026-07-23.md
