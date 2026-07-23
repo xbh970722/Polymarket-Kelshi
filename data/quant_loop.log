@@ -2207,3 +2207,25 @@ bash: line 1: /de
 [07-23 12:47:39]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-23 12:47:40]   h10: h10: 0 in-window | h10 shadow(main): n=1205 mean -0.4c total $-5.29 | KXETH15M: n=408 net $-0.33 | KXSOL15M: n=395 net $-4.80 | KXBTC15M: n=402 net $-0.16 | gate: KILL (0 pending) || H13 final6: n=181 win 178/181 net $+1.49 gate: ARCHIVE (clean n=106)
 [07-23 12:47:41]   journal: journal written: realized today $+0.00, 0 settled, 5 fills
+[07-23 12:47:41] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-23 12:47:43] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-23 12:47:43] light mark committed + pushed
+[07-23 12:50:39]   settle: done: 0 settled, 6 still open
+[07-23 12:50:39]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-23 12:50:40]   mktsnap: mktsnap: 10 quotes recorded, 3 outcomes resolved
+[07-23 12:50:41]   shortcycle: shortcycle disabled
+[07-23 12:50:41]   favorites: favorites lane disabled
+[07-23 12:50:42]   h10: h10: 1 in-window | h10 shadow(main): n=1205 mean -0.4c total $-5.29 | KXETH15M: n=408 net $-0.33 | KXSOL15M: n=395 net $-4.80 | KXBTC15M: n=402 net $-0.16 | gate: KILL (1 pending) || H13 final6: n=181 win 178/181 net $+1.49 gate: ARCHIVE (clean n=106)
+[07-23 12:50:42]   weather: weather: daily entry cap reached (3)
+[07-23 12:50:45]   disloc: DISLOC KXBTCD-26JUL2315-T64799.99: fav 0.79->0.32 ask 0.33 [SPOT-MOVE] tau 9m
+[07-23 12:50:45]   disloc: DISLOC KXETHD-26JUL2315-T1879.99: fav 0.81->0.53 ask 0.54 [AMBIGUOUS] tau 9m
+[07-23 12:50:45]   disloc: DISLOC KXSOLD-26JUL2315-T75.7499: fav 0.81->0.56 ask 0.59 [AMBIGUOUS] tau 9m
+[07-23 12:50:45]   disloc: DISLOC KXSOLD-26JUL2317-T75.9999: fav 0.84->0.74 ask 0.78 [AMBIGUOUS] tau 129m
+[07-23 12:50:45]   disloc: disloc: +4 events, 0 settled | disloc shadow: AMBIGUOUS: n=483 win 77% EV -1.2c | BOOK-ONLY: n=371 win 85% EV +1.9c | SPOT-MOVE: n=738 win 67% EV +0.1c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (46 pending)
+[07-23 12:50:54]   pmwatch: pmwatch: +39 pairs | pmwatch: 24272 rows, 7431 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-23 12:50:55]   journal: journal written: realized today $+0.00, 0 settled, 5 fills
+[07-23 12:50:56]   report: wrote reports\report_2026-07-23.md
