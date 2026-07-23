@@ -3366,3 +3366,26 @@ bash: line 1: /de
 [07-23 09:02:52]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-23 09:02:53]   h10: h10: 0 in-window | h10 shadow(main): n=1187 mean -0.4c total $-5.05 | KXETH15M: n=402 net $+0.11 | KXSOL15M: n=390 net $-4.38 | KXBTC15M: n=395 net $-0.78 | gate: KILL (0 pending) || H13 final6: n=173 win 170/173 net $+1.29 gate: ARCHIVE (clean n=98)
 [07-23 09:02:54]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-23 09:02:55] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-23 09:02:57] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-23 09:02:57] light mark committed + pushed
+[07-23 09:05:47]   settle: done: 0 settled, 1 still open
+[07-23 09:05:48]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-23 09:05:52]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-23 09:05:52]   shortcycle: shortcycle disabled
+[07-23 09:05:52]   favorites: favorites lane disabled
+[07-23 09:05:53]   h10: h10: 0 in-window | h10 shadow(main): n=1187 mean -0.4c total $-5.05 | KXETH15M: n=402 net $+0.11 | KXSOL15M: n=390 net $-4.38 | KXBTC15M: n=395 net $-0.78 | gate: KILL (0 pending) || H13 final6: n=173 win 170/173 net $+1.29 gate: ARCHIVE (clean n=98)
+[07-23 09:05:59]   weather: weather: 12 priced buckets | spent $0.00/999999.00
+[07-23 09:05:59]   weather: LIVE  KXHIGHPHIL-26JUL23-B79.5: YES x3 @ 4.0c cost=$0.13 q_model=0.30 vs mkt=0.03 mu=81.0F sigma=2.0 order=0831b9d5-be82-45cc-8253-42948f3603d5
+[07-23 09:05:59]   weather: LIVE  KXHIGHNY-26JUL23-B83.5: YES x3 @ 4.0c cost=$0.13 q_model=0.30 vs mkt=0.04 mu=82.0F sigma=2.0 order=361675e0-cfb5-41ca-aed7-d9ff138d5ed8
+[07-23 09:05:59]   weather: LIVE  KXHIGHMIA-26JUL23-B90.5: YES x3 @ 10.0c cost=$0.32 q_model=0.30 vs mkt=0.10 mu=92.0F sigma=1.0 order=a26f0c11-a441-428f-88ad-90514f1eee11
+[07-23 09:05:59]   weather: weather: daily entry cap reached (in-run)
+[07-23 09:05:59]   weather: done: 3 weather orders
+[07-23 09:06:04]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=472 win 77% EV -1.0c | BOOK-ONLY: n=368 win 85% EV +2.1c | SPOT-MOVE: n=735 win 67% EV +0.2c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (37 pending)
+[07-23 09:06:14]   pmwatch: pmwatch: +30 pairs | pmwatch: 24007 rows, 7352 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-23 09:06:15]   journal: journal written: realized today $+0.00, 0 settled, 3 fills
+[07-23 09:06:16]   report: wrote reports\report_2026-07-23.md
