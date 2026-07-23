@@ -3079,3 +3079,6 @@ bash: line 1: /de
 [07-23 00:52:51]   wxfade: wxfade: +9 logged, 40 settled | wxfade shadow: n=269 win 72.1% mean net -6.0c/contract total $-16.04 | gate: ARCHIVE (edge dead) (20 pending)
 [07-23 00:52:53]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
 [07-23 00:52:54]   report: wrote reports\report_2026-07-23.md
+[07-23 00:53:17] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
