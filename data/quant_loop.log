@@ -4179,3 +4179,23 @@ bash: line 1: /de
 [07-24 11:08:24]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-24 11:08:25]   h10: h10: 1 in-window | h10 shadow(main): n=1280 mean -0.8c total $-10.53 | KXETH15M: n=433 net $-2.63 | KXSOL15M: n=419 net $-5.29 | KXBTC15M: n=428 net $-2.60 | gate: KILL (1 pending) || H13 final6: n=193 win 190/193 net $+1.74 gate: ARCHIVE (clean n=118)
 [07-24 11:08:26]   journal: journal written: realized today $-0.58, 3 settled, 3 fills
+[07-24 11:08:27] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-24 11:08:28] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-24 11:08:28] light mark committed + pushed
+[07-24 11:11:51]   settle: done: 0 settled, 8 still open
+[07-24 11:11:52]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-24 11:11:54]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-24 11:11:54]   shortcycle: shortcycle disabled
+[07-24 11:11:54]   favorites: favorites lane disabled
+[07-24 11:11:55]   h10: h10: 0 in-window | h10 shadow(main): n=1280 mean -0.8c total $-10.53 | KXETH15M: n=433 net $-2.63 | KXSOL15M: n=419 net $-5.29 | KXBTC15M: n=428 net $-2.60 | gate: KILL (1 pending) || H13 final6: n=193 win 190/193 net $+1.74 gate: ARCHIVE (clean n=118)
+[07-24 11:11:56]   weather: weather: daily entry cap reached (3)
+[07-24 11:11:58]   disloc: DISLOC KXBTCD-26JUL2414-T63799.99: fav 0.82->0.68 ask 0.68 [BOOK-ONLY] tau 48m
+[07-24 11:11:58]   disloc: DISLOC KXBTCD-26JUL2414-T63699.99: fav 0.93->0.84 ask 0.85 [BOOK-ONLY] tau 48m
+[07-24 11:11:58]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=541 win 77% EV -1.0c | BOOK-ONLY: n=402 win 85% EV +2.2c | SPOT-MOVE: n=768 win 67% EV -0.2c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (40 pending)
+[07-24 11:12:05]   pmwatch: pmwatch: +30 pairs | pmwatch: 25589 rows, 7818 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-24 11:12:06]   journal: journal written: realized today $-0.58, 3 settled, 3 fills
+[07-24 11:12:07]   report: wrote reports\report_2026-07-24.md
