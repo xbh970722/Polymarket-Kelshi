@@ -3505,3 +3505,13 @@ bash: line 1: /de
 [07-25 09:20:23]   pmwatch: pmwatch: +4 pairs | pmwatch: 27422 rows, 8379 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-25 09:20:24]   journal: journal written: realized today $-0.21, 3 settled, 3 fills
 [07-25 09:20:25]   report: wrote reports\report_2026-07-25.md
+[07-25 09:20:26] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-25 09:20:27] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-25 09:20:27] committed + pushed
+[07-25 09:23:23]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-25 09:23:24]   h10: h10: 0 in-window | h10 shadow(main): n=1361 mean -0.8c total $-11.32 | KXETH15M: n=463 net $-4.10 | KXSOL15M: n=448 net $-5.10 | KXBTC15M: n=450 net $-2.12 | gate: KILL (0 pending) || H13 final6: n=217 win 214/217 net $+2.34 gate: ARCHIVE (clean n=142)
+[07-25 09:23:25]   journal: journal written: realized today $-0.21, 3 settled, 3 fills
