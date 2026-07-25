@@ -4059,3 +4059,13 @@ bash: line 1: /de
 [07-25 03:00:20]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-25 03:00:21]   h10: h10: 0 in-window | h10 shadow(main): n=1345 mean -0.8c total $-11.17 | KXETH15M: n=457 net $-2.85 | KXSOL15M: n=440 net $-5.97 | KXBTC15M: n=448 net $-2.35 | gate: KILL (0 pending) || H13 final6: n=212 win 209/212 net $+2.24 gate: ARCHIVE (clean n=137)
 [07-25 03:00:22]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-25 03:00:23] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-25 03:00:25] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-25 03:00:25] light mark committed + pushed
+[07-25 03:02:42]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-25 03:02:43]   h10: h10: 0 in-window | h10 shadow(main): n=1345 mean -0.8c total $-11.17 | KXETH15M: n=457 net $-2.85 | KXSOL15M: n=440 net $-5.97 | KXBTC15M: n=448 net $-2.35 | gate: KILL (0 pending) || H13 final6: n=212 win 209/212 net $+2.24 gate: ARCHIVE (clean n=137)
+[07-25 03:02:44]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
