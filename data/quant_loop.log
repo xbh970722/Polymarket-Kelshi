@@ -3732,3 +3732,34 @@ bash: line 1: /de
 [07-25 01:53:15]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-25 01:53:16]   h10: h10: 0 in-window | h10 shadow(main): n=1338 mean -0.9c total $-12.04 | KXETH15M: n=454 net $-3.26 | KXSOL15M: n=438 net $-6.24 | KXBTC15M: n=446 net $-2.54 | gate: KILL (0 pending) || H13 final6: n=209 win 206/209 net $+2.19 gate: ARCHIVE (clean n=134)
 [07-25 01:53:17]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-25 01:53:18] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-25 01:53:19] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-25 01:53:19] light mark committed + pushed
+[07-25 01:56:49]   settle: done: 0 settled, 7 still open
+[07-25 01:56:49]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-25 01:56:50]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-25 01:56:51]   shortcycle: shortcycle disabled
+[07-25 01:56:51]   favorites: favorites lane disabled
+[07-25 01:56:52]   h10: h10: 0 in-window | h10 shadow(main): n=1338 mean -0.9c total $-12.04 | KXETH15M: n=454 net $-3.26 | KXSOL15M: n=438 net $-6.24 | KXBTC15M: n=446 net $-2.54 | gate: KILL (0 pending) || H13 final6: n=209 win 206/209 net $+2.19 gate: ARCHIVE (clean n=134)
+[07-25 01:56:52]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-25 01:56:52]   weather: done: 0 weather orders
+[07-25 01:56:55]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=555 win 77% EV -1.1c | BOOK-ONLY: n=455 win 85% EV +1.8c | SPOT-MOVE: n=777 win 67% EV +0.0c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (8 pending)
+[07-25 01:57:06]   pmwatch: pmwatch: +53 pairs | pmwatch: 26923 rows, 8240 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-25 01:57:07]   manage: done: 0 exited, 0 flagged for review, 7 holding
+[07-25 01:57:07]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 â€” active ledger row lacks cash-move time
+[07-25 01:57:07]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-25 01:57:07]   reconcile: OK       KXCPIYOY-26JUL-T3.4: -3
+[07-25 01:57:07]   reconcile: OK       KXHIGHMIA-26JUL24-B89.5: +3
+[07-25 01:57:07]   reconcile: OK       KXHIGHNY-26JUL24-B81.5: -1
+[07-25 01:57:07]   reconcile: OK       KXHIGHPHIL-26JUL24-B84.5: -1
+[07-25 01:57:07]   reconcile: OK       KXHOOD-26JULFUNDED-P27900000.0: -14
+[07-25 01:57:07]   reconcile: OK       KXHOOD-26JULFUNDED-P28000000.0: -6
+[07-25 01:57:07]   reconcile: CASH OK: adj balance $30.15 ~ expected $30.15 (drift $+0.00, reserved $0.00)
+[07-25 01:57:07]   reconcile: reconcile: 7 tickers, 1 mismatches â€” INVESTIGATE
+[07-25 01:57:10]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=298 win 73.2% mean net -5.1c/contract total $-15.34 | gate: ARCHIVE (edge dead) (43 pending)
+[07-25 01:57:11]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-25 01:57:12]   report: wrote reports\report_2026-07-25.md
