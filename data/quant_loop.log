@@ -2415,3 +2415,24 @@ bash: line 1: /de
 [07-26 06:23:51]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-26 06:23:52]   h10: h10: 2 in-window | h10 shadow(main): n=1449 mean -0.5c total $-6.72 | KXETH15M: n=500 net $-3.11 | KXSOL15M: n=475 net $-4.12 | KXBTC15M: n=474 net $+0.51 | gate: KILL (2 pending) || H13 final6: n=237 win 234/237 net $+2.80 gate: ARCHIVE (clean n=162)
 [07-26 06:23:53]   journal: journal written: realized today $-0.76, 3 settled, 0 fills
+[07-26 06:23:54] git push rejected: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de -> merge -X ours + retry
+[07-26 06:23:55] git push retry FAILED: fatal: Unable to persist credentials with the 'wincredman' credential store.
+See https://aka.ms/gcm/credstores for more information.
+bash: line 1: /de
+[07-26 06:23:55] light mark committed + pushed
+[07-26 06:26:12]   settle: done: 0 settled, 4 still open
+[07-26 06:26:12]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-26 06:26:13]   mktsnap: mktsnap: 3 quotes recorded, 1 outcomes resolved
+[07-26 06:26:14]   shortcycle: shortcycle disabled
+[07-26 06:26:14]   favorites: favorites lane disabled
+[07-26 06:26:15]   h10: h10: 0 in-window | h10 shadow(main): n=1449 mean -0.5c total $-6.72 | KXETH15M: n=500 net $-3.11 | KXSOL15M: n=475 net $-4.12 | KXBTC15M: n=474 net $+0.51 | gate: KILL (3 pending) || H13 final6: n=237 win 234/237 net $+2.80 gate: ARCHIVE (clean n=162)
+[07-26 06:26:15]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-26 06:26:15]   weather: done: 0 weather orders
+[07-26 06:26:18]   disloc: DISLOC KXETHD-26JUL2609-T1889.99: fav 0.84->0.70 ask 0.71 [AMBIGUOUS] tau 34m
+[07-26 06:26:18]   disloc: DISLOC KXSOLD-26JUL2609-T74.9999: fav 0.81->0.72 ask 0.74 [AMBIGUOUS] tau 34m
+[07-26 06:26:18]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=575 win 77% EV -1.1c | BOOK-ONLY: n=514 win 85% EV +2.7c | SPOT-MOVE: n=783 win 67% EV +0.2c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (22 pending)
+[07-26 06:26:27]   pmwatch: pmwatch: +41 pairs | pmwatch: 28947 rows, 8836 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-26 06:26:28]   journal: journal written: realized today $-0.76, 3 settled, 0 fills
+[07-26 06:26:29]   report: wrote reports\report_2026-07-26.md
