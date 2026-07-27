@@ -3477,3 +3477,20 @@ bash: line 1: /de
 [07-27 16:47:35]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000018A96B9E720>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
 [07-27 16:47:35]   h10: h10: 0 in-window | h10 shadow(main): n=1622 mean -0.9c total $-14.16 | KXETH15M: n=560 net $-5.73 | KXSOL15M: n=529 net $-7.28 | KXBTC15M: n=533 net $-1.14 | gate: KILL (0 pending) || H13 final6: n=279 win 276/279 net $+3.74 gate: ARCHIVE (clean n=204)
 [07-27 16:47:36]   journal: journal written: realized today $+0.26, 3 settled, 3 fills
+[07-27 16:47:36] git push rejected: fatal: unable to access 'https://github.com/xbh970722/Polymarket-Kelshi.git/': Could not resolve host: github.com
+ -> merge -X ours + retry
+[07-27 16:47:36] git merge failed and aborted: fatal: unable to access 'https://github.com/xbh970722/Polymarket-Kelshi.git/': Could not resolve host: github.com
+ (will retry next mark)
+[07-27 16:47:36] light mark committed + pushed
+[07-27 16:50:44]   settle: WARN  KXALITOANNOUNCERETIRE-26JUN-AUG01: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets/KXALITOANNOUNCERETIRE-26JUN-AUG01 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000255AABE3BF0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[07-27 16:50:44]   settle: done: 0 settled, 7 still open
+[07-27 16:50:46]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-27 16:50:47]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-27 16:50:48]   shortcycle: shortcycle disabled
+[07-27 16:50:48]   favorites: favorites lane disabled
+[07-27 16:50:49]   h10: h10: 3 in-window | h10 shadow(main): n=1622 mean -0.9c total $-14.16 | KXETH15M: n=560 net $-5.73 | KXSOL15M: n=529 net $-7.28 | KXBTC15M: n=533 net $-1.14 | gate: KILL (3 pending) || H13 final6: n=279 win 276/279 net $+3.74 gate: ARCHIVE (clean n=204)
+[07-27 16:50:50]   weather: weather: daily entry cap reached (3)
+[07-27 16:50:54]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=673 win 78% EV -0.0c | BOOK-ONLY: n=558 win 85% EV +3.0c | SPOT-MOVE: n=920 win 68% EV +1.4c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (50 pending)
+[07-27 16:51:10]   pmwatch: pmwatch: +32 pairs | pmwatch: 31730 rows, 9679 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-27 16:51:11]   journal: journal written: realized today $+0.26, 3 settled, 3 fills
+[07-27 16:51:12]   report: wrote reports\report_2026-07-27.md
