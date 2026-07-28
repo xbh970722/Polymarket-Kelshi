@@ -2197,3 +2197,7 @@ bash: line 1: /de
 [07-27 20:27:10]   pmwatch: pmwatch: +57 pairs | pmwatch: 32066 rows, 9788 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
 [07-27 20:27:11]   journal: journal written: realized today $+0.26, 3 settled, 3 fills
 [07-27 20:27:12]   report: wrote reports\report_2026-07-27.md
+[07-27 20:27:15] committed + pushed
+[07-27 20:30:17]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-27 20:30:18]   h10: h10: 0 in-window | h10 shadow(main): n=1642 mean -0.9c total $-14.17 | KXETH15M: n=566 net $-6.05 | KXSOL15M: n=536 net $-7.61 | KXBTC15M: n=540 net $-0.51 | gate: KILL (0 pending) || H13 final6: n=283 win 280/283 net $+3.81 gate: ARCHIVE (clean n=208)
+[07-27 20:30:19]   journal: journal written: realized today $+0.26, 3 settled, 3 fills
