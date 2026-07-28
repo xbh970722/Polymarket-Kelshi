@@ -3380,3 +3380,7 @@ bash: line 1: /de
 [07-28 03:00:22]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-28 03:00:23]   h10: h10: 0 in-window | h10 shadow(main): n=1673 mean -1.0c total $-17.35 | KXETH15M: n=577 net $-7.06 | KXSOL15M: n=544 net $-8.88 | KXBTC15M: n=552 net $-1.41 | gate: KILL (0 pending) || H13 final6: n=294 win 291/294 net $+4.05 gate: ARCHIVE (clean n=219)
 [07-28 03:00:24]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[07-28 03:00:26] light mark committed + pushed
+[07-28 03:02:16]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-28 03:02:17]   h10: h10: 0 in-window | h10 shadow(main): n=1673 mean -1.0c total $-17.35 | KXETH15M: n=577 net $-7.06 | KXSOL15M: n=544 net $-8.88 | KXBTC15M: n=552 net $-1.41 | gate: KILL (0 pending) || H13 final6: n=294 win 291/294 net $+4.05 gate: ARCHIVE (clean n=219)
+[07-28 03:02:18]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
