@@ -2683,3 +2683,19 @@
 [07-28 08:38:31]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-28 08:38:32]   h10: h10: 1 in-window | h10 shadow(main): n=1703 mean -1.0c total $-17.10 | KXETH15M: n=587 net $-7.06 | KXSOL15M: n=554 net $-8.78 | KXBTC15M: n=562 net $-1.26 | gate: KILL (1 pending) || H13 final6: n=299 win 296/299 net $+4.19 gate: ARCHIVE (clean n=224)
 [07-28 08:38:33]   journal: journal written: realized today $-1.28, 3 settled, 0 fills
+[07-28 08:38:35] light mark committed + pushed
+[07-28 08:41:30]   settle: done: 0 settled, 4 still open
+[07-28 08:41:30]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-28 08:41:32]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-28 08:41:32]   shortcycle: shortcycle disabled
+[07-28 08:41:32]   favorites: favorites lane disabled
+[07-28 08:41:33]   h10: h10: 0 in-window | h10 shadow(main): n=1703 mean -1.0c total $-17.10 | KXETH15M: n=587 net $-7.06 | KXSOL15M: n=554 net $-8.78 | KXBTC15M: n=562 net $-1.26 | gate: KILL (2 pending) || H13 final6: n=299 win 296/299 net $+4.19 gate: ARCHIVE (clean n=224)
+[07-28 08:41:34]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[07-28 08:41:34]   weather: done: 0 weather orders
+[07-28 08:41:37]   disloc: DISLOC KXBTCD-26JUL2811-T63399.99: fav 0.94->0.80 ask 0.81 [AMBIGUOUS] tau 18m
+[07-28 08:41:37]   disloc: DISLOC KXBTCD-26JUL2811-T63299.99: fav 0.85->0.62 ask 0.63 [AMBIGUOUS] tau 18m
+[07-28 08:41:37]   disloc: DISLOC KXETHD-26JUL2811-T1884.99: fav 0.80->0.60 ask 0.61 [SPOT-MOVE] tau 18m
+[07-28 08:41:37]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=724 win 78% EV +0.5c | BOOK-ONLY: n=588 win 85% EV +3.0c | SPOT-MOVE: n=968 win 68% EV +1.1c | UNKNOWN: n=9 win 22% EV -47.9c | gate: accumulating (88 pending)
+[07-28 08:41:49]   pmwatch: pmwatch: +56 pairs | pmwatch: 33223 rows, 10154 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-28 08:41:49]   journal: journal written: realized today $-1.28, 3 settled, 0 fills
+[07-28 08:41:50]   report: wrote reports\report_2026-07-28.md
