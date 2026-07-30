@@ -3183,3 +3183,18 @@
 [07-30 17:38:16]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-30 17:38:17]   h10: h10: 0 in-window | h10 shadow(main): n=1819 mean -0.9c total $-15.97 | KXETH15M: n=627 net $-6.97 | KXSOL15M: n=589 net $-6.16 | KXBTC15M: n=603 net $-2.84 | gate: KILL (0 pending) || H13 final6: n=323 win 319/323 net $+3.77 gate: ARCHIVE (clean n=248)
 [07-30 17:38:18]   journal: journal written: realized today $-6.66, 5 settled, 3 fills
+[07-30 17:38:20] light mark committed + pushed
+[07-30 17:41:29]   settle: done: 0 settled, 5 still open
+[07-30 17:41:32]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-30 17:41:33]   mktsnap: mktsnap: 8 quotes recorded, 0 outcomes resolved
+[07-30 17:41:34]   shortcycle: shortcycle disabled
+[07-30 17:41:34]   favorites: favorites lane disabled
+[07-30 17:41:35]   h10: h10: 0 in-window | h10 shadow(main): n=1819 mean -0.9c total $-15.97 | KXETH15M: n=627 net $-6.97 | KXSOL15M: n=589 net $-6.16 | KXBTC15M: n=603 net $-2.84 | gate: KILL (1 pending) || H13 final6: n=323 win 319/323 net $+3.77 gate: ARCHIVE (clean n=248)
+[07-30 17:41:36]   weather: weather: daily entry cap reached (3)
+[07-30 17:41:38]   disloc: DISLOC KXBTCD-26JUL3020-T64899.99: fav 0.82->0.74 ask 0.75 [BOOK-ONLY] tau 18m
+[07-30 17:41:38]   disloc: DISLOC KXETHD-26JUL3020-T1924.99: fav 0.97->0.46 ask 0.47 [SPOT-MOVE] tau 18m
+[07-30 17:41:38]   disloc: DISLOC KXETHD-26JUL3020-T1919.99: fav 0.98->0.88 ask 0.88 [SPOT-MOVE] tau 18m
+[07-30 17:41:38]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=784 win 78% EV +0.7c | BOOK-ONLY: n=613 win 85% EV +3.2c | SPOT-MOVE: n=1063 win 67% EV +0.5c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (89 pending)
+[07-30 17:41:43]   pmwatch: pmwatch: +10 pairs | pmwatch: 34999 rows, 10684 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-30 17:41:44]   journal: journal written: realized today $-6.66, 5 settled, 3 fills
+[07-30 17:41:45]   report: wrote reports\report_2026-07-30.md
