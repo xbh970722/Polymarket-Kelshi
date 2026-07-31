@@ -3318,3 +3318,7 @@
 [07-31 11:45:11]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-31 11:45:12]   h10: h10: 0 in-window | h10 shadow(main): n=1923 mean -0.9c total $-18.04 | KXETH15M: n=660 net $-7.30 | KXSOL15M: n=623 net $-5.61 | KXBTC15M: n=640 net $-5.12 | gate: KILL (4 pending) || H13 final6: n=338 win 333/338 net $+3.13 gate: ARCHIVE (clean n=263)
 [07-31 11:45:13]   journal: journal written: realized today $-0.98, 3 settled, 3 fills
+[07-31 11:45:16] light mark committed + pushed
+[07-31 11:47:19]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-31 11:47:21]   h10: h10: 0 in-window | h10 shadow(main): n=1926 mean -0.9c total $-17.73 | KXETH15M: n=661 net $-7.21 | KXSOL15M: n=624 net $-5.47 | KXBTC15M: n=641 net $-5.05 | gate: KILL (0 pending) || H13 final6: n=339 win 334/339 net $+3.14 gate: ARCHIVE (clean n=264)
+[07-31 11:47:22]   journal: journal written: realized today $-0.98, 3 settled, 3 fills
