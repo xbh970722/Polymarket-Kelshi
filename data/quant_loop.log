@@ -3264,3 +3264,18 @@
 [07-30 18:08:31]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-30 18:08:33]   h10: h10: 0 in-window | h10 shadow(main): n=1822 mean -0.9c total $-16.63 | KXETH15M: n=628 net $-6.82 | KXSOL15M: n=590 net $-6.09 | KXBTC15M: n=604 net $-3.72 | gate: KILL (1 pending) || H13 final6: n=324 win 319/324 net $+2.78 gate: ARCHIVE (clean n=249)
 [07-30 18:08:34]   journal: journal written: realized today $-6.66, 5 settled, 3 fills
+[07-30 18:08:36] light mark committed + pushed
+[07-30 18:11:15]   settle: done: 0 settled, 5 still open
+[07-30 18:11:15]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-30 18:11:17]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[07-30 18:11:18]   shortcycle: shortcycle disabled
+[07-30 18:11:18]   favorites: favorites lane disabled
+[07-30 18:11:19]   h10: h10: 0 in-window | h10 shadow(main): n=1822 mean -0.9c total $-16.63 | KXETH15M: n=628 net $-6.82 | KXSOL15M: n=590 net $-6.09 | KXBTC15M: n=604 net $-3.72 | gate: KILL (1 pending) || H13 final6: n=324 win 319/324 net $+2.78 gate: ARCHIVE (clean n=249)
+[07-30 18:11:20]   weather: weather: daily entry cap reached (3)
+[07-30 18:11:23]   disloc: DISLOC KXBTCD-26JUL3021-T64699.99: fav 0.80->0.56 ask 0.57 [AMBIGUOUS] tau 49m
+[07-30 18:11:23]   disloc: DISLOC KXBTCD-26JUL3021-T64599.99: fav 0.90->0.78 ask 0.78 [AMBIGUOUS] tau 49m
+[07-30 18:11:23]   disloc: DISLOC KXETHD-26JUL3021-T1909.99: fav 0.89->0.80 ask 0.82 [BOOK-ONLY] tau 49m
+[07-30 18:11:23]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=784 win 78% EV +0.7c | BOOK-ONLY: n=614 win 85% EV +3.0c | SPOT-MOVE: n=1072 win 66% EV +0.4c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (84 pending)
+[07-30 18:11:32]   pmwatch: pmwatch: +33 pairs | pmwatch: 35031 rows, 10692 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-30 18:11:33]   journal: journal written: realized today $-6.66, 5 settled, 3 fills
+[07-30 18:11:34]   report: wrote reports\report_2026-07-30.md
