@@ -2481,3 +2481,26 @@
 [07-31 16:32:46]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [07-31 16:32:47]   h10: h10: 0 in-window | h10 shadow(main): n=1940 mean -0.9c total $-18.32 | KXETH15M: n=665 net $-6.75 | KXSOL15M: n=632 net $-6.70 | KXBTC15M: n=643 net $-4.87 | gate: KILL (0 pending) || H13 final6: n=342 win 337/342 net $+3.27 gate: ARCHIVE (clean n=267)
 [07-31 16:32:48]   journal: journal written: realized today $-0.98, 3 settled, 3 fills
+[07-31 16:32:50] light mark committed + pushed
+[07-31 16:35:38]   settle: done: 0 settled, 5 still open
+[07-31 16:35:38]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[07-31 16:35:41]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[07-31 16:35:41]   shortcycle: shortcycle disabled
+[07-31 16:35:42]   favorites: favorites lane disabled
+[07-31 16:35:43]   h10: h10: 0 in-window | h10 shadow(main): n=1940 mean -0.9c total $-18.32 | KXETH15M: n=665 net $-6.75 | KXSOL15M: n=632 net $-6.70 | KXBTC15M: n=643 net $-4.87 | gate: KILL (0 pending) || H13 final6: n=342 win 337/342 net $+3.27 gate: ARCHIVE (clean n=267)
+[07-31 16:35:43]   weather: weather: daily entry cap reached (3)
+[07-31 16:35:46]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=877 win 79% EV +0.8c | BOOK-ONLY: n=677 win 85% EV +3.0c | SPOT-MOVE: n=1158 win 66% EV -0.1c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (8 pending)
+[07-31 16:35:56]   pmwatch: pmwatch: +43 pairs | pmwatch: 36978 rows, 11289 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[07-31 16:35:57]   manage: REVIEW-DUE KXCPIYOY-26JUL-T3.4: held since 2026-07-23 entry 68c mark 72c target 77c -> ensemble re-judge hold/modify/exit
+[07-31 16:35:57]   manage: done: 0 exited, 1 flagged for review, 4 holding
+[07-31 16:35:58]   reconcile: WARN BOOKED_TS NULL #62 KXALITOANNOUNCERETIRE-26JUN-AUG01 YES x1 status=open order_id=? ts=2026-07-04T18:39:56 â€” active ledger row lacks cash-move time
+[07-31 16:35:58]   reconcile: OK       KXALITOANNOUNCERETIRE-26JUN-AUG01: +1
+[07-31 16:35:58]   reconcile: OK       KXCPIYOY-26JUL-T3.4: -3
+[07-31 16:35:58]   reconcile: OK       KXHIGHMIA-26JUL31-B95.5: -1
+[07-31 16:35:58]   reconcile: OK       KXHIGHNY-26JUL31-B84.5: -1
+[07-31 16:35:58]   reconcile: OK       KXHIGHPHIL-26JUL31-B88.5: -1
+[07-31 16:35:58]   reconcile: CASH OK: adj balance $27.90 ~ expected $27.90 (drift $+0.00, reserved $0.00)
+[07-31 16:35:58]   reconcile: reconcile: 5 tickers, 1 mismatches â€” INVESTIGATE
+[07-31 16:35:59]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=451 win 73.4% mean net -4.4c/contract total $-19.94 | gate: ARCHIVE (edge dead) (50 pending)
+[07-31 16:36:00]   journal: journal written: realized today $-0.98, 3 settled, 3 fills
+[07-31 16:36:02]   report: wrote reports\report_2026-07-31.md
