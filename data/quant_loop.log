@@ -2089,3 +2089,183 @@
 [08-03 09:16:33]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002322EA4E720>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
 [08-03 09:16:33]   h10: h10: 0 in-window | h10 shadow(main): n=2218 mean -1.1c total $-23.59 | KXETH15M: n=758 net $-10.93 | KXSOL15M: n=724 net $-10.26 | KXBTC15M: n=736 net $-2.40 | gate: KILL (0 pending) || H13 final6: n=419 win 412/419 net $+2.89 gate: ARCHIVE (clean n=344)
 [08-03 09:17:33]   journal: journal written: realized today $-0.12, 3 settled, 0 fills
+[08-03 09:18:03] git push rejected: fatal: unable to access 'https://github.com/xbh970722/Polymarket-Kelshi.git/': Could not resolve host: github.com
+ -> merge -X ours + retry
+[08-03 09:18:04] git merge failed and aborted: fatal: unable to access 'https://github.com/xbh970722/Polymarket-Kelshi.git/': Could not resolve host: github.com
+ (will retry next mark)
+[08-03 09:18:04] light mark committed + pushed
+[08-03 09:21:04]   settle: WARN  KXCPIYOY-26JUL-T3.4: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets/KXCPIYOY-26JUL-T3.4 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001EB6AC43740>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:21:04]   settle: done: 0 settled, 1 still open
+[08-03 09:21:34]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-03 09:22:34]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[08-03 09:23:04]   shortcycle: shortcycle disabled
+[08-03 09:23:34]   favorites: favorites lane disabled
+[08-03 09:24:04]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000252955DCD10>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:24:04]   h10: WARN KXETH15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXETH15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000252955DE150>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:24:04]   h10: WARN KXSOL15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXSOL15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000252955DE570>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:24:04]   h10: WARN KXBTC15M: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXBTC15M&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000252955DE720>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:24:04]   h10: h10: 0 in-window | h10 shadow(main): n=2218 mean -1.1c total $-23.59 | KXETH15M: n=758 net $-10.93 | KXSOL15M: n=724 net $-10.26 | KXBTC15M: n=736 net $-2.40 | gate: KILL (0 pending) || H13 final6: n=419 win 412/419 net $+2.89 gate: ARCHIVE (clean n=344)
+[08-03 09:24:34] CRITICAL: step weather exited 1
+[08-03 09:24:34]   weather: Traceback (most recent call last):
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+[08-03 09:24:34]   weather:     sock = connection.create_connection(
+[08-03 09:24:34]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+[08-03 09:24:34]   weather:     for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+[08-03 09:24:34]   weather:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 964, in getaddrinfo
+[08-03 09:24:34]   weather:     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[08-03 09:24:34]   weather:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather: socket.gaierror: [Errno 11001] getaddrinfo failed
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: The above exception was the direct cause of the following exception:
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: Traceback (most recent call last):
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+[08-03 09:24:34]   weather:     response = self._make_request(
+[08-03 09:24:34]   weather:                ^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+[08-03 09:24:34]   weather:     raise new_e
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+[08-03 09:24:34]   weather:     self._validate_conn(conn)
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+[08-03 09:24:34]   weather:     conn.connect()
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 704, in connect
+[08-03 09:24:34]   weather:     self.sock = sock = self._new_conn()
+[08-03 09:24:34]   weather:                        ^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 205, in _new_conn
+[08-03 09:24:34]   weather:     raise NameResolutionError(self.host, self, e) from e
+[08-03 09:24:34]   weather: urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x00000138C5C4CC80>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: The above exception was the direct cause of the following exception:
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: Traceback (most recent call last):
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 645, in send
+[08-03 09:24:34]   weather:     resp = conn.urlopen(
+[08-03 09:24:34]   weather:            ^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+[08-03 09:24:34]   weather:     retries = retries.increment(
+[08-03 09:24:34]   weather:               ^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+[08-03 09:24:34]   weather:     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+[08-03 09:24:34]   weather:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather: urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/portfolio/balance (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000138C5C4CC80>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)"))
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: During handling of the above exception, another exception occurred:
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: Traceback (most recent call last):
+[08-03 09:24:34]   weather:   File "<frozen runpy>", line 198, in _run_module_as_main
+[08-03 09:24:34]   weather:   File "<frozen runpy>", line 88, in _run_code
+[08-03 09:24:34]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2838, in <module>
+[08-03 09:24:34]   weather:     main()
+[08-03 09:24:34]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2834, in main
+[08-03 09:24:34]   weather:     args.fn(args)
+[08-03 09:24:34]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 925, in cmd_weather
+[08-03 09:24:34]   weather:     balance = float(client.balance().get("balance_dollars") or 0)
+[08-03 09:24:34]   weather:                     ^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 125, in balance
+[08-03 09:24:34]   weather:     return self._req("GET", f"{API}/portfolio/balance")
+[08-03 09:24:34]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 89, in _req
+[08-03 09:24:34]   weather:     r = self.s.request(method, self.base + bare, json=body, params=params,
+[08-03 09:24:34]   weather:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 592, in request
+[08-03 09:24:34]   weather:     resp = self.send(prep, **send_kwargs)
+[08-03 09:24:34]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 706, in send
+[08-03 09:24:34]   weather:     r = adapter.send(request, **kwargs)
+[08-03 09:24:34]   weather:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:24:34]   weather:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 678, in send
+[08-03 09:24:34]   weather:     raise ConnectionError(e, request=request)
+[08-03 09:24:34]   weather: requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/portfolio/balance (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000138C5C4CC80>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)"))
+[08-03 09:24:34]   weather: 
+[08-03 09:24:34]   weather: CRITICAL step weather exited 1
+[08-03 09:25:04]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=949 win 79% EV +1.3c | BOOK-ONLY: n=753 win 84% EV +2.3c | SPOT-MOVE: n=1251 win 65% EV -0.6c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (67 pending)
+[08-03 09:25:33]   pmwatch: pmwatch: +0 pairs | pmwatch: 40929 rows, 12532 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[08-03 09:25:34]   manage: WARN  KXCPIYOY-26JUL-T3.4: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets/KXCPIYOY-26JUL-T3.4 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000237D3D0CAA0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)"))
+[08-03 09:25:34]   manage: done: 0 exited, 0 flagged for review, 0 holding
+[08-03 09:26:04] CRITICAL: step reconcile exited 1
+[08-03 09:26:04]   reconcile: Traceback (most recent call last):
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 198, in _new_conn
+[08-03 09:26:04]   reconcile:     sock = connection.create_connection(
+[08-03 09:26:04]   reconcile:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\connection.py", line 60, in create_connection
+[08-03 09:26:04]   reconcile:     for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+[08-03 09:26:04]   reconcile:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\socket.py", line 964, in getaddrinfo
+[08-03 09:26:04]   reconcile:     for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+[08-03 09:26:04]   reconcile:                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile: socket.gaierror: [Errno 11001] getaddrinfo failed
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: The above exception was the direct cause of the following exception:
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: Traceback (most recent call last):
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 787, in urlopen
+[08-03 09:26:04]   reconcile:     response = self._make_request(
+[08-03 09:26:04]   reconcile:                ^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 488, in _make_request
+[08-03 09:26:04]   reconcile:     raise new_e
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 464, in _make_request
+[08-03 09:26:04]   reconcile:     self._validate_conn(conn)
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 1093, in _validate_conn
+[08-03 09:26:04]   reconcile:     conn.connect()
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 704, in connect
+[08-03 09:26:04]   reconcile:     self.sock = sock = self._new_conn()
+[08-03 09:26:04]   reconcile:                        ^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connection.py", line 205, in _new_conn
+[08-03 09:26:04]   reconcile:     raise NameResolutionError(self.host, self, e) from e
+[08-03 09:26:04]   reconcile: urllib3.exceptions.NameResolutionError: <urllib3.connection.HTTPSConnection object at 0x0000014484A5C800>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: The above exception was the direct cause of the following exception:
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: Traceback (most recent call last):
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 645, in send
+[08-03 09:26:04]   reconcile:     resp = conn.urlopen(
+[08-03 09:26:04]   reconcile:            ^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py", line 841, in urlopen
+[08-03 09:26:04]   reconcile:     retries = retries.increment(
+[08-03 09:26:04]   reconcile:               ^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\util\retry.py", line 519, in increment
+[08-03 09:26:04]   reconcile:     raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+[08-03 09:26:04]   reconcile:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile: urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/portfolio/positions?limit=200&count_filter=position (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000014484A5C800>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)"))
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: During handling of the above exception, another exception occurred:
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: Traceback (most recent call last):
+[08-03 09:26:04]   reconcile:   File "<frozen runpy>", line 198, in _run_module_as_main
+[08-03 09:26:04]   reconcile:   File "<frozen runpy>", line 88, in _run_code
+[08-03 09:26:04]   reconcile:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2838, in <module>
+[08-03 09:26:04]   reconcile:     main()
+[08-03 09:26:04]   reconcile:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2834, in main
+[08-03 09:26:04]   reconcile:     args.fn(args)
+[08-03 09:26:04]   reconcile:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2297, in cmd_reconcile
+[08-03 09:26:04]   reconcile:     pos = client.positions()
+[08-03 09:26:04]   reconcile:           ^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "D:\Polymarket-Kelshi\src\live.py", line 142, in positions
+[08-03 09:26:04]   reconcile:     page = self._req("GET", f"{API}/portfolio/positions", params=params)
+[08-03 09:26:04]   reconcile:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "D:\Polymarket-Kelshi\src\live.py", line 89, in _req
+[08-03 09:26:04]   reconcile:     r = self.s.request(method, self.base + bare, json=body, params=params,
+[08-03 09:26:04]   reconcile:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 592, in request
+[08-03 09:26:04]   reconcile:     resp = self.send(prep, **send_kwargs)
+[08-03 09:26:04]   reconcile:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py", line 706, in send
+[08-03 09:26:04]   reconcile:     r = adapter.send(request, **kwargs)
+[08-03 09:26:04]   reconcile:         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-03 09:26:04]   reconcile:   File "C:\Users\xuboh\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\adapters.py", line 678, in send
+[08-03 09:26:04]   reconcile:     raise ConnectionError(e, request=request)
+[08-03 09:26:04]   reconcile: requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/portfolio/positions?limit=200&count_filter=position (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000014484A5C800>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)"))
+[08-03 09:26:04]   reconcile: 
+[08-03 09:26:04]   reconcile: CRITICAL step reconcile exited 1
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHNY: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHNY&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90C980>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHCHI: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHCHI&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90D910>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHAUS: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHAUS&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90DB80>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHMIA: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHMIA&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90E060>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHLAX: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHLAX&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90E390>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHDEN: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHDEN&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF90E840>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: WARN wxfade KXHIGHPHIL: fetch failed (HTTPSConnectionPool(host='api.elections.kalshi.com', port=443): Max retries exceeded with url: /trade-api/v2/markets?series_ticker=KXHIGHPHIL&status=open&limit=100 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000002D7EF8E61E0>: Failed to resolve 'api.elections.kalshi.com' ([Errno 11001] getaddrinfo failed)")))
+[08-03 09:26:34]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=529 win 73.5% mean net -5.0c/contract total $-26.60 | gate: ARCHIVE (edge dead) (35 pending)
+[08-03 09:28:04]   journal: journal written: realized today $-0.12, 3 settled, 0 fills
+[08-03 09:28:34]   report: wrote reports\report_2026-08-03.md
