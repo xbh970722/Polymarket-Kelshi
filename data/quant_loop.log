@@ -2293,3 +2293,21 @@
 [08-04 00:32:16]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-04 00:32:16]   h10: h10: 0 in-window | h10 shadow(main): n=2218 mean -1.1c total $-23.59 | KXETH15M: n=758 net $-10.93 | KXSOL15M: n=724 net $-10.26 | KXBTC15M: n=736 net $-2.40 | gate: KILL (0 pending) || H13 final6: n=419 win 412/419 net $+2.89 gate: ARCHIVE (clean n=344)
 [08-04 00:32:17]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[08-04 00:32:20] light mark committed + pushed
+[08-04 00:35:32]   settle: done: 0 settled, 1 still open
+[08-04 00:35:33]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-04 00:35:36]   mktsnap: mktsnap: 11 quotes recorded, 18 outcomes resolved
+[08-04 00:35:36]   shortcycle: shortcycle disabled
+[08-04 00:35:37]   favorites: favorites lane disabled
+[08-04 00:35:37]   h10: h10: 0 in-window | h10 shadow(main): n=2218 mean -1.1c total $-23.59 | KXETH15M: n=758 net $-10.93 | KXSOL15M: n=724 net $-10.26 | KXBTC15M: n=736 net $-2.40 | gate: KILL (0 pending) || H13 final6: n=419 win 412/419 net $+2.89 gate: ARCHIVE (clean n=344)
+[08-04 00:35:38]   weather: VETO weather lane: mtm snapshot stale >2h (manage failing?) â€” refusing new entries while blind on unrealized
+[08-04 00:35:44]   disloc: disloc: +0 events, 19 settled | disloc shadow: AMBIGUOUS: n=953 win 79% EV +1.2c | BOOK-ONLY: n=754 win 84% EV +2.2c | SPOT-MOVE: n=1269 win 64% EV -1.2c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (44 pending)
+[08-04 00:35:55]   pmwatch: pmwatch: +57 pairs | pmwatch: 40941 rows, 12536 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[08-04 00:35:56]   manage: REVIEW-DUE KXCPIYOY-26JUL-T3.4: held since 2026-07-23 entry 68c mark 73c target 77c -> ensemble re-judge hold/modify/exit
+[08-04 00:35:56]   manage: done: 0 exited, 1 flagged for review, 0 holding
+[08-04 00:35:56]   reconcile: OK       KXCPIYOY-26JUL-T3.4: -3
+[08-04 00:35:56]   reconcile: CASH OK: adj balance $26.94 ~ expected $26.94 (drift $+0.00, reserved $0.00)
+[08-04 00:35:56]   reconcile: reconcile: 1 tickers, 0 mismatches â€” ACCOUNTING CLEAN
+[08-04 00:35:59]   wxfade: wxfade: +3 logged, 0 settled | wxfade shadow: n=529 win 73.5% mean net -5.0c/contract total $-26.60 | gate: ARCHIVE (edge dead) (38 pending)
+[08-04 00:36:00]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[08-04 00:36:01]   report: wrote reports\report_2026-08-04.md
