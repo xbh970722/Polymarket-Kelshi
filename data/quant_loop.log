@@ -2557,3 +2557,20 @@
 [08-05 09:02:34]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-05 09:02:35]   h10: h10: 0 in-window | h10 shadow(main): n=2263 mean -1.0c total $-22.81 | KXETH15M: n=772 net $-10.44 | KXSOL15M: n=736 net $-9.99 | KXBTC15M: n=755 net $-2.38 | gate: KILL (0 pending) || H13 final6: n=426 win 419/426 net $+3.09 gate: ARCHIVE (clean n=351)
 [08-05 09:02:36]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[08-05 09:02:38] light mark committed + pushed
+[08-05 09:05:52]   settle: done: 0 settled, 1 still open
+[08-05 09:05:54]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-05 09:05:57]   mktsnap: mktsnap: 3 quotes recorded, 13 outcomes resolved
+[08-05 09:05:58]   shortcycle: shortcycle disabled
+[08-05 09:05:58]   favorites: favorites lane disabled
+[08-05 09:05:59]   h10: h10: 0 in-window | h10 shadow(main): n=2263 mean -1.0c total $-22.81 | KXETH15M: n=772 net $-10.44 | KXSOL15M: n=736 net $-9.99 | KXBTC15M: n=755 net $-2.38 | gate: KILL (0 pending) || H13 final6: n=426 win 419/426 net $+3.09 gate: ARCHIVE (clean n=351)
+[08-05 09:06:03]   weather: weather: 13 priced buckets | spent $0.00/999999.00
+[08-05 09:06:03]   weather: LIVE  KXHIGHMIA-26AUG05-B90.5: NO x1 @ 45.0c cost=$0.47 q_model=0.07 vs mkt=0.56 mu=88.0F sigma=1.0 order=affb3ee3-d19d-4e8b-a27d-06ce23e1e5e9
+[08-05 09:06:03]   weather: LIVE  KXHIGHPHIL-26AUG05-B86.5: NO x1 @ 44.0c cost=$0.46 q_model=0.19 vs mkt=0.56 mu=84.0F sigma=2.0 order=38e7a63d-c99f-41cd-8158-9f4d979dd0b2
+[08-05 09:06:03]   weather: LIVE  KXHIGHNY-26AUG05-B82.5: NO x1 @ 39.0c cost=$0.41 q_model=0.37 vs mkt=0.61 mu=82.0F sigma=2.0 order=a35770bd-b8ab-435b-bd7e-0d0b972acdce
+[08-05 09:06:03]   weather: weather: daily entry cap reached (in-run)
+[08-05 09:06:03]   weather: done: 3 weather orders
+[08-05 09:06:07]   disloc: disloc: +0 events, 9 settled | disloc shadow: AMBIGUOUS: n=974 win 79% EV +1.2c | BOOK-ONLY: n=767 win 84% EV +2.4c | SPOT-MOVE: n=1313 win 64% EV -1.1c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (59 pending)
+[08-05 09:06:18]   pmwatch: pmwatch: +37 pairs | pmwatch: 41700 rows, 12771 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[08-05 09:06:18]   journal: journal written: realized today $+0.00, 0 settled, 3 fills
+[08-05 09:06:19]   report: wrote reports\report_2026-08-05.md
