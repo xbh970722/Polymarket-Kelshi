@@ -2123,3 +2123,48 @@
 [08-06 01:17:41]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-06 01:17:42]   h10: h10: 0 in-window | h10 shadow(main): n=2330 mean -1.0c total $-22.64 | KXETH15M: n=798 net $-12.71 | KXSOL15M: n=755 net $-8.93 | KXBTC15M: n=777 net $-1.00 | gate: KILL (0 pending) || H13 final6: n=449 win 442/449 net $+3.75 gate: ARCHIVE (clean n=374)
 [08-06 01:17:43]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[08-06 01:17:45] light mark committed + pushed
+[08-06 01:20:16]   settle: WARN  KXHIGHMIA-26AUG05-B90.5: fetch failed (503 Server Error: Service Unavailable for url: https://api.elections.kalshi.com/trade-api/v2/markets/KXHIGHMIA-26AUG05-B90.5)
+[08-06 01:20:16]   settle: WARN  KXHIGHPHIL-26AUG05-B86.5: fetch failed (503 Server Error: Service Unavailable for url: https://api.elections.kalshi.com/trade-api/v2/markets/KXHIGHPHIL-26AUG05-B86.5)
+[08-06 01:20:16]   settle: WARN  KXHIGHNY-26AUG05-B82.5: fetch failed (503 Server Error: Service Unavailable for url: https://api.elections.kalshi.com/trade-api/v2/markets/KXHIGHNY-26AUG05-B82.5)
+[08-06 01:20:16]   settle: done: 0 settled, 3 still open
+[08-06 01:20:17]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-06 01:20:18]   mktsnap: mktsnap: 0 quotes recorded, 0 outcomes resolved
+[08-06 01:20:18]   shortcycle: shortcycle disabled
+[08-06 01:20:19]   favorites: favorites lane disabled
+[08-06 01:20:20]   h10: h10: 0 in-window | h10 shadow(main): n=2330 mean -1.0c total $-22.64 | KXETH15M: n=798 net $-12.71 | KXSOL15M: n=755 net $-8.93 | KXBTC15M: n=777 net $-1.00 | gate: KILL (0 pending) || H13 final6: n=449 win 442/449 net $+3.75 gate: ARCHIVE (clean n=374)
+[08-06 01:20:20] CRITICAL: step weather exited 1
+[08-06 01:20:20]   weather: Traceback (most recent call last):
+[08-06 01:20:20]   weather:   File "<frozen runpy>", line 198, in _run_module_as_main
+[08-06 01:20:20]   weather:   File "<frozen runpy>", line 88, in _run_code
+[08-06 01:20:20]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2838, in <module>
+[08-06 01:20:20]   weather:     main()
+[08-06 01:20:20]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 2834, in main
+[08-06 01:20:20]   weather:     args.fn(args)
+[08-06 01:20:20]   weather:   File "D:\Polymarket-Kelshi\src\pipeline.py", line 925, in cmd_weather
+[08-06 01:20:20]   weather:     balance = float(client.balance().get("balance_dollars") or 0)
+[08-06 01:20:20]   weather:                     ^^^^^^^^^^^^^^^^
+[08-06 01:20:20]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 125, in balance
+[08-06 01:20:20]   weather:     return self._req("GET", f"{API}/portfolio/balance")
+[08-06 01:20:20]   weather:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[08-06 01:20:20]   weather:   File "D:\Polymarket-Kelshi\src\live.py", line 94, in _req
+[08-06 01:20:20]   weather:     raise RuntimeError(
+[08-06 01:20:20]   weather: RuntimeError: GET /trade-api/v2/portfolio/balance -> HTTP 503: <html>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: <head><title>503 Service Temporarily Unavailable</title></head>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: <body>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: <center><h1>503 Service Temporarily Unavailable</h1></center>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: </body>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: </html>
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: 
+[08-06 01:20:20]   weather: CRITICAL step weather exited 1
+[08-06 01:20:22]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=1004 win 79% EV +1.1c | BOOK-ONLY: n=789 win 84% EV +2.4c | SPOT-MOVE: n=1347 win 64% EV -1.1c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (56 pending)
+[08-06 01:20:33]   pmwatch: pmwatch: +57 pairs | pmwatch: 43177 rows, 13208 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[08-06 01:20:34]   journal: journal written: realized today $+0.00, 0 settled, 0 fills
+[08-06 01:20:34]   report: wrote reports\report_2026-08-06.md
