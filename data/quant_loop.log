@@ -2992,3 +2992,19 @@
 [08-06 06:23:42]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-06 06:23:43]   h10: h10: 2 in-window | h10 shadow(main): n=2353 mean -1.0c total $-23.26 | KXETH15M: n=806 net $-13.00 | KXSOL15M: n=762 net $-9.18 | KXBTC15M: n=785 net $-1.09 | gate: KILL (2 pending) || H13 final6: n=454 win 447/454 net $+3.84 gate: ARCHIVE (clean n=379)
 [08-06 06:23:45]   journal: journal written: realized today $-0.34, 3 settled, 0 fills
+[08-06 06:23:47] light mark committed + pushed
+[08-06 06:26:26]   settle: done: 0 settled, 0 still open
+[08-06 06:26:29]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-06 06:26:32]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[08-06 06:26:33]   shortcycle: shortcycle disabled
+[08-06 06:26:34]   favorites: favorites lane disabled
+[08-06 06:26:35]   h10: h10: 0 in-window | h10 shadow(main): n=2353 mean -1.0c total $-23.26 | KXETH15M: n=806 net $-13.00 | KXSOL15M: n=762 net $-9.18 | KXBTC15M: n=785 net $-1.09 | gate: KILL (3 pending) || H13 final6: n=454 win 447/454 net $+3.84 gate: ARCHIVE (clean n=379)
+[08-06 06:26:36]   weather: weather: 0 priced buckets | spent $0.00/999999.00
+[08-06 06:26:36]   weather: done: 0 weather orders
+[08-06 06:26:39]   disloc: DISLOC KXBTCD-26AUG0609-T64499.99: fav 0.78->0.61 ask 0.62 [BOOK-ONLY] tau 33m
+[08-06 06:26:39]   disloc: DISLOC KXETHD-26AUG0609-T1904.99: fav 0.82->0.69 ask 0.70 [AMBIGUOUS] tau 33m
+[08-06 06:26:39]   disloc: DISLOC KXSOLD-26AUG0609-T73.4999: fav 0.93->0.84 ask 0.85 [AMBIGUOUS] tau 33m
+[08-06 06:26:39]   disloc: disloc: +3 events, 0 settled | disloc shadow: AMBIGUOUS: n=1013 win 79% EV +1.0c | BOOK-ONLY: n=796 win 84% EV +2.3c | SPOT-MOVE: n=1349 win 64% EV -1.1c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (64 pending)
+[08-06 06:26:49]   pmwatch: pmwatch: +49 pairs | pmwatch: 43662 rows, 13313 kalshi-matched | |divergence| median 4.5c, p90 17.0c (gate n>=300)
+[08-06 06:26:50]   journal: journal written: realized today $-0.34, 3 settled, 0 fills
+[08-06 06:26:50]   report: wrote reports\report_2026-08-06.md
