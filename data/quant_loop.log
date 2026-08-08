@@ -3246,3 +3246,24 @@
 [08-08 11:32:37]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-08 11:32:38]   h10: h10: 0 in-window | h10 shadow(main): n=2615 mean -1.0c total $-25.99 | KXETH15M: n=892 net $-16.31 | KXSOL15M: n=846 net $-7.36 | KXBTC15M: n=877 net $-2.33 | gate: KILL (0 pending) || H13 final6: n=511 win 502/511 net $+3.16 gate: ARCHIVE (clean n=436)
 [08-08 11:32:39]   journal: journal written: realized today $-0.66, 3 settled, 3 fills
+[08-08 11:32:41] light mark committed + pushed
+[08-08 11:35:45]   settle: done: 0 settled, 3 still open
+[08-08 11:35:46]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-08 11:35:48]   mktsnap: mktsnap: 9 quotes recorded, 3 outcomes resolved
+[08-08 11:35:48]   shortcycle: shortcycle disabled
+[08-08 11:35:48]   favorites: favorites lane disabled
+[08-08 11:35:49]   h10: h10: 2 in-window | h10 shadow(main): n=2615 mean -1.0c total $-25.99 | KXETH15M: n=892 net $-16.31 | KXSOL15M: n=846 net $-7.36 | KXBTC15M: n=877 net $-2.33 | gate: KILL (2 pending) || H13 final6: n=511 win 502/511 net $+3.16 gate: ARCHIVE (clean n=436)
+[08-08 11:35:49]   weather: weather: daily entry cap reached (3)
+[08-08 11:35:52]   disloc: DISLOC KXETHD-26AUG0814-T1924.99: fav 0.91->0.56 ask 0.57 [BOOK-ONLY] tau 24m
+[08-08 11:35:52]   disloc: DISLOC KXSOLD-26AUG0814-T76.4999: fav 0.85->0.71 ask 0.73 [BOOK-ONLY] tau 24m
+[08-08 11:35:52]   disloc: disloc: +2 events, 0 settled | disloc shadow: AMBIGUOUS: n=1140 win 79% EV +1.4c | BOOK-ONLY: n=934 win 84% EV +2.6c | SPOT-MOVE: n=1419 win 65% EV -0.6c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (18 pending)
+[08-08 11:35:54]   pmwatch: pmwatch: +0 pairs | pmwatch: 47470 rows, 14493 kalshi-matched | |divergence| median 4.1c, p90 17.0c (gate n>=300)
+[08-08 11:35:55]   manage: done: 0 exited, 0 flagged for review, 3 holding
+[08-08 11:35:56]   reconcile: OK       KXHIGHMIA-26AUG08-B89.5: +3
+[08-08 11:35:56]   reconcile: OK       KXHIGHNY-26AUG08-B91.5: +3
+[08-08 11:35:56]   reconcile: OK       KXHIGHPHIL-26AUG08-B89.5: +3
+[08-08 11:35:56]   reconcile: CASH OK: adj balance $29.83 ~ expected $29.83 (drift $+0.00, reserved $0.00)
+[08-08 11:35:56]   reconcile: reconcile: 3 tickers, 0 mismatches â€” ACCOUNTING CLEAN
+[08-08 11:35:57]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=621 win 73.4% mean net -4.7c/contract total $-29.27 | gate: ARCHIVE (edge dead) (29 pending)
+[08-08 11:35:58]   journal: journal written: realized today $-0.66, 3 settled, 3 fills
+[08-08 11:35:59]   report: wrote reports\report_2026-08-08.md
