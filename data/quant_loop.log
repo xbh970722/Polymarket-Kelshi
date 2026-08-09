@@ -3439,3 +3439,22 @@
 [08-08 23:32:37]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-08 23:32:38]   h10: h10: 0 in-window | h10 shadow(main): n=2668 mean -0.9c total $-23.66 | KXETH15M: n=907 net $-14.66 | KXSOL15M: n=872 net $-6.74 | KXBTC15M: n=889 net $-2.26 | gate: KILL (0 pending) || H13 final6: n=527 win 518/527 net $+3.59 gate: ARCHIVE (clean n=452)
 [08-08 23:32:39]   journal: journal written: realized today $-0.66, 3 settled, 3 fills
+[08-08 23:32:40] light mark committed + pushed
+[08-08 23:35:45]   settle: done: 0 settled, 3 still open
+[08-08 23:35:46]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-08 23:35:48]   mktsnap: mktsnap: 8 quotes recorded, 4 outcomes resolved
+[08-08 23:35:48]   shortcycle: shortcycle disabled
+[08-08 23:35:48]   favorites: favorites lane disabled
+[08-08 23:35:49]   h10: h10: 0 in-window | h10 shadow(main): n=2668 mean -0.9c total $-23.66 | KXETH15M: n=907 net $-14.66 | KXSOL15M: n=872 net $-6.74 | KXBTC15M: n=889 net $-2.26 | gate: KILL (0 pending) || H13 final6: n=527 win 518/527 net $+3.59 gate: ARCHIVE (clean n=452)
+[08-08 23:35:49]   weather: weather: daily entry cap reached (3)
+[08-08 23:35:52]   disloc: disloc: +0 events, 0 settled | disloc shadow: AMBIGUOUS: n=1145 win 79% EV +1.4c | BOOK-ONLY: n=949 win 84% EV +2.8c | SPOT-MOVE: n=1427 win 65% EV -0.7c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (12 pending)
+[08-08 23:36:01]   pmwatch: pmwatch: +50 pairs | pmwatch: 48378 rows, 14777 kalshi-matched | |divergence| median 4.0c, p90 17.0c (gate n>=300)
+[08-08 23:36:02]   manage: done: 0 exited, 0 flagged for review, 3 holding
+[08-08 23:36:03]   reconcile: OK       KXHIGHMIA-26AUG08-B89.5: +3
+[08-08 23:36:03]   reconcile: OK       KXHIGHNY-26AUG08-B91.5: +3
+[08-08 23:36:03]   reconcile: OK       KXHIGHPHIL-26AUG08-B89.5: +3
+[08-08 23:36:03]   reconcile: CASH OK: adj balance $29.83 ~ expected $29.83 (drift $+0.00, reserved $0.00)
+[08-08 23:36:03]   reconcile: reconcile: 3 tickers, 0 mismatches â€” ACCOUNTING CLEAN
+[08-08 23:36:04]   wxfade: wxfade: +0 logged, 0 settled | wxfade shadow: n=621 win 73.4% mean net -4.7c/contract total $-29.27 | gate: ARCHIVE (edge dead) (31 pending)
+[08-08 23:36:06]   journal: journal written: realized today $-0.66, 3 settled, 3 fills
+[08-08 23:36:06]   report: wrote reports\report_2026-08-08.md
