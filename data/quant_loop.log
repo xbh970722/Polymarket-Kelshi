@@ -2010,3 +2010,20 @@
 [08-09 20:47:49]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-09 20:47:50]   h10: h10: 0 in-window | h10 shadow(main): n=2783 mean -0.8c total $-21.15 | KXETH15M: n=939 net $-12.49 | KXSOL15M: n=915 net $-8.48 | KXBTC15M: n=929 net $-0.17 | gate: KILL (0 pending) || H13 final6: n=553 win 544/553 net $+4.14 gate: ARCHIVE (clean n=478)
 [08-09 20:47:51]   journal: journal written: realized today $-0.44, 3 settled, 3 fills
+[08-09 20:47:56] light mark committed + pushed
+[08-09 20:50:36]   settle: done: 0 settled, 3 still open
+[08-09 20:50:36]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-09 20:50:38]   mktsnap: mktsnap: 3 quotes recorded, 3 outcomes resolved
+[08-09 20:50:38]   shortcycle: shortcycle disabled
+[08-09 20:50:38]   favorites: favorites lane disabled
+[08-09 20:50:39]   h10: h10: 1 in-window | h10 shadow(main): n=2783 mean -0.8c total $-21.15 | KXETH15M: n=939 net $-12.49 | KXSOL15M: n=915 net $-8.48 | KXBTC15M: n=929 net $-0.17 | gate: KILL (1 pending) || H13 final6: n=553 win 544/553 net $+4.14 gate: ARCHIVE (clean n=478)
+[08-09 20:50:40]   weather: weather: daily entry cap reached (3)
+[08-09 20:50:43]   disloc: DISLOC KXBTCD-26AUG0923-T65099.99: fav 0.88->0.74 ask 0.75 [AMBIGUOUS] tau 9m
+[08-09 20:50:43]   disloc: DISLOC KXETHD-26AUG1017-T1939.99: fav 0.79->0.71 ask 0.71 [SPOT-MOVE] tau 1089m
+[08-09 20:50:43]   disloc: DISLOC KXETHD-26AUG0923-T1924.99: fav 0.98->0.86 ask 0.88 [SPOT-MOVE] tau 9m
+[08-09 20:50:43]   disloc: DISLOC KXETHD-26AUG0923-T1919.99: fav 0.78->0.22 ask 0.23 [SPOT-MOVE] tau 9m
+[08-09 20:50:43]   disloc: DISLOC KXSOLD-26AUG0923-T76.7499: fav 0.87->0.52 ask 0.54 [AMBIGUOUS] tau 9m
+[08-09 20:50:43]   disloc: disloc: +5 events, 0 settled | disloc shadow: AMBIGUOUS: n=1175 win 78% EV +0.9c | BOOK-ONLY: n=981 win 84% EV +2.5c | SPOT-MOVE: n=1463 win 64% EV -0.7c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (34 pending)
+[08-09 20:50:52]   pmwatch: pmwatch: +42 pairs | pmwatch: 49653 rows, 15131 kalshi-matched | |divergence| median 4.0c, p90 16.8c (gate n>=300)
+[08-09 20:50:53]   journal: journal written: realized today $-0.44, 3 settled, 3 fills
+[08-09 20:50:54]   report: wrote reports\report_2026-08-09.md
