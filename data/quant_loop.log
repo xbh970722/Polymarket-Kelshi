@@ -2594,3 +2594,19 @@
 [08-10 10:08:52]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-10 10:08:53]   h10: h10: 1 in-window | h10 shadow(main): n=2868 mean -0.7c total $-19.24 | KXETH15M: n=968 net $-9.40 | KXSOL15M: n=945 net $-9.43 | KXBTC15M: n=955 net $-0.41 | gate: KILL (1 pending) || H13 final6: n=570 win 560/570 net $+3.46 gate: ARCHIVE (clean n=495)
 [08-10 10:08:54]   journal: journal written: realized today $+0.10, 3 settled, 3 fills
+[08-10 10:08:58] light mark committed + pushed
+[08-10 10:11:17]   settle: done: 0 settled, 3 still open
+[08-10 10:11:17]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-10 10:11:19]   mktsnap: mktsnap: 3 quotes recorded, 0 outcomes resolved
+[08-10 10:11:19]   shortcycle: shortcycle disabled
+[08-10 10:11:19]   favorites: favorites lane disabled
+[08-10 10:11:20]   h10: h10: 0 in-window | h10 shadow(main): n=2868 mean -0.7c total $-19.24 | KXETH15M: n=968 net $-9.40 | KXSOL15M: n=945 net $-9.43 | KXBTC15M: n=955 net $-0.41 | gate: KILL (1 pending) || H13 final6: n=570 win 560/570 net $+3.46 gate: ARCHIVE (clean n=495)
+[08-10 10:11:21]   weather: weather: daily entry cap reached (3)
+[08-10 10:11:24]   disloc: DISLOC KXBTCD-26AUG1013-T64099.99: fav 0.82->0.66 ask 0.66 [AMBIGUOUS] tau 49m
+[08-10 10:11:24]   disloc: DISLOC KXBTCD-26AUG1013-T63999.99: fav 0.92->0.81 ask 0.82 [AMBIGUOUS] tau 49m
+[08-10 10:11:24]   disloc: DISLOC KXSOLD-26AUG1013-T75.7499: fav 0.84->0.74 ask 0.76 [AMBIGUOUS] tau 49m
+[08-10 10:11:24]   disloc: DISLOC KXXRPD-26AUG1013-T1.0199: fav 0.91->0.47 ask 0.49 [SPOT-MOVE] tau 49m
+[08-10 10:11:24]   disloc: disloc: +4 events, 0 settled | disloc shadow: AMBIGUOUS: n=1204 win 78% EV +0.7c | BOOK-ONLY: n=1009 win 83% EV +2.1c | SPOT-MOVE: n=1495 win 64% EV -0.8c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (40 pending)
+[08-10 10:11:31]   pmwatch: pmwatch: +27 pairs | pmwatch: 50919 rows, 15531 kalshi-matched | |divergence| median 4.0c, p90 16.5c (gate n>=300)
+[08-10 10:11:32]   journal: journal written: realized today $+0.10, 3 settled, 3 fills
+[08-10 10:11:32]   report: wrote reports\report_2026-08-10.md
