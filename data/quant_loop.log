@@ -2531,3 +2531,18 @@
 [08-11 09:32:31]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
 [08-11 09:32:32]   h10: h10: 0 in-window | h10 shadow(main): n=2917 mean -0.6c total $-18.87 | KXETH15M: n=990 net $-10.04 | KXSOL15M: n=957 net $-9.16 | KXBTC15M: n=970 net $+0.33 | gate: KILL (0 pending) || H13 final6: n=580 win 569/580 net $+2.73 gate: ARCHIVE (clean n=505)
 [08-11 09:32:34]   journal: journal written: realized today $-0.74, 3 settled, 3 fills
+[08-11 09:32:36] light mark committed + pushed
+[08-11 09:35:31]   settle: done: 0 settled, 3 still open
+[08-11 09:35:34]   h15: h15 HARD STOP: realized $-4.56 â€” paused pending review
+[08-11 09:35:35]   mktsnap: mktsnap: 6 quotes recorded, 4 outcomes resolved
+[08-11 09:35:35]   shortcycle: shortcycle disabled
+[08-11 09:35:36]   favorites: favorites lane disabled
+[08-11 09:35:36]   h10: h10: 1 in-window | h10 shadow(main): n=2917 mean -0.6c total $-18.87 | KXETH15M: n=990 net $-10.04 | KXSOL15M: n=957 net $-9.16 | KXBTC15M: n=970 net $+0.33 | gate: KILL (1 pending) || H13 final6: n=580 win 569/580 net $+2.73 gate: ARCHIVE (clean n=505)
+[08-11 09:35:37]   weather: weather: daily entry cap reached (3)
+[08-11 09:35:40]   disloc: DISLOC KXBTCD-26AUG1112-T63599.99: fav 0.84->0.72 ask 0.73 [AMBIGUOUS] tau 24m
+[08-11 09:35:40]   disloc: DISLOC KXETHD-26AUG1112-T1869.99: fav 0.80->0.56 ask 0.57 [SPOT-MOVE] tau 24m
+[08-11 09:35:40]   disloc: DISLOC KXSOLD-26AUG1112-T74.9999: fav 0.91->0.80 ask 0.81 [AMBIGUOUS] tau 24m
+[08-11 09:35:40]   disloc: disloc: +3 events, 1 settled | disloc shadow: AMBIGUOUS: n=1228 win 78% EV +0.4c | BOOK-ONLY: n=1026 win 83% EV +1.7c | SPOT-MOVE: n=1535 win 64% EV -0.9c | UNKNOWN: n=11 win 36% EV -34.2c | gate: accumulating (32 pending)
+[08-11 09:35:47]   pmwatch: pmwatch: +28 pairs | pmwatch: 51803 rows, 15803 kalshi-matched | |divergence| median 4.0c, p90 16.5c (gate n>=300)
+[08-11 09:35:48]   journal: journal written: realized today $-0.74, 3 settled, 3 fills
+[08-11 09:35:49]   report: wrote reports\report_2026-08-11.md
